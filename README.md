@@ -1,2 +1,1 @@
-# UpFinityCrypto.github.io
-Official website for UpFinity
+# allcoinlab.github.ioo

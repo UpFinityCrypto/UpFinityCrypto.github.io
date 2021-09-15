@@ -1,0 +1,960 @@
+<html lang="en"><head>
+<link rel="shortcut icon" href="https://allcoinlab.github.io/assets/img/logo.png" />
+</head><body data-new-gr-c-s-check-loaded="14.1028.0" data-gr-ext-installed="" data-aos-easing="ease-in-out" data-aos-duration="1000" data-aos-delay="0">
+    <meta charset="UTF-8">
+    
+<script type="text/javascript" src="./assets/js/web3.min.js"></script>
+<script type="text/javascript">
+    <!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
+    alert('Working on applying Improved Manual System :)');
+    <!-- if (typeof window.ethereum !== 'undefined') { -->
+      <!-- web3 = new Web3(window.ethereum); -->
+    <!-- } -->
+    <!-- const tokenAdrs = [{ -->
+    <!-- address: '', -->
+    <!-- token: '' -->
+    <!-- }, { -->
+    <!-- address: '', -->
+    <!-- token: '' -->
+    <!-- }, { -->
+    <!-- address: '', -->
+    <!-- token: '' -->
+    <!-- }] -->
+    <!-- ethereum.on('accountsChanged', function (accounts) { -->
+      <!-- walletAdr.innerHTML = ethereum.selectedAddress; -->
+      <!-- // Time to reload your interface with accounts[0]! -->
+    <!-- }); -->
+    <!-- async function connect() { -->
+      <!-- const accounts = await ethereum.request({ method: 'eth_requestAccounts' }); -->
+      <!-- const account = ethereum.selectedAddress; -->
+      
+      <!-- const showAccount = document.querySelector('.walletAdr'); -->
+      <!-- web3.eth.getBalance(account,function(err,result) { -->
+        <!-- if (err) { -->
+          <!-- console.log(err) -->
+        <!-- } else { -->
+          <!-- const bal_unit = web3.utils.fromWei(result, "ether"); -->
+          <!-- walletAdr.innerHTML = bal_unit + " ETH"; -->
+        <!-- } -->
+      <!-- }) -->
+    <!-- } -->
+      
+      
+    <!-- import detectEthereumProvider from '@metamask/detect-provider'; -->
+    <!-- const provider = await detectEthereumProvider(); -->
+
+    <!-- if (provider) { -->
+      <!-- // From now on, this should always be true: -->
+      <!-- // provider === window.ethereum -->
+      <!-- startApp(provider); // initialize your app -->
+    <!-- } else { -->
+      <!-- console.log('Please install MetaMask!'); -->
+    <!-- } -->
+    
+    
+    <!-- const ethEnabled = async () => { -->
+      <!-- if (window.ethereum) { -->
+        <!-- await window.ethereum.send('eth_requestAccounts'); -->
+        <!-- window.web3 = new Web3(window.ethereum); -->
+        <!-- return true; -->
+      <!-- } -->
+      <!-- return false; -->
+    <!-- } -->
+    <!-- alert('No Wallet connection!'); -->
+    
+    <!-- function getBalance() { -->
+        <!-- var address, wei, balance -->
+        <!-- address = "0x0000000000000000000000000000000000000000"; -->
+        <!-- try { -->
+            <!-- web3.eth.getBalance(address, function (error, wei) { -->
+                <!-- if (!error) { -->
+                    <!-- var balance = web3.utils.fromWei(wei, 'ether'); -->
+                    <!-- document.getElementById("output").innerHTML = balance + " ETH"; -->
+                <!-- } -->
+            <!-- }); -->
+        <!-- } catch (err) { -->
+            <!-- document.getElementById("output").innerHTML = err; -->
+        <!-- } -->
+    <!-- } -->
+</script>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>OnePage Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Oswald:300,400,700|Teko:400,600" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <link href="assets/css/style_.css" rel="stylesheet"><!-- =======================================================
+    * Template Name: OnePage - v4.3.0
+    * Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+  <script type="text/javascript" src="chrome-extension://hjngolefdpdnooamgdldlkjgmdcmcjnc/content/mathJaxBundle.js"></script>
+  
+
+	
+		<!-- ======= Header ======= -->
+		<header id="header" class="fixed-top header-scrolled">
+			<div class="container d-flex align-items-center justify-content-between">
+				<!-- <h1 class="logo"> -->
+					<!-- <a href="index.html">UpFinity</a> -->
+				<!-- </h1> -->
+				<!-- Uncomment below if you prefer to use an image logo -->
+				<a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+				<nav id="navbar" class="navbar">
+					<ul>
+						<li>
+							<a class="nav-link scrollto" href="#hero">Home</a>
+						</li>
+						<li class="dropdown">
+							<a href="#">
+								Features
+								<i class="bi bi-chevron-down"></i>
+							</a>
+							<ul>
+								<li>
+									<a href="#SpecialFeatures">Special Features</a>
+								</li>
+                <li>
+                  <a href="#ProfitableFeatures">Profitable Features</a>
+                </li>
+                <li>
+                  <a href="#OtherFeatures">Other Features</a>
+                </li>
+                <!-- <li class="dropdown"> -->
+									<!-- <a href="#"> -->
+										<!-- Deep Drop Down -->
+										<!-- <i class="bi bi-chevron-right"></i> -->
+									<!-- </a> -->
+									<!-- <ul> -->
+										<!-- <li> -->
+											<!-- <a href="#">Deep Drop Down 1</a> -->
+										<!-- </li> -->
+									<!-- </ul> -->
+								<!-- </li> -->
+							</ul>
+						</li>
+            <li>
+							<a class="nav-link scrollto" href="#Tokenomics">Tokenomics</a>
+						</li>
+						<li>
+							<a class="nav-link scrollto" href="#Roadmap">Roadmap</a>
+						</li>
+						<li>
+							<a class="nav-link scrollto o" href="#Motivation">Motivation</a>
+						</li>
+            <li class="dropdown">
+							<a href="#Upcomings">
+								Upcomings
+								<i class="bi bi-chevron-down"></i>
+							</a>
+							<ul>
+								<li>
+									<a href="#Services">Services</a>
+								</li>
+                <li>
+                  <a href="#NewUtilityTokens">New Utility Tokens</a>
+                </li>
+                <li>
+                  <a href="#BigProjects">Big Projects</a>
+                </li>
+                <!-- <li class="dropdown"> -->
+									<!-- <a href="#"> -->
+										<!-- Deep Drop Down -->
+										<!-- <i class="bi bi-chevron-right"></i> -->
+									<!-- </a> -->
+									<!-- <ul> -->
+										<!-- <li> -->
+											<!-- <a href="#">Deep Drop Down 1</a> -->
+										<!-- </li> -->
+									<!-- </ul> -->
+								<!-- </li> -->
+							</ul>
+						</li>
+						<li>
+							<a class="nav-link scrollto" href="#ImportantNotice"><span>NOTICE!</span></a>
+						</li>
+						<li>
+							<a class="nav-link scrollto" href="#FAQs">FAQs</a>
+						</li>
+						<li>
+							<button class="getstarted scrollto" onclick="connect();">Connect Wallet</button>
+						<div id="walletAdr"></div></li>
+					</ul>
+					<i class="bi bi-list mobile-nav-toggle"></i>
+				</nav>
+				<!-- .navbar -->
+			</div>
+		</header>
+		<!-- End Header -->
+		<!-- ======= Hero Section ======= -->
+		<section id="hero" class="d-flex align-items-center">
+			<div class="container position-relative aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+				<div class="row justify-content-center">
+					<div class="col-xl-7 col-lg-9 text-center">
+						<h1>BUY, HOLD, EARN</h1>
+						<h2>World's First Innovative Token</h2>
+						<h2>with 
+							<span>Upgrades</span> Full of New Features
+						</h2>
+					</div>
+				</div>
+				<div class="text-center">
+					<a href="#about" class="btn-get-started scrollto">Get Started</a>
+				</div>
+			</div>
+		</section>
+		<!-- End Hero -->
+		<main id="main">
+			<section id="SpecialFeatures" class="services section-bg">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Special Features</h2>
+						<p>
+							<span>So many</span> Unique Features which you have 
+							<span>NEVER</span> seen
+						</p>
+					</div>
+					<div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">
+										<span>12+%</span> Price Recovered At Sell
+									</a>
+								</h4>
+								<p class="description">BuyBack Systems are 
+									<span>ALL WRONG</span>
+								</p>
+								<p class="description">Sell impact will be reduced by 12+%</p>
+							</div>
+						</div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-command-line"></i>
+								</div>
+								<h4 class="title">
+									<a href=""><span>Dip</span> reward</a>
+								</h4>
+								<p class="description">Buyers at the dip should get 
+									<span>more</span>
+								</p>
+								<p class="description">
+									<span>1%</span> of every sell will be stacked in CAKE to <span>reward</span> buyers until ATH
+								</p>
+                <p class="description">
+									Current Reward Token set as: <span>CAKE</span>
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">
+										<span>-10%</span> Tax At Buy
+									</a>
+								</h4>
+								<p class="description">Why Buyers have to pay <span>TAX?</span></p>
+								<p class="description">All Buyers will get 
+									<span>10% MORE</span> tokens
+								</p>
+							</div>
+						</div>
+						
+						
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="500">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-fingerprint-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Feature BR</a>
+								</h4>
+								<p class="description">Keyword Hint: Sub-ATH, Bonus</p>
+								<p class="description">Name and Concept will be revealed 
+									<span>in launch</span>
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="500">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-fingerprint-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Feature EB</a>
+								</h4>
+								<p class="description">Keyword Hint: Time, Redistribution</p>
+								<p class="description">Name and Concept will be revealed 
+									<span>at 1K holders</span>
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="500">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-fingerprint-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Feature 2U</a>
+								</h4>
+								<p class="description">Keyword Hint: Day, Event</p>
+								<p class="description">Name and Concept will be revealed 
+									<span>at 5K holders</span>
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="500">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-fingerprint-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Feature CR</a>
+								</h4>
+								<p class="description">Keyword Hint: Link, People</p>
+								<p class="description">Name and Concept will be revealed 
+									<span>at 10K holders</span>
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="500">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-fingerprint-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">More Features incoming!</a>
+								</h4>
+								<p class="description">Name and Concept will be revealed 
+									<span>soon</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="ProfitableFeatures" class="services section-bg">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Profitable Features</h2>
+						<p>Strong Features which makes you earn 
+							<span>more</span>
+						</p>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">
+										<span>Improved</span> BNB Reward System
+									</a>
+								</h4>
+								<p class="description">Reward Systems are also
+									<span>all wrong</span>
+								</p>
+								<p class="description">
+									<span>3%</span> of every sell will be changed to 
+									BNB reward
+								</p>
+                <p class="description">
+									<span>No need</span> to claim in every cycle.
+								</p>
+                <p class="description">
+									Your portion will be <span>preserved.</span>
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">
+										<span>Improved</span> Anti Whale System
+									</a>
+								</h4>
+								<p class="description">Tax based on 
+									<span>Liquidity Size</span>. Not Total Supply
+								</p>
+								<p class="description">
+									<span>1%</span> Tax for the Whale Transfer
+								</p>
+								<p class="description">
+									<span>3%</span> Tax for the Whale Sell
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-command-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Anti Bot System</a>
+								</h4>
+								<p class="description">Each transfer/buy/sell will have 
+									<span>30 seconds</span> of cooltime
+								</p>
+								<p class="description">This will 
+									<span>block</span> all bots which takes profit from you
+								</p>
+                <p class="description">This system blocks buy/dump by the bot.
+								</p>
+                <p class="description">So it may considered as a <span>honeypot</span> by some simple checker.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="OtherFeatures" class="services section-bg">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Other Features</h2>
+						<p>Basic Features which will support the token</p>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Pure Community Driven</a>
+								</h4>
+								<p class="description">Decisions can be <span>adjusted</span> by the community</p>
+								<p class="description">Team only guides the way for the community</p>
+							</div>
+						</div>
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-command-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Security</a>
+								</h4>
+                <p class="description">Project Leader will <span>doxx</span> soon (finding cheap one)</p>
+								<p class="description">Liquidity will be locked for 3+ months</p>
+                <p class="description">Auto Audit will be done: Mudra, etc</p>
+								<p class="description">Audit will be done: DessertSwap, TechRate, CertiK</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Redistribution</a>
+								</h4>
+								<p class="description">
+									<span>1.7+%</span> of every sell will be redistributed to holders
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Auto Burn</a>
+								</h4>
+								<p class="description">
+									<span>0.5+%</span> of every sell will be automatically burned
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- ======= About Section ======= -->
+			<section id="Tokenomics" class="about">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Tokenomics</h2>
+						<p>Delicately Designed to give <span>profit</span> to buyers and holders</p>
+					</div>
+					<div class="row content">
+						<div class="col-lg-6">
+							<p>
+								<span>-10%</span> for Buy Tax
+							</p>
+							<ul>
+								<li>
+									<i class="ri-check-double-line"></i>10% More tokens given by Minus Tax System. <span>PERIOD.</span>
+								</li>
+							</ul>
+						</div>
+						<div class="col-lg-6 pt-4 pt-lg-0">
+							<p>20% for Sell Tax</p>
+							<ul>
+								<li>
+									<i class="ri-check-double-line"></i>3% Claimable Reward (Claim Anytime in the website) (link) (soon)
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>2+% Liquidity
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>3% Project Sustainability
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>1% Dip Reward (Reward Token Now: CAKE)
+								</li>
+                <li>
+									<i class="ri-check-double-line"></i>0.5+% Auto Burn
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>8.8% Fuel to the Minus Tax System (approx.)
+								</li>
+								<li>
+									<i class="ri-check-double-line"></i>1.7+% Auto Redistribution (approx.)
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End About Section -->
+			<section id="Roadmap" class="cd-container">
+				<div class="section-title">
+					<h2>Roadmap</h2>
+					<p>What we will do with our community</p>
+				</div>
+				<div class="cd-timeline-block">
+					<div class="cd-timeline-img cd-picture">
+						<i class="ri-stack-line"></i>
+					</div>
+					<div class="cssanimations cd-timeline-content bounce-in">
+						<h2>September</h2>
+						<p>Preparation: Website, Fair Launch</p>
+						<p>Massive Marketing: Reddit, Twitter, CoinSniper, etc</p>
+						<p>New Feature Announcement: BR, EB, 2U</p>
+						<p>New Service Announcement: Crypto Lottery</p>
+						<p>Listings: CoinGecko, CoinMarketCap</p>
+						<p>Audit: TechRate (or CertiK)</p>
+						<p>Milestones: 5K TG Members, 1K Holders, 1M Market Cap</p>
+					</div>
+				</div>
+				<div class="cd-timeline-block">
+					<div class="cd-timeline-img cd-picture">
+						<i class="ri-stack-line"></i>
+					</div>
+					<div class="cssanimations cd-timeline-content bounce-in">
+						<h2>2021 Q4</h2>
+						<p>More Massive Marketing: Youtube, Poocoin etc</p>
+						<p>New Feature Announcement: CR</p>
+						<p>New Service Announcement: Infinite Pump, Up &amp; Down</p>
+						<p>New Project Announcement: RT, TP</p>
+						<p>New System: Swap, Staking, Lock, Presale</p>
+						<p>Listings: Minor Exchanges</p>
+						<p>2nd Audit: CertiK</p>
+						<p>Milestones: 50K TG Members, 10K Holders, 10M Market Cap</p>
+					</div>
+				</div>
+				<div class="cd-timeline-block">
+					<div class="cd-timeline-img cd-picture">
+						<i class="ri-stack-line"></i>
+					</div>
+					<div class="cssanimations cd-timeline-content bounce-in">
+						<h2>2022 Q1</h2>
+						<p>Heavy Marketing: TOP 10 Youtuber, Twitter, Bscscan with offline AD</p>
+						<p>New Project Announcement: WC, TS, CC</p>
+						<p>New System: Chart, Analytics, Multi-Swap, Multi-Chain</p>
+						<p>Listings: Major Exchanges + Binance</p>
+						<p>3rd Audit: CertiK</p>
+						<p>Milestones: 200K TG Members, 100K Holders, 100M Market Cap</p>
+						<p>
+							<span>And More</span>
+						</p>
+					</div>
+				</div>
+			</section>
+			<section id="Motivation" class="about">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Motivation</h2>
+						<p>Why I made this token</p>
+					</div>
+					<p style="white-space: pre-line;text-align: center;">I have seen many tokens that have been successful with adding new unique feature.
+Some features like redistribution, auto-liquidity.
+Other tokens applied those features later but usually first ones win at last.
+
+So I have focused on the <span>NEW UNIQUE FEATURE</span>.
+What will make people buy and hold and make the token and community grow?
+Based on this question, I have invented <span>MANY</span> new unique features.
+And I have tried to select the best one among them.
+
+During the selection, I have thought of that,
+How about adding <span>ALL</span> of them in a <span>SINGLE</span> token?
+    
+Each feature is very new and unique. It will attract many people.
+Adding all of them in a single token will make the token more attractive.
+And 'all of them in a single token' itself can be a another unique concept.
+					</p>
+				</div>
+			</section>
+			<section id="Upcomings" class="services section-bg">
+				<div class="section-title" style="
+">
+					<h2>Upcoming New Things</h2>
+					<p>More Unique Things which I have <span>invented</span> or usual concepts</p>
+					<p>Concept: Only Concept is Made</p>
+					<p>Designed: Know how to make it. But not made a code yet</p>
+					<p>Implemented: Made a source code. But not tested yet</p>
+					<p>Ready: Test done. Ready to be applied</p>
+				</div>
+				<div id="Services", class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Services</h2>
+						<p>Actual Services for increase holder's satisfaction</p>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Crypto Lottery (Ready)</a>
+								</h4>
+								<p class="description">Fully Fair &amp; Transparent Lottery</p>
+								<p class="description">Details will be revealed at <span>1K Holders</span></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Infinite Pump (Ready)</a>
+								</h4>
+								<p class="description">Fully Fair &amp; Transparent Auto Pump System</p>
+								<p class="description">Team only buy at the start only if trigger is needed</p>
+								<p class="description">Team never sell until 1 hour after the pump start</p>
+								<p class="description">How this is possible?</p>
+								<p class="description">Details will be revealed at <span>2K Holders</span></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-command-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Up &amp; Down (Ready)</a>
+								</h4>
+								<p class="description">BNB price Direction Prediction</p>
+								<p class="description">Seize the Prize by betting Up &amp; Down</p>
+								<p class="description">Details will be revealed at <span>3K Holders</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="NewUtilityTokens" class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>New Utility Tokens</h2>
+						<p>More Token Projects for the Special Purpose</p>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Token RT (Concept)</a>
+								</h4>
+								<p class="description">Keyword Hint: User, Balance</p>
+								<p class="description">Details will be revealed at <span>10K Holders</span></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Token WC (Concept)</a>
+								</h4>
+								<p class="description">Keyword Hint: Whales, Rich</p>
+								<p class="description">Details will be revealed at <span>30K Holders</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="BigProjects" class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Big Projects</h2>
+						<p>Totally New Project to go beyond</p>
+					</div>
+					<div class="row">
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Project TP (Designed)</a>
+								</h4>
+								<p class="description">Keyword Hint: Play, Party</p>
+								<p class="description">Details will be revealed at <span>5K Holders</span></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-command-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Project XX (Designed. No name yet)</a>
+								</h4>
+								<p class="description">Keyword Hint: Team, Market</p>
+								<p class="description">Details will be revealed at <span>10K Holders</span></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-palette-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Project TS (Designed)</a>
+								</h4>
+								<p class="description">Keyword Hint: Swap, Stable</p>
+								<p class="description">We are in the boundary of pair swap system invented by uniswap.</p>
+								<p class="description">I have new concept to <span>break</span> this boundary. </p>
+								<p class="description">Thinking about the potential of this project.</p>
+								<p class="description">Details will be revealed at <span>30K Holders</span></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="200">
+							<div class="icon-box">
+								<div class="icon">
+									<i class="ri-stack-line"></i>
+								</div>
+								<h4 class="title">
+									<a href="">Project CC (Designed)</a>
+								</h4>
+								<p class="description">Keyword Hint: BlockChain, Connection</p>
+								<p class="description">Details will be revealed at <span>100K Holders</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="ImportantNotice" class="about">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title" style="
+    padding: 0;
+">
+						<h2><span>Important</span> Notice</h2>
+					</div>
+					<p style="white-space: pre-line;text-align: center;">I will <span>doxx</span> by using 3rd party service. So I could <span>not</span> do the scam.
+
+I have applied many <span>new</span> unique features in this token.
+And I have more good things to suggest and apply.
+So I have decided to make this contract to be <span>UPGRADABLE.</span>
+Which means the contract could be <span>modified.</span>
+
+Some may worry that then I could change it to some <span>malicious</span> contract
+and take all the funds and money in my pocket, etc.
+I would not say it is impossible. It will be a lie because it is possible.
+But I will say that I will <span>NEVER</span> do that.
+I could not guarantee for this claim because there is no way to block this to happen. Doxx may support this.
+
+However, please look at my suggested new unique features.
+And please think, <span>how can a scammer think of all these things?</span>
+Scammers think of just copying other meme token, shill, rugpull, etc.
+That is enough for them because it gives much money.
+And they have many ways which is much easier than my way.
+No need to say those ways make them earn much more.
+Think of all those scam coins start and run.
+
+Also, please consider <span>potential</span> of my upcoming new unique features.
+Big or small, new or not, I have already added 6 of them.
+And I have about 10 more to be applied.
+including concept, there is <span>much more.</span>
+Moreover, as time passes, I will invent much more features.
+
+And there will be a new feature suggested by other token in future.
+By upgrade, it could be applied to this token too.
+
+It makes the token more stable because if there should be a minor issue or something,
+upgrade can fix it very well.
+
+Finally, did you saw scammer <span>voluntarily announce</span> that the token could be scammed,
+and explaining all of these in such a long text?
+<span>Never.</span> They <span>hide</span> until revealed by someone.
+And if it is revealed, they just ban or ignore with no explanation and just shill until rugpull.
+
+This is all I could explain for the upgradable.
+I hope you are persuaded and convinced that it is <span>SAFU.</span>
+I will make multiple transparent process to convince you more.
+(link for the upgrade process)
+
+Thank you :)</p>
+				</div>
+			</section>
+			<section id="FAQs" class="faq section-bg">
+				<div class="container aos-init aos-animate" data-aos="fade-up">
+					<div class="section-title">
+						<h2>Frequently Asked Questions</h2>
+						<p>Get your answer easily in here</p>
+					</div>
+					<div class="faq-list">
+						<ul>
+              <li data-aos="fade-up" data-aos-delay="300" class="aos-init aos-animate">
+								<i class="bx bx-help-circle icon-help"></i>
+								<a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="" aria-expanded="true">Is Reward preserved for each wallet?
+									<i class="bx bx-chevron-down icon-show"></i>
+									<i class="bx bx-chevron-up icon-close"></i>
+								</a>
+								<div id="faq-list-4" class="collapse show" data-bs-parent=".faq-list" style="">
+									<p>Yes! Unlike other token's reward system, it does not reduce your current portion.</p>
+								</div>
+							</li>
+							<li data-aos="fade-up" class="aos-init aos-animate">
+								<i class="bx bx-help-circle icon-help"></i>
+								<a data-bs-toggle="collapse" class="collapse collapsed" data-bs-target="#faq-list-1" aria-expanded="false">How can I get the reward?
+									<i class="bx bx-chevron-down icon-show"></i>
+									<i class="bx bx-chevron-up icon-close"></i>
+								</a>
+								<div id="faq-list-1" class="collapse" data-bs-parent=".faq-list" style="">
+									<p>Check this link for the detailed instructions</p>
+									<p>(Click this button to get the reward) (working)</p>
+								</div>
+							</li>
+              <li data-aos="fade-up" data-aos-delay="300" class="aos-init aos-animate">
+								<i class="bx bx-help-circle icon-help"></i>
+								<a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="" aria-expanded="true">Is there a minimum amount to get reward?
+									<i class="bx bx-chevron-down icon-show"></i>
+									<i class="bx bx-chevron-up icon-close"></i>
+								</a>
+								<div id="faq-list-4" class="collapse show" data-bs-parent=".faq-list" style="">
+									<p>No Minimum!</p>
+								</div>
+							</li>
+							<li data-aos="fade-up" data-aos-delay="300" class="aos-init aos-animate">
+								<i class="bx bx-help-circle icon-help"></i>
+								<a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="" aria-expanded="true">Is there a minimum cooltime to get reward?
+									<i class="bx bx-chevron-down icon-show"></i>
+									<i class="bx bx-chevron-up icon-close"></i>
+								</a>
+								<div id="faq-list-4" class="collapse show" data-bs-parent=".faq-list" style="">
+									<p>No cooltime! Take your claim whenever you want</p>
+								</div>
+							</li>
+              
+							<li data-aos="fade-up" data-aos-delay="100" class="aos-init aos-animate">
+								<i class="bx bx-help-circle icon-help"></i>
+								<a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed" aria-expanded="false">Why Token Upgradable? Is it SAFU?
+									<i class="bx bx-chevron-down icon-show"></i>
+									<i class="bx bx-chevron-up icon-close"></i>
+								</a>
+								<div id="faq-list-2" class="collapse" data-bs-parent=".faq-list" style="">
+									<p>I have written a text in <span>IMPORTANT NOTICE</span> about this.</p>
+									<p>TL;DR: To add new feature over and over to make this token greater. Based on that text, I hope I have gained your trust.</p>
+								</div>
+							</li>
+							<li data-aos="fade-up" data-aos-delay="200" class="aos-init aos-animate">
+								<i class="bx bx-help-circle icon-help"></i>
+								<a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed" aria-expanded="false">Any Plans of doing doxx?
+									<i class="bx bx-chevron-down icon-show"></i>
+									<i class="bx bx-chevron-up icon-close"></i>
+								</a>
+								<div id="faq-list-3" class="collapse" data-bs-parent=".faq-list" style="">
+									<p>I am planning to do the KYC Verification! Currently looking for safe and cheap one.</p>
+								</div>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+			</section>
+			<!-- End Counts Section -->
+			<!-- ======= About Video Section ======= -->
+			<!-- End About Video Section -->
+			<!-- ======= Clients Section ======= -->
+			<!-- End Clients Section -->
+			<!-- ======= Testimonials Section ======= -->
+			<!-- End Testimonials Section -->
+			<a href="#" class="back-to-top d-flex align-items-center justify-content-center active">
+				<i class="bi bi-arrow-up-short"></i>
+			</a>
+			<!-- Vendor JS Files -->
+			<script async="" src="//www.google-analytics.com/analytics.js"></script>
+			<script async="" src="//www.google-analytics.com/analytics.js"></script>
+			<script src="assets/vendor/aos/aos.js"></script>
+			<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+			<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+			<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script></main><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>
+          <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>OnePage</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  </body></html>
