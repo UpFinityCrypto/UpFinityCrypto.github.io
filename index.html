@@ -5,7 +5,7 @@
     
 <script type="text/javascript" src="./assets/js/web3.min.js"></script>
 <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-<script src="./assets/js/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="./assets/js/ethers.umd.min.js" type="application/javascript"></script>
 <script type="text/javascript">
     alert('Working on applying Improved Reward System :)');
 </script>
@@ -130,7 +130,7 @@
 							<a class="nav-link scrollto" href="#FAQs">FAQs</a>
 						</li>
 						<li>
-							<button class="getstarted scrollto" onclick="connect();">Connect Wallet</button>
+							<button id="connectWallet" class="getstarted scrollto"">Connect Wallet</button>
 						<div id="walletAdr"></div></li>
 					</ul>
 					<i class="bi bi-list mobile-nav-toggle"></i>
@@ -152,7 +152,10 @@
 					</div>
 				</div>
 				<div class="text-center">
-					<a href="#about" class="btn-get-started scrollto">Get Started</a>
+					<a href="#Tokenomics" class="btn-get-started scrollto">Tokenomics</a>
+				</div>
+				<div class="text-center">
+					<a id="connectWallet" class="btn-get-started scrollto">Connect Wallet</a>
 				</div>
 			</div>
 		</section>
