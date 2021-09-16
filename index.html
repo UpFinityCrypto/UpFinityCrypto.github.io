@@ -164,9 +164,9 @@
 					<a href="#test" id="connect" class="btn-get-started scrollto" onclick="fconnect();">Connect Wallet (TEST)</a>
           <div id="connectResult"></div>
 				</div>
-				<div class="container aos-init aos-animate" data-aos="fade-up">
+				<div class="container">
           <div class="row">
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
 							<div class="icon-box">
 								<div class="text-center">
                   <h2>Total Claimed Rewards</h2>
@@ -174,7 +174,7 @@
                 </div>
 							</div>
 						</div>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
 							<div class="icon-box">
 								<div class="text-center">
                   <h2>Total Unclaimed Rewards</h2>
@@ -182,7 +182,7 @@
                 </div>
 							</div>
 						</div>
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="400">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
 							<div class="icon-box">
 								<div class="text-center">
                   <h2>Your Claimed Rewards</h2>
@@ -922,7 +922,8 @@ Thank you :)</p>
 	<!-- prepare blockchain -->
 	if (typeof window.ethereum !== 'undefined') {
 	  web3 = new Web3(window.ethereum);
-    console.log(await ethereum.request({ method: 'eth_chainId' }));
+    const chainId = await ethereum.request({ method: 'eth_chainId' });
+    console.log(chainId);
 	  startApp();
 	} else {
 		console.log('Please install MetaMask!');
