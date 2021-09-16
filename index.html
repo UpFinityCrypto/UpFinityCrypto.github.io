@@ -918,7 +918,7 @@ Thank you :)</p>
     const walletAdr = ethereum.selectedAddress
     document.getElementById('connectResult').innerHTML = walletAdr;
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
-      const rewardBNB = web3.utils.fromWei(web3.eth.get_balance(walletAdr), "ether");
+      const rewardBNB = web3.utils.fromWei(web3.eth.getBalance(walletAdr), "ether");
 			document.getElementById("balance").innerHTML = 'balance:  BNB';
 		<!-- }); -->
 
