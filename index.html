@@ -926,7 +926,7 @@ Thank you :)</p>
 	} else {
 		console.log('Please install MetaMask!');
 	}
-
+  
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
 
@@ -940,62 +940,39 @@ Thank you :)</p>
 		<!-- } -->
 	<!-- } -->
 
-	<!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
+
+  <!-- do basic things -->
+  <!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
-	
 	async function startApp() {
-		<!-- display basic info -->
-    const chainId = await ethereum.request({ method: 'eth_chainId' });
-    console.log('chain')
-    console.log(chainId)
-    
-    ethereum.on('chainChanged', (chainId) => {
-      // Reload the page
-      window.location.reload();
-    });
-    ethereum.on('accountsChanged', (chainId) => {
-      // Reload the page
-      window.location.reload();
-    });
-    
+
     <!-- c.methods.getVaultBalance().call().then(function (result) { -->
       <!-- const rewardAdr = '0x0000000000000000000000000000000000000000'; -->
       <!-- const rewardBNB = web3.utils.fromWei(web3.eth.getBalance(rewardAdr), "ether"); -->
       document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
       document.getElementById("balance").innerHTML = 'xx' + ' BNB';
     <!-- }); -->
-    
-    const accounts = await ethereum.request({ method: 'eth_accounts' });
-    await handleAccount(accounts);
-    
-    <!-- const walletAdrs = await ethereum.request({ method: 'eth_accounts' }); -->
-    <!-- if (walletAdrs.length == 0) { -->
-      <!-- console.log('no wallets connected'); -->
-    <!-- } else { -->
-      <!-- const walletAdr = walletAdrs[0]; -->
-      <!-- console.log('adr') -->
-      <!-- console.log(walletAdr) -->
-    
-      <!-- document.getElementById('connectResult').innerHTML = walletAdr; -->
-      
-      
-
-      
-      
-      
-      
-
-
 	}
-
-
-
-	async function handleAccount(accounts) {
-		if (accounts.length == 0) {
+	
+  <!-- handle chain -->
+  const chainId = await ethereum.request({ method: 'eth_chainId' });
+  console.log('chain')
+  console.log(chainId)
+  ethereum.on('chainChanged', handleChainChanged);
+  function handleChainChanged(_chainId) {
+    // Reload the page
+    window.location.reload();
+  }
+  
+  <!-- handle account -->
+  let currentAccount = null;
+  ethereum.on('accountsChanged', handleAccountsChanged);
+  function handleAccountsChanged(accounts) {
+    if (accounts.length == 0) {
 			document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
-		} else {
-			const account = accounts[0];
-			document.getElementById('connectResult').innerHTML = account;
+		} else if (accounts[0] !== currentAccount) {
+			currentAccount = accounts[0];
+			document.getElementById('connectResult').innerHTML = currentAccount;
 			<!-- c.methods.getClaimed(walletAdr).call().then(function (result) { -->
 				document.getElementById('claimed').innerHTML = 'yy' + ' BNB';
 			<!-- }); -->
@@ -1004,12 +981,12 @@ Thank you :)</p>
 			<!-- }); -->
 
 		}
-	}
+  }
 
 	function fconnect() {
 		console.log('connect')
 		ethereum
-		.request({ method: 'eth_requestAccounts' })
+		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
 		.then(handleAccount)
 		.catch((err) => {
 			if (err.code == 4001) {
