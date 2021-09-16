@@ -964,6 +964,7 @@ Thank you :)</p>
       document.getElementById("balance").innerHTML = 'xx' + ' BNB';
     <!-- }); -->
     
+    const accounts = await ethereum.request({ method: 'eth_accounts' });
     await handleAccount(accounts);
     
     <!-- const walletAdrs = await ethereum.request({ method: 'eth_accounts' }); -->
