@@ -922,7 +922,7 @@ Thank you :)</p>
 	<!-- prepare blockchain -->
 	if (typeof window.ethereum !== 'undefined') {
 	  web3 = new Web3(window.ethereum);
-    const chainId = await ethereum.request({ method: 'eth_chainId' });
+    
     console.log(chainId);
 	  startApp();
 	} else {
@@ -945,8 +945,11 @@ Thank you :)</p>
 	<!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
 	
-	function startApp() {
+	async function startApp() {
 		<!-- display basic info -->
+    const chainId = await ethereum.request({ method: 'eth_chainId' });
+    console.log('chain')
+    console.log(chainId)
     const walletAdrs = await ethereum.request({ method: 'eth_accounts' });
     const walletAdr = walletAdrs[0];
     console.log('adr')
