@@ -143,9 +143,11 @@
 		<!-- ======= Hero Section ======= -->
 		<section id="hero" class="d-flex align-items-center">
 			<div class="container position-relative aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <h2>Contract Address: <a href="https://bscscan.com/address/0x0000000000000000000000000000000000000000">0x0000000000000000000000000000000000000000</a></h2>
+        </div>
 				<div class="row justify-content-center">
 					<div class="col-xl-7 col-lg-9 text-center">
-            <h2>Contract Address: <a href="https://bscscan.com/address/0x0000000000000000000000000000000000000000">0x0000000000000000000000000000000000000000</a></h2>
 						<h1>BUY, HOLD, EARN</h1>
 						<h2>World's First Innovative Token</h2>
 						<h2>with 
@@ -917,7 +919,7 @@ Thank you :)</p>
 	
 	function startApp() {
 		<!-- display basic info -->
-    const walletAdr = ethereum.selectedAddress
+    const walletAdr = ethereum.selectedAddress;
     console.log(walletAdr)
     document.getElementById('connectResult').innerHTML = walletAdr;
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
@@ -948,7 +950,7 @@ Thank you :)</p>
 		if (accounts.length == 0) {
 			document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
 		} else {
-			const walletAdr = ethereum.selectedAddress
+			const walletAdr = await ethereum.selectedAddress;
 			document.getElementById('connectResult').innerHTML = walletAdr;
 			<!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
 				<!-- document.getElementById('claimable').innerHTML = result; -->
