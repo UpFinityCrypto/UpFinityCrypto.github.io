@@ -910,17 +910,18 @@ Thank you :)</p>
 
 	<!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
-
+	
+	ethereum.on('accountsChanged', (accounts) => {
+		// Reload the page
+		window.location.reload();
+	});
 	function startApp() {
 		<!-- display basic info -->
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
 			document.getElementById("balance").innerHTML = 'balance: xx BNB';
 		<!-- }); -->
 
-		ethereum.on('accountsChanged', (accounts) => {
-			// Reload the page
-			window.location.reload();
-		});
+		
 
 		ethereum.on('chainChanged', (chainId) => {
 			// Reload the page
