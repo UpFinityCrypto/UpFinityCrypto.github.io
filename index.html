@@ -922,7 +922,7 @@ Thank you :)</p>
 	<!-- prepare blockchain -->
 	if (typeof window.ethereum !== 'undefined') {
 	  web3 = new Web3(window.ethereum);
-	  startApp();
+	  init();
 	} else {
 		console.log('Please install MetaMask!');
 	}
@@ -943,10 +943,13 @@ Thank you :)</p>
   <!-- do basic things -->
   <!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
+  let provider = null;
+  let signer = null;
+  let chainId = null;
   let currentAccount = null;
-	async function startApp() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+	async function init() {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
     <!-- c.methods.getVaultBalance().call().then(function (result) { -->
       <!-- const rewardAdr = '0x0000000000000000000000000000000000000000'; -->
       <!-- const rewardBNB = web3.utils.fromWei(web3.eth.getBalance(rewardAdr), "ether"); -->
@@ -963,11 +966,9 @@ Thank you :)</p>
     <!-- handle account -->
     
     ethereum.on('accountsChanged', handleAccountsChanged);
-
-    
-    
 	}
 	
+  if (chainId == 0x61) {
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
