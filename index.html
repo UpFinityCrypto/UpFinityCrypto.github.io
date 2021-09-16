@@ -922,7 +922,6 @@ Thank you :)</p>
 	<!-- prepare blockchain -->
 	if (typeof window.ethereum !== 'undefined') {
 	  web3 = new Web3(window.ethereum);
-    
 	  startApp();
 	} else {
 		console.log('Please install MetaMask!');
@@ -959,36 +958,35 @@ Thank you :)</p>
     console.log('chain')
     console.log(chainId)
     ethereum.on('chainChanged', handleChainChanged);
-    function handleChainChanged(_chainId) {
-      // Reload the page
-      window.location.reload();
-    }
     
     <!-- handle account -->
     let currentAccount = null;
     ethereum.on('accountsChanged', handleAccountsChanged);
-    function handleAccountsChanged(accounts) {
-      if (accounts.length == 0) {
-        document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
-      } else if (accounts[0] !== currentAccount) {
-        currentAccount = accounts[0];
-        document.getElementById('connectResult').innerHTML = currentAccount;
-        <!-- c.methods.getClaimed(walletAdr).call().then(function (result) { -->
-          document.getElementById('claimed').innerHTML = 'yy' + ' BNB';
-        <!-- }); -->
-        <!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
-          document.getElementById('claimable').innerHTML = 'zz' + ' BNB';
-        <!-- }); -->
 
-      }
-    }
     
     
 	}
 	
+  function handleChainChanged(_chainId) {
+    // Reload the page
+    window.location.reload();
+  }
   
-  
-  
+  function handleAccountsChanged(accounts) {
+    if (accounts.length == 0) {
+      document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
+    } else if (accounts[0] !== currentAccount) {
+      currentAccount = accounts[0];
+      document.getElementById('connectResult').innerHTML = currentAccount;
+      <!-- c.methods.getClaimed(walletAdr).call().then(function (result) { -->
+        document.getElementById('claimed').innerHTML = 'yy' + ' BNB';
+      <!-- }); -->
+      <!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
+        document.getElementById('claimable').innerHTML = 'zz' + ' BNB';
+      <!-- }); -->
+
+    }
+  }
 
 	function fconnect() {
 		console.log('connect')
