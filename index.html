@@ -920,9 +920,84 @@ Thank you :)</p>
 	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
 	<!-- main(); -->
 	<!-- prepare blockchain -->
+  async function getNetwork() {
+    network = await provider.getNetwork();
+  }
+  
+  const abi = [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "calBNB",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "claimBNB",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "claimedBNB",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+  ]
+  
 	if (typeof window.ethereum !== 'undefined') {
-	  web3 = new Web3(window.ethereum);
-	  init();
+    ethereum.on('chainChanged', handleChainChanged);
+    ethereum.on('accountsChanged', handleAccountsChanged);
+    
+	  const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    let network;
+    getNetwork();
+    
+    
+    document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
+    if (network.chainId == 56) {
+      console.log('testnet');
+      const cAdr = '0x665b122D4610B10fAa3ef8F6F705f7d5186D4faa';
+      const c = new ethers.Contract(cAdr, abi, provider);
+      balance = await c.balanceOf(cAdr);
+      document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
+    } else {
+      document.getElementById("balance").innerHTML = 'xx' + ' BNB';
+    }
 	} else {
 		console.log('Please install MetaMask!');
 	}
@@ -938,37 +1013,8 @@ Thank you :)</p>
 			<!-- console.log('Please install MetaMask!'); -->
 		<!-- } -->
 	<!-- } -->
+  
 
-
-  <!-- do basic things -->
-  <!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
-	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
-  let provider = null;
-  let signer = null;
-  let chainId = null;
-  let currentAccount = null;
-	async function init() {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();
-    <!-- c.methods.getVaultBalance().call().then(function (result) { -->
-      <!-- const rewardAdr = '0x0000000000000000000000000000000000000000'; -->
-      <!-- const rewardBNB = web3.utils.fromWei(web3.eth.getBalance(rewardAdr), "ether"); -->
-      document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
-      document.getElementById("balance").innerHTML = 'xx' + ' BNB';
-    <!-- }); -->
-    
-    <!-- handle chain -->
-    const chainId = await ethereum.request({ method: 'eth_chainId' });
-    console.log('chain')
-    console.log(chainId)
-    ethereum.on('chainChanged', handleChainChanged);
-    
-    <!-- handle account -->
-    
-    ethereum.on('accountsChanged', handleAccountsChanged);
-	}
-	
-  if (chainId == 0x61) {
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
