@@ -170,7 +170,7 @@
 							<div class="icon-box">
 								<div class="text-center">
                   <h2>Total Claimed Rewards</h2>
-                  <div id="balance">0 BNB</div>
+                  <div id="totalClaimed">0 BNB</div>
                 </div>
 							</div>
 						</div>
@@ -186,7 +186,7 @@
 							<div class="icon-box">
 								<div class="text-center">
                   <h2>Your Claimed Rewards</h2>
-                  <div id="claimable">0 BNB</div>
+                  <div id="claimed">0 BNB</div>
                   <h2>You Can Claim</h2>
                   <div id="claimable">0 BNB</div>
                   <a href="#test" id="claim" class="btn-get-started scrollto" onclick="fclaim();">Claim Reward</a>
@@ -961,6 +961,7 @@ Thank you :)</p>
     <!-- c.methods.getVaultBalance().call().then(function (result) { -->
       <!-- const rewardAdr = '0x0000000000000000000000000000000000000000'; -->
       <!-- const rewardBNB = web3.utils.fromWei(web3.eth.getBalance(rewardAdr), "ether"); -->
+      document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
       document.getElementById("balance").innerHTML = 'xx' + ' BNB';
     <!-- }); -->
     
@@ -995,12 +996,13 @@ Thank you :)</p>
 		} else {
 			const account = accounts[0];
 			document.getElementById('connectResult').innerHTML = account;
-			<!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
-				<!-- document.getElementById('claimable').innerHTML = result; -->
-			<!-- }); -->
 			<!-- c.methods.getClaimed(walletAdr).call().then(function (result) { -->
-				<!-- document.getElementById('claimed').innerHTML = result; -->
+				document.getElementById('claimed').innerHTML = 'yy' + ' BNB';
 			<!-- }); -->
+			<!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
+				document.getElementById('claimable').innerHTML = 'zz' + ' BNB';
+			<!-- }); -->
+
 		}
 	}
 
