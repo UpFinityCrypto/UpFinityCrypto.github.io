@@ -948,11 +948,14 @@ Thank you :)</p>
     const chainId = await ethereum.request({ method: 'eth_chainId' });
     console.log('chain')
     console.log(chainId)
+    
     const walletAdrs = await ethereum.request({ method: 'eth_accounts' });
     const walletAdr = walletAdrs[0];
     console.log('adr')
     console.log(walletAdr)
+    
     document.getElementById('connectResult').innerHTML = walletAdr;
+    
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
       <!-- const rewardAdr = '0x0000000000000000000000000000000000000000'; -->
       <!-- const rewardBNB = web3.utils.fromWei(web3.eth.getBalance(rewardAdr), "ether"); -->
