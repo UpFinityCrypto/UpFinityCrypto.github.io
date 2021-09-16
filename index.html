@@ -923,7 +923,9 @@ Thank you :)</p>
   async function getNetwork() {
     network = await provider.getNetwork();
   }
-  
+  async function balanceOf(cAdr) {
+    balance = await c.balanceOf(cAdr);
+  }
   const abi = [
     {
       "inputs": [
@@ -993,7 +995,8 @@ Thank you :)</p>
       console.log('testnet');
       const cAdr = '0x665b122D4610B10fAa3ef8F6F705f7d5186D4faa';
       const c = new ethers.Contract(cAdr, abi, provider);
-      balance = await c.balanceOf(cAdr);
+      let balance;
+      balanceOf(cAdr);
       document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
     } else {
       document.getElementById("balance").innerHTML = 'xx' + ' BNB';
