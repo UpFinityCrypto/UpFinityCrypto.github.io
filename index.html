@@ -155,13 +155,15 @@
 					<a href="#Tokenomics" class="btn-get-started scrollto">Tokenomics</a>
 				</div>
 				<div class="text-center">
-					<a id="connectWallet" class="btn-get-started scrollto" onclick="fconnectWallet();">Connect Wallet</a>
+					<a href="#" id="connect" class="btn-get-started scrollto" onclick="fconnect();">Connect Wallet</a>
+          <div id="connectResult"></div>
 				</div>
 				<div class="text-center">
-					<a id="balance" class="btn-get-started scrollto">balance</a>
+					<a href="#" id="balance" class="btn-get-started scrollto">balance</a>
 				</div>
 				<div class="text-center">
-					<a id="claim" class="btn-get-started scrollto" onclick="fclaim();">claim</a>
+					<a href="#" id="claim" class="btn-get-started scrollto" onclick="fclaim();">claim</a>
+          <div id="claimResult"></div>
 				</div>
 			</div>
 		</section>
@@ -911,10 +913,6 @@ Thank you :)</p>
 	<!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
 	
-	ethereum.on('accountsChanged', (accounts) => {
-		// Reload the page
-		window.location.reload();
-	});
 	function startApp() {
 		<!-- display basic info -->
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
@@ -929,8 +927,8 @@ Thank you :)</p>
 		});
 
 		<!-- click connect wallet -->
-		document.getElementById('connectWallet').click(function() {
-			fconnectWallet()
+		document.getElementById('connect').click(function() {
+			fconnect()
 		});
 
 		<!-- click claim button -->
@@ -943,10 +941,10 @@ Thank you :)</p>
 
 	function handleAccount(accounts) {
 		if (accounts.length == 0) {
-			document.getElementById('status').innerHTML = 'Please Connect Metamask';
+			document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
 		} else {
 			const walletAdr = ethereum.selectedAddress
-			document.getElementById('status').innerHTML = walletAdr;
+			document.getElementById('connectResult').innerHTML = walletAdr;
 			c.methods.getClaimable(walletAdr).call().then(function (result) {
 				document.getElementById('claimable').innerHTML = result;
 			});
@@ -956,7 +954,7 @@ Thank you :)</p>
 		}
 	}
 
-	function fconnectWallet() {
+	function fconnect() {
 		console.log('connect')
 		ethereum
 		.request({ method: 'eth_requestAccounts' })
@@ -965,7 +963,7 @@ Thank you :)</p>
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
 				// If this happens, the user rejected the connection request.
-				document.getElementById('status').innerHTML = 'You Rejected Connection';
+				document.getElementById('connectResult').innerHTML = 'You Rejected Connection';
 			} else {
 				console.error(err);
 			}
@@ -976,7 +974,7 @@ Thank you :)</p>
 		console.log('claim')
 		c.methods.claim().call().then(function (result) {
 			const rewardBNB = web3.utils.fromWei(result, "ether");
-			document.getElementById('result').innerHTML = rewardBNB + ' BNB claimed!';
+			document.getElementById('claimResult').innerHTML = rewardBNB + ' BNB claimed!';
 		});
 	}
 </script>
