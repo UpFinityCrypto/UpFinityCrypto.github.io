@@ -900,7 +900,7 @@ Thank you :)</p>
 	<!-- prepare blockchain -->
 	if (typeof window.ethereum !== 'undefined') {
 	  web3 = new Web3(window.ethereum);
-	  console.log(window.ethereum.networkVersion);
+    console.log(ethereum.request({ method: 'eth_chainId' }));
 	  startApp();
 	} else {
 		console.log('Please install MetaMask!');
@@ -924,7 +924,7 @@ Thank you :)</p>
 	
 	async function startApp() {
 		<!-- display basic info -->
-    const walletAdr = await ethereum.selectedAddress;
+    const walletAdr = await ethereum.request({ method: 'eth_accounts' });
     console.log('adr')
     console.log(walletAdr)
     document.getElementById('connectResult').innerHTML = walletAdr;
@@ -956,7 +956,7 @@ Thank you :)</p>
 		if (accounts.length == 0) {
 			document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
 		} else {
-			const walletAdr = await ethereum.selectedAddress;
+			const walletAdr = await ethereum.request({ method: 'eth_accounts' });
 			document.getElementById('connectResult').innerHTML = walletAdr;
 			<!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
 				<!-- document.getElementById('claimable').innerHTML = result; -->
