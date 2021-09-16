@@ -943,6 +943,7 @@ Thank you :)</p>
   <!-- do basic things -->
   <!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
+  let currentAccount = null;
 	async function startApp() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -960,7 +961,7 @@ Thank you :)</p>
     ethereum.on('chainChanged', handleChainChanged);
     
     <!-- handle account -->
-    let currentAccount = null;
+    
     ethereum.on('accountsChanged', handleAccountsChanged);
 
     
