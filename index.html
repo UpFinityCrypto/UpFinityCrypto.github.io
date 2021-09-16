@@ -165,10 +165,13 @@
           <div id="connectResult"></div>
 				</div>
 				<div class="text-center">
-					<a href="#test" id="balance" class="btn-get-started scrollto">balance</a>
+          <h2>Unclaimed Rewards</h2>
+          <div id="balance">0 BNB</div>
 				</div>
 				<div class="text-center">
-					<a href="#test" id="claim" class="btn-get-started scrollto" onclick="fclaim();">claim</a>
+          <h2>You Can Claim</h2>
+          <div id="claimable">0 BNB</div>
+					<a href="#test" id="claim" class="btn-get-started scrollto" onclick="fclaim();">Claim Reward</a>
           <div id="claimResult"></div>
 				</div>
 			</div>
@@ -922,6 +925,7 @@ Thank you :)</p>
 	async function startApp() {
 		<!-- display basic info -->
     const walletAdr = await ethereum.selectedAddress;
+    console.log('adr')
     console.log(walletAdr)
     document.getElementById('connectResult').innerHTML = walletAdr;
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
