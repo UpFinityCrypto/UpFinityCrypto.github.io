@@ -155,14 +155,14 @@
 					<a href="#Tokenomics" class="btn-get-started scrollto">Tokenomics</a>
 				</div>
 				<div class="text-center">
-					<a href="#" id="connect" class="btn-get-started scrollto" onclick="fconnect();">Connect Wallet</a>
+					<a href="#test" id="connect" class="btn-get-started scrollto" onclick="fconnect();">Connect Wallet</a>
           <div id="connectResult"></div>
 				</div>
 				<div class="text-center">
-					<a href="#" id="balance" class="btn-get-started scrollto">balance</a>
+					<a href="#test" id="balance" class="btn-get-started scrollto">balance</a>
 				</div>
 				<div class="text-center">
-					<a href="#" id="claim" class="btn-get-started scrollto" onclick="fclaim();">claim</a>
+					<a href="#test" id="claim" class="btn-get-started scrollto" onclick="fclaim();">claim</a>
           <div id="claimResult"></div>
 				</div>
 			</div>
@@ -920,21 +920,20 @@ Thank you :)</p>
 		<!-- }); -->
 
 		
-
+    ethereum.on('accountChanged', (chainId) => {
+			// Reload the page
+			window.location.reload();
+      
+      const walletAdr = ethereum.selectedAddress
+			document.getElementById('connectResult').innerHTML = walletAdr;
+		});
+    
 		ethereum.on('chainChanged', (chainId) => {
 			// Reload the page
 			window.location.reload();
 		});
 
-		<!-- click connect wallet -->
-		document.getElementById('connect').click(function() {
-			fconnect()
-		});
 
-		<!-- click claim button -->
-		document.getElementById('claim').click(function() {
-			fclaim()
-		});
 	}
 
 
