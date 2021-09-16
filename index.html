@@ -919,9 +919,9 @@ Thank you :)</p>
 	<!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
 	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
 	
-	function startApp() {
+	async function startApp() {
 		<!-- display basic info -->
-    const walletAdr = ethereum.selectedAddress;
+    const walletAdr = await ethereum.selectedAddress;
     console.log(walletAdr)
     document.getElementById('connectResult').innerHTML = walletAdr;
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
@@ -948,7 +948,7 @@ Thank you :)</p>
 
 
 
-	function handleAccount(accounts) {
+	async function handleAccount(accounts) {
 		if (accounts.length == 0) {
 			document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
 		} else {
