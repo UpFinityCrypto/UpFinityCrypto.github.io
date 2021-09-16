@@ -920,12 +920,7 @@ Thank you :)</p>
 	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
 	<!-- main(); -->
 	<!-- prepare blockchain -->
-  async function getNetwork() {
-    network = await provider.getNetwork();
-  }
-  async function balanceOf(cAdr) {
-    balance = await c.balanceOf(cAdr);
-  }
+
   const abi = [
     {
       "inputs": [
@@ -1017,7 +1012,13 @@ Thank you :)</p>
 		<!-- } -->
 	<!-- } -->
   
-
+  async function getNetwork() {
+    network = await provider.getNetwork();
+  }
+  async function balanceOf(cAdr) {
+    balance = await c.balanceOf(cAdr);
+  }
+  
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
