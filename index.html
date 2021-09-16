@@ -915,16 +915,19 @@ Thank you :)</p>
 	
 	function startApp() {
 		<!-- display basic info -->
+    const walletAdr = ethereum.selectedAddress
+    document.getElementById('connectResult').innerHTML = walletAdr;
 		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
-			document.getElementById("balance").innerHTML = 'balance: xx BNB';
+      const rewardBNB = web3.utils.fromWei(web3.get_balance(walletAdr), "ether");
+			document.getElementById("balance").innerHTML = 'balance:  BNB';
 		<!-- }); -->
 
 		
-    ethereum.on('accountChanged', (chainId) => {
+    ethereum.on('accountsChanged', (chainId) => {
 			// Reload the page
 			window.location.reload();
       
-			document.getElementById('connectResult').innerHTML = ethereum.selectedAddress;
+			document.getElementById('connectResult').innerHTML = walletAdr;
 		});
     
 		ethereum.on('chainChanged', (chainId) => {
