@@ -4,78 +4,10 @@
     <meta charset="UTF-8">
     
 <script type="text/javascript" src="./assets/js/web3.min.js"></script>
+<script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
+<script src="./assets/js/ethers-5.2.umd.min.js" type="application/javascript"></script>
 <script type="text/javascript">
-    <!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
-    alert('Working on applying Improved Manual System :)');
-    <!-- if (typeof window.ethereum !== 'undefined') { -->
-      <!-- web3 = new Web3(window.ethereum); -->
-    <!-- } -->
-    <!-- const tokenAdrs = [{ -->
-    <!-- address: '', -->
-    <!-- token: '' -->
-    <!-- }, { -->
-    <!-- address: '', -->
-    <!-- token: '' -->
-    <!-- }, { -->
-    <!-- address: '', -->
-    <!-- token: '' -->
-    <!-- }] -->
-    <!-- ethereum.on('accountsChanged', function (accounts) { -->
-      <!-- walletAdr.innerHTML = ethereum.selectedAddress; -->
-      <!-- // Time to reload your interface with accounts[0]! -->
-    <!-- }); -->
-    <!-- async function connect() { -->
-      <!-- const accounts = await ethereum.request({ method: 'eth_requestAccounts' }); -->
-      <!-- const account = ethereum.selectedAddress; -->
-      
-      <!-- const showAccount = document.querySelector('.walletAdr'); -->
-      <!-- web3.eth.getBalance(account,function(err,result) { -->
-        <!-- if (err) { -->
-          <!-- console.log(err) -->
-        <!-- } else { -->
-          <!-- const bal_unit = web3.utils.fromWei(result, "ether"); -->
-          <!-- walletAdr.innerHTML = bal_unit + " ETH"; -->
-        <!-- } -->
-      <!-- }) -->
-    <!-- } -->
-      
-      
-    <!-- import detectEthereumProvider from '@metamask/detect-provider'; -->
-    <!-- const provider = await detectEthereumProvider(); -->
-
-    <!-- if (provider) { -->
-      <!-- // From now on, this should always be true: -->
-      <!-- // provider === window.ethereum -->
-      <!-- startApp(provider); // initialize your app -->
-    <!-- } else { -->
-      <!-- console.log('Please install MetaMask!'); -->
-    <!-- } -->
-    
-    
-    <!-- const ethEnabled = async () => { -->
-      <!-- if (window.ethereum) { -->
-        <!-- await window.ethereum.send('eth_requestAccounts'); -->
-        <!-- window.web3 = new Web3(window.ethereum); -->
-        <!-- return true; -->
-      <!-- } -->
-      <!-- return false; -->
-    <!-- } -->
-    <!-- alert('No Wallet connection!'); -->
-    
-    <!-- function getBalance() { -->
-        <!-- var address, wei, balance -->
-        <!-- address = "0x0000000000000000000000000000000000000000"; -->
-        <!-- try { -->
-            <!-- web3.eth.getBalance(address, function (error, wei) { -->
-                <!-- if (!error) { -->
-                    <!-- var balance = web3.utils.fromWei(wei, 'ether'); -->
-                    <!-- document.getElementById("output").innerHTML = balance + " ETH"; -->
-                <!-- } -->
-            <!-- }); -->
-        <!-- } catch (err) { -->
-            <!-- document.getElementById("output").innerHTML = err; -->
-        <!-- } -->
-    <!-- } -->
+    alert('Working on applying Improved Reward System :)');
 </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -942,7 +874,103 @@ Thank you :)</p>
       </div>
     </div>
   </footer><!-- End Footer -->
+<script type="text/javascript">
+	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
+	alert('Working on Reward System, Simply Cancel Wallet connection :)');
+	<!-- main(); -->
+	<!-- prepare blockchain -->
+	if (typeof window.ethereum !== 'undefined') {
+	  web3 = new Web3(window.ethereum);
+	  console.log(window.ethereum.networkVersion);
+	  startApp();
+	} else {
+		console.log('Please install MetaMask!');
+	}
 
+	<!-- async function main() { -->
+		<!-- const provider = await detectEthereumProvider() -->
+
+		<!-- if (provider) { -->
+			<!-- const chainId = await provider.request({ -->
+				<!-- method: 'eth_chainId' -->
+			<!-- }) -->
+			<!-- startApp(provider); -->
+		<!-- } else { -->
+			<!-- console.log('Please install MetaMask!'); -->
+		<!-- } -->
+	<!-- } -->
+
+	<!-- const cAdr = '0x0000000000000000000000000000000000000000'; -->
+	<!-- const c = new web3.eth.Contract(abi, cAdr); -->
+
+	function startApp() {
+		<!-- display basic info -->
+		<!-- c.methods.getVaultBalance().call().then(function (result) { -->
+			document.getElementById("balance").innerHTML = 'this is balance';
+		<!-- }); -->
+
+		ethereum.on('accountsChanged', (accounts) => {
+			// Reload the page
+			window.location.reload();
+		});
+
+		ethereum.on('chainChanged', (chainId) => {
+			// Reload the page
+			window.location.reload();
+		});
+
+		<!-- click connect wallet -->
+		document.getElementById('connectWallet').click(function() {
+			fconnectWallet()
+		});
+
+		<!-- click claim button -->
+		document.getElementById('claim').click(function() {
+			fclaim()
+		});
+	}
+
+
+
+	function handleAccount(accounts) {
+		if (accounts.length == 0) {
+			document.getElementById('status').innerHTML = 'Please Connect Metamask';
+		} else {
+			const walletAdr = ethereum.selectedAddress
+			document.getElementById('status').innerHTML = walletAdr;
+			c.methods.getClaimable(walletAdr).call().then(function (result) {
+				document.getElementById('claimable').innerHTML = result;
+			});
+			c.methods.getClaimed(walletAdr).call().then(function (result) {
+				document.getElementById('claimed').innerHTML = result;
+			});
+		}
+	}
+
+	function fconnectWallet() {
+		console.log('connect')
+		ethereum
+		.request({ method: 'eth_requestAccounts' })
+		.then(handleAccount)
+		.catch((err) => {
+			if (err.code == 4001) {
+				// EIP-1193 userRejectedRequest error
+				// If this happens, the user rejected the connection request.
+				document.getElementById('status').innerHTML = 'You Rejected Connection';
+			} else {
+				console.error(err);
+			}
+		});
+	}
+
+	function fclaim() {
+		console.log('claim')
+		c.methods.claim().call().then(function (result) {
+			const rewardBNB = web3.utils.fromWei(result, "ether");
+			document.getElementById('result').innerHTML = rewardBNB + ' BNB claimed!';
+		});
+	}
+</script>
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
