@@ -924,8 +924,7 @@ Thank you :)</p>
 			// Reload the page
 			window.location.reload();
       
-      const walletAdr = ethereum.selectedAddress
-			document.getElementById('connectResult').innerHTML = walletAdr;
+			document.getElementById('connectResult').innerHTML = ethereum.selectedAddress;
 		});
     
 		ethereum.on('chainChanged', (chainId) => {
@@ -944,12 +943,12 @@ Thank you :)</p>
 		} else {
 			const walletAdr = ethereum.selectedAddress
 			document.getElementById('connectResult').innerHTML = walletAdr;
-			c.methods.getClaimable(walletAdr).call().then(function (result) {
-				document.getElementById('claimable').innerHTML = result;
-			});
-			c.methods.getClaimed(walletAdr).call().then(function (result) {
-				document.getElementById('claimed').innerHTML = result;
-			});
+			<!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
+				<!-- document.getElementById('claimable').innerHTML = result; -->
+			<!-- }); -->
+			<!-- c.methods.getClaimed(walletAdr).call().then(function (result) { -->
+				<!-- document.getElementById('claimed').innerHTML = result; -->
+			<!-- }); -->
 		}
 	}
 
