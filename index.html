@@ -994,7 +994,7 @@ Thank you :)</p>
 		console.log('connect')
 		ethereum
 		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
-		.then(handleAccount)
+		.then(handleAccountsChanged)
 		.catch((err) => {
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
