@@ -1035,13 +1035,13 @@ Thank you :)</p>
     document.getElementById('connectResult').innerHTML = currentAccount;
     c.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
       console.log(balanceInfo[0]);
-      balance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 10000) / 10000;
+      balance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimed').innerHTML = balance.toString() + ' BNB';
     });
     
     c.functions.calBNB(currentAccount).then(function (balanceInfo) {
       console.log(balanceInfo[0]);
-      balance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 10000) / 10000;
+      balance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimable').innerHTML = balance.toString() + ' BNB';
     });
   }
@@ -1069,7 +1069,7 @@ Thank you :)</p>
     c.populateTransaction.claim(currentAccount).then(function (balanceInfo) {
       console.log(balanceInfo);
       balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
-      document.getElementById('claimable').innerHTML = balance.toString() + ' BNB';
+      document.getElementById('claimResult').innerHTML = balance.toString() + ' BNB claimed!';
     });
     
 		<!-- c.methods.claim().call().then(function (result) { -->
