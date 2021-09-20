@@ -191,6 +191,7 @@
                   <div id="claimable">0 BNB</div>
                   <a href="#test" id="claim" class="btn-get-started scrollto" onclick="fclaim();">Claim Reward</a>
                   <div id="claimResult"></div>
+                  <div id="claimHash"></div>
                 </div>
 							</div>
 						</div>
@@ -1066,7 +1067,8 @@ Thank you :)</p>
     
     
     cSigner.claimBNB().then(function (result) {
-      console.log("Hash: " + result['hash']);
+      document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
+      document.getElementById('claimHash').innerHTML = result['hash'];
     });
     
     <!-- send({}, function (err, res) { -->
