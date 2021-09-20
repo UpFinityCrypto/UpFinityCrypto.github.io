@@ -1013,7 +1013,7 @@ Thank you :)</p>
     
     c = new ethers.Contract(cAdr, abi, provider);
     provider.getBalance(cAdr).then(function (balanceInfo) {
-      balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
+      balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
       document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
     });
     
