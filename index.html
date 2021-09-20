@@ -991,18 +991,23 @@ Thank you :)</p>
     
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   console.log(provider);
-  signer = provider.getSigner();
+  const signer = provider.getSigner();
   console.log(signer);
   
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
-    if (network.chainId == 56) {
-      console.log('testnet');
-      cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
-    } else {
-      console.log('testnet');
-      cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
-    }
+  
+  provider.getNetwork().then((res) => {
+    const network = res;
+  });
+  
+  if (network.chainId == 56) {
+    console.log('testnet');
+    cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+  } else {
+    console.log('testnet');
+    cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+  }
     c = new ethers.Contract(cAdr, abi, provider);
     balanceOf(cAdr);
     document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
