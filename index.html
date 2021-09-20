@@ -994,17 +994,21 @@ Thank you :)</p>
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
   
+  let network;
   provider.getNetwork().then((res) => {
-    const network = res;
+    network = res;
+    console.log(network);
+   
   });
   
   if (network.chainId == 56) {
-    console.log('testnet');
-    cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
-  } else {
     console.log('mainnet');
     cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+  } else {
+    console.log('testnet');
+    cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
   }
+  
     c = new ethers.Contract(cAdr, abi, provider);
     balanceOf(cAdr);
     document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
