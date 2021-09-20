@@ -977,6 +977,10 @@ Thank you :)</p>
   
   let provider;
   let signer;
+  let network;
+  let cAdr;
+  let c;
+  let balance;
 	if (typeof window.ethereum !== 'undefined') {
     ethereum.on('chainChanged', handleChainChanged);
     ethereum.on('accountsChanged', handleAccountsChanged);
@@ -986,20 +990,19 @@ Thank you :)</p>
     console.log(provider);
     signer = provider.getSigner();
     console.log(signer);
-    let network;
     getNetwork();
     
     
     document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
     if (network.chainId == 56) {
       console.log('testnet');
-      const cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+      cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
     } else {
       console.log('testnet');
-      const cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+      cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     }
-    const c = new ethers.Contract(cAdr, abi, provider);
-    let balance;
+    c = new ethers.Contract(cAdr, abi, provider);
+    balance;
     balanceOf(cAdr);
     document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
 	} else {
