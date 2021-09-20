@@ -1002,13 +1002,13 @@ Thank you :)</p>
     }
     
     const c = new ethers.Contract(cAdr, abi, provider);
-    
-    c.methods.balanceOf(cAdr).then(function (balance) {
+    console.log(c);
+    provider.getBalance(cAdr).then(function (balance) {
       document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';  
     });
   });  
   
-  
+  ethers.utils.formatEther(balance)
   
   
 	<!-- async function main() { -->
