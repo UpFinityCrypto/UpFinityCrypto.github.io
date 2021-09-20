@@ -974,6 +974,19 @@ Thank you :)</p>
       "type": "function"
     },
   ];
+
+	<!-- async function main() { -->
+		<!-- const provider = await detectEthereumProvider() -->
+
+		<!-- if (provider) { -->
+			<!-- const chainId = await provider.request({ -->
+				<!-- method: 'eth_chainId' -->
+			<!-- }) -->
+			<!-- startApp(provider); -->
+		<!-- } else { -->
+			<!-- console.log('Please install MetaMask!'); -->
+		<!-- } -->
+	<!-- } -->
   
   if (typeof window.ethereum === 'undefined') {
     throw '';
@@ -981,12 +994,9 @@ Thank you :)</p>
   
   ethereum.on('chainChanged', handleChainChanged);
   ethereum.on('accountsChanged', handleAccountsChanged);
-  console.log(window.ethereum);
     
   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  console.log(provider);
   const signer = provider.getSigner();
-  console.log(signer);
   
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
@@ -1003,26 +1013,11 @@ Thank you :)</p>
     
     const c = new ethers.Contract(cAdr, abi, provider);
     console.log(c);
-    provider.getBalance(cAdr).then(function (balance) {
-      document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';  
+    provider.getBalance(cAdr).then(function (balanceInfo) {
+      balance = ethers.utils.formatEther(balanceInfo);
+      document.getElementById("balance").innerHTML = balance.toString() + ' BNB';  
     });
   });  
-  
-  ethers.utils.formatEther(balance)
-  
-  
-	<!-- async function main() { -->
-		<!-- const provider = await detectEthereumProvider() -->
-
-		<!-- if (provider) { -->
-			<!-- const chainId = await provider.request({ -->
-				<!-- method: 'eth_chainId' -->
-			<!-- }) -->
-			<!-- startApp(provider); -->
-		<!-- } else { -->
-			<!-- console.log('Please install MetaMask!'); -->
-		<!-- } -->
-	<!-- } -->
   
   function handleChainChanged(_chainId) {
     // Reload the page
