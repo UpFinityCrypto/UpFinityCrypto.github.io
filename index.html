@@ -978,9 +978,12 @@ Thank you :)</p>
 	if (typeof window.ethereum !== 'undefined') {
     ethereum.on('chainChanged', handleChainChanged);
     ethereum.on('accountsChanged', handleAccountsChanged);
+    console.log(window.ethereum);
     
 	  const provider = new ethers.providers.Web3Provider(window.ethereum);
+    console.log(provider);
     const signer = provider.getSigner();
+    console.log(signer);
     let network;
     getNetwork();
     
