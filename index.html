@@ -981,20 +981,21 @@ Thank you :)</p>
   let cAdr;
   let c;
   let balance;
-
-	if (typeof window.ethereum !== 'undefined') {
-    ethereum.on('chainChanged', handleChainChanged);
-    ethereum.on('accountsChanged', handleAccountsChanged);
-    console.log(window.ethereum);
+  if (typeof window.ethereum === 'undefined') {
+    throw '';
+  }
+  
+  ethereum.on('chainChanged', handleChainChanged);
+  ethereum.on('accountsChanged', handleAccountsChanged);
+  console.log(window.ethereum);
     
-	  provider = new ethers.providers.Web3Provider(window.ethereum);
-    console.log(provider);
-    signer = provider.getSigner();
-    console.log(signer);
-    getNetwork();
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  console.log(provider);
+  signer = provider.getSigner();
+  console.log(signer);
     
-    
-    document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
+  document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
+  document.getElementById("balance").innerHTML = '0' + ' BNB';      
     if (network.chainId == 56) {
       console.log('testnet');
       cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
@@ -1003,7 +1004,6 @@ Thank you :)</p>
       cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     }
     c = new ethers.Contract(cAdr, abi, provider);
-    balance;
     balanceOf(cAdr);
     document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
 	} else {
