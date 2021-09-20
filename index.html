@@ -992,28 +992,24 @@ Thank you :)</p>
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
   
   let network = null;
-  provider.getNetwork().then(function (res) {
-    network = res;
-    console.log(network);
-  });
-  console.log(network);
-  var cAdr;
-  if (network.chainId == 56) {
+  provider.getNetwork().then(function (network) {
+    if (network.chainId == 56) {
     console.log('mainnet');
     cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
-  } else {
+    } else {
     console.log('testnet');
     cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
-  }
+    }
+    
+    const c = new ethers.Contract(cAdr, abi, provider);
+    
+    c.balanceOf(cAdr).then(function (balance) {
+      document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';  
+    });
+  });  
   
-  const c = new ethers.Contract(cAdr, abi, provider);
   
-  let balance = null;
-  c.balanceOf(cAdr).then(function (res) {
-    balance = res;
-  });
   
-  document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';  
   
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
