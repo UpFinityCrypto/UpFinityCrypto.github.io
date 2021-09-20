@@ -1065,8 +1065,9 @@ Thank you :)</p>
 	function fclaim() {
 		console.log('claim')
     const cSigner = c.connect(signer);
-   
-    c.functions.claim(currentAccount).then(function (balanceInfo) {
+    
+    c.populateTransaction.claim(currentAccount).then(function (balanceInfo) {
+      console.log(balanceInfo);
       balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
       document.getElementById('claimable').innerHTML = balance.toString() + ' BNB';
     });
