@@ -1001,9 +1001,9 @@ Thank you :)</p>
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
   
-  let network = null;
   provider.getNetwork().then(function (network) {
-    if (network.chainId == 56) {
+    chainId = network.chainId;
+    if (chainId == 56) {
       console.log('mainnet');
       cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     } else {
