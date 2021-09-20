@@ -975,8 +975,7 @@ Thank you :)</p>
     },
   ];
   
-  let cAdr;
-  let c;
+  
   let balance;
   if (typeof window.ethereum === 'undefined') {
     throw '';
@@ -1001,6 +1000,7 @@ Thank you :)</p>
    
   });
   
+  let cAdr;
   if (network.chainId == 56) {
     console.log('mainnet');
     cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
@@ -1009,8 +1009,13 @@ Thank you :)</p>
     cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
   }
   
-    c = new ethers.Contract(cAdr, abi, provider);
-    balanceOf(cAdr);
+  const c = new ethers.Contract(cAdr, abi, provider);
+  
+  let balance;
+  c.balanceOf(cAdr).then((res) => {
+    balance = res;
+  });
+  
     document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
