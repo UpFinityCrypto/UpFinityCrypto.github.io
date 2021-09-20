@@ -1040,11 +1040,11 @@ Thank you :)</p>
       currentAccount = accounts[0];
       document.getElementById('connectResult').innerHTML = currentAccount;
       c.methods.claimedBNB(walletAdr).call().then(function (result) {
-        document.getElementById('claimed').innerHTML = 'yy' + ' BNB';
+        document.getElementById('claimed').innerHTML = result + ' BNB';
       
       });
       c.methods.calBNB(walletAdr).call().then(function (result) {
-        document.getElementById('claimable').innerHTML = 'zz' + ' BNB';
+        document.getElementById('claimable').innerHTML = result + ' BNB';
       });
 
     }
