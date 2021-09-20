@@ -981,8 +981,7 @@ Thank you :)</p>
   let cAdr;
   let c;
   let balance;
-  
-  await provider.getNetwork();
+
 	if (typeof window.ethereum !== 'undefined') {
     ethereum.on('chainChanged', handleChainChanged);
     ethereum.on('accountsChanged', handleAccountsChanged);
