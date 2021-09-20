@@ -988,14 +988,15 @@ Thank you :)</p>
     document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
     if (network.chainId == 56) {
       console.log('testnet');
-      const cAdr = '0x665b122D4610B10fAa3ef8F6F705f7d5186D4faa';
-      const c = new ethers.Contract(cAdr, abi, provider);
-      let balance;
-      balanceOf(cAdr);
-      document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
+      const cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
     } else {
-      document.getElementById("balance").innerHTML = 'xx' + ' BNB';
+      console.log('testnet');
+      const cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     }
+    const c = new ethers.Contract(cAdr, abi, provider);
+    let balance;
+    balanceOf(cAdr);
+    document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
 	} else {
 		console.log('Please install MetaMask!');
 	}
