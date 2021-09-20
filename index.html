@@ -997,8 +997,9 @@ Thank you :)</p>
   provider = new ethers.providers.Web3Provider(window.ethereum);
   signer = provider.getSigner();
   
-  document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
-  document.getElementById("totalUnclaimed").innerHTML = '0' + ' BNB';      
+  document.getElementById("totalUnclaimed").innerHTML = '0' + ' BNB';
+  document.getElementById("claimable").innerHTML = '0' + ' BNB';      
+  document.getElementById("claimed").innerHTML = '0' + ' BNB';      
   
   provider.getNetwork().then(function (network) {
     chainId = network.chainId;
@@ -1031,15 +1032,14 @@ Thank you :)</p>
     }
     
     currentAccount = accounts[0];
+    c.functions.calBNB(currentAccount).then(function (balanceInfo) {
+      claimableBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
+      document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
+    });
     document.getElementById('connectResult').innerHTML = currentAccount;
     c.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
       totalBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimed').innerHTML = totalBalance.toString() + ' BNB';
-    });
-    
-    c.functions.calBNB(currentAccount).then(function (balanceInfo) {
-      claimableBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
-      document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
     });
   }
 
@@ -1068,18 +1068,6 @@ Thank you :)</p>
       document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
       document.getElementById('claimHash').innerHTML = result['hash'];
     });
-    
-    <!-- send({}, function (err, res) { -->
-      <!-- if (err) { -->
-        <!-- console.log("An error occured", err); -->
-        <!-- return; -->
-      <!-- } -->
-      <!-- console.log("Hash of the transaction: " + res); -->
-      
-      <!-- <!-- console.log(balanceInfo); --> -->
-      <!-- <!-- balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000; --> -->
-      <!-- <!-- document.getElementById('claimResult').innerHTML = balance.toString() + ' BNB claimed!'; --> -->
-    <!-- }); -->
 	}
 </script>
   <div id="preloader"></div>
