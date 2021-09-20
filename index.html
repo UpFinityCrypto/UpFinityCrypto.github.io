@@ -1034,13 +1034,11 @@ Thank you :)</p>
     currentAccount = accounts[0];
     document.getElementById('connectResult').innerHTML = currentAccount;
     c.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
-      console.log(balanceInfo[0]);
       balance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimed').innerHTML = balance.toString() + ' BNB';
     });
     
     c.functions.calBNB(currentAccount).then(function (balanceInfo) {
-      console.log(balanceInfo[0]);
       balance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimable').innerHTML = balance.toString() + ' BNB';
     });
@@ -1066,10 +1064,17 @@ Thank you :)</p>
 		console.log('claim')
     const cSigner = c.connect(signer);
     
-    c.populateTransaction.claimBNB().then(function (balanceInfo) {
-      console.log(balanceInfo);
-      balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
-      document.getElementById('claimResult').innerHTML = balance.toString() + ' BNB claimed!';
+    c.methods.claimBNB().send({}, function (err, res) {
+      if (err) {
+        console.log("An error occured", err);
+        return;
+      }
+      console.log("Hash of the transaction: " + res);
+      
+      <!-- console.log(balanceInfo); -->
+      <!-- balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000; -->
+      <!-- document.getElementById('claimResult').innerHTML = balance.toString() + ' BNB claimed!'; -->
+      }
     });
 
 	}
