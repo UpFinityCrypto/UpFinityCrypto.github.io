@@ -991,11 +991,10 @@ Thank you :)</p>
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
   
-  var network;
-  provider.getNetwork().then((res) => {
+  let network = null;
+  provider.getNetwork().then(function (res) {
     network = res;
     console.log(network);
-   
   });
   console.log(network);
   var cAdr;
@@ -1009,8 +1008,8 @@ Thank you :)</p>
   
   const c = new ethers.Contract(cAdr, abi, provider);
   
-  var balance;
-  c.balanceOf(cAdr).then((res) => {
+  let balance = null;
+  c.balanceOf(cAdr).then(function (res) {
     balance = res;
   });
   
@@ -1040,12 +1039,13 @@ Thank you :)</p>
     } else if (accounts[0] !== currentAccount) {
       currentAccount = accounts[0];
       document.getElementById('connectResult').innerHTML = currentAccount;
-      <!-- c.methods.getClaimed(walletAdr).call().then(function (result) { -->
+      c.methods.claimedBNB(walletAdr).call().then(function (result) {
         document.getElementById('claimed').innerHTML = 'yy' + ' BNB';
-      <!-- }); -->
-      <!-- c.methods.getClaimable(walletAdr).call().then(function (result) { -->
+      
+      });
+      c.methods.calBNB(walletAdr).call().then(function (result) {
         document.getElementById('claimable').innerHTML = 'zz' + ' BNB';
-      <!-- }); -->
+      });
 
     }
   }
