@@ -1011,7 +1011,7 @@ Thank you :)</p>
       cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
     }
     
-    const c = new ethers.Contract(cAdr, abi, provider);
+    c = new ethers.Contract(cAdr, abi, provider);
     provider.getBalance(cAdr).then(function (balanceInfo) {
       balance = Math.ethers.utils.formatEther(balanceInfo);
       document.getElementById("balance").innerHTML = balance.toString() + ' BNB';  
