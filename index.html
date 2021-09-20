@@ -178,7 +178,7 @@
 							<div class="icon-box">
 								<div class="text-center">
                   <h2>Total Unclaimed Rewards</h2>
-                  <div id="unclaimed">0 BNB</div>
+                  <div id="totalUnclaimed">0 BNB</div>
                 </div>
 							</div>
 						</div>
@@ -1000,7 +1000,7 @@ Thank you :)</p>
   signer = provider.getSigner();
   
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
-  document.getElementById("balance").innerHTML = '0' + ' BNB';      
+  document.getElementById("totalUnclaimed").innerHTML = '0' + ' BNB';      
   
   provider.getNetwork().then(function (network) {
     chainId = network.chainId;
@@ -1015,7 +1015,7 @@ Thank you :)</p>
     c = new ethers.Contract(cAdr, abi, provider);
     provider.getBalance(cAdr).then(function (balanceInfo) {
       balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
-      document.getElementById("unclaimed").innerHTML = balance.toString() + ' BNB';  
+      document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
     });
     
     fconnect();
