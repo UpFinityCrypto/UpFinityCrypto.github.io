@@ -995,8 +995,8 @@ Thank you :)</p>
   ethereum.on('chainChanged', handleChainChanged);
   ethereum.on('accountsChanged', handleAccountsChanged);
     
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  signer = provider.getSigner();
   
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
@@ -1033,12 +1033,12 @@ Thank you :)</p>
     
     currentAccount = accounts[0];
     document.getElementById('connectResult').innerHTML = currentAccount;
-    c.functions.claimedBNB(currentAccount).call().then(function (balanceInfo) {
+    c.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
       balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
       document.getElementById('claimed').innerHTML = balance.toString() + ' BNB';
     
     });
-    c.functions.calBNB(currentAccount).call().then(function (balanceInfo) {
+    c.functions.calBNB(currentAccount).then(function (balanceInfo) {
       balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
       document.getElementById('claimable').innerHTML = balance.toString() + ' BNB';
     });
@@ -1062,6 +1062,13 @@ Thank you :)</p>
 
 	function fclaim() {
 		console.log('claim')
+    const cSigner = c.connect(signer);
+   
+    c.functions.claim(currentAccount).then(function (balanceInfo) {
+      balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
+      document.getElementById('claimable').innerHTML = balance.toString() + ' BNB';
+    });
+    
 		<!-- c.methods.claim().call().then(function (result) { -->
 			<!-- const rewardBNB = web3.utils.fromWei(result, "ether"); -->
 			<!-- document.getElementById('claimResult').innerHTML = rewardBNB + ' BNB claimed!'; -->
