@@ -1004,19 +1004,20 @@ Thank you :)</p>
   let network = null;
   provider.getNetwork().then(function (network) {
     if (network.chainId == 56) {
-    console.log('mainnet');
-    cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+      console.log('mainnet');
+      cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     } else {
-    console.log('testnet');
-    cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+      console.log('testnet');
+      cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
     }
     
     const c = new ethers.Contract(cAdr, abi, provider);
-    console.log(c);
     provider.getBalance(cAdr).then(function (balanceInfo) {
-      balance = ethers.utils.formatEther(balanceInfo);
+      balance = Math.ethers.utils.formatEther(balanceInfo);
       document.getElementById("balance").innerHTML = balance.toString() + ' BNB';  
     });
+    
+    fconnect();
   });  
   
   function handleChainChanged(_chainId) {
@@ -1027,18 +1028,18 @@ Thank you :)</p>
   function handleAccountsChanged(accounts) {
     if (accounts.length == 0) {
       document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
-    } else if (accounts[0] !== currentAccount) {
-      currentAccount = accounts[0];
-      document.getElementById('connectResult').innerHTML = currentAccount;
-      c.methods.claimedBNB(walletAdr).call().then(function (result) {
-        document.getElementById('claimed').innerHTML = result + ' BNB';
-      
-      });
-      c.methods.calBNB(walletAdr).call().then(function (result) {
-        document.getElementById('claimable').innerHTML = result + ' BNB';
-      });
-
+      return;
     }
+    
+    currentAccount = accounts[0];
+    document.getElementById('connectResult').innerHTML = currentAccount;
+    c.methods.claimedBNB(walletAdr).call().then(function (result) {
+      document.getElementById('claimed').innerHTML = result + ' BNB';
+    
+    });
+    c.methods.calBNB(walletAdr).call().then(function (result) {
+      document.getElementById('claimable').innerHTML = result + ' BNB';
+    });
   }
 
 	function fconnect() {
