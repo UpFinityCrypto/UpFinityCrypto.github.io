@@ -161,7 +161,7 @@
 					<a href="#Tokenomics" class="btn-get-started scrollto">Tokenomics</a>
 				</div>
 				<div class="text-center">
-					<a href="#test" id="connect" class="btn-get-started scrollto" onclick="fconnect();">Connect Wallet (Under Construction)</a>
+					<a href="#test" id="connect" class="btn-get-started scrollto" onclick="fconnect();">Connect Wallet</a>
           <div id="connectResult"></div>
 				</div>
 				<div class="container">
@@ -1044,7 +1044,6 @@ Thank you :)</p>
   }
 
 	function fconnect() {
-		console.log('connect')
 		ethereum
 		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
 		.then(handleAccountsChanged)
@@ -1060,9 +1059,11 @@ Thank you :)</p>
 	}
 
 	function fclaim() {
-		console.log('claim')
-    const cSigner = c.connect(signer);
+		if (typeof c === 'undefined') {
+      return;
+    }
     
+    const cSigner = c.connect(signer);
     
     cSigner.claimBNB().then(function (result) {
       document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
