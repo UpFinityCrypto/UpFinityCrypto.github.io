@@ -989,11 +989,11 @@ Thank you :)</p>
   ethereum.on('accountsChanged', handleAccountsChanged);
   console.log(window.ethereum);
     
-  provider = new ethers.providers.Web3Provider(window.ethereum);
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
   console.log(provider);
   signer = provider.getSigner();
   console.log(signer);
-    
+  
   document.getElementById("totalClaimed").innerHTML = 'aa' + ' BNB';
   document.getElementById("balance").innerHTML = '0' + ' BNB';      
     if (network.chainId == 56) {
@@ -1006,9 +1006,6 @@ Thank you :)</p>
     c = new ethers.Contract(cAdr, abi, provider);
     balanceOf(cAdr);
     document.getElementById("balance").innerHTML = ethers.utils.formatEther(balance) + ' BNB';      
-	} else {
-		console.log('Please install MetaMask!');
-	}
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
 
