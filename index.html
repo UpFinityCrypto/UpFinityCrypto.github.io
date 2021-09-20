@@ -1066,16 +1066,12 @@ Thank you :)</p>
 		console.log('claim')
     const cSigner = c.connect(signer);
     
-    c.populateTransaction.claim(currentAccount).then(function (balanceInfo) {
+    c.populateTransaction.claimBNB().then(function (balanceInfo) {
       console.log(balanceInfo);
       balance = Math.round(ethers.utils.formatEther(balanceInfo) * 10000) / 10000;
       document.getElementById('claimResult').innerHTML = balance.toString() + ' BNB claimed!';
     });
-    
-		<!-- c.methods.claim().call().then(function (result) { -->
-			<!-- const rewardBNB = web3.utils.fromWei(result, "ether"); -->
-			<!-- document.getElementById('claimResult').innerHTML = rewardBNB + ' BNB claimed!'; -->
-		<!-- }); -->
+
 	}
 </script>
   <div id="preloader"></div>
