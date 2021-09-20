@@ -1033,12 +1033,12 @@ Thank you :)</p>
     
     currentAccount = accounts[0];
     document.getElementById('connectResult').innerHTML = currentAccount;
-    c.methods.claimedBNB(walletAdr).call().then(function (result) {
+    c.functions.claimedBNB(walletAdr).call().then(function (result) {
       console.log(result);
       document.getElementById('claimed').innerHTML = result + ' BNB';
     
     });
-    c.methods.calBNB(walletAdr).call().then(function (result) {
+    c.functions.calBNB(walletAdr).call().then(function (result) {
       document.getElementById('claimable').innerHTML = result + ' BNB';
     });
   }
