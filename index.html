@@ -975,9 +975,6 @@ Thank you :)</p>
     },
   ];
   
-  let provider;
-  let signer;
-  let network;
   let cAdr;
   let c;
   let balance;
@@ -1005,7 +1002,7 @@ Thank you :)</p>
     console.log('testnet');
     cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
   } else {
-    console.log('testnet');
+    console.log('mainnet');
     cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
   }
     c = new ethers.Contract(cAdr, abi, provider);
