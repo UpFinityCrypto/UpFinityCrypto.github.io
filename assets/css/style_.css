@@ -502,13 +502,13 @@ span {
 
 @media (max-height: 800px) {
   #hero {
-    height: auto;
+    background-attachment: fixed;
   }
 }
 
 @media (max-width: 992px) {
   #hero {
-    height: auto;
+    background-attachment: fixed;
   }
   #hero h1 {
     font-size: 40px;
@@ -524,8 +524,7 @@ span {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0 0px 0;
-  overflow: hidden;
+  padding: 400px 0 300px 0;
 }
 
 .section-bg {
@@ -2977,3 +2976,4 @@ footer {
         margin-top: 120px;
     }
 }
+
