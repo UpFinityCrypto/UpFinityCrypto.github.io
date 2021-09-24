@@ -1,15 +1,36 @@
 /***
- * All systems here is invented by AllCoinLab
+ * All systems invented by AllCoinLab
  * https://github.com/AllCoinLab
+ * https://t.me/AllCoinLab
  * 
- * For brief info: https://AllCoinLab.github.io
- * For detailed info: https://github.com/ALlCoinLab/UpFinity (working)
+ * TG: https://t.me/UpFinityTG
+ * Website: https://UpFinityCrypto.github.io
+ * For detailed info: https://github.com/ALlCoinLab/UpFinity/wiki (working)
  * 
  * 
  * Written in easy code to for easy verificiation by the investors.
  * Also written with more conditions in order not to make mistake + maintain code easily.
  * Those doesn't cost gas much so this is way better than the simple / short code.
  * Used gas optimization if needed.
+ * 
+ *
+ * 
+ * 
+ * $$\   $$\           $$$$$$$$\ $$\           $$\   $$\               
+ * $$ |  $$ |          $$  _____|\__|          \__|  $$ |              
+ * $$ |  $$ | $$$$$$\  $$ |      $$\ $$$$$$$\  $$\ $$$$$$\   $$\   $$\ 
+ * $$ |  $$ |$$  __$$\ $$$$$\    $$ |$$  __$$\ $$ |\_$$  _|  $$ |  $$ |
+ * $$ |  $$ |$$ /  $$ |$$  __|   $$ |$$ |  $$ |$$ |  $$ |    $$ |  $$ |
+ * $$ |  $$ |$$ |  $$ |$$ |      $$ |$$ |  $$ |$$ |  $$ |$$\ $$ |  $$ |
+ * \$$$$$$  |$$$$$$$  |$$ |      $$ |$$ |  $$ |$$ |  \$$$$  |\$$$$$$$ |
+ *  \______/ $$  ____/ \__|      \__|\__|  \__|\__|   \____/  \____$$ |
+ *           $$ |                                            $$\   $$ |
+ *           $$ |                                            \$$$$$$  |
+ *           \__|                                             \______/ 
+ * 
+ * 
+ * This is UpGradable Contract
+ * So many new features will be applied periodically :)
  * 
  ***/
 
@@ -245,6 +266,19 @@ contract UpFinity is Initializable {
     
     // Dividend Party
     uint public _dividendPartyPortion;
+    uint public _dividendPartyThreshold;
+    
+    // Max Variables
+    uint public _maxTxNume;
+    uint public _maxBalanceNume;
+    
+    // Accumulated Tax System
+    uint public DAY;
+    uint public _accuTaxTimeWindow;
+    
+    mapping (address => uint) public _timeAccuTaxCheck;
+    mapping (address => uint) public _taxAccuTaxCheck;
+    
     
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -254,6 +288,8 @@ contract UpFinity is Initializable {
     
     event WhaleTransaction(uint256 amount, uint256 tax);
     
+    event DividendParty(uint256 DividendAmount);
+    
     /**
      * vars and events to here
      **/
@@ -262,7 +298,7 @@ contract UpFinity is Initializable {
     receive() external payable {}
     
     modifier onlyOwner {
-        require(_owner == msg.sender, 'Only Owner can do this!!!!!!');
+        require(_owner == msg.sender, 'Only Owner can do this!!!!!');
         _;
     }
     
@@ -305,7 +341,8 @@ contract UpFinity is Initializable {
         
         PRICE_RECOVERY_ENTERED = 1;
         
-        _buySellTimeDuration = 5; // TODO: change it to 60
+        // Anti Bot System
+        _buySellTimeDuration = 0; // due to honeypot checker
 
         // Anti Whale System
         // denominator = 10 ** 6
@@ -316,12 +353,21 @@ contract UpFinity is Initializable {
         // whale sell will be charged 3% tax of initial amount
         // so default is 3 * 10 ** 4
         _whaleRate = 10 ** 4;
-        _whaleTransferFee = 10 ** 4;
-        _whaleSellFee = 3 * 10 ** 4;
+        _whaleTransferFee = 2 * 10 ** 4;
+        _whaleSellFee = 4 * 10 ** 4;
         
         // Dividend Party
         _dividendPartyPortion = 500;
+        _dividendPartyThreshold = 9876543210 * 10**_decimals; // clear to look
         
+        // Max Variables
+        _maxTxNume = 1000;
+        _maxBalanceNume = 110;
+        
+        // Accumulated Tax System
+        DAY = 24 * 60 * 60;
+        _accuTaxTimeWindow = DAY; // TODO: DAY in mainnet
+    
         
         /**
          * inits to here
@@ -356,12 +402,22 @@ contract UpFinity is Initializable {
      * functions from here
      **/
     
-    function setDividendPartyPortion(uint dividendPartyPortion_) external onlyOwner {
-        _dividendPartyPortion = dividendPartyPortion_;
-    }
-    
     function setBuySellTimeDuration(uint buySellTimeDuration_) external onlyOwner {
       _buySellTimeDuration = buySellTimeDuration_;
+    }
+    
+    function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
+        _dividendPartyPortion = dividendPartyPortion_;
+        _dividendPartyThreshold = dividendPartyThreshold_;
+    }
+    
+    function setMaxVars(uint _maxTxNume_, uint _maxBalanceNume_) external onlyOwner {
+        _maxTxNume = _maxTxNume_;
+        _maxBalanceNume = _maxBalanceNume_;
+    }
+
+    function setAccuTaxVars(uint _accuTaxTimeWindow_) external onlyOwner {
+        _accuTaxTimeWindow = _accuTaxTimeWindow_;
     }
     
     /**
@@ -586,6 +642,40 @@ contract UpFinity is Initializable {
         }
     }
     
+    // test with 1 min in testnet
+    // Accumulated Tax System
+    function accuTaxSystem(address adr, uint amount) internal returns (uint) {
+        uint r1 = balanceOf(_uniswapV2Pair);
+        
+        uint timeDiff = block.timestamp.sub(_timeAccuTaxCheck[adr]);
+        uint addTax = amount.mul(10000).div(r1); // liquidity based, 10000
+        if (_timeAccuTaxCheck[adr] == 0) { // first time checking this
+            // timeDiff cannot be calculated. skip.
+            // accumulate
+            
+            _taxAccuTaxCheck[adr] = addTax;
+            _timeAccuTaxCheck[adr] = block.timestamp; // set time
+        } else { // checked before
+            // timeDiff can be calculated. check.
+            // could be in same block so timeDiff == 0 should be included
+            // to avoid duplicate check, only check this one time
+            
+            if (timeDiff < _accuTaxTimeWindow) { // still in time window
+                // accumulate
+                _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(addTax);
+            } else { // time window is passed. reset the accumulation
+                _taxAccuTaxCheck[adr] = addTax;
+                _timeAccuTaxCheck[adr] = block.timestamp; // set time
+            }
+        }
+        amount = amount.sub(amount.mul(_taxAccuTaxCheck[adr]).div(10000)); // accumulate tax apply
+        
+        return amount;
+    }
+    
+    
+    
+    
     
     
     function _maxTxCheck(address sender, address recipient, uint amount) internal view {
@@ -593,18 +683,18 @@ contract UpFinity is Initializable {
         (recipient != _owner)) { // if owner is not related to any sequence, this will be checked
             if (sender != _myRouterSystem) { // add liq sequence
                 if (recipient != _uniswapV2Router) { // del liq sequence
-                    uint criteria = balanceOf(_uniswapV2Pair);
-                    require(amount <= criteria.mul(10).div(100), 'buy/sell/tx should be <10% of criteria'); // liquidity pool
+                    uint r1 = balanceOf(_uniswapV2Pair); // liquidity pool
+                    require(amount <= r1.mul(_maxTxNume).div(10000), 'buy/sell/tx should be <criteria');
                 }
             }    
         }
     }
-    function _maxWalletCheck(address sender, address recipient, address adr) internal view {
+    function _maxBalanceCheck(address sender, address recipient, address adr) internal view {
         if ((sender != _owner) &&
         (recipient != _owner)) { // if owner is not related to any sequence, this will be checked
             if (sender != _myRouterSystem) { // add liq sequence
                 if (recipient != _uniswapV2Router) { // del liq sequence
-                    require(balanceOf(adr) <= _tTotal.mul(11).div(1000), 'balance should be <1.1% of total supply'); // save totalsupply gas
+                    require(balanceOf(adr) <= _tTotal.mul(_maxBalanceNume).div(10000), 'balance should be <criteria'); // save totalsupply gas
                 }
             }
         }
@@ -627,7 +717,7 @@ contract UpFinity is Initializable {
         .sub(balanceOfLowGas(_rewardSystem, rate))
         .sub(balanceOfLowGas(_minusTaxSystem, rate))
         .sub(balanceOfLowGas(_uniswapV2Pair, rate));
-        // .sub(balanceOf(_owner));
+        // .sub(balanceOf(_owner)); // complicated if included. leave it.
     }
     
     function updateBuyReward(address user, uint addedTokenAmount_) internal {
@@ -789,7 +879,7 @@ contract UpFinity is Initializable {
         _tokenTransfer(sender, recipient, amount);
         
         // check balance
-        _maxWalletCheck(sender, recipient, recipient);
+        _maxBalanceCheck(sender, recipient, recipient);
         
         return;
     }
@@ -827,7 +917,7 @@ contract UpFinity is Initializable {
         updateBuyReward(recipient, amount);
         
         // check balance
-        _maxWalletCheck(sender, recipient, recipient);
+        _maxBalanceCheck(sender, recipient, recipient);
         
         return;
     }
@@ -876,7 +966,7 @@ contract UpFinity is Initializable {
         }
         
         // check balance
-        _maxWalletCheck(sender, recipient, recipient);
+        _maxBalanceCheck(sender, recipient, recipient);
         
         
         // amount of tokens decreased in the pair
@@ -894,6 +984,9 @@ contract UpFinity is Initializable {
         // token contract should sell tokens by pcsrouter
         // so move tokens to the token contract first.
         _tokenTransfer(sender, address(this), amount);
+        
+        // Accumulate Tax System
+        amount = accuTaxSystem(sender, amount);
         
         // Activate Price Recovery System
         _transfer(address(this), recipient, amount);
@@ -1060,8 +1153,10 @@ contract UpFinity is Initializable {
         {
             // now sell tokens in token contract by control of the token contract
             contractTokenAmount_ = balanceOf(address(this)).sub(amount);
-            if (amount < contractTokenAmount_) { // max is same with user amount
-                contractTokenAmount_ = amount;
+            if (_dividendPartyThreshold < contractTokenAmount_) { // sell c token if exceeds threshold
+                contractTokenAmount_ = _dividendPartyThreshold;
+            } else {
+                contractTokenAmount_ = 0;
             }
             
             // [save gas] make only 1 sell and divide by calculated eth
@@ -1085,14 +1180,17 @@ contract UpFinity is Initializable {
                 
                 {
                     // [save gas] 2 sell -> 1 sell
+                    // [9/24] to view the dividend party clearly, divide it to 2 sell
                     uint selledEthAmount = address(this).balance;
-                    swapTokensForEth(contractTokenAmount_.add(amount));
+                    if (0 < contractTokenAmount_) {
+                        swapTokensForEth(contractTokenAmount_);
+                    }
+                    swapTokensForEth(amount);
                     selledEthAmount = address(this).balance.sub(selledEthAmount);
                     
-                    // TODO: serial proportional with slippage
-                    contractEthAmount = selledEthAmount.mul(contractEthAmount).div(contractEthAmount.add(walletEthAmount));
-                    // contractEthAmount = selledEthAmount.mul(contractTokenAmount_).div(contractTokenAmount_.add(amount);
-                    
+                    if (0 < contractTokenAmount_) { // contractEthAmount = 0 if contractTokenAmount_ = 0
+                        contractEthAmount = selledEthAmount.mul(contractEthAmount).div(contractEthAmount.add(walletEthAmount));
+                    }
                     walletEthAmount = selledEthAmount.sub(contractEthAmount);
                 }
     
@@ -1165,7 +1263,7 @@ contract UpFinity is Initializable {
 
             uint liquidityEthAmount;
             {
-                if (balanceOf(_uniswapV2Pair).mul(_dividendPartyPortion).div(10000) < contractTokenAmount_) { // not exactly 5% but similar
+                if (0 < contractTokenAmount_) {
                     // dividend party !!!
                     isDividendParty = true;
                     
@@ -1221,6 +1319,8 @@ contract UpFinity is Initializable {
                     }
                     redistributionFee_ = redistributionFee_.sub(bnbFee);
                     redistributionFee_ = redistributionFee_.sub(bnbFee.div(20));
+                    
+                    emit DividendParty(contractEthAmount);
                 }
             }
             
@@ -1550,7 +1650,16 @@ contract UpFinity is Initializable {
         require(0 != 0, 'WRONG TRANSACTION, STOP');
     }
     
-    
+    function _countDigit(uint v) internal pure returns (uint) {
+        for (uint i; i < 100; i++) {
+            if (v == 0) {
+                return i;
+            } else {
+                v = v / 10;
+            }
+        }
+        return 100;
+    }
     
     
     /**
