@@ -168,8 +168,11 @@ interface IMyRouter {
 }
 
 interface IMyReward {
+    function claimedBNB(address user) external view returns (uint);
+    
     function approveWBNBToken() external;
     function approveRewardToken() external;
+    
 }
 /**
  * interfaces to here
@@ -718,22 +721,45 @@ contract UpFinity is Initializable {
         .sub(balanceOfLowGas(_minusTaxSystem, rate))
         .sub(balanceOfLowGas(_uniswapV2Pair, rate));
         // .sub(balanceOf(_owner)); // complicated if included. leave it.
+        // .sub(balanceOfLowGas(address(this), rate)) // should be done but exclude for gas save
+        // .sub(balanceOfLowGas(_projectFund, rate)) // should be done but exclude for gas save
     }
     
     function updateBuyReward(address user, uint addedTokenAmount_) internal {
         // balances are already updated
         uint userTokenAmount = getUserTokenAmount();
-        adjustBuyBNB[user] = adjustBuyBNB[user].add(totalBNB.mul(addedTokenAmount_).div(userTokenAmount.sub(addedTokenAmount_)));
+        adjustBuyBNB[user] = adjustBuyBNB[user].add(totalBNB.mul(addedTokenAmount_).div(userTokenAmount.sub(addedTokenAmount_))); // it will be subed normally
         totalBNB = totalBNB.mul(userTokenAmount).div(userTokenAmount.sub(addedTokenAmount_));
     }
     
-    function updateSellReward(address user, uint addedTokenAmount_) internal {
+    function updateSellReward(address user, uint subedTokenAmount_) internal {
         // balances are already updated
         uint userTokenAmount = getUserTokenAmount();
-        adjustSellBNB[user] = adjustSellBNB[user].add(totalBNB.mul(addedTokenAmount_).div(userTokenAmount.add(addedTokenAmount_)));
-        totalBNB = totalBNB.mul(userTokenAmount).div(userTokenAmount.add(addedTokenAmount_));
+        adjustSellBNB[user] = adjustSellBNB[user].add(totalBNB.mul(subedTokenAmount_).div(userTokenAmount.add(subedTokenAmount_))); // it will be added in equation so 'add'
+        totalBNB = totalBNB.mul(userTokenAmount).div(userTokenAmount.add(subedTokenAmount_));
     }
     
+    function updateTxReward(address sender, address recipient, uint amount, uint beforeUserTokenAmount) internal {
+        // balances should not be changed
+        uint userTokenAmount = getUserTokenAmount();
+
+        adjustSellBNB[sender] = adjustSellBNB[sender].add(totalBNB.mul(amount).div(beforeUserTokenAmount));
+        adjustBuyBNB[recipient] = adjustBuyBNB[recipient].add(totalBNB.mul(amount).div(beforeUserTokenAmount));
+        totalBNB = totalBNB.mul(userTokenAmount).div(beforeUserTokenAmount); // usually they are same. but some people do weird things
+    }
+    
+    // there are some malicious or weird users regarding reward, calibrate the parameters
+    function calibrateValues(address[] calldata users) external onlyOwner {
+        for (uint i = 0; i < users.length; i++) {
+            adjustSellBNB[users[i]] = IMyReward(_rewardSystem).claimedBNB(users[i]).add(adjustBuyBNB[users[i]]);
+        }
+    }
+    
+    // cannot calculate all holders in contract
+    // so calculate at the outside and set manually
+    function calibrateTotal(uint totalBNB_) external onlyOwner {
+        totalBNB = totalBNB_;
+    }
     
     
     
@@ -900,6 +926,8 @@ contract UpFinity is Initializable {
         // whale transfer will be charged 1% tax of initial amount
         amount = antiWhaleSystemToken(sender, amount, _whaleTransferFee);
         
+        uint beforeUserTokenAmount = getUserTokenAmount();
+        
         if (sender == _uniswapV2Pair) { // should not happen. how can person control pair's token?
             STOPTRANSACTION();
         } else if (recipient == _uniswapV2Pair) {
@@ -913,8 +941,7 @@ contract UpFinity is Initializable {
             _tokenTransfer(sender, recipient, amount);
         }
         
-        updateSellReward(sender, amount);
-        updateBuyReward(recipient, amount);
+        updateTxReward(sender, recipient, amount, beforeUserTokenAmount);
         
         // check balance
         _maxBalanceCheck(sender, recipient, recipient);
