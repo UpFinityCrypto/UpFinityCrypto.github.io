@@ -88,6 +88,9 @@
             <li>
 							<a class="nav-link scrollto" href="#Tokenomics">Tokenomics</a>
 						</li>
+            <li>
+							<a class="nav-link scrollto" href="#WhitePaper">WhitePaper</a>
+						</li>
 						<li>
 							<a class="nav-link scrollto" href="#Roadmap">Roadmap</a>
 						</li>
@@ -1154,6 +1157,10 @@ Thank you :)
       document.getElementById('claimHash').innerHTML = result['hash'];
     });
 	}
+  
+  $("#WhitePaper").live("click", function(){
+    $(this).after("If the embedded PDF is not displayed properly, <a href="UpFinityCrypto.github.io/UpFinity WhitePaper.pdf" target="_blank">please click here.</a> <embed href="UpFinityCrypto.github.io/UpFinity WhitePaper.pdf" type="application/pdf" />");
+  });
 </script>
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
