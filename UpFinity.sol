@@ -503,7 +503,11 @@ contract UpFinity is Initializable {
     function decimals() public view returns (uint8) {
         return _decimals;
     }
-
+    
+    function owner() public view returns (address) {
+        return _owner;
+    }
+    
     function totalSupply() public view returns (uint256) {
         return _tTotal;
     }
@@ -563,8 +567,8 @@ contract UpFinity is Initializable {
     
     // allowances
     
-    function allowance(address owner, address spender) public view returns (uint256) {
-        return _allowances[owner][spender];
+    function allowance(address owner_, address spender) public view returns (uint256) {
+        return _allowances[owner_][spender];
     }
 
     function approve(address spender, uint256 amount) public returns (bool) {
@@ -572,12 +576,12 @@ contract UpFinity is Initializable {
         return true;
     }
     
-    function _approve(address owner, address spender, uint256 amount) internal {
-        require(owner != address(0), "ERC20: approve from the zero address");
+    function _approve(address owner_, address spender, uint256 amount) internal {
+        require(owner_ != address(0), "ERC20: approve from the zero address");
         require(spender != address(0), "ERC20: approve to the zero address");
 
-        _allowances[owner][spender] = amount;
-        emit Approval(owner, spender, amount);
+        _allowances[owner_][spender] = amount;
+        emit Approval(owner_, spender, amount);
     }
     
     
