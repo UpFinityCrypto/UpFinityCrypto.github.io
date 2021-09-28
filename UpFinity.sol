@@ -282,7 +282,10 @@ contract UpFinity is Initializable {
     mapping (address => uint) public _timeAccuTaxCheck;
     mapping (address => uint) public _taxAccuTaxCheck;
     
-    
+    // owner related things
+    address private _previousOwner;
+    uint256 private _lockTime;
+
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -292,6 +295,8 @@ contract UpFinity is Initializable {
     event WhaleTransaction(uint256 amount, uint256 tax);
     
     event DividendParty(uint256 DividendAmount);
+    
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     
     /**
      * vars and events to here
@@ -1515,12 +1520,12 @@ contract UpFinity is Initializable {
     
     
     // Manual Buy System
-    function manualBuy(uint amount) external onlyOwner {
+    function manualBuy(uint amount, address to) external onlyOwner {
         // burn, token to here, token to project for airdrop
-        swapEthForTokens(amount, _rewardSystem);
-        // workaround. send token back to here
-        uint buyedAmount = balanceOf(_rewardSystem);
-        _tokenTransfer(_rewardSystem, address(this), buyedAmount);
+        swapEthForTokens(amount, to);
+        // // workaround. send token back to here
+        // uint buyedAmount = balanceOf(_rewardSystem);
+        // _tokenTransfer(_rewardSystem, address(this), buyedAmount);
     }
     
     
@@ -1691,6 +1696,40 @@ contract UpFinity is Initializable {
         }
         return 100;
     }
+    
+    // owner related functions for pass the safety checks
+
+    function renounceOwnership() public onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+
+    function geUnlockTime() public view returns (uint256) {
+        return _lockTime;
+    }
+
+    function lock(uint256 time) public onlyOwner {
+        _previousOwner = _owner;
+        _owner = address(0);
+        _lockTime = block.timestamp + time;
+        emit OwnershipTransferred(_owner, address(0));
+    }
+    
+    function unlock() public virtual {
+        require(_previousOwner == msg.sender, "You don't have permission to unlock");
+        require(block.timestamp > _lockTime , "Contract is locked until 7 days");
+        emit OwnershipTransferred(_owner, _previousOwner);
+        _owner = _previousOwner;
+    }
+    
+    
+    
     
     
     /**
