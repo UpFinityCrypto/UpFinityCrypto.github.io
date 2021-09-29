@@ -1014,7 +1014,7 @@ contract UpFinity is Initializable {
         // tx check
         _maxTxCheck(sender, recipient, amount);
             
-        antiBotSystem(recipient);
+        // antiBotSystem(recipient); // not for buy
             
         {
             uint addedTokenAmount = balanceOf(recipient);
