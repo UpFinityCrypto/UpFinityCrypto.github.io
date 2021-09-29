@@ -285,7 +285,10 @@ contract UpFinity is Initializable {
     // owner related things
     address private _previousOwner;
     uint256 private _lockTime;
-
+    
+    // Accumulated Tax System
+    uint public _accuMulFactor;
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -376,6 +379,7 @@ contract UpFinity is Initializable {
         DAY = 24 * 60 * 60;
         _accuTaxTimeWindow = DAY; // TODO: DAY in mainnet
     
+        _accuMulFactor = 2; // 10% tax if 5% price impact
         
         /**
          * inits to here
@@ -424,8 +428,9 @@ contract UpFinity is Initializable {
         _maxBalanceNume = _maxBalanceNume_;
     }
 
-    function setAccuTaxVars(uint _accuTaxTimeWindow_) external onlyOwner {
+    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_) external onlyOwner {
         _accuTaxTimeWindow = _accuTaxTimeWindow_;
+        _accuMulFactor = _accuMulFactor_;
     }
     
     /**
@@ -660,7 +665,7 @@ contract UpFinity is Initializable {
         uint r1 = balanceOf(_uniswapV2Pair);
         
         uint timeDiff = block.timestamp.sub(_timeAccuTaxCheck[adr]);
-        uint addTax = amount.mul(10000).div(r1); // liquidity based, 10000
+        uint addTax = amount.mul(_accuMulFactor).mul(10000).div(r1); // liquidity based, 10000
         if (_timeAccuTaxCheck[adr] == 0) { // first time checking this
             // timeDiff cannot be calculated. skip.
             // accumulate
