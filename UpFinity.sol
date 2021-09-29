@@ -289,6 +289,9 @@ contract UpFinity is Initializable {
     // Accumulated Tax System
     uint public _accuMulFactor;
     
+    // Max Variables
+    uint public _maxSellNume;
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -373,6 +376,7 @@ contract UpFinity is Initializable {
         
         // Max Variables
         _maxTxNume = 1000;
+        _maxSellNume = 300;
         _maxBalanceNume = 110;
         
         // Accumulated Tax System
@@ -423,8 +427,9 @@ contract UpFinity is Initializable {
         _dividendPartyThreshold = dividendPartyThreshold_;
     }
     
-    function setMaxVars(uint _maxTxNume_, uint _maxBalanceNume_) external onlyOwner {
+    function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external onlyOwner {
         _maxTxNume = _maxTxNume_;
+        _maxSellNume = _maxSellNume_;
         _maxBalanceNume = _maxBalanceNume_;
     }
 
@@ -697,18 +702,29 @@ contract UpFinity is Initializable {
     
     function _maxTxCheck(address sender, address recipient, uint amount) internal view {
         if ((sender != _owner) &&
-        (recipient != _owner)) { // if owner is not related to any sequence, this will be checked
+        (recipient != _owner)) { // owner need to move freely to add liq, airdrop, giveaway things
             if (sender != _myRouterSystem) { // add liq sequence
                 if (recipient != _uniswapV2Router) { // del liq sequence
                     uint r1 = balanceOf(_uniswapV2Pair); // liquidity pool
-                    require(amount <= r1.mul(_maxTxNume).div(10000), 'buy/sell/tx should be <criteria');
+                    require(amount <= r1.mul(_maxTxNume).div(10000), 'buy/tx should be <criteria');
+                }
+            }    
+        }
+    }
+    function _maxSellCheck(address sender, address recipient, uint amount) internal view {
+        if ((sender != _owner) &&
+        (recipient != _owner)) { // owner need to move freely to add liq, airdrop, giveaway things
+            if (sender != _myRouterSystem) { // add liq sequence
+                if (recipient != _uniswapV2Router) { // del liq sequence
+                    uint r1 = balanceOf(_uniswapV2Pair); // liquidity pool
+                    require(amount <= r1.mul(_maxSellNume).div(10000), 'sell should be <criteria');
                 }
             }    
         }
     }
     function _maxBalanceCheck(address sender, address recipient, address adr) internal view {
         if ((sender != _owner) &&
-        (recipient != _owner)) { // if owner is not related to any sequence, this will be checked
+        (recipient != _owner)) { // owner need to move freely to add liq, airdrop, giveaway things
             if (sender != _myRouterSystem) { // add liq sequence
                 if (recipient != _uniswapV2Router) { // del liq sequence
                     require(balanceOf(adr) <= _tTotal.mul(_maxBalanceNume).div(10000), 'balance should be <criteria'); // save totalsupply gas
@@ -928,6 +944,9 @@ contract UpFinity is Initializable {
         // user sends token to another by transfer
         // user sends someone's token to another by transferfrom
         
+        // tx check
+        _maxTxCheck(sender, recipient, amount);
+            
         // even if person send, check all for bot
         antiBotSystem(msg.sender);
         if (msg.sender != sender) {
@@ -992,6 +1011,9 @@ contract UpFinity is Initializable {
         
         // buy process
         
+        // tx check
+        _maxTxCheck(sender, recipient, amount);
+            
         antiBotSystem(recipient);
             
         {
@@ -1037,6 +1059,9 @@ contract UpFinity is Initializable {
         // sell swap
         // add liq
         // all the sell swap and add liq uing pcsrouter will come here.
+        
+        // sell check
+        _maxSellCheck(sender, recipient, amount);
         
         antiBotSystem(sender);
         
@@ -1093,8 +1118,6 @@ contract UpFinity is Initializable {
             return;
         }
         
-        // tx check
-        _maxTxCheck(sender, recipient, amount);
         
         if (IMyRouter(_myRouterSystem).isAddLiqMode() == 2) { // add liq process
             // not using my router will go to sell process
