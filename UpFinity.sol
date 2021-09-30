@@ -1,4 +1,4 @@
-/***
+ /***
  * All systems invented by AllCoinLab
  * https://github.com/AllCoinLab
  * https://t.me/AllCoinLab
@@ -185,14 +185,14 @@ contract UpFinity is Initializable {
     uint public _uptest;
     
     // My Basic Variables
-    address public _owner;
+    address public _owner; // constant
     
-    address public _token;
-    address public _myRouterSystem;
-    address public _minusTaxSystem;
-    address public _rewardSystem;
-    address public _projectFund;
-    address public _rewardToken;
+    address public _token; // constant
+    address public _myRouterSystem; // constant
+    address public _minusTaxSystem; // constant
+    address public _rewardSystem; // constant
+    address public _projectFund; // constant
+    address public _rewardToken; // constant
     
     /*
      * vars and events from here
@@ -200,12 +200,12 @@ contract UpFinity is Initializable {
     
     
     // Basic Variables
-    string private _name;
-    string private _symbol;
-    uint8 private _decimals;
+    string private _name; // constant
+    string private _symbol; // constant
+    uint8 private _decimals; // constant
     
-    address public _uniswapV2Router;
-    address public _uniswapV2Pair;
+    address public _uniswapV2Router; // constant
+    address public _uniswapV2Pair; // constant
     
     
     // Redistribution Variables
@@ -213,7 +213,7 @@ contract UpFinity is Initializable {
     mapping (address => uint256) private _tOwned;
     mapping (address => mapping (address => uint256)) private _allowances;
     
-    uint256 private MAX;
+    uint256 private MAX; // constant
     uint256 private _tTotal;
     uint256 private _rTotal;
     uint256 private _tFeeTotal;
@@ -223,38 +223,38 @@ contract UpFinity is Initializable {
     
     
     // Fee Variables
-    uint public _liquidityFee;
-    uint public _projectFundFee;
-    uint public _manualBuyFee;
+    uint public _liquidityFee; // fixed
+    uint public _projectFundFee; // fixed
+    uint public _manualBuyFee; // fixed
     
-    uint public _minusTaxFee;
+    uint public _minusTaxFee; // fixed
     
-    uint public _autoBurnFee;
+    uint public _autoBurnFee; // fixed
     
     // Price Recovery System Variables
-    uint public _priceRecoveryFee;
+    uint public _priceRecoveryFee; // fixed
     uint private PRICE_RECOVERY_ENTERED;
     
     
     // Anti Bot System Variables
     mapping (address => uint256) public _buySellTimer;
-    uint public _buySellTimeDuration;
+    uint public _buySellTimeDuration; // fixed
     
     // Anti Whale System Variables
-    uint public _whaleRate;
-    uint public _whaleTransferFee;
-    uint public _whaleSellFee;
+    uint public _whaleRate; // fixed
+    uint public _whaleTransferFee; // fixed
+    uint public _whaleSellFee; // fixed
     
     
     // Dip Reward System Variables
-    uint public _dipRewardFee;
+    uint public _dipRewardFee; // fixed
     
     uint public _minReservesAmount;
     uint public _curReservesAmount;
     
     
     // Improved Reward System Variables
-    uint public _improvedRewardFee;
+    uint public _improvedRewardFee; // fixed
     
     uint public totalBNB;
     uint public addedTotalBNB;
@@ -268,16 +268,16 @@ contract UpFinity is Initializable {
     mapping (address => bool) public blacklisted;
     
     // Dividend Party
-    uint public _dividendPartyPortion;
-    uint public _dividendPartyThreshold;
+    uint public _dividendPartyPortion; // fixed
+    uint public _dividendPartyThreshold; // fixed
     
     // Max Variables
-    uint public _maxTxNume;
-    uint public _maxBalanceNume;
+    uint public _maxTxNume; // fixed
+    uint public _maxBalanceNume; // fixed
     
     // Accumulated Tax System
-    uint public DAY;
-    uint public _accuTaxTimeWindow;
+    uint public DAY; // constant
+    uint public _accuTaxTimeWindow; // fixed
     
     mapping (address => uint) public _timeAccuTaxCheck;
     mapping (address => uint) public _taxAccuTaxCheck;
@@ -286,11 +286,23 @@ contract UpFinity is Initializable {
     address private _previousOwner;
     uint256 private _lockTime;
     
-    // Accumulated Tax System
-    uint public _accuMulFactor;
+    // Accumulated Tax System (cont.)
+    uint public _accuMulFactor; // fixed
     
     // Max Variables
-    uint public _maxSellNume;
+    uint public _maxSellNume; // fixed
+    
+    // Accumulated Tax System (cont.)
+    uint public _taxAccuTaxThreshold;
+    
+    uint public _timeAccuTaxCheckGlobal;
+    uint public _taxAccuTaxCheckGlobal;
+    
+    // Circuit Breaker
+    uint public _curcuitBreakerFlag;
+    uint public _curcuitBreakerThreshold; // fixed
+    uint public _curcuitBreakerTime;
+    uint public _curcuitBreakerDuration; // fixed
     
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -382,8 +394,16 @@ contract UpFinity is Initializable {
         // Accumulated Tax System
         DAY = 24 * 60 * 60;
         _accuTaxTimeWindow = DAY; // TODO: DAY in mainnet
-    
         _accuMulFactor = 2; // 10% tax if 5% price impact
+        
+        // Accumulated Tax System
+        _taxAccuTaxThreshold = 300;
+        
+        // Circuit Breaker
+        _curcuitBreakerFlag = 1;
+        _curcuitBreakerThreshold = 1500;
+        _curcuitBreakerTime = block.timestamp;
+        _curcuitBreakerDuration = 6 * 60 * 60; // 6 hours of chill time
         
         /**
          * inits to here
@@ -433,10 +453,17 @@ contract UpFinity is Initializable {
         _maxBalanceNume = _maxBalanceNume_;
     }
 
-    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_) external onlyOwner {
+    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external onlyOwner {
         _accuTaxTimeWindow = _accuTaxTimeWindow_;
         _accuMulFactor = _accuMulFactor_;
+        _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
     }
+    
+    function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external onlyOwner {
+        _curcuitBreakerThreshold = _curcuitBreakerThreshold_;
+        _curcuitBreakerDuration = _curcuitBreakerDuration_;
+    }
+    
     
     /**
     * Tokenomics Plan for Fair Launch
@@ -664,33 +691,106 @@ contract UpFinity is Initializable {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // there could be community's request
+    // owner can deactivate it. cannot activate :)
+    function deactivateCircuitBreaker() external onlyOwner {
+        // in the solidity world,
+        // to save the gas,
+        // 1 is false, 2 is true
+        
+        _curcuitBreakerFlag = 1; // you can sell now!
+        
+        _taxAccuTaxCheckGlobal = 1; // [save gas]
+        _timeAccuTaxCheckGlobal = block.timestamp.sub(1); // set time (set to a little past than now)
+    }
+    
     // test with 1 min in testnet
     // Accumulated Tax System
-    function accuTaxSystem(address adr, uint amount) internal returns (uint) {
+    // personal and global
+    function accuTaxSystem(address adr, uint amount) internal returns (uint) { // TODO: make this as a template and divide with personal
         uint r1 = balanceOf(_uniswapV2Pair);
         
-        uint timeDiff = block.timestamp.sub(_timeAccuTaxCheck[adr]);
-        uint addTax = amount.mul(_accuMulFactor).mul(10000).div(r1); // liquidity based, 10000
-        if (_timeAccuTaxCheck[adr] == 0) { // first time checking this
-            // timeDiff cannot be calculated. skip.
-            // accumulate
+        // global check first
+        {
+            if (_curcuitBreakerFlag == 2) { // circuit breaker activated
+                require(_curcuitBreakerTime + _curcuitBreakerDuration < block.timestamp, 'Circuit Breaker is not finished');
+                
+                // certain duration passed. everyone chilled now?
+                
+                _curcuitBreakerFlag = 1; // you can sell now!
+                
+                _taxAccuTaxCheckGlobal = 1; // [save gas]
+                _timeAccuTaxCheckGlobal = block.timestamp.sub(1); // set time (set to a little past than now)
+            }
             
-            _taxAccuTaxCheck[adr] = addTax;
-            _timeAccuTaxCheck[adr] = block.timestamp; // set time
-        } else { // checked before
-            // timeDiff can be calculated. check.
-            // could be in same block so timeDiff == 0 should be included
-            // to avoid duplicate check, only check this one time
-            
-            if (timeDiff < _accuTaxTimeWindow) { // still in time window
+            uint timeDiffGlobal = block.timestamp.sub(_timeAccuTaxCheckGlobal);
+            uint addTaxGlobal = amount.mul(1).mul(10000).div(r1); // this is for the actual impact. so set 1
+            if (_timeAccuTaxCheckGlobal == 0) { // first time checking this
+                // timeDiff cannot be calculated. skip.
                 // accumulate
-                _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(addTax);
-            } else { // time window is passed. reset the accumulation
+                
+                _taxAccuTaxCheckGlobal = addTaxGlobal;
+                _timeAccuTaxCheckGlobal = block.timestamp; // set time
+            } else { // checked before
+                // timeDiff can be calculated. check.
+                // could be in same block so timeDiff == 0 should be included
+                // to avoid duplicate check, only check this one time
+                
+                if (timeDiffGlobal < _accuTaxTimeWindow) { // still in time window
+                    // accumulate
+                    _taxAccuTaxCheckGlobal = _taxAccuTaxCheckGlobal.add(addTaxGlobal);
+                } else { // time window is passed. reset the accumulation
+                    _taxAccuTaxCheckGlobal = addTaxGlobal;
+                    _timeAccuTaxCheckGlobal = block.timestamp; // reset time
+                }
+            }
+            
+            if (_curcuitBreakerThreshold < _taxAccuTaxCheckGlobal) {
+                // https://en.wikipedia.org/wiki/Trading_curb
+                // a.k.a circuit breaker
+                // Let people chill and do the rational think and judgement :)
+                
+                _curcuitBreakerFlag = 2; // stop the sell for certain duration
+                _curcuitBreakerTime = block.timestamp;
+            }
+            
+        }
+        
+        // now personal
+        {
+            uint timeDiff = block.timestamp.sub(_timeAccuTaxCheck[adr]);
+            uint addTax = amount.mul(_accuMulFactor).mul(10000).div(r1); // liquidity based, 10000
+            if (_timeAccuTaxCheck[adr] == 0) { // first time checking this
+                // timeDiff cannot be calculated. skip.
+                // accumulate
+                
                 _taxAccuTaxCheck[adr] = addTax;
                 _timeAccuTaxCheck[adr] = block.timestamp; // set time
+            } else { // checked before
+                // timeDiff can be calculated. check.
+                // could be in same block so timeDiff == 0 should be included
+                // to avoid duplicate check, only check this one time
+                
+                if (timeDiff < _accuTaxTimeWindow) { // still in time window
+                    // accumulate
+                    _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(addTax);
+                    require(_taxAccuTaxCheck[adr] <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
+                } else { // time window is passed. reset the accumulation
+                    _taxAccuTaxCheck[adr] = addTax;
+                    _timeAccuTaxCheck[adr] = block.timestamp; // reset time
+                }
             }
+            amount = amount.sub(amount.mul(_taxAccuTaxCheck[adr]).div(10000)); // accumulate tax apply
         }
-        amount = amount.sub(amount.mul(_taxAccuTaxCheck[adr]).div(10000)); // accumulate tax apply
         
         return amount;
     }
