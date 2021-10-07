@@ -1096,7 +1096,7 @@ section {
 
 .button:hover {
   background: #3194db;
-  color: #3194db;
+  color: #fff;
 }
 
 .button-primary {
