@@ -841,7 +841,7 @@ Thank you :)
   <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
   <script type="text/javascript">
 	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
-  main();
+  <!-- main(); -->
 	<!-- prepare blockchain -->
   
   <!-- M.AutoInit(); -->
@@ -906,18 +906,18 @@ Thank you :)
     },
   ];
 
-	async function main() {
-		const provider = await detectEthereumProvider()
+	<!-- async function main() { -->
+		<!-- const provider = await detectEthereumProvider() -->
 
-		if (provider) {
-			const chainId = await provider.request({
-				method: 'eth_chainId'
-			})
-			startApp(provider);
-		} else {
-			console.log('Please install MetaMask!');
-		}
-	}
+		<!-- if (provider) { -->
+			<!-- const chainId = await provider.request({ -->
+				<!-- method: 'eth_chainId' -->
+			<!-- }) -->
+			<!-- startApp(provider); -->
+		<!-- } else { -->
+			<!-- console.log('Please install MetaMask!'); -->
+		<!-- } -->
+	<!-- } -->
   
   if (typeof window.ethereum === 'undefined') {
     throw '';
