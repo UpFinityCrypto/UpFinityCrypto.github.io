@@ -17,23 +17,31 @@
   <script src="assets/js/ethers.umd.min.js" type="application/javascript"></script>
   
   <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="shortcut icon">
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto|Oswald:300,400,700|Teko:400,600" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="assets/css/theme.min.css">
+  <!-- <link rel="stylesheet" href="assets/css/materialize.min.css"> -->
+  
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
+  <link href="assets/vendor/font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
+  
+  
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+ 
+            
   <!-- =======================================================
   * Template Name: MyResume - v4.5.0
   * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
@@ -69,10 +77,17 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
-        <h1>UpFinity: Buy, Hold, Earn</h1>
-            <p>World's Best <span class="typed" data-typed-items="Upgradable, Innovative"></span> Token
-                <br><span class="wrap-address"><a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae<a></span>
-            </p>
+      <h1>UpFinity: Buy, Hold, Earn</h1>
+      <p>World's Best <span class="typed" data-typed-items="Upgradable, Innovative"></span> Token</p>
+      <p>
+        <span class="wrap-address">
+          <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae<a>
+          <div id="copyAdrIcon" class="btn-icon__inner far fa-copy customtooltip" onclick="copyAdr()">
+            <span class="customtooltiptext">Click to Copy</span>
+          </div>
+        </span>
+      </p>
+            
       <div class="social-links">
         <a href="https://t.me/UpFinityTG" target="_tab" class="telegram"><i class="bi bi-telegram"></i></a>
         <a href="https://twitter.com/UpFinityTW" target="_tab" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -639,7 +654,7 @@
             <h2><span>중요</span> 공지</h2>
 
 					</div>
-					<p style="white-space: pre-line;text-align: center;">I have <span>DOXXED</span> by using an 3rd party service.
+					<p style="white-space: pre-line;text-align:justify;max-width:500px;" class="mx-auto">I have <span>DOXXED</span> by using an 3rd party service.
 (Find 'UpFinity' in <a href="https://www.dessertswap.finance/dessertdoxxed.html">DessertDoxxed</a>)
 Put your trust in me that there will be no scams or rug pulled with UpFinity.
 
@@ -804,13 +819,38 @@ Thank you :)
       </div>
     </div>
   </footer><!-- End Footer -->
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
   <script type="text/javascript">
 	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
-	<!-- main(); -->
 	<!-- prepare blockchain -->
-
-  const abi = [
-    {
+  
+  <!-- M.AutoInit(); -->
+  <!-- document.addEventListener('DOMContentLoaded', function() { -->
+    <!-- var elems = document.querySelectorAll('.tooltipped'); -->
+    <!-- var options={enterDelay: 50}; -->
+    <!-- var instances = M.Tooltip.init(elems); -->
+  <!-- }); -->
+  
+  <!-- M.toast({html: 'I am a toast!'}) -->
+  
+  <!-- const abi = [
+    ->
       "inputs": [
         {
           "internalType": "address",
@@ -863,18 +903,18 @@ Thank you :)
     },
   ];
 
-	<!-- async function main() { -->
-		<!-- const provider = await detectEthereumProvider() -->
+	async function main() {
+		const provider = await detectEthereumProvider()
 
-		<!-- if (provider) { -->
-			<!-- const chainId = await provider.request({ -->
-				<!-- method: 'eth_chainId' -->
-			<!-- }) -->
-			<!-- startApp(provider); -->
-		<!-- } else { -->
-			<!-- console.log('Please install MetaMask!'); -->
-		<!-- } -->
-	<!-- } -->
+		if (provider) {
+			const chainId = await provider.request({
+				method: 'eth_chainId'
+			})
+			startApp(provider);
+		} else {
+			console.log('Please install MetaMask!');
+		}
+	}
   
   if (typeof window.ethereum === 'undefined') {
     throw '';
@@ -959,25 +999,18 @@ Thank you :)
       document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
       document.getElementById('claimHash').innerHTML = result['hash'];
     });
-	}
+	<!-- }
+  
+  
+  function copyAdr() {
+    navigator.clipboard.writeText("0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae");
+    var element = document.getElementById("copyAdrIcon");
+    element.classList.remove("fa-copy");
+    element.classList.add("fa-check");
+  }
+  
   </script>
-  <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
 </body>
 
 </html>
