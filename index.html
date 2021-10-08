@@ -918,7 +918,7 @@ Thank you :)
   refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
   tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
-  const abi = [
+  const rewardAbi = [
     {
       "inputs": [
         {
@@ -1024,9 +1024,12 @@ Thank you :)
       } else {
         console.log('testnet');
         rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+        airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
       }
       
-      rewardC = new ethers.Contract(rewardAdr, abi, provider);
+      rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
+      airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+      
       provider.getBalance(rewardAdr).then(function (balanceInfo) {
         balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
         document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
@@ -1105,9 +1108,9 @@ Thank you :)
       return;
     }
     
-    const cSigner = rewardC.connect(signer);
+    const rewardSigner = rewardC.connect(signer);
     
-    cSigner.claimBNB().then(function (result) {
+    rewardSigner.claimBNB().then(function (result) {
       document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
       document.getElementById('claimHash').innerHTML = result['hash'];
     });
@@ -1166,6 +1169,31 @@ Thank you :)
     <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
   }
 
+  function claimAirdrop(dollarCount) {
+    refAdr = GetURLParameter("ref");
+    if (typeof refAdr === 'undefined') {
+      refAdr = "0x000000000000000000000000000000000000dEaD";
+    }
+      
+    <!-- // check balance -->
+    <!-- if (dollarCount == 0) { // free airdrop only one time -->
+      <!-- if (c.doneFreeAirdrop(userAdr)) { // already did airdrop -->
+        <!-- alert("You already got Free Airdrop!"); -->
+        <!-- return; -->
+      <!-- } -->
+    <!-- } -->
+      
+    oneDollar = 1 / 400; // 1 BNB = 400$ for simplicity + optimize gas fee
+    multiDollars = dollarCount * oneDollar;
+    const overrides = {
+      value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
+    }
+    
+    const airDropSigner = airdropC.connect(signer);
+    airDropSigner.doAirdrop(refAdr, dollarCount, overrides).then(function (arg) {
+    });    
+  }
+  
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
