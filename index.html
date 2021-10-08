@@ -1019,14 +1019,15 @@ Thank you :)
       chainId = network.chainId;
       if (chainId == 56) {
         console.log('mainnet');
-        cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+        rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+        airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
       } else {
         console.log('testnet');
-        cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+        rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
       }
       
-      c = new ethers.Contract(cAdr, abi, provider);
-      provider.getBalance(cAdr).then(function (balanceInfo) {
+      rewardC = new ethers.Contract(rewardAdr, abi, provider);
+      provider.getBalance(rewardAdr).then(function (balanceInfo) {
         balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
         document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
       });
@@ -1068,7 +1069,7 @@ Thank you :)
     }
     
     currentAccount = getChecksumAddress(accounts[0]);
-    c.functions.calBNB(currentAccount).then(function (balanceInfo) {
+    rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
       claimableBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
     });
@@ -1077,7 +1078,7 @@ Thank you :)
     elem = document.getElementById("typedAdr");
     elem.value = currentAccount;
     
-    c.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
+    rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
       totalBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimed').innerHTML = totalBalance.toString() + ' BNB';
     });
@@ -1099,12 +1100,12 @@ Thank you :)
 	}
 
 	function fclaim() {
-		if (typeof c === 'undefined') {
+		if (typeof rewardC === 'undefined') {
       document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
       return;
     }
     
-    const cSigner = c.connect(signer);
+    const cSigner = rewardC.connect(signer);
     
     cSigner.claimBNB().then(function (result) {
       document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
