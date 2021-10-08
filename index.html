@@ -1078,11 +1078,11 @@ Thank you :)
       tokenC.functions._curcuitBreakerFlag().then(function (arg) {
         curcuitBreakerFlagStatus = arg[0];
         if (curcuitBreakerFlagStatus == 1) {
-          displayText("curcuitBreakerStatus", "OFF");
+          displayText("circuitBreakerStatus", "OFF");
         } else if (curcuitBreakerFlagStatus == 2){
-          displayText("curcuitBreakerStatus", "ON");
+          displayText("circuitBreakerStatus", "ON");
         } else {
-          displayText("curcuitBreakerStatus", "Something wrong. Contact Dev :)");
+          displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
         }
       });
       fconnect();
