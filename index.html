@@ -106,7 +106,38 @@
   </section><!-- End Hero -->
 
   <main id="main">
+    
+    <!-- ======= About Section ======= -->
+    <section id="status" class="about">
+      <div class="container" data-aos="fade-up">
 
+        <div class="section-title">
+          <h2>Status (Coming Soon)</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-lg-4 text-justify content">
+            <h3>How to use</h3>
+            <ul>
+                <li><i class="bi bi-chevron-right"></i> Connect your wallet to view the rewards.</li>
+                <li><i class="bi bi-chevron-right"></i> Click Claim button to claim your rewards</li>
+            </ul>
+          </div>
+          <div class="col-12 col-lg-8 pt-4 pt-lg-0 content">
+            <div class="row mt-5">
+              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h6 class="text-center ">Circuit Breaker</h6>
+                    <div id="circuitBreakerStatus" class="text-center">OFF</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Section -->
+    
+    
     <!-- ======= About Section ======= -->
     <section id="rewards" class="about">
       <div class="container" data-aos="fade-up">
@@ -918,6 +949,10 @@ Thank you :)
   refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
   tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
+  constr tokenAbi = [
+     {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+  ];
+  
   const rewardAbi = [
     {
       "inputs": [
@@ -1019,16 +1054,20 @@ Thank you :)
       chainId = network.chainId;
       if (chainId == 56) {
         console.log('mainnet');
+        tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
         rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
         airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
       } else {
         console.log('testnet');
+        tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
         rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
         airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
       }
       
+      tokenC = new ethers.Contract(tokenAdr, tokenAbi, provider);
       rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
       airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+      
       
       provider.getBalance(rewardAdr).then(function (balanceInfo) {
         balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
