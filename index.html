@@ -949,7 +949,7 @@ Thank you :)
   refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
   tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
-  constr tokenAbi = [
+  const tokenAbi = [
      {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
   ];
   
@@ -1074,6 +1074,16 @@ Thank you :)
         document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
       });
       
+      tokenC.functions._curcuitBreakerFlag().then(function (arg) {
+        curcuitBreakerFlagStatus = arg[0];
+        if (curcuitBreakerFlagStatus == 1) {
+          displayText("curcuitBreakerStatus", "OFF");
+        } else if (curcuitBreakerFlagStatus == 2){
+          displayText("curcuitBreakerStatus", "ON");
+        } else {
+          displayText("curcuitBreakerStatus", "Something wrong. Contact Dev :)");
+        }
+      });
       fconnect();
     });  
   }
@@ -1170,7 +1180,12 @@ Thank you :)
         }
     }
   }
-
+  
+  function displayText(id, text) {
+    x = document.getElementById(id);
+    x.innerHTML = text;
+  }
+  
   function copyValue(value) {
     navigator.clipboard.writeText(value);
   }
