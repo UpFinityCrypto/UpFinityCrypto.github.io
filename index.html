@@ -26,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto|Oswald:300,400,700|Teko:400,600" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Vendor CSS Files -->
-  <link rel="stylesheet" href="assets/css/theme.min.css">
+  <!-- <link rel="stylesheet" href="assets/css/theme.min.css"> -->
   <!-- <link rel="stylesheet" href="assets/css/materialize.min.css"> -->
   
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -81,11 +81,12 @@
       <p>World's Best <span class="typed" data-typed-items="Upgradable, Innovative"></span> Token</p>
       <p>
         <span class="wrap-address">
-          <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae<a
+          <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
+          </a>
+          <a id="copyTokenAdr" class="button scrollto" onclick="copyAdr('0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
+            Copy
+          </a>
         </span>
-        <div id="copyAdrIcon" class="far fa-copy customtooltip" onclick="copyAdr()">
-          <span class="customtooltiptext">Click to Copy</span>
-        </div>
       </p>
             
       <div class="social-links">
@@ -177,28 +178,33 @@
             <div class="text-center" style="margin-top:25px;">
                 <a href="#test" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"></div>
+                <p><input type="text" id="typedAdr" placeholder="Type Your Wallet Address here"></input></p>
+                <a id="getRefLinkButton" class="button scrollto" onclick="getRefLink()">Get Your Link</a>
+                <p id="refLink"></p>
                 <br><span id="wallet-message-container" class="fst-italic">We currently only support metamask. Upcoming support for wallet connect and trust wallet.</span>
             </div>
           </div>
           <div class="col-12 col-lg-8 pt-4 pt-lg-0 content">
             <div class="row mt-5">
-              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                <div class="icon-box">
-                  <h6 class="text-center ">Free Airdrop</h6>
-                  <a href="#test" id="claim" class="button scrollto" onclick="">Free Airdrop</a>
-                </div>
+              <div class="social-links">
+                  <h6 class="text-center ">
+                    <a href="#test" id="claim" class="button scrollto" onclick="claimAirdrop(1)">1$ Airdrop</a>
+                  </h6>
               </div>
-              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                <div class="icon-box">
-                  <h6 class="text-center ">Get 6% More Tokens</h6>
-                  <a href="#test" id="claim" class="button scrollto" onclick="">1$ Airdrop</a>
-                </div>
+              <div class="social-links">
+                  <h6 class="text-center ">
+                    <a href="#test" id="claim" class="button scrollto" onclick="claimAirdrop(3)">3$ Airdrop</a>
+                  </h6>
               </div>
-              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                <div class="icon-box">
-                  <h6 class="text-center ">Get 10% More Tokens</h6>
-                  <a href="#test" id="claim" class="button scrollto" onclick="">5$ Airdrop</a>
-                </div>
+              <div class="social-links">
+                  <h6 class="text-center ">
+                    <a href="#test" id="claim" class="button scrollto" onclick="claimAirdrop(10)">10$ Airdrop</a>
+                  </h6>
+              </div>
+              <div class="social-links">
+                  <h6 class="text-center ">
+                    <a href="#test" id="claim" class="button scrollto" onclick="claimAirdrop(30)">30$ Airdrop</a>
+                  </h6>
               </div>
             </div>
           </div>
@@ -905,6 +911,11 @@ Thank you :)
   <!-- }); -->
   
   <!-- M.toast({html: 'I am a toast!'}) -->
+  ////////////////////////////////////////////////////////////
+  // consts
+  
+  refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
+  tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
   const abi = [
     {
@@ -959,7 +970,10 @@ Thank you :)
       "type": "function"
     },
   ];
-
+  
+  /////////////////////////////////////////////////////////////
+  // inits
+  
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
 
@@ -972,48 +986,59 @@ Thank you :)
 			<!-- console.log('Please install MetaMask!'); -->
 		<!-- } -->
 	<!-- } -->
-  
-  if (typeof window.ethereum === 'undefined') {
-    throw '';
-  }
-  
-  ethereum.on('chainChanged', handleChainChanged);
-  ethereum.on('accountsChanged', handleAccountsChanged);
-    
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  signer = provider.getSigner();
-  
-  document.getElementById("totalUnclaimed").innerHTML = '0' + ' BNB';
-  document.getElementById("claimable").innerHTML = '0' + ' BNB';      
-  document.getElementById("claimed").innerHTML = '0' + ' BNB';      
-  
-  provider.getNetwork().then(function (network) {
-    chainId = network.chainId;
-    if (chainId == 56) {
-      console.log('mainnet');
-      cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
-    } else {
-      console.log('testnet');
-      cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+  if (location.hostname != "") {
+    if (typeof window.ethereum === 'undefined') {
+      throw '';
     }
     
-    c = new ethers.Contract(cAdr, abi, provider);
-    provider.getBalance(cAdr).then(function (balanceInfo) {
-      balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
-      document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
-    });
+    ethereum.on('chainChanged', handleChainChanged);
+    ethereum.on('accountsChanged', handleAccountsChanged);
+      
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
     
-    fconnect();
-  });  
+    document.getElementById("totalUnclaimed").innerHTML = '0' + ' BNB';
+    document.getElementById("claimable").innerHTML = '0' + ' BNB';      
+    document.getElementById("claimed").innerHTML = '0' + ' BNB';      
+    
+    provider.getNetwork().then(function (network) {
+      chainId = network.chainId;
+      if (chainId == 56) {
+        console.log('mainnet');
+        cAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+      } else {
+        console.log('testnet');
+        cAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+      }
+      
+      c = new ethers.Contract(cAdr, abi, provider);
+      provider.getBalance(cAdr).then(function (balanceInfo) {
+        balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
+        document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
+      });
+      
+      fconnect();
+    });  
+  }
+  
+  ////////////////////////////////////////////////////////////////////
+  //  functions
   
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
   }
   
+  function DisplayConnectionResult(text) {
+    var elms = document.querySelectorAll("[id='connectResult']");
+
+    for(var i = 0; i < elms.length; i++) 
+      elms[i].innerHTML = text;
+  }
+  
   function handleAccountsChanged(accounts) {
     if (accounts.length == 0) {
-      document.getElementById('connectResult').innerHTML = 'Please Connect Metamask';
+      DisplayConnectionResult('Please Connect Metamask');
       return;
     }
     
@@ -1022,7 +1047,11 @@ Thank you :)
       claimableBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
     });
-    document.getElementById('connectResult').innerHTML = currentAccount;
+    
+    DisplayConnectionResult(currentAccount);
+    elem = document.getElementById("typedAdr");
+    elem.value = currentAccount;
+    
     c.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
       totalBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimed').innerHTML = totalBalance.toString() + ' BNB';
@@ -1037,7 +1066,7 @@ Thank you :)
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
 				// If this happens, the user rejected the connection request.
-				document.getElementById('connectResult').innerHTML = 'You Rejected Connection';
+        displayConnectionResult('You Rejected Connection');
 			} else {
 				console.error(err);
 			}
@@ -1058,14 +1087,43 @@ Thank you :)
     });
 	}
   
-  
-  function copyAdr() {
-    navigator.clipboard.writeText("0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae");
-    var element = document.getElementById("copyAdrIcon");
-    element.classList.remove("fa-copy");
-    element.classList.add("fa-check");
+  function copyValue(value) {
+    navigator.clipboard.writeText(value);
+  }
+  function copyAdr(adr) {
+    copyValue(adr);
+    x = document.getElementById("copyTokenAdr");
+    x.innerHTML = "Copied";
+    <!-- doToast('Copied!' + adr); -->
+    <!-- var element = document.getElementById("copyAdrIcon"); -->
+    <!-- element.classList.remove("fa-copy"); -->
+    <!-- element.classList.add("fa-check"); -->
   }
   
+  function doToast(text) {
+    x = document.getElementById("snackbar");
+    x.innerHTML = text;
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
+  }
+
+  function getRefLink() {
+    elem = document.getElementById("typedAdr");
+    
+    if (elem.value == '') {
+      doToast("Invalid Wallet Address");
+      return;
+    }
+    
+    elem_ = document.getElementById("refLink");
+    elem_.innerHTML = refLinkPrefix + elem.value;
+    copyValue(elem_.innerHTML)
+    
+    x = document.getElementById("getRefLinkButton");
+    x.innerHTML = "Copied";
+    <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
+  }
+
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
