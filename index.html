@@ -178,8 +178,9 @@
             <div class="text-center" style="margin-top:25px;">
                 <a href="#test" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"></div>
+                <div id="referralAdrDisplay"></div>
                 <p><input type="text" id="typedAdr" placeholder="Type Your Wallet Address here"></input></p>
-                <a id="getRefLinkButton" class="button scrollto" onclick="getRefLink()">Get Your Link</a>
+                <a href="#test" id="getRefLinkButton" class="button scrollto" onclick="getRefLink()">Get Your Link</a>
                 <p id="refLink"></p>
                 <br><span id="wallet-message-container" class="fst-italic">We currently only support metamask. Upcoming support for wallet connect and trust wallet.</span>
             </div>
@@ -974,6 +975,18 @@ Thank you :)
   /////////////////////////////////////////////////////////////
   // inits
   
+  refAdr = GetURLParameter("ref");
+  x = document.getElementById("referralAdrDisplay");
+  if (typeof refAdr === 'undefined') {
+    x.innerHTML = 'Referral Address: None';
+  } else {
+    refAdr = getChecksumAddress(refAdr);
+    if (refAdr == '') {
+      x.innerHTML = 'Referral Address: Wrong Address Format';
+    } else {
+      x.innerHTML = 'Referral Address: ' + refAdr;
+    }
+  }
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
 
@@ -986,6 +999,7 @@ Thank you :)
 			<!-- console.log('Please install MetaMask!'); -->
 		<!-- } -->
 	<!-- } -->
+  
   if (location.hostname != "") {
     if (typeof window.ethereum === 'undefined') {
       throw '';
@@ -1024,6 +1038,17 @@ Thank you :)
   ////////////////////////////////////////////////////////////////////
   //  functions
   
+  function getChecksumAddress(address) {
+    try {
+      checksumAdr = ethers.utils.getAddress(address);
+    } catch (error) {
+      console.log('Wrong Format Address');
+      console.log(address);
+      return '';
+    }
+    return checksumAdr;
+  }
+  
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
@@ -1042,7 +1067,7 @@ Thank you :)
       return;
     }
     
-    currentAccount = accounts[0];
+    currentAccount = getChecksumAddress(accounts[0]);
     c.functions.calBNB(currentAccount).then(function (balanceInfo) {
       claimableBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
       document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
@@ -1087,6 +1112,22 @@ Thank you :)
     });
 	}
   
+  
+  
+  
+  function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
+  }
+
   function copyValue(value) {
     navigator.clipboard.writeText(value);
   }
