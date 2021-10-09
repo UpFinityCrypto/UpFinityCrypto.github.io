@@ -2431,7 +2431,7 @@ form input[type=submit] {
     background: #28a745;
     color: #ffffff;
     transition: 0.3s;
-    width: 120px;
+    width: 200px;
     border-radius: 0 4px 4px 0;
 }
 form input[type=submit]:hover {
