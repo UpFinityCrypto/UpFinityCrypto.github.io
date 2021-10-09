@@ -507,24 +507,113 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <h5><span>-5%</span> Buy tax (Not even zero, <span>MINUS</span>)</h5>
-                        <ul class="ul-no-style">
-                            <li><i class="bx bx-check-double text-color-primary"></i> 5% More tokens given (Minus Tax Algorithm) <span class="text-color-secondary">PERIOD.</span></li>
+					<div class="col-lg-4">
+					  <div class="card">
+						<div class="card-body">
+						  <h5 class="card-title"><span>-5%</span> Sell Tax</h5>
+						  <p>Not even zero, <span>MINUS</span></p>
+						  <ul class="ul-no-style">
+                            <li><i class="bx bx-check-double text-color-primary"></i> 5% More tokens given<span class="text-color-secondary">PERIOD.</span></li>
                             <li><i class="bx bx-check-double text-color-primary"></i> CAKE Reward included (until ATH)
-                        </ul>
-                    </div>
-                    <div class="col-12 col-lg-6">
-                        <h5>20+% Sell Tax</h5>
-                        <ul class="ul-no-style">
-                            <li><i class="bx bx-check-double text-color-primary"></i> 4% Fund for Manual Big Buy</li>
-                            <li><i class="bx bx-check-double text-color-primary"></i> 4% Rewards for BNB / CAKE</li>
-                            <li><i class="bx bx-check-double text-color-primary"></i> 3% Project Sustainability</li>
-                            <li><i class="bx bx-check-double text-color-primary"></i> 2% Auto-Liquidity </li>
-                            <li><i class="bx bx-check-double text-color-primary"></i> 0.5% Auto-Burn </li>
-                            <li><i class="bx bx-check-double text-color-primary"></i> 6.5+% Redistribution + etc </li>
-                        </ul>
-                    </div>
+							</ul>
+						</div>
+					  </div>
+					</div>
+					<div class="col-lg-4">
+					  <div class="card">
+						<div class="card-body">
+						  <h5 class="card-title">20% Sell Tax</h5>
+
+						  <!-- Doughnut Chart -->
+						  <canvas id="SellTaxChart" style="max-height: 400px;"></canvas>
+						  <script>
+							document.addEventListener("DOMContentLoaded", () => {
+							  new Chart(document.querySelector('#SellTaxChart'), {
+								type: 'doughnut',
+								data: {
+								  labels: [
+									'Manual Buy: 4%',
+									'Rewards: 4%',
+									'Liquidity: 2%',
+									'Project: 3%',
+									'Burn + Redist + etc: 7%',
+								  ],
+								  datasets: [{
+									label: 'Sell Tax',
+									data: [4, 4, 2, 3, 7],
+									backgroundColor: [
+									  'rgb(255, 99, 132)',
+									  'rgb(54, 162, 235)',
+									  'rgb(255, 205, 86)',
+									  'rgb(40, 167, 69)',
+									  'rgb(234, 72, 23)',
+									  
+									],
+									hoverOffset: 4
+								  }],
+								},
+								options: {
+									plugins: {
+										legend: {
+											<!-- position: 'chartArea' -->
+											position: 'right'
+										}
+									}
+								}
+							  });
+							});
+						  </script>
+						  <!-- End Doughnut CHart -->
+
+						</div>
+					  </div>
+					</div>
+					<div class="col-lg-4">
+					  <div class="card">
+						<div class="card-body">
+						  <h5 class="card-title">Token Distribution</h5>
+
+						  <!-- Doughnut Chart -->
+						  <canvas id="TokenDistributionChart" style="max-height: 400px;"></canvas>
+						  <script>
+							document.addEventListener("DOMContentLoaded", () => {
+							  new Chart(document.querySelector('#TokenDistributionChart'), {
+								type: 'doughnut',
+								data: {
+								  labels: [
+									'Burn: 50%',
+									'Liquidity: 40%',
+									'Minus Tax: 2%',
+									'Project: 8%',
+								  ],
+								  datasets: [{
+									label: 'Token Distribution',
+									data: [50, 40, 2, 8],
+									backgroundColor: [
+									  'rgb(255, 99, 132)',
+									  'rgb(54, 162, 235)',
+									  'rgb(255, 205, 86)',
+									  'rgb(40, 167, 69)',
+									],
+									hoverOffset: 4
+								  }],
+								},
+								options: {
+									plugins: {
+										legend: {
+											<!-- position: 'chartArea' -->
+											position: 'right'
+										}
+									}
+								}
+							  });
+							});
+						  </script>
+						  <!-- End Doughnut CHart -->
+
+						</div>
+					  </div>
+					</div>
                 </div>
 
             </div>
@@ -929,11 +1018,12 @@ Thank you :)
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/typed.js/typed.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   
-  <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+  <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
   <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
   <script type="text/javascript">
 	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->

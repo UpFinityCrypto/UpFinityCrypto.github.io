@@ -2337,3 +2337,17 @@ footer {
   from {top: 30px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
+
+
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #000;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
