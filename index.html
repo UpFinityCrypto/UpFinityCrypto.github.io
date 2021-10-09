@@ -210,7 +210,7 @@
         </div>
 
         <div class="row">
-          <div class="col-12 col-lg-4 text-justify content">
+          <div class="col-lg-6 text-justify content">
             <h3>How to use (Coming Soon)</h3>
             <ul>
                 <li><i class="bi bi-chevron-right"></i> Connect your wallet.</li>
@@ -221,31 +221,40 @@
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"></div>
                 <div id="referralAdrDisplay"></div>
-                <p><input type="text" id="typedAdr" placeholder="Type Your Wallet Address here"></input></p>
-                <a href="#null" id="getRefLinkButton" class="button scrollto" onclick="getRefLink()">Get Your Link</a>
                 <p id="refLink"></p>
+				<h4>Make Referral Link</h4>
+				<p>Spread your link to get 5% Referral Bonus!</p>
+				<form action="" method="post">
+				  <input type="email" id="typedAdr" placeholder="Type Your Wallet Address here">
+				  <input type="submit" id="getRefLinkButton" value="Make Link" onclick="getRefLink()">
+				</form>
                 <br><span id="wallet-message-container" class="fst-italic">We currently only support metamask. Upcoming support for wallet connect and trust wallet.</span>
             </div>
           </div>
-          <div class="col-12 col-lg-8 pt-4 pt-lg-0 content">
+          <div class="col-lg-6 text-justify content">
             <div class="row mt-5">
               <div class="social-links">
-                  <h6 class="text-center ">
+                  <h6>
+					10% More Tokens!!
                     <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(1)">1$ Airdrop</a>
+					(Can claim only 1 time)
                   </h6>
               </div>
               <div class="social-links">
-                  <h6 class="text-center ">
+                  <h6>
+					6% More Tokens!
                     <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(3)">3$ Airdrop</a>
                   </h6>
               </div>
               <div class="social-links">
-                  <h6 class="text-center ">
+                  <h6>
+					7% More Tokens!
                     <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(10)">10$ Airdrop</a>
                   </h6>
               </div>
               <div class="social-links">
-                  <h6 class="text-center ">
+                  <h6>
+					8% More Tokens!
                     <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(30)">30$ Airdrop</a>
                   </h6>
               </div>
