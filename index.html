@@ -634,16 +634,18 @@
 									'Rewards: 4%',
 									'Liquidity: 2%',
 									'Project: 3%',
-									'Burn + Redist + etc: 7%',
+									'Minus Tax: 4.2%',
+									'Burn + Redist + etc: 2.8%',
 								  ],
 								  datasets: [{
 									label: 'Sell Tax',
-									data: [4, 4, 2, 3, 7],
+									data: [4, 4, 2, 3, 4.2, 2.8],
 									backgroundColor: [
 									  'rgb(255, 99, 132)',
 									  'rgb(54, 162, 235)',
 									  'rgb(255, 205, 86)',
 									  'rgb(40, 167, 69)',
+									  'rgb(162, 74, 96)',
 									  'rgb(234, 72, 23)',
 									  
 									],
@@ -670,7 +672,7 @@
 					  <div class="card">
 						<div class="card-body">
 						  <h5 class="card-title">Token Distribution</h5>
-
+						  <div>Project Tokens will be used for Burn / Giveaway / Airdrop event!</div>
 						  <!-- Doughnut Chart -->
 						  <canvas id="TokenDistributionChart" style="max-height: 400px;"></canvas>
 						  <script>
