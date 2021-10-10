@@ -1145,8 +1145,11 @@ Thank you :)
       }
       
 	  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
-	  factoryAdr = routerC.functions.factory();
-	  factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+	  routerC.functions.factory().then(function (args) {
+		console.log(args);
+	  <!-- factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider); -->
+	  });
+	  
 	  
       tokenC = new ethers.Contract(tokenAdr, tokenAbi, provider);
       rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
