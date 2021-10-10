@@ -1192,8 +1192,8 @@ Thank you :)
             rO = args__[0];
           }
           
-          maxBuyLiq = rI / bnbDiv / 10; // 10% of current liquidity
-          maxBuyLiq = BNB(maxBuyLiq * bnbDiv);
+          maxBuyLiq = rI / 10; // 10% of current liquidity
+          maxBuyLiq = BNB(maxBuyLiq);
           upfinityC.functions.totalSupply()
           .then(function (args___) {
             totalSupply = args___[0];
