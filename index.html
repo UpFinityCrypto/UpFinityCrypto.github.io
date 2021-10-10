@@ -1028,7 +1028,8 @@ Thank you :)
   refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
   tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
-  routerAbi = [{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+  const routerAbi = [{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+  const factoryAbi = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}];
   const tokenAbi = [
      {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
   ];
@@ -1131,6 +1132,7 @@ Thank you :)
       if (chainId == 56) {
         console.log('mainnet');
 		
+		wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
 		routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
         tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
         rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
@@ -1143,6 +1145,9 @@ Thank you :)
       }
       
 	  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
+	  factoryAdr = routerC.functions.factory();
+	  factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+	  
       tokenC = new ethers.Contract(tokenAdr, tokenAbi, provider);
       rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
       airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
