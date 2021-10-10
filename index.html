@@ -1178,46 +1178,46 @@ Thank you :)
       factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
       
       factoryC.functions.getPair(wbnbAdr, upfinityAdr)
-      .then(function (args_) {
-        pairAdr = args_[0];
+      .then(function (args) {
+        pairAdr = args[0];
         pairC = new ethers.Contract(pairAdr, pairAbi, provider);
         
         pairC.functions.getReserves()
-        .then(function (args__) {
+        .then(function (args) {
           if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-            rI = args__[0]; 
-            rO = args__[1];
+            rI = args[0]; 
+            rO = args[1];
           } else {
-            rI = args__[1];
-            rO = args__[0];
+            rI = args[1];
+            rO = args[0];
           }
           
-          maxBuyLiq = rI / 10; // 10% of current liquidity
+          maxBuyLiq = rI.div(10); // 10% of current liquidity
           maxBuyLiq = BNB(maxBuyLiq);
           upfinityC.functions.totalSupply()
-          .then(function (args___) {
-            totalSupply = args___[0];
+          .then(function (args) {
+            totalSupply = args[0];
             upfinityC.functions.balanceOf(currentAccount)
-            .then(function (args____) {
-              balance = args____[0];
+            .then(function (args) {
+              balance = args[0];
               balancePercentage = round(balance / totalSupply * 100, 2);
               displayText("balanceStatus", balancePercentage.toString() + ' %');
               
-              balanceLimit = totalSupply / 100; // 1% of total supply
+              balanceLimit = totalSupply.div(100); // 1% of total supply
               
-              <!-- if (balanceLimit <= balance) { // already max -->
-              <!-- } else { -->
-                <!-- buyLimit = balanceLimit - balance; -->
-                <!-- routerC.functions.getAmountIn(buyLimit, rI, rO) -->
-                <!-- .then(function (args_____) { -->
-                  <!-- maxbuyBal = args_____[0]; -->
-                  <!-- maxbuyBal = BNB(maxbuyBal); -->
+              if (balanceLimit <= balance) { // already max
+              } else {
+                buyLimit = balanceLimit.sub(balance);
+                routerC.functions.getAmountIn(buyLimit, rI, rO)
+                .then(function (args) {
+                  maxbuyBal = args[0];
+                  maxbuyBal = BNB(maxbuyBal);
                   
-                  <!-- maxBuy = Math.min(maxBuyLiq, maxbuyBal); -->
+                  maxBuy = Math.min(maxBuyLiq, maxbuyBal);
                   
-                  <!-- displayText("buyLimitStatus", maxBuy.toString() + ' BNB'); -->
-                <!-- }); -->
-              <!-- } -->
+                  displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
+                });
+              }
             });
           });
         });
