@@ -476,6 +476,12 @@
                     <div id="circuitBreakerStatus" class="text-center"></div>
                 </div>
               </div>
+			  <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h6 class="text-center ">Max Buy Limit (10% Currentl Liquidity)</h6>
+                    <div id="buyLimitStatus" class="text-center"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -488,7 +494,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Rewards</h2>
+          <h2>Rewards (Upgrading a little now)</h2>
         </div>
 
         <div class="row">
@@ -1167,6 +1173,7 @@ Thank you :)
 				}
 				
 				maxBuy = rI / bnbDiv / 10; // 10% of current liquidity
+				displayText("buyLimitStatus", maxBuy);
 			});
 		});
 	  });
@@ -1211,7 +1218,7 @@ Thank you :)
   }
   
   function displayBNB(value) {
-	return (value / bnbDiv).toFixed(6);
+	return (value / bnbDiv).toFixed(8);
   }
   
   function handleChainChanged(_chainId) {
