@@ -1030,6 +1030,7 @@ Thank you :)
   
   const routerAbi = [{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
   const factoryAbi = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}];
+  const pairAbi = [{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"}];
   const tokenAbi = [
      {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
   ];
@@ -1145,9 +1146,21 @@ Thank you :)
       }
       
 	  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
-	  routerC.functions.factory().then(function (args) {
-		console.log(args);
-	  <!-- factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider); -->
+	  routerC.functions.factory()
+	  .then(function (args) {
+		factoryAdr = args[0];
+		factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+		
+		factoryC.functions.getPair(wbnbAdr, tokenAdr)
+		.then(function (args_) {
+			pairAdr = args_[0];
+			pairC = new ethers.Contract(pairAdr, pairAbi, provider);
+			
+			pairC.functions.getReserves()
+			.then(function (args__) {
+				console.log(args__);
+			});
+		});
 	  });
 	  
 	  
