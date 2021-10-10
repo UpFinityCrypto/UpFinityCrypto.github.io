@@ -1165,7 +1165,8 @@ Thank you :)
 				} else {
 					rI = args__[1];
 				}
-				console.log(rI / bnbDiv);
+				
+				maxBuy = rI / bnbDiv / 10; // 10% of current liquidity
 			});
 		});
 	  });
@@ -1177,7 +1178,7 @@ Thank you :)
       
       
       provider.getBalance(rewardAdr).then(function (balanceInfo) {
-        balance = Math.round(ethers.utils.formatEther(balanceInfo) * 100000000) / 100000000;
+        balance = displayBNB(ethers.utils.formatEther(balanceInfo));
         document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
       });
       
@@ -1209,6 +1210,10 @@ Thank you :)
     return checksumAdr;
   }
   
+  function displayBNB(value) {
+	return (value / bnbDiv).toFixed(6);
+  }
+  
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
@@ -1228,13 +1233,13 @@ Thank you :)
     elem.value = currentAccount;
 	
 	rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
-      claimableBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
+      claimableBalance = displayBNB(ethers.utils.formatEther(balanceInfo[0]));
       document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
     });
 	
 	rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
-      totalBalance = Math.round(ethers.utils.formatEther(balanceInfo[0]) * 100000000) / 100000000;
-      document.getElementById('claimed').innerHTML = totalBalance.toString() + ' BNB';
+      claimedBalance = displayBNB(ethers.utils.formatEther(balanceInfo[0]));
+      document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
     });
 	
 
