@@ -1194,16 +1194,16 @@ Thank you :)
           
           maxBuyLiq = rI / 10; // 10% of current liquidity
           maxBuyLiq = BNB(maxBuyLiq);
-          <!-- upfinityC.functions.totalSupply() -->
-          <!-- .then(function (args___) { -->
-            <!-- totalSupply = args___[0]; -->
-            <!-- upfinityC.functions.balanceOf(currentAccount) -->
-            <!-- .then(function (args____) { -->
-              <!-- balance = args____[0]; -->
-              <!-- balancePercentage = round(balance / totalSupply * 100, 2); -->
-              <!-- displayText("balanceStatus", balancePercentage.toString() + ' %'); -->
+          upfinityC.functions.totalSupply()
+          .then(function (args___) {
+            totalSupply = args___[0];
+            upfinityC.functions.balanceOf(currentAccount)
+            .then(function (args____) {
+              balance = args____[0];
+              balancePercentage = round(balance / totalSupply * 100, 2);
+              displayText("balanceStatus", balancePercentage.toString() + ' %');
               
-              <!-- balanceLimit = totalSupply / 100; // 1% of total supply -->
+              balanceLimit = totalSupply / 100; // 1% of total supply
               
               <!-- if (balanceLimit <= balance) { // already max -->
               <!-- } else { -->
@@ -1217,9 +1217,9 @@ Thank you :)
                   
                   <!-- displayText("buyLimitStatus", maxBuy.toString() + ' BNB'); -->
                 <!-- }); -->
-              <!-- } -->
-            <!-- }); -->
-          <!-- }); -->
+              }
+            });
+          });
         });
       });
 	  });
