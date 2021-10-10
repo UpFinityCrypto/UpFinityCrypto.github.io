@@ -83,7 +83,7 @@
         <span class="wrap-address">
           <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
           </a>
-          <a id="copyTokenAdr" class="button scrollto" onclick="copyAdr('0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
+          <a id="copyupfinityAdr" class="button scrollto" onclick="copyAdr('0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
             Copy
           </a>
         </span>
@@ -476,11 +476,18 @@
                     <div id="circuitBreakerStatus" class="text-center"></div>
                 </div>
               </div>
-			  <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h6 class="text-center ">Balance</h6>
+                    <h6>(Max 1.1%)</h6>
+                    <div id="balanceStatus" class="text-center"></div>
+                </div>
+              </div>
+              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
                     <h6 class="text-center ">Max Buy Limit</h6>
-					<h6>(10% Current Liquidity)</h6>
-					<!-- <div>(Also need to check balance limit!)</div> -->
+                    <h6>(10% Current Liquidity)</h6>
+                    <!-- <div>(Also need to check balance limit!)</div> -->
                     <div id="buyLimitStatus" class="text-center"></div>
                 </div>
               </div>
@@ -1034,13 +1041,22 @@ Thank you :)
   // consts
   
   refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
-  tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
+  upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
-  const routerAbi = [{"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}];
+  const tokenAbi = [
+  {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+  {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+  ];
+  const routerAbi = [
+  {"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  {"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},
+  ];
   const factoryAbi = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}];
   const pairAbi = [{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"}];
-  const tokenAbi = [
-     {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
+  const upfinityAbi = [
+  {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+  {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   ];
   
   const rewardAbi = [
@@ -1145,12 +1161,12 @@ Thank you :)
 		bnbDiv = 10 ** decimals;
 		wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
 		routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
-        tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
+        upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
         rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
         airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
       } else {
         console.log('testnet');
-        tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
+        upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
         rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
         airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
       }
@@ -1158,40 +1174,67 @@ Thank you :)
 	  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
 	  routerC.functions.factory()
 	  .then(function (args) {
-		factoryAdr = args[0];
-		factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
-		
-		factoryC.functions.getPair(wbnbAdr, tokenAdr)
-		.then(function (args_) {
-			pairAdr = args_[0];
-			pairC = new ethers.Contract(pairAdr, pairAbi, provider);
-			
-			pairC.functions.getReserves()
-			.then(function (args__) {
-				if (wbnbAdr < tokenAdr) {
-					rI = args__[0];
-				} else {
-					rI = args__[1];
-				}
-				
-				maxBuy = rI / bnbDiv / 10; // 10% of current liquidity
-				displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
-			});
-		});
+      factoryAdr = args[0];
+      factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+      
+      factoryC.functions.getPair(wbnbAdr, upfinityAdr)
+      .then(function (args_) {
+        pairAdr = args_[0];
+        pairC = new ethers.Contract(pairAdr, pairAbi, provider);
+        
+        pairC.functions.getReserves()
+        .then(function (args__) {
+          if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+            rI = args__[0]; 
+            rO = args__[1];
+          } else {
+            rI = args__[1];
+            rO = args__[0];
+          }
+          
+          maxBuyLiq = rI / bnbDiv / 10; // 10% of current liquidity
+          maxBuyLiq = BNB(maxBuyLiq * bnbDiv);
+          upfinityC.functions.totalSupply()
+          .then(function (args___) {
+            totalSupply = args___[0];
+            upfinityC.functions.balanceOf(currentAccount)
+            .then(function (args____) {
+              balance = args____[0];
+              balancePercentage = round(balance / totalSupply * 100, 2);
+              displayText("balanceStatus", balancePercentage.toString() + ' %');
+              
+              balanceLimit = totalSupply / 100; // 1% of total supply
+              
+              if (balanceLimit <= balance) { // already max
+              } else {
+                buyLimit = balanceLimit - balance;
+                upfinityC.functions.getAmountIn(buyLimit, rI, rO)
+                .then(function (args_____) {
+                maxbuyBal = args_____[0];
+                maxbuyBal = BNB(maxbuyBal);
+                
+                maxBuy = Math.min(maxBuyLiq, maxbuyBal);
+                
+                displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
+              }
+            });
+          });
+        });
+      });
 	  });
 	  
 	  
-      tokenC = new ethers.Contract(tokenAdr, tokenAbi, provider);
+      upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
       rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
       airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
       
       
       provider.getBalance(rewardAdr).then(function (balanceInfo) {
-        balance = displayBNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
+        balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
         document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
       });
       
-      tokenC.functions._curcuitBreakerFlag().then(function (arg) {
+      upfinityC.functions._curcuitBreakerFlag().then(function (arg) {
         curcuitBreakerFlagStatus = arg[0];
         if (curcuitBreakerFlagStatus == 1) {
           displayText("circuitBreakerStatus", "OFF");
@@ -1219,8 +1262,11 @@ Thank you :)
     return checksumAdr;
   }
   
-  function displayBNB(value) {
-	return (value / bnbDiv).toFixed(8);
+  function round(value, n) {
+    return value.toFixed(n);
+  }
+  function BNB(value) {
+    return round(value / bnbDiv, 8);
   }
   
   function handleChainChanged(_chainId) {
@@ -1242,12 +1288,12 @@ Thank you :)
     elem.value = currentAccount;
 	
 	rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
-      claimableBalance = displayBNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
+      claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
       document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
     });
 	
 	rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
-      claimedBalance = displayBNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
+      claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
       document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
     });
 	
@@ -1320,7 +1366,7 @@ Thank you :)
   }
   function copyAdr(adr) {
     copyValue(adr);
-    x = document.getElementById("copyTokenAdr");
+    x = document.getElementById("copyupfinityAdr");
     x.innerHTML = "Copied";
     <!-- doToast('Copied!' + adr); -->
     <!-- var element = document.getElementById("copyAdrIcon"); -->
