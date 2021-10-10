@@ -1208,7 +1208,7 @@ Thank you :)
               if (balanceLimit <= balance) { // already max
               } else {
                 buyLimit = balanceLimit - balance;
-                upfinityC.functions.getAmountIn(buyLimit, rI, rO)
+                routerC.functions.getAmountIn(buyLimit, rI, rO)
                 .then(function (args_____) {
                   maxbuyBal = args_____[0];
                   maxbuyBal = BNB(maxbuyBal);
