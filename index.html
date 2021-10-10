@@ -1210,13 +1210,14 @@ Thank you :)
                 buyLimit = balanceLimit - balance;
                 upfinityC.functions.getAmountIn(buyLimit, rI, rO)
                 .then(function (args_____) {
-                maxbuyBal = args_____[0];
-                maxbuyBal = BNB(maxbuyBal);
-                
-                maxBuy = Math.min(maxBuyLiq, maxbuyBal);
-                
-                displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
-              });
+                  maxbuyBal = args_____[0];
+                  maxbuyBal = BNB(maxbuyBal);
+                  
+                  maxBuy = Math.min(maxBuyLiq, maxbuyBal);
+                  
+                  displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
+                });
+              }
             });
           });
         });
