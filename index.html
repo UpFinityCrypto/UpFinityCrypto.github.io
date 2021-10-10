@@ -1133,6 +1133,8 @@ Thank you :)
       if (chainId == 56) {
         console.log('mainnet');
 		
+		decimals = 18;
+		bnbDiv = 10 ** decimals;
 		wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
 		routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
         tokenAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
@@ -1158,8 +1160,12 @@ Thank you :)
 			
 			pairC.functions.getReserves()
 			.then(function (args__) {
-				console.log(args__[0]);
-				console.log(args__[1]);
+				if (wbnbAdr < tokenAdr) {
+					rI = args__[0];
+				} else {
+					rI = args__[1];
+				}
+				console.log(rI / bnbDiv);
 			});
 		});
 	  });
