@@ -1187,7 +1187,7 @@ Thank you :)
       
       
       provider.getBalance(rewardAdr).then(function (balanceInfo) {
-        balance = displayBNB(ethers.utils.formatEther(balanceInfo * bnbDiv));
+        balance = displayBNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
         document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
       });
       
@@ -1247,7 +1247,7 @@ Thank you :)
     });
 	
 	rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
-      claimedBalance = displayBNB(ethers.utils.formatEther(balanceInfo[0] * bnbDiv));
+      claimedBalance = displayBNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
       document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
     });
 	
