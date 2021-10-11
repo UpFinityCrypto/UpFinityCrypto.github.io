@@ -1042,6 +1042,195 @@ Thank you :)
   <!-- }); -->
   
   <!-- M.toast({html: 'I am a toast!'}) -->
+  
+  
+    ////////////////////////////////////////////////////////////////////
+  //  functions
+  
+  function syncDelay(milliseconds){
+   var start = new Date().getTime();
+   var end=0;
+   while( (end-start) < milliseconds){
+       end = new Date().getTime();
+   }
+  }
+
+  function getChecksumAddress(address) {
+    try {
+      checksumAdr = ethers.utils.getAddress(address);
+    } catch (error) {
+      console.log('Wrong Format Address');
+      console.log(address);
+      return '';
+    }
+    return checksumAdr;
+  }
+  
+  function round(value, n) {
+    return value.toFixed(n);
+  }
+  function BNB(value) {
+    return round(value / bnbDiv, 8);
+  }
+  
+  function handleChainChanged(_chainId) {
+    // Reload the page
+    window.location.reload();
+  }
+  
+  function displayConnectionResult(text) {
+    var elms = document.querySelectorAll("[id='connectResult']");
+
+    for(var i = 0; i < elms.length; i++) 
+      elms[i].innerHTML = text;
+  }
+  
+  function displayPersonalInformations(currentAccount) {
+  
+    displayConnectionResult(currentAccount);
+      elem = document.getElementById("typedAdr");
+      elem.value = currentAccount;
+    
+    rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
+        claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
+        document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
+      });
+    
+    rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
+        claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
+        document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
+      });
+	
+
+  }
+  
+  function handleAccountsChanged(accounts) {
+    if (accounts.length == 0) {
+      displayConnectionResult('Please Connect Metamask');
+      return;
+    }
+    
+    currentAccount = getChecksumAddress(accounts[0]);
+    displayPersonalInformations(currentAccount);
+      
+  }
+
+	function fconnect() {
+		ethereum
+		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
+		.then(handleAccountsChanged)
+		.catch((err) => {
+			if (err.code == 4001) {
+				// EIP-1193 userRejectedRequest error
+				// If this happens, the user rejected the connection request.
+        displayConnectionResult('You Rejected Connection');
+			} else {
+				console.error(err);
+			}
+		});
+	}
+
+	function fclaim() {
+		if (typeof rewardC === 'undefined') {
+      document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
+      return;
+    }
+    
+    const rewardSigner = rewardC.connect(signer);
+    
+    rewardSigner.claimBNB().then(function (result) {
+      document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
+      document.getElementById('claimHash').innerHTML = result['hash'];
+    });
+	}
+  
+  
+  
+  
+  function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
+  }
+  
+  function displayText(id, text) {
+    x = document.getElementById(id);
+    x.innerHTML = text;
+  }
+  
+  function copyValue(value) {
+    navigator.clipboard.writeText(value);
+  }
+  function copyAdr(adr) {
+    copyValue(adr);
+    x = document.getElementById("copyupfinityAdr");
+    x.innerHTML = "Copied";
+    <!-- doToast('Copied!' + adr); -->
+    <!-- var element = document.getElementById("copyAdrIcon"); -->
+    <!-- element.classList.remove("fa-copy"); -->
+    <!-- element.classList.add("fa-check"); -->
+  }
+  
+  function doToast(text) {
+    x = document.getElementById("snackbar");
+    x.innerHTML = text;
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
+  }
+
+  function getRefLink() {
+    elem = document.getElementById("typedAdr");
+    
+    if (elem.value == '') {
+      doToast("Invalid Wallet Address");
+      return;
+    }
+    
+    elem_ = document.getElementById("refLink");
+    elem_.innerHTML = refLinkPrefix + elem.value;
+    copyValue(elem_.innerHTML)
+    
+    x = document.getElementById("getRefLinkButton");
+    x.innerHTML = "Copied";
+    <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
+  }
+
+  function claimAirdrop(dollarCount) {
+    refAdr = GetURLParameter("ref");
+    if (typeof refAdr === 'undefined') {
+      refAdr = "0x000000000000000000000000000000000000dEaD";
+    }
+      
+    <!-- // check balance -->
+    <!-- if (dollarCount == 0) { // free airdrop only one time -->
+      <!-- if (c.doneFreeAirdrop(userAdr)) { // already did airdrop -->
+        <!-- alert("You already got Free Airdrop!"); -->
+        <!-- return; -->
+      <!-- } -->
+    <!-- } -->
+    
+    // _dollarsPerBNB
+    oneDollar = 1 / 400; // 1 BNB = 400$ for simplicity + optimize gas fee
+    multiDollars = dollarCount * oneDollar;
+    const overrides = {
+      value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
+    }
+    
+    const airDropSigner = airdropC.connect(signer);
+    airDropSigner.doAirdrop(refAdr, dollarCount, overrides).then(function (arg) {
+    });    
+  }
+  
+  
+  
+  
   ////////////////////////////////////////////////////////////
   // consts
   
@@ -1250,189 +1439,7 @@ Thank you :)
     
   }
   
-  ////////////////////////////////////////////////////////////////////
-  //  functions
-  
-  function syncDelay(milliseconds){
-   var start = new Date().getTime();
-   var end=0;
-   while( (end-start) < milliseconds){
-       end = new Date().getTime();
-   }
-  }
 
-  function getChecksumAddress(address) {
-    try {
-      checksumAdr = ethers.utils.getAddress(address);
-    } catch (error) {
-      console.log('Wrong Format Address');
-      console.log(address);
-      return '';
-    }
-    return checksumAdr;
-  }
-  
-  function round(value, n) {
-    return value.toFixed(n);
-  }
-  function BNB(value) {
-    return round(value / bnbDiv, 8);
-  }
-  
-  function handleChainChanged(_chainId) {
-    // Reload the page
-    window.location.reload();
-  }
-  
-  function displayConnectionResult(text) {
-    var elms = document.querySelectorAll("[id='connectResult']");
-
-    for(var i = 0; i < elms.length; i++) 
-      elms[i].innerHTML = text;
-  }
-  
-  function displayPersonalInformations(currentAccount) {
-  
-    displayConnectionResult(currentAccount);
-      elem = document.getElementById("typedAdr");
-      elem.value = currentAccount;
-    
-    rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
-        claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-        document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
-      });
-    
-    rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
-        claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-        document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
-      });
-	
-
-  }
-  
-  function handleAccountsChanged(accounts) {
-    if (accounts.length == 0) {
-      displayConnectionResult('Please Connect Metamask');
-      return;
-    }
-    
-    currentAccount = getChecksumAddress(accounts[0]);
-    displayPersonalInformations(currentAccount);
-      
-  }
-
-	function fconnect() {
-		ethereum
-		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
-		.then(handleAccountsChanged)
-		.catch((err) => {
-			if (err.code == 4001) {
-				// EIP-1193 userRejectedRequest error
-				// If this happens, the user rejected the connection request.
-        displayConnectionResult('You Rejected Connection');
-			} else {
-				console.error(err);
-			}
-		});
-	}
-
-	function fclaim() {
-		if (typeof rewardC === 'undefined') {
-      document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
-      return;
-    }
-    
-    const rewardSigner = rewardC.connect(signer);
-    
-    rewardSigner.claimBNB().then(function (result) {
-      document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
-      document.getElementById('claimHash').innerHTML = result['hash'];
-    });
-	}
-  
-  
-  
-  
-  function GetURLParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++) 
-    {
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam)
-        {
-            return sParameterName[1];
-        }
-    }
-  }
-  
-  function displayText(id, text) {
-    x = document.getElementById(id);
-    x.innerHTML = text;
-  }
-  
-  function copyValue(value) {
-    navigator.clipboard.writeText(value);
-  }
-  function copyAdr(adr) {
-    copyValue(adr);
-    x = document.getElementById("copyupfinityAdr");
-    x.innerHTML = "Copied";
-    <!-- doToast('Copied!' + adr); -->
-    <!-- var element = document.getElementById("copyAdrIcon"); -->
-    <!-- element.classList.remove("fa-copy"); -->
-    <!-- element.classList.add("fa-check"); -->
-  }
-  
-  function doToast(text) {
-    x = document.getElementById("snackbar");
-    x.innerHTML = text;
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 1500);
-  }
-
-  function getRefLink() {
-    elem = document.getElementById("typedAdr");
-    
-    if (elem.value == '') {
-      doToast("Invalid Wallet Address");
-      return;
-    }
-    
-    elem_ = document.getElementById("refLink");
-    elem_.innerHTML = refLinkPrefix + elem.value;
-    copyValue(elem_.innerHTML)
-    
-    x = document.getElementById("getRefLinkButton");
-    x.innerHTML = "Copied";
-    <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
-  }
-
-  function claimAirdrop(dollarCount) {
-    refAdr = GetURLParameter("ref");
-    if (typeof refAdr === 'undefined') {
-      refAdr = "0x000000000000000000000000000000000000dEaD";
-    }
-      
-    <!-- // check balance -->
-    <!-- if (dollarCount == 0) { // free airdrop only one time -->
-      <!-- if (c.doneFreeAirdrop(userAdr)) { // already did airdrop -->
-        <!-- alert("You already got Free Airdrop!"); -->
-        <!-- return; -->
-      <!-- } -->
-    <!-- } -->
-    
-    // _dollarsPerBNB
-    oneDollar = 1 / 400; // 1 BNB = 400$ for simplicity + optimize gas fee
-    multiDollars = dollarCount * oneDollar;
-    const overrides = {
-      value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
-    }
-    
-    const airDropSigner = airdropC.connect(signer);
-    airDropSigner.doAirdrop(refAdr, dollarCount, overrides).then(function (arg) {
-    });    
-  }
   
   }());
   </script>
