@@ -598,7 +598,7 @@
               <div class="social-links">
                   <h6>
 					Get 1$ Free Tokens!
-                    <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(1)">Free Airdrop</a>
+                    <a href="#null" id="claim" class="button scrollto" onclick="claimFreeAirdrop()">Free Airdrop</a>
                   </h6>
               </div>
               <div class="social-links">
@@ -1192,31 +1192,60 @@ Thank you :)
     x.value = "Copied";
     <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
   }
-
+  
+  function claimFreeAirdrop() {
+    refAdr = GetURLParameter("ref");
+    if (typeof refAdr === 'undefined') {
+      refAdr = "0x000000000000000000000000000000000000dEaD";
+    }
+    
+    
+    (async function() {
+      balanceData = await upfinityC.functions.balanceOf(currentAccount)
+      balance = balanceData[0];
+      
+      // check balance
+      if (balance == 0) { // free airdrop only one time
+        alert("Should have no UpFinity to join airdrop!");
+        return;
+      }
+      
+      const freeAirDropSigner = freeAirdropC.connect(signer);
+        freeAirDropSigner.doAirdrop(refAdr).then(function (arg) {
+      });
+    }());
+  }
+  
   function claimAirdrop(dollarCount) {
     refAdr = GetURLParameter("ref");
     if (typeof refAdr === 'undefined') {
       refAdr = "0x000000000000000000000000000000000000dEaD";
     }
+
+    (async function() {
+      balanceData = await upfinityC.functions.balanceOf(currentAccount)
+      balance = balanceData[0];
       
-    <!-- // check balance -->
-    <!-- if (dollarCount == 0) { // free airdrop only one time -->
-      <!-- if (c.doneFreeAirdrop(userAdr)) { // already did airdrop -->
-        <!-- alert("You already got Free Airdrop!"); -->
-        <!-- return; -->
-      <!-- } -->
-    <!-- } -->
+      // check balance
+      if (balance == 0) { // free airdrop only one time
+        alert("Should have no UpFinity to join airdrop!");
+        return;
+      }
+      
+      dollarsPerBNBData = await airdropC.functions._dollarsPerBNB();
+      dollarsPerBNB = dollarsPerBNBData[0];
     
-    // _dollarsPerBNB
-    oneDollar = 1 / 400; // 1 BNB = 400$ for simplicity + optimize gas fee
-    multiDollars = dollarCount * oneDollar;
-    const overrides = {
-      value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
-    }
-    
-    const airDropSigner = airdropC.connect(signer);
-    airDropSigner.doAirdrop(refAdr, dollarCount, overrides).then(function (arg) {
-    });    
+      oneDollar = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
+      
+      multiDollars = dollarCount * oneDollar;
+      const overrides = {
+        value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
+      }
+      
+      const airDropSigner = airdropC.connect(signer);
+      airDropSigner.doAirdrop(refAdr, dollarCount, overrides).then(function (arg) {
+      });
+    }());    
   }
   
   
@@ -1392,7 +1421,7 @@ Thank you :)
     
     upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
     rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
-    airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+    <!-- airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider); // TODO: change -->
     
     fconnect(); 
 
