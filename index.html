@@ -1202,9 +1202,9 @@ Thank you :)
     
     maxBuyLiq = rI.div(10); // 10% of current liquidity
     maxBuyLiq = BNB(maxBuyLiq);
-    totalSupply = await upfinityC.functions.totalSupply()[0];
+    totalSupply = (await upfinityC.functions.totalSupply())[0];
     
-    balance = await upfinityC.functions.balanceOf(currentAccount)[0];
+    balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
     balancePercentage = round(balance / totalSupply * 100, 2);
     displayText("balanceStatus", balancePercentage.toString() + ' %');
     
@@ -1213,7 +1213,7 @@ Thank you :)
     if (balanceLimit <= balance) { // already max
     } else {
       buyLimit = balanceLimit.sub(balance);
-      maxBuyBal = await routerC.functions.getAmountIn(buyLimit, rI, rO)[0];
+      maxBuyBal = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
       maxbuyBal = BNB(maxbuyBal);
       
       maxBuy = Math.min(maxBuyLiq, maxbuyBal);
@@ -1227,7 +1227,7 @@ Thank you :)
     document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
     
       
-    curcuitBreakerFlagStatus = await upfinityC.functions._curcuitBreakerFlag()[0];
+    curcuitBreakerFlagStatus = (await upfinityC.functions._curcuitBreakerFlag())[0];
     if (curcuitBreakerFlagStatus == 1) {
       displayText("circuitBreakerStatus", "OFF");
     } else if (curcuitBreakerFlagStatus == 2){
