@@ -1216,28 +1216,26 @@ Thank you :)
     }
 
 	  
-      upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
-      rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
-      airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+    upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
+    rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
+    airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+    
+    
+    balanceInfo = await provider.getBalance(rewardAdr);
+    balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
+    document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
+    
       
-      
-      provider.getBalance(rewardAdr).then(function (balanceInfo) {
-        balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-        document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
-      });
-      
-      upfinityC.functions._curcuitBreakerFlag().then(function (arg) {
-        curcuitBreakerFlagStatus = arg[0];
-        if (curcuitBreakerFlagStatus == 1) {
-          displayText("circuitBreakerStatus", "OFF");
-        } else if (curcuitBreakerFlagStatus == 2){
-          displayText("circuitBreakerStatus", "ON");
-        } else {
-          displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
-        }
-      });
-      fconnect();
-    });  
+    curcuitBreakerFlagStatus = await upfinityC.functions._curcuitBreakerFlag()[0];
+    if (curcuitBreakerFlagStatus == 1) {
+      displayText("circuitBreakerStatus", "OFF");
+    } else if (curcuitBreakerFlagStatus == 2){
+      displayText("circuitBreakerStatus", "ON");
+    } else {
+      displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
+    }
+    
+    fconnect(); 
   }
   
   ////////////////////////////////////////////////////////////////////
