@@ -1184,6 +1184,10 @@ Thank you :)
     pairAdr = pairData[0];
     pairC = new ethers.Contract(pairAdr, pairAbi, provider);
     
+    upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
+    rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
+    airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+    
     reserveData = await pairC.functions.getReserves();
     
     if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
@@ -1215,11 +1219,6 @@ Thank you :)
       displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
     }
 
-	  
-    upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
-    rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
-    airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
-    
     
     balanceInfo = await provider.getBalance(rewardAdr);
     balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
@@ -1273,19 +1272,19 @@ Thank you :)
   
   function displayPersonalInformations(currentAccount) {
   
-	displayConnectionResult(currentAccount);
-    elem = document.getElementById("typedAdr");
-    elem.value = currentAccount;
-	
-	rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
-      claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-      document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
-    });
-	
-	rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
-      claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-      document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
-    });
+    displayConnectionResult(currentAccount);
+      elem = document.getElementById("typedAdr");
+      elem.value = currentAccount;
+    
+    rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
+        claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
+        document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
+      });
+    
+    rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
+        claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
+        document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
+      });
 	
 
   }
@@ -1296,9 +1295,9 @@ Thank you :)
       return;
     }
     
-	currentAccount = getChecksumAddress(accounts[0]);
-	displayPersonalInformations(currentAccount);
-    
+    currentAccount = getChecksumAddress(accounts[0]);
+    displayPersonalInformations(currentAccount);
+      
   }
 
 	function fconnect() {
