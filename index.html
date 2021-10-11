@@ -1190,7 +1190,7 @@ Thank you :)
     
     fconnect(); 
     
-    syncDelay(3000);
+    syncDelay(3000); // maxBuyLiq
     
     reserveData = await pairC.functions.getReserves();
     
@@ -1218,6 +1218,7 @@ Thank you :)
     } else {
       buyLimit = balanceLimit.sub(balance);
       maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
+      console.log(maxBuyBalData);
       maxBuyBal = maxBuyBalData[0];
       maxbuyBal = BNB(maxbuyBal);
       
