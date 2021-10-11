@@ -1026,6 +1026,10 @@ Thank you :)
   <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
   <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
   <script type="text/javascript">
+  
+  (async function() { // to use async things
+
+
 	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
   <!-- main(); -->
 	<!-- prepare blockchain -->
@@ -1041,8 +1045,12 @@ Thank you :)
   ////////////////////////////////////////////////////////////
   // consts
   
-  refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
-  upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
+  const decimals = 18;
+  const bnbDiv = 10 ** decimals;
+  const wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
+  const routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
+  const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
+  const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
   const tokenAbi = [
   {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
@@ -1129,6 +1137,7 @@ Thank you :)
       x.innerHTML = 'Referral Address: ' + refAdr;
     }
   }
+  
 	<!-- async function main() { -->
 		<!-- const provider = await detectEthereumProvider() -->
 
@@ -1153,77 +1162,69 @@ Thank you :)
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();    
     
-    provider.getNetwork().then(function (network) {
-      chainId = network.chainId;
-      if (chainId == 56) {
-        console.log('mainnet');
-		
-		decimals = 18;
-		bnbDiv = 10 ** decimals;
-		wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
-		routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
-        upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
-        rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
-        airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
-      } else {
-        console.log('testnet');
-        upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
-        rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
-        airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
-      }
-      
-	  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
-	  routerC.functions.factory()
-	  .then(function (args) {
-      factoryAdr = args[0];
-      factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
-      
-      factoryC.functions.getPair(wbnbAdr, upfinityAdr)
-      .then(function (args) {
-        pairAdr = args[0];
-        pairC = new ethers.Contract(pairAdr, pairAbi, provider);
+    network = await provider.getNetwork();
+    chainId = network.chainId;
+    if (chainId == 56) {
+      console.log('mainnet');
+      rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+      airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
+    } else {
+      console.log('testnet');
+      rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+      airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
+    }
         
-        pairC.functions.getReserves()
-        .then(function (args) {
-          if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-            rI = args[0]; 
-            rO = args[1];
-          } else {
-            rI = args[1];
-            rO = args[0];
-          }
-          
-          maxBuyLiq = rI.div(10); // 10% of current liquidity
-          maxBuyLiq = BNB(maxBuyLiq);
-          upfinityC.functions.totalSupply()
-          .then(function (args) {
-            totalSupply = args[0];
-            upfinityC.functions.balanceOf(currentAccount)
+    routerC = new ethers.Contract(routerAdr, routerAbi, provider);
+    
+    factoryData = await routerC.functions.factory();
+    factoryAdr = factoryData[0];
+    factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+    
+    pairData = await factoryC.functions.getPair(wbnbAdr, upfinityAdr);
+    pairAdr = pairData[0];
+    pairC = new ethers.Contract(pairAdr, pairAbi, provider);
+    
+    reserveData = await pairC.functions.getReserves();
+    
+    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+      rI = reserveData[0]; 
+      rO = reserveData[1];
+    } else {
+      rI = reserveData[1];
+      rO = reserveData[0];
+    }
+            
+            maxBuyLiq = rI.div(10); // 10% of current liquidity
+            maxBuyLiq = BNB(maxBuyLiq);
+            upfinityC.functions.totalSupply()
             .then(function (args) {
-              balance = args[0];
-              balancePercentage = round(balance / totalSupply * 100, 2);
-              displayText("balanceStatus", balancePercentage.toString() + ' %');
-              
-              balanceLimit = totalSupply.div(100); // 1% of total supply
-              
-              if (balanceLimit <= balance) { // already max
-              } else {
-                buyLimit = balanceLimit.sub(balance);
-                routerC.functions.getAmountIn(buyLimit, rI, rO)
-                .then(function (args) {
-                  maxbuyBal = args[0];
-                  maxbuyBal = BNB(maxbuyBal);
-                  
-                  maxBuy = Math.min(maxBuyLiq, maxbuyBal);
-                  
-                  displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
-                });
-              }
+              totalSupply = args[0];
+              upfinityC.functions.balanceOf(currentAccount)
+              .then(function (args) {
+                balance = args[0];
+                balancePercentage = round(balance / totalSupply * 100, 2);
+                displayText("balanceStatus", balancePercentage.toString() + ' %');
+                
+                balanceLimit = totalSupply.div(100); // 1% of total supply
+                
+                if (balanceLimit <= balance) { // already max
+                } else {
+                  buyLimit = balanceLimit.sub(balance);
+                  routerC.functions.getAmountIn(buyLimit, rI, rO)
+                  .then(function (args) {
+                    maxbuyBal = args[0];
+                    maxbuyBal = BNB(maxbuyBal);
+                    
+                    maxBuy = Math.min(maxBuyLiq, maxbuyBal);
+                    
+                    displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
+                  });
+                }
+              });
             });
           });
         });
       });
-	  });
 	  
 	  
       upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
@@ -1426,6 +1427,7 @@ Thank you :)
     });    
   }
   
+  }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 </body>
