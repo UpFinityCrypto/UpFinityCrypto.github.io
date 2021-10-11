@@ -1453,7 +1453,7 @@ Thank you :)
     
     balanceLimit = totalSupply.div(100); // 1% of total supply
     
-    if (balanceLimit <= balance) { // already max
+    if (Number(balanceLimit) <= Number(balance)) { // already max
     } else {
       buyLimit = balanceLimit.sub(balance);
       maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
