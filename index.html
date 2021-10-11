@@ -1190,6 +1190,8 @@ Thank you :)
     
     fconnect(); 
     
+    syncDelay(3000);
+    
     reserveData = await pairC.functions.getReserves();
     
     if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
@@ -1246,6 +1248,14 @@ Thank you :)
   ////////////////////////////////////////////////////////////////////
   //  functions
   
+  function syncDelay(milliseconds){
+   var start = new Date().getTime();
+   var end=0;
+   while( (end-start) < milliseconds){
+       end = new Date().getTime();
+   }
+  }
+
   function getChecksumAddress(address) {
     try {
       checksumAdr = ethers.utils.getAddress(address);
