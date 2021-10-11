@@ -1193,39 +1193,28 @@ Thank you :)
       rI = reserveData[1];
       rO = reserveData[0];
     }
-            
-            maxBuyLiq = rI.div(10); // 10% of current liquidity
-            maxBuyLiq = BNB(maxBuyLiq);
-            upfinityC.functions.totalSupply()
-            .then(function (args) {
-              totalSupply = args[0];
-              upfinityC.functions.balanceOf(currentAccount)
-              .then(function (args) {
-                balance = args[0];
-                balancePercentage = round(balance / totalSupply * 100, 2);
-                displayText("balanceStatus", balancePercentage.toString() + ' %');
-                
-                balanceLimit = totalSupply.div(100); // 1% of total supply
-                
-                if (balanceLimit <= balance) { // already max
-                } else {
-                  buyLimit = balanceLimit.sub(balance);
-                  routerC.functions.getAmountIn(buyLimit, rI, rO)
-                  .then(function (args) {
-                    maxbuyBal = args[0];
-                    maxbuyBal = BNB(maxbuyBal);
-                    
-                    maxBuy = Math.min(maxBuyLiq, maxbuyBal);
-                    
-                    displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
-                  });
-                }
-              });
-            });
-          });
-        });
-      });
-	  
+    
+    maxBuyLiq = rI.div(10); // 10% of current liquidity
+    maxBuyLiq = BNB(maxBuyLiq);
+    totalSupply = await upfinityC.functions.totalSupply()[0];
+    
+    balance = await upfinityC.functions.balanceOf(currentAccount)[0];
+    balancePercentage = round(balance / totalSupply * 100, 2);
+    displayText("balanceStatus", balancePercentage.toString() + ' %');
+    
+    balanceLimit = totalSupply.div(100); // 1% of total supply
+    
+    if (balanceLimit <= balance) { // already max
+    } else {
+      buyLimit = balanceLimit.sub(balance);
+      maxBuyBal = await routerC.functions.getAmountIn(buyLimit, rI, rO)[0];
+      maxbuyBal = BNB(maxbuyBal);
+      
+      maxBuy = Math.min(maxBuyLiq, maxbuyBal);
+      
+      displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
+    }
+
 	  
       upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
       rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
