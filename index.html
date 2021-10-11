@@ -1180,9 +1180,7 @@ Thank you :)
       return;
     }
     
-    elem_ = document.getElementById("refLink");
-    elem_.innerHTML = refLinkPrefix + elem.value;
-    copyValue(elem_.innerHTML)
+    copyValue(refLinkPrefix + elem.value)
     
     x = document.getElementById("getRefLinkButton");
     x.value = "Copied";
