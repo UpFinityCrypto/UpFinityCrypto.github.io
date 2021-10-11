@@ -1082,6 +1082,24 @@ Thank you :)
     return round(value / bnbDiv, 8);
   }
   
+  function abbreviateNumber(value) {
+    var newValue = value;
+    if (value >= 1000) {
+        var suffixes = ["", "K", "M", "B", "T", "Q"];
+        var suffixNum = Math.floor( (""+value).length/3 );
+        var shortValue = '';
+        for (var precision = 2; precision >= 1; precision--) {
+            shortValue = parseFloat( (suffixNum != 0 ? (value / Math.pow(1000,suffixNum) ) : value).toPrecision(precision));
+            var dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
+            if (dotLessShortValue.length <= 2) { break; }
+        }
+        if (shortValue % 1 != 0)  shortValue = shortValue.toFixed(2);
+        newValue = shortValue+suffixes[suffixNum];
+    }
+    return newValue;
+}
+
+
   function handleChainChanged(_chainId) {
     // Reload the page
     window.location.reload();
@@ -1458,10 +1476,10 @@ Thank you :)
     
     balanceData = await upfinityC.functions.balanceOf(currentAccount)
     balance = balanceData[0];
-    <!-- displayText("balanceStatus", round(balaKnce.div(1e6) / 1e18, 3).toString()); -->
+    displayText("balanceStatus", abbreviateNumber(Math.floor(balance / 1e18)));
     
     balancePercentage = round(balance / totalSupply * 100, 2);
-    displayText("balancePercentageStatus", balancePercentage.toString() + ' %');
+    displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
     
     balanceLimit = totalSupply.div(100); // 1% of total supply
     
