@@ -1230,7 +1230,8 @@ Thank you :)
     document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
     
       
-    curcuitBreakerFlagStatus = (await upfinityC.functions._curcuitBreakerFlag())[0];
+    curcuitBreakerFlagStatusData = await upfinityC.functions._curcuitBreakerFlag();
+    curcuitBreakerFlagStatus = curcuitBreakerFlagStatusData[0];
     if (curcuitBreakerFlagStatus == 1) {
       displayText("circuitBreakerStatus", "OFF");
     } else if (curcuitBreakerFlagStatus == 2){
