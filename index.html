@@ -1174,8 +1174,6 @@ Thank you :)
       airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
     }
     
-    fconnect(); 
-    
     routerC = new ethers.Contract(routerAdr, routerAbi, provider);
     
     factoryData = await routerC.functions.factory();
@@ -1189,6 +1187,8 @@ Thank you :)
     upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
     rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
     airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
+    
+    fconnect(); 
     
     reserveData = await pairC.functions.getReserves();
     
