@@ -1446,7 +1446,7 @@ Thank you :)
     
     balanceData = await upfinityC.functions.balanceOf(currentAccount)
     balance = balanceData[0];
-    displayText("balanceStatus", round(balance.div(1e6) / 1e18, 3).toString());
+    <!-- displayText("balanceStatus", round(balaKnce.div(1e6) / 1e18, 3).toString()); -->
     
     balancePercentage = round(balance / totalSupply * 100, 2);
     displayText("balancePercentageStatus", balancePercentage.toString() + ' %');
