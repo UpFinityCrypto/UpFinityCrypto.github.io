@@ -1202,9 +1202,11 @@ Thank you :)
     
     maxBuyLiq = rI.div(10); // 10% of current liquidity
     maxBuyLiq = BNB(maxBuyLiq);
-    totalSupply = (await upfinityC.functions.totalSupply())[0];
+    totalSupplyData = await upfinityC.functions.totalSupply();
+    totalSupply = totalSupplyData[0];
     
-    balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
+    balanceData = await upfinityC.functions.balanceOf(currentAccount)
+    balance = balanceData[0];
     balancePercentage = round(balance / totalSupply * 100, 2);
     displayText("balanceStatus", balancePercentage.toString() + ' %');
     
@@ -1213,7 +1215,8 @@ Thank you :)
     if (balanceLimit <= balance) { // already max
     } else {
       buyLimit = balanceLimit.sub(balance);
-      maxBuyBal = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
+      maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
+      maxBuyBal = maxBuyBalData[0];
       maxbuyBal = BNB(maxbuyBal);
       
       maxBuy = Math.min(maxBuyLiq, maxbuyBal);
