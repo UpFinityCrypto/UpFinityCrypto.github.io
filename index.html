@@ -1097,8 +1097,11 @@ Thank you :)
         newValue = shortValue+suffixes[suffixNum];
     }
     return newValue;
-}
-
+  }
+  
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   function handleChainChanged(_chainId) {
     // Reload the page
@@ -1476,7 +1479,7 @@ Thank you :)
     
     balanceData = await upfinityC.functions.balanceOf(currentAccount)
     balance = balanceData[0];
-    displayText("balanceStatus", abbreviateNumber(Math.floor(balance / 1e18)));
+    displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
     
     balancePercentage = round(balance / totalSupply * 100, 2);
     displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
