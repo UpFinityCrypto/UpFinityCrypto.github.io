@@ -570,29 +570,35 @@
           <div class="col-lg-6 text-justify content">
             <h3>How to use (Coming Soon)</h3>
             <ul>
-                <li><i class="bi bi-chevron-right"></i> Connect your wallet.</li>
-                <li><i class="bi bi-chevron-right"></i> Click airdrop option you like (can do only 1 time)</li>
-                <li><i class="bi bi-chevron-right"></i> Will be sent to you instantly and be locked until 21.12.07</li>
+                <li><i class="bi bi-chevron-right"></i>Connect your wallet.</li>
+                <li><i class="bi bi-chevron-right"></i>Click airdrop option you like</li>
+                <li><i class="bi bi-chevron-right"></i><span>Can do only 1 time</span></li>
+                <li><i class="bi bi-chevron-right"></i>Will be sent to you instantly and be locked until 21.12.07</li>
             </ul>
             <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"></div>
                 <div id="referralAdrDisplay"></div>
-				<h4>Make Referral Link</h4>
-				<p>Spread your link to get 5% Referral Bonus!</p>
-				<form action="" method="post">
-				  <input type="email" id="typedAdr" placeholder="Type Your Wallet Address here">
-				  <input type="submit" id="getRefLinkButton" value="Make Link" onclick="getRefLink()">
-				</form>
-                <br><span id="wallet-message-container" class="fst-italic">We currently only support metamask. Upcoming support for wallet connect and trust wallet.</span>
             </div>
+            
+            
+            <h4>Make Referral Link</h4>
+            <p>Spread your link to get 5% Referral Bonus!</p>
+            <form action="" method="post">
+              <input type="email" id="typedAdr" placeholder="Type Your Wallet Address here">
+              <input type="submit" id="getRefLinkButton" value="Make Link" onclick="getRefLink()">
+            </form>
+            
+            <span id="wallet-message-container" class="fst-italic">We currently only support metamask. Upcoming support for wallet connect and trust wallet.</span>
+            
           </div>
+          
           <div class="col-lg-6 text-justify content">
             <div class="row mt-5">
               <div class="social-links">
                   <h6>
-					Free!
-                    <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(1)">1$ Airdrop</a>
+					Get 1$ Free Tokens!
+                    <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(1)">Free Airdrop</a>
                   </h6>
               </div>
               <div class="social-links">
