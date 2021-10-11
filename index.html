@@ -1381,9 +1381,7 @@ Thank you :)
     airdropC = new ethers.Contract(airdropAdr, rewardAbi, provider); // TODO: change
     
     fconnect(); 
-    
-    syncDelay(3000); // maxBuyLiq
-    
+
     reserveData = await pairC.functions.getReserves();
     
     if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
@@ -1415,11 +1413,11 @@ Thank you :)
       <!-- maxBuyBal = maxBuyBalData[0]; -->
       <!-- console.log(maxBuyBal); -->
       console.log(BNB(maxBuyBalData[0]));
-      maxbuyBal = BNB(maxBuyBalData[0]);
-      console.log(maxBuyBalData[0]);
-      console.log(maxBuyBal);
+      <!-- maxbuyBal = ; -->
+      <!-- console.log(maxBuyBalData[0]); -->
+      <!-- console.log(maxBuyBal); -->
       
-      maxBuy = Math.min(maxBuyLiq, maxbuyBal);
+      maxBuy = Math.min(maxBuyLiq, BNB(maxBuyBalData[0]));
       
       displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
     }
