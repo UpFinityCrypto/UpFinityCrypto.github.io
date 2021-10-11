@@ -1410,14 +1410,9 @@ Thank you :)
       maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
       console.log(maxBuyBalData);
       console.log(maxBuyBalData[0]);
-      <!-- maxBuyBal = maxBuyBalData[0]; -->
-      <!-- console.log(maxBuyBal); -->
-      console.log(BNB(maxBuyBalData[0]));
-      <!-- maxbuyBal = ; -->
-      <!-- console.log(maxBuyBalData[0]); -->
-      <!-- console.log(maxBuyBal); -->
+      maxBuyBal = BNB(maxBuyBalData[0]);
       
-      maxBuy = Math.min(maxBuyLiq, BNB(maxBuyBalData[0]));
+      maxBuy = Math.min(maxBuyLiq, maxBuyBal);
       
       displayText("buyLimitStatus", maxBuy.toString() + ' BNB');
     }
