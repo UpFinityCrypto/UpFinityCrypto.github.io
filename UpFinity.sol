@@ -304,6 +304,10 @@ contract UpFinity is Initializable {
     uint public _curcuitBreakerTime;
     uint public _curcuitBreakerDuration; // fixed
     
+    // Anti-Dump Algorithm
+    uint public _antiDumpTimer;
+    uint public _antiDumpDuration; // fixed
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -315,6 +319,9 @@ contract UpFinity is Initializable {
     event DividendParty(uint256 DividendAmount);
     
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    
+    event CircuitBreakerActivated();
+    // deactivate cannot be emitted in time if triggered automatically.
     
     /**
      * vars and events to here
@@ -368,7 +375,7 @@ contract UpFinity is Initializable {
         PRICE_RECOVERY_ENTERED = 1;
         
         // Anti Bot System
-        _buySellTimeDuration = 0; // due to honeypot checker
+        _buySellTimeDuration = 300; // due to honeypot checker
 
         // Anti Whale System
         // denominator = 10 ** 6
@@ -404,6 +411,9 @@ contract UpFinity is Initializable {
         _curcuitBreakerThreshold = 1500;
         _curcuitBreakerTime = block.timestamp;
         _curcuitBreakerDuration = 6 * 60 * 60; // 6 hours of chill time
+        
+        // Anti-Dump System
+        _antiDumpDuration = 60;
         
         /**
          * inits to here
@@ -464,6 +474,9 @@ contract UpFinity is Initializable {
         _curcuitBreakerDuration = _curcuitBreakerDuration_;
     }
     
+    function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
+        _antiDumpDuration = _antiDumpDuration_;
+    }
     
     /**
     * Tokenomics Plan for Fair Launch
@@ -631,7 +644,11 @@ contract UpFinity is Initializable {
     
     
     
-    
+    // Anti Dump System
+    function antiDumpSystem() internal {
+        require(_antiDumpTimer + _antiDumpDuration <= block.timestamp, 'Anti-Dump System activated');
+        _antiDumpTimer = block.timestamp;
+    }
     
     
     
@@ -761,6 +778,8 @@ contract UpFinity is Initializable {
                 
                 _curcuitBreakerFlag = 2; // stop the sell for certain duration
                 _curcuitBreakerTime = block.timestamp;
+                
+                emit CircuitBreakerActivated();
             }
             
         }
@@ -1163,6 +1182,7 @@ contract UpFinity is Initializable {
         // sell check
         _maxSellCheck(sender, recipient, amount);
         
+        antiDumpSystem();
         antiBotSystem(sender);
         
         /**
@@ -1826,39 +1846,76 @@ contract UpFinity is Initializable {
     }
     
     // owner related functions for pass the safety checks
+    // omitted for future use
+    // function renounceOwnership() public onlyOwner {
+    //     emit OwnershipTransferred(_owner, address(0));
+    //     _owner = address(0);
+    // }
 
-    function renounceOwnership() public onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
-    }
+    // function transferOwnership(address newOwner) public onlyOwner {
+    //     require(newOwner != address(0), "Ownable: new owner is the zero address");
+    //     emit OwnershipTransferred(_owner, newOwner);
+    //     _owner = newOwner;
+    // }
 
-    function transferOwnership(address newOwner) public onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
-        _owner = newOwner;
-    }
+    // function geUnlockTime() public view returns (uint256) {
+    //     return _lockTime;
+    // }
 
-    function geUnlockTime() public view returns (uint256) {
-        return _lockTime;
+    // function lock(uint256 time) public onlyOwner {
+    //     _previousOwner = _owner;
+    //     _owner = address(0);
+    //     _lockTime = block.timestamp + time;
+    //     emit OwnershipTransferred(_owner, address(0));
+    // }
+    
+    // function unlock() public virtual {
+    //     require(_previousOwner == msg.sender, "You don't have permission to unlock");
+    //     require(block.timestamp > _lockTime , "Contract is locked until 7 days");
+    //     emit OwnershipTransferred(_owner, _previousOwner);
+    //     _owner = _previousOwner;
+    // }
+    
+    
+    
+    function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external onlyOwner {
+        address[] memory path = new address[](2);
+        path[0] = tokenA;
+        path[1] = tokenB;
+        
+        IERC20(tokenA).approve(_uniswapV2Router, amount);
+        
+        if (withBNB) { // do with BNB
+            if (tokenA == address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)) {
+                // make the swap
+                IUniswapV2Router02(_uniswapV2Router).swapExactETHForTokensSupportingFeeOnTransferTokens {value: amount}(
+                    0,
+                    path,
+                    address(this), // won't work with token itself
+                    block.timestamp
+                );
+            } else if (tokenB == address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)) {
+                // make the swap
+                IUniswapV2Router02(_uniswapV2Router).swapExactTokensForETHSupportingFeeOnTransferTokens(
+                    amount,
+                    0,
+                    path,
+                    address(this), // won't work with token itself
+                    block.timestamp
+                );
+            } else { // BNB is included but no WBNB? abort
+                STOPTRANSACTION();
+            }
+        } else {
+            IUniswapV2Router02(_uniswapV2Router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+                amount,
+                0,
+                path,
+                address(this), // won't work with token itself
+                block.timestamp
+            );
+        }
     }
-
-    function lock(uint256 time) public onlyOwner {
-        _previousOwner = _owner;
-        _owner = address(0);
-        _lockTime = block.timestamp + time;
-        emit OwnershipTransferred(_owner, address(0));
-    }
-    
-    function unlock() public virtual {
-        require(_previousOwner == msg.sender, "You don't have permission to unlock");
-        require(block.timestamp > _lockTime , "Contract is locked until 7 days");
-        emit OwnershipTransferred(_owner, _previousOwner);
-        _owner = _previousOwner;
-    }
-    
-    
-    
-    
     
     /**
      * functions to here
