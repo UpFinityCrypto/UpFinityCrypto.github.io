@@ -1173,7 +1173,9 @@ Thank you :)
       rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
       airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
     }
-        
+    
+    fconnect(); 
+    
     routerC = new ethers.Contract(routerAdr, routerAbi, provider);
     
     factoryData = await routerC.functions.factory();
@@ -1234,7 +1236,7 @@ Thank you :)
       displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
     }
     
-    fconnect(); 
+    
   }
   
   ////////////////////////////////////////////////////////////////////
