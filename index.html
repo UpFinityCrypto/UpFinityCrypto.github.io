@@ -1447,8 +1447,10 @@ Thank you :)
     
     balanceData = await upfinityC.functions.balanceOf(currentAccount)
     balance = balanceData[0];
+    displayText("balanceStatus", round(balance.div(1e6).div(1e18), 3).toString());
+    
     balancePercentage = round(balance / totalSupply * 100, 2);
-    displayText("balanceStatus", balancePercentage.toString() + ' %');
+    displayText("balancePercentageStatus", balancePercentage.toString() + ' %');
     
     balanceLimit = totalSupply.div(100); // 1% of total supply
     
