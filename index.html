@@ -578,7 +578,6 @@
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"></div>
                 <div id="referralAdrDisplay"></div>
-                <p id="refLink"></p>
 				<h4>Make Referral Link</h4>
 				<p>Spread your link to get 5% Referral Bonus!</p>
 				<form action="" method="post">
@@ -1181,7 +1180,7 @@ Thank you :)
     copyValue(elem_.innerHTML)
     
     x = document.getElementById("getRefLinkButton");
-    x.innerHTML = "Copied";
+    x.value = "Copied";
     <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
   }
 
@@ -1414,8 +1413,6 @@ Thank you :)
     } else {
       buyLimit = balanceLimit.sub(balance);
       maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
-      console.log(maxBuyBalData);
-      console.log(maxBuyBalData[0]);
       maxBuyBal = BNB(maxBuyBalData[0]);
       
       maxBuy = Math.min(maxBuyLiq, maxBuyBal);
