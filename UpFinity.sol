@@ -308,6 +308,9 @@ contract UpFinity is Initializable {
     uint public _antiDumpTimer;
     uint public _antiDumpDuration; // fixed
     
+    // Minus Tax Bonus
+    uint public _minusTaxBonus; // fixed
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -335,139 +338,172 @@ contract UpFinity is Initializable {
         _;
     }
     
-    function initialize(address owner_) public initializer {
-        _owner = owner_;
-        /**
-         * inits from here
-         **/
+    // function initialize(address owner_) public initializer {
+    //     _owner = owner_;
+    //     /**
+    //      * inits from here
+    //      **/
         
-        _name = "UpFinity";
-        _symbol = "UPF";
-        _decimals = 18;
+    //     _name = "UpFinity";
+    //     _symbol = "UPF";
+    //     _decimals = 18;
         
-        MAX = ~uint256(0);
-        _tTotal = 10 * 10**12 * 10**_decimals;
-        _rTotal = (MAX - (MAX % _tTotal));
+    //     MAX = ~uint256(0);
+    //     _tTotal = 10 * 10**12 * 10**_decimals;
+    //     _rTotal = (MAX - (MAX % _tTotal));
         
+    //     _minusTaxBonus = 100;
         
+    //     // before price recovery fee
+    //     _liquidityFee = 300; // should be considered half for bnb/upfinity
+    //     _improvedRewardFee = 300;
+    //     _projectFundFee = 300;
+    //     _dipRewardFee = 100;
+    //     _manualBuyFee = 400;
+    //     _autoBurnFee = 50;
         
-        uint sellFee = 2000;
+    //     uint sellFee = 2000;
         
+    //     _priceRecoveryFee = sellFee
+    //     .sub(_manualBuyFee)
+    //     .sub(_autoBurnFee); // 1550
         
-        // before price recovery fee
-        _liquidityFee = 100;
-        _improvedRewardFee = 300;
-        _projectFundFee = 300;
-        _dipRewardFee = 100;
-        _manualBuyFee = 400;
-        _autoBurnFee = 50;
+    //     // calculate except burn / minustax part
+    //     // buyingFee = 2000 - _manualBuyFee = 1600
+    //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * 0.01 = 1550 - 8400 * 0.01 = 1550 - (84) = 1466
+    
+    //     // sub minustax part
+    //     // bnbFee = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee = 1000
+    //     // yFee - bnbFee - bnbFee * 0.01 = 1466 - 1000 - (10) = 456
+    
+    //     // so the caclulation,
+    //     // _minusTaxFee = 84 + 10 = 94
+    //     // _redistributionFee = 456 - _liquidityFee = 456 - 300 = 156
         
-        _priceRecoveryFee = sellFee
-        .sub(_manualBuyFee)
-        .sub(_autoBurnFee);
+    //     PRICE_RECOVERY_ENTERED = 1;
         
-        
-        // check with balance increase, minimum 4.2%
-        // _minusTaxFee
-        // redistribute with leftovers, minimum 2.9%
-        // _redistributionFee;
-        
-        PRICE_RECOVERY_ENTERED = 1;
-        
-        // Anti Bot System
-        _buySellTimeDuration = 300; // due to honeypot checker
+    //     // Anti Sell System
+    //     _buySellTimeDuration = 300;
 
-        // Anti Whale System
-        // denominator = 10 ** 6
-        // whale transfer / sell amount 1% of the token amount in the liquidity pool
-        // so default is 10 ** 4
-        // whale transfer will be charged 1% tax of initial amount
-        // so default is 10 ** 4
-        // whale sell will be charged 3% tax of initial amount
-        // so default is 3 * 10 ** 4
-        _whaleRate = 10 ** 4;
-        _whaleTransferFee = 2 * 10 ** 4;
-        _whaleSellFee = 4 * 10 ** 4;
+    //     // Anti Whale System
+    //     // denominator = 10 ** 6
+    //     // whale transfer / sell amount 1% of the token amount in the liquidity pool
+    //     // so default is 10 ** 4
+    //     // whale transfer will be charged 1% tax of initial amount
+    //     // so default is 10 ** 4
+    //     // whale sell will be charged 3% tax of initial amount
+    //     // so default is 3 * 10 ** 4
+    //     _whaleRate = 10 ** 4;
+    //     _whaleTransferFee = 2 * 10 ** 4;
+    //     _whaleSellFee = 4 * 10 ** 4;
         
-        // Dividend Party
-        _dividendPartyPortion = 500;
-        _dividendPartyThreshold = 9876543210 * 10**_decimals; // clear to look
+    //     // Dividend Party
+    //     // _dividendPartyPortion = 500;
+    //     _dividendPartyThreshold = 9876543210 * 10**_decimals; // clear to look
         
-        // Max Variables
-        _maxTxNume = 1000;
-        _maxSellNume = 300;
-        _maxBalanceNume = 110;
+    //     // Max Variables
+    //     _maxTxNume = 1000;
+    //     _maxSellNume = 300;
+    //     _maxBalanceNume = 110;
         
-        // Accumulated Tax System
-        DAY = 24 * 60 * 60;
-        _accuTaxTimeWindow = DAY; // TODO: DAY in mainnet
-        _accuMulFactor = 2; // 10% tax if 5% price impact
+    //     // Accumulated Tax System
+    //     DAY = 24 * 60 * 60;
+    //     _accuTaxTimeWindow = DAY; // TODO: DAY in mainnet
+    //     _accuMulFactor = 2; // 10% tax if 5% price impact
         
-        // Accumulated Tax System
-        _taxAccuTaxThreshold = 300;
+    //     // Accumulated Tax System
+    //     _taxAccuTaxThreshold = 300;
         
-        // Circuit Breaker
-        _curcuitBreakerFlag = 1;
-        _curcuitBreakerThreshold = 1500;
-        _curcuitBreakerTime = block.timestamp;
-        _curcuitBreakerDuration = 6 * 60 * 60; // 6 hours of chill time
+    //     // Circuit Breaker
+    //     _curcuitBreakerFlag = 1;
+    //     _curcuitBreakerThreshold = 1500;
+    //     _curcuitBreakerTime = block.timestamp;
+    //     _curcuitBreakerDuration = 6 * 60 * 60; // 6 hours of chill time
         
-        // Anti-Dump System
-        _antiDumpDuration = 60;
+    //     // Anti-Dump System
+    //     _antiDumpDuration = 60;
         
-        /**
-         * inits to here
-         **/
+    //     /**
+    //      * inits to here
+    //      **/
          
-    }
+    // }
     
     function setUptest(uint uptest_) external {
         _uptest = uptest_;
     }
 
-    function setToken(address token_) external onlyOwner {
+    function setToken(address token_) external onlyOwner { // test purpose
         _token = token_;
     }
-    function setMyRouterSystem(address myRouterSystem_) external onlyOwner {
-        _myRouterSystem = myRouterSystem_;
-    }  
-    function setMinusTaxSystem(address minusTaxSystem_) external onlyOwner {
-        _minusTaxSystem = minusTaxSystem_;
-    }
-    function setRewardSystem(address rewardSystem_) external onlyOwner {
-        _rewardSystem = rewardSystem_;
-    }
-    function setMarketingFund(address marketingFund_) external onlyOwner {
-        _projectFund = marketingFund_;
-    }
-    function setRewardToken(address rewardToken_) external onlyOwner {
-        _rewardToken = rewardToken_;
-    }
+    // function setMyRouterSystem(address myRouterSystem_) external onlyOwner {
+    //     _myRouterSystem = myRouterSystem_;
+    // }  
+    // function setMinusTaxSystem(address minusTaxSystem_) external onlyOwner {
+    //     _minusTaxSystem = minusTaxSystem_;
+    // }
+    // function setRewardSystem(address rewardSystem_) external onlyOwner {
+    //     _rewardSystem = rewardSystem_;
+    // }
+    // function setMarketingFund(address marketingFund_) external onlyOwner {
+    //     _projectFund = marketingFund_;
+    // }
+    // function setRewardToken(address rewardToken_) external onlyOwner {
+    //     _rewardToken = rewardToken_;
+    // }
     
     /**
      * functions from here
      **/
     
-    function setBuySellTimeDuration(uint buySellTimeDuration_) external onlyOwner {
-      _buySellTimeDuration = buySellTimeDuration_;
+    
+    function setFeeVars(
+    uint _minusTaxBonus_,
+    uint _liquidityFee_, 
+    uint _improvedRewardFee_, 
+    uint _projectFundFee_, 
+    uint _dipRewardFee_,
+    uint _manualBuyFee_,
+    uint _autoBurnFee_
+    ) external onlyOwner {
+        // before price recovery fee
+        
+        _minusTaxBonus = _minusTaxBonus_;
+        
+        _liquidityFee = _liquidityFee_;
+        _improvedRewardFee = _improvedRewardFee_;
+        _projectFundFee = _projectFundFee_;
+        _dipRewardFee = _dipRewardFee_;
+        _manualBuyFee = _manualBuyFee_;
+        _autoBurnFee = _autoBurnFee_;
+        
+        uint sellFee = 2000;
+        
+        _priceRecoveryFee = sellFee
+        .sub(_manualBuyFee)
+        .sub(_autoBurnFee);
     }
     
-    function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
-        _dividendPartyPortion = dividendPartyPortion_;
-        _dividendPartyThreshold = dividendPartyThreshold_;
-    }
+    // function setBuySellTimeDuration(uint buySellTimeDuration_) external onlyOwner {
+    //   _buySellTimeDuration = buySellTimeDuration_;
+    // }
     
-    function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external onlyOwner {
-        _maxTxNume = _maxTxNume_;
-        _maxSellNume = _maxSellNume_;
-        _maxBalanceNume = _maxBalanceNume_;
-    }
+    // function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
+    //     _dividendPartyPortion = dividendPartyPortion_;
+    //     _dividendPartyThreshold = dividendPartyThreshold_;
+    // }
+    
+    // function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external onlyOwner {
+    //     _maxTxNume = _maxTxNume_;
+    //     _maxSellNume = _maxSellNume_;
+    //     _maxBalanceNume = _maxBalanceNume_;
+    // }
 
-    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external onlyOwner {
-        _accuTaxTimeWindow = _accuTaxTimeWindow_;
-        _accuMulFactor = _accuMulFactor_;
-        _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
-    }
+    // function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external onlyOwner {
+    //     _accuTaxTimeWindow = _accuTaxTimeWindow_;
+    //     _accuMulFactor = _accuMulFactor_;
+    //     _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
+    // }
     
     function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external onlyOwner {
         _curcuitBreakerThreshold = _curcuitBreakerThreshold_;
@@ -496,45 +532,45 @@ contract UpFinity is Initializable {
     * Listing Price: 1T Token = 0.1 BNB 
     **/
          
-    // inits
-    function runInit() external onlyOwner {
-        require(_uniswapV2Pair == address(0), 'Already Initialized');
+    // // inits
+    // function runInit() external onlyOwner {
+    //     require(_uniswapV2Pair == address(0), 'Already Initialized');
         
-        // Initialize
-        _rOwned[_owner] = _rTotal;
-        emit Transfer(address(0), _owner, _tTotal);
+    //     // Initialize
+    //     _rOwned[_owner] = _rTotal;
+    //     emit Transfer(address(0), _owner, _tTotal);
   
-        // 50% burn
-        _tokenTransfer(_owner, address(0x000000000000000000000000000000000000dEaD), _tTotal.mul(5000).div(10000));
+    //     // 50% burn
+    //     _tokenTransfer(_owner, address(0x000000000000000000000000000000000000dEaD), _tTotal.mul(5000).div(10000));
         
-        // 40% liquidity will be done after init
-        // 2% Minus Tax System (5% bonus)
-        _tokenTransfer(_owner, _minusTaxSystem, _tTotal.mul(200).div(10000));
+    //     // 40% liquidity will be done after init
+    //     // 2% Minus Tax System (5% bonus)
+    //     _tokenTransfer(_owner, _minusTaxSystem, _tTotal.mul(200).div(10000));
         
-        _uniswapV2Router = address(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+    //     _uniswapV2Router = address(0x10ED43C718714eb63d5aA57B78B54704E256024E);
         
-        _uniswapV2Pair = IUniswapV2Factory(address(0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73))
-            .createPair(address(this), address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c));
+    //     _uniswapV2Pair = IUniswapV2Factory(address(0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73))
+    //         .createPair(address(this), address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c));
 
-        // pancakeswap router have full token control of my router
-        _approve(_myRouterSystem, _uniswapV2Router, ~uint256(0));
+    //     // pancakeswap router have full token control of my router
+    //     _approve(_myRouterSystem, _uniswapV2Router, ~uint256(0));
         
-        // more redistribution goes to investors
-        // exclude pair for getting distribution to make token price stable
-        excludeFromReward(_uniswapV2Pair);
-        // also for the minus tax system for consistency
-        excludeFromReward(_minusTaxSystem);
+    //     // more redistribution goes to investors
+    //     // exclude pair for getting distribution to make token price stable
+    //     excludeFromReward(_uniswapV2Pair);
+    //     // also for the minus tax system for consistency
+    //     excludeFromReward(_minusTaxSystem);
         
-        // zero / burn address will get redistribution
-        // it will work as a auto burn, which will help the deflation
-        // excludeFromReward(address(0x0000000000000000000000000000000000000000));
-        // excludeFromReward(address(0x000000000000000000000000000000000000dEaD));
+    //     // zero / burn address will get redistribution
+    //     // it will work as a auto burn, which will help the deflation
+    //     // excludeFromReward(address(0x0000000000000000000000000000000000000000));
+    //     // excludeFromReward(address(0x000000000000000000000000000000000000dEaD));
         
-        // preparation for the improved reward
-        IMyReward(_rewardSystem).approveWBNBToken();
-        IMyReward(_rewardSystem).approveRewardToken();
-        IERC20(address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)).approve(_uniswapV2Router, ~uint256(0));
-    }
+    //     // preparation for the improved reward
+    //     IMyReward(_rewardSystem).approveWBNBToken();
+    //     IMyReward(_rewardSystem).approveRewardToken();
+    //     IERC20(address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)).approve(_uniswapV2Router, ~uint256(0));
+    // }
     
     
     function addBlacklist(address adr) external onlyOwner {
@@ -597,27 +633,27 @@ contract UpFinity is Initializable {
     
     
     
-    function excludeFromReward(address account) public onlyOwner {
-        require(!_isExcluded[account], "Account is already excluded");
-        if(_rOwned[account] > 0) {
-            _tOwned[account] = tokenFromReflection(_rOwned[account]);
-        }
-        _isExcluded[account] = true;
-        _excluded.push(account);
-    }
+    // function excludeFromReward(address account) public onlyOwner {
+    //     require(!_isExcluded[account], "Account is already excluded");
+    //     if(_rOwned[account] > 0) {
+    //         _tOwned[account] = tokenFromReflection(_rOwned[account]);
+    //     }
+    //     _isExcluded[account] = true;
+    //     _excluded.push(account);
+    // }
     
-    function includeToReward(address account) public onlyOwner {
-        require(_isExcluded[account], "Account is not excluded");
-        for (uint256 i = 0; i < _excluded.length; i++) {
-            if (_excluded[i] == account) {
-                _excluded[i] = _excluded[_excluded.length - 1];
-                _tOwned[account] = 0;
-                _isExcluded[account] = false;
-                _excluded.pop();
-                break;
-            }
-        }
-    }
+    // function includeToReward(address account) public onlyOwner {
+    //     require(_isExcluded[account], "Account is not excluded");
+    //     for (uint256 i = 0; i < _excluded.length; i++) {
+    //         if (_excluded[i] == account) {
+    //             _excluded[i] = _excluded[_excluded.length - 1];
+    //             _tOwned[account] = 0;
+    //             _isExcluded[account] = false;
+    //             _excluded.pop();
+    //             break;
+    //         }
+    //     }
+    // }
     
     
     // allowances
@@ -1111,8 +1147,8 @@ contract UpFinity is Initializable {
                 
             // WELCOME BUYERS :))))
             
-            // 10% BONUS
-            _tokenTransfer(_minusTaxSystem, recipient, amount.mul(500).div(10000));
+            // x% BONUS
+            _tokenTransfer(_minusTaxSystem, recipient, amount.mul(_minusTaxBonus).div(10000));
             
             // Dip Reward bonus
             _dipRewardTransfer(recipient, amount);
@@ -1452,10 +1488,11 @@ contract UpFinity is Initializable {
                     isDividendParty = true;
                     
                     {
+                        // calculate except burn / minustax part
                         uint totalFee = 10000;
                         uint sellFee = 2000;
                         uint buyingFee = sellFee.sub(_manualBuyFee);
-                        deno_ = buyingFee.sub(_autoBurnFee).sub((totalFee.sub(buyingFee)).div(20));
+                        deno_ = buyingFee.sub(_autoBurnFee).sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
                         redistributionFee_ = deno_;
                     }
                     
@@ -1501,8 +1538,11 @@ contract UpFinity is Initializable {
                         // SENDBNB(address(this), liquidityEthAmount);
                         
                     }
+                    
+                    // sub minustax part
+                    
                     redistributionFee_ = redistributionFee_.sub(bnbFee);
-                    redistributionFee_ = redistributionFee_.sub(bnbFee.div(20));
+                    redistributionFee_ = redistributionFee_.sub(bnbFee.mul(_minusTaxBonus).div(10000));
                     
                     emit DividendParty(contractEthAmount);
                 }
@@ -1878,44 +1918,44 @@ contract UpFinity is Initializable {
     
     
     
-    function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external onlyOwner {
-        address[] memory path = new address[](2);
-        path[0] = tokenA;
-        path[1] = tokenB;
+    // function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external onlyOwner {
+    //     address[] memory path = new address[](2);
+    //     path[0] = tokenA;
+    //     path[1] = tokenB;
         
-        IERC20(tokenA).approve(_uniswapV2Router, amount);
+    //     IERC20(tokenA).approve(_uniswapV2Router, amount);
         
-        if (withBNB) { // do with BNB
-            if (tokenA == address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)) {
-                // make the swap
-                IUniswapV2Router02(_uniswapV2Router).swapExactETHForTokensSupportingFeeOnTransferTokens {value: amount}(
-                    0,
-                    path,
-                    address(this), // won't work with token itself
-                    block.timestamp
-                );
-            } else if (tokenB == address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)) {
-                // make the swap
-                IUniswapV2Router02(_uniswapV2Router).swapExactTokensForETHSupportingFeeOnTransferTokens(
-                    amount,
-                    0,
-                    path,
-                    address(this), // won't work with token itself
-                    block.timestamp
-                );
-            } else { // BNB is included but no WBNB? abort
-                STOPTRANSACTION();
-            }
-        } else {
-            IUniswapV2Router02(_uniswapV2Router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
-                amount,
-                0,
-                path,
-                address(this), // won't work with token itself
-                block.timestamp
-            );
-        }
-    }
+    //     if (withBNB) { // do with BNB
+    //         if (tokenA == address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)) {
+    //             // make the swap
+    //             IUniswapV2Router02(_uniswapV2Router).swapExactETHForTokensSupportingFeeOnTransferTokens {value: amount}(
+    //                 0,
+    //                 path,
+    //                 address(this), // won't work with token itself
+    //                 block.timestamp
+    //             );
+    //         } else if (tokenB == address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c)) {
+    //             // make the swap
+    //             IUniswapV2Router02(_uniswapV2Router).swapExactTokensForETHSupportingFeeOnTransferTokens(
+    //                 amount,
+    //                 0,
+    //                 path,
+    //                 address(this), // won't work with token itself
+    //                 block.timestamp
+    //             );
+    //         } else { // BNB is included but no WBNB? abort
+    //             STOPTRANSACTION();
+    //         }
+    //     } else {
+    //         IUniswapV2Router02(_uniswapV2Router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+    //             amount,
+    //             0,
+    //             path,
+    //             address(this), // won't work with token itself
+    //             block.timestamp
+    //         );
+    //     }
+    // }
     
     /**
      * functions to here
@@ -1927,17 +1967,17 @@ contract UpFinity is Initializable {
     // something like someone put BNB in here, etc
     // I will pull those things when it happens
     
-    function balanceToken(address token) external view returns (uint) {
-        return IERC20(token).balanceOf(address(this));
-    }
+    // function balanceToken(address token) external view returns (uint) {
+    //     return IERC20(token).balanceOf(address(this));
+    // }
     
     // function getLeftoverToken(address token) external onlyOwner {
     //     IERC20(token).transfer(_owner, IERC20(token).balanceOf(address(this)));
     // }
     
-    function balanceBNB() external view returns (uint) {
-        return address(this).balance;
-    }
+    // function balanceBNB() external view returns (uint) {
+    //     return address(this).balance;
+    // }
     
     // function getLeftoverBNB() external onlyOwner {
     //     {
