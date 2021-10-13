@@ -44,6 +44,18 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
   text-transform: uppercase;
 }
 
+.buff {
+  color: #28a745;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.nerf {
+  color: #ea4817;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
