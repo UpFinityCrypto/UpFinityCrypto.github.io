@@ -724,7 +724,7 @@ contract UpFinity is Initializable {
             emit WhaleTransaction(amount, tax);
             
             uint whaleFee = amount.mul(tax).div(10 ** 6);
-            _tokenTransfer(sender, _projectFund, whaleFee);
+            _tokenTransfer(sender, address(this), whaleFee);
             return amount.sub(whaleFee);
         } else { // normal user movement
             return amount;
@@ -769,7 +769,7 @@ contract UpFinity is Initializable {
     // test with 1 min in testnet
     // Accumulated Tax System
     // personal and global
-    function accuTaxSystem(address adr, uint amount) internal returns (uint) { // TODO: make this as a template and divide with personal
+    function accuTaxSystem(address adr, uint amount, bool isSell) internal returns (uint) { // TODO: make this as a template and divide with personal
         uint r1 = balanceOf(_uniswapV2Pair);
         
         // global check first
@@ -844,7 +844,15 @@ contract UpFinity is Initializable {
                     _timeAccuTaxCheck[adr] = block.timestamp; // reset time
                 }
             }
-            amount = amount.sub(amount.mul(_taxAccuTaxCheck[adr]).div(10000)); // accumulate tax apply
+            
+            {
+                uint amountTax = amount.mul(_taxAccuTaxCheck[adr]).div(10000);
+                if (isSell) { // already send token to contract. no need to transfer. skip
+                } else {
+                    _tokenTransfer(adr, address(this), amountTax); // send tax to contract
+                }
+                amount = amount.sub(amountTax); // accumulate tax apply
+            }
         }
         
         return amount;
@@ -904,9 +912,9 @@ contract UpFinity is Initializable {
         .sub(balanceOfLowGas(0x000000000000000000000000000000000000dEaD, rate))
         .sub(balanceOfLowGas(_rewardSystem, rate))
         .sub(balanceOfLowGas(_minusTaxSystem, rate))
-        .sub(balanceOfLowGas(_uniswapV2Pair, rate));
+        .sub(balanceOfLowGas(_uniswapV2Pair, rate))
         // .sub(balanceOf(_owner)); // complicated if included. leave it.
-        // .sub(balanceOfLowGas(address(this), rate)) // should be done but exclude for gas save
+        .sub(balanceOfLowGas(address(this), rate));
         // .sub(balanceOfLowGas(_projectFund, rate)) // should be done but exclude for gas save
     }
     
@@ -962,7 +970,7 @@ contract UpFinity is Initializable {
         {
             address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
             uint balanceWBNB = IERC20(WBNB).balanceOf(_rewardSystem);
-            if (0 < balanceWBNB) { // [save gas] convert WBNB to reward token
+            if (10 ** 17 < balanceWBNB) { // [save gas] convert WBNB to reward token when 0.1 WBNB
                 
                 // pull WBNB to here to trade
                 IERC20(WBNB).transferFrom(_rewardSystem, address(this), balanceWBNB);
@@ -994,8 +1002,6 @@ contract UpFinity is Initializable {
             IERC20(_rewardToken).transferFrom(_rewardSystem, recipient, userBonus); // CAKE, BUSD, etc
         }
     }
-    
-    
     
     
     // LP manage System
@@ -1111,7 +1117,10 @@ contract UpFinity is Initializable {
             antiBotSystem(recipient);
         }
         
-        // whale transfer will be charged 1% tax of initial amount
+        // Accumulate Tax System
+        amount = accuTaxSystem(sender, amount, false);
+        
+        // whale transfer will be charged x% tax of initial amount
         amount = antiWhaleSystemToken(sender, amount, _whaleTransferFee);
         
         uint beforeUserTokenAmount = getUserTokenAmount();
@@ -1204,7 +1213,7 @@ contract UpFinity is Initializable {
         _tokenTransfer(sender, address(this), amount);
         
         // Accumulate Tax System
-        amount = accuTaxSystem(sender, amount);
+        amount = accuTaxSystem(sender, amount, true);
         
         // Activate Price Recovery System
         _transfer(address(this), recipient, amount);
@@ -1290,8 +1299,8 @@ contract UpFinity is Initializable {
         
         // Blacklisted Bot Sell will be heavily punished
         if (blacklisted[sender]) {
-            _tokenTransfer(sender, _owner, amount.mul(99).div(100));
-            amount = amount.div(100); // bot will get only 1% 
+            _tokenTransfer(sender, address(this), amount.mul(9999).div(10000));
+            amount = amount.mul(1).div(10000); // bot will get only 0.01% 
         }
         
         // Always leave a dust behind to use it in future events
@@ -1672,13 +1681,13 @@ contract UpFinity is Initializable {
         // WEAK CONDITION: do it first after all in/out process for the pair is done (so right after special trick)
         // check resulted token balance in pair
         {
-            // calculate required amount to make Minus Tax System to be 10% of pair balance
+            // calculate required amount to make Minus Tax System to be x% of pair balance
             uint pairAddedAmount = balanceOf(_uniswapV2Pair).sub(pairTokenAmount);
-            uint minusTaxAmount = pairAddedAmount.mul(500).div(10000) + 1;
+            uint minusTaxAmount = pairAddedAmount.mul(_minusTaxBonus).div(10000) + 1;
             
             
-            // this will make 5% equilibrium
-            _tokenTransfer(address(this), _minusTaxSystem, minusTaxAmount); // 5% + 1
+            // this will make x% equilibrium
+            _tokenTransfer(address(this), _minusTaxSystem, minusTaxAmount); // x% + 1
         }
  
  
@@ -1710,7 +1719,10 @@ contract UpFinity is Initializable {
     // Manual Buy System
     function manualBuy(uint amount, address to) external onlyOwner {
         // burn, token to here, token to project for airdrop
+
         swapEthForTokens(amount, to);
+        
+        
         // // workaround. send token back to here
         // uint buyedAmount = balanceOf(_rewardSystem);
         // _tokenTransfer(_rewardSystem, address(this), buyedAmount);
@@ -1785,6 +1797,10 @@ contract UpFinity is Initializable {
     
     function _tokenTransfer(address sender, address recipient, uint256 tAmount) internal {
         if (tAmount == 0) { // nothing to do
+            return;
+        }
+        
+        if (sender == recipient) { // sometimes it happens. do nothing :)
             return;
         }
         
