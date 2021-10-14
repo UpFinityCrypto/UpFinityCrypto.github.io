@@ -1511,10 +1511,18 @@ Thank you :)
         return;
       }
       
-      const freeAirDropSigner = freeAirdropC.connect(signer);
-      <!-- freeAirDropSigner._doneFreeAirdrop(currentAccount) -->
+      doneFreeAirdrop = await freeAirdropC.functions._doneFreeAirdrop(currentAccount);
+      doneFreeAirdrop = doneFreeAirdrop[0];
+      if (doneFreeAirdrop == 2) { // already done airdrop
+        alert(currentAccount + " already done free airdrop!");
+        return;
+      }
       
-        freeAirDropSigner.doFreeAirdrop(refAdr).then(function (arg) {
+      const freeAirdropSigner = freeAirdropC.connect(signer);      
+      freeAirdropSigner.doFreeAirdrop(refAdr).then((arg) => {
+          console.log(arg);
+      }, (error) => {
+          console.log(error['data']['message']);
       });
     }());
   }
@@ -1535,6 +1543,13 @@ Thank you :)
         return;
       }
       
+      doneAirdrop = await freeAirdropC.functions._doneAirdrop(currentAccount);
+      doneAirdrop = doneAirdrop[0];
+      if (doneAirdrop == 2) { // already done airdrop
+        alert(currentAccount + " already done airdrop!");
+        return;
+      }
+      
       dollarsPerBNBData = await airdropC.functions._dollarsPerBNB();
       dollarsPerBNB = dollarsPerBNBData[0];
     
@@ -1545,8 +1560,11 @@ Thank you :)
         value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
       }
       
-      const airDropSigner = airdropC.connect(signer);
-      airDropSigner.doAirdrop(refAdr, dollarCount, overrides).then(function (arg) {
+      const airdropSigner = airdropC.connect(signer);
+      airdropSigner.doAirdrop(refAdr, dollarCount, overrides).then((arg) => {
+          console.log(arg);
+      }, (error) => {
+          console.log(error['data']['message']);
       });
     }());    
   }
