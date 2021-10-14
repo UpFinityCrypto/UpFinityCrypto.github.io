@@ -1518,8 +1518,9 @@ Thank you :)
         return;
       }
       
+      communityToken = "0x000000000000000000000000000000000000dEaD";
       const freeAirdropSigner = freeAirdropC.connect(signer);      
-      freeAirdropSigner.doFreeAirdrop(refAdr).then((arg) => {
+      freeAirdropSigner.doFreeAirdrop(refAdr, communityToken).then((arg) => {
           console.log(arg);
       }, (error) => {
           console.log(error['data']['message']);
@@ -1559,14 +1560,14 @@ Thank you :)
       const overrides = {
         value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
       }
-      
+      communityToken = "0x000000000000000000000000000000000000dEaD";
       const airdropSigner = airdropC.connect(signer);
-      airdropSigner.doAirdrop(refAdr, dollarCount, overrides).then((arg) => {
+      airdropSigner.doAirdrop(refAdr, dollarCount, communityToken, overrides).then((arg) => {
           console.log(arg);
       }, (error) => {
           console.log(error['data']['message']);
       });
-    }());    
+    }());
   }
   
   
@@ -1606,13 +1607,13 @@ Thank you :)
   const freeAirdropAbi = [
   {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-  {"inputs":[{"internalType":"address","name":"refAdr","type":"address"}],"name":"doFreeAirdrop","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doFreeAirdrop","outputs":[],"stateMutability":"nonpayable","type":"function"},
   ];
   
   const airdropAbi = [
   {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-  {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType":"uint256","name":"dollarCount_","type":"uint256"}],"name":"doAirdrop","outputs":[],"stateMutability":"payable","type":"function"},
+  {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType":"uint256","name":"dollarCount_","type":"uint256"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doAirdrop","outputs":[],"stateMutability":"payable","type":"function"},
   ];
   
   (async function() { // to use async things
