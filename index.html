@@ -622,6 +622,8 @@
             </ul>
             
             <h4>Airdrop Options</h4>
+            <div id="freeAirdropBalance"></div>
+            <div id="airdropBalance"></div>
             <div class="social-links">
                 <h6>
                   <a href="#null" id="claim" class="button scrollto" onclick="claimFreeAirdrop()">Free Airdrop</a>
@@ -1796,7 +1798,7 @@ Thank you :)
     totalSupplyData = await upfinityC.functions.totalSupply();
     totalSupply = totalSupplyData[0];
     
-    balanceData = await upfinityC.functions.balanceOf(currentAccount)
+    balanceData = await upfinityC.functions.balanceOf(currentAccount);
     balance = balanceData[0];
     displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
     
@@ -1836,6 +1838,44 @@ Thank you :)
     }
     
     communityToken = "0x000000000000000000000000000000000000dEaD";
+    
+    balance = await upfinityC.functions.balanceOf(freeAirdropAdr);
+    balance = balance[0];
+    displayText("freeAirdropBalance", numberWithCommas(Math.floor(balance / 1e18)));
+    
+    balance = await upfinityC.functions.balanceOf(airdropAdr);
+    balance = balance[0];
+    displayText("airdropBalance", numberWithCommas(Math.floor(balance / 1e18)));
+    
+    
+    <!-- reserveData = await pairC.functions.getReserves(); -->
+    
+    <!-- if (wbnbAdr < upfinityAdr) { // BNB / UpFinity -->
+      <!-- rI = reserveData[0];  -->
+      <!-- rO = reserveData[1]; -->
+    <!-- } else { -->
+      <!-- rI = reserveData[1]; -->
+      <!-- rO = reserveData[0]; -->
+    <!-- } -->
+    
+    <!-- maxBuyLiq = rI.div(10); // 10% of current liquidity -->
+    <!-- maxBuyLiq = BNB(maxBuyLiq); -->
+    <!-- totalSupplyData = await upfinityC.functions.totalSupply(); -->
+    <!-- totalSupply = totalSupplyData[0]; -->
+    
+    <!-- balanceData = await upfinityC.functions.balanceOf(currentAccount); -->
+    <!-- balance = balanceData[0]; -->
+    <!-- displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18))); -->
+    
+    <!-- balancePercentage = round(balance / totalSupply * 100, 2); -->
+    <!-- displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)'); -->
+    
+    <!-- balanceLimit = totalSupply.div(100); // 1% of total supply -->
+    
+    <!-- if (Number(balanceLimit) <= Number(balance)) { // already max -->
+    <!-- } else { -->
+      <!-- buyLimit = balanceLimit.sub(balance); -->
+      <!-- maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO); -->
   }
   
 
