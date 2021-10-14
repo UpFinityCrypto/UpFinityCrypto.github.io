@@ -1512,7 +1512,9 @@ Thank you :)
       }
       
       const freeAirDropSigner = freeAirdropC.connect(signer);
-        freeAirDropSigner.doAirdrop(refAdr).then(function (arg) {
+      <!-- freeAirDropSigner._doneFreeAirdrop(currentAccount) -->
+      
+        freeAirDropSigner.doFreeAirdrop(refAdr).then(function (arg) {
       });
     }());
   }
@@ -1578,61 +1580,22 @@ Thank you :)
   ];
   
   const rewardAbi = [
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "user",
-          "type": "address"
-        }
-      ],
-      "name": "calBNB",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "claimBNB",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "name": "claimedBNB",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
+  {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"calBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"claimBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"claimedBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   ];
   
+  const freeAirdropAbi = [
+  {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"refAdr","type":"address"}],"name":"doFreeAirdrop","outputs":[],"stateMutability":"nonpayable","type":"function"},
+  ]
   
-  
+  const airdropAbi = [
+  {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType":"uint256","name":"dollarCount_","type":"uint256"}],"name":"doAirdrop","outputs":[],"stateMutability":"payable","type":"function"},
+  ]
   
   (async function() { // to use async things
 
@@ -1703,11 +1666,11 @@ Thank you :)
     if (chainId == 56) {
       console.log('mainnet');
       rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
-      airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
+      freeAirdropAdr = '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4';
+      airdropAdr = '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004';
     } else {
       console.log('testnet');
       rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
-      airdropAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5'; // TODO: change
     }
     
     routerC = new ethers.Contract(routerAdr, routerAbi, provider);
@@ -1722,7 +1685,8 @@ Thank you :)
     
     upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
     rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
-    <!-- airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider); // TODO: change -->
+    freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
+    airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
     
     fconnect(); 
 
