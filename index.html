@@ -615,6 +615,20 @@
             </form>
             
             <span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
+            
+            <h4>Referral Bonus</h4>
+            <div><span>5%</span> additional token will be sent to:</div>
+            <div id="referralAdrDisplay"></div>
+            <h4>Community Bonus</h4>
+            <div>If rugpulled community choose us for the next gem and supports us,</div>
+            <div>We will add bonus if they have that token more than 0</div>
+            <div>Bonus amount depends on the community volume and support, etc</div>
+            <div>Currently we support: SHIBCAKE (1%)</div>
+            <form action="">
+              <input type="text" id="typedCommunityAdr" placeholder="Type Token Address here">
+              <a id="getCommunityAdrButton" href="#null" class="button scrollto" onclick="getCommunityAdr()">Set Bonus</a>
+              <div id="displayCommunityAdrBonus"></div>
+            </form>
           </div>
           
           <div class="col-lg-6 text-justify content">
@@ -623,19 +637,8 @@
               <div>IF having trouble for anything, DM @ALLCOINLAB</div>
             </div>
             <div class="row mt-5">
-              <h6>Referral Bonus</h6>
-              <div><span>5%</span> additional token will be sent to:</div>
-              <div id="referralAdrDisplay"></div>
-              <h6>Community Bonus</h6>
-              <div>If rugpulled community choose us for the next gem and supports us,</div>
-              <div>We will add bonus if they have that token more than 0</div>
-              <div>Bonus amount depends on the community volume and support, etc</div>
-              <div>Currently we support: SHIBCAKE (1%)</div>
-              <form action="">
-                <input type="text" id="typedCommunityAdr" placeholder="Type Token Address here">
-                <a id="getCommunityAdrButton" href="#null" class="button scrollto" onclick="getCommunityAdr()">Set Bonus</a>
-                <div id="displayCommunityAdrBonus"></div>
-              </form>
+              
+              <h4>Airdrop Options</h4>
               <div class="social-links">
                   <h6>
                     <a href="#null" id="claim" class="button scrollto" onclick="claimFreeAirdrop()">Free Airdrop</a>
