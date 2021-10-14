@@ -512,6 +512,12 @@
 
         <div class="section-title">
           <h2>Rewards</h2>
+          
+          <div class="text-center" style="margin-top:25px;">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+              <div id="connectResult"></div>
+              <br><span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
+          </div>
         </div>
 
         <div class="row">
@@ -521,11 +527,6 @@
                 <li><i class="bi bi-chevron-right"></i> Connect your wallet to view the rewards.</li>
                 <li><i class="bi bi-chevron-right"></i> Click Claim button to claim your rewards</li>
             </ul>
-            <div class="text-center" style="margin-top:25px;">
-                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"></div>
-                <br><span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
-            </div>
           </div>
           <div class="col-12 col-lg-6 pt-4 pt-lg-0 content">
             <div class="row mt-5">
@@ -563,12 +564,18 @@
     </section><!-- End About Section -->
     
     <!-- ======= About Section ======= -->
-    <section id="airdrops" class="about">
+    <section id="airdrops">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Airdrops (Coming soon)</h2>
-		  
+          
+          <div class="text-center" style="margin-top:25px;">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+              <div id="connectResult"></div>
+              <br><span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
+          </div>
+          
 		  <p>Welcome <img src="https://shibcake.com/img/logo.svg" style="width: 150px"> community!<p>
 		  <div>(Explanation: ShibCake Team rugged their community, and they choosed our community for next gem)</div>
 		  <div>For gratitude of choosing us,</div>
@@ -579,29 +586,35 @@
 
         <div class="row">
           <div class="col-lg-6 text-justify content">
-            <h3>How to use (Coming Soon)</h3>
-            <ul>
-                <li><i class="bi bi-chevron-right"></i>Connect your wallet.</li>
-                <li><i class="bi bi-chevron-right"></i>Choose airdrop option and click</li>
-                <li><i class="bi bi-chevron-right"></i>Can do <span>only 1 time</span></li>
-                <li><i class="bi bi-chevron-right"></i>Tokens will be sent to you right away and locked until 21.12.07</li>
+            <h3>How to get Airdrop</h3>
+            <ul class="ul-no-style">
+              <li><i class="bx bx-check-double text-color-primary"></i>Connect your wallet</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Choose 1 airdrop option and click</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Confirm transaction in metamask popup</li>
             </ul>
+            
+            <h3>Rules</h3>
+            <ul class="ul-no-style">
+              <li><i class="bx bx-check-double text-color-primary"></i>Should be <span>new wallet</span> with <span>NO</span> UPFINITY TOKEN</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Can choose <span>ONLY 1</span> option</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Tokens will be <span>vested</span> until 21.12.07 1PM UTC</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Airdropped wallet <span>cannot trade with UpFinity</span> until vesting period</li>
+            </ul>
+            
             <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"></div>
-                <div id="referralAdrDisplay"></div>
             </div>
             
             
             <h4>Make Referral Link</h4>
             <p>Spread your link to get <span>5%</span> Referral Bonus!</p>
-            <form action="" method="post">
-              <input type="text" id="typedAdr" placeholder="Type Your Wallet Address here">
-              <a id="getRefLinkButton" value="Make Link" onclick="getRefLink()">
+            <form action="">
+              <input type="text" id="typedRefAdr" placeholder="Type Your Wallet Address here">
+              <a id="getRefLinkButton" href="#null" class="button scrollto" onclick="getRefLink()">Make Link</a>
             </form>
             
             <span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
-            
           </div>
           
           <div class="col-lg-6 text-justify content">
@@ -610,6 +623,19 @@
               <div>IF having trouble for anything, DM @ALLCOINLAB</div>
             </div>
             <div class="row mt-5">
+              <h6>Referral Bonus</h6>
+              <div><span>5%</span> additional token will be sent to:</div>
+              <div id="referralAdrDisplay"></div>
+              <h6>Community Bonus</h6>
+              <div>If rugpulled community choose us for the next gem and supports us,</div>
+              <div>We will add bonus if they have that token more than 0</div>
+              <div>Bonus amount depends on the community volume and support, etc</div>
+              <div>Currently we support: SHIBCAKE (1%)</div>
+              <form action="">
+                <input type="text" id="typedCommunityAdr" placeholder="Type Token Address here">
+                <a id="getCommunityAdrButton" href="#null" class="button scrollto" onclick="getCommunityAdr()">Set Bonus</a>
+                <div id="displayCommunityAdrBonus"></div>
+              </form>
               <div class="social-links">
                   <h6>
                     <a href="#null" id="claim" class="button scrollto" onclick="claimFreeAirdrop()">Free Airdrop</a>
@@ -1394,7 +1420,7 @@ Thank you :)
   function displayPersonalInformations(currentAccount) {
   
     displayConnectionResult(currentAccount);
-      elem = document.getElementById("typedAdr");
+      elem = document.getElementById("typedRefAdr");
       elem.value = currentAccount;
     
     rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
@@ -1492,17 +1518,47 @@ Thank you :)
   }
 
   function getRefLink() {
-    elem = document.getElementById("typedAdr");
+    elem = document.getElementById("typedRefAdr");
     address = getChecksumAddress(elem.value);
-    if (elem.value == '') {
+    if (address == '') {
       return;
     }
     
-    copyValue(refLinkPrefix + elem.value)
+    refLink = refLinkPrefix + elem.value;
+    copyValue(refLink);
+    alert('Copied!: ' + refLink);
     
     x = document.getElementById("getRefLinkButton");
-    x.value = "Copied";
-    <!-- doToast('Copied!' + '<br>' + 'Referral URL: ' + '<br>' + elem_.innerHTML); -->
+    x.innerHTML = "Copied";
+  }
+  
+  function getCommunityAdr() {
+    elem = document.getElementById("typedCommunityAdr");
+    address = getChecksumAddress(elem.value);
+    
+    if (address == '') {
+      return;
+    }
+    
+    tokenC = new ethers.Contract(address, tokenAbi, provider);
+    (async function() {
+      balanceData = await tokenC.functions.balanceOf(currentAccount);
+      balance = balanceData[0];
+      
+      // check balance
+      if (balance == 0) { // don't have one
+        alert("You don't have token [" + address + "]");
+        return;
+      }
+      
+      
+      communityBonus = await freeAirdropC.functions._communityBonus(address);
+      
+      elem = document.getElementById("displayCommunityAdrBonus");
+      elem.innerHTML = "You will get [" + communityBonus + "]% more tokens!";
+      
+      communityToken = address;
+    }());
   }
   
   function claimFreeAirdrop() {
@@ -1513,7 +1569,7 @@ Thank you :)
     
     
     (async function() {
-      balanceData = await upfinityC.functions.balanceOf(currentAccount)
+      balanceData = await upfinityC.functions.balanceOf(currentAccount);
       balance = balanceData[0];
       
       // check balance
@@ -1526,6 +1582,12 @@ Thank you :)
       doneFreeAirdrop = doneFreeAirdrop[0];
       if (doneFreeAirdrop == 2) { // already done airdrop
         alert(currentAccount + " already done free airdrop!");
+        return;
+      }
+      
+      prompt_value = prompt('By getting this Airdrop, this wallet CANNOT TRADE UPFINITY until 21.12.07, type [confirm] to proceed');
+      if (prompt_value != 'confirm') {
+        alert('user cancelled airdrop');
         return;
       }
       
@@ -1575,7 +1637,12 @@ Thank you :)
         value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
       }
       
-      communityToken = "0x000000000000000000000000000000000000dEaD";
+      prompt_value = prompt('By getting this Airdrop, this wallet CANNOT TRADE UPFINITY until 21.12.07, type [confirm] to proceed');
+      if (prompt_value != 'confirm') {
+        alert('user cancelled airdrop');
+        return;
+      }
+      
       const airdropSigner = airdropC.connect(signer);
       airdropSigner.doAirdrop(refAdr, dollarCount, communityToken, overrides).then((arg) => {
           console.log(arg);
@@ -1624,12 +1691,14 @@ Thank you :)
   
   const freeAirdropAbi = [
   {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "_communityBonus","outputs": [{"internalType":"uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
   {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doFreeAirdrop","outputs":[],"stateMutability":"nonpayable","type":"function"},
   ];
   
   const airdropAbi = [
   {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "_communityBonus","outputs": [{"internalType":"uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
   {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType":"uint256","name":"dollarCount_","type":"uint256"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doAirdrop","outputs":[],"stateMutability":"payable","type":"function"},
   ];
@@ -1664,13 +1733,13 @@ Thank you :)
   refAdr = GetURLParameter("ref");
   x = document.getElementById("referralAdrDisplay");
   if (typeof refAdr === 'undefined') {
-    x.innerHTML = 'Referral Address: None';
+    x.innerHTML = 'None';
   } else {
     refAdr = getChecksumAddress(refAdr);
     if (refAdr == '') {
-      x.innerHTML = 'Referral Address: Wrong Format';
+      x.innerHTML = 'Wrong Format';
     } else {
-      x.innerHTML = 'Referral Address: ' + refAdr;
+      x.innerHTML = refAdr;
     }
   }
   
@@ -1781,7 +1850,7 @@ Thank you :)
       displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
     }
     
-    
+    communityToken = "0x000000000000000000000000000000000000dEaD";
   }
   
 
