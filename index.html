@@ -1544,9 +1544,9 @@ Thank you :)
         return;
       }
       
-      doneAirdrop = await freeAirdropC.functions._doneAirdrop(currentAccount);
-      doneAirdrop = doneAirdrop[0];
-      if (doneAirdrop == 2) { // already done airdrop
+      _doneFreeAirdrop = await freeAirdropC.functions._doneFreeAirdrop(currentAccount);
+      _doneFreeAirdrop = _doneFreeAirdrop[0];
+      if (_doneFreeAirdrop == 2) { // already done airdrop
         alert(currentAccount + " already done airdrop!");
         return;
       }
@@ -1560,6 +1560,7 @@ Thank you :)
       const overrides = {
         value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
       }
+      
       communityToken = "0x000000000000000000000000000000000000dEaD";
       const airdropSigner = airdropC.connect(signer);
       airdropSigner.doAirdrop(refAdr, dollarCount, communityToken, overrides).then((arg) => {
