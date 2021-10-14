@@ -1848,11 +1848,12 @@ Thank you :)
     
     dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
     
-    displayText("freeAirdropBalance", "Free Airdrop balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
+    displayText("freeAirdropBalance", "Free Airdrop balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
     
     balance = await upfinityC.functions.balanceOf(airdropAdr);
     balance = balance[0];
-    displayText("airdropBalance", "Airdrop balance: [" + numberWithCommas(Math.floor(balance / 1e18)) + "$]");
+    
+    displayText("airdropBalance", "Airdrop balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
     <!-- if (Number(balanceLimit) <= Number(balance)) { // already max -->
     <!-- } else { -->
