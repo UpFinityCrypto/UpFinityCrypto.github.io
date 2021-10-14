@@ -1841,36 +1841,18 @@ Thank you :)
     
     balance = await upfinityC.functions.balanceOf(freeAirdropAdr);
     balance = balance[0];
-    displayText("freeAirdropBalance", numberWithCommas(Math.floor(balance / 1e18)));
+    
+    dollarsPerBNBData = await airdropC.functions._dollarsPerBNB();
+    dollarsPerBNB = dollarsPerBNBData[0];
+    oneDollar = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
+    
+    dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
+    
+    displayText("freeAirdropBalance", "Free Airdrop balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
     balance = await upfinityC.functions.balanceOf(airdropAdr);
     balance = balance[0];
-    displayText("airdropBalance", numberWithCommas(Math.floor(balance / 1e18)));
-    
-    
-    <!-- reserveData = await pairC.functions.getReserves(); -->
-    
-    <!-- if (wbnbAdr < upfinityAdr) { // BNB / UpFinity -->
-      <!-- rI = reserveData[0];  -->
-      <!-- rO = reserveData[1]; -->
-    <!-- } else { -->
-      <!-- rI = reserveData[1]; -->
-      <!-- rO = reserveData[0]; -->
-    <!-- } -->
-    
-    <!-- maxBuyLiq = rI.div(10); // 10% of current liquidity -->
-    <!-- maxBuyLiq = BNB(maxBuyLiq); -->
-    <!-- totalSupplyData = await upfinityC.functions.totalSupply(); -->
-    <!-- totalSupply = totalSupplyData[0]; -->
-    
-    <!-- balanceData = await upfinityC.functions.balanceOf(currentAccount); -->
-    <!-- balance = balanceData[0]; -->
-    <!-- displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18))); -->
-    
-    <!-- balancePercentage = round(balance / totalSupply * 100, 2); -->
-    <!-- displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)'); -->
-    
-    <!-- balanceLimit = totalSupply.div(100); // 1% of total supply -->
+    displayText("airdropBalance", "Airdrop balance: [" + numberWithCommas(Math.floor(balance / 1e18)) + "$]");
     
     <!-- if (Number(balanceLimit) <= Number(balance)) { // already max -->
     <!-- } else { -->
