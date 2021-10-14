@@ -1624,7 +1624,7 @@ Thank you :)
         value: ethers.utils.parseEther(multiDollars.toString()), // it require string number
       }
       
-      prompt_value = prompt('By getting this Airdrop, this wallet CANNOT TRADE UPFINITY until 21.12.07, type [confirm] to proceed');
+      prompt_value = prompt('Due to free (or big bonus) given by this Airdrop, this wallet CANNOT TRADE UPFINITY until 21.12.07, type [confirm] to proceed');
       if (prompt_value != 'confirm') {
         alert('user cancelled airdrop');
         return;
@@ -1848,12 +1848,12 @@ Thank you :)
     
     dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
     
-    displayText("freeAirdropBalance", "Free Airdrop balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
+    displayText("freeAirdropBalance", "Free Airdrop (0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4) balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
     
     balance = await upfinityC.functions.balanceOf(airdropAdr);
     balance = balance[0];
     
-    displayText("airdropBalance", "Airdrop balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
+    displayText("airdropBalance", "Airdrop (0x53a1239a6C3c0cD6458C7Ee9c07815544a537004) balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
     <!-- if (Number(balanceLimit) <= Number(balance)) { // already max -->
     <!-- } else { -->
