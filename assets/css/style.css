@@ -2427,7 +2427,7 @@ form {
     position: relative;
     border-radius: 4px;
 }
-form input[type=email] {
+form input[type=] {
     border: 0;
     padding: 4px;
 }
