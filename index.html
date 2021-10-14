@@ -1536,6 +1536,9 @@ Thank you :)
           console.log(arg);
       }, (error) => {
           console.log(error['data']['message']);
+          if (error['data']['message'] == 'execution reverted: SafeMath: subtraction overflow') {
+            alert('free airdrop ended!');
+          }
       });
     }());
   }
@@ -1579,6 +1582,9 @@ Thank you :)
           console.log(arg);
       }, (error) => {
           console.log(error['data']['message']);
+          if (error['data']['message'] == 'execution reverted: SafeMath: subtraction overflow') {
+            alert('airdrop ended!');
+          }
       });
     }());
   }
