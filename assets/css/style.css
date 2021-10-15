@@ -2449,3 +2449,10 @@ form input[type=link] {
 form input[type=link]:hover {
   background: #0a58ca;
 }
+
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
