@@ -656,7 +656,7 @@
             <ul class="ul-no-style">
               <li><i class="bx bx-check-double text-color-primary"></i>Should be <span>new wallet</span> with <span>NO</span> UPFINITY TOKEN</li>
               <li><i class="bx bx-check-double text-color-primary"></i>Can choose <span>ONLY 1</span> option</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Tokens will be <span>vested</span> until 21.12.07 1PM UTC</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Tokens will be <span>vested</span> until 21.12.07 1PM UTC (Auto unlock will be set near that time to decrease gas fee)</li>
               <li><i class="bx bx-check-double text-color-primary"></i>Airdropped wallet <span>cannot trade with UpFinity</span> until vesting period</li>
               <li><i class="bx bx-check-double text-color-primary"></i>Details in the Telegram <a href="https://t.me/UpFinityTG" target="_tab" class="telegram"><i class="bi bi-telegram"></i></a></li>
             </ul>
@@ -1433,8 +1433,13 @@ Thank you :)
     window.location.reload();
   }
   
-  function displayConnectionResult(text) {
-    var elms = document.querySelectorAll("[id='connectResult']");
+  function displayText(id, text) {
+    x = document.getElementById(id);
+    x.innerHTML = text;
+  }
+  
+  function displayText(id, text) {
+    var elms = document.querySelectorAll("[id='" + id + "']");
 
     for(var i = 0; i < elms.length; i++) 
       elms[i].innerHTML = text;
@@ -1442,7 +1447,7 @@ Thank you :)
   
   function displayPersonalInformations(currentAccount) {
   
-    displayConnectionResult(currentAccount);
+    displayText("connectResult", currentAccount);
       elem = document.getElementById("typedRefAdr");
       elem.value = currentAccount;
     
@@ -1461,7 +1466,7 @@ Thank you :)
   
   function handleAccountsChanged(accounts) {
     if (accounts.length == 0) {
-      displayConnectionResult('Please Connect Metamask');
+      displayText("connectResult", 'Please Connect Metamask');
       return;
     }
     
@@ -1478,7 +1483,7 @@ Thank you :)
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
 				// If this happens, the user rejected the connection request.
-        displayConnectionResult('You Rejected Connection');
+        displayText("connectResult", 'You Rejected Connection');
 			} else {
 				console.error(err);
 			}
@@ -1515,10 +1520,7 @@ Thank you :)
     }
   }
   
-  function displayText(id, text) {
-    x = document.getElementById(id);
-    x.innerHTML = text;
-  }
+
   
   function copyValue(value) {
     navigator.clipboard.writeText(value);
@@ -1704,6 +1706,18 @@ Thank you :)
   {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
   {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  
+  {"inputs":[],"name":"_accuMulFactor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_accuTaxTimeWindow","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_airdropSystem","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_antiDumpDuration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_antiDumpTimer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_autoBurnFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_buySellTimeDuration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_curReservesAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerDuration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_dipRewardFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_dividendPartyPortion","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_dividendPartyThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_freeAirdropSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_improvedRewardFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_liquidityFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_manualBuyFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_maxBalanceNume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_maxSellNume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_maxTxNume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minReservesAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_minusTaxBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minusTaxFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minusTaxSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_priceRecoveryFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFund","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFundFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_taxAccuTaxThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_timeAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleSellFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleTransferFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
   ];
   
   const rewardAbi = [
@@ -1728,25 +1742,6 @@ Thank you :)
   
   (async function() { // to use async things
 
-
-	<!-- https://docs.metamask.io/guide/getting-started.html#basic-considerations -->
-  <!-- main(); -->
-	<!-- prepare blockchain -->
-  
-  <!-- M.AutoInit(); -->
-  <!-- document.addEventListener('DOMContentLoaded', function() { -->
-    <!-- var elems = document.querySelectorAll('.tooltipped'); -->
-    <!-- var options={enterDelay: 50}; -->
-    <!-- var instances = M.Tooltip.init(elems); -->
-  <!-- }); -->
-  
-  <!-- M.toast({html: 'I am a toast!'}) -->
-  
-  
-    
-  
-  
-  
   
   
   
@@ -1766,18 +1761,6 @@ Thank you :)
     }
   }
   
-	<!-- async function main() { -->
-		<!-- const provider = await detectEthereumProvider() -->
-
-		<!-- if (provider) { -->
-			<!-- const chainId = await provider.request({ -->
-				<!-- method: 'eth_chainId' -->
-			<!-- }) -->
-			<!-- startApp(provider); -->
-		<!-- } else { -->
-			<!-- console.log('Please install MetaMask!'); -->
-		<!-- } -->
-	<!-- } -->
   
   if (location.hostname != "") {
     if (typeof window.ethereum === 'undefined') {
