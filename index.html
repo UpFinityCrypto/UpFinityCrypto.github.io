@@ -121,7 +121,7 @@
 					<div class="col-lg-6">
 						<div class="card">
 						<div class="card-body">
-						  <h4 class="card-title"><span>27x</span> Killing Features</h4>
+						  <h4 class="card-title"><span>28x</span> Killing Features</h4>
 
 						  <!-- Default Accordion -->
 						  <div class="accordion" id="accordionExample">
@@ -138,22 +138,22 @@
 								  <h4>Dip Reward Algorithm</h4>
 								  <div>Buyers at the dip should get <span>MORE</span></div>
 								  <div>And get to choose the reward token they would like to receive!</div>
-								  <div><span>1%</span> of every sell will be stacked to this <span>REWARD</span></div>
+								  <div><span id="_dipRewardFee">1</span>% of every sell will be stacked to this <span>REWARD</span></div>
 								  <div>Rewards will be included in every buy until ATH</div>
 								  <div>Community can request to <span>CHANGE</span> reward token (CAKE, DOGE, SHIB, etc)</div>
-								  <div>Current Reward Token: CAKE</div>
+								  <div>Current Reward Token: <span id="_rewardToken">CAKE</span></div>
 								  
 								  <h4>Advanced BNB Reward Algorithm</h4>
 								  <div>Most reward systems nowadays are <span>LACKING</span></div>
-								  <div><span>3%</span> of every sell will be set to BNB reward</div>
+								  <div><span id="_improvedRewardFee">3</span>% of every sell will be set to BNB reward</div>
 								  <div><span>NO</span> claim cooltime</div>
 								  <div><span>NO</span> minimum amount needed</div>
 								  <div>Your reward will be completely <span>preserved</span></div>
 								  
 								  <h4>Minus Tax Algorithm</h4>
 								  <div>Why buyers have to pay <span>TAX?</span></div>
-								  <div>Buy tax is <span>-1%</span>, not even zero, <span>MINUS</span></div>
-								  <div>1% more tokens will be included in every buy</div>
+								  <div>Buy tax is -<span id="_minusTaxBonus">1</span>%, not even zero, <span>MINUS</span></div>
+								  <div><span id="_minusTaxBonus">1</span>% more tokens will be included in every buy</div>
 								  
 								  <h4>Redistribution</h4>
 								  <div><span>1.56+%</span> of every sell is reflected back to holders!</div>
@@ -171,19 +171,19 @@
 								  <p><strong>Investors should be protected</strong></p>
 								  
 								  <h4>Global Anti-Dump Algorithm</h4>
-								  <div>When current liquidity drops by 15% within 1 day, triggers [Circuit breaker]</div>
+								  <div>When current liquidity drops by <span id="_curcuitBreakerThreshold">15</span>% within <span id="_timeAccuTaxCheckGlobal">1</span> day, triggers [Circuit breaker]</div>
 								  
                   <h4>Circuit Breaker Algorithm</h4>
-								  <div>None can sell for <span>3 hours</span>, resets [Global Anti-dump algorithm]</div>
+								  <div>None can sell for <span id="_curcuitBreakerDuration">3</span> hours, resets [Global Anti-dump algorithm]</div>
                   
 								  <h4>Personal Anti-Dump Algorithm</h4>
-								  <div>Each wallet can only sell <span>3%</span> of current liquidity within 1 day</div>
+								  <div>Each wallet can only sell <span id="_taxAccuTaxThreshold">3</span>% of current liquidity within 1 day</div>
 								  
 								  <h4>Global Anti-Panic Algorithm</h4>
-								  <div>Only 1 sell per <span>1 minute</span> can happen, globally.</div>
+								  <div>Only 1 sell per <span id="_buySellTimeDuration">1 minute</span> can happen, globally.</div>
 								  
 								  <h4>Personal Anti-Panic Algorithm</h4>
-								  <div>Each wallet can sell once every <span>5 minutes</span></div>
+								  <div>Each wallet can sell once every <span id="_antiDumpDuration">5</span> minutes</div>
 								  
 								  
 								</div>
@@ -202,21 +202,21 @@
 								  <div><span>16+%</span> of every sell will be BOUGHT BACK Instantly</div>
 								  
 								  <h4>Anti-Whale Algorithm</h4>
-								  <div>1 wallet can hold a maximum of <span>1.1%</span> of total supply</div>
+								  <div>1 wallet can hold a maximum of <span id="_maxBalanceNume">1.1%</span> of total supply</div>
 								  <div>(Can be exceeded by redistribution etc)</div>
 								  
 								  <h4>Advanced Anti-Dump Algorithm</h4>
-								  <div>1 wallet can sell a total of <span>3%</span> of current liquidity at once</div>
+								  <div>1 wallet can sell a total of <span id="_maxSellNume">3%</span> of current liquidity at once</div>
 								  
 								  <h4>Advanced Anti-Pump Algorithm</h4>
-								  <div>1 wallet can buy/transfer up to <span>10%</span> of current liquidity at 1 buy/transfer</div>
+								  <div>1 wallet can buy/transfer up to <span id="_maxTxNume">10%</span> of current liquidity at 1 buy/transfer</div>
 								</div>
 							  </div>
 							</div>
 							<div class="accordion-item">
 							  <div class="accordion-header" id="headingFour">
 								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-								  3x Events
+								  4x Events
 								</button>
 							  </div>
 							  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
@@ -225,10 +225,14 @@
 								  
 								  <h4>Dividend Party</h4>
 								  <div>Profit should be done as a <span>Party!</span></div>
-								  <div>If contract balance exceeds <span>9,876,543,210 tokens,</span></div>
+								  <div>If contract balance exceeds <span id="_dividendPartyThreshold">9,876,543,210</span> tokens,</div>
                   <div>a sell will be triggered.</div>
 								  <div>Liquidity / Rewards / Redistribution will happen in <span>BULK</span></div>
 								  
+                  <h4>Manual BuyBack Event</h4>
+								  <div><span id="_manualBuyFee">4</span>% of every sell will be stacked as BNB</div>
+                  <div>And it will be used for manual buyback</div>
+                  
 								  <h4>Manual Token Burn Event</h4>
 								  <div>By the community request and at certain event,</div>
 								  <div>Token will be burned!</div>
@@ -253,25 +257,25 @@
 								  <h4>Proportional Tax Algorithm</h4>
 								  <div>Whales <span>CANNOT</span> do workaround to avoid tax</div>
 								  <div>Extra tax will be set proportionally to <span>current liquidity size</span></div>
-								  <div>If a sell with 1% price impact => 2% more tax</div>
+								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2<span>% more tax</div>
 								  <div>If a sell with 2% price impact => 4% more tax, and so on</div>
-								  <div>Current multiplication: 2</div>
+								  <div>Current multiplication: <span id="_accuMulFactor">2<span></div>
 								  
 								  <h4>Accumulating Tax Algorithm</h4>
 								  <div>Whales <span>CANNOT</span> dump it all quickly</div>
 								  <div>Tax will be accumulated if sold in a <span>SHORT PERIOD</span></div>
-								  <div>If a sell with 1% price impact => 2% more tax</div>
+								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2<span>% more tax</div>
 								  <div>if same wallet sells again for 2% impact within 1 day => <span>6%</span> more tax</div>
-                  <div>(2% from 1st sell + 4% second sell)</div>
-								  <div>This tax resets 1 day after each first sell</div>
+                  <div>(<span id="_accuMulFactor">2<span>% from 1st sell + 4% second sell)</div>
+								  <div>This tax resets <span id="_accuTaxTimeWindow">1<span> day after each first sell</div>
 								  
 								  <h4>Advanced Sell Tax Algorithm</h4>
 								  <div>Tax is based on <span>LIQUIDITY SIZE</span>, not total supply</div>
-								  <div>Flat <span>4%</span> more tax if sell more than 1% of current liquidity</div>
+								  <div>Flat <span id="_whaleSellFee">4%</span> more tax if sell more than <span id="_whaleRate">1</span>% of current liquidity</div>
 								  
 								  <h4>Advanced Transfer Tax Algorithm</h4>
 								  <div>Tax is based on <span>LIQUIDITY SIZE</span>, not total supply</div>
-								  <div>Flat <span>2%</span> more tax if transfer more than 1% of current liquidity</div>
+								  <div>Flat <span id="_whaleTransferFee">2%</span> more tax if transfer more than <span id="_whaleRate">1</span>% of current liquidity</div>
 								  
 								</div>
 							  </div>
@@ -287,11 +291,11 @@
 								  <p><strong>Making Our Project more promising</strong></p>
 								  
 								  <h4>Auto-Liquidity System</h4>
-								  <div>6% of every sell will be added to the liquidity</div>
+								  <div><span id="_liquidityFee">6</span>% of every sell will be added to the liquidity</div>
 							
 								  
 								  <h4>Auto-Burn System</h4>
-								  <div>0.5% of every sell will be auto-burned</div>
+								  <div><span id="_autoBurnFee">0.5</span>% of every sell will be auto-burned</div>
 								  
 								  
 								  <h4>Tracking Algorithm</h4>
@@ -516,20 +520,14 @@
             <div class="row mt-5">
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
-                    <h6 class="text-center ">Balance (1.1% Max)</h6>
+                    <h6 class="text-center ">Balance (<span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="balanceStatus" class="text-center"></div>
                     <div id="balancePercentageStatus" class="text-center"></div>
                 </div>
               </div>
-              <!-- <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100"> -->
-                <!-- <div class="icon-box"> -->
-                    <!-- <h6 class="text-center ">Max Buy Limit (1.1% Max)</h6> -->
-                    <!-- <div id="buyLimitStatus" class="text-center"></div> -->
-                <!-- </div> -->
-              <!-- </div> -->
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
-                    <h6 class="text-center ">Limit Per 1 Buy (10% Liq & 1.1% Max)</h6>
+                    <h6 class="text-center ">Limit Per 1 Buy (10% Liq & <span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="oneBuyLimitStatus" class="text-center"></div>
                 </div>
               </div>
@@ -1867,17 +1865,38 @@ Thank you :)
     
     dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
     
-    displayText("freeAirdropBalance", "Free Airdrop (0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4) balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
+    displayText("freeAirdropBalance", "Free Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
     
     balance = await upfinityC.functions.balanceOf(airdropAdr);
     balance = balance[0];
     
-    displayText("airdropBalance", "Airdrop (0x53a1239a6C3c0cD6458C7Ee9c07815544a537004) balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
+    displayText("airdropBalance", "Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
-    <!-- if (Number(balanceLimit) <= Number(balance)) { // already max -->
-    <!-- } else { -->
-      <!-- buyLimit = balanceLimit.sub(balance); -->
-      <!-- maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO); -->
+    displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
+    displayText("_accuTaxTimeWindow", (await upfinityC.functions._accuTaxTimeWindow())[0] / 60 / 60 / 24);
+    displayText("_airdropSystem", (await upfinityC.functions._airdropSystem())[0]);
+    displayText("_antiDumpDuration", (await upfinityC.functions._antiDumpDuration())[0] / 60);
+    displayText("_autoBurnFee", (await upfinityC.functions._autoBurnFee())[0] / 100);
+    displayText("_buySellTimeDuration", (await upfinityC.functions._buySellTimeDuration())[0] / 60);
+    displayText("_curcuitBreakerDuration", (await upfinityC.functions._curcuitBreakerDuration())[0] / 60 / 60);
+    displayText("_curcuitBreakerThreshold", (await upfinityC.functions._curcuitBreakerThreshold())[0] / 100);
+    displayText("_dipRewardFee", (await upfinityC.functions._dipRewardFee())[0] / 100);
+    displayText("_dividendPartyThreshold", numberWithCommas((await upfinityC.functions._dividendPartyThreshold())[0] / 1e18));
+    displayText("_freeAirdropSystem", (await upfinityC.functions._freeAirdropSystem())[0]);
+    displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] / 100);
+    displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] / 100);
+    displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] / 100);
+    displayText("_maxBalanceNume", (await upfinityC.functions._maxBalanceNume())[0] / 100);
+    displayText("_maxSellNume", (await upfinityC.functions._maxSellNume())[0] / 100);
+    displayText("_maxTxNume", (await upfinityC.functions._maxTxNume())[0] / 100);
+    displayText("_minusTaxBonus", (await upfinityC.functions._minusTaxBonus())[0] / 100);
+    <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
+    displayText("_taxAccuTaxThreshold", (await upfinityC.functions._taxAccuTaxThreshold())[0] / 100);
+    displayText("_timeAccuTaxCheckGlobal", (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 60 / 60 / 24);
+    displayText("_whaleRate", (await upfinityC.functions._whaleRate())[0] / 1000);
+    displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 1000);
+    displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 1000);
+    
   }
   
 
