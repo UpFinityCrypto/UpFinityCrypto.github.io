@@ -156,7 +156,7 @@
 								  <div><span id="_minusTaxBonus">1</span>% more tokens will be included in every buy</div>
 								  
 								  <h4>Redistribution</h4>
-								  <div><span>1.56+%</span> of every sell is reflected back to holders!</div>
+								  <div><span id="redistributionFee">1.56+%</span> of every sell is reflected back to holders!</div>
 								</div>
 							  </div>
 							</div>
@@ -1884,7 +1884,7 @@ Thank you :)
     displayText("_dividendPartyThreshold", numberWithCommas((await upfinityC.functions._dividendPartyThreshold())[0] / 1e18));
     displayText("_freeAirdropSystem", (await upfinityC.functions._freeAirdropSystem())[0]);
     displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] / 100);
-    displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] / 100);
+    displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] / 100 * 2); // double
     displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] / 100);
     displayText("_maxBalanceNume", (await upfinityC.functions._maxBalanceNume())[0] / 100);
     displayText("_maxSellNume", (await upfinityC.functions._maxSellNume())[0] / 100);
@@ -1897,6 +1897,10 @@ Thank you :)
     displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 1000);
     displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 1000);
     
+
+    redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) / 100 - ((await upfinityC.functions._liquidityFee())[0] + (await upfinityC.functions._projectFundFee())[0] + (await upfinityC.functions._improvedRewardFee())[0] + (await upfinityC.functions._dipRewardFee())[0]) * 1.1 - (await upfinityC.functions._liquidityFee())[0];
+    
+    displayText("redistributionFee", redistributionFee / 100);
   }
   
 
