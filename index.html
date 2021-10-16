@@ -1865,12 +1865,12 @@ Thank you :)
     
     dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
     
-    displayText("freeAirdropBalance", "Free Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
+    displayText("freeAirdropBalance", "Free Airdrop (" + (await upfinityC.functions._airdropSystem())[0]) + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
     
     balance = await upfinityC.functions.balanceOf(airdropAdr);
     balance = balance[0];
     
-    displayText("airdropBalance", "Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
+    displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0]) + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
     displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
     displayText("_accuTaxTimeWindow", (await upfinityC.functions._accuTaxTimeWindow())[0] / 60 / 60 / 24);
