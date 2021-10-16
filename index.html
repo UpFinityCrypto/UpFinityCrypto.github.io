@@ -138,14 +138,14 @@
 								  <h4>Dip Reward Algorithm</h4>
 								  <div>Buyers at the dip should get <span>MORE</span></div>
 								  <div>And get to choose the reward token they would like to receive!</div>
-								  <div><span id="_dipRewardFee">1</span>% of every sell will be stacked to this <span>REWARD</span></div>
+								  <div><span id="_dipRewardFee">1</span>+% of every sell will be stacked to this <span>REWARD</span></div>
 								  <div>Rewards will be included in every buy until ATH</div>
 								  <div>Community can request to <span>CHANGE</span> reward token (CAKE, DOGE, SHIB, etc)</div>
 								  <div>Current Reward Token: <span id="_rewardToken">CAKE</span></div>
 								  
 								  <h4>Advanced BNB Reward Algorithm</h4>
 								  <div>Most reward systems nowadays are <span>LACKING</span></div>
-								  <div><span id="_improvedRewardFee">3</span>% of every sell will be set to BNB reward</div>
+								  <div><span id="_improvedRewardFee">3</span>+% of every sell will be set to BNB reward</div>
 								  <div><span>NO</span> claim cooltime</div>
 								  <div><span>NO</span> minimum amount needed</div>
 								  <div>Your reward will be completely <span>preserved</span></div>
@@ -156,7 +156,7 @@
 								  <div><span id="_minusTaxBonus">1</span>% more tokens will be included in every buy</div>
 								  
 								  <h4>Redistribution</h4>
-								  <div><span id="redistributionFee">1.56+%</span> of every sell is reflected back to holders!</div>
+								  <div><span id="redistributionFee">1.56</span>+% of every sell is reflected back to holders!</div>
 								</div>
 							  </div>
 							</div>
@@ -180,10 +180,10 @@
 								  <div>Each wallet can only sell <span id="_taxAccuTaxThreshold">3</span>% of current liquidity within 1 day</div>
 								  
 								  <h4>Global Anti-Panic Algorithm</h4>
-								  <div>Only 1 sell per <span id="_buySellTimeDuration">1 minute</span> can happen, globally.</div>
+								  <div>Only 1 sell per <span id="_antiDumpDuration">1</span> min can happen, globally.</div>
 								  
 								  <h4>Personal Anti-Panic Algorithm</h4>
-								  <div>Each wallet can sell once every <span id="_antiDumpDuration">5</span> minutes</div>
+								  <div>Each wallet can sell once every <span id="_buySellTimeDuration">5</span> min</div>
 								  
 								  
 								</div>
@@ -202,14 +202,14 @@
 								  <div><span>16+%</span> of every sell will be BOUGHT BACK Instantly</div>
 								  
 								  <h4>Anti-Whale Algorithm</h4>
-								  <div>1 wallet can hold a maximum of <span id="_maxBalanceNume">1.1%</span> of total supply</div>
+								  <div>1 wallet can hold a maximum of <span id="_maxBalanceNume">1.1</span>% of total supply</div>
 								  <div>(Can be exceeded by redistribution etc)</div>
 								  
 								  <h4>Advanced Anti-Dump Algorithm</h4>
-								  <div>1 wallet can sell a total of <span id="_maxSellNume">3%</span> of current liquidity at once</div>
+								  <div>1 wallet can sell a total of <span id="_maxSellNume">3</span>% of current liquidity at once</div>
 								  
 								  <h4>Advanced Anti-Pump Algorithm</h4>
-								  <div>1 wallet can buy/transfer up to <span id="_maxTxNume">10%</span> of current liquidity at 1 buy/transfer</div>
+								  <div>1 wallet can buy/transfer up to <span id="_maxTxNume">10</span>% of current liquidity at 1 buy/transfer</div>
 								</div>
 							  </div>
 							</div>
@@ -257,25 +257,25 @@
 								  <h4>Proportional Tax Algorithm</h4>
 								  <div>Whales <span>CANNOT</span> do workaround to avoid tax</div>
 								  <div>Extra tax will be set proportionally to <span>current liquidity size</span></div>
-								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2<span>% more tax</div>
+								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2</span>% more tax</div>
 								  <div>If a sell with 2% price impact => 4% more tax, and so on</div>
-								  <div>Current multiplication: <span id="_accuMulFactor">2<span></div>
+								  <div>Current multiplication: <span id="_accuMulFactor">2</span></div>
 								  
 								  <h4>Accumulating Tax Algorithm</h4>
 								  <div>Whales <span>CANNOT</span> dump it all quickly</div>
 								  <div>Tax will be accumulated if sold in a <span>SHORT PERIOD</span></div>
-								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2<span>% more tax</div>
+								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2</span>% more tax</div>
 								  <div>if same wallet sells again for 2% impact within 1 day => <span>6%</span> more tax</div>
-                  <div>(<span id="_accuMulFactor">2<span>% from 1st sell + 4% second sell)</div>
-								  <div>This tax resets <span id="_accuTaxTimeWindow">1<span> day after each first sell</div>
+                  <div>(<span id="_accuMulFactor">2</span>% from 1st sell + 4% second sell)</div>
+								  <div>This tax resets <span id="_accuTaxTimeWindow">1</span> day after each first sell</div>
 								  
 								  <h4>Advanced Sell Tax Algorithm</h4>
 								  <div>Tax is based on <span>LIQUIDITY SIZE</span>, not total supply</div>
-								  <div>Flat <span id="_whaleSellFee">4%</span> more tax if sell more than <span id="_whaleRate">1</span>% of current liquidity</div>
+								  <div>Flat <span id="_whaleSellFee">4</span>% more tax if sell more than <span id="_whaleRate">1</span>% of current liquidity</div>
 								  
 								  <h4>Advanced Transfer Tax Algorithm</h4>
 								  <div>Tax is based on <span>LIQUIDITY SIZE</span>, not total supply</div>
-								  <div>Flat <span id="_whaleTransferFee">2%</span> more tax if transfer more than <span id="_whaleRate">1</span>% of current liquidity</div>
+								  <div>Flat <span id="_whaleTransferFee">2</span>% more tax if transfer more than <span id="_whaleRate">1</span>% of current liquidity</div>
 								  
 								</div>
 							  </div>
@@ -1893,12 +1893,12 @@ Thank you :)
     <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
     displayText("_taxAccuTaxThreshold", (await upfinityC.functions._taxAccuTaxThreshold())[0] / 100);
     displayText("_timeAccuTaxCheckGlobal", (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 60 / 60 / 24);
-    displayText("_whaleRate", (await upfinityC.functions._whaleRate())[0] / 1000);
-    displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 1000);
-    displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 1000);
+    displayText("_whaleRate", (await upfinityC.functions._whaleRate())[0] / 10000);
+    displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 10000);
+    displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 10000);
     
 
-    redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) / 100 - ((await upfinityC.functions._liquidityFee())[0] + (await upfinityC.functions._projectFundFee())[0] + (await upfinityC.functions._improvedRewardFee())[0] + (await upfinityC.functions._dipRewardFee())[0]) * 1.1 - (await upfinityC.functions._liquidityFee())[0];
+    redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) * 1.01 - (await upfinityC.functions._liquidityFee())[0];
     
     displayText("redistributionFee", redistributionFee / 100);
   }
