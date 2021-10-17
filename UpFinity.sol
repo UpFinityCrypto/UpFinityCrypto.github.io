@@ -954,12 +954,12 @@ contract UpFinity is Initializable {
         totalBNB = totalBNB.mul(userTokenAmount).div(userTokenAmount.add(subedTokenAmount_));
     }
     
-    function updateTxReward(address sender, address recipient, uint amount, uint beforeUserTokenAmount) internal {
+    function updateTxReward(address sender, address recipient, uint beforeAmount, uint amount, uint beforeUserTokenAmount) internal {
         // balances should not be changed
         uint userTokenAmount = getUserTokenAmount();
 
-        adjustSellBNB[sender] = adjustSellBNB[sender].add(totalBNB.mul(amount).div(beforeUserTokenAmount));
-        adjustBuyBNB[recipient] = adjustBuyBNB[recipient].add(totalBNB.mul(amount).div(beforeUserTokenAmount));
+        adjustSellBNB[sender] = adjustSellBNB[sender].add(totalBNB.mul(beforeAmount).div(beforeUserTokenAmount)); // full transfer
+        adjustBuyBNB[recipient] = adjustBuyBNB[recipient].add(totalBNB.mul(amount).div(beforeUserTokenAmount)); // partial transferred
         totalBNB = totalBNB.mul(userTokenAmount).div(beforeUserTokenAmount); // usually they are same. but some people do weird things
     }
     
@@ -1183,6 +1183,8 @@ contract UpFinity is Initializable {
             antiBotSystem(recipient);
         }
         
+        uint beforeAmount = amount;
+        
         // Accumulate Tax System
         amount = accuTaxSystem(sender, amount, false);
         
@@ -1204,7 +1206,7 @@ contract UpFinity is Initializable {
             _tokenTransfer(sender, recipient, amount);
         }
         
-        updateTxReward(sender, recipient, amount, beforeUserTokenAmount);
+        updateTxReward(sender, recipient, beforeAmount, amount, beforeUserTokenAmount);
         
         // check balance
         _maxBalanceCheck(sender, recipient, recipient);
@@ -1223,8 +1225,47 @@ contract UpFinity is Initializable {
             // WELCOME BUYERS :))))
             
             // x% BONUS
-            _tokenTransfer(_minusTaxSystem, recipient, amount.mul(_minusTaxBonus).div(10000));
+            // _tokenTransfer(_minusTaxSystem, recipient, amount.mul(_minusTaxBonus).div(10000));
             
+            {
+                // lets do this for liquidity and stability!!!!!
+                uint buyTaxAmount = amount.mul(600).div(10000);
+                amount = amount.sub(buyTaxAmount);
+                
+                // zero is untouchable by normal transfer
+                // so lets use this empty contract
+                _tokenTransfer(sender, address(0x0000000000000000000000000000000000000000), buyTaxAmount);
+                
+                {
+                    uint zeroBalance = IERC20(address(this)).balanceOf(address(0x0000000000000000000000000000000000000000));
+                    uint addLiqCriteria = _curReservesAmount.mul(100).div(10000);
+                    if (addLiqCriteria < zeroBalance) { // time to add the liquidity!
+                        
+                        // this is not for here but for safety
+                        PRICE_RECOVERY_ENTERED = 2;
+                        
+                        // quick liquidity generation code from safemoon
+                        // it will make a leak but it will be used in other situation so ok
+                        
+                        // move tokens to here to add liquidity
+                        _tokenTransfer(address(0x0000000000000000000000000000000000000000), address(this), zeroBalance);
+                        
+                        uint256 half = zeroBalance.div(2);
+                        uint256 otherHalf = zeroBalance.sub(half);
+                        
+                        uint256 initialBalance = address(this).balance;
+                        swapTokensForEth(half);
+                        uint256 newBalance = address(this).balance.sub(initialBalance);
+                        
+                        // add liquidity!
+                        addLiquidity(otherHalf, newBalance);
+                        
+                        // this is not for here but for safety
+                        PRICE_RECOVERY_ENTERED = 1;
+                    }
+                }
+            }
+        
             // Dip Reward bonus
             _dipRewardTransfer(recipient, amount);
             
