@@ -311,6 +311,12 @@ contract UpFinity is Initializable {
     // Minus Tax Bonus
     uint public _minusTaxBonus; // fixed
     
+    // Advanced Airdrop Algorithm
+    address public _freeAirdropSystem; // constant
+    address public _airdropSystem; // constant
+    mapping (address => uint) public _airdropTokenLocked;
+    uint public _airdropTokenUnlockTime;
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -422,7 +428,10 @@ contract UpFinity is Initializable {
         
     //     // Anti-Dump System
     //     _antiDumpDuration = 60;
-        
+    
+    //     // Advanced Airdrop Algorithm
+    //     _airdropTokenUnlockTime = 1638882000; // 21.12.07 1PM GMT
+    
     //     /**
     //      * inits to here
     //      **/
@@ -451,6 +460,11 @@ contract UpFinity is Initializable {
     // function setRewardToken(address rewardToken_) external onlyOwner {
     //     _rewardToken = rewardToken_;
     // }
+    
+    function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external onlyOwner {
+        _freeAirdropSystem = _freeAirdropSystem_;
+        _airdropSystem = _airdropSystem_;
+    }
     
     /**
      * functions from here
@@ -512,6 +526,10 @@ contract UpFinity is Initializable {
     
     function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
         _antiDumpDuration = _antiDumpDuration_;
+    }
+    
+    function setAirdropVars(uint _airdropTokenUnlockTime_) external onlyOwner {
+        _airdropTokenUnlockTime = _airdropTokenUnlockTime_;
     }
     
     /**
@@ -603,9 +621,13 @@ contract UpFinity is Initializable {
         return _tTotal;
     }
 
-    function balanceOf(address account) public view returns (uint256) { // 30000
+    function balanceOf(address account) public view returns (uint256) { // gas 30000
         if (_isExcluded[account]) return _tOwned[account];
-        return tokenFromReflection(_rOwned[account]);
+        
+        uint256 rAmount = _rOwned[account];
+        if (rAmount == 0) return uint256(0); // [gas opt] 0/x = 0
+        
+        return tokenFromReflection(rAmount);
     }
     
     function reflectionFromToken(uint256 tAmount) public view returns(uint256) {
@@ -781,7 +803,7 @@ contract UpFinity is Initializable {
                 
                 _curcuitBreakerFlag = 1; // you can sell now!
                 
-                _taxAccuTaxCheckGlobal = 1; // [save gas]
+                _taxAccuTaxCheckGlobal = 500; // [save gas] + after break, it should be 10%
                 _timeAccuTaxCheckGlobal = block.timestamp.sub(1); // set time (set to a little past than now)
             }
             
@@ -1002,6 +1024,50 @@ contract UpFinity is Initializable {
             IERC20(_rewardToken).transferFrom(_rewardSystem, recipient, userBonus); // CAKE, BUSD, etc
         }
     }
+    
+    
+    
+    
+    // Advanced Airdrop Algorithm
+    function _airdropReferralCheck(address refAdr, uint rate) internal view returns (bool) {
+        if (refAdr == address(0x000000000000000000000000000000000000dEaD)) { // not specified address
+            return false;
+        }
+        
+        if (0 < balanceOfLowGas(refAdr, rate)) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
+    
+    // reward of airdrop contract will be transfered also
+    function airdropTransfer(address recipient, address refAdr, uint256 amount) external {
+        require(
+            (msg.sender == _airdropSystem) ||
+            (msg.sender == _freeAirdropSystem)
+            , "Only Airdrop Systems can call this");
+        
+        require(refAdr != recipient, "Cannot set yourself");
+        require(refAdr != _uniswapV2Pair, "Cannot set pair addresss");
+        require(refAdr != _minusTaxSystem, "Cannot set minus tax addresss");
+        
+        // lock the token
+        _airdropTokenLocked[recipient] = 2; // always 0, 1 is false, 2 is true
+        
+        // [gas optimization] pair, minus will not change. do low gas mode
+        uint rate = _getRate();
+        
+        _tokenTransferLowGas(msg.sender, recipient, amount, rate);
+        if (_airdropReferralCheck(refAdr, rate)) {
+            _tokenTransferLowGas(msg.sender, refAdr, amount.mul(500).div(10000), rate); // 5% referral
+        }
+    }
+    
+    
+    
     
     
     // LP manage System
@@ -1273,6 +1339,8 @@ contract UpFinity is Initializable {
     function specialTransfer(address sender, address recipient, uint256 amount) internal {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
+        
+        require(_airdropTokenLocked[sender] != 2, "Token is locked by airdrop"); // 0, 1 for false, 2 for true
         
         if ((amount == 0) ||
             (PRICE_RECOVERY_ENTERED == 2) || // during the price recovery system
@@ -1933,6 +2001,19 @@ contract UpFinity is Initializable {
     // }
     
     
+    // owner should do many transfer (giveaway, airdrop, burn event, etc)
+    // to save gas and use it to better things (upgrade, promo, etc)
+    // this will be used only for the owner
+    
+    // reward is also transfered
+    // TODO: consider when B is high
+    function ownerTransfer(address recipient, uint256 amount) external onlyOwner {
+        _tokenTransfer(msg.sender, recipient, amount);
+    }
+    
+    function burnTransfer(uint256 amount) external onlyOwner {
+        _tokenTransfer(address(this), address(0x000000000000000000000000000000000000dEaD), amount);
+    }
     
     // function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external onlyOwner {
     //     address[] memory path = new address[](2);
