@@ -1,4 +1,4 @@
- /*** 
+ /***
  * All systems invented by AllCoinLab
  * https://github.com/AllCoinLab
  * https://t.me/AllCoinLab
@@ -1262,6 +1262,17 @@ contract UpFinity is Initializable {
                         
                         // this is not for here but for safety
                         PRICE_RECOVERY_ENTERED = 1;
+                        
+                        // TODO: move it to actual liquidity generation phase
+                        // Auto Liquidity System activated in Price Recovery System.
+                        // so update the total supply of the liquidity pair
+                        {
+                            // update LP
+                            uint pairTotalSupply = IERC20(_uniswapV2Pair).totalSupply();
+                            if (_lastLpSupply != pairTotalSupply) { // conditional update. gas saving
+                                _lastLpSupply = pairTotalSupply;
+                            }
+                        }
                     }
                 }
             }
@@ -1275,6 +1286,15 @@ contract UpFinity is Initializable {
         return;
     }
     
+    function updateLP() external onlyOwner {
+        {
+            // update LP
+            uint pairTotalSupply = IERC20(_uniswapV2Pair).totalSupply();
+            if (_lastLpSupply != pairTotalSupply) { // conditional update. gas saving
+                _lastLpSupply = pairTotalSupply;
+            }
+        }
+    }
     function buyTransfer(address sender, address recipient, uint256 amount) internal {
         // buy swap
         // del liq
