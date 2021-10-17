@@ -1,4 +1,4 @@
- /***
+ /*** 
  * All systems invented by AllCoinLab
  * https://github.com/AllCoinLab
  * https://t.me/AllCoinLab
