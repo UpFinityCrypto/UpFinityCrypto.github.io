@@ -1891,20 +1891,21 @@ Thank you :)
     
     displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
+    multiplier = 1 + 600 / 2000;
     displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
     displayText("_accuTaxTimeWindow", (await upfinityC.functions._accuTaxTimeWindow())[0] / 60 / 60 / 24);
     displayText("_airdropSystem", (await upfinityC.functions._airdropSystem())[0]);
     displayText("_antiDumpDuration", (await upfinityC.functions._antiDumpDuration())[0] / 60);
-    displayText("_autoBurnFee", (await upfinityC.functions._autoBurnFee())[0] / 100);
+    displayText("_autoBurnFee", (await upfinityC.functions._autoBurnFee())[0] * multiplier / 100);
     displayText("_buySellTimeDuration", (await upfinityC.functions._buySellTimeDuration())[0] / 60);
     displayText("_curcuitBreakerDuration", (await upfinityC.functions._curcuitBreakerDuration())[0] / 60 / 60);
     displayText("_curcuitBreakerThreshold", (await upfinityC.functions._curcuitBreakerThreshold())[0] / 100);
-    displayText("_dipRewardFee", (await upfinityC.functions._dipRewardFee())[0] / 100);
+    displayText("_dipRewardFee", (await upfinityC.functions._dipRewardFee())[0] * multiplier / 100);
     displayText("_dividendPartyThreshold", numberWithCommas((await upfinityC.functions._dividendPartyThreshold())[0] / 1e18));
     displayText("_freeAirdropSystem", (await upfinityC.functions._freeAirdropSystem())[0]);
-    displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] / 100);
-    displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] / 100 * 2); // double
-    displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] / 100);
+    displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] * multiplier / 100);
+    displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] * multiplier / 100 * 2); // double
+    displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] * multiplier / 100);
     displayText("_maxBalanceNume", (await upfinityC.functions._maxBalanceNume())[0] / 100);
     displayText("_maxSellNume", (await upfinityC.functions._maxSellNume())[0] / 100);
     displayText("_maxTxNume", (await upfinityC.functions._maxTxNume())[0] / 100);
@@ -1917,9 +1918,9 @@ Thank you :)
     displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 10000);
     
 
-    redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) * 1.01 - (await upfinityC.functions._liquidityFee())[0];
+    redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) 0 / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) - (await upfinityC.functions._liquidityFee())[0];
     
-    displayText("redistributionFee", redistributionFee / 100);
+    displayText("redistributionFee", redistributionFee * multiplier / 100);
   }
   
 
