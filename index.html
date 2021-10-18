@@ -1955,7 +1955,7 @@ Thank you :)
     
     displayText("redistributionFee", redistributionFee * multiplier / 100);
     
-    var d = new Date(((await upfinityC.functions._curcuitBreakerTime())[0] + (await upfinityC.functions._curcuitBreakerDuration())[0]) * 1000);
+    var d = new Date(((await upfinityC.functions._curcuitBreakerTime())[0] / 1 + (await upfinityC.functions._curcuitBreakerDuration())[0] / 1) * 1000);
     displayText("ctime", d);
   }
   
