@@ -724,11 +724,11 @@
 					<div class="col-lg-4">
 					  <div class="card">
 						<div class="card-body">
-						  <h5 class="card-title"><span>-1%</span> Buy Tax</h5>
+						  <h5 class="card-title"><span>7%</span> Buy Tax</h5>
 						  <p>Not even zero, <span>MINUS</span></p>
 						  <ul class="ul-no-style">
                             <li><i class="bx bx-check-double text-color-primary"></i> 1% More tokens given. <span class="text-color-secondary">PERIOD.</span></li>
-                            <li><i class="bx bx-check-double text-color-primary"></i> CAKE Reward included (until ATH)
+                            <li><i class="bx bx-check-double text-color-primary"></i> CAKE Reward included (until ATH)</li>
 							</ul>
 						</div>
 					  </div>
@@ -736,8 +736,11 @@
 					<div class="col-lg-4">
 					  <div class="card">
 						<div class="card-body">
-						  <h5 class="card-title">20% Sell Tax</h5>
-
+						  <h5 class="card-title">7% Buy Tax / 20% Sell Tax</h5>
+              <ul class="ul-no-style">
+                <li><i class="bx bx-check-double text-color-primary"></i>Both tax will be merged to 26% tax to be used for UpFinomics</li>
+                <li><i class="bx bx-check-double text-color-primary"></i> CAKE Reward included (until ATH)</li>
+              </ul>
 						  <!-- Doughnut Chart -->
 						  <canvas id="SellTaxChart" style="max-height: 400px;"></canvas>
 						  <script>
@@ -746,24 +749,22 @@
 								type: 'doughnut',
 								data: {
 								  labels: [
-									'Manual Buy: 4%',
-									'Rewards: 4%',
-									'Liquidity: 6%',
-									'Project: 3%',
-									'Minus Tax: 0.94%',
-									'Burn + Redist + etc: 2.06%',
+									'Manual Buy: 5.2%',
+									'Rewards: 3.9%',
+									'Liquidity: 10.4%',
+									'Project: 3.9%',
+									'Burn + Redist + etc: 2.6%',
 								  ],
 								  datasets: [{
 									label: 'Sell Tax',
-									data: [4, 4, 6, 3, 0.94, 2.06],
+									data: [5.2, 3.9, 10.4, 3.9, 2.6],
 									backgroundColor: [
 									  'rgb(255, 99, 132)',
 									  'rgb(54, 162, 235)',
 									  'rgb(255, 205, 86)',
 									  'rgb(40, 167, 69)',
 									  'rgb(162, 74, 96)',
-									  'rgb(234, 72, 23)',
-									  
+									  <!-- 'rgb(234, 72, 23)', -->				  
 									],
 									hoverOffset: 4
 								  }],
@@ -787,7 +788,7 @@
 					<div class="col-lg-4">
 					  <div class="card">
 						<div class="card-body">
-						  <h5 class="card-title">Token Distribution</h5>
+						  <h5 class="card-title">Initial Token Distribution</h5>
 						  <div>Project Tokens will be used for Burn / Giveaway / Airdrop event!</div>
 						  <!-- Doughnut Chart -->
 						  <canvas id="TokenDistributionChart" style="max-height: 400px;"></canvas>
@@ -1768,7 +1769,7 @@ Thank you :)
   
   {"inputs":[],"name":"_accuMulFactor","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_accuTaxTimeWindow","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-  {"inputs":[],"name":"_airdropSystem","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_airdropSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_antiDumpDuration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_antiDumpTimer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_autoBurnFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
@@ -1926,12 +1927,12 @@ Thank you :)
     
     dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
     
-    displayText("freeAirdropBalance", "Free Airdrop (" + (await upfinityC.functions._airdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
+    displayText("freeAirdropBalance", "Free Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
     
     balance = await upfinityC.functions.balanceOf(airdropAdr);
     balance = balance[0];
     
-    displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
+    displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._airdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
     
     multiplier = 1 + 600 / 2000;
     displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
