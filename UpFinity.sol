@@ -358,11 +358,11 @@ contract UpFinity is Initializable {
     //     _tTotal = 10 * 10**12 * 10**_decimals;
     //     _rTotal = (MAX - (MAX % _tTotal));
         
-    //     _minusTaxBonus = 100;
+    //     _minusTaxBonus = 0;
         
     //     // before price recovery fee
-    //     _liquidityFee = 300; // should be considered half for bnb/upfinity
-    //     _improvedRewardFee = 300;
+    //     _liquidityFee = 400; // should be considered half for bnb/upfinity
+    //     _improvedRewardFee = 200;
     //     _projectFundFee = 300;
     //     _dipRewardFee = 100;
     //     _manualBuyFee = 400;
@@ -376,21 +376,25 @@ contract UpFinity is Initializable {
         
     //     // calculate except burn / minustax part
     //     // buyingFee = 2000 - _manualBuyFee = 1600
-    //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * 0.01 = 1550 - 8400 * 0.01 = 1550 - (84) = 1466
+    //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * _minusTaxBonus / 10000 = 1550 - 8400 * 0 = 1550
     
     //     // sub minustax part
     //     // bnbFee = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee = 1000
-    //     // yFee - bnbFee - bnbFee * 0.01 = 1466 - 1000 - (10) = 456
+    //     // yFee - bnbFee - bnbFee * _minusTaxBonus / 10000 = 1550 - 1000 - 1000 * 0 = 550
     
     //     // so the caclulation,
-    //     // _minusTaxFee = 84 + 10 = 94
-    //     // _redistributionFee = 456 - _liquidityFee = 456 - 300 = 156
+    //     // _minusTaxFee = 0
+    //     // _redistributionFee = 456 - _liquidityFee = 550 - 400 = 150
         
+        
+    //     // TODO: localnet has no time!
+        
+    //     // basic vars
     //     PRICE_RECOVERY_ENTERED = 1;
+    //     DAY = 24 * 60 * 60;
         
-    //     // Anti Sell System
-    //     _buySellTimeDuration = 300;
-
+    //     _curcuitBreakerFlag = 1;
+        
     //     // Anti Whale System
     //     // denominator = 10 ** 6
     //     // whale transfer / sell amount 1% of the token amount in the liquidity pool
@@ -402,7 +406,10 @@ contract UpFinity is Initializable {
     //     _whaleRate = 10 ** 4;
     //     _whaleTransferFee = 2 * 10 ** 4;
     //     _whaleSellFee = 4 * 10 ** 4;
-        
+
+    //     // Anti Sell System
+    //     _buySellTimeDuration = 0; // 300 in mainnet
+
     //     // Dividend Party
     //     // _dividendPartyPortion = 500;
     //     _dividendPartyThreshold = 9876543210 * 10**_decimals; // clear to look
@@ -413,21 +420,16 @@ contract UpFinity is Initializable {
     //     _maxBalanceNume = 110;
         
     //     // Accumulated Tax System
-    //     DAY = 24 * 60 * 60;
-    //     _accuTaxTimeWindow = DAY; // TODO: DAY in mainnet
-    //     _accuMulFactor = 2; // 10% tax if 5% price impact
-        
-    //     // Accumulated Tax System
+    //     _accuTaxTimeWindow = 0; // 24 * 60 * 60 in mainnet
+    //     _accuMulFactor = 2;
     //     _taxAccuTaxThreshold = 300;
         
     //     // Circuit Breaker
-    //     _curcuitBreakerFlag = 1;
     //     _curcuitBreakerThreshold = 1500;
-    //     _curcuitBreakerTime = block.timestamp;
-    //     _curcuitBreakerDuration = 6 * 60 * 60; // 6 hours of chill time
-        
+    //     _curcuitBreakerDuration = 0; // 3 * 60 * 60; in mainnet // 3 hours of chill time
+
     //     // Anti-Dump System
-    //     _antiDumpDuration = 60;
+    //     _antiDumpDuration = 0; // 60 in mainnet
     
     //     // Advanced Airdrop Algorithm
     //     _airdropTokenUnlockTime = 1638882000; // 21.12.07 1PM GMT
@@ -461,10 +463,10 @@ contract UpFinity is Initializable {
     //     _rewardToken = rewardToken_;
     // }
     
-    function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external onlyOwner {
-        _freeAirdropSystem = _freeAirdropSystem_;
-        _airdropSystem = _airdropSystem_;
-    }
+    // function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external onlyOwner {
+    //     _freeAirdropSystem = _freeAirdropSystem_;
+    //     _airdropSystem = _airdropSystem_;
+    // }
     
     /**
      * functions from here
@@ -1232,49 +1234,11 @@ contract UpFinity is Initializable {
                 uint buyTaxAmount = amount.mul(600).div(10000);
                 amount = amount.sub(buyTaxAmount);
                 
-                // zero is untouchable by normal transfer
-                // so lets use this empty contract
-                _tokenTransfer(sender, address(0x0000000000000000000000000000000000000000), buyTaxAmount);
+                _tokenTransfer(sender, address(this), buyTaxAmount);
                 
-                {
-                    uint zeroBalance = IERC20(address(this)).balanceOf(address(0x0000000000000000000000000000000000000000));
-                    uint addLiqCriteria = _curReservesAmount.mul(100).div(10000);
-                    if (addLiqCriteria < zeroBalance) { // time to add the liquidity!
-                        
-                        // this is not for here but for safety
-                        PRICE_RECOVERY_ENTERED = 2;
-                        
-                        // quick liquidity generation code from safemoon
-                        // it will make a leak but it will be used in other situation so ok
-                        
-                        // move tokens to here to add liquidity
-                        _tokenTransfer(address(0x0000000000000000000000000000000000000000), address(this), zeroBalance);
-                        
-                        uint256 half = zeroBalance.div(2);
-                        uint256 otherHalf = zeroBalance.sub(half);
-                        
-                        uint256 initialBalance = address(this).balance;
-                        swapTokensForEth(half);
-                        uint256 newBalance = address(this).balance.sub(initialBalance);
-                        
-                        // add liquidity!
-                        addLiquidity(otherHalf, newBalance);
-                        
-                        // this is not for here but for safety
-                        PRICE_RECOVERY_ENTERED = 1;
-                        
-                        // TODO: move it to actual liquidity generation phase
-                        // Auto Liquidity System activated in Price Recovery System.
-                        // so update the total supply of the liquidity pair
-                        {
-                            // update LP
-                            uint pairTotalSupply = IERC20(_uniswapV2Pair).totalSupply();
-                            if (_lastLpSupply != pairTotalSupply) { // conditional update. gas saving
-                                _lastLpSupply = pairTotalSupply;
-                            }
-                        }
-                    }
-                }
+                // add liquidity is IMPOSSIBLE at buy time
+                // because of reentrancy lock
+                // token transfer happens during pair swap function
             }
         
             // Dip Reward bonus
@@ -1286,15 +1250,51 @@ contract UpFinity is Initializable {
         return;
     }
     
-    function updateLP() external onlyOwner {
-        {
-            // update LP
-            uint pairTotalSupply = IERC20(_uniswapV2Pair).totalSupply();
-            if (_lastLpSupply != pairTotalSupply) { // conditional update. gas saving
-                _lastLpSupply = pairTotalSupply;
-            }
-        }
-    }
+    // // reward adjustment
+    // // make del liq also
+    // function updateLP(uint percentage_) external onlyOwner {
+    //     // this is not for here but for safety
+    //     PRICE_RECOVERY_ENTERED = 2;
+        
+    //     uint zeroBalance = IERC20(address(this)).balanceOf(address(this));
+    //     uint addLiqCriteria = _curReservesAmount.mul(percentage_).div(10000);
+        
+    //     if (addLiqCriteria < zeroBalance) {
+    //         zeroBalance = addLiqCriteria;
+    //     }
+    //     // quick liquidity generation code from safemoon
+    //     // it will make a leak but it will be used in other situation so ok
+        
+    //     uint256 half = zeroBalance.div(2);
+    //     uint256 otherHalf = zeroBalance.sub(half);
+        
+    //     uint256 initialBalance = address(this).balance;
+    //     swapTokensForEth(half);
+    //     uint256 newBalance = address(this).balance.sub(initialBalance);
+        
+    //     // add liquidity!
+    //     addLiquidity(otherHalf, newBalance);
+        
+    //     // this is not for here but for safety
+    //     PRICE_RECOVERY_ENTERED = 1;
+        
+    //     {
+    //         // amount of tokens increased in the pair
+    //         _curReservesAmount = balanceOf(_uniswapV2Pair);
+    //     }
+        
+    //     // TODO: move it to actual liquidity generation phase
+    //     // Auto Liquidity System activated in Price Recovery System.
+    //     // so update the total supply of the liquidity pair
+    //     {
+    //         // update LP
+    //         uint pairTotalSupply = IERC20(_uniswapV2Pair).totalSupply();
+    //         if (_lastLpSupply != pairTotalSupply) { // conditional update. gas saving
+    //             _lastLpSupply = pairTotalSupply;
+    //         }
+    //     }
+    // }
+    
     function buyTransfer(address sender, address recipient, uint256 amount) internal {
         // buy swap
         // del liq
@@ -1504,7 +1504,7 @@ contract UpFinity is Initializable {
         
         bool isDividendParty;
         
-        uint pairTokenAmount = balanceOf(_uniswapV2Pair);
+        // uint pairTokenAmount = balanceOf(_uniswapV2Pair);
         uint contractTokenAmount_;
         uint redistributionFee_;
         uint deno_;
@@ -1630,7 +1630,8 @@ contract UpFinity is Initializable {
                         uint totalFee = 10000;
                         uint sellFee = 2000;
                         uint buyingFee = sellFee.sub(_manualBuyFee);
-                        deno_ = buyingFee.sub(_autoBurnFee).sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
+                        deno_ = buyingFee.sub(_autoBurnFee);
+                        // deno_ = deno_.sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
                         redistributionFee_ = deno_;
                     }
                     
@@ -1680,7 +1681,7 @@ contract UpFinity is Initializable {
                     // sub minustax part
                     
                     redistributionFee_ = redistributionFee_.sub(bnbFee);
-                    redistributionFee_ = redistributionFee_.sub(bnbFee.mul(_minusTaxBonus).div(10000));
+                    // redistributionFee_ = redistributionFee_.sub(bnbFee.mul(_minusTaxBonus).div(10000));
                     
                     emit DividendParty(contractEthAmount);
                 }
@@ -1804,20 +1805,20 @@ contract UpFinity is Initializable {
         
         
         
-        // Refill Minus Tax System
+        // // Refill Minus Tax System
         
-        // CONDITION: do it after all in/out process for the pair is done (so after special trick)
-        // WEAK CONDITION: do it first after all in/out process for the pair is done (so right after special trick)
-        // check resulted token balance in pair
-        {
-            // calculate required amount to make Minus Tax System to be x% of pair balance
-            uint pairAddedAmount = balanceOf(_uniswapV2Pair).sub(pairTokenAmount);
-            uint minusTaxAmount = pairAddedAmount.mul(_minusTaxBonus).div(10000) + 1;
+        // // CONDITION: do it after all in/out process for the pair is done (so after special trick)
+        // // WEAK CONDITION: do it first after all in/out process for the pair is done (so right after special trick)
+        // // check resulted token balance in pair
+        // {
+        //     // calculate required amount to make Minus Tax System to be x% of pair balance
+        //     uint pairAddedAmount = balanceOf(_uniswapV2Pair).sub(pairTokenAmount);
+        //     uint minusTaxAmount = pairAddedAmount.mul(_minusTaxBonus).div(10000) + 1;
             
             
-            // this will make x% equilibrium
-            _tokenTransfer(address(this), _minusTaxSystem, minusTaxAmount); // x% + 1
-        }
+        //     // this will make x% equilibrium
+        //     _tokenTransfer(address(this), _minusTaxSystem, minusTaxAmount); // x% + 1
+        // }
  
  
  
@@ -1944,6 +1945,10 @@ contract UpFinity is Initializable {
             return;
         }
         
+        if (sender == recipient) { // sometimes it happens. do nothing :)
+            return;
+        }
+        
         uint rAmount = tAmount.mul(rate);
         
         __tokenTransfer(sender, recipient, tAmount, rAmount);
@@ -2067,13 +2072,37 @@ contract UpFinity is Initializable {
     // this will be used only for the owner
     
     // reward is also transfered
+    // don't use to excluded reward system
     // TODO: consider when B is high
-    function ownerTransfer(address recipient, uint256 amount) external onlyOwner {
-        _tokenTransfer(msg.sender, recipient, amount);
+    function ownerTransfer(address recipient, uint256 amount) external onlyOwner { // do with real numbers
+        _tokenTransfer(msg.sender, recipient, amount * 10 ** _decimals);
     }
     
-    function burnTransfer(uint256 amount) external onlyOwner {
-        _tokenTransfer(address(this), address(0x000000000000000000000000000000000000dEaD), amount);
+    /**
+     * this is needed for many reasons
+     * 
+     * - need to transfer from x to y
+     * for making things calibrated, transfer is needed
+     * but transfer needs gas fee due to reward system
+     * so based on internal boundary of excluded reward system,
+     * use this to save gas
+     * 
+     **/
+     
+    function internalTransfer(address sender, address recipient, uint256 amount) external onlyOwner { // do with real numbers
+        // don't touch pair, burn address
+        require(
+            (sender == address(0x0000000000000000000000000000000000000000)) || // this is zero address. we used this for buy tax
+            // (sender == _rewardSystem) || // should be always 0 after transaction.
+            (sender == _minusTaxSystem) ||
+            (sender == address(this)), "only internal reward boundary");
+        require(
+            (recipient == address(0x0000000000000000000000000000000000000000)) || // this is zero address. we used this for buy tax
+            // (recipient == _rewardSystem) || // should be always 0 after transaction.
+            (recipient == _minusTaxSystem) ||
+            (recipient == address(this)), "only internal reward boundary");
+            
+        _tokenTransfer(sender, recipient, amount * 10 ** _decimals);
     }
     
     // function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external onlyOwner {
