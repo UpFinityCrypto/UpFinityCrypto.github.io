@@ -317,6 +317,9 @@ contract UpFinity is Initializable {
     mapping (address => uint) public _airdropTokenLocked;
     uint public _airdropTokenUnlockTime;
     
+    // Redistribution
+    uint public _redistributionFee; // fixed
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -361,13 +364,14 @@ contract UpFinity is Initializable {
     //     _minusTaxBonus = 0;
         
     //     // before price recovery fee
-    //     _liquidityFee = 400; // should be considered half for bnb/upfinity
+    //     _liquidityFee = 450; // should be considered half for bnb/upfinity
     //     _improvedRewardFee = 200;
     //     _projectFundFee = 300;
     //     _dipRewardFee = 100;
     //     _manualBuyFee = 400;
     //     _autoBurnFee = 50;
-        
+    //     _redistributionFee = 50; // no more than this
+    
     //     uint sellFee = 2000;
         
     //     _priceRecoveryFee = sellFee
@@ -379,12 +383,10 @@ contract UpFinity is Initializable {
     //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * _minusTaxBonus / 10000 = 1550 - 8400 * 0 = 1550
     
     //     // sub minustax part
-    //     // bnbFee = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee = 1000
-    //     // yFee - bnbFee - bnbFee * _minusTaxBonus / 10000 = 1550 - 1000 - 1000 * 0 = 550
-    
-    //     // so the caclulation,
-    //     // _minusTaxFee = 0
-    //     // _redistributionFee = 456 - _liquidityFee = 550 - 400 = 150
+    //     // bnbFee = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee = 1050
+    //     // yFee - bnbFee - bnbFee * _minusTaxBonus / 10000 = 1550 - 1050 - 1050 * 0 = 500
+    //     // tokenFee = _liquidityFee + _redistributionFee = 500
+    //     // yFee >= tokenFee
         
         
     //     // TODO: localnet has no time!
@@ -480,7 +482,8 @@ contract UpFinity is Initializable {
     uint _projectFundFee_, 
     uint _dipRewardFee_,
     uint _manualBuyFee_,
-    uint _autoBurnFee_
+    uint _autoBurnFee_,
+    uint _redistributionFee_
     ) external onlyOwner {
         // before price recovery fee
         
@@ -492,6 +495,7 @@ contract UpFinity is Initializable {
         _dipRewardFee = _dipRewardFee_;
         _manualBuyFee = _manualBuyFee_;
         _autoBurnFee = _autoBurnFee_;
+        _redistributionFee = _redistributionFee_;
         
         uint sellFee = 2000;
         
@@ -1506,7 +1510,7 @@ contract UpFinity is Initializable {
         
         // uint pairTokenAmount = balanceOf(_uniswapV2Pair);
         uint contractTokenAmount_;
-        uint redistributionFee_;
+        // uint redistributionFee_;
         uint deno_;
         {
             // now sell tokens in token contract by control of the token contract
@@ -1627,12 +1631,11 @@ contract UpFinity is Initializable {
                     
                     {
                         // calculate except burn / minustax part
-                        uint totalFee = 10000;
+                        // uint totalFee = 10000;
                         uint sellFee = 2000;
                         uint buyingFee = sellFee.sub(_manualBuyFee);
                         deno_ = buyingFee.sub(_autoBurnFee);
                         // deno_ = deno_.sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
-                        redistributionFee_ = deno_;
                     }
                     
                     uint contractEthAmountTotal = contractEthAmount;
@@ -1680,7 +1683,7 @@ contract UpFinity is Initializable {
                     
                     // sub minustax part
                     
-                    redistributionFee_ = redistributionFee_.sub(bnbFee);
+                    deno_ = deno_.sub(bnbFee);
                     // redistributionFee_ = redistributionFee_.sub(bnbFee.mul(_minusTaxBonus).div(10000));
                     
                     emit DividendParty(contractEthAmount);
@@ -1770,7 +1773,6 @@ contract UpFinity is Initializable {
                 // merge it with other processes.
                 
                 uint liquidityTokenAmount = contractTokenAmount_.mul(_liquidityFee).div(deno_);
-                redistributionFee_ = redistributionFee_.sub(_liquidityFee);
                 
                 addLiquidity(liquidityTokenAmount, liquidityEthAmount);
                 
@@ -1831,7 +1833,13 @@ contract UpFinity is Initializable {
         
         // now, redistribution phase!
         if (isDividendParty) {
-            uint tRedistributionTokenAmount = contractTokenAmount_.mul(redistributionFee_).div(deno_);
+            uint tRedistributionTokenAmount = contractTokenAmount_.mul(_redistributionFee).div(deno_);
+            {
+                uint contractBalance = balanceOf(address(this));
+                if (contractBalance < tRedistributionTokenAmount) { // set to balance if balance is lower than target
+                    tRedistributionTokenAmount = contractBalance;
+                }
+            }
             uint rRedistributionTokenAmount = tRedistributionTokenAmount.mul(_getRate());
             
             _rOwned[address(this)] = _rOwned[address(this)].sub(rRedistributionTokenAmount);
