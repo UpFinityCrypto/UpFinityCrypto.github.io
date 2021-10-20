@@ -1628,7 +1628,7 @@ Thank you :)
       }
       
       
-      communityBonus = await freeAirdropC.functions._communityBonus(address);
+      communityBonus = (await freeAirdropC.functions._communityBonus(address))[0] / 100;
       
       elem = document.getElementById("displayCommunityAdrBonus");
       elem.innerHTML = "You will get [" + communityBonus + "]% more tokens!";
