@@ -508,10 +508,10 @@ contract UpFinity is Initializable {
     //   _buySellTimeDuration = buySellTimeDuration_;
     // }
     
-    // function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
-    //     _dividendPartyPortion = dividendPartyPortion_;
-    //     _dividendPartyThreshold = dividendPartyThreshold_;
-    // }
+    function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
+        _dividendPartyPortion = dividendPartyPortion_;
+        _dividendPartyThreshold = dividendPartyThreshold_;
+    }
     
     // function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external onlyOwner {
     //     _maxTxNume = _maxTxNume_;
