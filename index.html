@@ -523,12 +523,14 @@
                     <h6 class="text-center ">Balance (<span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="balanceStatus" class="text-center"></div>
                     <div id="balancePercentageStatus" class="text-center"></div>
+                    <div id="balanceIcon"></div>
                 </div>
               </div>
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
                     <h6 class="text-center ">Limit Per 1 Buy (10% Liq & <span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="oneBuyLimitStatus" class="text-center"></div>
+                    
                 </div>
               </div>
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -1874,6 +1876,21 @@ Thank you :)
     
     balancePercentage = round(balance / totalSupply * 100, 2);
     displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
+    if (balancePercentage >= 1) {
+      displayText("balanceIcon", 🐳);
+    } else if (balancePercentage >= 0.3) {
+      displayText("balanceIcon", 🦈);
+    } else if (balancePercentage >= 0.1) {
+      displayText("balanceIcon", 🐬);
+    } else if (balancePercentage >= 0.03) {
+      displayText("balanceIcon", 🐟);
+    } else if (balancePercentage >= 0.01) {
+      displayText("balanceIcon", 🐙);
+    } else if (balancePercentage >= 0.003) {
+      displayText("balanceIcon", 🦀);
+    } else if (balancePercentage >= 0.001) {
+      displayText("balanceIcon", 🦐);
+    } 
     
     balanceLimit = totalSupply.div(100); // 1% of total supply
     
