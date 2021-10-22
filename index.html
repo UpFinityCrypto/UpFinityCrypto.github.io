@@ -523,7 +523,7 @@
                     <h6 class="text-center ">Balance (<span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="balanceStatus" class="text-center"></div>
                     <div id="balancePercentageStatus" class="text-center"></div>
-                    <div id="balanceIcon"></div>
+                    <div id="balanceIcon" style="font-size: 100px;"></div>
                 </div>
               </div>
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -1877,19 +1877,19 @@ Thank you :)
     balancePercentage = round(balance / totalSupply * 100, 2);
     displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
     if (balancePercentage >= 1) {
-      displayText("balanceIcon", 0x1F40B);
+      displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
     } else if (balancePercentage >= 0.3) {
-      displayText("balanceIcon", 🦈);
+      displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
     } else if (balancePercentage >= 0.1) {
-      displayText("balanceIcon", 🐬);
+      displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
     } else if (balancePercentage >= 0.03) {
-      displayText("balanceIcon", 🐟);
+      displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
     } else if (balancePercentage >= 0.01) {
-      displayText("balanceIcon", 🐙);
+      displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
     } else if (balancePercentage >= 0.003) {
-      displayText("balanceIcon", 🦀);
+      displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
     } else if (balancePercentage >= 0.001) {
-      displayText("balanceIcon", 🦐);
+      displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
     } 
     
     balanceLimit = totalSupply.div(100); // 1% of total supply
