@@ -1947,6 +1947,7 @@ Thank you :)
     if (maxSellLiq_ < maxSellLiq) {
       maxSellLiq = maxSellLiq_;
     }
+    maxSellLiq = BNB(maxSellLiq);
     displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');
     
     balanceInfo = await provider.getBalance(rewardAdr);
