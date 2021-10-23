@@ -533,7 +533,6 @@
                     <h6>(<span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="balanceStatus" class="text-center"></div>
                     <div id="balancePercentageStatus" class="text-center"></div>
-                    <div id="balanceIcon" style="font-size: 100px;"></div>
                 </div>
               </div>
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -1940,7 +1939,7 @@ Thank you :)
     
     // it may display last big value
     _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
-    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck())[0] / 1;
+    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
     maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
     _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
     _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
