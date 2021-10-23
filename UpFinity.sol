@@ -320,6 +320,9 @@ contract UpFinity is Initializable {
     // Redistribution
     uint public _redistributionFee; // fixed
     
+    // First Penguin Algorithm
+    uint public _firstPenguinWasBuy; // fixed
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -525,18 +528,24 @@ contract UpFinity is Initializable {
     //     _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
     // }
     
-    function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external onlyOwner {
-        _curcuitBreakerThreshold = _curcuitBreakerThreshold_;
-        _curcuitBreakerDuration = _curcuitBreakerDuration_;
-    }
+    // function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external onlyOwner {
+    //     _curcuitBreakerThreshold = _curcuitBreakerThreshold_;
+    //     _curcuitBreakerDuration = _curcuitBreakerDuration_;
+    // }
     
-    function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
-        _antiDumpDuration = _antiDumpDuration_;
-    }
+    // function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
+    //     _antiDumpDuration = _antiDumpDuration_;
+    // }
     
-    function setAirdropVars(uint _airdropTokenUnlockTime_) external onlyOwner {
-        _airdropTokenUnlockTime = _airdropTokenUnlockTime_;
-    }
+    // function setAirdropVars(uint _airdropTokenUnlockTime_) external onlyOwner {
+    //     _airdropTokenUnlockTime = _airdropTokenUnlockTime_;
+    // }
+    
+    // function setAntiWhaleVars(uint _whaleRate_, uint _whaleTransferFee_, uint _whaleSellFee_) external onlyOwner {
+    //     _whaleRate = _whaleRate_;
+    //     _whaleTransferFee = _whaleTransferFee_;
+    //     _whaleSellFee = _whaleSellFee_;
+    // }
     
     /**
     * Tokenomics Plan for Fair Launch
@@ -737,11 +746,6 @@ contract UpFinity is Initializable {
     
     // Improved Anti Whale System
     // details in: https://github.com/AllCoinLab/AllCoinLab/wiki
-    function setWhaleRate(uint whaleRate_, uint whaleTransferTax_, uint whaleSellTax_) external onlyOwner {
-        _whaleRate = whaleRate_;
-        _whaleTransferFee = whaleTransferTax_;
-        _whaleSellFee = whaleSellTax_;
-    }
     
     // based on token
     // send portion to the marketing
@@ -1335,7 +1339,10 @@ contract UpFinity is Initializable {
             }  
         }
         
+        // now last trade was buy
+        _firstPenguinWasBuy = 1;
     }
+    
     function _sellTransfer(address sender, address recipient, uint256 amount) internal {
         // core condition of the Price Recovery System
         // In order to buy AFTER the sell,
@@ -1399,6 +1406,9 @@ contract UpFinity is Initializable {
                 _lastLpSupply = pairTotalSupply;
             }
         }
+        
+        // now last trade was sell
+        _firstPenguinWasBuy = 2;
     }
     
     function specialTransfer(address sender, address recipient, uint256 amount) internal {
@@ -1494,6 +1504,198 @@ contract UpFinity is Initializable {
         return buyEthAmount;
     }
     
+    function walletProcess(uint walletEthAmount, bool isWhaleSell) internal returns (uint, uint, uint) {
+        uint firstPenguinliquidityEthAmount;
+        uint priceRecoveryEthAmount;
+        uint burnEthAmount;
+        
+        /**
+         * 
+         * Normal Case
+         * 20% sell tax
+         * = 4% manual + 16% buy 
+         * = 4% manual + 15.5% price recovery + 0.5% auto burn
+         * so 15.5% stacks
+         * 
+         * First Penguin Case
+         * 20% sell tax
+         * = 9.5% liquidity BNB + 10.5% buy
+         * = 9.5% liquidity BNB + 10% price recovery + 0.5% auto burn
+         * = 9.5% liquidity BNB + 9.5% liquidity token + 0.5% auto burn + 0.5%
+         * so 0.5+% stacks
+         * 
+         **/
+         
+        {
+            uint walletEthAmountTotal = walletEthAmount;
+            uint firstPenguinWasBuy = _firstPenguinWasBuy; // [save gas]
+            
+            if (firstPenguinWasBuy != 1) { // buy 1, sell 2
+                // Manual Buy System
+                {
+                    uint manualBuySystemAmount = walletEthAmountTotal.mul(_manualBuyFee).div(10000);
+                    // SENDBNB(address(this), manualBuySystemAmount); // leave bnb here
+                    walletEthAmount = walletEthAmount.sub(manualBuySystemAmount);
+                }
+            } else {
+                // Liquidity BNB
+                {
+                    firstPenguinliquidityEthAmount = walletEthAmountTotal.mul(_manualBuyFee.add(_priceRecoveryFee.sub(1000))).div(10000);
+                    walletEthAmount = walletEthAmount.sub(firstPenguinliquidityEthAmount);
+                }
+            }
+            
+            // Price Recovery System
+            {
+                if (firstPenguinWasBuy != 1) { // buy 1, sell 2
+                    priceRecoveryEthAmount = walletEthAmountTotal.mul(_priceRecoveryFee).div(10000);
+                } else {
+                    priceRecoveryEthAmount = walletEthAmountTotal.mul(1000).div(10000);
+                }
+                // use this to buy again
+                walletEthAmount = walletEthAmount.sub(priceRecoveryEthAmount);
+            }
+            
+            // Auto Burn System
+            {
+                burnEthAmount = walletEthAmountTotal.mul(_autoBurnFee).div(10000);
+                // buy and burn at last buy
+                walletEthAmount = walletEthAmount.sub(burnEthAmount);
+            }
+            
+            // Anti Whale System
+            // whale sell will be charged 3% tax at initial amount
+            {
+                uint antiWhaleEthAmount;
+                if (isWhaleSell) {
+                    antiWhaleEthAmount = walletEthAmountTotal.mul(_whaleSellFee).div(10 ** 6);
+                    walletEthAmount = walletEthAmount.sub(antiWhaleEthAmount);
+                    
+                    SENDBNB(_projectFund, antiWhaleEthAmount);
+                } else {
+                    // Future use
+                }
+            }
+            
+            // send BNB to user (80%)
+            // if anti whale (<80%)
+            {
+                // in case of token -> BNB,
+                // router checks slippage by router's WBNB balance
+                // so send this to router by WBNB
+                address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
+                IWETH(WBNB).deposit{value: walletEthAmount}();
+                IERC20(WBNB).transfer(_uniswapV2Router, walletEthAmount);
+                
+                // TODO: solve this case
+                // in case of token -> WBNB,
+                // should be sent to user directly. router checks user's balance
+            }
+        }
+        return (firstPenguinliquidityEthAmount, priceRecoveryEthAmount, burnEthAmount);
+    }
+    
+    function dividendPartyProcess(uint contractEthAmount) internal returns (uint, uint, uint) {
+        uint deno_;
+        uint liquidityEthAmount;
+        {
+            // calculate except burn / minustax part
+            // uint totalFee = 10000;
+            uint sellFee = 2000;
+            uint buyingFee = sellFee.sub(_manualBuyFee);
+            deno_ = buyingFee.sub(_autoBurnFee);
+            // deno_ = deno_.sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
+        }
+        
+        uint contractEthAmountTotal = contractEthAmount;
+        uint bnbFee;
+        
+        // Dip Reward System
+        {
+            uint dipRewardAmount = contractEthAmountTotal.mul(_dipRewardFee).div(deno_);
+            contractEthAmount = contractEthAmount.sub(dipRewardAmount);
+            bnbFee = bnbFee.add(_dipRewardFee);
+            
+            // [save gas] send WBNB. All converted to CAKE at buy time
+            address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
+            IWETH(WBNB).deposit{value: dipRewardAmount}();
+            IERC20(WBNB).transfer(_rewardSystem, dipRewardAmount);
+        }
+        
+        // Improved Reward System
+        {
+            uint improvedRewardAmount = contractEthAmountTotal.mul(_improvedRewardFee).div(deno_);
+            contractEthAmount = contractEthAmount.sub(improvedRewardAmount);
+            bnbFee = bnbFee.add(_improvedRewardFee);
+            
+            SENDBNB(_rewardSystem, improvedRewardAmount);
+        }
+        
+        // Project Fund
+        {
+            uint projectFundAmount = contractEthAmountTotal.mul(_projectFundFee).div(deno_);
+            contractEthAmount = contractEthAmount.sub(projectFundAmount);
+            bnbFee = bnbFee.add(_projectFundFee);
+            
+            SENDBNB(_projectFund, projectFundAmount);
+        }
+        
+        // Liquidity BNB
+        {
+            liquidityEthAmount = contractEthAmountTotal.mul(_liquidityFee).div(deno_);
+            contractEthAmount = contractEthAmount.sub(liquidityEthAmount);
+            bnbFee = bnbFee.add(_liquidityFee);
+            
+            // SENDBNB(address(this), liquidityEthAmount);
+            
+        }
+        
+        // sub minustax part
+        
+        deno_ = deno_.sub(bnbFee);
+        // redistributionFee_ = redistributionFee_.sub(bnbFee.mul(_minusTaxBonus).div(10000));
+        
+        emit DividendParty(contractEthAmountTotal);
+        
+        return (contractEthAmount, deno_, liquidityEthAmount);
+    }
+    
+    
+    // this is not based on tokenomics strict proportion
+    // but based on serial proportion
+    // so it may be different with calculation at the token phase
+    // but in the liquidity / redistribution phase, it checks with actual balance so it is ok
+    function burnProcess(
+        uint contractTokenAmount_, 
+        uint contractEthAmount, 
+        uint priceRecoveryEthAmount,
+        uint burnEthAmount,
+        uint rate
+        ) internal returns (uint, uint) {
+        uint priceRecoveryTokenAmount;
+        {
+            // Buy to Auto Burn. Do it at the last to do safe procedure
+            // [gas save] add to 2nd buy
+            
+            {
+                // uint burnTokenAmount = contractTokenAmount_.mul(expectedBurnTokenAmount).div(expectedContractTokenAmount.add(expectedPriceRecoveryTokenAmount).add(expectedBurnTokenAmount));
+                uint burnTokenAmount = contractTokenAmount_.mul(burnEthAmount).div(contractEthAmount.add(priceRecoveryEthAmount).add(burnEthAmount));
+                contractTokenAmount_ = contractTokenAmount_.sub(burnTokenAmount);
+                
+                _tokenTransferLowGas(address(this), address(0x000000000000000000000000000000000000dEaD), burnTokenAmount, rate);
+            }
+            
+            // TODO: should be combined calculation but stack too deep
+            {
+                // priceRecoveryTokenAmount = contractTokenAmount_.mul(expectedPriceRecoveryTokenAmount).div(expectedContractTokenAmount.add(expectedPriceRecoveryTokenAmount));
+                priceRecoveryTokenAmount = contractTokenAmount_.mul(priceRecoveryEthAmount).div(contractEthAmount.add(priceRecoveryEthAmount));
+                contractTokenAmount_ = contractTokenAmount_.sub(priceRecoveryTokenAmount);
+            }
+        }
+        
+        return (contractTokenAmount_, priceRecoveryTokenAmount);
+    }
+    
     function _transfer(address from, address to, uint256 amount) internal {
         // only sell process comes here
         // and tokens are in token contract
@@ -1510,13 +1712,13 @@ contract UpFinity is Initializable {
         
         // uint pairTokenAmount = balanceOf(_uniswapV2Pair);
         uint contractTokenAmount_;
-        // uint redistributionFee_;
         uint deno_;
         {
             // now sell tokens in token contract by control of the token contract
             contractTokenAmount_ = balanceOf(address(this)).sub(amount);
-            if (_dividendPartyThreshold < contractTokenAmount_) { // sell c token if exceeds threshold
+            if (_dividendPartyThreshold < contractTokenAmount_) { // dividend party!!
                 contractTokenAmount_ = _dividendPartyThreshold;
+                isDividendParty = true;
             } else {
                 contractTokenAmount_ = 0;
             }
@@ -1524,6 +1726,8 @@ contract UpFinity is Initializable {
             // [save gas] make only 1 sell and divide by calculated eth
             // uint ethAmounts = new uint[](3); // if stack too deep
             uint contractEthAmount;
+            
+            uint firstPenguinLiquidityEthAmount;
             uint priceRecoveryEthAmount;
             uint burnEthAmount;
             {
@@ -1532,7 +1736,7 @@ contract UpFinity is Initializable {
                     // calculated eth
                     (uint rB, uint rT) = getReserves();
                     {
-                        if (0 < contractTokenAmount_) {
+                        if (isDividendParty) {
                             (contractEthAmount, rT, rB) = getAmountOut(contractTokenAmount_, rT, rB); // sell c first
                         }
                     }
@@ -1544,149 +1748,29 @@ contract UpFinity is Initializable {
                     // [save gas] 2 sell -> 1 sell
                     // [9/24] to view the dividend party clearly, divide it to 2 sell
                     uint selledEthAmount = address(this).balance;
-                    if (0 < contractTokenAmount_) {
+                    if (isDividendParty) {
                         swapTokensForEth(contractTokenAmount_);
                     }
                     swapTokensForEth(amount);
                     selledEthAmount = address(this).balance.sub(selledEthAmount);
                     
-                    if (0 < contractTokenAmount_) { // contractEthAmount = 0 if contractTokenAmount_ = 0
+                    if (isDividendParty) {
                         contractEthAmount = selledEthAmount.mul(contractEthAmount).div(contractEthAmount.add(walletEthAmount));
                     }
-                    walletEthAmount = selledEthAmount.sub(contractEthAmount);
+                    walletEthAmount = selledEthAmount.sub(contractEthAmount); // if not party, contractEthAmount = 0
                 }
-    
-                
-    
-    
-    
+
                 // sell: token -> bnb phase
-            
-            
-            
+
                 // wallet first to avoid stack
-                {
-                    uint walletEthAmountTotal = walletEthAmount;
-                    
-                    // Manual Buy System
-                    {
-                        uint manualBuySystemAmount = walletEthAmountTotal.mul(_manualBuyFee).div(10000);
-                        // SENDBNB(address(this), manualBuySystemAmount); // leave bnb here
-                        walletEthAmount = walletEthAmount.sub(manualBuySystemAmount);
-                    }
-    
-                    // Auto Burn System
-                    {
-                        burnEthAmount = walletEthAmountTotal.mul(_autoBurnFee).div(10000);
-                        // buy and burn at last buy
-                        walletEthAmount = walletEthAmount.sub(burnEthAmount);
-                    }
-                    
-                    // Price Recovery System
-                    {
-                        priceRecoveryEthAmount = walletEthAmountTotal.mul(_priceRecoveryFee).div(10000);
-                        // use this to buy again
-                        walletEthAmount = walletEthAmount.sub(priceRecoveryEthAmount);
-                    }
-                    
-    
-                    
-                    // Anti Whale System
-                    // whale sell will be charged 3% tax at initial amount
-                    {
-                        uint antiWhaleEthAmount;
-                        if (isWhaleSell) {
-                            antiWhaleEthAmount = walletEthAmountTotal.mul(_whaleSellFee).div(10 ** 6);
-                            walletEthAmount = walletEthAmount.sub(antiWhaleEthAmount);
-                            
-                            SENDBNB(_projectFund, antiWhaleEthAmount);
-                        } else {
-                            // Future use
-                        }
-                    }
-                    
-                    // send BNB to user (80%)
-                    // if anti whale (<80%)
-                    {
-                        // in case of token -> BNB,
-                        // router checks slippage by router's WBNB balance
-                        // so send this to router by WBNB
-                        address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
-                        IWETH(WBNB).deposit{value: walletEthAmount}();
-                        IERC20(WBNB).transfer(_uniswapV2Router, walletEthAmount);
-                        
-                        // TODO: solve this case
-                        // in case of token -> WBNB,
-                        // should be sent to user directly. router checks user's balance
-                    }
-                }
+                (firstPenguinLiquidityEthAmount, priceRecoveryEthAmount, burnEthAmount) = walletProcess(walletEthAmount, isWhaleSell);
             }
                 
 
             uint liquidityEthAmount;
             {
-                if (0 < contractTokenAmount_) {
-                    // dividend party !!!
-                    isDividendParty = true;
-                    
-                    {
-                        // calculate except burn / minustax part
-                        // uint totalFee = 10000;
-                        uint sellFee = 2000;
-                        uint buyingFee = sellFee.sub(_manualBuyFee);
-                        deno_ = buyingFee.sub(_autoBurnFee);
-                        // deno_ = deno_.sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
-                    }
-                    
-                    uint contractEthAmountTotal = contractEthAmount;
-                    uint bnbFee;
-                    
-                    // Dip Reward System
-                    {
-                        uint dipRewardAmount = contractEthAmountTotal.mul(_dipRewardFee).div(deno_);
-                        contractEthAmount = contractEthAmount.sub(dipRewardAmount);
-                        bnbFee = bnbFee.add(_dipRewardFee);
-                        
-                        // [save gas] send WBNB. All converted to CAKE at buy time
-                        address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
-                        IWETH(WBNB).deposit{value: dipRewardAmount}();
-                        IERC20(WBNB).transfer(_rewardSystem, dipRewardAmount);
-                    }
-                    
-                    // Improved Reward System
-                    {
-                        uint improvedRewardAmount = contractEthAmountTotal.mul(_improvedRewardFee).div(deno_);
-                        contractEthAmount = contractEthAmount.sub(improvedRewardAmount);
-                        bnbFee = bnbFee.add(_improvedRewardFee);
-                        
-                        SENDBNB(_rewardSystem, improvedRewardAmount);
-                    }
-                    
-                    // Project Fund
-                    {
-                        uint projectFundAmount = contractEthAmountTotal.mul(_projectFundFee).div(deno_);
-                        contractEthAmount = contractEthAmount.sub(projectFundAmount);
-                        bnbFee = bnbFee.add(_projectFundFee);
-                        
-                        SENDBNB(_projectFund, projectFundAmount);
-                    }
-                    
-                    // Liquidity BNB
-                    {
-                        liquidityEthAmount = contractEthAmountTotal.mul(_liquidityFee).div(deno_);
-                        contractEthAmount = contractEthAmount.sub(liquidityEthAmount);
-                        bnbFee = bnbFee.add(_liquidityFee);
-                        
-                        // SENDBNB(address(this), liquidityEthAmount);
-                        
-                    }
-                    
-                    // sub minustax part
-                    
-                    deno_ = deno_.sub(bnbFee);
-                    // redistributionFee_ = redistributionFee_.sub(bnbFee.mul(_minusTaxBonus).div(10000));
-                    
-                    emit DividendParty(contractEthAmount);
+                if (isDividendParty) {
+                    (contractEthAmount, deno_, liquidityEthAmount) = dividendPartyProcess(contractEthAmount);
                 }
             }
             
@@ -1697,27 +1781,29 @@ contract UpFinity is Initializable {
             // now buy tokens to token contract by control of the token contract
             // it may not exactly x% now, but treat as x%
             
+            uint priceRecoveryTokenAmount;
             // TODO: liquidity 1% buy first
             {
                 
-                // [gas save] 3 buy -> 2 buy
-                uint expectedContractTokenAmount;
-                uint expectedPriceRecoveryTokenAmount;
-                uint expectedBurnTokenAmount;
-                {
-                    // calculated token
-                    (uint rB, uint rT) = getReserves();
-                    {
-                        if (0 < contractEthAmount) {
-                            (expectedContractTokenAmount, rB, rT) = getAmountOut(contractEthAmount, rB, rT); // buy c first
-                        }
-                    }
-                    (expectedPriceRecoveryTokenAmount, rB, rT) = getAmountOut(priceRecoveryEthAmount, rB, rT); // buy wallet token: slippage more
-                    (expectedBurnTokenAmount, rB, rT) = getAmountOut(burnEthAmount, rB, rT);
-                }
+                // [gas save] set to normal proportional
                 
-                // [gas save] 3 buy -> 2 buy
-                if (0 < contractEthAmount) {
+                // // [gas save] 3 buy -> 2 buy
+                // uint expectedContractTokenAmount;
+                // uint expectedPriceRecoveryTokenAmount;
+                // uint expectedBurnTokenAmount;
+                // {
+                //     // calculated token
+                //     (uint rB, uint rT) = getReserves();
+                //     {
+                //         if (isDividendParty) {
+                //             (expectedContractTokenAmount, rB, rT) = getAmountOut(contractEthAmount, rB, rT); // buy c first
+                //         }
+                //     }
+                //     (expectedPriceRecoveryTokenAmount, rB, rT) = getAmountOut(priceRecoveryEthAmount, rB, rT); // buy wallet token: slippage more
+                //     (expectedBurnTokenAmount, rB, rT) = getAmountOut(burnEthAmount, rB, rT);
+                // }
+
+                if (isDividendParty) { // [gas save] 3 buy -> 2 buy
                     swapEthForTokens(contractEthAmount, _rewardSystem);
                     swapEthForTokens(priceRecoveryEthAmount.add(burnEthAmount), _rewardSystem);
                 } else {
@@ -1727,31 +1813,18 @@ contract UpFinity is Initializable {
                 
                 // workaround. send token back to here
                 {
-                    // [save gas] pair, minus fixed
+                    ///////////////////////////////////////////////// [LOW GAS ZONE] start
                     uint rate = _getRate();
                     contractTokenAmount_ = balanceOfLowGas(_rewardSystem, rate);
                     _tokenTransferLowGas(_rewardSystem, address(this), contractTokenAmount_, rate);
                     
-                    {
-                        // Buy to Auto Burn. Do it at the last to do safe procedure
-                        // [gas save] add to 2nd buy
-                        
-                        // TODO: serial proportional
-                        {
-                            uint burnTokenAmount = contractTokenAmount_.mul(expectedBurnTokenAmount).div(expectedContractTokenAmount.add(expectedPriceRecoveryTokenAmount).add(expectedBurnTokenAmount));
-                            // uint burnTokenAmount = contractTokenAmount_.mul(burnEthAmount).div(contractEthAmount.add(priceRecoveryEthAmount).add(burnEthAmount));
-                            contractTokenAmount_ = contractTokenAmount_.sub(burnTokenAmount);
-                            
-                            _tokenTransferLowGas(address(this), address(0x000000000000000000000000000000000000dEaD), burnTokenAmount, rate);
-                        }
-                        
-                        // TODO: should be combined calculation but stack too deep
-                        {
-                            uint priceRecoveryTokenAmount = contractTokenAmount_.mul(expectedPriceRecoveryTokenAmount).div(expectedContractTokenAmount.add(expectedPriceRecoveryTokenAmount));
-                            // uint priceRecoveryTokenAmount = contractTokenAmount_.mul(priceRecoveryEthAmount).div(contractEthAmount.add(priceRecoveryEthAmount));
-                            contractTokenAmount_ = contractTokenAmount_.sub(priceRecoveryTokenAmount);
-                        }
-                    }
+                    (contractTokenAmount_, priceRecoveryTokenAmount) = burnProcess(
+                        contractTokenAmount_, 
+                        contractEthAmount, 
+                        priceRecoveryEthAmount,
+                        burnEthAmount, 
+                        rate);
+                    ///////////////////////////////////////////////// [LOW GAS ZONE] end
                 }
             }
 
@@ -1761,10 +1834,30 @@ contract UpFinity is Initializable {
  
             // buy: BNB -> token phase
  
- 
- 
- 
-
+            
+            /**
+             * 
+             * Normal Case
+             * 20% sell tax
+             * = 4% manual + 16% buy 
+             * = 4% manual + 15.5% price recovery + 0.5% auto burn
+             * so 15.5% stacks
+             * 
+             * First Penguin Case
+             * 20% sell tax
+             * = 9.5% liquidity BNB + 10.5% buy
+             * = 9.5% liquidity BNB + 10% price recovery + 0.5% auto burn
+             * = 9.5% liquidity BNB + 9.5% liquidity token + 0.5% auto burn + 0.5%
+             * so 0.5+% stacks
+             * 
+             **/
+             
+            if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
+                uint firstPenguinLiquidityTokenAmount = priceRecoveryTokenAmount.mul(_manualBuyFee.add(_priceRecoveryFee.sub(1000))).div(1000);
+                
+                addLiquidity(firstPenguinLiquidityTokenAmount, firstPenguinLiquidityEthAmount);
+            }
+            
             if (isDividendParty) { // dividend party
                 // SafeMoon has BNB leaking issue at adding liquidity
                 // https://www.certik.org/projects/safemoon
@@ -1840,10 +1933,13 @@ contract UpFinity is Initializable {
                     tRedistributionTokenAmount = contractBalance;
                 }
             }
-            uint rRedistributionTokenAmount = tRedistributionTokenAmount.mul(_getRate());
             
-            _rOwned[address(this)] = _rOwned[address(this)].sub(rRedistributionTokenAmount);
-            _reflectFee(rRedistributionTokenAmount, tRedistributionTokenAmount);
+            if (0 < tRedistributionTokenAmount) { // [save gas] only do when above 0
+                uint rRedistributionTokenAmount = tRedistributionTokenAmount.mul(_getRate());
+                
+                _rOwned[address(this)] = _rOwned[address(this)].sub(rRedistributionTokenAmount);
+                _reflectFee(rRedistributionTokenAmount, tRedistributionTokenAmount);
+            }
         }
         
         // checked and used. so set to default
@@ -1864,6 +1960,9 @@ contract UpFinity is Initializable {
         // // workaround. send token back to here
         // uint buyedAmount = balanceOf(_rewardSystem);
         // _tokenTransfer(_rewardSystem, address(this), buyedAmount);
+        
+        // now last trade was buy
+        _firstPenguinWasBuy = 1;
     }
     
     
