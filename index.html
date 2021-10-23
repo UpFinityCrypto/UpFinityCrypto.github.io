@@ -489,6 +489,7 @@
         </div>
       </div>
     </section><!-- End About Section -->
+   
     
     
     <!-- ======= About Section ======= -->
@@ -496,7 +497,7 @@
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Sell Protection (UPGRADING NOW)</h2>
+          <h2>Status (UPGRADING NOW)</h2>
         </div>
 
         <div class="row">
@@ -520,7 +521,16 @@
             <div class="row mt-5">
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
-                    <h6 class="text-center ">Balance (<span id="_maxBalanceNume">1.1</span>% Max)</h6>
+                    <h5 class="text-center ">Limit Per 1 Buy</h5>
+                    <h6>(<10% Impact)</h6>
+                    <div id="oneBuyLimitStatus" class="text-center"></div>
+                    
+                </div>
+              </div>
+              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h5 class="text-center ">Balance</h5>
+                    <h6>(<span id="_maxBalanceNume">1.1</span>% Max)</h6>
                     <div id="balanceStatus" class="text-center"></div>
                     <div id="balancePercentageStatus" class="text-center"></div>
                     <div id="balanceIcon" style="font-size: 100px;"></div>
@@ -528,14 +538,31 @@
               </div>
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
-                    <h6 class="text-center ">Limit Per 1 Buy (10% Liq & <span id="_maxBalanceNume">1.1</span>% Max)</h6>
-                    <div id="oneBuyLimitStatus" class="text-center"></div>
+                    <h5 class="text-center ">Grade</h5>
+                    <div id="balanceIcon" style="font-size: 100px;"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-5">
+              <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h5 class="text-center ">Limit Per 1 Sell</h5>
+                    <h6>(<3% Impact)</h6>
+                    <div id="oneSellLimitStatus" class="text-center"></div>
+                    
+                </div>
+              </div>
+             <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h5 class="text-center ">Sell Cooltime</h5>
+                    <div id="sellCooltime" class="text-center"></div>
                     
                 </div>
               </div>
               <div class="col-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
-                    <h6 class="text-center ">Circuit Breaker</h6>
+                    <h5 class="text-center ">Circuit Breaker</h5>
                     <div id="circuitBreakerStatus" class="text-center"></div>
                 </div>
               </div>
@@ -1767,10 +1794,13 @@ Thank you :)
   {"inputs":[],"name":"_antiDumpTimer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_autoBurnFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_buySellTimeDuration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_buySellTimer","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_curReservesAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerDuration","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerFlag","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_curcuitBreakerTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_dipRewardFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_dividendPartyPortion","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_dividendPartyThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_freeAirdropSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_improvedRewardFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_liquidityFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_manualBuyFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_maxBalanceNume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_maxSellNume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_maxTxNume","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minReservesAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_minusTaxBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minusTaxFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minusTaxSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
-  {"inputs":[],"name":"_priceRecoveryFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFund","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFundFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_taxAccuTaxThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_timeAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleSellFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleTransferFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_taxAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
+  {"inputs":[],"name":"_priceRecoveryFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFund","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFundFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_taxAccuTaxThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_timeAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleSellFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleTransferFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_taxAccuTaxCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+  {"inputs":[],"name":"_taxAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
   ];
   
   const rewardAbi = [
@@ -1865,7 +1895,7 @@ Thank you :)
       rO = reserveData[0];
     }
     
-    maxBuyLiq = rI.div(10); // 10% of current liquidity
+    maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
     maxBuyLiq = BNB(maxBuyLiq);
     totalSupplyData = await upfinityC.functions.totalSupply();
     totalSupply = totalSupplyData[0];
@@ -1907,13 +1937,39 @@ Thank you :)
       }
       //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
     }
-
+    
+    // it may display last big value
+    _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
+    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck())[0] / 1;
+    maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
+    _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
+    _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
+    maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
+    if (maxSellLiq_ < maxSellLiq) {
+      maxSellLiq = maxSellLiq_;
+    }
+    displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');
     
     balanceInfo = await provider.getBalance(rewardAdr);
     balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
     document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
     
-      
+    
+    _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
+    _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
+    _antiDumpEndTime = _antiDumpTimer + _antiDumpDuration;
+    
+    _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
+    _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
+    _buySellEndTime = _buySellTimer + _buySellTimeDuration;
+    if (_antiDumpEndTime < _buySellEndTime) {
+      var d = new Date(_buySellEndTime * 1000);
+      displayText("sellCooltime", d);
+    } else {
+      var d = new Date(_antiDumpEndTime * 1000);
+      displayText("sellCooltime", d);
+    }
+    
     curcuitBreakerFlagStatusData = await upfinityC.functions._curcuitBreakerFlag();
     curcuitBreakerFlagStatus = curcuitBreakerFlagStatusData[0];
     if (curcuitBreakerFlagStatus == 1) {
