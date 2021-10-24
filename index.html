@@ -1970,7 +1970,7 @@ Thank you :)
     _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
     _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
     sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration;
-    if (sellCooltime < sellCooltime_) }
+    if (sellCooltime < sellCooltime_) {
       sellCooltime = sellCooltime_;
     }
     
