@@ -1958,25 +1958,35 @@ Thank you :)
     
     _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
     _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
-    _antiDumpEndTime = _antiDumpTimer + _antiDumpDuration;
+    sellCooltime = _antiDumpTimer + _antiDumpDuration;
     
     _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
     _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
-    _buySellEndTime = _buySellTimer + _buySellTimeDuration;
-    if (_antiDumpEndTime < _buySellEndTime) {
-      var d = new Date(_buySellEndTime * 1000);
-      displayText("sellCooltime", d);
-    } else {
-      var d = new Date(_antiDumpEndTime * 1000);
-      displayText("sellCooltime", d);
+    sellCooltime_ = _buySellTimer + _buySellTimeDuration;
+    if (sellCooltime < sellCooltime_) }
+      sellCooltime = sellCooltime_;
     }
     
-    curcuitBreakerFlagStatusData = await upfinityC.functions._curcuitBreakerFlag();
-    curcuitBreakerFlagStatus = curcuitBreakerFlagStatusData[0];
-    if (curcuitBreakerFlagStatus == 1) {
+    _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
+    _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
+    sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration;
+    if (sellCooltime < sellCooltime_) }
+      sellCooltime = sellCooltime_;
+    }
+    
+    d = new Date(sellCooltime * 1000);
+    displayText("sellCooltime", d);
+    
+    
+    _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+    if (_curcuitBreakerFlag == 1) {
       displayText("circuitBreakerStatus", "OFF");
-    } else if (curcuitBreakerFlagStatus == 2){
-      displayText("circuitBreakerStatus", "ON");
+    } else if (_curcuitBreakerFlag == 2){
+      if ((_curcuitBreakerTime + _curcuitBreakerDuration) * 1000 < Date.now()) {
+        displayText("circuitBreakerStatus", "OFF");
+      } else {
+        displayText("circuitBreakerStatus", "ON");
+      }
     } else {
       displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
     }
@@ -2030,10 +2040,6 @@ Thank you :)
     
     displayText("redistributionFee", redistributionFee * multiplier / 100);
     
-    var d = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
-    displayText("cvalue", d);
-    var d = new Date(((await upfinityC.functions._curcuitBreakerTime())[0] / 1 + (await upfinityC.functions._curcuitBreakerDuration())[0] / 1) * 1000);
-    displayText("ctime", d);
   }
   
 
