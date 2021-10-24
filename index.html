@@ -1963,7 +1963,7 @@ Thank you :)
     _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
     _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
     sellCooltime_ = _buySellTimer + _buySellTimeDuration;
-    if (sellCooltime < sellCooltime_) }
+    if (sellCooltime < sellCooltime_) {
       sellCooltime = sellCooltime_;
     }
     
