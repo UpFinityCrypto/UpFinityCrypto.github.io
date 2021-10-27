@@ -1969,7 +1969,7 @@ Thank you :)
     
     _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
     _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-    sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration;
+    sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
     if (sellCooltime < sellCooltime_) {
       sellCooltime = sellCooltime_;
     }
@@ -1982,7 +1982,7 @@ Thank you :)
     if (_curcuitBreakerFlag == 1) {
       displayText("circuitBreakerStatus", "OFF");
     } else if (_curcuitBreakerFlag == 2){
-      if ((_curcuitBreakerTime + _curcuitBreakerDuration) * 1000 < Date.now()) {
+      if ((_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000 < Date.now()) {
         displayText("circuitBreakerStatus", "OFF");
       } else {
         displayText("circuitBreakerStatus", "ON");
