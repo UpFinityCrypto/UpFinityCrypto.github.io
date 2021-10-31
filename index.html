@@ -1834,9 +1834,9 @@ Thank you :)
   if (location.hostname == "") {
     return;
   }
-    
+  
   if (typeof window.ethereum === 'undefined') {
-    alert('blockchain dapp is not installed!);
+    alert('blockchain dapp is not installed!');
     return;
   }
     
@@ -1902,6 +1902,8 @@ Thank you :)
   maxBuyLiq = BNB(maxBuyLiq);
   totalSupplyData = await upfinityC.functions.totalSupply();
   totalSupply = totalSupplyData[0];
+  
+  
   
   balanceData = await upfinityC.functions.balanceOf(currentAccount);
   balance = balanceData[0];
