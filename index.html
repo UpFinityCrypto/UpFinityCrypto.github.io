@@ -463,26 +463,30 @@
           <div class="col-6 text-justify content">
             <h3>Doxxed</h3>
             <a href="https://www.dessertswap.finance/dessertdoxxed.html">
+            view in dessertdoxxed
             <img src="assets/img/safu/doxxed.png">
             </a>
           </div>
           <div class="col-6 text-justify content">
             <h3>LP Locked</h3>
             <a href="https://dxsale.app/app/v3/dxlockview?id=0&add=0xe7F0704b198585B8777abe859C3126f57eB8C989&type=lplock&chain=BSC">
+            view in dxsale (connect wallet!)
             <img src="assets/img/safu/locked.jpg">
             </a>
           </div>
           <div class="col-6 text-justify content">
-            <h3>burned</h3>
-            <p>(approx 5.5%. multiple burn event done and more to come)</p>
+            <h3>auto/manual burned</h3>
+            <p>(<span id="_manualburned">5.5</span>%. multiple burn event done and more to come)</p>
             <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
+            view in bscscan
             <img src="assets/img/safu/burned.jpg">
             </a>
           </div>
           <div class="col-6 text-justify content">
-            <h3>LP burned</h3>
-            <p>(approx 5.1%. multiple LP burn will be done)</p>
+            <h3>manual LP burned</h3>
+            <p>(<span id="_manuallpburned">5.1</span>%. multiple LP burn will be done)</p>
             <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
+            view in bscscan
             <img src="assets/img/safu/lpburned.jpg">
             </a>
           </div>
@@ -1905,6 +1909,7 @@ Thank you :)
   maxBuyLiq = BNB(maxBuyLiq);
   totalSupplyData = await upfinityC.functions.totalSupply();
   totalSupply = totalSupplyData[0];
+  totalLpSupply = (await pairC.functions.totalSupply())[0];
   
   
   sellCooltime = 0;
@@ -2002,6 +2007,13 @@ Thank you :)
   balanceInfo = await provider.getBalance(rewardAdr);
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
   document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB'; 
+  
+  burnAmount = (await upfinityC.function.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
+  document.getElementById("_manualburned").innerHTML = round(burnAmount / totalSupply * 100, 1);
+  burnLpAmount = (await pairC.function.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
+  document.getElementById("_manuallpburned").innerHTML = round(burnLpAmount / totalLpSupply * 100, 1);
+  
+  // personal wallet infos
   
   fconnect(); 
   
