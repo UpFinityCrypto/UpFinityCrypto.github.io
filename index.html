@@ -2036,7 +2036,7 @@ Thank you :)
   
   // personal wallet infos
   
-  afconnect().then(function() { 
+  afconnect().then(async function() { 
     balanceData = await upfinityC.functions.balanceOf(currentAccount);
     balance = balanceData[0];
     displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
