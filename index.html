@@ -1552,6 +1552,18 @@ Thank you :)
 
   }
   
+  async function ahandleAccountsChanged(accounts) {
+    if (accounts.length == 0) {
+      displayText("connectResult", 'Please Connect Metamask');
+      return;
+    }
+    
+    currentAccount = getChecksumAddress(accounts[0]);
+    displayPersonalInformations(currentAccount);
+    
+    return currentAccount;
+  }
+  
   function handleAccountsChanged(accounts) {
     if (accounts.length == 0) {
       displayText("connectResult", 'Please Connect Metamask');
@@ -1565,18 +1577,12 @@ Thank you :)
   }
   
   async function afconnect() {
-		ethereum
-		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
-		.then(handleAccountsChanged)
-		.catch((err) => {
-			if (err.code == 4001) {
-				// EIP-1193 userRejectedRequest error
-				// If this happens, the user rejected the connection request.
-        displayText("connectResult", 'You Rejected Connection');
-			} else {
-				console.error(err);
-			}
-		});
+		accounts = await ethereum
+		.request({ method: 'eth_requestAccounts' }); // eth_requestAccounts
+    
+    currentAccount = await ahandleAccountsChanged(accounts);
+    
+    return currentAccount;		
 	}
   
 	function fconnect() {
@@ -2034,80 +2040,80 @@ Thank you :)
   
   // personal wallet infos
   
-  afconnect().then(async function() { 
-    balanceData = await upfinityC.functions.balanceOf(currentAccount);
-    balance = balanceData[0];
-    displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
+  currentAccount = await afconnect();
+  
+  balanceData = await upfinityC.functions.balanceOf(currentAccount);
+  balance = balanceData[0];
+  displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
+  
+  balancePercentage = round(balance / totalSupply * 100, 2);
+  displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
+  if (balancePercentage >= 1) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
+  } else if (balancePercentage >= 0.3) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
+  } else if (balancePercentage >= 0.1) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
+  } else if (balancePercentage >= 0.03) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
+  } else if (balancePercentage >= 0.01) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
+  } else if (balancePercentage >= 0.003) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
+  } else if (balancePercentage >= 0.001) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
+  } 
+  
+  balanceLimit = totalSupply.div(100); // 1% of total supply
+  
+  if (Number(balanceLimit) <= Number(balance)) { // already max
+  } else {
+    buyLimit = balanceLimit.sub(balance);
+    maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
+    maxBuyBal = BNB(maxBuyBalData[0]);
     
-    balancePercentage = round(balance / totalSupply * 100, 2);
-    displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
-    if (balancePercentage >= 1) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
-    } else if (balancePercentage >= 0.3) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
-    } else if (balancePercentage >= 0.1) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
-    } else if (balancePercentage >= 0.03) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
-    } else if (balancePercentage >= 0.01) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
-    } else if (balancePercentage >= 0.003) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
-    } else if (balancePercentage >= 0.001) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
-    } 
-    
-    balanceLimit = totalSupply.div(100); // 1% of total supply
-    
-    if (Number(balanceLimit) <= Number(balance)) { // already max
-    } else {
-      buyLimit = balanceLimit.sub(balance);
-      maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
-      maxBuyBal = BNB(maxBuyBalData[0]);
-      
-      if (maxBuyBal < maxBuyLiq) {
-        displayText("oneBuyLimitStatus", maxBuyBal.toString() + ' BNB');
-      } else { 
-        displayText("oneBuyLimitStatus", maxBuyLiq.toString() + ' BNB');
-      }
-      //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
+    if (maxBuyBal < maxBuyLiq) {
+      displayText("oneBuyLimitStatus", maxBuyBal.toString() + ' BNB');
+    } else { 
+      displayText("oneBuyLimitStatus", maxBuyLiq.toString() + ' BNB');
     }
-    
-    // it may display last big value
-    _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
-    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-    maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
-    _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
-    _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
-    maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
-    if (maxSellLiq_ < maxSellLiq) {
-      maxSellLiq = maxSellLiq_;
-    }
-    maxSellLiq = BNB(maxSellLiq / 2);
-    displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
-    
-    
-    _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
-    _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
-    sellCooltime = _antiDumpTimer + _antiDumpDuration;
-    
-    _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
-    _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
-    sellCooltime_ = _buySellTimer + _buySellTimeDuration;
-    if (sellCooltime < sellCooltime_) {
-      sellCooltime = sellCooltime_;
-    }
-    
-    _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
-    _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-    sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
-    if (sellCooltime < sellCooltime_) {
-      sellCooltime = sellCooltime_;
-    }
-    
-    d = new Date(sellCooltime * 1000);
-    displayText("sellCooltime", d);
-    });
+    //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
+  }
+  
+  // it may display last big value
+  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
+  _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
+  maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
+  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
+  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
+  maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
+  if (maxSellLiq_ < maxSellLiq) {
+    maxSellLiq = maxSellLiq_;
+  }
+  maxSellLiq = BNB(maxSellLiq / 2);
+  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
+  
+  
+  _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
+  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
+  sellCooltime = _antiDumpTimer + _antiDumpDuration;
+  
+  _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
+  _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
+  sellCooltime_ = _buySellTimer + _buySellTimeDuration;
+  if (sellCooltime < sellCooltime_) {
+    sellCooltime = sellCooltime_;
+  }
+  
+  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
+  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
+  sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
+  if (sellCooltime < sellCooltime_) {
+    sellCooltime = sellCooltime_;
+  }
+  
+  d = new Date(sellCooltime * 1000);
+  displayText("sellCooltime", d);
 
   }());
   </script>
