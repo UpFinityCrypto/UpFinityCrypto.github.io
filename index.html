@@ -1894,6 +1894,22 @@ Thank you :)
   }
   
   // without wallet connection
+  reserveData = await pairC.functions.getReserves();
+  
+  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+    rI = reserveData[0]; 
+    rO = reserveData[1];
+  } else {
+    rI = reserveData[1];
+    rO = reserveData[0];
+  }
+  
+  maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
+  maxBuyLiq = BNB(maxBuyLiq);
+  totalSupplyData = await upfinityC.functions.totalSupply();
+  totalSupply = totalSupplyData[0];
+  
+  
   sellCooltime = 0;
   _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
   _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
@@ -1986,22 +2002,11 @@ Thank you :)
   displayText("claimable", "connect wallet!");
   displayText("claimed", "connect wallet!");
   
+  balanceInfo = await provider.getBalance(rewardAdr);
+  balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
+  document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB'; 
+  
   fconnect(); 
-
-  reserveData = await pairC.functions.getReserves();
-  
-  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-    rI = reserveData[0]; 
-    rO = reserveData[1];
-  } else {
-    rI = reserveData[1];
-    rO = reserveData[0];
-  }
-  
-  maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
-  maxBuyLiq = BNB(maxBuyLiq);
-  totalSupplyData = await upfinityC.functions.totalSupply();
-  totalSupply = totalSupplyData[0];
   
   
   
@@ -2054,11 +2059,7 @@ Thank you :)
     maxSellLiq = maxSellLiq_;
   }
   maxSellLiq = BNB(maxSellLiq / 2);
-  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');
-  
-  balanceInfo = await provider.getBalance(rewardAdr);
-  balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
+  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
   
   
   _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
