@@ -2011,9 +2011,9 @@ Thank you :)
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
   document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB'; 
   
-  burnAmount = (await upfinityC.function.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
+  burnAmount = (await upfinityC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
   document.getElementById("_manualburned").innerHTML = round(burnAmount / totalSupply * 100, 1);
-  burnLpAmount = (await pairC.function.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
+  burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
   document.getElementById("_manuallpburned").innerHTML = round(burnLpAmount / totalLpSupply * 100, 1);
   
   // personal wallet infos
