@@ -1830,6 +1830,48 @@ Thank you :)
   
   /////////////////////////////////////////////////////////////
   // inits
+
+  if (location.hostname == "") {
+    return;
+  }
+    
+  if (typeof window.ethereum === 'undefined') {
+    alert('blockchain dapp is not installed!);
+    return;
+  }
+    
+  ethereum.on('chainChanged', handleChainChanged);
+  ethereum.on('accountsChanged', handleAccountsChanged);
+    
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  signer = provider.getSigner();    
+  
+  network = await provider.getNetwork();
+  chainId = network.chainId;
+  if (chainId == 56) {
+    console.log('mainnet');
+    rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
+    freeAirdropAdr = '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4';
+    airdropAdr = '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004';
+  } else {
+    console.log('testnet');
+    rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
+  }
+    
+  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
+  
+  factoryData = await routerC.functions.factory();
+  factoryAdr = factoryData[0];
+  factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+  
+  pairData = await factoryC.functions.getPair(wbnbAdr, upfinityAdr);
+  pairAdr = pairData[0];
+  pairC = new ethers.Contract(pairAdr, pairAbi, provider);
+  
+  upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
+  rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
+  freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
+  airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
   
   refAdr = GetURLParameter("ref");
   x = document.getElementById("referralAdrDisplay");
@@ -1844,201 +1886,162 @@ Thank you :)
     }
   }
   
+  fconnect(); 
+
+  reserveData = await pairC.functions.getReserves();
   
-  if (location.hostname != "") {
-    if (typeof window.ethereum === 'undefined') {
-      throw '';
+  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+    rI = reserveData[0]; 
+    rO = reserveData[1];
+  } else {
+    rI = reserveData[1];
+    rO = reserveData[0];
+  }
+  
+  maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
+  maxBuyLiq = BNB(maxBuyLiq);
+  totalSupplyData = await upfinityC.functions.totalSupply();
+  totalSupply = totalSupplyData[0];
+  
+  balanceData = await upfinityC.functions.balanceOf(currentAccount);
+  balance = balanceData[0];
+  displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
+  
+  balancePercentage = round(balance / totalSupply * 100, 2);
+  displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
+  if (balancePercentage >= 1) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
+  } else if (balancePercentage >= 0.3) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
+  } else if (balancePercentage >= 0.1) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
+  } else if (balancePercentage >= 0.03) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
+  } else if (balancePercentage >= 0.01) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
+  } else if (balancePercentage >= 0.003) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
+  } else if (balancePercentage >= 0.001) {
+    displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
+  } 
+  
+  balanceLimit = totalSupply.div(100); // 1% of total supply
+  
+  if (Number(balanceLimit) <= Number(balance)) { // already max
+  } else {
+    buyLimit = balanceLimit.sub(balance);
+    maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
+    maxBuyBal = BNB(maxBuyBalData[0]);
+    
+    if (maxBuyBal < maxBuyLiq) {
+      displayText("oneBuyLimitStatus", maxBuyBal.toString() + ' BNB');
+    } else { 
+      displayText("oneBuyLimitStatus", maxBuyLiq.toString() + ' BNB');
     }
-    
-    ethereum.on('chainChanged', handleChainChanged);
-    ethereum.on('accountsChanged', handleAccountsChanged);
-      
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    signer = provider.getSigner();    
-    
-    network = await provider.getNetwork();
-    chainId = network.chainId;
-    if (chainId == 56) {
-      console.log('mainnet');
-      rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
-      freeAirdropAdr = '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4';
-      airdropAdr = '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004';
-    } else {
-      console.log('testnet');
-      rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
-    }
-    
-    routerC = new ethers.Contract(routerAdr, routerAbi, provider);
-    
-    factoryData = await routerC.functions.factory();
-    factoryAdr = factoryData[0];
-    factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
-    
-    pairData = await factoryC.functions.getPair(wbnbAdr, upfinityAdr);
-    pairAdr = pairData[0];
-    pairC = new ethers.Contract(pairAdr, pairAbi, provider);
-    
-    upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
-    rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
-    freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
-    airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
-    
-    fconnect(); 
-
-    reserveData = await pairC.functions.getReserves();
-    
-    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-      rI = reserveData[0]; 
-      rO = reserveData[1];
-    } else {
-      rI = reserveData[1];
-      rO = reserveData[0];
-    }
-    
-    maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
-    maxBuyLiq = BNB(maxBuyLiq);
-    totalSupplyData = await upfinityC.functions.totalSupply();
-    totalSupply = totalSupplyData[0];
-    
-    balanceData = await upfinityC.functions.balanceOf(currentAccount);
-    balance = balanceData[0];
-    displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
-    
-    balancePercentage = round(balance / totalSupply * 100, 2);
-    displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
-    if (balancePercentage >= 1) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
-    } else if (balancePercentage >= 0.3) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
-    } else if (balancePercentage >= 0.1) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
-    } else if (balancePercentage >= 0.03) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
-    } else if (balancePercentage >= 0.01) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
-    } else if (balancePercentage >= 0.003) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
-    } else if (balancePercentage >= 0.001) {
-      displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
-    } 
-    
-    balanceLimit = totalSupply.div(100); // 1% of total supply
-    
-    if (Number(balanceLimit) <= Number(balance)) { // already max
-    } else {
-      buyLimit = balanceLimit.sub(balance);
-      maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
-      maxBuyBal = BNB(maxBuyBalData[0]);
-      
-      if (maxBuyBal < maxBuyLiq) {
-        displayText("oneBuyLimitStatus", maxBuyBal.toString() + ' BNB');
-      } else { 
-        displayText("oneBuyLimitStatus", maxBuyLiq.toString() + ' BNB');
-      }
-      //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
-    }
-    
-    // it may display last big value
-    _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
-    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-    maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
-    _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
-    _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
-    maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
-    if (maxSellLiq_ < maxSellLiq) {
-      maxSellLiq = maxSellLiq_;
-    }
-    maxSellLiq = BNB(maxSellLiq / 2);
-    displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');
-    
-    balanceInfo = await provider.getBalance(rewardAdr);
-    balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-    document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
-    
-    
-    _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
-    _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
-    sellCooltime = _antiDumpTimer + _antiDumpDuration;
-    
-    _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
-    _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
-    sellCooltime_ = _buySellTimer + _buySellTimeDuration;
-    if (sellCooltime < sellCooltime_) {
-      sellCooltime = sellCooltime_;
-    }
-    
-    _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
-    _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-    sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
-    if (sellCooltime < sellCooltime_) {
-      sellCooltime = sellCooltime_;
-    }
-    
-    d = new Date(sellCooltime * 1000);
-    displayText("sellCooltime", d);
-    
-    
-    _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
-    if (_curcuitBreakerFlag == 1) {
+    //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
+  }
+  
+  // it may display last big value
+  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
+  _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
+  maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
+  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
+  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
+  maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
+  if (maxSellLiq_ < maxSellLiq) {
+    maxSellLiq = maxSellLiq_;
+  }
+  maxSellLiq = BNB(maxSellLiq / 2);
+  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');
+  
+  balanceInfo = await provider.getBalance(rewardAdr);
+  balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
+  document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB';  
+  
+  
+  _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
+  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
+  sellCooltime = _antiDumpTimer + _antiDumpDuration;
+  
+  _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
+  _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
+  sellCooltime_ = _buySellTimer + _buySellTimeDuration;
+  if (sellCooltime < sellCooltime_) {
+    sellCooltime = sellCooltime_;
+  }
+  
+  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
+  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
+  sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
+  if (sellCooltime < sellCooltime_) {
+    sellCooltime = sellCooltime_;
+  }
+  
+  d = new Date(sellCooltime * 1000);
+  displayText("sellCooltime", d);
+  
+  
+  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  if (_curcuitBreakerFlag == 1) {
+    displayText("circuitBreakerStatus", "OFF");
+  } else if (_curcuitBreakerFlag == 2){
+    if ((_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000 < Date.now()) {
       displayText("circuitBreakerStatus", "OFF");
-    } else if (_curcuitBreakerFlag == 2){
-      if ((_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000 < Date.now()) {
-        displayText("circuitBreakerStatus", "OFF");
-      } else {
-        displayText("circuitBreakerStatus", "ON");
-      }
     } else {
-      displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
+      displayText("circuitBreakerStatus", "ON");
     }
-    
-    communityToken = "0x000000000000000000000000000000000000dEaD";
-    
-    balance = await upfinityC.functions.balanceOf(freeAirdropAdr);
-    balance = balance[0];
-    
-    dollarsPerBNBData = await airdropC.functions._dollarsPerBNB();
-    dollarsPerBNB = dollarsPerBNBData[0];
-    oneDollar = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
-    
-    dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
-    
-    displayText("freeAirdropBalance", "Free Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
-    
-    balance = await upfinityC.functions.balanceOf(airdropAdr);
-    balance = balance[0];
-    
-    displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._airdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
-    
-    multiplier = 1 + 600 / 2000;
-    displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
-    displayText("_accuTaxTimeWindow", (await upfinityC.functions._accuTaxTimeWindow())[0] / 60 / 60 / 24);
-    displayText("_airdropSystem", (await upfinityC.functions._airdropSystem())[0]);
-    displayText("_antiDumpDuration", (await upfinityC.functions._antiDumpDuration())[0] / 60);
-    displayText("_autoBurnFee", (await upfinityC.functions._autoBurnFee())[0] * multiplier / 100);
-    displayText("_buySellTimeDuration", (await upfinityC.functions._buySellTimeDuration())[0] / 60);
-    displayText("_curcuitBreakerDuration", (await upfinityC.functions._curcuitBreakerDuration())[0] / 60 / 60);
-    displayText("_curcuitBreakerThreshold", (await upfinityC.functions._curcuitBreakerThreshold())[0] / 100);
-    displayText("_dipRewardFee", (await upfinityC.functions._dipRewardFee())[0] * multiplier / 100);
-    displayText("_dividendPartyThreshold", numberWithCommas((await upfinityC.functions._dividendPartyThreshold())[0] / 1e18));
-    displayText("_freeAirdropSystem", (await upfinityC.functions._freeAirdropSystem())[0]);
-    displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] * multiplier / 100);
-    displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] * multiplier / 100 * 2); // double
-    displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] * multiplier / 100);
-    displayText("_maxBalanceNume", (await upfinityC.functions._maxBalanceNume())[0] / 100);
-    displayText("_maxSellNume", (await upfinityC.functions._maxSellNume())[0] / 100);
-    displayText("_maxTxNume", (await upfinityC.functions._maxTxNume())[0] / 100);
-    displayText("_minusTaxBonus", (await upfinityC.functions._minusTaxBonus())[0] / 100);
-    <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
-    displayText("_taxAccuTaxThreshold", (await upfinityC.functions._taxAccuTaxThreshold())[0] / 100);
-    displayText("_timeAccuTaxCheckGlobal", (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 60 / 60 / 24);
-    displayText("_whaleRate", (await upfinityC.functions._whaleRate())[0] / 10000);
-    displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 10000);
-    displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 10000);
-    
+  } else {
+    displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
+  }
+  
+  communityToken = "0x000000000000000000000000000000000000dEaD";
+  
+  balance = await upfinityC.functions.balanceOf(freeAirdropAdr);
+  balance = balance[0];
+  
+  dollarsPerBNBData = await airdropC.functions._dollarsPerBNB();
+  dollarsPerBNB = dollarsPerBNBData[0];
+  oneDollar = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
+  
+  dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
+  
+  displayText("freeAirdropBalance", "Free Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
+  
+  balance = await upfinityC.functions.balanceOf(airdropAdr);
+  balance = balance[0];
+  
+  displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._airdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
+  
+  multiplier = 1 + 600 / 2000;
+  displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
+  displayText("_accuTaxTimeWindow", (await upfinityC.functions._accuTaxTimeWindow())[0] / 60 / 60 / 24);
+  displayText("_airdropSystem", (await upfinityC.functions._airdropSystem())[0]);
+  displayText("_antiDumpDuration", (await upfinityC.functions._antiDumpDuration())[0] / 60);
+  displayText("_autoBurnFee", (await upfinityC.functions._autoBurnFee())[0] * multiplier / 100);
+  displayText("_buySellTimeDuration", (await upfinityC.functions._buySellTimeDuration())[0] / 60);
+  displayText("_curcuitBreakerDuration", (await upfinityC.functions._curcuitBreakerDuration())[0] / 60 / 60);
+  displayText("_curcuitBreakerThreshold", (await upfinityC.functions._curcuitBreakerThreshold())[0] / 100);
+  displayText("_dipRewardFee", (await upfinityC.functions._dipRewardFee())[0] * multiplier / 100);
+  displayText("_dividendPartyThreshold", numberWithCommas((await upfinityC.functions._dividendPartyThreshold())[0] / 1e18));
+  displayText("_freeAirdropSystem", (await upfinityC.functions._freeAirdropSystem())[0]);
+  displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] * multiplier / 100);
+  displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] * multiplier / 100 * 2); // double
+  displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] * multiplier / 100);
+  displayText("_maxBalanceNume", (await upfinityC.functions._maxBalanceNume())[0] / 100);
+  displayText("_maxSellNume", (await upfinityC.functions._maxSellNume())[0] / 100);
+  displayText("_maxTxNume", (await upfinityC.functions._maxTxNume())[0] / 100);
+  displayText("_minusTaxBonus", (await upfinityC.functions._minusTaxBonus())[0] / 100);
+  <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
+  displayText("_taxAccuTaxThreshold", (await upfinityC.functions._taxAccuTaxThreshold())[0] / 100);
+  displayText("_timeAccuTaxCheckGlobal", (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 60 / 60 / 24);
+  displayText("_whaleRate", (await upfinityC.functions._whaleRate())[0] / 10000);
+  displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 10000);
+  displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 10000);
+  
 
-    redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) * 0 / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) - (await upfinityC.functions._liquidityFee())[0];
-    
-    displayText("redistributionFee", redistributionFee * multiplier / 100);
+  redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) * 0 / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) - (await upfinityC.functions._liquidityFee())[0];
+  
+  displayText("redistributionFee", redistributionFee * multiplier / 100);
     
   }
   
