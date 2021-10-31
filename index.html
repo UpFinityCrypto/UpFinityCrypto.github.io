@@ -2044,8 +2044,6 @@ Thank you :)
   redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) * 0 / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) - (await upfinityC.functions._liquidityFee())[0];
   
   displayText("redistributionFee", redistributionFee * multiplier / 100);
-    
-  }
   
 
   
