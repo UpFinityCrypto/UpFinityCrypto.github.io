@@ -76,4 +76,11 @@ body {
   background-color: #000;
   font-size: 15px;
 }
+
+.about .content ul li {
+  margin-bottom: 20px;
+
+  align-items: center;
+}
 safu 1 col in mobile
+<div class="col-sm-6 d-flex align-items-stretch aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
