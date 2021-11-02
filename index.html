@@ -1422,7 +1422,7 @@ Thank you :)
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <div>
-                $<span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0" data-purecounter-decimal="10" class="purecounter"></span>
+                $<span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="10" data-purecounter-decimal="10" data-purecounter-separator="true" data-purecounter-currency="true" data-purecounter-currencysymbol="$"class="purecounter"></span>
                 <p>Price</p>
               </div>
             </div>
@@ -1431,7 +1431,7 @@ Thank you :)
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <div>
-                <span id="burnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0" class="purecounter"></span>
+                <span id="burnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="10" data-purecounter-separator="true" class="purecounter"></span>
                 <p>Burned</p>
               </div>
             </div>
@@ -1440,7 +1440,7 @@ Thank you :)
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <div>
-                <span id="circulateCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0" class="purecounter"></span>
+                <span id="circulateCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="10" data-purecounter-separator="true" class="purecounter"></span>
                 <p>Circulating</p>
               </div>
             </div>
@@ -1449,7 +1449,7 @@ Thank you :)
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <div>
-                <span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0" class="purecounter"></span>
+                <span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="10" data-purecounter-separator="true" class="purecounter"></span>
                 <p>Market Cap</p>
               </div>
             </div>
@@ -2110,16 +2110,12 @@ Thank you :)
   
   var elms_ = document.querySelectorAll("[id='priceCounter']");
   elms_[0].setAttribute('data-purecounter-end', price_.toFixed(10));
-  elms_[0].setAttribute('data-purecounter-duration', 10);
   var elms_ = document.querySelectorAll("[id='burnCounter']");
   elms_[0].setAttribute('data-purecounter-end', burnSupply_);
-  elms_[0].setAttribute('data-purecounter-duration', 10);
   var elms_ = document.querySelectorAll("[id='circulateCounter']");
   elms_[0].setAttribute('data-purecounter-end', realSupply_);
-  elms_[0].setAttribute('data-purecounter-duration', 10);
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
   elms_[0].setAttribute('data-purecounter-end', mcap);
-  elms_[0].setAttribute('data-purecounter-duration', 10);
   
   // personal wallet infos
   
