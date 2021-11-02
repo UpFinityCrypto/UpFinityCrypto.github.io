@@ -2100,8 +2100,8 @@ Thank you :)
   }
   
   price_ = bnbAmount_ / tokenAmount_ * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
-  totalSupply_ = (await tokenC.functions.totalSupply())[0] / 1;
-  burnSupply_ = (await tokenC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
+  totalSupply_ = (await upfinityC.functions.totalSupply())[0] / 1;
+  burnSupply_ = (await upfinityC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
 
   realSupply_ = (totalSupply_ - burnSupply_) / 10 ** decimals_;
   mcap = price_ * realSupply_;
