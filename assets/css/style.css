@@ -12,6 +12,7 @@ body {
   font-family: "Poppins", sans-serif;
   color: #aaaaaa;
   background-color: #000;
+  font-size: 15px;
 }
 
 a {
@@ -156,9 +157,6 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 @media (max-width: 992px) {
   #header {
     width: 300px;
-    background: #fafafa;
-    border-right: 1px solid #e6e9ec;
-    left: -300px;
   }
 }
 
@@ -309,19 +307,19 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 }
 #hero p span {
   color: #ea4817;
-  letter-spacing: 1px;
 }
 #hero .social-links {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 #hero .social-links a {
   font-size: 24px;
   display: inline-block;
   color: #dfdfdf;
   line-height: 1;
-  margin-right: 20px;
+  margin: 10px 10px;
   transition: 0.3s;
 }
+
 #hero .social-links a:hover {
   color: #ea4817;
 }
@@ -333,12 +331,12 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
     text-align: center;
   }
   #hero h1 {
-    font-size: 32px;
+    font-size: 28px;
     line-height: 36px;
   }
   #hero p {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
   }
 }
@@ -402,7 +400,6 @@ section {
 }
 .about .content ul li {
   margin-bottom: 20px;
-  display: flex;
   align-items: center;
 }
 .about .content ul strong {
@@ -1088,10 +1085,11 @@ section {
 }
 
 .wrap-address {
-  font-size:20px;
+  font-size:12px;
   color: #45505b !important;
   font-weight: bold;
 }
+
 .wrap-address:hover {
   color: #ea4817 !important;
   cursor: pointer;
@@ -1100,11 +1098,12 @@ section {
 .button {
   color: #fff;
   border: 0;
-  padding: 10px 15px;
+  padding: 15px 20px;
   background: #28a745;
   transition: 0.4s;
   border-radius: 50px;
   display: inline-block;
+  font-size: 20px;
 }
 
 .button:hover {
@@ -1182,7 +1181,7 @@ section {
   /* transition: all 0.3s ease-in-out; */
   border-radius: 8px;
   z-index: 1;
-  
+  text-align: center;
 }
 
 
