@@ -157,6 +157,7 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 @media (max-width: 992px) {
   #header {
     width: 300px;
+    left: -300px;
   }
 }
 
