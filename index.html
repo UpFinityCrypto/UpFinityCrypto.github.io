@@ -2086,6 +2086,21 @@ Thank you :)
   burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
   document.getElementById("_manuallpburned").innerHTML = round(burnLpAmount / totalLpSupply * 100, 1);
   
+  bnbAmount_ = rI_ / 10 ** 18;
+  tokenAmount_ = rO_ / 10 ** decimals_;
+
+  price_ = bnbAmount_ / tokenAmount_ * 500; // TODO: WBNB-BUSD
+  totalSupply_ = (await tokenC.functions.totalSupply())[0] / 1;
+  burnSupply_ = (await tokenC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
+
+  realSupply_ = (totalSupply_ - burnSupply_) / 10 ** decimals_;
+  mcap = price_ * realSupply_;
+  mcap = mcap.toFixed(0);
+  $('[id=priceCounter]').attr('data-purecounter-end', price_.toFixed(10));
+  $('[id=burnCounter]').attr('data-purecounter-end', burnSupply_));
+  $('[id=circulateCounter]').attr('data-purecounter-end', realSupply_));
+  $('[id=marketcapCounter]').attr('data-purecounter-end', mcap));
+  
   // personal wallet infos
   
   currentAccount = await afconnect();
