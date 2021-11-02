@@ -1,0 +1,61 @@
+#hero p span {
+  color: #ea4817;
+}
+#hero .social-links {
+  margin-top: 30px;
+}
+#hero .social-links a {
+  font-size: 24px;
+  display: inline-block;
+  color: #dfdfdf;
+  line-height: 1;
+  margin-right: 20px;
+  transition: 0.3s;
+}
+#hero .social-links a:hover {
+  color: #ea4817;
+}
+#hero .social-links .button:hover {
+  color: #fff;
+}
+@media (max-width: 992px) {
+  #hero {
+    text-align: center;
+  }
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero p {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+.wrap-address {
+  font-size:12px;
+  color: #45505b !important;
+  font-weight: bold;
+}
+
+
+.button {
+  color: #fff;
+  border: 0;
+  padding: 10px 15px;
+  background: #28a745;
+  transition: 0.4s;
+  border-radius: 50px;
+  display: inline-block;
+  font-size: 20px;
+}
+
+#hero .social-links a {
+  font-size: 24px;
+  display: inline-block;
+  color: #dfdfdf;
+  line-height: 1;
+  margin: 0 10px;
+  transition: 0.3s;
+}
