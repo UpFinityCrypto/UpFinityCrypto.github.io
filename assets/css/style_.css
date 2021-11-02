@@ -43,7 +43,7 @@
 .button {
   color: #fff;
   border: 0;
-  padding: 10px 15px;
+  padding: 15px 20px;
   background: #28a745;
   transition: 0.4s;
   border-radius: 50px;
@@ -70,3 +70,10 @@
     left: -300px;
   }
 }
+body {
+  font-family: "Poppins", sans-serif;
+  color: #aaaaaa;
+  background-color: #000;
+  font-size: 15px;
+}
+safu 1 col in mobile
