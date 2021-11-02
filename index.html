@@ -2106,10 +2106,19 @@ Thank you :)
   realSupply_ = (totalSupply_ - burnSupply_) / 10 ** decimals_;
   mcap = price_ * realSupply_;
   mcap = mcap.toFixed(0);
-  $('[id=priceCounter]').attr('data-purecounter-end', price_.toFixed(10));
-  $('[id=burnCounter]').attr('data-purecounter-end', burnSupply_);
-  $('[id=circulateCounter]').attr('data-purecounter-end', realSupply_);
-  $('[id=marketcapCounter]').attr('data-purecounter-end', mcap);
+  
+  var elms_ = document.querySelectorAll("[id='priceCounter']");
+  elms_[0].setAttribute('data-purecounter-end', price_.toFixed(10));
+  elms_[0].setAttribute('data-purecounter-duration', 10);
+  var elms_ = document.querySelectorAll("[id='burnCounter']");
+  elms_[0].setAttribute('data-purecounter-end', burnSupply_);
+  elms_[0].setAttribute('data-purecounter-duration', 10);
+  var elms_ = document.querySelectorAll("[id='circulateCounter']");
+  elms_[0].setAttribute('data-purecounter-end', realSupply_);
+  elms_[0].setAttribute('data-purecounter-duration', 10);
+  var elms_ = document.querySelectorAll("[id='marketcapCounter']");
+  elms_[0].setAttribute('data-purecounter-end', mcap);
+  elms_[0].setAttribute('data-purecounter-duration', 10);
   
   // personal wallet infos
   
