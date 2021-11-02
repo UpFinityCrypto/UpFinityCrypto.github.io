@@ -1422,7 +1422,7 @@ Thank you :)
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
               <div>
-                <span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0" class="purecounter"></span>
+                $<span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="0" data-purecounter-decimal="10" class="purecounter"></span>
                 <p>Price</p>
               </div>
             </div>
@@ -2101,9 +2101,10 @@ Thank you :)
   
   price_ = bnbAmount_ / tokenAmount_ * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
   totalSupply_ = (await upfinityC.functions.totalSupply())[0] / 1;
+  totalSupply_ = totalSupply_ / 10 ** decimals
   burnSupply_ = (await upfinityC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
-
-  realSupply_ = (totalSupply_ - burnSupply_) / 10 ** decimals;
+  burnSupply_ = burnSupply_ / 10 ** decimals
+  realSupply_ = (totalSupply_ - burnSupply_);
   mcap = price_ * realSupply_;
   mcap = mcap.toFixed(0);
   
