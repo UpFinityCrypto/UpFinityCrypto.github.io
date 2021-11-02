@@ -2090,19 +2090,20 @@ Thank you :)
   tokenAmount_ = rO_ / 10 ** decimals_;
   
   // without wallet connection
-  <!-- pairAdr_ = (await factoryC.functions.getPair(wbnbAdr, tokenAdr))[0]; -->
-  <!-- pairC = new ethers.Contract(pairAdr_, pairAbi, provider); -->
-  <!-- reserveData = await pairC.functions.getReserves(); -->
+  busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+  pricepairAdr_ = (await factoryC.functions.getPair(wbnbAdr, busdAdr))[0];
+  pricepairC = new ethers.Contract(pricepairAdr_, pairAbi, provider);
+  pricereserveData = await pricepairC.functions.getReserves();
   
-  <!-- if (wbnbAdr < upfinityAdr) { // BNB / UpFinity -->
-    <!-- rI = reserveData[0];  -->
-    <!-- rO = reserveData[1]; -->
-  <!-- } else { -->
-    <!-- rI = reserveData[1]; -->
-    <!-- rO = reserveData[0]; -->
-  <!-- } -->
+  if (wbnbAdr < busdAdr) { // BNB / UpFinity
+    pricerI = pricereserveData[0] / 1; 
+    pricerO = pricereserveData[1] / 1;
+  } else {
+    pricerI = pricereserveData[1] / 1;
+    pricerO = pricereserveData[0] / 1;
+  }
   
-  price_ = bnbAmount_ / tokenAmount_ * 500; // TODO: WBNB-BUSD
+  price_ = bnbAmount_ / tokenAmount_ * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
   totalSupply_ = (await tokenC.functions.totalSupply())[0] / 1;
   burnSupply_ = (await tokenC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
 
