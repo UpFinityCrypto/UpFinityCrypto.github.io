@@ -2103,7 +2103,7 @@ Thank you :)
   totalSupply_ = (await upfinityC.functions.totalSupply())[0] / 1;
   burnSupply_ = (await upfinityC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
 
-  realSupply_ = (totalSupply_ - burnSupply_) / 10 ** decimals_;
+  realSupply_ = (totalSupply_ - burnSupply_) / 10 ** decimals;
   mcap = price_ * realSupply_;
   mcap = mcap.toFixed(0);
   
