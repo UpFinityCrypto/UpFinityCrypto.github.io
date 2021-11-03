@@ -2174,7 +2174,8 @@ Thank you :)
     maxSellLiq = maxSellLiq_;
   }
   maxSellLiq = BNB(maxSellLiq / 2);
-  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
+  displayText("oneSellLimitStatus", 'upgrading!');
+  <!-- displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');  -->
   
   
   _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
