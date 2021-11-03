@@ -112,11 +112,14 @@
         <!-- ======= Features Section ======= -->
         <section id="features" class="features">
             <div class="container" data-aos="fade-up">
-
                 <div class="section-title">
                     <h2>Special Features</h2>
                     <p><span class="text-bold text-color-secondary text-bold">SO MANY</span> Unique Features, all in <span class="text-color-secondary">SINGLE</span> token
                     <p>(Details in WhitePaper)</p>
+                    <div class="text-center" style="margin-top:25px;">
+                      <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+                      <span id="connectResult">To see the values, connect wallet!</span>
+                  </div>
                 </div>
 				<div class="row">
 					<div class="col-lg-6">
@@ -455,6 +458,10 @@
                          <div class="section-title">
                     <h2>Stats</h2>
                     <p>Check realtime basic stats!<p>
+                                <div class="text-center" style="margin-top:25px;">
+                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+                <span id="connectResult">To see the values, connect wallet!</span>
+            </div>
                 </div>
       <div class="container aos-init aos-animate" data-aos="fade-up">
 
@@ -552,11 +559,10 @@
         <div class="section-title">
           <h2>Status (UPGRADING NOW)</h2>
           
-          <div class="text-center" style="margin-top:25px;">
-              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-              <div id="connectResult"></div>
-              <br><span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
-          </div>
+            <div class="text-center" style="margin-top:25px;">
+                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+                <span id="connectResult">To see the values, connect wallet!</span>
+            </div>
           
         </div>
 
@@ -719,11 +725,10 @@
         <div class="section-title">
           <h2>Rewards</h2>
           
-          <div class="text-center" style="margin-top:25px;">
-              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-              <div id="connectResult"></div>
-              <br><span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
-          </div>
+            <div class="text-center" style="margin-top:25px;">
+                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+                <span id="connectResult">To see the values, connect wallet!</span>
+            </div>
         </div>
 
         <div class="row">
@@ -776,11 +781,10 @@
         <div class="section-title">
           <h2>Airdrops</h2>
           
-          <div class="text-center" style="margin-top:25px;">
-              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-              <div id="connectResult"></div>
-              <br><span id="wallet-message-container" class="fst-italic">Some Trust wallet users may have error</span>
-          </div>
+            <div class="text-center" style="margin-top:25px;">
+                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+                <span id="connectResult">To see the values, connect wallet!</span>
+            </div>
           
         </div>
 
@@ -1998,7 +2002,6 @@ Thank you :)
   }
   
   if (typeof window.ethereum === 'undefined') {
-    alert('blockchain dapp is not installed! details can be shown only in the dapp');
     return;
   }
     
