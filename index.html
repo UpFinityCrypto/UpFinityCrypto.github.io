@@ -2258,24 +2258,22 @@ Thank you :)
   displayText("sellCooltime", d);
   
   _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
-  if (_curcuitBreakerFlag == 2){
-    if (Date.now() < (_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000) {
+  if (_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000) {
       displayText("circuitBreakerStatus", "Circuit breaker ON");
+  } else {
+    if (Date.now() < _antiDumpTimer + _antiDumpDuration) {
+      displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
     } else {
-      if (Date.now() < _antiDumpTimer + _antiDumpDuration) {
-        displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
+      if (Date.now() < _buySellTimer + _buySellTimeDuration) {
+        displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
       } else {
-        if (Date.now() < _buySellTimer + _buySellTimeDuration) {
-          displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
+        if (rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) {
+          displayText("circuitBreakerStatus", "exceeded daily sell limit " + String(_taxAccuTaxThreshold / 100) + "%");
         } else {
-          if (rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) {
-            displayText("circuitBreakerStatus", "exceeded daily sell limit " + String(_taxAccuTaxThreshold / 100) + "%");
+          if (blacklisted) {
+            displayText("circuitBreakerStatus", "Blacklisted. contact @ALLCOINLAB");
           } else {
-            if (blacklisted) {
-              displayText("circuitBreakerStatus", "Blacklisted. contact @ALLCOINLAB");
-            } else {
-              displayText("circuitBreakerStatus", "You can sell: check slippage and sell size!");
-            }
+            displayText("circuitBreakerStatus", "You can sell: check slippage and sell size!");
           }
         }
       }
