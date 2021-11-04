@@ -2271,8 +2271,11 @@ Thank you :)
           if (rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) {
             displayText("circuitBreakerStatus", "exceeded daily sell limit " + String(_taxAccuTaxThreshold / 100) + "%");
           } else {
-            if (
-            displayText("circuitBreakerStatus", "Blacklisted. contact @ALLCOINLAB");
+            if (blacklisted) {
+              displayText("circuitBreakerStatus", "Blacklisted. contact @ALLCOINLAB");
+            } else {
+              displayText("circuitBreakerStatus", "You can sell: check slippage and sell size!");
+            }
           }
         }
       }
