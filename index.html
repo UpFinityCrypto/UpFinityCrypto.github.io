@@ -1966,7 +1966,8 @@ Thank you :)
   {"inputs":[],"name":"_minusTaxBonus","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minusTaxFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_minusTaxSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
   {"inputs":[],"name":"_priceRecoveryFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFund","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_projectFundFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardSystem","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_rewardToken","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_taxAccuTaxThreshold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_timeAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleRate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleSellFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_whaleTransferFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_taxAccuTaxCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-  {"inputs":[],"name":"_taxAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"}
+  {"inputs":[],"name":"_taxAccuTaxCheckGlobal","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},
+  {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"blacklisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
   ];
   
   const rewardAbi = [
@@ -2251,6 +2252,8 @@ Thank you :)
     sellCooltime = sellCooltime_;
   }
   
+  blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
+  
   d = new Date(sellCooltime * 1000);
   displayText("sellCooltime", d);
   
@@ -2263,10 +2266,13 @@ Thank you :)
         displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
       } else {
         if (Date.now() < _buySellTimer + _buySellTimeDuration) {
-          displayText("circuitBreakerStatus", "your last sell cooltime" + String(_buySellTimeDuration) + "s");
+          displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
         } else {
           if (rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) {
-            displayText("circuitBreakerStatus", "exceeded daily sell limit" + String(_taxAccuTaxThreshold / 100) + "%");
+            displayText("circuitBreakerStatus", "exceeded daily sell limit " + String(_taxAccuTaxThreshold / 100) + "%");
+          } else {
+            if (
+            displayText("circuitBreakerStatus", "Blacklisted. contact @ALLCOINLAB");
           }
         }
       }
