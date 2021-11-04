@@ -2197,8 +2197,8 @@ Thank you :)
   }
   
   partyImpact = _dividendPartyThreshold / rO * 100;
-  displayText("dividendPartyImpactMin", partyImpact * 1);
-  displayText("dividendPartyImpactMax", partyImpact * 2);
+  displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
+  displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
   
   <!-- <div> Tax Penalty </div> -->
   <!-- <div> +0.5% </div> -->
