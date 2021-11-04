@@ -608,9 +608,8 @@
                     <div id="balanceIcon" style="font-size: 100px;"></div>
                 </div>
               </div>
-            </div>
             
-            <div class="row mt-5">
+            
               <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
                     <h5 class="text-center ">Limit Per 1 Sell</h5>
@@ -632,6 +631,13 @@
                     <div id="circuitBreakerStatus" class="text-center"></div>
                 </div>
               </div>
+              <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon-box">
+                    <h5 class="text-center ">Dividend Party</h5>
+                    <div id="dividendPartyStatus"></div>
+                    <div>+<span id="dividendPartyImpactMin"><span>% ~ +<span id="dividendPartyImpactMax"><span>%</div>
+                </div>
+              </div>                
             </div>
           </div>
         </div>
@@ -2184,6 +2190,31 @@ Thank you :)
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
   elms_[0].setAttribute('data-purecounter-end', mcap);
   
+  _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0] / 1;
+  upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0] / 1;
+  if (_dividendPartyThreshold * 0.9 < upfinityBalance) {
+    displayText("dividendPartyStatus", "READY");
+  }
+  
+  partyImpact = _dividendPartyThreshold / rO * 100;
+  displayText("dividendPartyImpactMin", partyImpact * 1);
+  displayText("dividendPartyImpactMax", partyImpact * 2);
+  
+  <!-- <div> Tax Penalty </div> -->
+  <!-- <div> +0.5% </div> -->
+  
+  // price impact 1 / ( 1 + x / r0) = (1 - I)
+  // smart contract, change x,r0 equation to 1 / (1 + x / r0) for exact result 
+  // x / r0 = a => price diff = 1 / (1 + a)^2
+  // for simplicity + safety, a = 0.08, 0.05
+
+  // for user: price impact based limit
+  // for graph: price change based limit
+  // so need price impact - price change relation
+  // price impact accumulation => user limit
+  // price change accumulation => global limit
+  // x / r0 = a => price change = 1 / (1 + a)^2
+
   // personal wallet infos
   
   currentAccount = await afconnect();
