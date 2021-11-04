@@ -2265,7 +2265,9 @@ Thank you :)
         if (Date.now() < _buySellTimer + _buySellTimeDuration) {
           displayText("circuitBreakerStatus", "your last sell cooltime" + String(_buySellTimeDuration) + "s");
         } else {
-          
+          if (rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) {
+            displayText("circuitBreakerStatus", "exceeded daily sell limit" + String(_taxAccuTaxThreshold / 100) + "%");
+          }
         }
       }
     }
