@@ -628,7 +628,7 @@
               </div>
               <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
                 <div class="icon-box">
-                    <h5 class="text-center ">Circuit Breaker</h5>
+                    <h5 class="text-center ">Can't Sell because</h5>
                     <div id="circuitBreakerStatus" class="text-center"></div>
                 </div>
               </div>
@@ -2079,29 +2079,7 @@ Thank you :)
   
   d = new Date(sellCooltime * 1000);
   displayText("sellCooltime", d);
-  
-  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
-  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-  sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
-  if (sellCooltime < sellCooltime_) {
-    sellCooltime = sellCooltime_;
-  }
-  
-  d = new Date(sellCooltime * 1000);
-  displayText("sellCooltime", d);
-  
-  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
-  if (_curcuitBreakerFlag == 1) {
-    displayText("circuitBreakerStatus", "OFF");
-  } else if (_curcuitBreakerFlag == 2){
-    if ((_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000 < Date.now()) {
-      displayText("circuitBreakerStatus", "OFF");
-    } else {
-      displayText("circuitBreakerStatus", "ON");
-    }
-  } else {
-    displayText("circuitBreakerStatus", "Something wrong. Contact Dev :)");
-  }
+
   
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
@@ -2273,16 +2251,26 @@ Thank you :)
     sellCooltime = sellCooltime_;
   }
   
-  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
-  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-  sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
-  if (sellCooltime < sellCooltime_) {
-    sellCooltime = sellCooltime_;
-  }
-  
   d = new Date(sellCooltime * 1000);
   displayText("sellCooltime", d);
-
+  
+  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  if (_curcuitBreakerFlag == 2){
+    if (Date.now() < (_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000) {
+      displayText("circuitBreakerStatus", "Circuit breaker ON");
+    } else {
+      if (Date.now() < _antiDumpTimer + _antiDumpDuration) {
+        displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
+      } else {
+        if (Date.now() < _buySellTimer + _buySellTimeDuration) {
+          displayText("circuitBreakerStatus", "your last sell cooltime" + String(_buySellTimeDuration) + "s");
+        } else {
+          
+        }
+      }
+    }
+  }
+  
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
