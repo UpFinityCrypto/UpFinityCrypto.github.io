@@ -2463,6 +2463,7 @@ img {
 
 .progress-bar {
   border-right: solid 5px #FFF;
+  font-size: 10px;
 }
 .progress-bar:last-child {
   border: none;
