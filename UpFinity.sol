@@ -464,9 +464,9 @@ contract UpFinity is Initializable {
     // function setMarketingFund(address marketingFund_) external onlyOwner {
     //     _projectFund = marketingFund_;
     // }
-    // function setRewardToken(address rewardToken_) external onlyOwner {
-    //     _rewardToken = rewardToken_;
-    // }
+    function setRewardToken(address rewardToken_) external onlyOwner {
+        _rewardToken = rewardToken_;
+    }
     
     // function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external onlyOwner {
     //     _freeAirdropSystem = _freeAirdropSystem_;
@@ -606,14 +606,18 @@ contract UpFinity is Initializable {
     // }
     
     
-    function addBlacklist(address adr) external onlyOwner {
-        blacklisted[adr] = true;
+    function addBlacklist(address[] calldata adrs) external onlyOwner {
+        for (uint i = 0; i < adrs.length; i++) {
+            blacklisted[adrs[i]] = true;
+        }
     }
-    function delBlacklist(address adr) external onlyOwner {
-        blacklisted[adr] = false;
+    function delBlacklist(address[] calldata adrs) external onlyOwner {
+        for (uint i = 0; i < adrs.length; i++) {
+            blacklisted[adrs[i]] = false;
+        }
     }
     
-    
+
     // basic viewers
     
     function name() public view returns (string memory) {
@@ -785,17 +789,21 @@ contract UpFinity is Initializable {
     
     
     
-    // there could be community's request
-    // owner can deactivate it. cannot activate :)
-    function deactivateCircuitBreaker() external onlyOwner {
+    function _deactivateCircuitBreaker() internal {
         // in the solidity world,
         // to save the gas,
         // 1 is false, 2 is true
         
         _curcuitBreakerFlag = 1; // you can sell now!
         
-        _taxAccuTaxCheckGlobal = 1; // [save gas]
+        _taxAccuTaxCheckGlobal = 500; // [save gas]
         _timeAccuTaxCheckGlobal = block.timestamp.sub(1); // set time (set to a little past than now)
+    }
+    
+    // there could be community's request
+    // owner can deactivate it. cannot activate :)
+    function deactivateCircuitBreaker() external onlyOwner {
+        _deactivateCircuitBreaker();
     }
     
     // test with 1 min in testnet
@@ -810,20 +818,17 @@ contract UpFinity is Initializable {
                 require(_curcuitBreakerTime + _curcuitBreakerDuration < block.timestamp, 'Circuit Breaker is not finished');
                 
                 // certain duration passed. everyone chilled now?
-                
-                _curcuitBreakerFlag = 1; // you can sell now!
-                
-                _taxAccuTaxCheckGlobal = 500; // [save gas] + after break, it should be 10%
-                _timeAccuTaxCheckGlobal = block.timestamp.sub(1); // set time (set to a little past than now)
+                _deactivateCircuitBreaker();
             }
             
             uint timeDiffGlobal = block.timestamp.sub(_timeAccuTaxCheckGlobal);
-            uint addTaxGlobal = amount.mul(1).mul(10000).div(r1); // this is for the actual impact. so set 1
+            uint priceChange = _getPriceChange(r1, amount); // price change based, 10000
+
             if (_timeAccuTaxCheckGlobal == 0) { // first time checking this
                 // timeDiff cannot be calculated. skip.
                 // accumulate
                 
-                _taxAccuTaxCheckGlobal = addTaxGlobal;
+                _taxAccuTaxCheckGlobal = priceChange;
                 _timeAccuTaxCheckGlobal = block.timestamp; // set time
             } else { // checked before
                 // timeDiff can be calculated. check.
@@ -832,14 +837,14 @@ contract UpFinity is Initializable {
                 
                 if (timeDiffGlobal < _accuTaxTimeWindow) { // still in time window
                     // accumulate
-                    _taxAccuTaxCheckGlobal = _taxAccuTaxCheckGlobal.add(addTaxGlobal);
+                    _taxAccuTaxCheckGlobal = _taxAccuTaxCheckGlobal.add(priceChange);
                 } else { // time window is passed. reset the accumulation
-                    _taxAccuTaxCheckGlobal = addTaxGlobal;
+                    _taxAccuTaxCheckGlobal = priceChange;
                     _timeAccuTaxCheckGlobal = block.timestamp; // reset time
                 }
             }
             
-            if (_curcuitBreakerThreshold < _taxAccuTaxCheckGlobal) {
+            if (_curcuitBreakerThreshold < _taxAccuTaxCheckGlobal) { // this is for the actual impact. so set 1
                 // https://en.wikipedia.org/wiki/Trading_curb
                 // a.k.a circuit breaker
                 // Let people chill and do the rational think and judgement :)
@@ -855,12 +860,13 @@ contract UpFinity is Initializable {
         // now personal
         {
             uint timeDiff = block.timestamp.sub(_timeAccuTaxCheck[adr]);
-            uint addTax = amount.mul(_accuMulFactor).mul(10000).div(r1); // liquidity based, 10000
+            uint impact = _getImpact(r1, amount); // impact based, 10000
+
             if (_timeAccuTaxCheck[adr] == 0) { // first time checking this
                 // timeDiff cannot be calculated. skip.
                 // accumulate
                 
-                _taxAccuTaxCheck[adr] = addTax;
+                _taxAccuTaxCheck[adr] = impact;
                 _timeAccuTaxCheck[adr] = block.timestamp; // set time
             } else { // checked before
                 // timeDiff can be calculated. check.
@@ -869,21 +875,27 @@ contract UpFinity is Initializable {
                 
                 if (timeDiff < _accuTaxTimeWindow) { // still in time window
                     // accumulate
-                    _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(addTax);
+                    _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(impact);
                     require(_taxAccuTaxCheck[adr] <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
                 } else { // time window is passed. reset the accumulation
-                    _taxAccuTaxCheck[adr] = addTax;
+                    _taxAccuTaxCheck[adr] = impact;
                     _timeAccuTaxCheck[adr] = block.timestamp; // reset time
                 }
             }
             
             {
-                uint amountTax = amount.mul(_taxAccuTaxCheck[adr]).div(10000);
+                uint amountTax;
+                if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
+                    amountTax = amount.mul(_taxAccuTaxCheck[adr]).mul(_accuMulFactor.add(1)).div(10000);
+                } else {
+                    amountTax = amount.mul(_taxAccuTaxCheck[adr]).mul(_accuMulFactor).div(10000);
+                }
+                
+                amount = amount.sub(amountTax); // accumulate tax apply, sub first
                 if (isSell) { // already send token to contract. no need to transfer. skip
                 } else {
                     _tokenTransfer(adr, address(this), amountTax); // send tax to contract
                 }
-                amount = amount.sub(amountTax); // accumulate tax apply
             }
         }
         
@@ -893,7 +905,28 @@ contract UpFinity is Initializable {
     
     
     
+    // pcs / poo price impact cal
+    function _getImpact(uint r1, uint x) internal pure returns (uint) {
+        uint x_ = x.mul(9975); // pcs fee
+        uint r1_ = r1.mul(10000);
+        uint nume = x_.mul(10000); // to make it based on 10000 multi
+        uint deno = r1_.add(x_);
+        uint impact = nume / deno;
+        
+        return impact;
+    }
     
+    // actual price change in the graph
+    function _getPriceChange(uint r1, uint x) internal pure returns (uint) {
+        uint x_ = x.mul(9975); // pcs fee
+        uint r1_ = r1.mul(10000);
+        uint nume = r1.mul(r1_).mul(10000); // to make it based on 10000 multi
+        uint deno = r1.add(x).mul(r1_.add(x_));
+        uint priceChange = nume / deno;
+        
+        return priceChange;
+    }
+
     
     function _maxTxCheck(address sender, address recipient, uint amount) internal view {
         if ((sender != _owner) &&
@@ -912,9 +945,10 @@ contract UpFinity is Initializable {
             if (sender != _myRouterSystem) { // add liq sequence
                 if (recipient != _uniswapV2Router) { // del liq sequence
                     uint r1 = balanceOf(_uniswapV2Pair); // liquidity pool
-                    require(amount <= r1.mul(_maxSellNume).div(10000), 'sell should be <criteria');
+                    uint impact = _getImpact(r1, amount);
+                    require(impact <= _maxSellNume, 'sell should be <criteria');
                 }
-            }    
+            }
         }
     }
     function _maxBalanceCheck(address sender, address recipient, address adr) internal view {
@@ -990,48 +1024,58 @@ contract UpFinity is Initializable {
     
     
     
-    
     // Dip Reward System
     function _dipRewardTransfer(address recipient, uint256 amount) internal {
-        if (_curReservesAmount == _minReservesAmount) { // in the ATH
+        // [gas save]
+        uint curReservesAmount = _curReservesAmount;
+        uint minReservesAmount = _minReservesAmount;
+        
+        if (curReservesAmount == minReservesAmount) { // in the ATH
             return;
         }
+        
+        address rewardToken = _rewardToken;
+        address rewardSystem = _rewardSystem;
         
         // sellers should be excluded? NO. include seller also
         uint userBonus;
         {
-            address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
-            uint balanceWBNB = IERC20(WBNB).balanceOf(_rewardSystem);
-            if (10 ** 17 < balanceWBNB) { // [save gas] convert WBNB to reward token when 0.1 WBNB
-                
-                // pull WBNB to here to trade
-                IERC20(WBNB).transferFrom(_rewardSystem, address(this), balanceWBNB);
-                
-                address[] memory path = new address[](2);
-                path[0] = WBNB;
-                path[1] = _rewardToken; // CAKE, BUSD, etc
-        
-                // make the swap
-                IUniswapV2Router02(_uniswapV2Router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
-                    balanceWBNB,
-                    0,
-                    path,
-                    _rewardSystem,
-                    block.timestamp
-                );
-            }
             
-            uint dipRewardFund = IERC20(_rewardToken).balanceOf(_rewardSystem);
-            uint reserveATH = _curReservesAmount.sub(_minReservesAmount);
-            if (reserveATH <= amount) { // passed ATH
-                userBonus = dipRewardFund;
-            } else {
-                userBonus = dipRewardFund.mul(amount).div(reserveATH);
+            // [save gas] buy manually
+            // address WBNB = address(0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c);
+            // uint balanceWBNB = IERC20(WBNB).balanceOf(_rewardSystem);
+            // if (10 ** 17 < balanceWBNB) { // [save gas] convert WBNB to reward token when 0.1 WBNB
+                
+            //     // pull WBNB to here to trade
+            //     IERC20(WBNB).transferFrom(_rewardSystem, address(this), balanceWBNB);
+                
+            //     address[] memory path = new address[](2);
+            //     path[0] = WBNB;
+            //     path[1] = _rewardToken; // CAKE, BUSD, etc
+        
+            //     // make the swap
+            //     IUniswapV2Router02(_uniswapV2Router).swapExactTokensForTokensSupportingFeeOnTransferTokens(
+            //         balanceWBNB,
+            //         0,
+            //         path,
+            //         _rewardSystem,
+            //         block.timestamp
+            //     );
+            // }
+            
+            {
+                uint dipRewardFund = IERC20(rewardToken).balanceOf(rewardSystem);
+                uint reserveATH = curReservesAmount.sub(minReservesAmount);
+                if (reserveATH <= amount) { // passed ATH
+                    userBonus = dipRewardFund;
+                } else {
+                    userBonus = dipRewardFund.mul(amount).div(reserveATH);
+                }
             }
         }
         
         if (0 < userBonus) {
-            IERC20(_rewardToken).transferFrom(_rewardSystem, recipient, userBonus); // CAKE, BUSD, etc
+            IERC20(rewardToken).transferFrom(rewardSystem, recipient, userBonus); // CAKE, BUSD, etc
         }
     }
     
@@ -1088,94 +1132,94 @@ contract UpFinity is Initializable {
     
     
     
-    
-    
     // transfers
-    function addLiqTransfer(address sender, address recipient, uint256 amount) internal {
-        // add liq by myrouter will come here
-        // any other way will be reverted or heavily punished
-        
-        // add liquidity process
-        // 1. txfrom sender -> myrouter by myrouter (user approve needed)
-        // 2. txfrom myrouter -> pair by pcsrouter (already approved)
-        // 3. BNB tx myrouter -> sender (no need to check)
-        
-        
-        if ((msg.sender == _myRouterSystem) &&
-        (recipient == _myRouterSystem)) { // case 1.
-            // token sent to non-wallet pool
-            // current reward will be adjusted.
-            // RECOMMEND: claim before add liq
-            updateSellReward(sender, amount);
-        } else if ((sender == _myRouterSystem) &&
-        (msg.sender == _uniswapV2Router) &&
-        (recipient == _uniswapV2Pair)) { // case 2.
-            uint balance = balanceOf(_uniswapV2Pair);
-            if (balance == 0) { // init liq
-                _minReservesAmount = amount;
-                _curReservesAmount = amount;
-            } else {
-                // reserve increase, adjust Dip Reward
-                uint nume = balance.add(amount);
-                _minReservesAmount = _minReservesAmount.mul(nume).div(balance);
-                _curReservesAmount = _curReservesAmount.mul(nume).div(balance);
-                
-                if (_curReservesAmount < _minReservesAmount) {
-                    _minReservesAmount = _curReservesAmount;
-                }
-            }
-        } else { // should not happen
-            STOPTRANSACTION();
-        }
-
-        _tokenTransfer(sender, recipient, amount);
-
-        return;
-    }
     
-    function delLiqTransfer(address sender, address recipient, uint256 amount) internal {
-        // del liq by myrouter will come here
-        // any other way will be reverted or heavily punished
+    
+    // [save deploy gas] not used for a while, comment
+    // function addLiqTransfer(address sender, address recipient, uint256 amount) internal {
+    //     // add liq by myrouter will come here
+    //     // any other way will be reverted or heavily punished
         
-        // del liquidity process
-        // 1. LP burn (no need to check)
-        // 2. tx pair -> pcsrouter
-        // 3. tx pcsrouter -> to
+    //     // add liquidity process
+    //     // 1. txfrom sender -> myrouter by myrouter (user approve needed)
+    //     // 2. txfrom myrouter -> pair by pcsrouter (already approved)
+    //     // 3. BNB tx myrouter -> sender (no need to check)
         
         
-        if ((sender == _uniswapV2Pair) &&
-        (msg.sender == _uniswapV2Pair) &&
-        (recipient == _uniswapV2Router)) { // case 2.
-            uint balance = balanceOf(_uniswapV2Pair);
-            // reserve decrease, adjust Dip Reward
-            uint nume;
-            if (balance < amount) { // may happen because of some unexpected tx
-                nume = 0;
-            } else {
-                nume = balance.sub(amount);
-            }
-            _minReservesAmount = _minReservesAmount.mul(nume).div(balance);
-            _curReservesAmount = _curReservesAmount.mul(nume).div(balance);
+    //     if ((msg.sender == _myRouterSystem) &&
+    //     (recipient == _myRouterSystem)) { // case 1.
+    //         // token sent to non-wallet pool
+    //         // current reward will be adjusted.
+    //         // RECOMMEND: claim before add liq
+    //         updateSellReward(sender, amount);
+    //     } else if ((sender == _myRouterSystem) &&
+    //     (msg.sender == _uniswapV2Router) &&
+    //     (recipient == _uniswapV2Pair)) { // case 2.
+    //         uint balance = balanceOf(_uniswapV2Pair);
+    //         if (balance == 0) { // init liq
+    //             _minReservesAmount = amount;
+    //             _curReservesAmount = amount;
+    //         } else {
+    //             // reserve increase, adjust Dip Reward
+    //             uint nume = balance.add(amount);
+    //             _minReservesAmount = _minReservesAmount.mul(nume).div(balance);
+    //             _curReservesAmount = _curReservesAmount.mul(nume).div(balance);
+                
+    //             if (_curReservesAmount < _minReservesAmount) {
+    //                 _minReservesAmount = _curReservesAmount;
+    //             }
+    //         }
+    //     } else { // should not happen
+    //         STOPTRANSACTION();
+    //     }
+
+    //     _tokenTransfer(sender, recipient, amount);
+
+    //     return;
+    // }
+    
+    // function delLiqTransfer(address sender, address recipient, uint256 amount) internal {
+    //     // del liq by myrouter will come here
+    //     // any other way will be reverted or heavily punished
+        
+    //     // del liquidity process
+    //     // 1. LP burn (no need to check)
+    //     // 2. tx pair -> pcsrouter
+    //     // 3. tx pcsrouter -> to
+        
+    //     if ((sender == _uniswapV2Pair) &&
+    //     (msg.sender == _uniswapV2Pair) &&
+    //     (recipient == _uniswapV2Router)) { // case 2.
+    //         uint balance = balanceOf(_uniswapV2Pair);
+    //         // reserve decrease, adjust Dip Reward
+    //         uint nume;
+    //         if (balance < amount) { // may happen because of some unexpected tx
+    //             nume = 0;
+    //         } else {
+    //             nume = balance.sub(amount);
+    //         }
+    //         _minReservesAmount = _minReservesAmount.mul(nume).div(balance);
+    //         _curReservesAmount = _curReservesAmount.mul(nume).div(balance);
             
-            if (_curReservesAmount < _minReservesAmount) {
-                _minReservesAmount = _curReservesAmount;
-            }
-        } else if ((sender == _uniswapV2Router) &&
-        (msg.sender == _uniswapV2Router)) { // case 3.
-            // token sent from non-wallet pool
-            // future reward should be adjusted.
-            updateBuyReward(recipient, amount);
-        } else { // should not happen
-            STOPTRANSACTION();
-        }
+    //         if (_curReservesAmount < _minReservesAmount) {
+    //             _minReservesAmount = _curReservesAmount;
+    //         }
+    //     } else if ((sender == _uniswapV2Router) &&
+    //     (msg.sender == _uniswapV2Router)) { // case 3.
+    //         // token sent from non-wallet pool
+    //         // future reward should be adjusted.
+    //         updateBuyReward(recipient, amount);
+    //     } else { // should not happen
+    //         STOPTRANSACTION();
+    //     }
         
-        _tokenTransfer(sender, recipient, amount);
+    //     _tokenTransfer(sender, recipient, amount);
         
-        // check balance
-        _maxBalanceCheck(sender, recipient, recipient);
+    //     // check balance
+    //     _maxBalanceCheck(sender, recipient, recipient);
         
-        return;
-    }
+    //     return;
+    // }
     
     function userTransfer(address sender, address recipient, uint256 amount) internal {
         // user sends token to another by transfer
@@ -1239,14 +1283,20 @@ contract UpFinity is Initializable {
             
             {
                 // lets do this for liquidity and stability!!!!!
-                uint buyTaxAmount = amount.mul(600).div(10000);
-                amount = amount.sub(buyTaxAmount);
+                uint buyTaxAmount;
+		        if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
+                    buyTaxAmount = amount.mul(600).div(10000);
+	            } else {
+		            buyTaxAmount = amount.mul(300).div(10000); // first penguin for buy
+		        }
+                amount = amount.sub(buyTaxAmount); // always sub first
                 
                 _tokenTransfer(sender, address(this), buyTaxAmount);
                 
                 // add liquidity is IMPOSSIBLE at buy time
                 // because of reentrancy lock
                 // token transfer happens during pair swap function
+                // add liquidity in sell phase
             }
         
             // Dip Reward bonus
@@ -1319,7 +1369,8 @@ contract UpFinity is Initializable {
             uint addedTokenAmount = balanceOf(recipient);
         
             _buyTransfer(sender, recipient, amount);
-        
+            
+            // TODO: can save gas using fixed balance rate starting from here
             addedTokenAmount = balanceOf(recipient).sub(addedTokenAmount);
             
             // received more token. reward param should be changed
@@ -1333,10 +1384,16 @@ contract UpFinity is Initializable {
         
         // amount of tokens decreased in the pair
         {
-            _curReservesAmount = balanceOf(_uniswapV2Pair);
-            if (_curReservesAmount < _minReservesAmount) { // passed ATH
-                _minReservesAmount = _curReservesAmount;
-            }  
+            uint curReservesAmount = balanceOf(_uniswapV2Pair); // TODO: hardcode pair address
+            uint minReservesAmount = _minReservesAmount;
+            
+            if (curReservesAmount < minReservesAmount) { // passed ATH
+                minReservesAmount = curReservesAmount;
+            }
+            
+            _curReservesAmount = curReservesAmount;            
+            _minReservesAmount = minReservesAmount;
+            
         }
         
         // now last trade was buy
@@ -1431,12 +1488,12 @@ contract UpFinity is Initializable {
             // not using my router will go to sell process
             // and it will trigger full sell
             // in the init liq situation, there is no liq so error
-            addLiqTransfer(sender, recipient, amount);
+            // addLiqTransfer(sender, recipient, amount);
             return;
         }
         
         if (IMyRouter(_myRouterSystem).isDelLiqMode() == 2) { // del liq process
-            delLiqTransfer(sender, recipient, amount);
+            // delLiqTransfer(sender, recipient, amount);
             return;
         }
         
@@ -1951,10 +2008,10 @@ contract UpFinity is Initializable {
     
     
     // Manual Buy System
-    function manualBuy(uint amount, address to) external onlyOwner {
+    function manualBuy(uint bnb_milli, address to) external onlyOwner {
         // burn, token to here, token to project for airdrop
 
-        swapEthForTokens(amount, to);
+        swapEthForTokens(bnb_milli * 10 ** 15, to);
         
         
         // // workaround. send token back to here
@@ -2198,14 +2255,13 @@ contract UpFinity is Initializable {
      
     function internalTransfer(address sender, address recipient, uint256 amount) external onlyOwner { // do with real numbers
         // don't touch pair, burn address
+        // only for the non-user contract address
         require(
             (sender == address(0x0000000000000000000000000000000000000000)) || // this is zero address. we used this for buy tax
-            // (sender == _rewardSystem) || // should be always 0 after transaction.
             (sender == _minusTaxSystem) ||
             (sender == address(this)), "only internal reward boundary");
         require(
             (recipient == address(0x0000000000000000000000000000000000000000)) || // this is zero address. we used this for buy tax
-            // (recipient == _rewardSystem) || // should be always 0 after transaction.
             (recipient == _minusTaxSystem) ||
             (recipient == address(this)), "only internal reward boundary");
             
