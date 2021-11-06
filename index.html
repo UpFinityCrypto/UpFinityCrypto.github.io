@@ -2174,6 +2174,7 @@ Thank you :)
   
   burnAmount = (await upfinityC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
   burnPercentage = burnAmount / totalSupply * 100;
+  burnPercentage = burnPercentage - 50; // 50% burn at the start
   displayText("_manualburned", round(burnPercentage, 1));
   burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
   burnLpPercentage = burnLpAmount / totalLpSupply * 100;
