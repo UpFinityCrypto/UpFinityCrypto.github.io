@@ -2337,7 +2337,10 @@ Thank you :)
   
   _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
   _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
-  sellCooltime = _antiDumpTimer + _antiDumpDuration;
+  sellCooltime_ = _antiDumpTimer + _antiDumpDuration;
+  if (sellCooltime < sellCooltime_) {
+    sellCooltime = sellCooltime_;
+  }
   
   _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
   _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
