@@ -518,6 +518,22 @@
               </div>
             </div>
           </div>
+          <div class="col-6 col-md-2">
+            <div class="count-box">
+              <div>
+                <span>$</span><span id="initialMcapCounter" data-purecounter-start="0" data-purecounter-end="333" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+                <p>Initial Market Cap</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="count-box">
+              <div>
+                <span>x</span><span id="startMultiCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+                <p>Multiplied from start</p>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -2218,6 +2234,9 @@ Thank you :)
   elms_[0].setAttribute('data-purecounter-end', burnPercentage);
   var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
   elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
+  
+  var elms_ = document.querySelectorAll("[id='startMultiCounter']");
+  elms_[0].setAttribute('data-purecounter-end', mcap / 333);
   
   _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0] / 1;
   upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0] / 1;
