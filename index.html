@@ -685,6 +685,10 @@
     <section id="counts" class="counts">
      <div class="section-title">
         <h2>Tax Guide</h2>
+        <p>If you sell 10M = (slippage <span id="10mSlippage"></span>%</p>
+        <p>If you sell 100M = (slippage <span id="100mSlippage"></span>%</p>
+        <p>If you sell 1B = (slippage <span id="1bSlippage"></span>%</p>
+        <p>If you sell 10B = (slippage <span id="10bSlippage"></span>%</p>
       </div>
       <div class="container aos-init aos-animate" data-aos="fade-up">
 
@@ -2372,16 +2376,37 @@ Thank you :)
     }
   }
   
-  
+  base = 20;
+  margin = 3;
+  whaleTax = 0;
+  impact = getImpact(tokenAmount_, 10**7);
+  if (10**7 / tokenAmount_ * 100 > 1) {
+    whaleTax = 4;
+  } else {
+    whaleTax = 0;
+  }
+  displayText("10mSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
+  impact = getImpact(tokenAmount_, 10**8);
+  if (10**8 / tokenAmount_ * 100 > 1) {
+    whaleTax = 4;
+  } else {
+    whaleTax = 0;
+  }
+  displayText("100mSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
   impact = getImpact(tokenAmount_, 10**9);
   if (10**9 / tokenAmount_ * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
-  
-  console.log(20 + impact + taxPenalty + partyImpact + whaleTax + 3);
-  
+  displayText("1bSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
+  impact = getImpact(tokenAmount_, 10**10);
+  if (10**10 / tokenAmount_ * 100 > 1) {
+    whaleTax = 4;
+  } else {
+    whaleTax = 0;
+  }
+  displayText("10bSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
   
   }());
   </script>
