@@ -613,9 +613,7 @@
           </div>
           <div class="col-12 col-lg-6 text-justify content">
             <div class="row mt-5">
-              <div>If numbers not showing correctly, it means dev is upgrading :)</div>
-              <div>IF having trouble for anything, DM @ALLCOINLAB</div>
-              <div>All value can be changed or different due to network status!</div>
+              <span id="notice"></span>
             </div>
             <div class="row mt-5">
               <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -685,6 +683,9 @@
     <section id="counts" class="counts">
      <div class="section-title">
         <h2>Tax Guide</h2>
+        <div class="row mt-5">
+          <span id="notice"></span>
+        </div>
         <p>If you sell 10M = (slippage <span id="10mSlippage"></span>%)</p>
         <p>If you sell 100M = (slippage <span id="100mSlippage"></span>%)</p>
         <p>If you sell 1B = (slippage <span id="1bSlippage"></span>%)</p>
@@ -789,8 +790,7 @@
           </div>
           <div class="col-12 col-lg-6 pt-4 pt-lg-0 content">
             <div class="row mt-5">
-              <div>If numbers not showing correctly, it means dev is upgrading :)</div>
-              <div>IF having trouble for anything, DM @ALLCOINLAB</div>
+              <span id="notice"></span>
             </div>
             <div class="row mt-5">
               <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -2413,6 +2413,7 @@ Thank you :)
   }
   displayText("10bSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
   
+  displayText("notice", "If numbers not showing correctly, it means dev is upgrading :) IF having trouble for anything, DM @ALLCOINLAB All value can be changed or different due to network status!");
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
