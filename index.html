@@ -467,7 +467,7 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-6 col-md-2">
             <div class="count-box">
               <div>
                 <span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-decimals="10" data-purecounter-currency="true" data-purecounter-currencysymbol="$" class="purecounter"></span>
@@ -476,7 +476,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-6 col-md-2">
             <div class="count-box">
               <div>
                 <span id="burnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
@@ -485,7 +485,7 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-6 col-md-2">
             <div class="count-box">
               <div>
                 <span id="circulateCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
@@ -494,11 +494,35 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-6 col-md-2">
             <div class="count-box">
               <div>
                 <span>$</span><span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
                 <p>Market Cap</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="count-box">
+              <div>
+                <span>$</span><span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+                <p>Market Cap</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="count-box">
+              <div>
+                <span id="manualBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
+                <p><h3>Burned by Event</h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="count-box">
+              <div>
+                <span id="manualLPBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
+                <p><h3>LP Burned by Event</h3>
               </div>
             </div>
           </div>
@@ -532,7 +556,7 @@
           </div>
           <div class="col-12 col-md-6 text-justify content">
             <h3>auto/manual burned</h3>
-            <p>(<span id="_manualburned">5.5</span>%. multiple burn event done and more to come)</p>
+            <p>(<span id="_manualburned">50</span>%. multiple burn event done and more to come)</p>
             <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
             view in bscscan
             <img src="assets/img/safu/burned.jpg">
@@ -540,7 +564,7 @@
           </div>
           <div class="col-12 col-md-6 text-justify content">
             <h3>manual LP burned</h3>
-            <p>(<span id="_manuallpburned">5.1</span>%. multiple LP burn will be done)</p>
+            <p>(<span id="_manuallpburned">50</span>%. multiple LP burn will be done)</p>
             <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
             view in bscscan
             <img src="assets/img/safu/lpburned.jpg">
@@ -2157,9 +2181,11 @@ Thank you :)
   document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB'; 
   
   burnAmount = (await upfinityC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
-  document.getElementById("_manualburned").innerHTML = round(burnAmount / totalSupply * 100, 1);
+  burnPercentage = burnAmount / totalSupply * 100;
+  displayText("_manualburned", round(burnPercentage, 1));
   burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
-  document.getElementById("_manuallpburned").innerHTML = round(burnLpAmount / totalLpSupply * 100, 1);
+  burnLpPercentage = burnLpAmount / totalLpSupply * 100;
+  displayText("_manuallpburned", round(burnLpPercentage, 1));
   
   bnbAmount_ = rI / 10 ** 18;
   tokenAmount_ = rO / 10 ** decimals;
@@ -2195,6 +2221,10 @@ Thank you :)
   elms_[0].setAttribute('data-purecounter-end', realSupply_);
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
   elms_[0].setAttribute('data-purecounter-end', mcap);
+  var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
+  elms_[0].setAttribute('data-purecounter-end', burnPercentage);
+  var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
+  elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
   
   _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0] / 1;
   upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0] / 1;
