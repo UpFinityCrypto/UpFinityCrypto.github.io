@@ -2274,8 +2274,7 @@ Thank you :)
   balancePercentage = round(balance / totalSupply * 100, 2);
   displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
   if (balancePercentage >= 1) {
-    <!-- displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳 -->
-    displayText("balanceIcon", "<img src='assets/img/whale.gif'>"); // 🐳
+    displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
   } else if (balancePercentage >= 0.3) {
     displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
   } else if (balancePercentage >= 0.1) {
