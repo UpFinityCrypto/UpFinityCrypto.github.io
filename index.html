@@ -2131,6 +2131,8 @@ Thank you :)
     sellCooltime = sellCooltime_;
   }
   
+  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  
   d = new Date(sellCooltime * 1000);
   displayText("sellCooltime", d);
 
@@ -2356,7 +2358,7 @@ Thank you :)
   
   
   
-  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  
   if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000)) {
       displayText("circuitBreakerStatus", "Circuit breaker ON");
   } else {
