@@ -2126,7 +2126,7 @@ Thank you :)
   sellCooltime = 0;
   _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
   _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-  sellCooltime_ = _curcuitBreakerTime + 2 * _curcuitBreakerDuration;
+  sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
   if (sellCooltime < sellCooltime_) {
     sellCooltime = sellCooltime_;
   }
@@ -2359,7 +2359,7 @@ Thank you :)
   
   
   
-  if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime + 2 * _curcuitBreakerDuration) * 1000)) {
+  if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60) * 1000)) {
       displayText("circuitBreakerStatus", "Circuit breaker ON");
   } else {
     if (Date.now() < _antiDumpTimer + _antiDumpDuration) {
