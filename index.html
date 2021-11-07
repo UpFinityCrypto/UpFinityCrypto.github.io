@@ -2257,11 +2257,11 @@ Thank you :)
   priceReserveData = await pricePairC.functions.getReserves();
   
   if (wbnbAdr < busdAdr) { // BNB / UpFinity
-    pricerI = pricereserveData[0]; 
-    pricerO = pricereserveData[1];
+    pricerI = priceReserveData[0]; 
+    pricerO = priceReserveData[1];
   } else {
-    pricerI = pricereserveData[1];
-    pricerO = pricereserveData[0];
+    pricerI = priceReserveData[1];
+    pricerO = priceReserveData[0];
   }
   
   price = rI.div(rO).mul(pricerO).div(pricerI); // TODO: WBNB-BUSD, same decimal
