@@ -590,7 +590,7 @@
 
         <div class="section-title">
           <h2>Status</h2>
-            <img src="assets/img/whale.mp4">
+            <img src="assets/img/whale.gif">
             <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
                 <div id="connectResult"><span>To see the values, connect wallet!<span></div>
@@ -2315,9 +2315,9 @@ Thank you :)
   if (maxSellLiq_ < maxSellLiq) {
     maxSellLiq = maxSellLiq_;
   }
-  maxSellLiq = BNB(maxSellLiq / 2);
-  displayText("oneSellLimitStatus", 'upgrading!');
-  <!-- displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB');  -->
+  maxSellLiq = BNB(maxSellLiq / 1.5); // roughly estimated
+  <!-- displayText("oneSellLimitStatus", 'upgrading!'); -->
+  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
   
   taxPenalty = _taxAccuTaxCheck * (await upfinityC.functions._accuMulFactor())[0] / 100;
   if (15 < taxPenalty) {
