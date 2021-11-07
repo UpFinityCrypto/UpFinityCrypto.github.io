@@ -1994,6 +1994,7 @@ Thank you :)
   const routerAbi = [
   {"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
   {"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},
+  {"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"},
   ];
   const factoryAbi = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}];
   const pairAbi = [{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},
@@ -2110,6 +2111,7 @@ Thank you :)
   // constants
   
   totalSupply = (await upfinityC.functions.totalSupply())[0];
+  decimals = (await upfinityC.functions.decimals())[0];
   
   _accuMulFactor = (await upfinityC.functions._accuMulFactor())[0] / 1;
   
@@ -2128,7 +2130,7 @@ Thank you :)
   _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
   _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
   _dipRewardFee = (await upfinityC.functions._dipRewardFee())[0] / 1;
-  _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0] / 1;
+  _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0]; // big number
   _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0] / 1;
   _improvedRewardFee = (await upfinityC.functions._improvedRewardFee())[0] / 1;
   _liquidityFee = (await upfinityC.functions._liquidityFee())[0] / 1;
@@ -2142,51 +2144,6 @@ Thank you :)
   _whaleRate = (await upfinityC.functions._whaleRate())[0] / 1;
   _whaleSellFee = (await upfinityC.functions._whaleSellFee())[0] / 1;
   _whaleTransferFee = (await upfinityC.functions._whaleTransferFee())[0] / 1;
-  
-  
-  reserveData = await pairC.functions.getReserves();
-  
-  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-    rI = reserveData[0]; 
-    rO = reserveData[1];
-  } else {
-    rI = reserveData[1];
-    rO = reserveData[0];
-  }
-  
-  maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
-  
-  totalLpSupply = (await pairC.functions.totalSupply())[0];
-  
-  
-  sellCooltime = 0;
-  sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
-    
-  if (sellCooltime < sellCooltime_) {
-    if (_curcuitBreakerThreshold <= _taxAccuTaxCheckGlobal) {
-      sellCooltime = sellCooltime_;
-    }
-  }
-
-  d = new Date(sellCooltime * 1000);
-  displayText("sellCooltime", d);
-
-  
-  communityToken = "0x000000000000000000000000000000000000dEaD";
-  
-  balance = (await upfinityC.functions.balanceOf(freeAirdropAdr))[0] / 1;
-  
-  dollarsPerBNB = (await airdropC.functions._dollarsPerBNB())[0] / 1;
-  oneDollar = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
-  
-  dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
-  
-  displayText("freeAirdropBalance", "Free Airdrop (" + (await upfinityC.functions._freeAirdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + " $]");
-  
-  balance = await upfinityC.functions.balanceOf(airdropAdr);
-  balance = balance[0];
-  
-  displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._airdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
   
   multiplier = 1 + 600 / 2000;
   displayText("_accuMulFactor", _accuMulFactor);
@@ -2219,29 +2176,77 @@ Thank you :)
   
   displayText("redistributionFee", redistributionFee * multiplier / 100);
   
-  displayText("connectResult", "CONNECT WALLET!");
-  displayText("balanceStatus", "connect wallet!");
-  <!-- displayText("balanceIcon", "connect wallet!"); --> // big icon
-  displayText("oneBuyLimitStatus", "connect wallet!");
-  displayText("oneSellLimitStatus", "connect wallet!");
+  connectWalletText = "connect wallet!";
+  displayText("connectResult", connectWalletText);
+  displayText("balanceStatus", connectWalletText);
+  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
+  displayText("oneBuyLimitStatus", connectWalletText);
+  displayText("oneSellLimitStatus", connectWalletText);
+  
+  displayText("claimable", connectWalletText);
+  displayText("claimed", connectWalletText);
+  
+  
+  
+  
+  reserveData = await pairC.functions.getReserves();
+  
+  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+    rI = reserveData[0]; 
+    rO = reserveData[1];
+  } else {
+    rI = reserveData[1];
+    rO = reserveData[0];
+  }
+  
+  totalLpSupply = (await pairC.functions.totalSupply())[0];
+  
+  maxBuyUPF = rO.mul(1000).div(10000); // 10% of current liquidity
+  maxBuyBNB = (await routerC.functions.getAmountIn(maxBuy, rI, rO))[0];
+  
 
-  displayText("claimable", "connect wallet!");
-  displayText("claimed", "connect wallet!");
+  sellCooltime = 0;
+  sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
+  
+  if (_curcuitBreakerThreshold <= _taxAccuTaxCheckGlobal) {
+    if (sellCooltime < sellCooltime_) {
+      sellCooltime = sellCooltime_;
+      d = new Date(sellCooltime * 1000);
+      displayText("sellCooltime", d);
+    }
+  }
+
+  
+  communityToken = "0x000000000000000000000000000000000000dEaD";
+  
+  // airdrop
+  freeAirdropBalance = (await upfinityC.functions.balanceOf(freeAirdropAdr))[0];
+  dollarsPerBNB = (await airdropC.functions._dollarsPerBNB())[0] / 1;
+  oneDollarBNB = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
+  oneDollarUPF = (await routerC.functions.getAmountOut(ethers.utils.parseEther(oneDollarBNB.toString()), rI, rO))[0];
+  _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0]
+  displayText("freeAirdropBalance", "Free Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(freeAirdropBalance.div(oneDollarUPF) / 1) + " $]");
+  
+  airdropBalance = (await upfinityC.functions.balanceOf(airdropAdr))[0];
+  _airdropSystem = (await upfinityC.functions._airdropSystem())[0]
+  displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1) + "$]");
+  
   
   balanceInfo = await provider.getBalance(rewardAdr);
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB'; 
+  displayText("totalUnclaimed", balance.toString() + ' BNB');
   
-  burnAmount = (await upfinityC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0];
+  burnAdr = "0x000000000000000000000000000000000000dEaD";
+  burnAmount = (await upfinityC.functions.balanceOf(burnAdr))[0];
   burnPercentage = burnAmount.div(totalSupply).mul(100);
   burnPercentage = burnPercentage.sub(50); // 50% burn at the start
   displayText("_manualburned", round(burnPercentage / 1, 1));
-  burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0];
+  burnLpAmount = (await pairC.functions.balanceOf(burnAdr))[0];
   burnLpPercentage = burnLpAmount.div(totalLpSupply).mul(100);
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
-  bnbAmount_ = rI / 10 ** 18;
-  tokenAmount_ = rO / 10 ** decimals;
+  bnbAmount = rI.div(10 ** 18);
+  tokenAmount_ = rO.div(10 ** decimals);
   
   // without wallet connection
   busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
