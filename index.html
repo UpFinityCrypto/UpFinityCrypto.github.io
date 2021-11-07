@@ -2266,7 +2266,7 @@ Thank you :)
   
   price = rI.div(rO).mul(pricerO).div(pricerI); // TODO: WBNB-BUSD, same decimal
   realSupply = totalSupply.sub(burnAmount);
-  mcap = price * realSupply.div(10 ** decimals);
+  mcap = price * realSupply / 10 ** decimals;
   
   var elms_ = document.querySelectorAll("[id='priceCounter']");
   elms_[0].setAttribute('data-purecounter-end', price.toFixed(10));
