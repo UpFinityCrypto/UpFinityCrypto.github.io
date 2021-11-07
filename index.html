@@ -2109,7 +2109,7 @@ Thank you :)
   
   // constants
   
-  totalSupply = (await upfinityC.functions.totalSupply())[0] / 1;
+  totalSupply = (await upfinityC.functions.totalSupply())[0];
   
   _accuMulFactor = (await upfinityC.functions._accuMulFactor())[0] / 1;
   
@@ -2156,7 +2156,7 @@ Thank you :)
   
   maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
   
-  totalLpSupply = (await pairC.functions.totalSupply())[0] / 1;
+  totalLpSupply = (await pairC.functions.totalSupply())[0];
   
   
   sellCooltime = 0;
@@ -2232,12 +2232,12 @@ Thank you :)
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
   document.getElementById("totalUnclaimed").innerHTML = balance.toString() + ' BNB'; 
   
-  burnAmount = (await upfinityC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
-  burnPercentage = burnAmount / totalSupply * 100;
-  burnPercentage = burnPercentage - 50; // 50% burn at the start
+  burnAmount = (await upfinityC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0];
+  burnPercentage = burnAmount.div(totalSupply).mul(100);
+  burnPercentage = burnPercentage.sub(50); // 50% burn at the start
   displayText("_manualburned", round(burnPercentage, 1));
-  burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0] / 1;
-  burnLpPercentage = burnLpAmount / totalLpSupply * 100;
+  burnLpAmount = (await pairC.functions.balanceOf("0x000000000000000000000000000000000000dEaD"))[0];
+  burnLpPercentage = burnLpAmount.div(totalLpSupply).mul(100);
   displayText("_manuallpburned", round(burnLpPercentage, 1));
   
   bnbAmount_ = rI / 10 ** 18;
