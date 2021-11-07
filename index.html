@@ -2269,7 +2269,7 @@ Thank you :)
   mcap = price * realSupply / 10 ** decimals;
   
   var elms_ = document.querySelectorAll("[id='priceCounter']");
-  elms_[0].setAttribute('data-purecounter-end', price.toFixed(10));
+  elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
   var elms_ = document.querySelectorAll("[id='burnCounter']");
   elms_[0].setAttribute('data-purecounter-end', burnAmount);
   var elms_ = document.querySelectorAll("[id='circulateCounter']");
