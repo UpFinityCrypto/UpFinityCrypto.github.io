@@ -813,7 +813,7 @@ contract UpFinity is Initializable {
         uint r1 = balanceOf(_uniswapV2Pair);
         
         // global check first
-        {
+        if (isSell) {
             if (_curcuitBreakerFlag == 2) { // circuit breaker activated
                 require(_curcuitBreakerTime + _curcuitBreakerDuration < block.timestamp, 'Circuit Breaker is not finished');
                 
@@ -876,7 +876,9 @@ contract UpFinity is Initializable {
                 if (timeDiff < _accuTaxTimeWindow) { // still in time window
                     // accumulate
                     _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(impact);
-                    require(_taxAccuTaxCheck[adr] <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
+                    if (isSell) { // only limit for sell, but transfer will get heavy tax
+                        require(_taxAccuTaxCheck[adr] <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
+                    }
                 } else { // time window is passed. reset the accumulation
                     _taxAccuTaxCheck[adr] = impact;
                     _timeAccuTaxCheck[adr] = block.timestamp; // reset time
@@ -923,6 +925,7 @@ contract UpFinity is Initializable {
         uint nume = r1.mul(r1_).mul(10000); // to make it based on 10000 multi
         uint deno = r1.add(x).mul(r1_.add(x_));
         uint priceChange = nume / deno;
+        priceChange = uint(10000).sub(priceChange);
         
         return priceChange;
     }
