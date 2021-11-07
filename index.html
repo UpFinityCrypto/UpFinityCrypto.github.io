@@ -2201,7 +2201,7 @@ Thank you :)
   totalLpSupply = (await pairC.functions.totalSupply())[0];
   
   maxBuyUPF = rO.mul(1000).div(10000); // 10% of current liquidity
-  maxBuyBNB = (await routerC.functions.getAmountIn(maxBuy, rI, rO))[0];
+  maxBuyBNB = (await routerC.functions.getAmountIn(maxBuyUPF, rI, rO))[0];
   
 
   sellCooltime = 0;
