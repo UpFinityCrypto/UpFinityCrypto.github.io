@@ -2339,7 +2339,7 @@ Thank you :)
   maxSellLiq = 0;
   
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
-  if ((_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000) < Date.now()) {
+  if ((_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000 < Date.now()) {
     _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
     _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
     if (_taxAccuTaxCheck < _taxAccuTaxThreshold) {
