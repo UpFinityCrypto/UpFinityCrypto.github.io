@@ -218,8 +218,8 @@ contract UpFinity is Initializable {
     uint256 private _rTotal;
     uint256 private _tFeeTotal;
     
-    mapping (address => bool) private _isExcluded;
-    address[] private _excluded;
+    mapping (address => bool) public _isExcluded;
+    address[] public _excluded;
     
     
     // Fee Variables
@@ -345,8 +345,8 @@ contract UpFinity is Initializable {
     fallback() external payable {}
     receive() external payable {}
     
-    modifier onlyOwner {
-        require(_owner == msg.sender, 'Only Owner can do this!!!!!');
+    modifier onlyOwner() {
+        require(_owner == msg.sender, "Ownable: caller is not the owner");
         _;
     }
     
@@ -522,11 +522,11 @@ contract UpFinity is Initializable {
     //     _maxBalanceNume = _maxBalanceNume_;
     // }
 
-    // function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external onlyOwner {
-    //     _accuTaxTimeWindow = _accuTaxTimeWindow_;
-    //     _accuMulFactor = _accuMulFactor_;
-    //     _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
-    // }
+    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external onlyOwner {
+         _accuTaxTimeWindow = _accuTaxTimeWindow_;
+         _accuMulFactor = _accuMulFactor_;
+         _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
+    }
     
     // function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external onlyOwner {
     //     _curcuitBreakerThreshold = _curcuitBreakerThreshold_;
@@ -640,7 +640,7 @@ contract UpFinity is Initializable {
         return _tTotal;
     }
 
-    function balanceOf(address account) public view returns (uint256) { // gas 30000
+    function balanceOf(address account) public view returns (uint256) { // gas 26345 / 56492
         if (_isExcluded[account]) return _tOwned[account];
         
         uint256 rAmount = _rOwned[account];
@@ -655,7 +655,7 @@ contract UpFinity is Initializable {
         return rAmount;
     }
 
-    function tokenFromReflection(uint256 rAmount) public view returns(uint256) {
+    function tokenFromReflection(uint256 rAmount) public view returns(uint256) { // 54312
         require(rAmount <= _rTotal, "Amount must be less than total reflections");
         uint256 currentRate =  _getRate();
         return rAmount.div(currentRate);
@@ -664,7 +664,11 @@ contract UpFinity is Initializable {
     
     function balanceOfLowGas(address account, uint256 rate) internal view returns (uint256) {
         if (_isExcluded[account]) return _tOwned[account];
-        return tokenFromReflectionLowGas(_rOwned[account], rate);
+        
+        uint256 rAmount = _rOwned[account];
+        if (rAmount == 0) return uint256(0); // [gas opt] 0/x = 0
+        
+        return tokenFromReflectionLowGas(rAmount, rate);
     }
     function tokenFromReflectionLowGas(uint256 rAmount, uint256 rate) internal view returns(uint256) {
         require(rAmount <= _rTotal, "Amount must be less than total reflections");
@@ -972,7 +976,7 @@ contract UpFinity is Initializable {
         totalBNB = totalBNB + addedTotalBNB_;
     }
     
-    function getUserTokenAmount() public view returns (uint) {
+    function getUserTokenAmount() public view returns (uint) { // 73604 for 6
         // [save gas] multi balance check with same rate
         uint rate = _getRate();
         
@@ -2130,14 +2134,26 @@ contract UpFinity is Initializable {
     }
 
     function _getCurrentSupply() internal view returns (uint256, uint256) {
-        uint256 rSupply = _rTotal;
-        uint256 tSupply = _tTotal;      
-        for (uint256 i = 0; i < _excluded.length; i++) {
-            if (_rOwned[_excluded[i]] > rSupply || _tOwned[_excluded[i]] > tSupply) return (_rTotal, _tTotal);
-            rSupply = rSupply.sub(_rOwned[_excluded[i]]);
-            tSupply = tSupply.sub(_tOwned[_excluded[i]]);
+        // [gas save]
+        uint256 rTotal_ = _rTotal;
+        uint256 tTotal_ = _tTotal;
+        
+        uint256 rSupply = rTotal_;
+        uint256 tSupply = tTotal_;
+        
+        address[2] memory excluded_;
+        excluded_[0] = address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a);
+        excluded_[1] = address(0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D);
+        
+        for (uint256 i = 0; i < 2; i++) {
+            uint256 rOwned_ = _rOwned[excluded_[i]];
+            uint256 tOwned_ = _tOwned[excluded_[i]];
+            
+            if (rOwned_ > rSupply || tOwned_ > tSupply) return (rTotal_, tTotal_);
+            rSupply = rSupply.sub(rOwned_);
+            tSupply = tSupply.sub(tOwned_);
         }
-        if (rSupply < _rTotal.div(_tTotal)) return (_rTotal, _tTotal);
+        if (rSupply < rTotal_.div(tTotal_)) return (rTotal_, tTotal_);
         return (rSupply, tSupply);
     }
 
@@ -2202,29 +2218,30 @@ contract UpFinity is Initializable {
         return 100;
     }
     
+    
+    
+    
     // owner related functions for pass the safety checks
     // omitted for future use
-    // function renounceOwnership() public onlyOwner {
-    //     emit OwnershipTransferred(_owner, address(0));
-    //     _owner = address(0);
-    // }
-
-    // function transferOwnership(address newOwner) public onlyOwner {
-    //     require(newOwner != address(0), "Ownable: new owner is the zero address");
-    //     emit OwnershipTransferred(_owner, newOwner);
-    //     _owner = newOwner;
-    // }
-
-    // function geUnlockTime() public view returns (uint256) {
-    //     return _lockTime;
-    // }
-
-    // function lock(uint256 time) public onlyOwner {
-    //     _previousOwner = _owner;
-    //     _owner = address(0);
-    //     _lockTime = block.timestamp + time;
-    //     emit OwnershipTransferred(_owner, address(0));
-    // }
+    
+    function renounceOwnership() public onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+    
+    function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+    
+    //Locks the contract for owner for the amount of time provided
+    function lock(uint256 time) public onlyOwner {
+        _previousOwner = _owner;
+        _owner = address(0);
+        _lockTime = block.timestamp + time;
+        emit OwnershipTransferred(_owner, address(0));
+    }
     
     // function unlock() public virtual {
     //     require(_previousOwner == msg.sender, "You don't have permission to unlock");
@@ -2232,6 +2249,10 @@ contract UpFinity is Initializable {
     //     emit OwnershipTransferred(_owner, _previousOwner);
     //     _owner = _previousOwner;
     // }
+    
+    
+    
+    
     
     
     // owner should do many transfer (giveaway, airdrop, burn event, etc)
@@ -2244,6 +2265,10 @@ contract UpFinity is Initializable {
     function ownerTransfer(address recipient, uint256 amount) external onlyOwner { // do with real numbers
         _tokenTransfer(msg.sender, recipient, amount * 10 ** _decimals);
     }
+    
+    
+    
+    
     
     /**
      * this is needed for many reasons
