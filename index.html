@@ -2117,7 +2117,6 @@ Thank you :)
   }
   
   maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
-  maxBuyLiq = BNB(maxBuyLiq);
   totalSupplyData = await upfinityC.functions.totalSupply();
   totalSupply = totalSupplyData[0];
   totalLpSupply = (await pairC.functions.totalSupply())[0];
@@ -2294,9 +2293,7 @@ Thank you :)
   if (Number(balanceLimit) <= Number(balance)) { // already max
   } else {
     buyLimit = balanceLimit.sub(balance);
-    maxBuyBalData = await routerC.functions.getAmountIn(buyLimit, rI, rO);
-    maxBuyBal = BNB(maxBuyBalData[0]);
-    
+    maxBuyBal = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0] / 1;
     if (maxBuyBal < maxBuyLiq) {
       displayText("oneBuyLimitStatus", maxBuyBal.toString() + ' BNB');
     } else { 
