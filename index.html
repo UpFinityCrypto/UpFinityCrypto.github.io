@@ -2341,11 +2341,17 @@ Thank you :)
   
   
   
-  // it may display last big value  
+  // it may display last big value
+  maxSellUPF = 0;
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-  maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
-  maxSellUPF = rO.mul(maxSellRate).div(10000);
+  if (_taxAccuTaxCheck < _taxAccuTaxThreshold) {
+    maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
+    maxSellUPF = rO.mul(maxSellRate).div(10000);
+    if (maxSellUPF_ < maxSellUPF) {
+      maxSellUPF = maxSellUPF_;
+    }
+  }
   
   if (_taxAccuTaxCheckGlobal < _curcuitBreakerThreshold) {
     maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
