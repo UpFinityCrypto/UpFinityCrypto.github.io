@@ -2239,11 +2239,11 @@ Thank you :)
   
   burnAdr = "0x000000000000000000000000000000000000dEaD";
   burnAmount = (await upfinityC.functions.balanceOf(burnAdr))[0];
-  burnPercentage = burnAmount.div(totalSupply).mul(100);
+  burnPercentage = burnAmount.mul(100).div(totalSupply);
   burnPercentage = burnPercentage.sub(50); // 50% burn at the start
   displayText("_manualburned", round(burnPercentage / 1, 1));
   burnLpAmount = (await pairC.functions.balanceOf(burnAdr))[0];
-  burnLpPercentage = burnLpAmount.div(totalLpSupply).mul(100);
+  burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
   bnbAmount = rI / 1e18;
@@ -2271,9 +2271,9 @@ Thank you :)
   var elms_ = document.querySelectorAll("[id='priceCounter']");
   elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
   var elms_ = document.querySelectorAll("[id='burnCounter']");
-  elms_[0].setAttribute('data-purecounter-end', burnAmount);
+  elms_[0].setAttribute('data-purecounter-end', burnAmount / 1e18);
   var elms_ = document.querySelectorAll("[id='circulateCounter']");
-  elms_[0].setAttribute('data-purecounter-end', realSupply);
+  elms_[0].setAttribute('data-purecounter-end', realSupply / 1e18);
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
   elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
   var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
