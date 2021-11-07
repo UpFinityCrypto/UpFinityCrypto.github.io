@@ -2295,9 +2295,9 @@ Thank you :)
     buyLimit = balanceLimit.sub(balance);
     maxBuyBal = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0] / 1;
     if (maxBuyBal < maxBuyLiq) {
-      displayText("oneBuyLimitStatus", maxBuyBal.toString() + ' BNB');
+      displayText("oneBuyLimitStatus", BNB(maxBuyBal) + ' BNB');
     } else { 
-      displayText("oneBuyLimitStatus", maxBuyLiq.toString() + ' BNB');
+      displayText("oneBuyLimitStatus", BNB(maxBuyLiq) + ' BNB');
     }
     //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
   }
