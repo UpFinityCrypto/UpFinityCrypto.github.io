@@ -2225,11 +2225,11 @@ Thank you :)
   oneDollarBNB = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
   oneDollarUPF = (await routerC.functions.getAmountOut(ethers.utils.parseEther(oneDollarBNB.toString()), rI, rO))[0];
   _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0]
-  displayText("freeAirdropBalance", "Free Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(freeAirdropBalance.div(oneDollarUPF) / 1) + " $]");
+  displayText("freeAirdropBalance", "Free Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(freeAirdropBalance.div(oneDollarUPF) / 1)) + " $]");
   
   airdropBalance = (await upfinityC.functions.balanceOf(airdropAdr))[0];
   _airdropSystem = (await upfinityC.functions._airdropSystem())[0]
-  displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1) + "$]");
+  displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1)) + "$]");
   
   
   balanceInfo = await provider.getBalance(rewardAdr);
