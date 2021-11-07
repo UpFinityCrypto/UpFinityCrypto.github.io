@@ -2144,6 +2144,8 @@ Thank you :)
   _whaleSellFee = (await upfinityC.functions._whaleSellFee())[0] / 1;
   _whaleTransferFee = (await upfinityC.functions._whaleTransferFee())[0] / 1;
   
+  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
+  
   multiplier = 1 + 600 / 2000;
   displayText("_accuMulFactor", _accuMulFactor);
   displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
@@ -2337,32 +2339,27 @@ Thank you :)
     }
   }
   
+  
+  
   // it may display last big value  
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-  if (_taxAccuTaxThreshold <= _taxAccuTaxCheck) {
-    if (Date.now() < (_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000) {
-      maxSellRate = 0;
-    } else {
-      maxSellRate = _taxAccuTaxThreshold;
-    }
-  } else {
-    maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck;
-  }
-  maxSellLiq = rI.mul(maxSellRate).div(10000);
+  maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
+  maxSellUPF = rO.mul(maxSellRate).div(10000);
   
   if (_taxAccuTaxCheckGlobal < _curcuitBreakerThreshold) {
     maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
-    maxSellLiq_ = rI.mul(maxSellRate_).div(10000);
-    if (maxSellLiq_ < maxSellLiq) {
-      maxSellLiq = maxSellLiq_;
+    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
+    if (maxSellUPF_ < maxSellUPF) {
+      maxSellUPF = maxSellUPF_;
     }
   } 
   
-  maxSellLiq = BNB(maxSellLiq / 1.5); // roughly estimated
-  displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
+  maxSellBNB = (await routerC.functions.getAmountOut(maxSellUPF, rI, rO))[0];
+  maxSellBNB = BNB(maxSellBNB / 1.5); // roughly estimated
+  displayText("oneSellLimitStatus", maxSellBNB.toString() + ' BNB'); 
   
-  taxPenalty = _taxAccuTaxCheck * (await upfinityC.functions._accuMulFactor())[0] / 100;
+  taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
   if (15 < taxPenalty) {
     taxPenalty = 15; // check
   }
@@ -2380,25 +2377,23 @@ Thank you :)
   // price change accumulation => global limit
   // x / r0 = a => price change = 1 / (1 + a)^2
   
-  _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
-  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
+  
   sellCooltime_ = _antiDumpTimer + _antiDumpDuration;
   if (sellCooltime < sellCooltime_) {
     sellCooltime = sellCooltime_;
+    d = new Date(sellCooltime * 1000);
+    displayText("sellCooltime", d);
   }
   
-  _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
   _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
   sellCooltime_ = _buySellTimer + _buySellTimeDuration;
   if (sellCooltime < sellCooltime_) {
     sellCooltime = sellCooltime_;
+    d = new Date(sellCooltime * 1000);
+    displayText("sellCooltime", d);
   }
   
   blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
-  
-  d = new Date(sellCooltime * 1000);
-  displayText("sellCooltime", d);
-  
   
   
   
