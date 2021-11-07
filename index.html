@@ -2336,18 +2336,20 @@ Thank you :)
     //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
   }
   
-  // it may display last big value
-  maxSellLiq = 0;
-  
+  // it may display last big value  
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
-  if ((_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000 < Date.now()) {
-    _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
-    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-    if (_taxAccuTaxCheck < _taxAccuTaxThreshold) {
-      maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck;
-      maxSellLiq = rI.mul(maxSellRate).div(10000);
+  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
+  _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
+  if (_taxAccuTaxThreshold <= _taxAccuTaxCheck) {
+    if (Date.now() < (_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000) {
+      maxSellRate = 0;
+    } else {
+      maxSellRate = _taxAccuTaxThreshold;
     }
+  } else {
+    maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck;
   }
+  maxSellLiq = rI.mul(maxSellRate).div(10000);
   
   if (_taxAccuTaxCheckGlobal < _curcuitBreakerThreshold) {
     maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
