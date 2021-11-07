@@ -2309,14 +2309,26 @@ Thank you :)
   }
   
   // it may display last big value
-  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
-  _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-  maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
-  
-  maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
-  if (maxSellLiq_ < maxSellLiq) {
-    maxSellLiq = maxSellLiq_;
+  maxSellLiq = 0;
+  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
+  _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
+  if ((_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000) < Date.now()) {
+    _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
+    _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
+    if (_taxAccuTaxCheck < _taxAccuTaxThreshold) {
+      maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck;
+      maxSellLiq = rI.mul(maxSellRate).div(10000);
+    }
   }
+  
+  if (_taxAccuTaxCheckGlobal < _curcuitBreakerThreshold) {
+    maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
+    maxSellLiq_ = rI.mul(maxSellRate_).div(10000);
+    if (maxSellLiq_ < maxSellLiq) {
+      maxSellLiq = maxSellLiq_;
+    }
+  } 
+  
   maxSellLiq = BNB(maxSellLiq / 1.5); // roughly estimated
   <!-- displayText("oneSellLimitStatus", 'upgrading!'); -->
   displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
@@ -2370,7 +2382,7 @@ Thank you :)
       if (Date.now() < _buySellTimer + _buySellTimeDuration) {
         displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
       } else {
-        if (rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) {
+        if ((rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000) < 0) & (Date.now() < (_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000)) {
           displayText("circuitBreakerStatus", "exceeded daily sell limit " + String(_taxAccuTaxThreshold / 100) + "%");
         } else {
           if (blacklisted) {
