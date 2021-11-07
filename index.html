@@ -2244,7 +2244,7 @@ Thank you :)
   burnLpPercentage = burnLpAmount.div(totalLpSupply).mul(100);
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
-  bnbAmount = rI.div(10 ** 18);
+  bnbAmount = rI.div(1e18);
   tokenAmount = rO.div(10 ** decimals);
   
   
@@ -2300,11 +2300,10 @@ Thank you :)
   
   currentAccount = await afconnect();
   
-  balanceData = await upfinityC.functions.balanceOf(currentAccount);
-  balance = balanceData[0];
+  balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
   displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
   
-  balancePercentage = round(balance / totalSupply * 100, 2);
+  balancePercentage = round(balance.div(totalSupply) * 100, 2);
   displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
   if (balancePercentage >= 1) {
     displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
@@ -2322,23 +2321,24 @@ Thank you :)
     displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
   } 
   
-  balanceLimit = totalSupply.div(100); // 1% of total supply
   
-  if (Number(balanceLimit) <= Number(balance)) { // already max
+  
+  balanceLimit = totalSupply.mul(100).div(10000); // 1% of total supply
+  
+  if (Number(balanceLimit) <= Number(balance)) { 
+    displayText("oneBuyLimitStatus", 'already max!');
   } else {
     buyLimit = balanceLimit.sub(balance);
-    maxBuyBal = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0] / 1;
-    if (maxBuyBal < maxBuyLiq) {
-      displayText("oneBuyLimitStatus", BNB(maxBuyBal) + ' BNB');
+    maxBuyBNB_ = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
+    if (maxBuyBNB < maxBuyBNB_) {
+      displayText("oneBuyLimitStatus", BNB(maxBuyBNB) + ' BNB');
     } else { 
-      displayText("oneBuyLimitStatus", BNB(maxBuyLiq) + ' BNB');
+      displayText("oneBuyLimitStatus", BNB(maxBuyBNB_) + ' BNB');
     }
-    //displayText("buyLimitStatus", maxBuyBal.toString() + ' BNB');
   }
   
   // it may display last big value  
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
-  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
   if (_taxAccuTaxThreshold <= _taxAccuTaxCheck) {
     if (Date.now() < (_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000) {
