@@ -2246,46 +2246,42 @@ Thank you :)
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
   bnbAmount = rI.div(10 ** 18);
-  tokenAmount_ = rO.div(10 ** decimals);
+  tokenAmount = rO.div(10 ** decimals);
+  
   
   // without wallet connection
   busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-  pricepairAdr_ = (await factoryC.functions.getPair(wbnbAdr, busdAdr))[0];
-  pricepairC = new ethers.Contract(pricepairAdr_, pairAbi, provider);
-  pricereserveData = await pricepairC.functions.getReserves();
+  pricePairAdr = (await factoryC.functions.getPair(wbnbAdr, busdAdr))[0];
+  pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
+  priceReserveData = await pricePairC.functions.getReserves();
   
   if (wbnbAdr < busdAdr) { // BNB / UpFinity
-    pricerI = pricereserveData[0] / 1; 
-    pricerO = pricereserveData[1] / 1;
+    pricerI = pricereserveData[0]; 
+    pricerO = pricereserveData[1];
   } else {
-    pricerI = pricereserveData[1] / 1;
-    pricerO = pricereserveData[0] / 1;
+    pricerI = pricereserveData[1];
+    pricerO = pricereserveData[0];
   }
   
-  price_ = bnbAmount_ / tokenAmount_ * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
-  totalSupply_ = (await upfinityC.functions.totalSupply())[0] / 1;
-  totalSupply_ = totalSupply_ / 10 ** decimals
-  burnSupply_ = (await upfinityC.functions.balanceOf('0x000000000000000000000000000000000000dEaD'))[0] / 1;
-  burnSupply_ = burnSupply_ / 10 ** decimals
-  realSupply_ = (totalSupply_ - burnSupply_);
-  mcap = price_ * realSupply_;
-  mcap = mcap.toFixed(0);
+  price = rI.div(rO).mul(pricerO).div(pricerI); // TODO: WBNB-BUSD, same decimal
+  realSupply = totalSupply.sub(burnAmount);
+  mcap = price * realSupply.div(10 ** decimals);
   
   var elms_ = document.querySelectorAll("[id='priceCounter']");
-  elms_[0].setAttribute('data-purecounter-end', price_.toFixed(10));
+  elms_[0].setAttribute('data-purecounter-end', price.toFixed(10));
   var elms_ = document.querySelectorAll("[id='burnCounter']");
-  elms_[0].setAttribute('data-purecounter-end', burnSupply_);
+  elms_[0].setAttribute('data-purecounter-end', burnAmount);
   var elms_ = document.querySelectorAll("[id='circulateCounter']");
-  elms_[0].setAttribute('data-purecounter-end', realSupply_);
+  elms_[0].setAttribute('data-purecounter-end', realSupply);
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
-  elms_[0].setAttribute('data-purecounter-end', mcap);
+  elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
   var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
   elms_[0].setAttribute('data-purecounter-end', burnPercentage);
   var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
   elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
   
   var elms_ = document.querySelectorAll("[id='startMultiCounter']");
-  elms_[0].setAttribute('data-purecounter-end', mcap / 333);
+  elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
   
   _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0] / 1;
   upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0] / 1;
