@@ -2361,7 +2361,8 @@ Thank you :)
     }
   } 
   
-  maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0];
+  <!-- maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0]; -->
+  maxSellBNB = maxSellUPF / rO * rI; // workaround
   maxSellBNB = BNB(maxSellBNB / 1.5); // roughly estimated
   displayText("oneSellLimitStatus", maxSellBNB.toString() + ' BNB'); 
   
