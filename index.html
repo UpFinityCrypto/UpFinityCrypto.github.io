@@ -2424,29 +2424,29 @@ Thank you :)
   base = 20;
   margin = 3;
   whaleTax = 0;
-  impact = getImpact(tokenAmount_, 10**7);
-  if (10**7 / tokenAmount_ * 100 > 1) {
+  impact = getImpact(tokenAmount, 10**7);
+  if (10**7 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
   displayText("10mSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
-  impact = getImpact(tokenAmount_, 10**8);
-  if (10**8 / tokenAmount_ * 100 > 1) {
+  impact = getImpact(tokenAmount, 10**8);
+  if (10**8 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
   displayText("100mSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
-  impact = getImpact(tokenAmount_, 10**9);
-  if (10**9 / tokenAmount_ * 100 > 1) {
+  impact = getImpact(tokenAmount, 10**9);
+  if (10**9 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
   displayText("1bSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
-  impact = getImpact(tokenAmount_, 10**10);
-  if (10**10 / tokenAmount_ * 100 > 1) {
+  impact = getImpact(tokenAmount, 10**10);
+  if (10**10 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
