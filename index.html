@@ -2126,8 +2126,14 @@ Thank you :)
   _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
   _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
   sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
+  
+  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
+  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
+  
   if (sellCooltime < sellCooltime_) {
-    sellCooltime = sellCooltime_;
+    if (_taxAccuTaxCheckGlobal >= _curcuitBreakerThreshold) {
+      sellCooltime = sellCooltime_;
+    }
   }
   
   _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
@@ -2306,8 +2312,7 @@ Thank you :)
   _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
   maxSellLiq = rI.mul(_taxAccuTaxThreshold - _taxAccuTaxCheck).div(10000);
-  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
-  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
+  
   maxSellLiq_ = rI.mul(_curcuitBreakerThreshold - _taxAccuTaxCheckGlobal).div(10000);
   if (maxSellLiq_ < maxSellLiq) {
     maxSellLiq = maxSellLiq_;
