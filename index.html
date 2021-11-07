@@ -2106,6 +2106,20 @@ Thank you :)
   }
   
   // without wallet connection
+  
+  // constants
+  
+  totalSupply = (await upfinityC.functions.totalSupply())[0] / 1;
+  
+  _accuMulFactor = (await upfinityC.functions._accuMulFactor())[0] / 1;
+  
+  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
+  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
+  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
+  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
+  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
+  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  
   reserveData = await pairC.functions.getReserves();
   
   if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
@@ -2117,38 +2131,28 @@ Thank you :)
   }
   
   maxBuyLiq = rI.mul(1000).div(10000); // 10% of current liquidity
-  totalSupplyData = await upfinityC.functions.totalSupply();
-  totalSupply = totalSupplyData[0];
+  
   totalLpSupply = (await pairC.functions.totalSupply())[0];
   
   
   sellCooltime = 0;
-  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
-  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
   sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
-  
-  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
-  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
-  
+    
   if (sellCooltime < sellCooltime_) {
     if (_taxAccuTaxCheckGlobal >= _curcuitBreakerThreshold) {
       sellCooltime = sellCooltime_;
     }
   }
-  
-  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
-  
+
   d = new Date(sellCooltime * 1000);
   displayText("sellCooltime", d);
 
   
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
-  balance = await upfinityC.functions.balanceOf(freeAirdropAdr);
-  balance = balance[0];
+  balance = (await upfinityC.functions.balanceOf(freeAirdropAdr))[0] / 1;
   
-  dollarsPerBNBData = await airdropC.functions._dollarsPerBNB();
-  dollarsPerBNB = dollarsPerBNBData[0];
+  dollarsPerBNB = (await airdropC.functions._dollarsPerBNB())[0] / 1;
   oneDollar = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
   
   dollarTokens = await routerC.functions.getAmountIn(ethers.utils.parseEther(oneDollar.toString()), rO, rI);
@@ -2160,34 +2164,58 @@ Thank you :)
   
   displayText("airdropBalance", "Airdrop (" + (await upfinityC.functions._airdropSystem())[0] + ") balance: [" + numberWithCommas(Math.floor(balance / dollarTokens)) + "$]");
   
-  multiplier = 1 + 600 / 2000;
-  displayText("_accuMulFactor", (await upfinityC.functions._accuMulFactor())[0]);
-  displayText("_accuTaxTimeWindow", (await upfinityC.functions._accuTaxTimeWindow())[0] / 60 / 60 / 24);
-  displayText("_airdropSystem", (await upfinityC.functions._airdropSystem())[0]);
-  displayText("_antiDumpDuration", (await upfinityC.functions._antiDumpDuration())[0] / 60);
-  displayText("_autoBurnFee", (await upfinityC.functions._autoBurnFee())[0] * multiplier / 100);
-  displayText("_buySellTimeDuration", (await upfinityC.functions._buySellTimeDuration())[0] / 60);
-  displayText("_curcuitBreakerDuration", (await upfinityC.functions._curcuitBreakerDuration())[0] / 60 / 60);
-  displayText("_curcuitBreakerThreshold", (await upfinityC.functions._curcuitBreakerThreshold())[0] / 100);
-  displayText("_dipRewardFee", (await upfinityC.functions._dipRewardFee())[0] * multiplier / 100);
-  displayText("_dividendPartyThreshold", numberWithCommas((await upfinityC.functions._dividendPartyThreshold())[0] / 1e18));
-  displayText("_freeAirdropSystem", (await upfinityC.functions._freeAirdropSystem())[0]);
-  displayText("_improvedRewardFee", (await upfinityC.functions._improvedRewardFee())[0] * multiplier / 100);
-  displayText("_liquidityFee", (await upfinityC.functions._liquidityFee())[0] * multiplier / 100 * 2); // double
-  displayText("_manualBuyFee", (await upfinityC.functions._manualBuyFee())[0] * multiplier / 100);
-  displayText("_maxBalanceNume", (await upfinityC.functions._maxBalanceNume())[0] / 100);
-  displayText("_maxSellNume", (await upfinityC.functions._maxSellNume())[0] / 100);
-  displayText("_maxTxNume", (await upfinityC.functions._maxTxNume())[0] / 100);
-  displayText("_minusTaxBonus", (await upfinityC.functions._minusTaxBonus())[0] / 100);
-  <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
-  displayText("_taxAccuTaxThreshold", (await upfinityC.functions._taxAccuTaxThreshold())[0] / 100);
-  displayText("_timeAccuTaxCheckGlobal", (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 60 / 60 / 24);
-  displayText("_whaleRate", (await upfinityC.functions._whaleRate())[0] / 10000);
-  displayText("_whaleSellFee", (await upfinityC.functions._whaleSellFee())[0] / 10000);
-  displayText("_whaleTransferFee", (await upfinityC.functions._whaleTransferFee())[0] / 10000);
+  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
+  _airdropSystem = (await upfinityC.functions._airdropSystem())[0] / 1;
+  _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
+  _autoBurnFee = (await upfinityC.functions._autoBurnFee())[0] / 1;
+  _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
+  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
+  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
+  _dipRewardFee = (await upfinityC.functions._dipRewardFee())[0] / 1;
+  _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0] / 1;
+  _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0] / 1;
+  _improvedRewardFee = (await upfinityC.functions._improvedRewardFee())[0] / 1;
+  _liquidityFee = (await upfinityC.functions._liquidityFee())[0] / 1;
+  _manualBuyFee = (await upfinityC.functions._manualBuyFee())[0] / 1;
+  _maxBalanceNume = (await upfinityC.functions._maxBalanceNume())[0] / 1;
+  _maxSellNume = (await upfinityC.functions._maxSellNume())[0] / 1;
+  _maxTxNume = (await upfinityC.functions._maxTxNume())[0] / 1;
+  _minusTaxBonus = (await upfinityC.functions._minusTaxBonus())[0] / 1;
+  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
+  _timeAccuTaxCheckGlobal = (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 1;
+  _whaleRate = (await upfinityC.functions._whaleRate())[0] / 1;
+  _whaleSellFee = (await upfinityC.functions._whaleSellFee())[0] / 1;
+  _whaleTransferFee = (await upfinityC.functions._whaleTransferFee())[0] / 1;
+  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
+  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
   
-
-  redistributionFee = (2000 - (await upfinityC.functions._manualBuyFee())[0]) - (await upfinityC.functions._autoBurnFee())[0] - (10000 - (2000 - (await upfinityC.functions._manualBuyFee())[0])) * 0 / 100 - ((await upfinityC.functions._liquidityFee())[0] / 1 + (await upfinityC.functions._projectFundFee())[0] / 1 + (await upfinityC.functions._improvedRewardFee())[0] / 1 + (await upfinityC.functions._dipRewardFee())[0] / 1) - (await upfinityC.functions._liquidityFee())[0];
+  multiplier = 1 + 600 / 2000;
+  displayText("_accuMulFactor", _accuMulFactor);
+  displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
+  displayText("_airdropSystem", _airdropSystem);
+  displayText("_antiDumpDuration", _antiDumpDuration / 60);
+  displayText("_autoBurnFee", _autoBurnFee * multiplier / 100);
+  displayText("_buySellTimeDuration", _buySellTimeDuration / 60);
+  displayText("_curcuitBreakerDuration", _curcuitBreakerDuration / 60 / 60);
+  displayText("_curcuitBreakerThreshold", _curcuitBreakerThreshold / 100);
+  displayText("_dipRewardFee", _dipRewardFee * multiplier / 100);
+  displayText("_dividendPartyThreshold", numberWithCommas(_dividendPartyThreshold / 1e18));
+  displayText("_freeAirdropSystem", _freeAirdropSystem);
+  displayText("_improvedRewardFee", _improvedRewardFee * multiplier / 100);
+  displayText("_liquidityFee", _liquidityFee * multiplier / 100 * 2); // double
+  displayText("_manualBuyFee", _manualBuyFee * multiplier / 100);
+  displayText("_maxBalanceNume", _maxBalanceNume / 100);
+  displayText("_maxSellNume", _maxSellNume / 100);
+  displayText("_maxTxNume", _maxTxNume / 100);
+  displayText("_minusTaxBonus", _minusTaxBonus / 100);
+  <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
+  displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100);
+  displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
+  displayText("_whaleRate", _whaleRate / 10000);
+  displayText("_whaleSellFee", _whaleSellFee / 10000);
+  displayText("_whaleTransferFee", _whaleTransferFee / 10000);
+  
+  redistributionFee = (2000 - _manualBuyFee) - _autoBurnFee - (10000 - (2000 - _manualBuyFee)) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee - _liquidityFee;
   
   displayText("redistributionFee", redistributionFee * multiplier / 100);
   
@@ -2310,7 +2338,7 @@ Thank you :)
   
   // it may display last big value
   maxSellLiq = 0;
-  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
+  
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   if ((_timeAccuTaxCheck + _accuTaxTimeWindow) * 1000) < Date.now()) {
     _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
@@ -2330,7 +2358,6 @@ Thank you :)
   } 
   
   maxSellLiq = BNB(maxSellLiq / 1.5); // roughly estimated
-  <!-- displayText("oneSellLimitStatus", 'upgrading!'); -->
   displayText("oneSellLimitStatus", maxSellLiq.toString() + ' BNB'); 
   
   taxPenalty = _taxAccuTaxCheck * (await upfinityC.functions._accuMulFactor())[0] / 100;
