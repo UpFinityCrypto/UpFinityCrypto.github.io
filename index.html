@@ -264,25 +264,24 @@
 								  <h4>Proportional Tax Algorithm</h4>
 								  <div>Whales <span>CANNOT</span> do workaround to avoid tax</div>
 								  <div>Extra tax will be set proportionally to <span>current liquidity size</span></div>
-								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2</span>% more tax</div>
-								  <div>If a sell with 2% price impact => 4% more tax, and so on</div>
-								  <div>Current multiplication: <span id="_accuMulFactor">2</span></div>
+								  <div>If a sell with 1% price impact => <span id="_accuMulFactor"></span>% more tax</div>
+								  <div>Current multiplication: <span id="_accuMulFactor"></span></div>
 								  
 								  <h4>Accumulating Tax Algorithm</h4>
 								  <div>Whales <span>CANNOT</span> dump it all quickly</div>
 								  <div>Tax will be accumulated if sold in a <span>SHORT PERIOD</span></div>
-								  <div>If a sell with 1% price impact => <span id="_accuMulFactor">2</span>% more tax</div>
-								  <div>if same wallet sells again for 2% impact within 1 day => <span>6%</span> more tax</div>
-                  <div>(<span id="_accuMulFactor">2</span>% from 1st sell + 4% second sell)</div>
-								  <div>This tax resets <span id="_accuTaxTimeWindow">1</span> day after each first sell</div>
+								  <div>If a sell with 1% price impact => <span id="_accuMulFactor"></span>% more tax</div>
+								  <div>if same wallet sells again for 1% price impact within <span id="_accuTaxTimeWindow"></span> day => <span>6</span>% more tax</div>
+                  <div>(<span id="_accuMulFactor"></span>% from 1st sell + <span id="_accuMulFactor"></span>% from 2nd sell)</div>
+								  <div>This tax resets <span id="_accuTaxTimeWindow"></span> day after each first sell</div>
 								  
 								  <h4>Advanced Sell Tax Algorithm</h4>
 								  <div>Tax is based on <span>LIQUIDITY SIZE</span>, not total supply</div>
-								  <div>Flat <span id="_whaleSellFee">4</span>% more tax if sell more than <span id="_whaleRate">1</span>% of current liquidity</div>
+								  <div>Flat <span id="_whaleSellFee"></span>% more tax if sell more than <span id="_whaleRate"></span>% of current liquidity</div>
 								  
 								  <h4>Advanced Transfer Tax Algorithm</h4>
 								  <div>Tax is based on <span>LIQUIDITY SIZE</span>, not total supply</div>
-								  <div>Flat <span id="_whaleTransferFee">2</span>% more tax if transfer more than <span id="_whaleRate">1</span>% of current liquidity</div>
+								  <div>Flat <span id="_whaleTransferFee"></span>% more tax if transfer more than <span id="_whaleRate"></span>% of current liquidity</div>
 								  
 								</div>
 							  </div>
@@ -298,11 +297,11 @@
 								  <p><strong>Making Our Project more promising</strong></p>
 								  
 								  <h4>Auto-Liquidity System</h4>
-                  <div><span id="_liquidityFee">6</span>% tax will be added to the liquidity</div>
+                  <div><span id="_liquidityFee"></span>% tax will be added to the liquidity</div>
 								 
 								  
 								  <h4>Auto-Burn System</h4>
-								  <div><span id="_autoBurnFee">0.5</span>% tax will be auto-burned</div>
+								  <div><span id="_autoBurnFee"></span>% tax will be auto-burned</div>
 								  
 								  
 								  <h4>Tracking Algorithm</h4>
