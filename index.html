@@ -178,19 +178,19 @@
 								  <p><strong>Investors should be protected</strong></p>
 								  
 								  <h4>Global Anti-Dump Algorithm</h4>
-								  <div>When current liquidity drops by <span id="_curcuitBreakerThreshold">15</span>% within <span id="_accuTaxTimeWindow">1</span> day, triggers [Circuit breaker]</div>
+								  <div>When current price drops by <span id="_curcuitBreakerThreshold">15</span>% within <span id="_accuTaxTimeWindow"></span> day, triggers [Circuit breaker]</div>
 								  
                   <h4>Circuit Breaker Algorithm</h4>
-								  <div>None can sell for <span id="_curcuitBreakerDuration">3</span> hours, resets [Global Anti-dump algorithm]</div>
+								  <div>None can sell for <span id="_curcuitBreakerDuration"></span> hours, resets [Global Anti-dump algorithm]</div>
                   
 								  <h4>Personal Anti-Dump Algorithm</h4>
-								  <div>Each wallet can only sell <span id="_taxAccuTaxThreshold">3</span>% of current liquidity within 1 day</div>
+								  <div>Each wallet can only sell/transfer <span id="_taxAccuTaxThreshold"></span>% of price impact within 1 day</div>
 								  
 								  <h4>Global Anti-Panic Algorithm</h4>
-								  <div>Only 1 sell per <span id="_antiDumpDuration">1</span> min can happen, globally.</div>
+								  <div>Only 1 sell per <span id="_antiDumpDuration"></span> min can happen, globally.</div>
 								  
 								  <h4>Personal Anti-Panic Algorithm</h4>
-								  <div>Each wallet can sell once every <span id="_buySellTimeDuration">5</span> min</div>
+								  <div>Each wallet can sell once every <span id="_buySellTimeDuration"></span> min</div>
 								  
 								  
 								</div>
@@ -209,14 +209,14 @@
 								  <div><span>16+%</span> of every sell will be BOUGHT BACK Instantly</div>
 								  
 								  <h4>Anti-Whale Algorithm</h4>
-								  <div>1 wallet can hold a maximum of <span id="_maxBalanceNume">1.1</span>% of total supply</div>
+								  <div>1 wallet can hold a maximum of <span id="_maxBalanceNume"></span>% of total supply</div>
 								  <div>(Can be exceeded by redistribution etc)</div>
 								  
 								  <h4>Advanced Anti-Dump Algorithm</h4>
-								  <div>1 wallet can sell a total of <span id="_maxSellNume">3</span>% of current liquidity at once</div>
+								  <div>1 wallet can sell/transfer a total of <span id="_maxSellNume"></span>% of price impact at once</div>
 								  
 								  <h4>Advanced Anti-Pump Algorithm</h4>
-								  <div>1 wallet can buy/transfer up to <span id="_maxTxNume">10</span>% of current liquidity at 1 buy/transfer</div>
+								  <div>1 wallet can buy/transfer up to <span id="_maxTxNume"></span>% of current liquidity at once</div>
 								</div>
 							  </div>
 							</div>
@@ -232,12 +232,12 @@
 								  
 								  <h4>Dividend Party</h4>
 								  <div>Profit should be done as a <span>Party!</span></div>
-								  <div>If contract balance exceeds <span id="_dividendPartyThreshold">9,876,543,210</span> tokens,</div>
+								  <div>If contract balance exceeds <span id="_dividendPartyThreshold"></span> tokens,</div>
                   <div>a sell will be triggered.</div>
 								  <div>Liquidity / Rewards / Redistribution will happen in <span>BULK</span></div>
 								  
                   <h4>Manual BuyBack Event</h4>
-								  <div><span id="_manualBuyFee">4</span>% tax will be stacked as BNB</div>
+								  <div><span id="_manualBuyFee"></span>% tax will be stacked as BNB</div>
                   <div>And it will be used for manual buyback</div>
                   
 								  <h4>Manual Token Burn Event</h4>
@@ -602,15 +602,26 @@
         <div class="row">
           <div class="col-12 col-lg-6 text-justify content">
             <h3>Sell Rules</h3>
-            <ul>
-                To Protect Investors,
-                <li><i class="bi bi-chevron-right"></i> anyone can sell every [<span id="_antiDumpDuration">1</span> minute]</li>
-                <li><i class="bi bi-chevron-right"></i> 1 wallet can sell every [<span id="_buySellTimeDuration">5</span> minutes]</li>
-                <li><i class="bi bi-chevron-right"></i> 1 wallet can sell max [<span id="_maxSellNume">3</span>% of current liquidity] at once</li>
-                <li><i class="bi bi-chevron-right"></i> people can sell total of [<span id="_curcuitBreakerThreshold">15</span>% of current liquidity] within 1 day</li>
-                <li><i class="bi bi-chevron-right"></i> 1 wallet can sell total of [<span id="_taxAccuTaxThreshold">3</span>% of current liquidity] within 1 day</li>
-                <li><i class="bi bi-chevron-right"></i> if [Circuit Breaker] is [ON], everyone can sell after [<span id="_curcuitBreakerDuration">3</span> hours]</li>
-            </ul>
+            <div class="accordion-body">
+              <p><strong>Investors should be protected</strong></p>
+              
+              <h4>Global Anti-Dump Algorithm</h4>
+              <div>When current price drops by <span id="_curcuitBreakerThreshold">15</span>% within <span id="_accuTaxTimeWindow"></span> day, triggers [Circuit breaker]</div>
+              
+              <h4>Circuit Breaker Algorithm</h4>
+              <div>None can sell for <span id="_curcuitBreakerDuration"></span> hours, resets [Global Anti-dump algorithm]</div>
+              
+              <h4>Personal Anti-Dump Algorithm</h4>
+              <div>Each wallet can only sell/transfer <span id="_taxAccuTaxThreshold"></span>% of price impact within 1 day</div>
+              
+              <h4>Global Anti-Panic Algorithm</h4>
+              <div>Only 1 sell per <span id="_antiDumpDuration"></span> min can happen, globally.</div>
+              
+              <h4>Personal Anti-Panic Algorithm</h4>
+              <div>Each wallet can sell once every <span id="_buySellTimeDuration"></span> min</div>
+              
+              
+            </div>
           </div>
           <div class="col-12 col-lg-6 text-justify content">
             <div class="row mt-5">
