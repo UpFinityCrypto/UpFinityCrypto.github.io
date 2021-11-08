@@ -2209,8 +2209,8 @@ Thank you :)
   sellCooltime = 0;
   sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
   
-  if (_curcuitBreakerThreshold <= _taxAccuTaxCheckGlobal) {
-    if (sellCooltime < sellCooltime_) {
+  if (_curcuitBreakerThreshold / 1 <= _taxAccuTaxCheckGlobal / 1) {
+    if (sellCooltime / 1 < sellCooltime_ / 1) {
       sellCooltime = sellCooltime_;
       d = new Date(sellCooltime * 1000);
       displayText("sellCooltime", d);
@@ -2287,7 +2287,7 @@ Thank you :)
   
   upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0];
   partyImpact = 0;
-  if (_dividendPartyThreshold * 0.9 < upfinityBalance) {
+  if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
     displayText("dividendPartyStatus", "READY");
     partyImpact = _dividendPartyThreshold.div(rO) * 100; // roughly
     displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
@@ -2327,12 +2327,12 @@ Thank you :)
   
   balanceLimit = totalSupply.mul(100).div(10000); // 1% of total supply
   
-  if (Number(balanceLimit) <= Number(balance)) { 
+  if (balanceLimit / 1 <= balance / 1 { 
     displayText("oneBuyLimitStatus", 'already max!');
   } else {
     buyLimit = balanceLimit.sub(balance);
     maxBuyBNB_ = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
-    if (maxBuyBNB < maxBuyBNB_) {
+    if (maxBuyBNB / 1 < maxBuyBNB_ / 1) {
       displayText("oneBuyLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB');
     } else { 
       displayText("oneBuyLimitStatus", round(maxBuyBNB_ / bnbDiv, 2) + ' BNB');
@@ -2389,7 +2389,7 @@ Thank you :)
   
   
   sellCooltime_ = _antiDumpTimer + _antiDumpDuration;
-  if (sellCooltime < sellCooltime_) {
+  if (sellCooltime / 1 < sellCooltime_ / 1) {
     sellCooltime = sellCooltime_;
     d = new Date(sellCooltime * 1000);
     displayText("sellCooltime", d);
@@ -2397,7 +2397,7 @@ Thank you :)
   
   _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
   sellCooltime_ = _buySellTimer + _buySellTimeDuration;
-  if (sellCooltime < sellCooltime_) {
+  if (sellCooltime / 1 < sellCooltime_ / 1) {
     sellCooltime = sellCooltime_;
     d = new Date(sellCooltime * 1000);
     displayText("sellCooltime", d);
@@ -2407,13 +2407,13 @@ Thank you :)
   
   
   
-  if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60) * 1000)) {
+  if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000)) {
       displayText("circuitBreakerStatus", "Circuit breaker ON");
   } else {
-    if (Date.now() < _antiDumpTimer + _antiDumpDuration) {
+    if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
       displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
     } else {
-      if (Date.now() < _buySellTimer + _buySellTimeDuration) {
+      if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
         displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
       } else {
         if (blacklisted) {
