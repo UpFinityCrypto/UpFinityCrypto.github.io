@@ -2345,23 +2345,23 @@ Thank you :)
   maxSellUPF = rO;
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-  if (_taxAccuTaxCheck < _taxAccuTaxThreshold) {
+  if (_taxAccuTaxCheck / 1 < _taxAccuTaxThreshold / 1) {
     maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
     maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-    if (maxSellUPF_ < maxSellUPF) {
+    if (maxSellUPF_ / 1 < maxSellUPF . 1) {
       maxSellUPF = maxSellUPF_;
     }
   }
   
-  if (_taxAccuTaxCheckGlobal < _curcuitBreakerThreshold) {
+  if (_taxAccuTaxCheckGlobal / 1 < _curcuitBreakerThreshold / 1) {
     maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
     maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-    if (maxSellUPF_ < maxSellUPF) {
+    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
       maxSellUPF = maxSellUPF_;
     }
   } 
   
-  if (maxSellUPF == rO) {
+  if (maxSellUPF / 1 == rO / 1) {
     maxSellUPF = 0;
   }
   <!-- maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0]; -->
@@ -2370,7 +2370,7 @@ Thank you :)
   displayText("oneSellLimitStatus", maxSellBNB.toString() + ' BNB'); 
   
   taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
-  if (15 < taxPenalty) {
+  if (15 < taxPenalty / 1) {
     taxPenalty = 15; // check
   }
   displayText("yourTaxPenalty", taxPenalty);
