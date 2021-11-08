@@ -85,7 +85,7 @@
         <span class="wrap-address">
           <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
           </a>
-          <a id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
+          <a id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
             Copy
           </a>
         </span>
@@ -1601,20 +1601,25 @@ Thank you :)
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Donations</h2>
-          <p>If you like our work, and would like to support us,</p>
-          <p>you can send your donation to this address.</p>
-          <p>Any token is accepted, thank you very much for your support!</p>
-          <p>It will help us a lot!</p>
-          <img src='assets/img/donation_qr.png'>
+          <div>
+            <h2>Donations</h2>
+            <p>If you like our work, and would like to support us,</p>
+            <p>you can send your donation to this address.</p>
+            <p>Any token is accepted, thank you very much for your support!</p>
+            <p>It will help us a lot!</p>
+            <img src='assets/img/donation_qr.png'>
+          </div>
+          <div>
+            <span class="wrap-address">
+              <a href="https://bscscan.com/address/0x4e73d1e3C4639ea23D3CBEb66A09eEb086EE8Cb8" target="_tab">0x4e73d1e3C4639ea23D3CBEb66A09eEb086EE8Cb8
+              </a>
+              <a id="copyDonationAdr" class="button scrollto" onclick="copyAdr('copyDonationAdr', '0x4e73d1e3C4639ea23D3CBEb66A09eEb086EE8Cb8');">
+                Copy
+              </a>
+            </span>
+          </div>
         </div>
-        <span class="wrap-address">
-          <a href="https://bscscan.com/address/0x4e73d1e3C4639ea23D3CBEb66A09eEb086EE8Cb8" target="_tab">0x4e73d1e3C4639ea23D3CBEb66A09eEb086EE8Cb8
-          </a>
-          <a id="copyupfinityAdr" class="button scrollto" onclick="copyAdr('0x4e73d1e3C4639ea23D3CBEb66A09eEb086EE8Cb8');">
-            Copy
-          </a>
-        </span>
+
         
         
   </main><!-- End #main -->
@@ -1839,9 +1844,9 @@ Thank you :)
   function copyValue(value) {
     navigator.clipboard.writeText(value);
   }
-  function copyAdr(adr) {
+  function copyAdr(id, adr) {
     copyValue(adr);
-    displayText(this.id, "Copied");
+    displayText(id, "Copied");
     <!-- doToast('Copied!' + adr); -->
     <!-- var element = document.getElementById("copyAdrIcon"); -->
     <!-- element.classList.remove("fa-copy"); -->
