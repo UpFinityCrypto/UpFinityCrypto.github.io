@@ -2333,9 +2333,9 @@ Thank you :)
     buyLimit = balanceLimit.sub(balance);
     maxBuyBNB_ = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
     if (maxBuyBNB < maxBuyBNB_) {
-      displayText("oneBuyLimitStatus", BNB(maxBuyBNB) + ' BNB');
+      displayText("oneBuyLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB');
     } else { 
-      displayText("oneBuyLimitStatus", BNB(maxBuyBNB_) + ' BNB');
+      displayText("oneBuyLimitStatus", round(maxBuyBNB_ / bnbDiv, 2) + ' BNB');
     }
   }
   
@@ -2361,6 +2361,9 @@ Thank you :)
     }
   } 
   
+  if (maxSellUPF == rO) {
+    maxSellUPF = 0;
+  }
   <!-- maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0]; -->
   maxSellBNB = maxSellUPF / rO * rI; // workaround
   maxSellBNB = BNB(maxSellBNB / 1.5); // roughly estimated
