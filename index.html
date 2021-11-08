@@ -85,7 +85,7 @@
         <span class="wrap-address">
           <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
           </a>
-          <a id="copyupfinityAdr" class="button scrollto" onclick="copyAdr('0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
+          <a id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
             Copy
           </a>
         </span>
@@ -1838,8 +1838,7 @@ Thank you :)
   }
   function copyAdr(adr) {
     copyValue(adr);
-    x = document.getElementById("copyupfinityAdr");
-    x.innerHTML = "Copied";
+    displayText(this.id, "Copied");
     <!-- doToast('Copied!' + adr); -->
     <!-- var element = document.getElementById("copyAdrIcon"); -->
     <!-- element.classList.remove("fa-copy"); -->
