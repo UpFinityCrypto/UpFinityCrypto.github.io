@@ -2377,7 +2377,7 @@ Thank you :)
   balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
   displayText("balanceStatus", numberWithCommas(Math.floor(balance / 1e18)));
   
-  balancePercentage = round(balance.div(totalSupply) * 100, 2);
+  balancePercentage = round(balance / totalSupply * 100, 2);
   displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
   if (balancePercentage >= 1) {
     displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
