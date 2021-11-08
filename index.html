@@ -2416,6 +2416,14 @@ Thank you :)
   
   // it may display last big value
   maxSellUPF = rO;
+  if (_taxAccuTaxCheckGlobal / 1 < _curcuitBreakerThreshold / 1) {
+    maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
+    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
+    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
+      maxSellUPF = maxSellUPF_;
+    }
+  }
+  
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
   if (_taxAccuTaxCheck / 1 < _taxAccuTaxThreshold / 1) {
@@ -2425,15 +2433,7 @@ Thank you :)
       maxSellUPF = maxSellUPF_;
     }
   }
-  
-  if (_taxAccuTaxCheckGlobal / 1 < _curcuitBreakerThreshold / 1) {
-    maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
-    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
-      maxSellUPF = maxSellUPF_;
-    }
-  } 
-  
+
   if (maxSellUPF / 1 == rO / 1) {
     maxSellUPF = 0;
   }
@@ -2510,28 +2510,28 @@ Thank you :)
   } else {
     whaleTax = 0;
   }
-  displayText("10mSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
+  displayText("10mSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
   impact = getImpact(tokenAmount, 10**8);
   if (10**8 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
-  displayText("100mSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
+  displayText("100mSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
   impact = getImpact(tokenAmount, 10**9);
   if (10**9 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
-  displayText("1bSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
+  displayText("1bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
   impact = getImpact(tokenAmount, 10**10);
   if (10**10 / tokenAmount * 100 > 1) {
     whaleTax = 4;
   } else {
     whaleTax = 0;
   }
-  displayText("10bSlippage", round(base + impact + taxPenalty + partyImpact + whaleTax + margin, 1));
+  displayText("10bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
   
   displayText("devNotice", "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>");
   }());
