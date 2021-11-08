@@ -2264,7 +2264,7 @@ Thank you :)
     pricerO = priceReserveData[0];
   }
   
-  price = rI.div(rO).mul(pricerO).div(pricerI); // TODO: WBNB-BUSD, same decimal
+  price = rI.mul(pricerO).div(rO).div(pricerI); // TODO: WBNB-BUSD, same decimal
   realSupply = totalSupply.sub(burnAmount);
   mcap = price * realSupply / 10 ** decimals;
   
@@ -2346,8 +2346,8 @@ Thank you :)
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
   if (_taxAccuTaxCheck < _taxAccuTaxThreshold) {
-    maxSellRate = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
-    maxSellUPF = rO.mul(maxSellRate).div(10000);
+    maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
+    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
     if (maxSellUPF_ < maxSellUPF) {
       maxSellUPF = maxSellUPF_;
     }
