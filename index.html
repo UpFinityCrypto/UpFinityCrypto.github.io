@@ -2348,7 +2348,7 @@ Thank you :)
   if (_taxAccuTaxCheck / 1 < _taxAccuTaxThreshold / 1) {
     maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
     maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-    if (maxSellUPF_ / 1 < maxSellUPF . 1) {
+    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
       maxSellUPF = maxSellUPF_;
     }
   }
