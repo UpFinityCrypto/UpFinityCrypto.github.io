@@ -2256,7 +2256,7 @@ Thank you :)
   pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
   priceReserveData = await pricePairC.functions.getReserves();
   
-  if (wbnbAdr < busdAdr) { // BNB / UpFinity
+  if (wbnbAdr < busdAdr) { // BNB / busd
     pricerI = priceReserveData[0]; 
     pricerO = priceReserveData[1];
   } else {
@@ -2264,7 +2264,7 @@ Thank you :)
     pricerO = priceReserveData[0];
   }
   
-  price = rI.mul(pricerO).div(rO).div(pricerI); // TODO: WBNB-BUSD, same decimal
+  price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
   realSupply = totalSupply.sub(burnAmount);
   mcap = price * realSupply / 10 ** decimals;
   
