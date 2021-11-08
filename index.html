@@ -2441,9 +2441,12 @@ Thank you :)
   maxSellBNB = BNB(maxSellBNB / 1.5); // roughly estimated
   displayText("oneSellLimitStatus", maxSellBNB.toString() + ' BNB'); 
   
-  taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
-  if (15 < taxPenalty / 1) {
-    taxPenalty = 15; // check
+  taxPenalty = 0;
+  if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) {
+    taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
+    if (15 < taxPenalty / 1) {
+      taxPenalty = 15; // check
+    }
   }
   displayText("yourTaxPenalty", taxPenalty);
   
