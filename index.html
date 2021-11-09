@@ -2192,7 +2192,7 @@ Thank you :)
   freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
   airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
-  
+  nftSigner = nftC.connect(signer);
   const nftOverride = {
     value: ethers.utils.parseEther('0.00000000005'), // it require string number
   }
