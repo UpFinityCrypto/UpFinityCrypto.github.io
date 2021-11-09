@@ -95,6 +95,9 @@
           <a id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
             Copy
           </a>
+          <a class="button scrollto" onclick="addUPF();">
+            Add UPF in wallet
+          </a>
         </span>
       </p>
             
@@ -2066,8 +2069,36 @@ Thank you :)
     }());
   }
   
-  
-  
+  function addUPF() {
+    const tokenAddress = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
+    const tokenSymbol = 'UPF';
+    const tokenDecimals = 18;
+    const tokenImage = 'http://www.theupfinity.com/assets/img/logo.png';
+
+    try {
+      // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+      const wasAdded = await ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20', // Initially only supports ERC20, but eventually more!
+          options: {
+            address: tokenAddress, // The address that the token is at.
+            symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+            decimals: tokenDecimals, // The number of decimals in the token
+            image: tokenImage, // A string url of the token logo
+          },
+        },
+      });
+
+      if (wasAdded) {
+        alert('UpFinity added!');
+      } else {
+        alert('Filed to add!');
+      }
+    } catch (error) {
+      alert(error);
+    }
+  }
   ////////////////////////////////////////////////////////////
   // consts
   
