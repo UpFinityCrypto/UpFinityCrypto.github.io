@@ -128,7 +128,7 @@
                     <p>(Details in WhitePaper)</p>
                     <div class="text-center" style="margin-top:25px;">
                       <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                      <div id="connectResult"><span>To see the values, connect wallet!<span></div>
+                      <div id="connectResult"><span><span></div>
                   </div>
                 </div>
 				<div class="row">
@@ -468,7 +468,7 @@
                     <p>Check realtime basic stats!<p>
                                 <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span>To see the values, connect wallet!<span></div>
+                <div id="connectResult"><span><span></div>
             </div>
                 </div>
       <div class="container aos-init aos-animate" data-aos="fade-up">
@@ -601,7 +601,7 @@
             <img src="assets/img/whale.gif">
             <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span>To see the values, connect wallet!<span></div>
+                <div id="connectResult"><span><span></div>
             </div>
           
         </div>
@@ -843,7 +843,7 @@
           
             <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span>To see the values, connect wallet!<span></div>
+                <div id="connectResult"><span><span></div>
             </div>
         </div>
 
@@ -898,7 +898,7 @@
           
             <div class="text-center" style="margin-top:25px;">
                 <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span>To see the values, connect wallet!<span></div>
+                <div id="connectResult"><span><span></div>
             </div>
           
         </div>
@@ -1866,7 +1866,7 @@ Thank you :)
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
 				// If this happens, the user rejected the connection request.
-        displayText("connectResult", 'You Rejected Connection');
+        displayText("connectResult", '<span>You Rejected! Connect wallet to use claim, etc!</span>');
 			} else {
 				console.error(err);
 			}
@@ -2268,7 +2268,7 @@ Thank you :)
   
   displayText("redistributionFee", redistributionFee * multiplier / 100);
   
-  connectWalletText = "connect wallet!";
+  connectWalletText = "<span>Connect wallet to use claim, etc!</span>";
   displayText("connectResult", connectWalletText);
   displayText("balanceStatus", connectWalletText);
   <!-- displayText("balanceIcon", connectWalletText); --> // big icon
