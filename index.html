@@ -2135,6 +2135,10 @@ Thank you :)
   {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType":"uint256","name":"dollarCount_","type":"uint256"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doAirdrop","outputs":[],"stateMutability":"payable","type":"function"},
   ];
   
+  const nftAbi = [
+  {"inputs": [], "name": "mintDiamond", "outputs": [], "stateMutability": "payable", "type": "function"},
+  {"inputs": [], "name": "mintEmerald", "outputs": [], "stateMutability": "payable", "type": "function"},
+  ]
   (async function() { // to use async things
 
   
@@ -2164,6 +2168,7 @@ Thank you :)
     rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     freeAirdropAdr = '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4';
     airdropAdr = '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004';
+    nftAdr = '0x95569889EDc571145186104d9f5A7b3Fd70BE8c7';
   } else {
     alert('Change to BSC network and refresh!');
     return;
@@ -2185,6 +2190,11 @@ Thank you :)
   rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
   freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
   airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
+  nftC = new ethers.Contract(nftAdr, nftAbi , provider);
+  
+  const nftOverride = {
+    value: ethers.utils.parseEther('0.00000000005'), // it require string number
+  }
   
   refAdr = GetURLParameter("ref");
   x = document.getElementById("referralAdrDisplay");
