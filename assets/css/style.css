@@ -1112,6 +1112,11 @@ section {
   font-size: 20px;
 }
 
+.button-soon {
+  border: 5px solid;
+  border-color: #28a745;
+}
+
 .button:hover {
   background: #3194db;
   color: #fff;
