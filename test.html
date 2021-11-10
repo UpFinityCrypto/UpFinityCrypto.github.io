@@ -205,6 +205,7 @@
               <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
               <div id="connectResult"><span><span></div>
           </div>
+          <p>Total Minted: <span id="totalNFTCount"></span></p>
         </div>
         
         
@@ -2791,11 +2792,18 @@
   elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3"))['image']);
   
   
-  displayText("diamondBoyCount", (await nftC.functions._totalItemCount(2))[0] / 1);
-  displayText("diamondGirlCount", (await nftC.functions._totalItemCount(3))[0] / 1);
-  displayText("emeraldBoyCount", (await nftC.functions._totalItemCount(0))[0] / 1);
-  displayText("emeraldGirlCount", (await nftC.functions._totalItemCount(1))[0] / 1);
+  diamondBoyCount = (await nftC.functions._totalItemCount(2))[0] / 1;
+  displayText("diamondBoyCount", diamondBoyCount);
+  diamondGirlCount = (await nftC.functions._totalItemCount(3))[0] / 1;
+  displayText("diamondGirlCount", diamondGirlCount);
+  emeraldBoyCount = (await nftC.functions._totalItemCount(0))[0] / 1;
+  displayText("emeraldBoyCount", emeraldBoyCount);
+  emeraldGirlCount = (await nftC.functions._totalItemCount(1))[0] / 1;
+  displayText("emeraldGirlCount", emeraldGirlCount);
   
+  displayText("totalNFTCount", diamondBoyCount + diamondGirlCount + emeraldBoyCount + emeraldGirlCount);
+  totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
+  console.log(totalSupplyNFT);
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
