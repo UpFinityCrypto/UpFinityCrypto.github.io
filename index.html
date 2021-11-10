@@ -1697,8 +1697,8 @@ Thank you :)
         </div>
         
         
-        <div class="row" style="overflow-y: scroll; transform: rotate(-90deg);">
-          <div class="col-12 col-lg-6 text-justify content" style="transform: rotate(90deg);">
+        <div class="row">
+          <div class="col-12 col-lg-6 text-justify content">
           <div class="section-title">
             <h2>diamond</h2>
             <p>aaa</p>
@@ -2179,7 +2179,8 @@ Thank you :)
 			}
 			
 			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
-			for (int idx = 0; idx < nftBalance; idx++) {
+      var idx;
+			for (idx = 0; idx < nftBalance; idx++) {
 				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
 				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
 				if (tokenInt / 1 == 10001) {
