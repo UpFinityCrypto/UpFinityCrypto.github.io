@@ -1113,6 +1113,7 @@ section {
 }
 
 .button-soon {
+  background: #00000000;
   border: 5px solid;
   border-color: #28a745;
 }
