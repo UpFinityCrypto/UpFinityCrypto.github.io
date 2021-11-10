@@ -2220,8 +2220,12 @@
       var idx;
 			for (idx = 0; idx < nftBalance; idx++) {
 				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
-				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
-				if (tokenInt / 1 == 10002) {
+				tokenItem = (await nftC.functions._itemById(tokenId))[0];
+				if (tokenItem / 1 == 2) {
+					alert("Already have diamond!");
+					return;
+				}
+        if (tokenItem / 1 == 3) {
 					alert("Already have diamond!");
 					return;
 				}
@@ -2248,9 +2252,13 @@
       var idx;
 			for (idx = 0; idx < nftBalance; idx++) {
 				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
-				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
-				if (tokenInt / 1 == 10001) {
-					alert("Already have emerald!");
+				tokenItem = (await nftC.functions._itemById(tokenId))[0];
+				if (tokenItem / 1 == 0) {
+					alert("Already have diamond!");
+					return;
+				}
+        if (tokenItem / 1 == 1) {
+					alert("Already have diamond!");
 					return;
 				}
 			}
