@@ -2780,6 +2780,12 @@
   var elms_ = document.querySelectorAll("[id='emeraldGirl']");
   elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3"))['image']);
   
+  
+  displayText("diamondBoyCount", (await nftC.functions._totalItemCount(2))[0] / 1));
+  displayText("diamondGirlCount", (await nftC.functions._totalItemCount(3))[0] / 1));
+  displayText("emeraldBoyCount", (await nftC.functions._totalItemCount(0))[0] / 1));
+  displayText("emeraldGirlCount", (await nftC.functions._totalItemCount(1))[0] / 1));
+  
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
