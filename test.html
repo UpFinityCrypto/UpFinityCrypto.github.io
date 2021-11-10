@@ -1826,6 +1826,17 @@
   ////////////////////////////////////////////////////////////////////
   //  functions
   
+  function loadFile(filePath) {
+    var result = null;
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", filePath, false);
+    xmlhttp.send();
+    if (xmlhttp.status==200) {
+      result = xmlhttp.responseText;
+    }
+    return result;
+  }
+
   function syncDelay(milliseconds){
    var start = new Date().getTime();
    var end=0;
@@ -2746,6 +2757,19 @@
   displayText("10bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
   
   displayText("devNotice", "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>");
+  
+  
+  
+  
+  var elms_ = document.querySelectorAll("[id='dimaondBoy']");
+  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/0"))['image']);
+  var elms_ = document.querySelectorAll("[id='dimaondGirl']");
+  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/1"))['image']);
+  var elms_ = document.querySelectorAll("[id='emeraldBoy']");
+  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/2"))['image']);
+  var elms_ = document.querySelectorAll("[id='emeraldGirl']");
+  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3"))['image']);
+  
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
