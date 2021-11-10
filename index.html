@@ -68,8 +68,10 @@
 
     <nav id="navbar" class="navbar nav-menu">
       <ul>
-        <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-        <li><a href="#features" class="nav-link scrollto"><i class="bx bx-list-ul"></i> <span>Features</span></a></li>
+        <li><a href="#Home" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+        <li><a href="#Ecosystem" class="nav-link scrollto active"><i class="bx bx-list-ul"></i> <span>Ecosystem</span></a></li>
+        <li><a href="#Features" class="nav-link scrollto"><i class="bx bx-list-ul"></i> <span>Features</span></a></li>
+        <li><a href="#Status" class="nav-link scrollto"><i class="bx bx-list-ul"></i> <span>Status</span></a></li>
         <li><a href="#rewards" class="nav-link scrollto"><i class="bx bx-award"></i> <span>Rewards</span></a></li>
         <li><a href="#airdrops" class="nav-link scrollto"><i class="bx bx-droplet"></i> <span>Airdrops</span></a></li>
         <li><a href="#upfinomics" class="nav-link scrollto"><i class="bx bx-coin"></i> <span>UpFinomics</span></a></li>
@@ -84,7 +86,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center">
+  <section id="Home" class="d-flex flex-column justify-content-center">
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
       <h1>UpFinity: Buy, Hold, Earn</h1>
       <p>World's Best <span class="typed" data-typed-items="Upgradable, Innovative"></span> Token</p>
@@ -121,9 +123,56 @@
   </section><!-- End Hero -->
 
   <main id="main">
+      <!-- ======= About Section ======= -->
+    <section id="rewards" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Ecosystem</h2>
+          <p>Actual Usecase of the UpFinity</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-12 col-lg-6 text-justify content">
+            <div class="section-title">
+              <h2>Coin Vote</h2>
+              <p>We bringing a revolution to current coin voting websites.</p>
+            
+              <p>Once a (day/week) the current top coin will be purchased from our contract as reward for our holders. This will create green candles for them, increase their holder count and expose our community to theirs.
+    Everyone will want to be #1 
+
+    Votes will be counted with our unique wallet verification system, stopping bots/macros from abusing the system. Vote count will in turn be fully based on community power. This and the reward incentive for being #1 will attract legit projects and the whole bsc community will benefit from transparently seeing what's truly trending. And us in turn benefit from all that exposure. 
+
+    Income from traffic ads on the website will be divided: 20% dev team, 30% for $UPF marketing, 50% $UPF Holders. Creating yet another passive income for $UPF holders!</p>
+              <p><a id="coinVoteLink" href="https://coin-vote.herokuapp.com" class="button scrollto">Coin Vote Beta</a></p>
+              <!-- <p><a id="coinVoteLink" href="" class="button scrollto">Upgrading!</a></p> -->
+            </div>
+          </div>
+          
+          <div class="col-12 col-lg-6 text-justify content">
+            <div class="section-title">
+              <h2>NFT</h2>
+              <h2>Mystery Box</h2>
+              <h2>NFT Farming</h2>
+              <h2>MarketPlace</h2>
+              <h2>Staking</h2>
+              <h2>Swap</h2>
+              <h2>Play 2 Earn</h2>
+              <h2>UPF Store</h2>
+              <h2>Merchandise</h2>
+              
+              <p></p>
+    
+              <p></p>
+              <p><a id="coinVoteLink" href="" class="button scrollto">Coming Soon</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     
         <!-- ======= Features Section ======= -->
-        <section id="features" class="features">
+        <section id="Features" class="features">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>Special Features</h2>
@@ -463,149 +512,20 @@
 						</div>
 					</div>
 				</div>            
-              
-        </section><!-- End Features Section -->
-		     <section id="counts" class="counts">
-                         <div class="section-title">
-                    <h2>Stats</h2>
-                    <p>Check realtime basic stats!<p>
-                                <div class="text-center" style="margin-top:25px;">
-                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span><span></div>
-            </div>
-                </div>
-      <div class="container aos-init aos-animate" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-decimals="10" data-purecounter-currency="true" data-purecounter-currencysymbol="$" class="purecounter"></span>
-                <p>Price</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span id="burnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
-                <p>Burned</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span id="circulateCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
-                <p>Circulating</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span>$</span><span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
-                <p>Market Cap</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span id="manualBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
-                <p>Burned by Event</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span id="manualLPBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
-                <p>LP Burned by Event</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span>$</span><span id="initialMcapCounter" data-purecounter-start="0" data-purecounter-end="333" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
-                <p>Initial Market Cap</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-2">
-            <div class="count-box">
-              <div>
-                <span>x</span><span id="startMultiCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
-                <p>Multiplied from start</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-    
-    <!-- ======= About Section ======= -->
-    <section id="safu" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>SAFU Proofs</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-12 col-md-6 text-justify content">
-            <h3>Doxxed</h3>
-            <a href="https://www.dessertswap.finance/dessertdoxxed.html">
-            view in dessertdoxxed
-            <img src="assets/img/safu/doxxed.png">
-            </a>
-          </div>
-          <div class="col-12 col-md-6 text-justify content">
-            <h3>LP Locked</h3>
-            <a href="https://dxsale.app/app/v3/dxlockview?id=0&add=0xe7F0704b198585B8777abe859C3126f57eB8C989&type=lplock&chain=BSC">
-            view in dxsale (connect wallet!)
-            <img src="assets/img/safu/locked.jpg">
-            </a>
-          </div>
-          <div class="col-12 col-md-6 text-justify content">
-            <h3>auto/manual burned</h3>
-            <p>(<span id="_manualburned">50</span>%. multiple burn event done and more to come)</p>
-            <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
-            view in bscscan
-            <img src="assets/img/safu/burned.jpg">
-            </a>
-          </div>
-          <div class="col-12 col-md-6 text-justify content">
-            <h3>manual LP burned</h3>
-            <p>(<span id="_manuallpburned">50</span>%. multiple LP burn will be done)</p>
-            <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
-            view in bscscan
-            <img src="assets/img/safu/lpburned.jpg">
-            </a>
-          </div>
-        </div>
-      </div>
-    </section><!-- End About Section -->
-   
-    
-    
-    <!-- ======= About Section ======= -->
+          
+    </section><!-- End Features Section -->
+        
+<!-- ======= About Section ======= -->
     <section id="status" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
+          <img src="assets/img/whale.gif">
           <h2>Status</h2>
-            <img src="assets/img/whale.gif">
-            <div class="text-center" style="margin-top:25px;">
-                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span><span></div>
-            </div>
+          <div class="text-center" style="margin-top:25px;">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+              <div id="connectResult"><span><span></div>
+          </div>
           
         </div>
 
@@ -699,144 +619,93 @@
             </div>
           </div>
         </div>
+        
+        <div class="section-title">
+          <h2>Stats</h2>
+          <p>Check realtime basic stats!<p>
+          <div class="text-center" style="margin-top:25px;">
+             <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+            <div id="connectResult"><span><span></div>
+          </div>
+        </div>
+        <div class="container aos-init aos-animate" data-aos="fade-up">
+
+          <div class="row gy-4">
+
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-decimals="10" data-purecounter-currency="true" data-purecounter-currencysymbol="$" class="purecounter"></span>
+                  <p>Price</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span id="burnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
+                  <p>Burned</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span id="circulateCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
+                  <p>Circulating</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span>$</span><span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+                  <p>Market Cap</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span id="manualBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
+                  <p>Burned by Event</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span id="manualLPBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
+                  <p>LP Burned by Event</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span>$</span><span id="initialMcapCounter" data-purecounter-start="0" data-purecounter-end="333" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+                  <p>Initial Market Cap</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-2">
+              <div class="count-box">
+                <div>
+                  <span>x</span><span id="startMultiCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+                  <p>Multiplied from start</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section><!-- End About Section -->
-    
-    <section id="counts" class="counts">
-     <div class="section-title">
-        <h2>Tax Guide</h2>
-        <div class="row mt-5">
-          <span id="devNotice"></span>
-        </div>
-        <p>If you sell 10M = (slippage <span id="10mSlippage"></span>%)</p>
-        <p>If you sell 100M = (slippage <span id="100mSlippage"></span>%)</p>
-        <p>If you sell 1B = (slippage <span id="1bSlippage"></span>%)</p>
-        <p>If you sell 10B = (slippage <span id="10bSlippage"></span>%)</p>
-      </div>
-      <div class="container aos-init aos-animate" data-aos="fade-up">
 
-        <div class="row gy-4">
-
-
-      Sell with 0.1% price impact (Slippage 23+)
-      <div class="progress">
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Base 20%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-          Impact 0.2%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-          Margin 1-3%
-        </div>
-      </div>
-      Sell with 0.5% price impact at Dividend Party (Slippage 27+)
-      <div class="progress">
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Base 20%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-          Impact 1%
-        </div>
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Party 3%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-          Margin 1-3%
-        </div>
-      </div>
-
-      Sell with 1% price impact at Dividend Party (Slippage 32+)
-      <div class="progress">
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Base 20%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 19%;">
-          Impact 2%
-        </div>
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Party 3%
-        </div>
-        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 16%;">
-          Whale 4%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
-          Margin 1-3%
-        </div>
-      </div>
-      Sell AGAIN with 1% price impact at Dividend Party (Slippage 36+)
-      <div class="progress">
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Base 20%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 17%;">
-          Impact 2%
-        </div>
-        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 18%;">
-          Penalty 2%
-        </div>
-        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
-          Party 3%
-        </div>
-        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 16%;">
-          Whale 4%
-        </div>
-        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 18%;">
-          Margin 1-3%
-        </div>
-      </div>
-    </div>
-    </div>
-    </section>
-    
-    <!-- ======= About Section ======= -->
-    <section id="rewards" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Ecosystem</h2>
-          <p>Actual Usecase of the UpFinity</p>
-        </div>
-        
-        <div class="row">
-          <div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>Coin Vote</h2>
-              <p>We bringing a revolution to current coin voting websites.</p>
-            
-              <p>Once a (day/week) the current top coin will be purchased from our contract as reward for our holders. This will create green candles for them, increase their holder count and expose our community to theirs.
-    Everyone will want to be #1 
-
-    Votes will be counted with our unique wallet verification system, stopping bots/macros from abusing the system. Vote count will in turn be fully based on community power. This and the reward incentive for being #1 will attract legit projects and the whole bsc community will benefit from transparently seeing what's truly trending. And us in turn benefit from all that exposure. 
-
-    Income from traffic ads on the website will be divided: 20% dev team, 30% for $UPF marketing, 50% $UPF Holders. Creating yet another passive income for $UPF holders!</p>
-              <p><a id="coinVoteLink" href="https://coin-vote.herokuapp.com" class="button scrollto">Coin Vote Beta</a></p>
-              <!-- <p><a id="coinVoteLink" href="" class="button scrollto">Upgrading!</a></p> -->
-            </div>
-          </div>
-          
-          <div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>NFT</h2>
-              <h2>Mystery Box</h2>
-              <h2>NFT Farming</h2>
-              <h2>MarketPlace</h2>
-              <h2>Staking</h2>
-              <h2>Swap</h2>
-              <h2>Play 2 Earn</h2>
-              <h2>UPF Store</h2>
-              <h2>Merchandise</h2>
-              
-              <p></p>
-    
-              <p></p>
-              <p><a id="coinVoteLink" href="" class="button scrollto">Coming Soon</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
+   
     <!-- ======= About Section ======= -->
     <section id="rewards" class="about">
       <div class="container" data-aos="fade-up">
@@ -893,115 +762,50 @@
     </section><!-- End About Section -->
     
     <!-- ======= About Section ======= -->
-    <section id="airdrops">
+    <section id="safu" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
-          <h2>Airdrops</h2>
-          
-            <div class="text-center" style="margin-top:25px;">
-                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-                <div id="connectResult"><span><span></div>
-            </div>
-          
+          <h2>SAFU Proofs</h2>
         </div>
 
         <div class="row">
-          <div class="col-lg-6 text-justify content">
-            <h3>How to get Airdrop</h3>
-            <ul class="ul-no-style">
-              <li><i class="bx bx-check-double text-color-primary"></i>Connect your wallet</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Choose 1 airdrop option and click</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Confirm transaction in metamask popup</li>
-            </ul>
-            
-            
-            <h4>Make Referral Link</h4>
-            <p>Spread your link to get <span>5%</span> Referral Bonus!</p>
-            <form action="">
-              <input type="text" id="typedRefAdr" placeholder="Type Your Wallet Address here">
-              <a id="getRefLinkButton" href="#null" class="button scrollto" onclick="getRefLink()">Make Link</a>
-            </form>
-
-            <h4>Referral Bonus</h4>
-            <div><span>5%</span> additional token will be sent to:</div>
-            <div id="referralAdrDisplay"></div>
-            <h4>Community Bonus</h4>
-            <div>If rugpulled community choose us for the next gem and supports us,</div>
-            <div>We will add bonus if they have that token more than 0</div>
-            <div>Bonus amount depends on the community volume and support, etc</div>
-            <div>Tell all rugpulled community to support us. We will add all of them one by one :)</div> 
-            <div>Currently we support: <img src="https://shibcake.com/img/logo.svg" style="width: 150px"> (1%)</div>
-            <form action="">
-              <input type="text" id="typedCommunityAdr" placeholder="Type Token Address here">
-              <a id="getCommunityAdrButton" href="#null" class="button scrollto" onclick="getCommunityAdr()">Set Bonus</a>
-              <div id="displayCommunityAdrBonus"></div>
-            </form>
+          <div class="col-12 col-md-6 text-justify content">
+            <h3>Doxxed</h3>
+            <a href="https://www.dessertswap.finance/dessertdoxxed.html">
+            view in dessertdoxxed
+            <img src="assets/img/safu/doxxed.png">
+            </a>
           </div>
-          
-          <div class="col-lg-6 text-justify content">
-            <h3>Rules</h3>
-            <ul class="ul-no-style">
-              <li><i class="bx bx-check-double text-color-primary"></i>Should be <span>new wallet</span> with <span>NO</span> UPFINITY TOKEN</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Can choose <span>ONLY 1</span> option</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Tokens will be <span>vested</span> until 21.12.07 1PM UTC (Auto unlock will be set near that time to decrease gas fee)</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Airdropped wallet <span>cannot trade with UpFinity</span> until vesting period</li>
-              <li><i class="bx bx-check-double text-color-primary"></i>Details in the Telegram <a href="https://t.me/UpFinityTG" target="_tab" class="telegram"><i class="bi bi-telegram"></i></a></li>
-            </ul>
-            
-            <h4>Airdrop Options</h4>
-            <div id="freeAirdropBalance"></div>
-            <div id="airdropBalance"></div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimFreeAirdrop()">Free Airdrop</a>
-                  get 1$ free tokens!
-                </h6>
-            </div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(3)">3$ Airdrop</a>
-                  1% More Tokens!
-                </h6>
-            </div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(5)">5$ Airdrop</a>
-                  2% More Tokens!
-                </h6>
-            </div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(10)">10$ Airdrop</a>
-                  3% More Tokens!
-                </h6>
-            </div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(30)">30$ Airdrop</a>
-                  5% More Tokens!
-                </h6>
-            </div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(50)">50$ Airdrop</a>
-                  7% More Tokens!
-                </h6>
-            </div>
-            <div class="social-links">
-                <h6>
-                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(100)">100$ Airdrop</a>
-                  10% More Tokens!
-                </h6>
-            </div>
+          <div class="col-12 col-md-6 text-justify content">
+            <h3>LP Locked</h3>
+            <a href="https://dxsale.app/app/v3/dxlockview?id=0&add=0xe7F0704b198585B8777abe859C3126f57eB8C989&type=lplock&chain=BSC">
+            view in dxsale (connect wallet!)
+            <img src="assets/img/safu/locked.jpg">
+            </a>
+          </div>
+          <div class="col-12 col-md-6 text-justify content">
+            <h3>auto/manual burned</h3>
+            <p>(<span id="_manualburned">50</span>%. multiple burn event done and more to come)</p>
+            <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
+            view in bscscan
+            <img src="assets/img/safu/burned.jpg">
+            </a>
+          </div>
+          <div class="col-12 col-md-6 text-justify content">
+            <h3>manual LP burned</h3>
+            <p>(<span id="_manuallpburned">50</span>%. multiple LP burn will be done)</p>
+            <a href="https://bscscan.com/tx/0xc99a53913ded6e672ed7e61722c4d02a88829cb4b852490eb3a9c2fbd0fbbc16">
+            view in bscscan
+            <img src="assets/img/safu/lpburned.jpg">
+            </a>
           </div>
         </div>
       </div>
     </section><!-- End About Section -->
     
     
-        
-        <!-- ======= tokenomics Section ======= -->
+    <!-- ======= tokenomics Section ======= -->
         <section id="upfinomics" class="tokenomic">
             <div class="container" data-aos="fade-up">
 
@@ -1116,6 +920,100 @@
             </div>
         </section>
         <!-- End tokenomic Section -->
+    
+    <section id="counts" class="counts">
+     <div class="section-title">
+        <h2>Tax Guide</h2>
+        <div class="row mt-5">
+          <span id="devNotice"></span>
+        </div>
+        <p>If you sell 10M = (slippage <span id="10mSlippage"></span>%)</p>
+        <p>If you sell 100M = (slippage <span id="100mSlippage"></span>%)</p>
+        <p>If you sell 1B = (slippage <span id="1bSlippage"></span>%)</p>
+        <p>If you sell 10B = (slippage <span id="10bSlippage"></span>%)</p>
+      </div>
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+
+      Sell with 0.1% price impact (Slippage 23+)
+      <div class="progress">
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Base 20%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+          Impact 0.2%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+          Margin 1-3%
+        </div>
+      </div>
+      Sell with 0.5% price impact at Dividend Party (Slippage 27+)
+      <div class="progress">
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Base 20%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+          Impact 1%
+        </div>
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Party 3%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+          Margin 1-3%
+        </div>
+      </div>
+
+      Sell with 1% price impact at Dividend Party (Slippage 32+)
+      <div class="progress">
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Base 20%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 19%;">
+          Impact 2%
+        </div>
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Party 3%
+        </div>
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 16%;">
+          Whale 4%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+          Margin 1-3%
+        </div>
+      </div>
+      Sell AGAIN with 1% price impact at Dividend Party (Slippage 36+)
+      <div class="progress">
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Base 20%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 17%;">
+          Impact 2%
+        </div>
+        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 18%;">
+          Penalty 2%
+        </div>
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 15%;">
+          Party 3%
+        </div>
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 16%;">
+          Whale 4%
+        </div>
+        <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 18%;">
+          Margin 1-3%
+        </div>
+      </div>
+    </div>
+    </div>
+    </section>
+    
+    
+    
+    
+    
+        
+        
         
 <!-- ======= Features Section ======= -->
         <section id="patchs" class="features">
@@ -1313,7 +1211,112 @@
         </section>
         <!-- End Motivation Section -->
 
+<!-- ======= About Section ======= -->
+    <section id="airdrops">
+      <div class="container" data-aos="fade-up">
 
+        <div class="section-title">
+          <h2>Airdrops</h2>
+          
+            <div class="text-center" style="margin-top:25px;">
+                <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+                <div id="connectResult"><span><span></div>
+            </div>
+          
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 text-justify content">
+            <h3>How to get Airdrop</h3>
+            <ul class="ul-no-style">
+              <li><i class="bx bx-check-double text-color-primary"></i>Connect your wallet</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Choose 1 airdrop option and click</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Confirm transaction in metamask popup</li>
+            </ul>
+            
+            
+            <h4>Make Referral Link</h4>
+            <p>Spread your link to get <span>5%</span> Referral Bonus!</p>
+            <form action="">
+              <input type="text" id="typedRefAdr" placeholder="Type Your Wallet Address here">
+              <a id="getRefLinkButton" href="#null" class="button scrollto" onclick="getRefLink()">Make Link</a>
+            </form>
+
+            <h4>Referral Bonus</h4>
+            <div><span>5%</span> additional token will be sent to:</div>
+            <div id="referralAdrDisplay"></div>
+            <h4>Community Bonus</h4>
+            <div>If rugpulled community choose us for the next gem and supports us,</div>
+            <div>We will add bonus if they have that token more than 0</div>
+            <div>Bonus amount depends on the community volume and support, etc</div>
+            <div>Tell all rugpulled community to support us. We will add all of them one by one :)</div> 
+            <div>Currently we support: <img src="https://shibcake.com/img/logo.svg" style="width: 150px"> (1%)</div>
+            <form action="">
+              <input type="text" id="typedCommunityAdr" placeholder="Type Token Address here">
+              <a id="getCommunityAdrButton" href="#null" class="button scrollto" onclick="getCommunityAdr()">Set Bonus</a>
+              <div id="displayCommunityAdrBonus"></div>
+            </form>
+          </div>
+          
+          <div class="col-lg-6 text-justify content">
+            <h3>Rules</h3>
+            <ul class="ul-no-style">
+              <li><i class="bx bx-check-double text-color-primary"></i>Should be <span>new wallet</span> with <span>NO</span> UPFINITY TOKEN</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Can choose <span>ONLY 1</span> option</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Tokens will be <span>vested</span> until 21.12.07 1PM UTC (Auto unlock will be set near that time to decrease gas fee)</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Airdropped wallet <span>cannot trade with UpFinity</span> until vesting period</li>
+              <li><i class="bx bx-check-double text-color-primary"></i>Details in the Telegram <a href="https://t.me/UpFinityTG" target="_tab" class="telegram"><i class="bi bi-telegram"></i></a></li>
+            </ul>
+            
+            <h4>Airdrop Options</h4>
+            <div id="freeAirdropBalance"></div>
+            <div id="airdropBalance"></div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimFreeAirdrop()">Free Airdrop</a>
+                  get 1$ free tokens!
+                </h6>
+            </div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(3)">3$ Airdrop</a>
+                  1% More Tokens!
+                </h6>
+            </div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(5)">5$ Airdrop</a>
+                  2% More Tokens!
+                </h6>
+            </div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(10)">10$ Airdrop</a>
+                  3% More Tokens!
+                </h6>
+            </div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(30)">30$ Airdrop</a>
+                  5% More Tokens!
+                </h6>
+            </div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(50)">50$ Airdrop</a>
+                  7% More Tokens!
+                </h6>
+            </div>
+            <div class="social-links">
+                <h6>
+                  <a href="#null" id="claim" class="button scrollto" onclick="claimAirdrop(100)">100$ Airdrop</a>
+                  10% More Tokens!
+                </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End About Section -->
 
 
 
@@ -1413,70 +1416,70 @@
     
     
     
-        <!-- ======= Notice Section ======= -->
-        <section id="notice" class="about">
-				<div class="container aos-init aos-animate" data-aos="fade-up">
-					<div class="section-title" style="
-    padding: 0;
-">
-						<h2><span>Important</span> Notice</h2>
-            <h2><span>중요</span> 공지</h2>
+        <!-- <!-- ======= Notice Section ======= --> -->
+        <!-- <section id="notice" class="about"> -->
+				<!-- <div class="container aos-init aos-animate" data-aos="fade-up"> -->
+					<!-- <div class="section-title" style=" -->
+    <!-- padding: 0; -->
+<!-- "> -->
+						<!-- <h2><span>Important</span> Notice</h2> -->
+            <!-- <h2><span>중요</span> 공지</h2> -->
 
-					</div>
-					<p style="white-space: pre-line;text-align:justify;max-width:500px;" class="mx-auto">I have <span>DOXXED</span> by using an 3rd party service.
-(Find 'UpFinity' in <a href="https://www.dessertswap.finance/dessertdoxxed.html">DessertDoxxed</a>)
-Put your trust in me that there will be no scams or rug pulled with UpFinity.
+					<!-- </div> -->
+					<!-- <p style="white-space: pre-line;text-align:justify;max-width:500px;" class="mx-auto">I have <span>DOXXED</span> by using an 3rd party service. -->
+<!-- (Find 'UpFinity' in <a href="https://www.dessertswap.finance/dessertdoxxed.html">DessertDoxxed</a>) -->
+<!-- Put your trust in me that there will be no scams or rug pulled with UpFinity. -->
 
-I have applied many <span>new</span> unique features in this token.
-I have many innovative plans that I will implement into UpFinity’s smart contract.
-So I have decided to make this contract <span>UPGRADABLE.</span>
-Which means the contract can be <span>modified.</span>
+<!-- I have applied many <span>new</span> unique features in this token. -->
+<!-- I have many innovative plans that I will implement into UpFinity’s smart contract. -->
+<!-- So I have decided to make this contract <span>UPGRADABLE.</span> -->
+<!-- Which means the contract can be <span>modified.</span> -->
 
-Some investors may worry that since this contract is modifiable,
-there might be a <span>malicious</span> intent on my part. 
-Such as taking all the funds and money into my own pocket, etc.
-I will not say that this is impossible. Simply because; it is possible.
-But I will say that, <span>I will NEVER do that.</span>
-I am hoping, that by me being <span>DOXXED</span> will build trust and support within the UpFinity community.
+<!-- Some investors may worry that since this contract is modifiable, -->
+<!-- there might be a <span>malicious</span> intent on my part.  -->
+<!-- Such as taking all the funds and money into my own pocket, etc. -->
+<!-- I will not say that this is impossible. Simply because; it is possible. -->
+<!-- But I will say that, <span>I will NEVER do that.</span> -->
+<!-- I am hoping, that by me being <span>DOXXED</span> will build trust and support within the UpFinity community. -->
 
-Please look at my suggested new unique features and smart contract functionalities.
-And please ask yourself, <span>HOW CAN A SCAMMER THINK OF ALL THESE THINGS?</span>
-Scammers usually only copy another meme token's Smart Contract or honeypot.
-That is enough for them because it gives much money.
-Think of all those scam coins start and run.
+<!-- Please look at my suggested new unique features and smart contract functionalities. -->
+<!-- And please ask yourself, <span>HOW CAN A SCAMMER THINK OF ALL THESE THINGS?</span> -->
+<!-- Scammers usually only copy another meme token's Smart Contract or honeypot. -->
+<!-- That is enough for them because it gives much money. -->
+<!-- Think of all those scam coins start and run. -->
 
-I have not done that, I have created a <span>new</span> generation Smart Contract
-I have done something extremely unique with UpFinity’s Smart Contract.
-I have deployed a contract that allows for updated features without the need of a V2 token.
-This makes this contract truly upgradable.
+<!-- I have not done that, I have created a <span>new</span> generation Smart Contract -->
+<!-- I have done something extremely unique with UpFinity’s Smart Contract. -->
+<!-- I have deployed a contract that allows for updated features without the need of a V2 token. -->
+<!-- This makes this contract truly upgradable. -->
 
-Also, please consider the <span>potential</span> of my upcoming new unique features.
-Big or small, new or not, I have already created 6 of them.
-And I have about 10 more to be applied.
-including concepts, there is <span>much more.</span>
-Moreover, as time passes, I will invent more features.
+<!-- Also, please consider the <span>potential</span> of my upcoming new unique features. -->
+<!-- Big or small, new or not, I have already created 6 of them. -->
+<!-- And I have about 10 more to be applied. -->
+<!-- including concepts, there is <span>much more.</span> -->
+<!-- Moreover, as time passes, I will invent more features. -->
 
-And there will be a new feature suggested by other token in future.
-By upgrade, it could be applied to this token too.
+<!-- And there will be a new feature suggested by other token in future. -->
+<!-- By upgrade, it could be applied to this token too. -->
 
-It makes the token more stable because if there should be a minor issue or something,
-a simple upgrade can fix it very well.
+<!-- It makes the token more stable because if there should be a minor issue or something, -->
+<!-- a simple upgrade can fix it very well. -->
 
-Finally, have you ever seen a <span>voluntarily announce</span> that the token could be scammed,
-and explaining all of these in such a long text?
-<span>Never.</span> They <span>hide</span> until revealed by someone.
-And if it is revealed, they just ban or ignore with no explanation and just shill until rugpull.
+<!-- Finally, have you ever seen a <span>voluntarily announce</span> that the token could be scammed, -->
+<!-- and explaining all of these in such a long text? -->
+<!-- <span>Never.</span> They <span>hide</span> until revealed by someone. -->
+<!-- And if it is revealed, they just ban or ignore with no explanation and just shill until rugpull. -->
 
-This is all I could explain for the upgradable Smart Contract.
-I hope you are persuaded and convinced that it is <span>SAFU.</span>
-I will make multiple transparent process to convince you more.
-(link for the upgrade process)
+<!-- This is all I could explain for the upgradable Smart Contract. -->
+<!-- I hope you are persuaded and convinced that it is <span>SAFU.</span> -->
+<!-- I will make multiple transparent process to convince you more. -->
+<!-- (link for the upgrade process) -->
 
-Thank you :)
-고맙습니다 :)</p>
-				</div>
-			</section>
-      <!-- End Notice Section -->
+<!-- Thank you :) -->
+<!-- 고맙습니다 :)</p> -->
+				<!-- </div> -->
+			<!-- </section> -->
+      <!-- <!-- End Notice Section --> -->
     
     
       <!-- ======= Testimonials Section ======= -->
