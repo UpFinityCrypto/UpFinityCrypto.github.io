@@ -2150,19 +2150,19 @@ Thank you :)
 				return;
 			}
 			
-			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
-      var idx;
-			for (idx = 0; idx < nftBalance; idx++) {
-				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
-				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
-				if (tokenInt / 1 == 10002) {
-					alert("Already have diamond!");
-					return;
-				}
-			}
+			<!-- nftBalance = (await nftC.functions.balanceOf(currentAccount))[0]; -->
+      <!-- var idx; -->
+			<!-- for (idx = 0; idx < nftBalance; idx++) { -->
+				<!-- tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0]; -->
+				<!-- tokenInt = (await nftC.functions._nftInt(tokenId))[0]; -->
+				<!-- if (tokenInt / 1 == 10002) { -->
+					<!-- alert("Already have diamond!"); -->
+					<!-- return; -->
+				<!-- } -->
+			<!-- } -->
 			
 			nftOverride = {
-			value: ethers.utils.parseEther('0.25'), // it require string number
+			value: ethers.utils.parseEther('0.000000000025'), // it require string number
 		  }
 		  
 		  nftSigner.mintDiamond(nftOverride).then((arg) => {
@@ -2178,19 +2178,19 @@ Thank you :)
 				return;
 			}
 			
-			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
-      var idx;
-			for (idx = 0; idx < nftBalance; idx++) {
-				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
-				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
-				if (tokenInt / 1 == 10001) {
-					alert("Already have emerald!");
-					return;
-				}
-			}
+			<!-- nftBalance = (await nftC.functions.balanceOf(currentAccount))[0]; -->
+      <!-- var idx; -->
+			<!-- for (idx = 0; idx < nftBalance; idx++) { -->
+				<!-- tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0]; -->
+				<!-- tokenInt = (await nftC.functions._nftInt(tokenId))[0]; -->
+				<!-- if (tokenInt / 1 == 10001) { -->
+					<!-- alert("Already have emerald!"); -->
+					<!-- return; -->
+				<!-- } -->
+			<!-- } -->
 			
 			nftOverride = {
-			value: ethers.utils.parseEther('0.5'), // it require string number
+			value: ethers.utils.parseEther('0.00000000005'), // it require string number
 		  }
 		  
 		  nftSigner.mintEmerald(nftOverride).then((arg) => {
