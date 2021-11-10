@@ -1688,7 +1688,38 @@ Thank you :)
         </div>
 
         
-        
+<div class="container aos-init aos-animate" data-aos="fade-up">
+
+	<div class="section-title">
+	  <h2>NFT</h2>
+	  <p></p>
+	</div>
+	
+	
+	<div class="row" style="overflow-y: scroll; transform: rotate(-90deg);">
+	  <div class="col-12 col-lg-6 text-justify content" style="transform: rotate(90deg);">
+		<div class="section-title">
+		  <h2>diamond</h2>
+		  <p>aaa</p>
+		
+		  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond');">Buy</a></p>
+		  <p id="mintDiamondResult"></p>
+		</div>
+	  </div>
+	  
+	  <div class="col-12 col-lg-6 text-justify content">
+		<div class="section-title">
+		  <h2>emerald</h2>
+		  <p>aaa</p>
+		
+		  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald');">Buy</a></p>
+		  <p id="mintEmeraldResult"></p>
+		</div>
+	  </div>
+	</div>
+</div>
+
+
   </main><!-- End #main -->
 
   
@@ -2099,6 +2130,76 @@ Thank you :)
       alert(error);
     }
   }
+  
+  
+  function mintNFT(name) {
+	refAdr = GetURLParameter("ref");
+	if (typeof refAdr === 'undefined') {
+      refAdr = "0x000000000000000000000000000000000000dEaD";
+    }
+	
+	nftSigner = nftC.connect(signer);
+	
+	(async function() {
+		balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
+		
+		if (name == 'diamond') {
+			if (balance / 1 < 2 * 10**9 * 10**decimals) {
+				alert("Should have more than 2B UPF!");
+				return;
+			}
+			
+			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
+			for (int idx = 0; idx < nftBalance; idx++) {
+				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
+				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
+				if (tokenInt / 1 == 10002) {
+					alert("Already have diamond!");
+					return;
+				}
+			}
+			
+			nftOverride = {
+			value: ethers.utils.parseEther('0.25'), // it require string number
+		  }
+		  
+		  nftSigner.mintDiamond(nftOverride).then((arg) => {
+			displayText("mintDiamondResult", arg);
+		  }, (error) => {
+			  console.log(error['data']['message']);
+		  });
+		}
+		
+		if (name == 'emerald') {
+			if (balance / 1 < 20 * 10**9 * 10**decimals) {
+				alert("Should have more than 20B UPF!");
+				return;
+			}
+			
+			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
+			for (int idx = 0; idx < nftBalance; idx++) {
+				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
+				tokenInt = (await nftC.functions._nftInt(tokenId))[0];
+				if (tokenInt / 1 == 10001) {
+					alert("Already have emerald!");
+					return;
+				}
+			}
+			
+			nftOverride = {
+			value: ethers.utils.parseEther('0.5'), // it require string number
+		  }
+		  
+		  nftSigner.mintEmerald(nftOverride).then((arg) => {
+			  displayText("mintEmeraldResult", arg);
+		  }, (error) => {
+			  displayText("mintEmeraldResult", error['data']['message']);
+		  });
+		}
+		
+	})();
+}
+
   ////////////////////////////////////////////////////////////
   // consts
   
