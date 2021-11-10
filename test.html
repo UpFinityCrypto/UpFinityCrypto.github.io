@@ -212,15 +212,17 @@
           <div class="col-12 col-lg-6 text-justify content">
             <div class="section-title">
               <h2>diamond</h2>
-              <div class="col-12 col-lg-6 text-justify content">
-                <img src="assets/img/nft/diamond.png">
-                <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', true);">Mint</a></p>
-                <p id="mintDiamondBoyResult"></p>
-              </div>
-              <div class="col-12 col-lg-6 text-justify content">
-                <img src="assets/img/nft/diamond.png">
-                <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', false);">Mint</a></p>
-                <p id="mintDiamondGirlResult"></p>
+              <div class="row">
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img src="assets/img/nft/diamond.png">
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', true);">Mint</a></p>
+                  <p id="mintDiamondBoyResult"></p>
+                </div>
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img src="assets/img/nft/diamond.png">
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', false);">Mint</a></p>
+                  <p id="mintDiamondGirlResult"></p>
+                </div>
               </div>
             </div>
           </div>
@@ -228,15 +230,17 @@
           <div class="col-12 col-lg-6 text-justify content">
             <div class="section-title">
               <h2>emerald</h2>
-              <div class="col-12 col-lg-6 text-justify content">
-                <img src="assets/img/nft/emerald.png">
-                <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', true);">Mint</a></p>
-                <p id="mintEmeraldBoyResult"></p>
-              </div>
-              <div class="col-12 col-lg-6 text-justify content">
-                <img src="assets/img/nft/emerald.png">
-                <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', false);">Mint</a></p>
-                <p id="mintEmeraldGirlResult"></p>
+              <div class="row">
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img src="assets/img/nft/emerald.png">
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', true);">Mint</a></p>
+                  <p id="mintEmeraldBoyResult"></p>
+                </div>
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img src="assets/img/nft/emerald.png">
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', false);">Mint</a></p>
+                  <p id="mintEmeraldGirlResult"></p>
+                </div>
               </div>
             </div>
           </div>
@@ -2178,7 +2182,7 @@
   }
   
   
-  function mintNFT(name) {
+  function mintNFT(name, isBoy) {
 	refAdr = GetURLParameter("ref");
 	if (typeof refAdr === 'undefined') {
       refAdr = "0x000000000000000000000000000000000000dEaD";
