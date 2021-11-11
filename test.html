@@ -615,6 +615,23 @@
   displayText_("totalNFTCount", diamondBoyCount + diamondGirlCount + emeraldBoyCount + emeraldGirlCount);
   totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
+
+  const source = document.getElementById('source');
+  const result = document.getElementById('result');
+  ​
+  const inputHandler = function(e) {
+      valueIn = ethers.utils.parseEther(e.target.value);
+      valueOut = rO.mul(valueIn).div(rI.add(valueIn));
+      valueOut = ethers.utils.formatEther(valueOut);
+      valueOut = parseInt(valueOut);
+      result.innerHTML = numberWithCommas(valueOut);
+  }
+  ​
+  source.addEventListener('input', inputHandler);
+  source.addEventListener('propertychange', inputHandler); // for IE8
+  // Firefox/Edge18-/IE9+ don’t fire on <select><option>
+  // source.addEventListener('change', inputHandler); 
+
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
