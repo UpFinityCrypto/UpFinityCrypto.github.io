@@ -10,6 +10,7 @@ const result = document.getElementById('swapOutput');
 
 const inputHandlerBuy = function(e) {
     valueIn = e.target.value;
+    valueIn = valueIn.replace(/,/g,'');
     if (valueIn == 0) {
       result.value = 0;
       return;
@@ -23,6 +24,7 @@ const inputHandlerBuy = function(e) {
 }
 const inputHandlerSell = function(e) {
     valueIn = e.target.value;
+    valueIn = valueIn.replace(/,/g,'');
     if (valueIn == 0) {
       result.value = 0;
       return;
