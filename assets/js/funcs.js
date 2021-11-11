@@ -544,6 +544,8 @@ function buySellChange() {
     swapComma("swapOuput", false);
     source.addEventListener('input', inputHandlerSell);
     source.addEventListener('propertychange', inputHandlerSell); // for IE8
+    
+    return;
   }
   
   elem_ = getElement("swapSell");
