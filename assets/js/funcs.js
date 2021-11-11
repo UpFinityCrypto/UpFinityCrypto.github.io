@@ -486,6 +486,11 @@ function buySellChange() {
   displayText_(elem.id, UPFtarget);
   elem_.id = "BNBtarget";
   displayText_(elem_.id, BNBtarget);
+  
+  elem = getElement("swapInput");
+  elem_ = getElement("swapOutput");
+  elem.value = '';
+  elem_.value = '';
 }
 
 function buyUPF() {
