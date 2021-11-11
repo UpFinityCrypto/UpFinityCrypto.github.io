@@ -455,8 +455,7 @@ function mintNFT(name, isBoy) {
   })();
 }
     
-  function buyUPF() {
-      buyBNB = document.getElementById("source").value;
-      console.log(buyBNB);
-    }
-}
+function buyUPF() {
+    buyBNB = document.getElementById("source").value;
+    console.log(buyBNB);
+  }
