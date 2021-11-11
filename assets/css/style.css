@@ -286,7 +286,7 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 }
 @media (min-width: 992px) {
   #hero {
-    padding-left: 160px;
+    padding-left: 50px;
   }
 }
 #hero:before {
