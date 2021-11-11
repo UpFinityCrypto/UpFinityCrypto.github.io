@@ -471,10 +471,10 @@ function buySellChange() {
   
   elem = getElement("BNBlogo");
   elem_ = getElement("UPFlogo");
-  BNBlogo
-  UPFlogo
-  elem.setAttribute('src', elem_['src']);
-  elem_.setAttribute('src', elem['src']);
+  BNBlogo = elem['src'];
+  UPFlogo = elem_['src'];
+  elem.setAttribute('src', UPFlogo);
+  elem_.setAttribute('src', BNBlogo);
 }
 
 function buyUPF() {
