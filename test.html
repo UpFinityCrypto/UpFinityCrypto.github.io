@@ -778,8 +778,8 @@
   totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
 
-  const source = document.getElementById('source');
-  const result = document.getElementById('result');
+  const source = document.getElementById('swapInput');
+  const result = document.getElementById('swapOutput');
   
   const inputHandler = function(e) {
       valueIn = e.target.value;
