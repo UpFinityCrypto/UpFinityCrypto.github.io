@@ -5,6 +5,33 @@ const decimals = 18;
   const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
   const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
   
+  const inputHandlerBuy = function(e) {
+      valueIn = e.target.value;
+      if (valueIn == 0) {
+        result.value = 0;
+        return;
+      }
+
+      valueIn = ethers.utils.parseEther(valueIn);
+      valueOut = rO.mul(valueIn).div(rI.add(valueIn));
+      valueOut = ethers.utils.formatEther(valueOut);
+      valueOut = parseInt(valueOut);
+      result.value = numberWithCommas(valueOut);
+  }
+  const inputHandlerSell = function(e) {
+      valueIn = e.target.value;
+      if (valueIn == 0) {
+        result.value = 0;
+        return;
+      }
+
+      valueIn = ethers.utils.parseEther(valueIn);
+      valueOut = rI.mul(valueIn).div(rO.add(valueIn));
+      valueOut = ethers.utils.formatEther(valueOut);
+      valueOut = parseInt(valueOut);
+      result.value = numberWithCommas(valueOut);
+  }
+  
   const tokenAbi = [
   {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
   {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},

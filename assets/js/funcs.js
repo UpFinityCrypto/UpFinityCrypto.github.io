@@ -493,8 +493,8 @@ function buySellChange() {
   elem.value = '';
   elem_.value = '';
   
-  const source = document.getElementById('swapInput');
-  const result = document.getElementById('swapOutput');
+  const source = getElement('swapInput');
+  const result = getElement('swapOutput');
   
   source.addEventListener('input', inputHandlerSell);
   source.addEventListener('propertychange', inputHandlerSell); // for IE8
