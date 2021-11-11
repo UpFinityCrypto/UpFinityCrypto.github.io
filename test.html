@@ -767,6 +767,8 @@
   totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
   
+  source = getElement('swapInput');
+  
   source.addEventListener('input', inputHandlerBuy);
   source.addEventListener('propertychange', inputHandlerBuy); // for IE8
   // Firefox/Edge18-/IE9+ don’t fire on <select><option>

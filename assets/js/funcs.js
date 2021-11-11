@@ -533,8 +533,8 @@ function buySellChange() {
   elem.value = '';
   elem_.value = '';
   
-  const source = getElement('swapInput');
-  const result = getElement('swapOutput');
+  source = getElement('swapInput');
+  result = getElement('swapOutput');
     
   elem = getElement("swapBuy");
   if (elem != null) {
