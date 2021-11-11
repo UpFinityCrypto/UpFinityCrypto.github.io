@@ -138,12 +138,12 @@
       swap
       <div>
         <div>Input</div>
-        <span>Balance: <div id="BNBbalance"></div></span>
+        <span>Balance: <div id="BNBbalance"></div> BNB </span>
         <input id="source">
       </div>
       <div>
         <div>Output</div>
-        <span>Balance: <div id="UPFbalance"></div></span>
+        <span>Balance: <div id="UPFbalance"></div> UPF </span>
         <div id="result"></div>
       </div>
       <a href="" class="button scrollto" onClick="buyUPF();">SWAP</a>
@@ -651,7 +651,7 @@
 
   balanceInfo = await provider.getBalance(currentAccount);
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  displayText_("BNBbalance", balance.toString() + ' BNB');
+  displayText_("BNBbalance", balance.toFixed(3));
 
   balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
   displayText_("UPFbalance", numberWithCommas(Math.floor(balance / 1e18)));
