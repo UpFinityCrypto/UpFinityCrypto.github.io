@@ -535,16 +535,15 @@ function buySellChange() {
   
   const source = getElement('swapInput');
   const result = getElement('swapOutput');
-  
-  source.addEventListener('input', inputHandlerSell);
-  source.addEventListener('propertychange', inputHandlerSell); // for IE8
-  
+    
   elem = getElement("swapBuy");
   if (elem != null) {
     elem.setAttribute('onclick', "sellUPF();");
     elem.id = "swapSell";
     swapComma("swapInput", true);
     swapComma("swapOuput", false);
+    source.addEventListener('input', inputHandlerSell);
+    source.addEventListener('propertychange', inputHandlerSell); // for IE8
   }
   
   elem_ = getElement("swapSell");
@@ -553,6 +552,8 @@ function buySellChange() {
     elem_.id = "swapBuy";
     swapComma("swapInput", false);
     swapComma("swapOuput", true);
+    source.addEventListener('input', inputHandlerBuy);
+    source.addEventListener('propertychange', inputHandlerBuy); // for IE8
   }
   
   
