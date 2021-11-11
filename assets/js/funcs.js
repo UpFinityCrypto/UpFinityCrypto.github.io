@@ -523,3 +523,17 @@ function buyUPF() {
     });
       
 }
+
+function sellUPF() {
+  buyUPF = document.getElementById("swapInput").value;
+  
+  routerSigner = routerC.connect(signer);
+  routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+    .then((arg) => {
+      console.log(arg);    
+    }, (error) => {
+      console.log(error['message']);
+      console.log(error['data']['message']);
+    });
+      
+}
