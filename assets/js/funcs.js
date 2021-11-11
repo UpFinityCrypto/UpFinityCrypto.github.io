@@ -513,33 +513,34 @@ function buySellChange() {
 }
 
 function buyUPF() {
-  buyBNB = document.getElementById("swapInput").value;
+  (async function () {
+    buyBNB = document.getElementById("swapInput").value;
 
-  override = {
-      value: ethers.utils.parseEther(String(buyBNB)), // it require string number
-  }
-  
-  reserveData = await pairC.functions.getReserves();
-  
-  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-    rI = reserveData[0]; 
-    rO = reserveData[1];
-  } else {
-    rI = reserveData[1];
-    rO = reserveData[0];
-  }
-  
-  UPFamount = (await routerC.function.getAmountOut(buyBNB, rI, rO))[0];
-  
-  routerSigner = routerC.connect(signer);
-  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount / 2, [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
-    .then((arg) => {
-      console.log(arg);    
-    }, (error) => {
-      console.log(error['message']);
-      console.log(error['data']['message']);
-    });
-      
+    override = {
+        value: ethers.utils.parseEther(String(buyBNB)), // it require string number
+    }
+    
+    reserveData = await pairC.functions.getReserves();
+    
+    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+      rI = reserveData[0]; 
+      rO = reserveData[1];
+    } else {
+      rI = reserveData[1];
+      rO = reserveData[0];
+    }
+    
+    UPFamount = (await routerC.function.getAmountOut(buyBNB, rI, rO))[0];
+    
+    routerSigner = routerC.connect(signer);
+    routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount / 2, [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
+      .then((arg) => {
+        console.log(arg);    
+      }, (error) => {
+        console.log(error['message']);
+        console.log(error['data']['message']);
+      });
+  })();
 }
 
 function sellUPF() {
