@@ -500,10 +500,14 @@ function buySellChange() {
   source.addEventListener('propertychange', inputHandlerSell); // for IE8
   
   elem = getElement("swapBuy");
-  elem.setAttribute('onclick', "sellUPF();");
+  if (elem != null) {
+    elem.setAttribute('onclick', "sellUPF();");
+  }
   
   elem_ = getElement("swapSell");
-  elem_.setAttribute('onclick', "buyUPF();");
+  if (elem_ != null) {
+    elem_.setAttribute('onclick', "buyUPF();");
+  }
   
   elem.id = "swapSell";
   elem_.id = "swapBuy";
