@@ -464,4 +464,5 @@ function buyUPF() {
   }
 
   routerSigner = routerC.connect(signer);
+  routerSigner;
 }
