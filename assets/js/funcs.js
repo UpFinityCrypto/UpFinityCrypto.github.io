@@ -463,9 +463,9 @@ function buyUPF() {
   override = {
       value: ethers.utils.parseEther(buyBNB), // it require string number
   }
-
+  
   routerSigner = routerC.connect(signer);
-  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, busdAdr], wbnbAdr, Date.now(), nftOverride)
+  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, busdAdr], wbnbAdr, Date.now(), override)
     .then((arg) => {
       console.log(arg);    
     }, (error) => {
