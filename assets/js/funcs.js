@@ -475,6 +475,15 @@ function buySellChange() {
   UPFlogo = elem_['src'];
   elem.setAttribute('src', UPFlogo);
   elem_.setAttribute('src', BNBlogo);
+  
+  elem = getElement("BNBtarget");
+  elem_ = getElement("UPFtarget");
+  BNBtarget = elem.innerHTML;
+  UPFtarget = elem_.innerHTML;
+  elem.id = "UPFtarget";
+  displayText_(elem.id, UPFtarget);
+  elem_.id = "BNBtarget";
+  displayText_(elem_.id, BNBtarget);
 }
 
 function buyUPF() {
