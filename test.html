@@ -779,38 +779,7 @@
   balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
   displayText_("UPFbalance", numberWithCommas(Math.floor(balance / 1e18)));
   
-  var $input = $( "#swapInput" );
-
-  $input.on( "keyup", function( event ) {
-   
-      // 1.
-      var selection = window.getSelection().toString();
-      if ( selection !== '' ) {
-          return;
-      }
-   
-      // 2.
-      if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
-          return;
-      }
-    
-      // 3
-      var $this = $( this );
-      var input = $this.val();
-   
-      // 4
-      var input = input.replace(/[\D\s\._\-]+/g, "");
-   
-      // 5
-      input = input ? parseInt( input, 10 ) : 0;
-   
-      // 6
-      $this.val( function() {
-          return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
-      });
-
-  } );
-
+  swapComma();
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

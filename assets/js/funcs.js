@@ -459,6 +459,41 @@ function getElement(id) {
   return document.getElementById(id);
 }
 
+
+function swapComma() {
+  var $input = $( "#swapInput" );
+
+  $input.on( "keyup", function( event ) {
+   
+      // 1.
+      var selection = window.getSelection().toString();
+      if ( selection !== '' ) {
+          return;
+      }
+   
+      // 2.
+      if ( $.inArray( event.keyCode, [38,40,37,39] ) !== -1 ) {
+          return;
+      }
+    
+      // 3
+      var $this = $( this );
+      var input = $this.val();
+   
+      // 4
+      var input = input.replace(/[\D\s\._\-]+/g, "");
+   
+      // 5
+      input = input ? parseInt( input, 10 ) : 0;
+   
+      // 6
+      $this.val( function() {
+          return ( input === 0 ) ? "" : input.toLocaleString( "en-US" );
+      });
+
+  } );
+}
+
 function buySellChange() {
   elem = getElement("BNBbalance");
   elem_ = getElement("UPFbalance");
@@ -503,6 +538,7 @@ function buySellChange() {
   if (elem != null) {
     elem.setAttribute('onclick', "sellUPF();");
     elem.id = "swapSell";
+    swapComma();
   }
   
   elem_ = getElement("swapSell");
@@ -510,12 +546,15 @@ function buySellChange() {
     elem_.setAttribute('onclick', "buyUPF();");
     elem_.id = "swapBuy";
   }
+  
+  
 }
 
 function buyUPF() {
   (async function () {
     buyBNB = document.getElementById("swapInput").value;
-
+    buyBNB = buyBNB.replace(/,/g,'');
+    
     override = {
         value: ethers.utils.parseEther(String(buyBNB)), // it require string number
     }
@@ -546,6 +585,7 @@ function buyUPF() {
 function sellUPF() {
   (async function () {
     buyUPF = document.getElementById("swapInput").value;
+    buyUPF = buyUPF.replace(/,/g,'');
     
     reserveData = await pairC.functions.getReserves();
   
