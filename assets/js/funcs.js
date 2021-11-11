@@ -462,10 +462,19 @@ function getElement(id) {
 function buySellChange() {
   elem = getElement("BNBbalance");
   elem_ = getElement("UPFbalance");
+  BNBbalance = elem.innerHTML;
+  UPFbalance = elem_.innerHTML;
   elem.id = "UPFbalance";
-  displayText_(elem.id, elem_.innerHTML);
+  displayText_(elem.id, UPFbalance);
   elem_.id = "BNBbalance";
-  displayText_(elem_.id, elem.innerHTML);
+  displayText_(elem_.id, BNBbalance);
+  
+  elem = getElement("BNBlogo");
+  elem_ = getElement("UPFlogo");
+  BNBlogo
+  UPFlogo
+  elem.setAttribute('src', elem_['src']);
+  elem_.setAttribute('src', elem['src']);
 }
 
 function buyUPF() {
