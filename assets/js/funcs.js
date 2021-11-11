@@ -454,7 +454,8 @@ function mintNFT(name, isBoy) {
     }
   })();
 }
-    
+
+
 function buyUPF() {
   buyBNB = document.getElementById("source").value;
   console.log(buyBNB);
@@ -464,5 +465,12 @@ function buyUPF() {
   }
 
   routerSigner = routerC.connect(signer);
-  routerSigner;
+  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, busdAdr], wbnbAdr, Date.now(), nftOverride)
+    .then((arg) => {
+      console.log(arg);    
+    }, (error) => {
+      console.log(error['message']);
+      console.log(error['data']['message']);
+    });
+      
 }
