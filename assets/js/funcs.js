@@ -453,5 +453,11 @@ function loadFile(filePath) {
 		  });
 		}
 		
-	})();
+    })();
+
+    function buyUPF() {
+      buyBNB = document.getElementById("source").value;
+      console.log(buyBNB);
+    }
+  }
 }
