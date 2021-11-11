@@ -556,9 +556,9 @@ function buySellChange() {
     swapComma("swapOuput", true);
     source.addEventListener('input', inputHandlerBuy);
     source.addEventListener('propertychange', inputHandlerBuy); // for IE8
+    
+    return;
   }
-  
-  
 }
 
 function buyUPF() {
