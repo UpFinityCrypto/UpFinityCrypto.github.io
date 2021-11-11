@@ -327,7 +327,7 @@
   displayText("claimable", connectWalletText);
   displayText("claimed", connectWalletText);
   
-  
+  document.getElementById("source").value = 'Loading..';
   
   
   reserveData = await pairC.functions.getReserves();
@@ -642,6 +642,8 @@
   source.addEventListener('propertychange', inputHandler); // for IE8
   // Firefox/Edge18-/IE9+ don’t fire on <select><option>
   // source.addEventListener('change', inputHandler); 
+
+  document.getElementById("source").value = '0';
 
   }());
   </script>
