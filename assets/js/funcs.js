@@ -473,10 +473,11 @@ function buySellChange() {
   elem_ = getElement("UPFlogo");
   BNBlogo = elem['src'];
   UPFlogo = elem_['src'];
-  elem.id = "UPFlogo";
   elem.setAttribute('src', UPFlogo);
-  elem_.id = "BNBlogo";
   elem_.setAttribute('src', BNBlogo);
+  elem.id = "UPFlogo";
+  elem_.id = "BNBlogo";
+  
   
   elem = getElement("BNBtarget");
   elem_ = getElement("UPFtarget");
