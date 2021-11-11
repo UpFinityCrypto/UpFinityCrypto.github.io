@@ -583,7 +583,7 @@ function buyUPF() {
       rO = reserveData[0];
     }
     
-    UPFamount = (await routerC.function.getAmountOut(buyBNB, rI, rO))[0];
+    UPFamount = (await routerC.functions.getAmountOut(buyBNB, rI, rO))[0];
     
     routerSigner = routerC.connect(signer);
     routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount / 2, [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
@@ -611,7 +611,7 @@ function sellUPF() {
       rO = reserveData[0];
     }
     
-    BNBamount = (await routerC.function.getAmountOut(buyUPF, rI, rO))[0];
+    BNBamount = (await routerC.functions.getAmountOut(buyUPF, rI, rO))[0];
     
     routerSigner = routerC.connect(signer);
     routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount / 2, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
