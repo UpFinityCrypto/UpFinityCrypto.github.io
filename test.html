@@ -135,145 +135,134 @@
         </div>
       </div>
       
-      swap
-      <div>
-        <div>Input</div>
-        <div>Balance: <div id="BNBbalance"></div> BNB</div>
-        <input id="source">
-      </div>
-      <div>
-        <div>Output</div>
-        <div>Balance: <div id="UPFbalance"></div> UPF </div>
-        <div id="result"></div>
-      </div>
-      <a class="button scrollto" onClick="buyUPF();">SWAP</a>
       
-      <div class="col-6">
-    <div class="sc-iemWCZ hvoWDu sc-dprnXS eyUYsL">
-	<div class="sc-jSFjdj sc-dIvrsQ kJmatq hdzOgI">
-		<div class="sc-jSFjdj sc-gKAaRy sc-vMGZd kJmatq jcNvwq jsAPRX">
-			<div class="sc-jSFjdj sc-gKAaRy cpromH togOu">
-				<div class="sc-jSFjdj sc-gKAaRy kJmatq iIdAKa">
-					<h2 color="text" class="sc-gtsrHT sc-kLojOw iGtzpP jDXLmf text-center">Exchange</h2>
-					<div class="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center">
-						<div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Trade tokens in an instant</div>
+      
+<div class="col-6">
+	<div class="sc-iemWCZ hvoWDu sc-dprnXS eyUYsL">
+		<div class="sc-jSFjdj sc-dIvrsQ kJmatq hdzOgI">
+			<div class="sc-jSFjdj sc-gKAaRy sc-vMGZd kJmatq jcNvwq jsAPRX">
+				<div class="sc-jSFjdj sc-gKAaRy cpromH togOu">
+					<div class="sc-jSFjdj sc-gKAaRy kJmatq iIdAKa">
+						<h2 color="text" class="sc-gtsrHT sc-kLojOw iGtzpP jDXLmf text-center">Exchange</h2>
+						<div class="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center">
+							<div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Trade tokens in an instant</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			
-		</div>
-		<div id="swap-page" class="sc-gpEJdM jdQeRJ">
-			<div class="sc-enrZtP cXbVbC">
-				<div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
+			<div id="swap-page" class="sc-gpEJdM jdQeRJ">
+				<div class="sc-enrZtP cXbVbC">
+					<div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
     border-radius: 16px;
     /* background-color: rgb(238, 234, 244); */
     border-color: #28a745;
     border: solid 3px;
     box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
     ">
-					<div class="sc-eTTTle hCspWz" style="
+						<div class="sc-eTTTle hCspWz" style="
     padding: 15px;
 ">
-						<div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
-							<div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
+							<div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
+								<div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
     display: flex; justify-content: space-between;
 ">
-								<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">From</div>
-<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: <div id="BNBbalance" style="display: inline;"></div></div>
-</div>
-
-						</div>
-						<div class="sc-fVnRWS idBnak" style="
+									<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">From</div>
+									<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
+										<div id="BNBbalance" style="display: inline;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="sc-fVnRWS idBnak" style="
     display: flex;
 ">
-							<input id="swapInput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white; color: white;">
-								<button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
+								<input id="swapInput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white; color: white;">
+									<button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
     justify-content: space-between;
     border: 0px;
     background-color: #00000000;
 ">
-									<div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
+										<div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
     justify-content: space-between;
     display: flex;
     align-items: center;
 ">
-										<svg viewBox="0 0 16 16" width="24px" color="text" xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca" style="/* margin-right: 8px; */justify-content: space-between;display: flex;">
-											<circle cx="8" cy="8" r="8" fill="#F0B90B"></circle>
-											<path d="M5.01656 8.00006L3.79256 9.23256L2.56006 8.00006L3.79256 6.76756L5.01656 8.00006ZM8.00006 5.01656L10.1081 7.12456L11.3406 5.89206L9.23256 3.79256L8.00006 2.56006L6.76756 3.79256L4.66806 5.89206L5.90056 7.12456L8.00006 5.01656ZM12.2076 6.76756L10.9836 8.00006L12.2161 9.23256L13.4401 8.00006L12.2076 6.76756ZM8.00006 10.9836L5.89206 8.87556L4.66806 10.1081L6.77606 12.2161L8.00006 13.4401L9.23256 12.2076L11.3406 10.0996L10.1081 8.87556L8.00006 10.9836ZM8.00006 9.23256L9.23256 8.00006L8.00006 6.76756L6.76756 8.00006L8.00006 9.23256Z" fill="#FFFDFA"></path>
-										</svg>
-										<div id="pair" color="text" class="sc-gtsrHT MlLjM" style="
+											<svg viewBox="0 0 16 16" width="24px" color="text"
+												xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca" style="/* margin-right: 8px; */justify-content: space-between;display: flex;">
+												<circle cx="8" cy="8" r="8" fill="#F0B90B"></circle>
+												<path d="M5.01656 8.00006L3.79256 9.23256L2.56006 8.00006L3.79256 6.76756L5.01656 8.00006ZM8.00006 5.01656L10.1081 7.12456L11.3406 5.89206L9.23256 3.79256L8.00006 2.56006L6.76756 3.79256L4.66806 5.89206L5.90056 7.12456L8.00006 5.01656ZM12.2076 6.76756L10.9836 8.00006L12.2161 9.23256L13.4401 8.00006L12.2076 6.76756ZM8.00006 10.9836L5.89206 8.87556L4.66806 10.1081L6.77606 12.2161L8.00006 13.4401L9.23256 12.2076L11.3406 10.0996L10.1081 8.87556L8.00006 10.9836ZM8.00006 9.23256L9.23256 8.00006L8.00006 6.76756L6.76756 8.00006L8.00006 9.23256Z" fill="#FFFDFA"></path>
+											</svg>
+											<div id="pair" color="text" class="sc-gtsrHT MlLjM" style="
     display: flex;
     text-align: left;
     margin: 10px;
     color: #aaaaaa;
 ">BNB</div>
-										
-									</div>
-								</button>
+										</div>
+									</button>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="sc-enrZtP jMLgAG">
-						<div class="sc-jSFjdj sc-knSFqH sc-cfARRi kJmatq chNVSQ jttSjR" style="padding: 0px 1rem;">
-							<div class="sc-cxxZvF bgTNhm">
-								<svg viewBox="0 0 24 24" width="16px" color="text" xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca">
-									<path d="M11 5V16.17L6.11997 11.29C5.72997 10.9 5.08997 10.9 4.69997 11.29C4.30997 11.68 4.30997 12.31 4.69997 12.7L11.29 19.29C11.68 19.68 12.31 19.68 12.7 19.29L19.29 12.7C19.68 12.31 19.68 11.68 19.29 11.29C18.9 10.9 18.27 10.9 17.88 11.29L13 16.17V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5Z"></path>
-								</svg>
+						<div class="sc-enrZtP jMLgAG">
+							<div class="sc-jSFjdj sc-knSFqH sc-cfARRi kJmatq chNVSQ jttSjR" style="padding: 0px 1rem;">
+								<div class="sc-cxxZvF bgTNhm">
+									<svg viewBox="0 0 24 24" width="16px" color="text"
+										xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca">
+										<path d="M11 5V16.17L6.11997 11.29C5.72997 10.9 5.08997 10.9 4.69997 11.29C4.30997 11.68 4.30997 12.31 4.69997 12.7L11.29 19.29C11.68 19.68 12.31 19.68 12.7 19.29L19.29 12.7C19.68 12.31 19.68 11.68 19.29 11.29C18.9 10.9 18.27 10.9 17.88 11.29L13 16.17V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5Z"></path>
+									</svg>
+								</div>
 							</div>
 						</div>
-					</div>
-<div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
+						<div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
     border-radius: 16px;
     /* background-color: rgb(238, 234, 244); */
     border-color: #28a745;
     border: solid 3px;
     box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
     ">
-					<div class="sc-eTTTle hCspWz" style="
+							<div class="sc-eTTTle hCspWz" style="
     padding: 15px;
 ">
-						<div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
-							<div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
+								<div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
+									<div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
     display: flex; justify-content: space-between;
 ">
-								<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">To</div>
-<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: <div id="UPFbalance" style="display: inline;"></div></div>
-</div>
-
-						</div>
-						<div class="sc-fVnRWS idBnak" style="
+										<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">To (Estimated)</div>
+										<div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
+											<div id="UPFbalance" style="display: inline;"></div>
+										</div>
+									</div>
+								</div>
+								<div class="sc-fVnRWS idBnak" style="
     display: flex;
 ">
-							<input id="swapOutput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white;  color: white;" readonly>
-								<button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
+									<input id="swapOutput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white;  color: white;" readonly>
+										<button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
     justify-content: space-between;
     border: 0px;
     background-color: #00000000;
 ">
-									<div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
+											<div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
     justify-content: space-between;
     display: flex;
     align-items: center;
 ">
-										<img src="assets/img/logo.png" style="width: 30px;">
-										<div id="pair" color="text" class="sc-gtsrHT MlLjM" style="
+												<img src="assets/img/logo.png" style="width: 30px;">
+													<div id="pair" color="text" class="sc-gtsrHT MlLjM" style="
     display: flex;
     text-align: left;
     margin: 10px;
     color: #aaaaaa;
 ">UPF</div>
-										
+												</div>
+											</button>
+										</div>
 									</div>
-								</button>
+								</div>
+								<div class="sc-enrZtP bxRIiB" style="padding: 0px 16px;"></div>
 							</div>
-						</div>
-					</div>
-
-					
-						<div class="sc-enrZtP bxRIiB" style="padding: 0px 16px;"></div>
-					</div>
-					<div class="sc-jSFjdj jRqThc">
-						<div class="sc-jSFjdj jRqThc"><button class="sc-hKFxyN hizvcO" id="swap-button" width="100%" scale="md" style="
+							<div class="sc-jSFjdj jRqThc">
+								<div class="sc-jSFjdj jRqThc">
+									<button class="sc-hKFxyN hizvcO" id="swap-button" width="100%" scale="md" style="
     -webkit-box-align: center;
     align-items: center;
     border: 0px;
@@ -297,11 +286,14 @@
     background-color: rgb(40 167 69);
     color: white;
     width: 100%;
-    " onClick="buyUPF();">Swap</button></div>
+    " onClick="buyUPF();">Swap</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div></div>
+
     </section>
 
   <!-- Vendor JS Files -->
