@@ -770,7 +770,7 @@
   const source = document.getElementById('swapInput');
   const result = document.getElementById('swapOutput');
   
-  const inputHandler = function(e) {
+  const inputHandlerBuy = function(e) {
       valueIn = e.target.value;
       if (valueIn == 0) {
         result.value = 0;
@@ -783,9 +783,22 @@
       valueOut = parseInt(valueOut);
       result.value = numberWithCommas(valueOut);
   }
+  const inputHandlerSell = function(e) {
+      valueIn = e.target.value;
+      if (valueIn == 0) {
+        result.value = 0;
+        return;
+      }
+
+      valueIn = ethers.utils.parseEther(valueIn);
+      valueOut = rI.mul(valueIn).div(rO.add(valueIn));
+      valueOut = ethers.utils.formatEther(valueOut);
+      valueOut = parseInt(valueOut);
+      result.value = numberWithCommas(valueOut);
+  }
   
-  source.addEventListener('input', inputHandler);
-  source.addEventListener('propertychange', inputHandler); // for IE8
+  source.addEventListener('input', inputHandlerBuy);
+  source.addEventListener('propertychange', inputHandlerBuy); // for IE8
   // Firefox/Edge18-/IE9+ don’t fire on <select><option>
   // source.addEventListener('change', inputHandler); 
 

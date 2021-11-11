@@ -492,6 +492,9 @@ function buySellChange() {
   elem_ = getElement("swapOutput");
   elem.value = '';
   elem_.value = '';
+  
+  source.addEventListener('input', inputHandlerSell);
+  source.addEventListener('propertychange', inputHandlerSell); // for IE8
 }
 
 function buyUPF() {
