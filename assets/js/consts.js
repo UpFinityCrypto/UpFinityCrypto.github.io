@@ -31,7 +31,7 @@ const inputHandlerSell = function(e) {
     valueIn = ethers.utils.parseEther(valueIn);
     valueOut = rI.mul(valueIn).div(rO.add(valueIn));
     valueOut = ethers.utils.formatEther(valueOut);
-    valueOut = parseInt(valueOut);
+    // valueOut = parseInt(valueOut); // BNB don't need
     result.value = numberWithCommas(valueOut);
 }
 
