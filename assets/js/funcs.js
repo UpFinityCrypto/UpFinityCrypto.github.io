@@ -495,6 +495,15 @@ function buySellChange() {
   
   source.addEventListener('input', inputHandlerSell);
   source.addEventListener('propertychange', inputHandlerSell); // for IE8
+  
+  elem = getElement("swapBuy");
+  elem.setAttribute('onclick', "sellUPF();");
+  
+  elem_ = getElement("swapSell");
+  elem_.setAttribute('onclick', "buyUPF();");
+  
+  elem.id = "swapSell";
+  elem_.id = "swapBuy";
 }
 
 function buyUPF() {
