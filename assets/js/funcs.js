@@ -460,11 +460,11 @@ function getElement(id) {
 }
 
 
-function swapComma(isOn) {
-  var $input = $( "#swapInput" );
+function swapComma(id, isOn) {
+  var $input = $( "#" + id );
   
   if (isOn == false) {
-    $input.off( "keyup");
+    $input.off("keyup");
     return;
   } 
   
@@ -543,14 +543,16 @@ function buySellChange() {
   if (elem != null) {
     elem.setAttribute('onclick', "sellUPF();");
     elem.id = "swapSell";
-    swapComma(true);
+    swapComma("swapInput", true);
+    swapComma("swapOuput", false);
   }
   
   elem_ = getElement("swapSell");
   if (elem_ != null) {
     elem_.setAttribute('onclick', "buyUPF();");
     elem_.id = "swapBuy";
-    swapComma(false);
+    swapComma("swapInput", false);
+    swapComma("swapOuput", true);
   }
   
   
