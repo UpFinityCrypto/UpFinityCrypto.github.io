@@ -519,8 +519,20 @@ function buyUPF() {
       value: ethers.utils.parseEther(String(buyBNB)), // it require string number
   }
   
+  reserveData = await pairC.functions.getReserves();
+  
+  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+    rI = reserveData[0]; 
+    rO = reserveData[1];
+  } else {
+    rI = reserveData[1];
+    rO = reserveData[0];
+  }
+  
+  UPFamount = (await routerC.function.getAmountOut(buyBNB, rI, rO))[0];
+  
   routerSigner = routerC.connect(signer);
-  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
+  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount / 2, [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
     .then((arg) => {
       console.log(arg);    
     }, (error) => {
@@ -531,15 +543,40 @@ function buyUPF() {
 }
 
 function sellUPF() {
-  buyUPF = document.getElementById("swapInput").value;
+  (async function () {
+    buyUPF = document.getElementById("swapInput").value;
+    
+    reserveData = await pairC.functions.getReserves();
   
-  routerSigner = routerC.connect(signer);
-  routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
-    .then((arg) => {
-      console.log(arg);    
-    }, (error) => {
-      console.log(error['message']);
-      console.log(error['data']['message']);
-    });
-      
+    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+      rI = reserveData[0]; 
+      rO = reserveData[1];
+    } else {
+      rI = reserveData[1];
+      rO = reserveData[0];
+    }
+    
+    BNBamount = (await routerC.function.getAmountOut(buyUPF, rI, rO))[0];
+    
+    routerSigner = routerC.connect(signer);
+    routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount / 2, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+      .then((arg) => {
+        console.log(arg);    
+      }, (error) => {
+        console.log(error['message']);
+        console.log(error['data']['message']);
+      });
+  })();
 }
+
+
+
+
+
+
+
+
+
+
+
+
