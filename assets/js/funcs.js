@@ -457,7 +457,7 @@ function mintNFT(name, isBoy) {
 
 
 function buyUPF() {
-  buyBNB = document.getElementById("source").value;
+  buyBNB = document.getElementById("swapInput").value;
   console.log(buyBNB);
 
   override = {
