@@ -766,9 +766,6 @@
   displayText_("totalNFTCount", diamondBoyCount + diamondGirlCount + emeraldBoyCount + emeraldGirlCount);
   totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
-
-  const source = document.getElementById('swapInput');
-  const result = document.getElementById('swapOutput');
   
   source.addEventListener('input', inputHandlerBuy);
   source.addEventListener('propertychange', inputHandlerBuy); // for IE8
