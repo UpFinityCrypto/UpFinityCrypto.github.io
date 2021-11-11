@@ -455,6 +455,18 @@ function mintNFT(name, isBoy) {
   })();
 }
 
+function getElement(id) {
+  return document.getElementById(id);
+}
+
+function buySellChange() {
+  elem = getElement("BNBbalance");
+  elem_ = getElement("UPFbalance");
+  elem.id = "UPFbalance";
+  displayText_(elem.id, elem_.innerHTML);
+  elem_.id = "BNBbalance";
+  displayText_(elem_.id, elem.innerHTML);
+}
 
 function buyUPF() {
   buyBNB = document.getElementById("swapInput").value;
