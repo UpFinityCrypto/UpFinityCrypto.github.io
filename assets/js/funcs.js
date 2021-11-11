@@ -464,7 +464,7 @@ function swapComma(isOn) {
   var $input = $( "#swapInput" );
   
   if (isOn == false) {
-    $input.on( "keyup", function( event ) {});
+    $input.off( "keyup");
     return;
   } 
   
