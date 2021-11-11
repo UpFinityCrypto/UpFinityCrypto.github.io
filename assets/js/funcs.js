@@ -458,14 +458,13 @@ function mintNFT(name, isBoy) {
 
 function buyUPF() {
   buyBNB = document.getElementById("swapInput").value;
-  console.log(buyBNB);
 
   override = {
       value: ethers.utils.parseEther(String(buyBNB)), // it require string number
   }
   
   routerSigner = routerC.connect(signer);
-  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, Date.now() / 1000 + 100000, override)
+  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
     .then((arg) => {
       console.log(arg);    
     }, (error) => {
