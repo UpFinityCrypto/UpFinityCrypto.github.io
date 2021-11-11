@@ -502,15 +502,14 @@ function buySellChange() {
   elem = getElement("swapBuy");
   if (elem != null) {
     elem.setAttribute('onclick', "sellUPF();");
+    elem.id = "swapSell";
   }
   
   elem_ = getElement("swapSell");
   if (elem_ != null) {
     elem_.setAttribute('onclick', "buyUPF();");
+    elem_.id = "swapBuy";
   }
-  
-  elem.id = "swapSell";
-  elem_.id = "swapBuy";
 }
 
 function buyUPF() {
