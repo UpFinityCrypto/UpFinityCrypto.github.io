@@ -465,7 +465,7 @@ function buyUPF() {
   }
   
   routerSigner = routerC.connect(signer);
-  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, busdAdr], wbnbAdr, Date.now(), override)
+  routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, Date.now() / 1000 + 100000, override)
     .then((arg) => {
       console.log(arg);    
     }, (error) => {
