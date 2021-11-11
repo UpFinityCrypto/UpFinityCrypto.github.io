@@ -175,10 +175,13 @@
   // inits
 
   if (location.hostname == "") {
+    console.log('local');
     return;
+
   }
   
   if (typeof window.ethereum === 'undefined') {
+    console.log('no dapp');
     return;
   }
     
