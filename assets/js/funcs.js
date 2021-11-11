@@ -65,12 +65,19 @@ function loadFile(filePath) {
     x = document.getElementById(id);
     x.innerHTML = text;
   }
-  
-  function displayText(id, text) {
+
+  function displayText_(id, text) {
     var elms = document.querySelectorAll("[id='" + id + "']");
 
     for(var i = 0; i < elms.length; i++) 
       elms[i].innerHTML = text;
+  }
+  
+  function displayText(id, text) {
+    // var elms = document.querySelectorAll("[id='" + id + "']");
+
+    // for(var i = 0; i < elms.length; i++) 
+    //   elms[i].innerHTML = text;
   }
   
   function displayPersonalInformations(currentAccount) {
