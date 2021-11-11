@@ -598,15 +598,15 @@
   
   
   diamondBoyCount = (await nftC.functions._totalItemCount(2))[0] / 1;
-  displayText("diamondBoyCount", diamondBoyCount);
+  displayText_("diamondBoyCount", diamondBoyCount);
   diamondGirlCount = (await nftC.functions._totalItemCount(3))[0] / 1;
-  displayText("diamondGirlCount", diamondGirlCount);
+  displayText_("diamondGirlCount", diamondGirlCount);
   emeraldBoyCount = (await nftC.functions._totalItemCount(0))[0] / 1;
-  displayText("emeraldBoyCount", emeraldBoyCount);
+  displayText_("emeraldBoyCount", emeraldBoyCount);
   emeraldGirlCount = (await nftC.functions._totalItemCount(1))[0] / 1;
-  displayText("emeraldGirlCount", emeraldGirlCount);
+  displayText_("emeraldGirlCount", emeraldGirlCount);
   
-  displayText("totalNFTCount", diamondBoyCount + diamondGirlCount + emeraldBoyCount + emeraldGirlCount);
+  displayText_("totalNFTCount", diamondBoyCount + diamondGirlCount + emeraldBoyCount + emeraldGirlCount);
   totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
   }());
