@@ -460,9 +460,14 @@ function getElement(id) {
 }
 
 
-function swapComma() {
+function swapComma(isOn) {
   var $input = $( "#swapInput" );
-
+  
+  if (isOn == false) {
+    $input.on( "keyup", function( event ) {});
+    return;
+  } 
+  
   $input.on( "keyup", function( event ) {
    
       // 1.
@@ -538,13 +543,14 @@ function buySellChange() {
   if (elem != null) {
     elem.setAttribute('onclick', "sellUPF();");
     elem.id = "swapSell";
-    swapComma();
+    swapComma(true);
   }
   
   elem_ = getElement("swapSell");
   if (elem_ != null) {
     elem_.setAttribute('onclick', "buyUPF();");
     elem_.id = "swapBuy";
+    swapComma(false);
   }
   
   

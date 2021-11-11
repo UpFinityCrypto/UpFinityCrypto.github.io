@@ -778,8 +778,8 @@
 
   balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
   displayText_("UPFbalance", numberWithCommas(Math.floor(balance / 1e18)));
+  swapComma(false);
   
-  swapComma();
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
