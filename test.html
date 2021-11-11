@@ -784,7 +784,7 @@
   const inputHandler = function(e) {
       valueIn = e.target.value;
       if (valueIn == 0) {
-        result.innerHTML = 0;
+        result.value = 0;
         return;
       }
 
@@ -792,7 +792,7 @@
       valueOut = rO.mul(valueIn).div(rI.add(valueIn));
       valueOut = ethers.utils.formatEther(valueOut);
       valueOut = parseInt(valueOut);
-      result.innerHTML = numberWithCommas(valueOut);
+      result.value = numberWithCommas(valueOut);
   }
   
   source.addEventListener('input', inputHandler);
