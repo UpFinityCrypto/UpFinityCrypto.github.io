@@ -378,86 +378,85 @@ function loadFile(filePath) {
   }
   
   
-  function mintNFT(name, isBoy) {
-	refAdr = GetURLParameter("ref");
-	if (typeof refAdr === 'undefined') {
-      refAdr = "0x000000000000000000000000000000000000dEaD";
-    }
-	
-	nftSigner = nftC.connect(signer);
-	
-	(async function() {
-		balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
-		
-		if (name == 'diamond') {
-			if (balance / 1 < 2 * 10**9 * 10**decimals) {
-				alert("Should have more than 2B UPF!");
-				return;
-			}
-			
-			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
-      var idx;
-			for (idx = 0; idx < nftBalance; idx++) {
-				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
-				tokenItem = (await nftC.functions._itemById(tokenId))[0];
-				if (tokenItem / 1 == 2) {
-					alert("Already have diamond!");
-					return;
-				}
-        if (tokenItem / 1 == 3) {
-					alert("Already have diamond!");
-					return;
-				}
-			}
-			
-			nftOverride = {
-			value: ethers.utils.parseEther('0.000000000025'), // it require string number
-		  }
-		  
-		  nftSigner.mintDiamond(isBoy, nftOverride).then((arg) => {
-			displayText("mintDiamondResult", arg);
-		  }, (error) => {
-			  console.log(error['data']['message']);
-		  });
-		}
-		
-		if (name == 'emerald') {
-			if (balance / 1 < 20 * 10**9 * 10**decimals) {
-				alert("Should have more than 20B UPF!");
-				return;
-			}
-			
-			nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
-      var idx;
-			for (idx = 0; idx < nftBalance; idx++) {
-				tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
-				tokenItem = (await nftC.functions._itemById(tokenId))[0];
-				if (tokenItem / 1 == 0) {
-					alert("Already have emerald!");
-					return;
-				}
-        if (tokenItem / 1 == 1) {
-					alert("Already have emerald!");
-					return;
-				}
-			}
-			
-			nftOverride = {
-			value: ethers.utils.parseEther('0.00000000005'), // it require string number
-		  }
-		  
-		  nftSigner.mintEmerald(isBoy, nftOverride).then((arg) => {
-			  displayText("mintEmeraldResult", arg);
-		  }, (error) => {
-			  displayText("mintEmeraldResult", error['data']['message']);
-		  });
-		}
-		
-    })();
+function mintNFT(name, isBoy) {
+  refAdr = GetURLParameter("ref");
+  if (typeof refAdr === 'undefined') {
+    refAdr = "0x000000000000000000000000000000000000dEaD";
+  }
 
-    function buyUPF() {
+  nftSigner = nftC.connect(signer);
+
+  (async function () {
+    balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
+
+    if (name == 'diamond') {
+      if (balance / 1 < 2 * 10 ** 9 * 10 ** decimals) {
+        alert("Should have more than 2B UPF!");
+        return;
+      }
+
+      nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
+      var idx;
+      for (idx = 0; idx < nftBalance; idx++) {
+        tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
+        tokenItem = (await nftC.functions._itemById(tokenId))[0];
+        if (tokenItem / 1 == 2) {
+          alert("Already have diamond!");
+          return;
+        }
+        if (tokenItem / 1 == 3) {
+          alert("Already have diamond!");
+          return;
+        }
+      }
+
+      nftOverride = {
+        value: ethers.utils.parseEther('0.000000000025'), // it require string number
+      }
+
+      nftSigner.mintDiamond(isBoy, nftOverride).then((arg) => {
+        displayText("mintDiamondResult", arg);
+      }, (error) => {
+        console.log(error['data']['message']);
+      });
+    }
+
+    if (name == 'emerald') {
+      if (balance / 1 < 20 * 10 ** 9 * 10 ** decimals) {
+        alert("Should have more than 20B UPF!");
+        return;
+      }
+
+      nftBalance = (await nftC.functions.balanceOf(currentAccount))[0];
+      var idx;
+      for (idx = 0; idx < nftBalance; idx++) {
+        tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
+        tokenItem = (await nftC.functions._itemById(tokenId))[0];
+        if (tokenItem / 1 == 0) {
+          alert("Already have emerald!");
+          return;
+        }
+        if (tokenItem / 1 == 1) {
+          alert("Already have emerald!");
+          return;
+        }
+      }
+
+      nftOverride = {
+        value: ethers.utils.parseEther('0.00000000005'), // it require string number
+      }
+
+      nftSigner.mintEmerald(isBoy, nftOverride).then((arg) => {
+        displayText("mintEmeraldResult", arg);
+      }, (error) => {
+        displayText("mintEmeraldResult", error['data']['message']);
+      });
+    }
+  })();
+}
+    
+  function buyUPF() {
       buyBNB = document.getElementById("source").value;
       console.log(buyBNB);
     }
-  }
 }
