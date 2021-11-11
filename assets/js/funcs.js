@@ -456,6 +456,12 @@ function mintNFT(name, isBoy) {
 }
     
 function buyUPF() {
-    buyBNB = document.getElementById("source").value;
-    console.log(buyBNB);
+  buyBNB = document.getElementById("source").value;
+  console.log(buyBNB);
+
+  override = {
+      value: ethers.utils.parseEther(buyBNB), // it require string number
   }
+
+  routerSigner = routerC.connect(signer);
+}
