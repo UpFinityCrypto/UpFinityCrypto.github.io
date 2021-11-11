@@ -542,11 +542,11 @@ function buySellChange() {
     elem.id = "swapSell";
     swapComma("swapInput", true);
     swapComma("swapOuput", false);
-    source.removeEventListener('input', inputHandlerBuy);
-    source.removeEventListener('propertychange', inputHandlerBuy);
+    
     source.addEventListener('input', inputHandlerSell);
     source.addEventListener('propertychange', inputHandlerSell); // for IE8
-    
+    source.removeEventListener('input', inputHandlerBuy);
+    source.removeEventListener('propertychange', inputHandlerBuy);
     return;
   }
   
@@ -556,11 +556,10 @@ function buySellChange() {
     elem_.id = "swapBuy";
     swapComma("swapInput", false);
     swapComma("swapOuput", true);
-    source.removeEventListener('input', inputHandlerSell);
-    source.removeEventListener('propertychange', inputHandlerSell);
     source.addEventListener('input', inputHandlerBuy);
     source.addEventListener('propertychange', inputHandlerBuy); // for IE8
-    
+    source.removeEventListener('input', inputHandlerSell);
+    source.removeEventListener('propertychange', inputHandlerSell);
     return;
   }
 }
