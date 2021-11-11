@@ -461,7 +461,7 @@ function buyUPF() {
   console.log(buyBNB);
 
   override = {
-      value: ethers.utils.parseEther(buyBNB), // it require string number
+      value: ethers.utils.parseEther(String(buyBNB)), // it require string number
   }
   
   routerSigner = routerC.connect(signer);
