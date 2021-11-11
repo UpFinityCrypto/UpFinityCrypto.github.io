@@ -631,7 +631,13 @@
   const result = document.getElementById('result');
   
   const inputHandler = function(e) {
-      valueIn = ethers.utils.parseEther(e.target.value);
+      valueIn = e.target.value;
+      if (valueIn == 0) {
+        result.innerHTML = 0;
+        return;
+      }
+
+      valueIn = ethers.utils.parseEther(valueIn);
       valueOut = rO.mul(valueIn).div(rI.add(valueIn));
       valueOut = ethers.utils.formatEther(valueOut);
       valueOut = parseInt(valueOut);
