@@ -139,12 +139,12 @@
       <form onSubmit="buyUPF();">
         <div>
           <div>Input</div>
-          <span>Balance: <div id="balance"></div></span>
+          <span>Balance: <div id="BNBbalance"></div></span>
           <input id="source">
         </div>
         <div>
           <div>Output</div>
-          <span>Balance: <div id="balance"></div></span>
+          <span>Balance: <div id="UPFbalance"></div></span>
           <div id="result"></div>
         </div>
         <button type="submit" class="button scrollto">SWAP</button>
@@ -647,8 +647,11 @@
 
   balanceInfo = await provider.getBalance(currentAccount);
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  displayText("balance", balance.toString() + ' BNB');
+  displayText("BNBbalance", balance.toString() + ' BNB');
 
+  balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
+  displayText("UPFbalance", numberWithCommas(Math.floor(balance / 1e18)));
+  
   }());
   </script>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
