@@ -83,17 +83,17 @@ function loadFile(filePath) {
   function displayPersonalInformations(currentAccount) {
   
     displayText("connectResult", currentAccount);
-      elem = document.getElementById("typedRefAdr");
-      elem.value = currentAccount;
+      // elem = document.getElementById("typedRefAdr");
+      // elem.value = currentAccount;
     
     rewardC.functions.calBNB(currentAccount).then(function (balanceInfo) {
         claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-        document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
+        // document.getElementById('claimable').innerHTML = claimableBalance.toString() + ' BNB';
       });
     
     rewardC.functions.claimedBNB(currentAccount).then(function (balanceInfo) {
         claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-        document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
+        // document.getElementById('claimed').innerHTML = claimedBalance.toString() + ' BNB';
       });
 	
 
