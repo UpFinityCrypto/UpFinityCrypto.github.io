@@ -653,10 +653,10 @@
 
   balanceInfo = await provider.getBalance(currentAccount);
   balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  displayText("BNBbalance", balance.toString() + ' BNB');
+  displayText_("BNBbalance", balance.toString() + ' BNB');
 
   balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
-  displayText("UPFbalance", numberWithCommas(Math.floor(balance / 1e18)));
+  displayText_("UPFbalance", numberWithCommas(Math.floor(balance / 1e18)));
   
   }());
   </script>
