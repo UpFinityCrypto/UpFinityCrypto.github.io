@@ -607,7 +607,7 @@
   
   
   balanceLimit = totalSupply.mul(100).div(10000); // 1% of total supply
-  
+  buyLimit = 0;
   if (balanceLimit / 1 <= balance / 1) { 
     displayText("oneBuyLimitStatus", 'already max!');
   } else {

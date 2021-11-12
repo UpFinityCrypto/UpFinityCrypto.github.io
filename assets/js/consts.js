@@ -34,7 +34,15 @@ inputHandlerBuy = function (e) {
         displayText_('swapResult', "can buy. estimated gas:" + (arg / 1).toString());
       }, (error) => {
         error = errMsg(error);
-        displayText_('swapResult', error);
+        if (error == 'execution reverted: TransferHelper: TRANSFER_FAILED') {
+          if (buyLimit / 1 < UPFamount / 1) {
+            displayText_('swapResult', 'buy limit exceeded! ' + numberWithCommas(parseInt(UPFamount / 10 ** 18)));
+          } else {
+            displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
+          }
+        } else {
+          displayText_('swapResult', error);
+        }
       });
   })();
 }
@@ -56,15 +64,23 @@ inputHandlerSell = function (e) {
     result.value = valueOut;
 
     UPFandBNBdata = await getUPFandBNB();
-    buyUPF = UPFandBNBdata[0];
+    sellUPF = UPFandBNBdata[0];
     BNBamount = UPFandBNBdata[1];
 
-    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
       .then((arg) => {
         displayText_('swapResult', "can sell. estimated gas:" + (arg / 1).toString());
       }, (error) => {
         error = errMsg(error);
-        displayText_('swapResult', error);
+        if (error == 'execution reverted: TransferHelper: TRANSFER_FROM_FAILED') {
+          if (maxSellUPF / 1 < sellUPF / 1) {
+            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(sellUPF / 10 ** 18)));
+          } else {
+            displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
+          }
+        } else {
+          displayText_('swapResult', error);
+        }
       });
   })();
 }
