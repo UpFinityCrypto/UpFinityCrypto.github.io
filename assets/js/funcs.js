@@ -628,7 +628,7 @@ function fbuyUPF() {
     buyBNB = BNBandUPFdata[0];
     UPFamount = BNBandUPFdata[1];
 
-    if (balanceBNB < buyBNB) {
+    if (balanceBNB / 1 < buyBNB / 1) {
       alert('requested BNB size is higher than balance!');
       return;
     }
@@ -654,7 +654,7 @@ function fbuyUPF() {
       }, (error) => {
         error = errMsg(error);
         if (error == 'execution reverted: Pancake: TRANSFER_FAILED') {
-          if (maxBuyBNB < buyBNB) {
+          if (maxBuyBNB / 1 < buyBNB / 1) {
             displayText_('swapResult', 'buy limit exceeded! ' + round(maxBuyBNB / bnbDiv, 2));
           } else {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
@@ -673,7 +673,7 @@ function fsellUPF() {
     sellUPF = UPFandBNBdata[0];
     BNBamount = UPFandBNBdata[1];
 
-    if (balanceUPF < sellUPF) {
+    if (balanceUPF / 1 < sellUPF / 1) {
       alert('requested UPF size is higher than balance!');
       return;
     }
