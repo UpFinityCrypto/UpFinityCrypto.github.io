@@ -650,7 +650,7 @@ function buyUPF() {
         error = errMsg(error);
         if (error == 'execution reverted: TransferHelper: TRANSFER_FAILED') {
           if (buyLimit / 1 < UPFamount / 1) {
-            displayText_('swapResult', 'buy limit exceeded! ' + numberWithCommas(parseInt(UPFamount / 10 ** 18)));
+            displayText_('swapResult', 'buy limit exceeded! ' + numberWithCommas(parseInt(buyLimit / 10 ** 18)));
           } else {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
           }
@@ -690,7 +690,7 @@ function sellUPF() {
         error = errMsg(error);
         if (error == 'execution reverted: TransferHelper: TRANSFER_FROM_FAILED') {
           if (maxSellUPF / 1 < sellUPF / 1) {
-            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(sellUPF / 10 ** 18)));
+            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(maxSellUPF / 10 ** 18)));
           } else {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
           }
