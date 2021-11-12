@@ -7,7 +7,6 @@ const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
 
 inputHandlerBuy = function (e) {
   (async function () {
-    displayText_('swapResult', 'Checking');
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     result = getElement('swapOutput');
@@ -27,7 +26,6 @@ inputHandlerBuy = function (e) {
 }
 inputHandlerSell = function (e) {
   (async function () {
-    displayText_('swapResult', 'Checking');
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     result = getElement('swapOutput');
