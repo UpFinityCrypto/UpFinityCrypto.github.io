@@ -607,7 +607,7 @@ async function getUPFandBNB() {
   buyUPF = buyUPF.replace(/,/g, '');
   buyUPF = ethers.utils.parseEther(String(buyUPF));
 
-ta = await pairC.functions.getReserves();
+  reserveData = await pairC.functions.getReserves();
 
   if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
     rI = reserveData[0];
