@@ -5,62 +5,66 @@ const routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
 const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
 const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
 
-inputHandlerBuy = function(e) {
-  valueIn = e.target.value;
-  valueIn = valueIn.replace(/,/g,'');
-  result = getElement('swapOutput');
-  if (valueIn == 0) {
-    result.value = 0;
-    return;
-  }
+inputHandlerBuy = function (e) {
+  (async function () {
+    valueIn = e.target.value;
+    valueIn = valueIn.replace(/,/g, '');
+    result = getElement('swapOutput');
+    if (valueIn == 0) {
+      result.value = 0;
+      return;
+    }
 
-  valueIn = ethers.utils.parseEther(valueIn);
-  valueOut = rO.mul(valueIn).div(rI.add(valueIn));
-  valueOut = ethers.utils.formatEther(valueOut);
-  valueOut = parseInt(valueOut);
-  result.value = numberWithCommas(valueOut);
+    valueIn = ethers.utils.parseEther(valueIn);
+    valueOut = rO.mul(valueIn).div(rI.add(valueIn));
+    valueOut = ethers.utils.formatEther(valueOut);
+    valueOut = parseInt(valueOut);
+    result.value = numberWithCommas(valueOut);
 
-  BNBandUPFdata = getBNBandUPF();
-  buyBNB = BNBandUPFdata[0];
-  UPFamount = BNBandUPFdata[1];
+    BNBandUPFdata = await getBNBandUPF();
+    buyBNB = BNBandUPFdata[0];
+    UPFamount = BNBandUPFdata[1];
 
-  override = {
+    override = {
       value: buyBNB, // it require string number
-  }
-  routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
-  .then((arg) => {
-    console.log(arg);    
-  }, (error) => {
-    error = errMsg(error);
-    displayText_('swapResult', error);
-  });
+    }
+    routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
+      .then((arg) => {
+        console.log(arg);
+      }, (error) => {
+        error = errMsg(error);
+        displayText_('swapResult', error);
+      });
+  })();
 }
-inputHandlerSell = function(e) {
-  valueIn = e.target.value;
-  valueIn = valueIn.replace(/,/g,'');
-  result = getElement('swapOutput');
-  if (valueIn == 0) {
-    result.value = 0;
-    return;
-  }
+inputHandlerSell = function (e) {
+  (async function () {
+    valueIn = e.target.value;
+    valueIn = valueIn.replace(/,/g, '');
+    result = getElement('swapOutput');
+    if (valueIn == 0) {
+      result.value = 0;
+      return;
+    }
 
-  valueIn = ethers.utils.parseEther(valueIn);
-  valueOut = rI.mul(valueIn).div(rO.add(valueIn));
-  valueOut = ethers.utils.formatEther(valueOut);
-  // valueOut = parseInt(valueOut); // BNB don't need
-  result.value = valueOut;
+    valueIn = ethers.utils.parseEther(valueIn);
+    valueOut = rI.mul(valueIn).div(rO.add(valueIn));
+    valueOut = ethers.utils.formatEther(valueOut);
+    // valueOut = parseInt(valueOut); // BNB don't need
+    result.value = valueOut;
 
-  UPFandBNBdata = getUPFandBNB();
-  buyUPF = UPFandBNBdata[0];
-  BNBamount = UPFandBNBdata[1];
+    UPFandBNBdata = await getUPFandBNB();
+    buyUPF = UPFandBNBdata[0];
+    BNBamount = UPFandBNBdata[1];
 
-  routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
-  .then((arg) => {
-    console.log(arg);    
-  }, (error) => {
-    error = errMsg(error);
-    displayText_('swapResult', error);
-  });
+    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+      .then((arg) => {
+        console.log(arg);
+      }, (error) => {
+        error = errMsg(error);
+        displayText_('swapResult', error);
+      });
+  })();
 }
 
 const tokenAbi = [
