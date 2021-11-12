@@ -787,7 +787,7 @@
   myNFTs = getElement("myNFTs");
   myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
   for (idx = 0; idx < myNFTcounts; idx++) {
-    myNFTidx = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, 0))[0] / 1;
+    myNFTidx = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
     myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTidx)))['image'];
     myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTidx)))['name'];
     output = `
