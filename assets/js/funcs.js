@@ -628,6 +628,11 @@ function fbuyUPF() {
     buyBNB = BNBandUPFdata[0];
     UPFamount = BNBandUPFdata[1];
 
+    if (balanceBNB < buyBNB) {
+      alert('requested UPF size is higher than balance!');
+      return;
+    }
+
     override = {
       value: buyBNB, // it require string number
     }
@@ -668,7 +673,7 @@ function fsellUPF() {
     sellUPF = UPFandBNBdata[0];
     BNBamount = UPFandBNBdata[1];
 
-    if (balance < sellUPF) {
+    if (balanceUPF < sellUPF) {
       alert('requested UPF size is higher than balance!');
       return;
     }
