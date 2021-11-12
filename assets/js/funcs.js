@@ -653,7 +653,7 @@ function fbuyUPF() {
           });
       }, (error) => {
         error = errMsg(error);
-        if (error == 'execution reverted: TransferHelper: TRANSFER_FAILED') {
+        if (error == 'execution reverted: Pancake: TRANSFER_FAILED') {
           if (buyLimit / 1 < UPFamount / 1) {
             displayText_('swapResult', 'buy limit exceeded! ' + numberWithCommas(parseInt(buyLimit / 10 ** 18)));
           } else {
