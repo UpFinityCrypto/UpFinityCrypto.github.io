@@ -695,7 +695,7 @@ function fsellUPF() {
         error = errMsg(error);
         if (error == 'execution reverted: TransferHelper: TRANSFER_FROM_FAILED') {
           if (maxSellUPF / 1 < sellUPF / 1) {
-            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(maxSellUPF / 10 ** 18)));
+            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(maxSellUPF / bnbDiv)));
           } else {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
           }
