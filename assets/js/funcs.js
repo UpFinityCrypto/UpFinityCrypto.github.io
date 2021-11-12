@@ -642,7 +642,7 @@ function cantsellReason() {
       return "last sell less than " + String(_antiDumpDuration) + "s";
     } else {
       if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
-        return "your last sell less than " + String(_buySellTimeDuration) + "s");
+        return "your last sell less than " + String(_buySellTimeDuration) + "s";
       } else {
         if (blacklisted) {
           return "Contact @ALLCOINLAB";
