@@ -629,39 +629,76 @@ function buyUPF() {
     UPFamount = BNBandUPFdata[1];
 
     override = {
-        value: buyBNB, // it require string number
+      value: buyBNB, // it require string number
     }
-    
-    routerSigner = routerC.connect(signer);
-    routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
+
+    routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
       .then((arg) => {
-        console.log(arg);    
+        displayText_('swapResult', "can buy. estimated gas:" + (arg / 1).toString());
+
+        routerSigner = routerC.connect(signer);
+
+        routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
+          .then((arg) => {
+            console.log(arg);
+            displayText_('swapResult', 'buy done!');    
+          }, (error) => {
+            error = errMsg(error);
+            displayText_('swapResult', error);
+          });
       }, (error) => {
         error = errMsg(error);
-        displayText_('swapResult', error);
+        if (error == 'execution reverted: TransferHelper: TRANSFER_FAILED') {
+          if (buyLimit / 1 < UPFamount / 1) {
+            displayText_('swapResult', 'buy limit exceeded! ' + numberWithCommas(parseInt(UPFamount / 10 ** 18)));
+          } else {
+            displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
+          }
+        } else {
+          displayText_('swapResult', error);
+        }
       });
+
   })();
 }
 
 function sellUPF() {
   (async function () {
     UPFandBNBdata = await getUPFandBNB();
-    buyUPF = UPFandBNBdata[0];
+    sellUPF = UPFandBNBdata[0];
     BNBamount = UPFandBNBdata[1];
 
-    if (balance < buyUPF) {
+    if (balance < sellUPF) {
       alert('requested UPF size is higher than balance!');
       return;
     }
-    
-    routerSigner = routerC.connect(signer);
-    routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+
+    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
       .then((arg) => {
-        console.log(arg);    
+        displayText_('swapResult', "can sell. estimated gas:" + (arg / 1).toString());
+
+        routerSigner = routerC.connect(signer);
+        routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+          .then((arg) => {
+            console.log(arg);
+            displayText_('swapResult', 'sell done');      
+          }, (error) => {
+            error = errMsg(error);
+            displayText_('swapResult', error);
+          });
       }, (error) => {
         error = errMsg(error);
-        displayText_('swapResult', error);
+        if (error == 'execution reverted: TransferHelper: TRANSFER_FROM_FAILED') {
+          if (maxSellUPF / 1 < sellUPF / 1) {
+            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(sellUPF / 10 ** 18)));
+          } else {
+            displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
+          }
+        } else {
+          displayText_('swapResult', error);
+        }
       });
+
   })();
 }
 
