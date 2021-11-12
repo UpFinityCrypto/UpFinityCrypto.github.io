@@ -619,7 +619,11 @@ function sellUPF() {
     buyUPF = document.getElementById("swapInput").value;
     buyUPF = buyUPF.replace(/,/g,'');
     buyUPF = ethers.utils.parseEther(String(buyUPF));
-
+    if (buyUPF < balance) {
+      alert('requested UPF size is lower than balance!');
+      return;
+    }
+    
     reserveData = await pairC.functions.getReserves();
   
     if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
