@@ -710,13 +710,13 @@ function fsellUPF() {
 
 function cantsellReason() {
   if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000)) {
-    return "Circuit breaker ON";
+    return "Circuit breaker ON: " + String(_curcuitBreakerDuration / 60 / 60) + "hours";
   } else {
     if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
-      return "last sell less than " + String(_antiDumpDuration) + "s";
+      return "last sell less than " + String(_antiDumpDuration / 60) + "minutes";
     } else {
       if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
-        return "your last sell less than " + String(_buySellTimeDuration) + "s";
+        return "your last sell less than " + String(_buySellTimeDuration) + "seconds";
       } else {
         if (blacklisted) {
           return "Contact @ALLCOINLAB";

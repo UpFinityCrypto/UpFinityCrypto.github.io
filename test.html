@@ -607,45 +607,51 @@
   
   balanceLimit = totalSupply.mul(_maxBalanceNume).div(10000); // 1.1% of total supply
   buyLimit = balanceLimit.sub(balanceUPF);
-  if (buyLimit < 0) {
+  if (buyLimit / 1 < 0) {
     displayText("oneBuyLimitStatus", 'already max!');
     buyLimit = 0;
   }
   
   maxBuyBNB_ = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
-  if (maxBuyBNB_ < maxBuyBNB) {
+  if (maxBuyBNB_ / 1 < maxBuyBNB / 1) {
     maxBuyBNB = maxBuyBNB_;
   }
   
   displayText("oneBuyLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB');  
   
+  
+  
+  
+  
   // it may display last big value
-  maxSellUPF = rO;
+
+  maxSellUPF = rO;  
   maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
-  if (maxSellRate_ < 0) {
+  if (maxSellRate_ / 1 < 0) {
     maxSellRate_ = 0;
   }
   maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
   if (maxSellUPF_ / 1 < maxSellUPF / 1) {
     maxSellUPF = maxSellUPF_;
   }
-  
+
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
   maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
-  if (maxSellRate_ < 0) {
+  if (maxSellRate_ / 1 < 0) {
     maxSellRate_ = 0;
   }
+  
   maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
   if (maxSellUPF_ / 1 < maxSellUPF / 1) {
     maxSellUPF = maxSellUPF_;
   }
-  
+
   <!-- maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0]; -->
   maxSellBNB = maxSellUPF / rO * rI; // workaround
-  maxSellBNB = BNB(maxSellBNB / 1.5); // roughly estimated
-  displayText("oneSellLimitStatus", maxSellBNB.toString() + ' BNB'); 
-  
+  maxSellBNB = maxSellBNB / 1.5; // roughly estimated
+  displayText("oneSellLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB'); 
+
   taxPenalty = 0;
   if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) {
     taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
@@ -654,7 +660,7 @@
     }
   }
   displayText("yourTaxPenalty", taxPenalty);
-  
+
   // price impact 1 / ( 1 + x / r0) = (1 - I)
   // smart contract, change x,r0 equation to 1 / (1 + x / r0) for exact result 
   // x / r0 = a => price diff = 1 / (1 + a)^2
@@ -666,7 +672,6 @@
   // price impact accumulation => user limit
   // price change accumulation => global limit
   // x / r0 = a => price change = 1 / (1 + a)^2
-  
   
   sellCooltime_ = _antiDumpTimer + _antiDumpDuration;
   if (sellCooltime / 1 < sellCooltime_ / 1) {
@@ -684,25 +689,10 @@
   }
   
   blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
-  
-  
-  
-  if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000)) {
-      displayText("circuitBreakerStatus", "Circuit breaker ON");
-  } else {
-    if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
-      displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
-    } else {
-      if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
-        displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
-      } else {
-        if (blacklisted) {
-          displayText("circuitBreakerStatus", "if still can't sell, contact @ALLCOINLAB");
-        } else {
-          displayText("circuitBreakerStatus", "You can sell: check slippage and sell size!");
-        }
-      }
-    }
+
+  cantsell = cantsellReason();
+  if (cantsell != "") {
+    displayText("circuitBreakerStatus", cantsell);
   }
   
   base = 20;
