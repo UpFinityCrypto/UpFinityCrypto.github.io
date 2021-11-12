@@ -7,6 +7,7 @@ const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
 
 inputHandlerBuy = function (e) {
   (async function () {
+    displayText_('swapResult', 'Checking');
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     result = getElement('swapOutput');
@@ -30,7 +31,7 @@ inputHandlerBuy = function (e) {
     }
     routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
       .then((arg) => {
-        console.log(arg);
+        displayText_('swapResult', "can buy. estimated gas": arg / 1);
       }, (error) => {
         error = errMsg(error);
         displayText_('swapResult', error);
@@ -39,6 +40,7 @@ inputHandlerBuy = function (e) {
 }
 inputHandlerSell = function (e) {
   (async function () {
+    displayText_('swapResult', 'Checking');
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     result = getElement('swapOutput');
@@ -59,7 +61,7 @@ inputHandlerSell = function (e) {
 
     routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
       .then((arg) => {
-        console.log(arg);
+        displayText_('swapResult', "can sell. estimated gas": arg / 1);
       }, (error) => {
         error = errMsg(error);
         displayText_('swapResult', error);
