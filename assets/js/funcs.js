@@ -629,7 +629,7 @@ function fbuyUPF() {
     UPFamount = BNBandUPFdata[1];
 
     if (balanceBNB < buyBNB) {
-      alert('requested UPF size is higher than balance!');
+      alert('requested BNB size is higher than balance!');
       return;
     }
 
