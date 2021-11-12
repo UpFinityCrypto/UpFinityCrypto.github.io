@@ -555,6 +555,8 @@ function buySellChange() {
     } else {
       getElement("swapInput").removeAttribute('disabled');
     }
+    
+    displayText_("swapResult", "max sell: " + round(maxSellBNB / bnbDiv, 2) + ' BNB');
     return;
   }
   
@@ -570,6 +572,8 @@ function buySellChange() {
     source.removeEventListener('propertychange', inputHandlerSell);
 
     getElement("swapInput").removeAttribute('disabled');
+    
+    displayText_("swapResult", "max buy: " + round(maxBuyBNB / bnbDiv, 2) + ' BNB');
     return;
   }
 }

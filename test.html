@@ -650,7 +650,9 @@
   <!-- maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0]; -->
   maxSellBNB = maxSellUPF / rO * rI; // workaround
   maxSellBNB = maxSellBNB / 1.5; // roughly estimated
-  displayText("oneSellLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB'); 
+  displayText("oneSellLimitStatus", round(maxSellBNB / bnbDiv, 2) + ' BNB'); 
+
+
 
   taxPenalty = 0;
   if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) {
