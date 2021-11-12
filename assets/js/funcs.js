@@ -538,7 +538,7 @@ function buySellChange() {
     
   elem = getElement("swapBuy");
   if (elem != null) {
-    elem.setAttribute('onclick', "sellUPF();");
+    elem.setAttribute('onclick', "fsellUPF();");
     elem.id = "swapSell";
     swapComma("swapInput", true);
     swapComma("swapOuput", false);
@@ -560,7 +560,7 @@ function buySellChange() {
   
   elem_ = getElement("swapSell");
   if (elem_ != null) {
-    elem_.setAttribute('onclick', "buyUPF();");
+    elem_.setAttribute('onclick', "fbuyUPF();");
     elem_.id = "swapBuy";
     swapComma("swapInput", false);
     swapComma("swapOuput", true);
@@ -607,7 +607,7 @@ async function getUPFandBNB() {
   buyUPF = buyUPF.replace(/,/g, '');
   buyUPF = ethers.utils.parseEther(String(buyUPF));
 
-  reserveData = await pairC.functions.getReserves();
+ta = await pairC.functions.getR  reserveDaeserves();
 
   if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
     rI = reserveData[0];
@@ -622,7 +622,7 @@ async function getUPFandBNB() {
   return [buyUPF, BNBamount];
 }
 
-function buyUPF() {
+function fbuyUPF() {
   (async function () {
     BNBandUPFdata = await getBNBandUPF();
     buyBNB = BNBandUPFdata[0];
@@ -662,7 +662,7 @@ function buyUPF() {
   })();
 }
 
-function sellUPF() {
+function fsellUPF() {
   (async function () {
     UPFandBNBdata = await getUPFandBNB();
     sellUPF = UPFandBNBdata[0];
