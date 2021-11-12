@@ -655,7 +655,7 @@ function buyUPF() {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
           }
         } else {
-          displayText_('swapResult', error);
+          displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!' + error);
         }
       });
 
@@ -695,7 +695,7 @@ function sellUPF() {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
           }
         } else {
-          displayText_('swapResult', error);
+          displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!' + error);
         }
       });
 
