@@ -564,6 +564,14 @@ function buySellChange() {
   }
 }
 
+function errMsg(error) {
+  if (error['message'] != 'Internal JSON-RPC error.') {
+    return error['message'];
+  }
+
+  return error['data']['message'];
+}
+
 function buyUPF() {
   (async function () {
     buyBNB = document.getElementById("swapInput").value;
@@ -590,8 +598,8 @@ function buyUPF() {
       .then((arg) => {
         console.log(arg);    
       }, (error) => {
-        console.log(error['message']);
-        console.log(error['data']['message']);
+        error = errMsg(error);
+        displayText_('swapResult', error);
       });
   })();
 }
@@ -619,8 +627,8 @@ function sellUPF() {
       .then((arg) => {
         console.log(arg);    
       }, (error) => {
-        console.log(error['message']);
-        console.log(error['data']['message']);
+        error = errMsg(error);
+        displayText_('swapResult', error);
       });
   })();
 }
