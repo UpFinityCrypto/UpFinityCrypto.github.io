@@ -764,12 +764,11 @@
   // Firefox/Edge18-/IE9+ don’t fire on <select><option>
   // source.addEventListener('change', inputHandler); 
 
-  balanceInfo = await provider.getBalance(currentAccount);
-  balanceBNB = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  displayText_("BNBbalance", parseInt(balanceBNB).toFixed(3));
+  balanceBNB = await provider.getBalance(currentAccount);
+  displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
   balanceUPF = (await upfinityC.functions.balanceOf(currentAccount))[0];
-  displayText_("UPFbalance", numberWithCommas(Math.floor(balanceUPF / 1e18)));
+  displayText_("UPFbalance", numberWithCommas(parseInt(balanceUPF / bnbDiv)));
   balance = balanceUPF;
   
   swapComma("swapInput", false);
