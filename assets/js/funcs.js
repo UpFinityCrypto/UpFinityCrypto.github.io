@@ -582,7 +582,7 @@ function errMsg(error) {
   return error['data']['message'];
 }
 
-function getBNBandUPF() {
+async function getBNBandUPF() {
   buyBNB = document.getElementById("swapInput").value;
   buyBNB = buyBNB.replace(/,/g,'');
   buyBNB = ethers.utils.parseEther(String(buyBNB));
@@ -602,28 +602,29 @@ function getBNBandUPF() {
   return [buyBNB, UPFamount];
 }
 
-function getUPFandBNB() {
+async function getUPFandBNB() {
   buyUPF = document.getElementById("swapInput").value;
-  buyUPF = buyUPF.replace(/,/g,'');
+  buyUPF = buyUPF.replace(/,/g, '');
   buyUPF = ethers.utils.parseEther(String(buyUPF));
 
   reserveData = await pairC.functions.getReserves();
 
   if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-    rI = reserveData[0]; 
+    rI = reserveData[0];
     rO = reserveData[1];
   } else {
     rI = reserveData[1];
     rO = reserveData[0];
   }
-  
+
   BNBamount = (await routerC.functions.getAmountOut(buyUPF, rO, rI))[0];
 
   return [buyUPF, BNBamount];
 }
+
 function buyUPF() {
   (async function () {
-    BNBandUPFdata = getBNBandUPF();
+    BNBandUPFdata = await getBNBandUPF();
     buyBNB = BNBandUPFdata[0];
     UPFamount = BNBandUPFdata[1];
 
@@ -644,7 +645,7 @@ function buyUPF() {
 
 function sellUPF() {
   (async function () {
-    UPFandBNBdata = getUPFandBNB();
+    UPFandBNBdata = await getUPFandBNB();
     buyUPF = UPFandBNBdata[0];
     BNBamount = UPFandBNBdata[1];
 
