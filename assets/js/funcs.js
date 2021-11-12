@@ -654,8 +654,8 @@ function fbuyUPF() {
       }, (error) => {
         error = errMsg(error);
         if (error == 'execution reverted: Pancake: TRANSFER_FAILED') {
-          if (buyLimit / 1 < UPFamount / 1) {
-            displayText_('swapResult', 'buy limit exceeded! ' + numberWithCommas(parseInt(buyLimit / 10 ** 18)));
+          if (maxBuyBNB < buyBNB) {
+            displayText_('swapResult', 'buy limit exceeded! ' + round(maxBuyBNB / bnbDiv, 2));
           } else {
             displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
           }
