@@ -568,9 +568,9 @@ function buyUPF() {
   (async function () {
     buyBNB = document.getElementById("swapInput").value;
     buyBNB = buyBNB.replace(/,/g,'');
-    
+    buyBNB = ethers.utils.parseEther(String(buyBNB))
     override = {
-        value: ethers.utils.parseEther(String(buyBNB)), // it require string number
+        value: buyBNB, // it require string number
     }
     
     reserveData = await pairC.functions.getReserves();
