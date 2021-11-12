@@ -636,18 +636,18 @@ function sellUPF() {
 
 function cantsellReason() {
   if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000)) {
-    displayText("circuitBreakerStatus", "Circuit breaker ON");
+    return "Circuit breaker ON";
   } else {
     if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
-      displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
+      return "last sell less than " + String(_antiDumpDuration) + "s";
     } else {
       if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
-        displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
+        return "your last sell less than " + String(_buySellTimeDuration) + "s");
       } else {
         if (blacklisted) {
-          displayText("circuitBreakerStatus", "if still can't sell, contact @ALLCOINLAB");
+          return "Contact @ALLCOINLAB";
         } else {
-          displayText("circuitBreakerStatus", "You can sell: check slippage and sell size!");
+          return "check slippage and sell size! @ALLCOINLAB if still can't";
         }
       }
     }
