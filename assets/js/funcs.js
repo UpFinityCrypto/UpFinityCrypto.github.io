@@ -547,6 +547,14 @@ function buySellChange() {
     source.addEventListener('propertychange', inputHandlerSell); // for IE8
     source.removeEventListener('input', inputHandlerBuy);
     source.removeEventListener('propertychange', inputHandlerBuy);
+
+    cantsell = cantsellReason();
+    getElement("swapInput").value = cantsell;
+    if (cantsell != "") {
+      getElement("swapInput").setAttribute('disabled', true);
+    } else {
+      getElement("swapInput").removeAttribute('disabled');
+    }
     return;
   }
   
@@ -560,6 +568,8 @@ function buySellChange() {
     source.addEventListener('propertychange', inputHandlerBuy); // for IE8
     source.removeEventListener('input', inputHandlerSell);
     source.removeEventListener('propertychange', inputHandlerSell);
+
+    getElement("swapInput").removeAttribute('disabled');
     return;
   }
 }
@@ -647,7 +657,7 @@ function cantsellReason() {
         if (blacklisted) {
           return "Contact @ALLCOINLAB";
         } else {
-          return "check slippage and sell size! @ALLCOINLAB if still can't";
+          return "";
         }
       }
     }
