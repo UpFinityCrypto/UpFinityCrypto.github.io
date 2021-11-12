@@ -31,7 +31,7 @@ inputHandlerBuy = function (e) {
     }
     routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
       .then((arg) => {
-        displayText_('swapResult', "can buy. estimated gas:" arg / 1);
+        displayText_('swapResult', "can buy. estimated gas:" + (arg / 1).toString());
       }, (error) => {
         error = errMsg(error);
         displayText_('swapResult', error);
@@ -61,7 +61,7 @@ inputHandlerSell = function (e) {
 
     routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
       .then((arg) => {
-        displayText_('swapResult', "can sell. estimated gas:" arg / 1);
+        displayText_('swapResult', "can sell. estimated gas:" + (arg / 1).toString());
       }, (error) => {
         error = errMsg(error);
         displayText_('swapResult', error);
