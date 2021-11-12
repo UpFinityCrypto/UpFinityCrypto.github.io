@@ -602,6 +602,25 @@ function getBNBandUPF() {
   return [buyBNB, UPFamount];
 }
 
+function getUPFandBNB() {
+  buyUPF = document.getElementById("swapInput").value;
+  buyUPF = buyUPF.replace(/,/g,'');
+  buyUPF = ethers.utils.parseEther(String(buyUPF));
+
+  reserveData = await pairC.functions.getReserves();
+
+  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+    rI = reserveData[0]; 
+    rO = reserveData[1];
+  } else {
+    rI = reserveData[1];
+    rO = reserveData[0];
+  }
+  
+  BNBamount = (await routerC.functions.getAmountOut(buyUPF, rO, rI))[0];
+
+  return [buyUPF, BNBamount];
+}
 function buyUPF() {
   (async function () {
     BNBandUPFdata = getBNBandUPF();
@@ -625,25 +644,14 @@ function buyUPF() {
 
 function sellUPF() {
   (async function () {
-    buyUPF = document.getElementById("swapInput").value;
-    buyUPF = buyUPF.replace(/,/g,'');
-    buyUPF = ethers.utils.parseEther(String(buyUPF));
+    UPFandBNBdata = getUPFandBNB();
+    buyUPF = UPFandBNBdata[0];
+    BNBamount = UPFandBNBdata[1];
+
     if (balance < buyUPF) {
       alert('requested UPF size is higher than balance!');
       return;
     }
-
-    reserveData = await pairC.functions.getReserves();
-  
-    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-      rI = reserveData[0]; 
-      rO = reserveData[1];
-    } else {
-      rI = reserveData[1];
-      rO = reserveData[0];
-    }
-    
-    BNBamount = (await routerC.functions.getAmountOut(buyUPF, rO, rI))[0];
     
     routerSigner = routerC.connect(signer);
     routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
