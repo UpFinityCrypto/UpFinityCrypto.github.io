@@ -620,7 +620,7 @@ function sellUPF() {
       rO = reserveData[0];
     }
     
-    BNBamount = (await routerC.functions.getAmountOut(buyUPF, rI, rO))[0];
+    BNBamount = (await routerC.functions.getAmountOut(buyUPF, rO, rI))[0];
     
     routerSigner = routerC.connect(signer);
     routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(buyUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
@@ -634,9 +634,25 @@ function sellUPF() {
 }
 
 
-
-
-
+function cantsellReason() {
+  if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000)) {
+    displayText("circuitBreakerStatus", "Circuit breaker ON");
+  } else {
+    if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
+      displayText("circuitBreakerStatus", "last sell cooltime " + String(_antiDumpDuration) + "s");
+    } else {
+      if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
+        displayText("circuitBreakerStatus", "your last sell cooltime " + String(_buySellTimeDuration) + "s");
+      } else {
+        if (blacklisted) {
+          displayText("circuitBreakerStatus", "if still can't sell, contact @ALLCOINLAB");
+        } else {
+          displayText("circuitBreakerStatus", "You can sell: check slippage and sell size!");
+        }
+      }
+    }
+  }
+}
 
 
 
