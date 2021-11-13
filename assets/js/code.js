@@ -512,5 +512,6 @@
     <!-- } -->
   <!-- } -->
           
-  
+  getExtFile('header', 'header.html');
+  getExtFile('footer', 'footer.html');
   }());
