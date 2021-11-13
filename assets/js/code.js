@@ -1,6 +1,6 @@
   
   (async function() { // to use async things 
-  
+  console.log('init');
   getExtFile('Airdrop', 'sections/Airdrop.html');
   getExtFile('Donations', 'sections/Donations.html');
   getExtFile('Ecosystem', 'sections/Ecosystem.html');
@@ -20,7 +20,7 @@
   getExtFile('Taxs', 'sections/Taxs.html');
   getExtFile('Testimonials', 'sections/Testimonials.html');
   getExtFile('UpFinomics', 'sections/UpFinomics.html');
-  
+  console.log('init done');
   /////////////////////////////////////////////////////////////
   // inits
 
@@ -531,5 +531,7 @@
       <!-- target.innerHTML += output; -->
     <!-- } -->
   <!-- } -->
-          
+       
+  console.log('code done');
+  
   }());
