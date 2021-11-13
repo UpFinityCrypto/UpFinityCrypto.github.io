@@ -675,7 +675,7 @@ function fsellUPF() {
       alert('requested UPF size is higher than balance!');
       return;
     }
-
+    
     routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000)
       .then((arg) => {
         displayText_('swapResult', "can sell. estimated gas:" + (arg / 1).toString());
