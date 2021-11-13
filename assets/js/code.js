@@ -1,11 +1,11 @@
   
   (async function() { // to use async things 
   
-  getExtFile('header', 'sections/header.html');
-  getExtFile('status', 'sections/status.html');
-  getExtFile('rewards', 'sections/rewards.html');
-  getExtFile('roadmap', 'sections/roadmap.html');
-  getExtFile('footer', 'sections/footer.html');
+  getExtFile('Header', 'sections/Header.html');
+  getExtFile('Status', 'sections/Status.html');
+  getExtFile('Rewards', 'sections/Rewards.html');
+  getExtFile('Roadmap', 'sections/Roadmap.html');
+  getExtFile('Footer', 'sections/Footer.html');
   
   /////////////////////////////////////////////////////////////
   // inits
