@@ -1,11 +1,25 @@
   
   (async function() { // to use async things 
   
+  getExtFile('Airdrop', 'sections/Airdrop.html');
+  getExtFile('Donations', 'sections/Donations.html');
+  getExtFile('Ecosystem', 'sections/Ecosystem.html');
+  getExtFile('FAQs', 'sections/FAQs.html');
+  getExtFile('Features', 'sections/Features.html');
+  getExtFile('Footer', 'sections/Footer.html');
+  getExtFile('Gallery', 'sections/Gallery.html');
   getExtFile('Header', 'sections/Header.html');
-  getExtFile('Status', 'sections/Status.html');
+  getExtFile('Hero', 'sections/Home.html'); // hero
+  getExtFile('Motivation', 'sections/Motivation.html');
+  getExtFile('Notice', 'sections/Notice.html');
+  getExtFile('Patchs', 'sections/Patchs.html');
   getExtFile('Rewards', 'sections/Rewards.html');
   getExtFile('Roadmap', 'sections/Roadmap.html');
-  getExtFile('Footer', 'sections/Footer.html');
+  getExtFile('SAFUs', 'sections/SAFUs.html');
+  getExtFile('Status', 'sections/Status.html');
+  getExtFile('Taxs', 'sections/Taxs.html');
+  getExtFile('Testimonials', 'sections/Testimonials.html');
+  getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
   /////////////////////////////////////////////////////////////
   // inits
