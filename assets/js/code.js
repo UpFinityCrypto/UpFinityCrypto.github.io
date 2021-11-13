@@ -9,7 +9,7 @@
   getExtFile('Footer', 'sections/Footer.html');
   getExtFile('Gallery', 'sections/Gallery.html');
   getExtFile('Header', 'sections/Header.html');
-  getExtFile('Hero', 'sections/Home.html'); // hero
+  getExtFile('hero', 'sections/Home.html'); // hero
   getExtFile('Motivation', 'sections/Motivation.html');
   getExtFile('Notice', 'sections/Notice.html');
   getExtFile('Patchs', 'sections/Patchs.html');
