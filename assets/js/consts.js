@@ -118,3 +118,72 @@ const nftAbi = [
   { "inputs": [], "name": "totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
 {"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},
 ];
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Chart(document.querySelector('#SellTaxChart'), {
+  type: 'doughnut',
+  data: {
+    labels: [
+    'Manual Buy: 5.2%',
+    'Rewards: 3.9%',
+    'Liquidity: 11.7%',
+    'Project: 3.9%',
+    'Burn + Redist + etc: 1.3%',
+    ],
+    datasets: [{
+    label: 'Sell Tax',
+    data: [5.2, 3.9, 11.7, 3.9, 1.3],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(40, 167, 69)',
+      'rgb(162, 74, 96)',
+      <!-- 'rgb(234, 72, 23)', -->				  
+    ],
+    hoverOffset: 4
+    }],
+  },
+  options: {
+    plugins: {
+      legend: {
+        <!-- position: 'chartArea' -->
+        position: 'right'
+      }
+    }
+  }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Chart(document.querySelector('#TokenDistributionChart'), {
+  type: 'doughnut',
+  data: {
+    labels: [
+    'Burn: 50%',
+    'Liquidity: 40%',
+    'Minus Tax: 2%',
+    'Project: 8%',
+    ],
+    datasets: [{
+    label: 'Token Distribution',
+    data: [50, 40, 2, 8],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(40, 167, 69)',
+    ],
+    hoverOffset: 4
+    }],
+  },
+  options: {
+    plugins: {
+      legend: {
+        <!-- position: 'chartArea' -->
+        position: 'right'
+      }
+    }
+  }
+  });
+});
