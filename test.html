@@ -498,16 +498,25 @@
   
 
   sellCooltime = 0;
-  sellCooltime_ = _curcuitBreakerTime + _curcuitBreakerDuration + 1.5 * 60 * 60;
-  
-  if (_curcuitBreakerThreshold / 1 <= _taxAccuTaxCheckGlobal / 1) {
-    if (sellCooltime / 1 < sellCooltime_ / 1) {
-      sellCooltime = sellCooltime_;
-      d = new Date(sellCooltime * 1000);
-      displayText("sellCooltime", d);
+  if (_curcuitBreakerFlag == 2) { // breaker on?
+    sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60;
+    if (Date.now() < sellCooltime_) {
+      iif (sellCooltime / 1 < sellCooltime_ / 1) {
+        sellCooltime = sellCooltime_;
+        d = new Date(sellCooltime * 1000);
+        displayText("sellCooltime", d);
+      }
     }
   }
-
+  
+  sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
+  if (Date.now() < sellCooltime_) {
+    sellCooltime = sellCooltime_;
+    d = new Date(sellCooltime * 1000);
+    displayText("sellCooltime", d);
+  }
+  
+  
   
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
@@ -634,7 +643,23 @@
   
   
   // it may display last big value
+  
+  _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
+  sellCooltime_ = _buySellTimer + _buySellTimeDuration;
+  if (sellCooltime / 1 < sellCooltime_ / 1) {
+    sellCooltime = sellCooltime_;
+    d = new Date(sellCooltime * 1000);
+    displayText("sellCooltime", d);
+  }
+  
+  blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
 
+  cantsell = cantsellReason();
+  if (cantsell != "") {
+    displayText("circuitBreakerStatus", cantsell);
+  }
+  
+  
   maxSellUPF = rO;  
   maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
   if (maxSellRate_ / 1 < 0) {
@@ -691,27 +716,11 @@
   // price change accumulation => global limit
   // x / r0 = a => price change = 1 / (1 + a)^2
   
-  sellCooltime_ = _antiDumpTimer + _antiDumpDuration;
-  if (sellCooltime / 1 < sellCooltime_ / 1) {
-    sellCooltime = sellCooltime_;
-    d = new Date(sellCooltime * 1000);
-    displayText("sellCooltime", d);
-  }
   
-  _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
-  sellCooltime_ = _buySellTimer + _buySellTimeDuration;
-  if (sellCooltime / 1 < sellCooltime_ / 1) {
-    sellCooltime = sellCooltime_;
-    d = new Date(sellCooltime * 1000);
-    displayText("sellCooltime", d);
-  }
   
-  blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
-
-  cantsell = cantsellReason();
-  if (cantsell != "") {
-    displayText("circuitBreakerStatus", cantsell);
-  }
+  
+  
+  
   
   base = 20;
   margin = 3;
