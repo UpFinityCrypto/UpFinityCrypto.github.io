@@ -501,7 +501,7 @@
   if (_curcuitBreakerFlag == 2) { // breaker on?
     sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60;
     if (Date.now() < sellCooltime_) {
-      iif (sellCooltime / 1 < sellCooltime_ / 1) {
+      if (sellCooltime / 1 < sellCooltime_ / 1) {
         sellCooltime = sellCooltime_;
         d = new Date(sellCooltime * 1000);
         displayText("sellCooltime", d);
