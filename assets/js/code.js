@@ -1,9 +1,5 @@
   
-  (async function() { // to use async things
-
-  
-  
-  
+  (async function() { // to use async things 
   
   /////////////////////////////////////////////////////////////
   // inits
@@ -56,18 +52,21 @@
   airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
   
-  // refAdr = GetURLParameter("ref");
-  // x = document.getElementById("referralAdrDisplay");
-  // if (typeof refAdr === 'undefined') {
-  //   x.innerHTML = 'None';
-  // } else {
-  //   refAdr = getChecksumAddress(refAdr);
-  //   if (refAdr == '') {
-  //     x.innerHTML = 'Wrong Format';
-  //   } else {
-  //     x.innerHTML = refAdr;
-  //   }
-  // }
+  x = getElement("referralAdrDisplay");
+  if (x != null) {
+    refAdr = GetURLParameter("ref");
+    if (typeof refAdr === 'undefined') {
+    
+      x.innerHTML = 'None';
+    } else {
+      refAdr = getChecksumAddress(refAdr);
+      if (refAdr == '') {
+        x.innerHTML = 'Wrong Format';
+      } else {
+        x.innerHTML = refAdr;
+      }
+    }
+  }
   
   // without wallet connection
   
