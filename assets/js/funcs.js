@@ -736,9 +736,7 @@ function getExtFile(target, file){
   var div = $('#' + target);
   // Getting elements from server and saving the in the variable data
   $.get(file, function(response) {
-    for(var i = 0; i < data.length; i++){
-      div.append($(response));
-    }
+    div.append($(response));
 
   });
 }
