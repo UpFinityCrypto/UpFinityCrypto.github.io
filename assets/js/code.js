@@ -460,12 +460,13 @@
   console.log(totalSupplyNFT);
   
   source = getElement('swapInput');
+  if (source) {
+    source.addEventListener('input', inputHandlerBuy);
+    source.addEventListener('propertychange', inputHandlerBuy); // for IE8
+    // Firefox/Edge18-/IE9+ don’t fire on <select><option>
+    // source.addEventListener('change', inputHandler); 
+  }
   
-  source.addEventListener('input', inputHandlerBuy);
-  source.addEventListener('propertychange', inputHandlerBuy); // for IE8
-  // Firefox/Edge18-/IE9+ don’t fire on <select><option>
-  // source.addEventListener('change', inputHandler); 
-
   balanceBNB = await provider.getBalance(currentAccount);
   displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
@@ -477,20 +478,21 @@
   swapComma("swapOuput", true);
   
   myNFTs = getElement("myNFTs");
-  myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
-  for (idx = 0; idx < myNFTcounts; idx++) {
-    myNFTidx = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
-    myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTidx)))['image'];
-    myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTidx)))['name'];
-    output = `
-      <div class="col-12 col-lg-3 text-justify content">
-        <img src="${myNFTimgSrc}" style="width: 30px;">
-        <p>${myNFTimgName}</p>
-      </div>
-    `;
-    myNFTs.innerHTML += output;
+  if (myNFTs) {
+    myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
+    for (idx = 0; idx < myNFTcounts; idx++) {
+      myNFTidx = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
+      myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTidx)))['image'];
+      myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTidx)))['name'];
+      output = `
+        <div class="col-12 col-lg-3 text-justify content">
+          <img src="${myNFTimgSrc}" style="width: 30px;">
+          <p>${myNFTimgName}</p>
+        </div>
+      `;
+      myNFTs.innerHTML += output;
+    }
   }
-  
   
   
   <!-- grades = ['diamond', 'emerald']; -->
