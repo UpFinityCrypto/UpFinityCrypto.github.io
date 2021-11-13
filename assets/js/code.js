@@ -429,13 +429,21 @@
   
   
   var elms_ = document.querySelectorAll("[id='diamondBoy']");
-  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/0"))['image']);
+  if (elms_.length) {
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/0"))['image']);
+  }
   var elms_ = document.querySelectorAll("[id='diamondGirl']");
-  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/1"))['image']);
+  if (elms_.length) {
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/1"))['image']);
+  }
   var elms_ = document.querySelectorAll("[id='emeraldBoy']");
-  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/2"))['image']);
+  if (elms_.length) {
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/2"))['image']);
+  }
   var elms_ = document.querySelectorAll("[id='emeraldGirl']");
-  elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3"))['image']);
+  if (elms_.length) {
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3"))['image']);
+  }
   
   
   diamondBoyCount = (await nftC.functions._totalItemCount(2))[0] / 1;
