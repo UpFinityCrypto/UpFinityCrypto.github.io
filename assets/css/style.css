@@ -333,6 +333,17 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
   transition: 0.3s;
 }
 
+@media (max-width: 992px) {
+  #hero .social-links a {
+    font-size: 20px;
+    display: inline-block;
+    color: #dfdfdf;
+    line-height: 1;
+    margin: 10px 10px;
+    transition: 0.3s;
+  }
+ 
+}
 #hero .social-links a:hover {
   color: #ea4817;
 }
@@ -1104,7 +1115,7 @@ section {
   color: #ea4817 !important;
   cursor: pointer;
 }
-
+@media (max-width: 992px) {
 .button {
   color: #fff;
   border: 0;
@@ -1114,6 +1125,19 @@ section {
   border-radius: 50px;
   display: inline-block;
   font-size: 20px;
+}
+
+@media (max-width: 992px) {
+  .button {
+    color: #fff;
+    border: 0;
+    padding: 5px 10px;
+    background: #28a745;
+    transition: 0.4s;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 15px;
+  }
 }
 
 .button-soon {
