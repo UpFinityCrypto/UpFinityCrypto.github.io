@@ -5,7 +5,7 @@ getExtFile('Ecosystem', 'sections/Ecosystem.html');
 getExtFile('FAQs', 'sections/FAQs.html');
 getExtFile('Features', 'sections/Features.html');
 getExtFile('footer', 'sections/Footer.html'); // footer
-getExtFile('Gallery', 'sections/Gallery.html');
+// getExtFile('Gallery', 'sections/Gallery.html');
 getExtFile('header', 'sections/Header.html'); // header
 // getExtFile('hero', 'sections/Home.html'); // hero
 getExtFile('Motivation', 'sections/Motivation.html');
@@ -16,7 +16,7 @@ getExtFile('Roadmap', 'sections/Roadmap.html');
 getExtFile('SAFUs', 'sections/SAFUs.html');
 getExtFile('Status', 'sections/Status.html');
 getExtFile('Taxs', 'sections/Taxs.html');
-getExtFile('Testimonials', 'sections/Testimonials.html');
+// getExtFile('Testimonials', 'sections/Testimonials.html');
 getExtFile('UpFinomics', 'sections/UpFinomics.html');
 
 
