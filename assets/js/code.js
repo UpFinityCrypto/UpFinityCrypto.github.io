@@ -176,6 +176,8 @@ getExtFile('UpFinomics', 'sections/UpFinomics.html');
   displayText("claimable", connectWalletText);
   displayText("claimed", connectWalletText);
 
+  displayText_("BNBbalance", connectWalletText);
+  displayText_("UPFbalance", connectWalletText);
   
   reserveData = await pairC.functions.getReserves();
   
