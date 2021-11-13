@@ -264,22 +264,34 @@ getExtFile('UpFinomics', 'sections/UpFinomics.html');
   realSupply = totalSupply.sub(burnAmount);
   mcap = price * realSupply / 10 ** decimals;
   
-  // var elms_ = document.querySelectorAll("[id='priceCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
-  // var elms_ = document.querySelectorAll("[id='burnCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', burnAmount / 1e18);
-  // var elms_ = document.querySelectorAll("[id='circulateCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', realSupply / 1e18);
-  // var elms_ = document.querySelectorAll("[id='marketcapCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
-  // var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', burnPercentage);
-  // var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
-  
-  // var elms_ = document.querySelectorAll("[id='startMultiCounter']");
-  // elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
-  
+  var elms_ = document.querySelectorAll("[id='priceCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
+  }
+  var elms_ = document.querySelectorAll("[id='burnCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', burnAmount / 1e18);
+  }
+  var elms_ = document.querySelectorAll("[id='circulateCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', realSupply / 1e18);
+  }
+  var elms_ = document.querySelectorAll("[id='marketcapCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
+  }
+  var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', burnPercentage);
+  }
+  var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
+  }
+  var elms_ = document.querySelectorAll("[id='startMultiCounter']");
+  if (elms_) {
+  elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
+  }
   
   upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0];
   partyImpact = 0;
