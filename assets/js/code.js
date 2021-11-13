@@ -513,6 +513,7 @@
   <!-- } -->
           
   getExtFile('header', 'header.html');
+  getExtFile('status', 'status.html');
   getExtFile('rewards', 'rewards.html');
   getExtFile('footer', 'footer.html');
   }());
