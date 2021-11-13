@@ -1,0 +1,51 @@
+<div class="container" data-aos="fade-up">
+
+  <div class="section-title">
+    <h2>Rewards</h2>
+    
+      <div class="text-center" style="margin-top:25px;">
+          <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+          <div id="connectResult"><span><span></div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-6 text-justify content">
+      <h3>How to use</h3>
+      <ul>
+          <li><i class="bi bi-chevron-right"></i> Connect your wallet to view the rewards.</li>
+          <li><i class="bi bi-chevron-right"></i> Click Claim button to claim your rewards</li>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-6 pt-4 pt-lg-0 content">
+      <div class="row mt-5">
+        <span id="devNotice"></span>
+      </div>
+      <div class="row mt-5">
+        <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+              <h6 class="text-center ">Total rewards left</h6>
+              <div id="totalUnclaimed" class="text-center">BNB</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+          <div class="icon-box">
+              <h6 class="text-center ">You can claim</h6>
+              <div id="claimable" class="text-center">
+                  BNB<br>
+              </div>
+              <a href="#null" id="claim" class="button scrollto" onclick="fclaim();">Claim</a>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box">
+                <h6 class="text-center ">Your claimed rewards</h6>
+                <div id="claimed" class="text-center">
+                    BNB
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
