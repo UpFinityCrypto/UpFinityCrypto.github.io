@@ -640,7 +640,7 @@
   if (maxSellRate_ / 1 < 0) {
     maxSellRate_ = 0;
   }
-  maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
+  maxSellUPF_ = rO.mul(maxSellRate_).div(10000); // not exactly right but roughly to avoid confusion
   if (maxSellUPF_ / 1 < maxSellUPF / 1) {
     maxSellUPF = maxSellUPF_;
   }
@@ -648,30 +648,36 @@
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
   maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
-  if (maxSellRate_ / 1 < 0) {
-    maxSellRate_ = 0;
+  if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+    if (maxSellRate_ / 1 < 0) {
+      maxSellRate_ = 0;
+    }
+    
+    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
+    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
+      maxSellUPF = maxSellUPF_;
+    }
   }
   
-  maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-  if (maxSellUPF_ / 1 < maxSellUPF / 1) {
-    maxSellUPF = maxSellUPF_;
+  if (0 < maxSellUPF / 1) {
+    maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0];
+    <!-- maxSellBNB = maxSellUPF / rO * rI; // workaround -->
+    maxSellBNB = maxSellBNB / 1.5; // roughly estimated
+  } else {
+    maxSellBNB = 0;
   }
 
-  <!-- maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0]; -->
-  maxSellBNB = maxSellUPF / rO * rI; // workaround
-  maxSellBNB = maxSellBNB / 1.5; // roughly estimated
-  displayText("oneSellLimitStatus", round(maxSellBNB / bnbDiv, 2) + ' BNB'); 
-
-
+  displayText("oneSellLimitStatus", round(maxSellBNB / bnbDiv, 2) + ' BNB');
 
   taxPenalty = 0;
-  if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) {
+  if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
     taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
     if (15 < taxPenalty / 1) {
       taxPenalty = 15; // check
     }
   }
   displayText("yourTaxPenalty", taxPenalty);
+
 
   // price impact 1 / ( 1 + x / r0) = (1 - I)
   // smart contract, change x,r0 equation to 1 / (1 + x / r0) for exact result 
