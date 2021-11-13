@@ -6,9 +6,9 @@
   getExtFile('Ecosystem', 'sections/Ecosystem.html');
   getExtFile('FAQs', 'sections/FAQs.html');
   getExtFile('Features', 'sections/Features.html');
-  getExtFile('Footer', 'sections/Footer.html');
+  getExtFile('footer', 'sections/Footer.html'); // footer
   getExtFile('Gallery', 'sections/Gallery.html');
-  getExtFile('Header', 'sections/Header.html');
+  getExtFile('header', 'sections/Header.html'); // header
   getExtFile('hero', 'sections/Home.html'); // hero
   getExtFile('Motivation', 'sections/Motivation.html');
   getExtFile('Notice', 'sections/Notice.html');
