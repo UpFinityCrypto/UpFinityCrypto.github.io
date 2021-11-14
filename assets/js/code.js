@@ -506,7 +506,7 @@ $(document).click(function (e) {
       }
       
       diamondBoyCount = (await nftC.functions._totalItemCount(name2Ids[grade + gender]))[0] / 1;
-      displayText_("diamondBoyCount", diamondBoyCount);
+      displayText_(grade + gender + "Count", diamondBoyCount);
       totalNFTCount += diamondBoyCount;
     }
   }
