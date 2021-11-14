@@ -490,10 +490,8 @@ $(document).click(function (e) {
   var name2Ids = {};
   for(var id in id2Names)
   {
-      var numsArr = id2Names[id];
-      numsArr.forEach(function(num){
-          name2Ids[num]=id;
-      });
+      var num = id2Names[id];
+      name2Ids[num] = id;
   }
   
   totalNFTCount = 0;
