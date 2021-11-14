@@ -538,8 +538,8 @@ $(document).click(function (e) {
     myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
     for (idx = 0; idx < myNFTcounts; idx++) {
       myNFTidx = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
-      myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTidx)))['image'];
-      myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTidx)))['name'];
+      myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTidx) + '.json'))['image'];
+      myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTidx) + '.json'))['name'];
       output = `
         <div class="col-12 col-lg-3 text-justify content">
           <img src="${myNFTimgSrc}" style="width: 30px;">
