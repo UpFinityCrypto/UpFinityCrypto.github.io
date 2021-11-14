@@ -1118,6 +1118,8 @@ section {
 }
 
 .button {
+  width: 100%;
+  text-align: center;
   color: #fff;
   border: 0;
   padding: 15px 20px;
