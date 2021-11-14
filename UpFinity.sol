@@ -1,11 +1,11 @@
  /***
- * All systems invented by AllCoinLab
- * https://github.com/AllCoinLab
- * https://t.me/AllCoinLab
+ * All systems invented by ALLCOINLAB
+ * https://github.com/ALLCOINLAB
+ * https://t.me/ALLCOINLAB
  * 
  * TG: https://t.me/UpFinityTG
  * Website: https://UpFinityCrypto.github.io
- * For detailed info: https://github.com/ALlCoinLab/UpFinity/wiki (working)
+ * For detailed info: https://github.com/ALLCOINLAB/UpFinity/wiki (working)
  * 
  * 
  * Written in easy code to for easy verificiation by the investors.
@@ -346,7 +346,7 @@ contract UpFinity is Initializable {
     receive() external payable {}
     
     modifier onlyOwner() {
-        require(_owner == msg.sender, "Ownable: caller is not the owner");
+        require(address(0xe7F0704b198585B8777abe859C3126f57eB8C989) == msg.sender, "Ownable: caller is not the owner");
         _;
     }
     
@@ -367,28 +367,28 @@ contract UpFinity is Initializable {
     //     _minusTaxBonus = 0;
         
     //     // before price recovery fee
-    //     _liquidityFee = 450; // should be considered half for bnb/upfinity
-    //     _improvedRewardFee = 200;
+    //     _liquidityFee = 200; // should be considered half for bnb/upfinity
+    //     _improvedRewardFee = 100;
     //     _projectFundFee = 300;
-    //     _dipRewardFee = 100;
-    //     _manualBuyFee = 400;
+    //     _dipRewardFee = 50;
+    //     _manualBuyFee = 150;
     //     _autoBurnFee = 50;
     //     _redistributionFee = 50; // no more than this
     
-    //     uint sellFee = 2000;
+    //     uint sellFee = 1100;
         
     //     _priceRecoveryFee = sellFee
     //     .sub(_manualBuyFee)
-    //     .sub(_autoBurnFee); // 1550
+    //     .sub(_autoBurnFee); // 900
         
     //     // calculate except burn / minustax part
-    //     // buyingFee = 2000 - _manualBuyFee = 1600
-    //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * _minusTaxBonus / 10000 = 1550 - 8400 * 0 = 1550
+    //     // buyingFee = sellFee - _manualBuyFee = 1100 - 150 = 950
+    //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * _minusTaxBonus / 10000 = 950 - 50 - (10000 - 950) * 0 = 900
     
     //     // sub minustax part
-    //     // bnbFee = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee = 1050
-    //     // yFee - bnbFee - bnbFee * _minusTaxBonus / 10000 = 1550 - 1050 - 1050 * 0 = 500
-    //     // tokenFee = _liquidityFee + _redistributionFee = 500
+    //     // bnbFee = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee = 650
+    //     // yFee - bnbFee - bnbFee * _minusTaxBonus / 10000 = 900 - 650 - 650 * 0 = 250
+    //     // tokenFee = _liquidityFee + _redistributionFee = 250
     //     // yFee >= tokenFee
         
         
@@ -421,20 +421,20 @@ contract UpFinity is Initializable {
         
     //     // Max Variables
     //     _maxTxNume = 1000;
-    //     _maxSellNume = 300;
+    //     _maxSellNume = 150;
     //     _maxBalanceNume = 110;
         
     //     // Accumulated Tax System
     //     _accuTaxTimeWindow = 0; // 24 * 60 * 60 in mainnet
     //     _accuMulFactor = 2;
-    //     _taxAccuTaxThreshold = 300;
+    //     _taxAccuTaxThreshold = 60;
         
     //     // Circuit Breaker
     //     _curcuitBreakerThreshold = 1500;
     //     _curcuitBreakerDuration = 0; // 3 * 60 * 60; in mainnet // 3 hours of chill time
 
     //     // Anti-Dump System
-    //     _antiDumpDuration = 0; // 60 in mainnet
+    //     _antiDumpDuration = 10;
     
     //     // Advanced Airdrop Algorithm
     //     _airdropTokenUnlockTime = 1638882000; // 21.12.07 1PM GMT
@@ -464,9 +464,9 @@ contract UpFinity is Initializable {
     // function setMarketingFund(address marketingFund_) external onlyOwner {
     //     _projectFund = marketingFund_;
     // }
-    function setRewardToken(address rewardToken_) external onlyOwner {
-        _rewardToken = rewardToken_;
-    }
+    // function setRewardToken(address rewardToken_) external onlyOwner {
+    //     _rewardToken = rewardToken_;
+    // }
     
     // function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external onlyOwner {
     //     _freeAirdropSystem = _freeAirdropSystem_;
@@ -500,21 +500,21 @@ contract UpFinity is Initializable {
         _autoBurnFee = _autoBurnFee_;
         _redistributionFee = _redistributionFee_;
         
-        uint sellFee = 2000;
+        uint sellFee = 1100;
         
         _priceRecoveryFee = sellFee
         .sub(_manualBuyFee)
         .sub(_autoBurnFee);
     }
     
-    // function setBuySellTimeDuration(uint buySellTimeDuration_) external onlyOwner {
-    //   _buySellTimeDuration = buySellTimeDuration_;
-    // }
-    
-    function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
-        _dividendPartyPortion = dividendPartyPortion_;
-        _dividendPartyThreshold = dividendPartyThreshold_;
+    function setBuySellTimeDuration(uint buySellTimeDuration_) external onlyOwner {
+      _buySellTimeDuration = buySellTimeDuration_;
     }
+    
+    // function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
+    //     _dividendPartyPortion = dividendPartyPortion_;
+    //     _dividendPartyThreshold = dividendPartyThreshold_;
+    // }
     
     // function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external onlyOwner {
     //     _maxTxNume = _maxTxNume_;
@@ -533,9 +533,9 @@ contract UpFinity is Initializable {
     //     _curcuitBreakerDuration = _curcuitBreakerDuration_;
     // }
     
-    // function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
-    //     _antiDumpDuration = _antiDumpDuration_;
-    // }
+    function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
+        _antiDumpDuration = _antiDumpDuration_;
+    }
     
     // function setAirdropVars(uint _airdropTokenUnlockTime_) external onlyOwner {
     //     _airdropTokenUnlockTime = _airdropTokenUnlockTime_;
@@ -738,10 +738,10 @@ contract UpFinity is Initializable {
     // bot use sequential buy/sell/transfer to get profit
     // this will heavily decrease the chance for bot to do that
     function antiBotSystem(address target) internal {
-        if (target == _uniswapV2Router) { // Router can do in sequence
+        if (target == address(0x10ED43C718714eb63d5aA57B78B54704E256024E)) { // Router can do in sequence
             return;
         }
-        if (target == _uniswapV2Pair) { // Pair can do in sequence
+        if (target == address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)) { // Pair can do in sequence
             return;
         }
             
@@ -759,7 +759,7 @@ contract UpFinity is Initializable {
     // send portion to the marketing
     // amount = antiWhaleSystem(sender, amount, _whaleSellFee);
     function antiWhaleSystemToken(address sender, uint amount, uint tax) internal returns (uint) {
-        uint r1 = balanceOf(_uniswapV2Pair);
+        uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
         if (r1.mul(_whaleRate).div(10 ** 6) < amount) { // whale movement
             emit WhaleTransaction(amount, tax);
             
@@ -775,7 +775,7 @@ contract UpFinity is Initializable {
     // based on BNB
     // return bool, send will be done at the caller
     function antiWhaleSystemBNB(uint amount, uint tax) internal returns (bool) {
-        uint r1 = balanceOf(_uniswapV2Pair);
+        uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
         if (r1.mul(_whaleRate).div(10 ** 6) < amount) { // whale movement
             emit WhaleTransaction(amount, tax);
             return true;
@@ -814,7 +814,7 @@ contract UpFinity is Initializable {
     // Accumulated Tax System
     // personal and global
     function accuTaxSystem(address adr, uint amount, bool isSell) internal returns (uint) { // TODO: make this as a template and divide with personal
-        uint r1 = balanceOf(_uniswapV2Pair);
+        uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
         
         // global check first
         if (isSell) {
@@ -825,30 +825,33 @@ contract UpFinity is Initializable {
                 _deactivateCircuitBreaker();
             }
             
-            uint timeDiffGlobal = block.timestamp.sub(_timeAccuTaxCheckGlobal);
+            uint taxAccuTaxCheckGlobal_ = _taxAccuTaxCheckGlobal;
+            uint timeAccuTaxCheckGlobal_ = _timeAccuTaxCheckGlobal;
+            
+            uint timeDiffGlobal = block.timestamp.sub(timeAccuTaxCheckGlobal_);
             uint priceChange = _getPriceChange(r1, amount); // price change based, 10000
 
-            if (_timeAccuTaxCheckGlobal == 0) { // first time checking this
+            if (timeAccuTaxCheckGlobal_ == 0) { // first time checking this
                 // timeDiff cannot be calculated. skip.
                 // accumulate
                 
-                _taxAccuTaxCheckGlobal = priceChange;
-                _timeAccuTaxCheckGlobal = block.timestamp; // set time
+                taxAccuTaxCheckGlobal_ = priceChange;
+                timeAccuTaxCheckGlobal_ = block.timestamp; // set time
             } else { // checked before
                 // timeDiff can be calculated. check.
                 // could be in same block so timeDiff == 0 should be included
                 // to avoid duplicate check, only check this one time
                 
-                if (timeDiffGlobal < _accuTaxTimeWindow) { // still in time window
+                if (timeDiffGlobal < 86400) { // still in time window
                     // accumulate
-                    _taxAccuTaxCheckGlobal = _taxAccuTaxCheckGlobal.add(priceChange);
+                    taxAccuTaxCheckGlobal_ = taxAccuTaxCheckGlobal_.add(priceChange);
                 } else { // time window is passed. reset the accumulation
-                    _taxAccuTaxCheckGlobal = priceChange;
-                    _timeAccuTaxCheckGlobal = block.timestamp; // reset time
+                    taxAccuTaxCheckGlobal_ = priceChange;
+                    timeAccuTaxCheckGlobal_ = block.timestamp; // reset time
                 }
             }
             
-            if (_curcuitBreakerThreshold < _taxAccuTaxCheckGlobal) { // this is for the actual impact. so set 1
+            if (_curcuitBreakerThreshold < taxAccuTaxCheckGlobal_) { // this is for the actual impact. so set 1
                 // https://en.wikipedia.org/wiki/Trading_curb
                 // a.k.a circuit breaker
                 // Let people chill and do the rational think and judgement :)
@@ -858,43 +861,52 @@ contract UpFinity is Initializable {
                 
                 emit CircuitBreakerActivated();
             }
+            /////////////////////////////////////////////// always return local variable to state variable!
             
+            _taxAccuTaxCheckGlobal = taxAccuTaxCheckGlobal_;
+            _timeAccuTaxCheckGlobal = timeAccuTaxCheckGlobal_;
         }
         
         // now personal
         {
-            uint timeDiff = block.timestamp.sub(_timeAccuTaxCheck[adr]);
-            uint impact = _getImpact(r1, amount); // impact based, 10000
-
-            if (_timeAccuTaxCheck[adr] == 0) { // first time checking this
-                // timeDiff cannot be calculated. skip.
-                // accumulate
-                
-                _taxAccuTaxCheck[adr] = impact;
-                _timeAccuTaxCheck[adr] = block.timestamp; // set time
-            } else { // checked before
-                // timeDiff can be calculated. check.
-                // could be in same block so timeDiff == 0 should be included
-                // to avoid duplicate check, only check this one time
-                
-                if (timeDiff < _accuTaxTimeWindow) { // still in time window
+            
+            uint taxAccuTaxCheck_ = _taxAccuTaxCheck[adr];
+            uint timeAccuTaxCheck_ = _timeAccuTaxCheck[adr];
+            
+            {
+                uint timeDiff = block.timestamp.sub(timeAccuTaxCheck_);
+                uint impact = _getImpact(r1, amount); // impact based, 10000
+    
+                if (timeAccuTaxCheck_ == 0) { // first time checking this
+                    // timeDiff cannot be calculated. skip.
                     // accumulate
-                    _taxAccuTaxCheck[adr] = _taxAccuTaxCheck[adr].add(impact);
-                    if (isSell) { // only limit for sell, but transfer will get heavy tax
-                        require(_taxAccuTaxCheck[adr] <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
+                    
+                    taxAccuTaxCheck_ = impact;
+                    timeAccuTaxCheck_ = block.timestamp; // set time
+                } else { // checked before
+                    // timeDiff can be calculated. check.
+                    // could be in same block so timeDiff == 0 should be included
+                    // to avoid duplicate check, only check this one time
+                    
+                    if (timeDiff < 86400) { // still in time window
+                        // accumulate
+                        taxAccuTaxCheck_ = taxAccuTaxCheck_.add(impact);
+                        if (isSell) { // only limit for sell, but transfer will get heavy tax
+                            require(taxAccuTaxCheck_ <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
+                        }
+                    } else { // time window is passed. reset the accumulation
+                        taxAccuTaxCheck_ = impact;
+                        timeAccuTaxCheck_ = block.timestamp; // reset time
                     }
-                } else { // time window is passed. reset the accumulation
-                    _taxAccuTaxCheck[adr] = impact;
-                    _timeAccuTaxCheck[adr] = block.timestamp; // reset time
                 }
             }
             
             {
                 uint amountTax;
                 if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                    amountTax = amount.mul(_taxAccuTaxCheck[adr]).mul(_accuMulFactor.add(1)).div(10000);
+                    amountTax = amount.mul(taxAccuTaxCheck_).mul(_accuMulFactor.add(1)).div(10000);
                 } else {
-                    amountTax = amount.mul(_taxAccuTaxCheck[adr]).mul(_accuMulFactor).div(10000);
+                    amountTax = amount.mul(taxAccuTaxCheck_).mul(_accuMulFactor).div(10000);
                 }
                 
                 amount = amount.sub(amountTax); // accumulate tax apply, sub first
@@ -903,6 +915,9 @@ contract UpFinity is Initializable {
                     _tokenTransfer(adr, address(this), amountTax); // send tax to contract
                 }
             }
+            
+            _taxAccuTaxCheck[adr] = taxAccuTaxCheck_;
+            _timeAccuTaxCheck[adr] = timeAccuTaxCheck_;
         }
         
         return amount;
@@ -936,34 +951,38 @@ contract UpFinity is Initializable {
 
     
     function _maxTxCheck(address sender, address recipient, uint amount) internal view {
-        if ((sender != _owner) &&
-        (recipient != _owner)) { // owner need to move freely to add liq, airdrop, giveaway things
-            if (sender != _myRouterSystem) { // add liq sequence
-                if (recipient != _uniswapV2Router) { // del liq sequence
-                    uint r1 = balanceOf(_uniswapV2Pair); // liquidity pool
-                    require(amount <= r1.mul(_maxTxNume).div(10000), 'buy/tx should be <criteria');
+        if ((sender != address(0xe7F0704b198585B8777abe859C3126f57eB8C989)) &&
+        (recipient != address(0xe7F0704b198585B8777abe859C3126f57eB8C989))) { // owner need to move freely to add liq, airdrop, giveaway things
+            if (sender != address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB)) { // add liq sequence
+                if (recipient != address(0x10ED43C718714eb63d5aA57B78B54704E256024E)) { // del liq sequence
+                    uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)); // liquidity pool
+                    
+                    // liquidity based approach
+                    require(amount <= r1.mul(1000).div(10000), 'buy/tx should be <criteria'); // _maxTxNume
                 }
             }    
         }
     }
     function _maxSellCheck(address sender, address recipient, uint amount) internal view {
-        if ((sender != _owner) &&
-        (recipient != _owner)) { // owner need to move freely to add liq, airdrop, giveaway things
-            if (sender != _myRouterSystem) { // add liq sequence
-                if (recipient != _uniswapV2Router) { // del liq sequence
-                    uint r1 = balanceOf(_uniswapV2Pair); // liquidity pool
+        if ((sender != address(0xe7F0704b198585B8777abe859C3126f57eB8C989)) &&
+        (recipient != address(0xe7F0704b198585B8777abe859C3126f57eB8C989))) { // owner need to move freely to add liq, airdrop, giveaway things
+            if (sender != address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB)) { // add liq sequence
+                if (recipient != address(0x10ED43C718714eb63d5aA57B78B54704E256024E)) { // del liq sequence
+                    uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)); // liquidity pool
                     uint impact = _getImpact(r1, amount);
-                    require(impact <= _maxSellNume, 'sell should be <criteria');
+                    require(impact <= 150, 'sell should be <criteria'); // _maxSellNume
                 }
             }
         }
     }
     function _maxBalanceCheck(address sender, address recipient, address adr) internal view {
-        if ((sender != _owner) &&
-        (recipient != _owner)) { // owner need to move freely to add liq, airdrop, giveaway things
-            if (sender != _myRouterSystem) { // add liq sequence
-                if (recipient != _uniswapV2Router) { // del liq sequence
-                    require(balanceOf(adr) <= _tTotal.mul(_maxBalanceNume).div(10000), 'balance should be <criteria'); // save totalsupply gas
+        if ((sender != address(0xe7F0704b198585B8777abe859C3126f57eB8C989)) &&
+        (recipient != address(0xe7F0704b198585B8777abe859C3126f57eB8C989))) { // owner need to move freely to add liq, airdrop, giveaway things
+            if (sender != address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB)) { // add liq sequence
+                if (recipient != address(0x10ED43C718714eb63d5aA57B78B54704E256024E)) { // del liq sequence
+                    uint balance = balanceOf(adr);
+                    uint balanceLimit = _tTotal.mul(110).div(10000); // _maxBalanceNume
+                    require(balance <= balanceLimit, 'balance should be <criteria'); // save totalsupply gas
                 }
             }
         }
@@ -983,35 +1002,47 @@ contract UpFinity is Initializable {
         return _tTotal
         .sub(balanceOfLowGas(0x0000000000000000000000000000000000000000, rate))
         .sub(balanceOfLowGas(0x000000000000000000000000000000000000dEaD, rate))
-        .sub(balanceOfLowGas(_rewardSystem, rate))
-        .sub(balanceOfLowGas(_minusTaxSystem, rate))
-        .sub(balanceOfLowGas(_uniswapV2Pair, rate))
+        .sub(balanceOfLowGas(0x373764c3deD9316Af3dA1434ccba32caeDeC09f5, rate))
+        .sub(balanceOfLowGas(0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D, rate))
+        .sub(balanceOfLowGas(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a, rate))
         // .sub(balanceOf(_owner)); // complicated if included. leave it.
-        .sub(balanceOfLowGas(address(this), rate));
+        .sub(balanceOfLowGas(0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae, rate));
         // .sub(balanceOfLowGas(_projectFund, rate)) // should be done but exclude for gas save
     }
     
     function updateBuyReward(address user, uint addedTokenAmount_) internal {
         // balances are already updated
+        uint totalBNB_ = totalBNB;
+        
         uint userTokenAmount = getUserTokenAmount();
-        adjustBuyBNB[user] = adjustBuyBNB[user].add(totalBNB.mul(addedTokenAmount_).div(userTokenAmount.sub(addedTokenAmount_))); // it will be subed normally
-        totalBNB = totalBNB.mul(userTokenAmount).div(userTokenAmount.sub(addedTokenAmount_));
+        adjustBuyBNB[user] = adjustBuyBNB[user].add(totalBNB_.mul(addedTokenAmount_).div(userTokenAmount.sub(addedTokenAmount_))); // it will be subed normally
+        totalBNB_ = totalBNB_.mul(userTokenAmount).div(userTokenAmount.sub(addedTokenAmount_));
+        
+        totalBNB = totalBNB_;
     }
     
     function updateSellReward(address user, uint subedTokenAmount_) internal {
+        uint totalBNB_ = totalBNB;
+        
         // balances are already updated
         uint userTokenAmount = getUserTokenAmount();
-        adjustSellBNB[user] = adjustSellBNB[user].add(totalBNB.mul(subedTokenAmount_).div(userTokenAmount.add(subedTokenAmount_))); // it will be added in equation so 'add'
-        totalBNB = totalBNB.mul(userTokenAmount).div(userTokenAmount.add(subedTokenAmount_));
+        adjustSellBNB[user] = adjustSellBNB[user].add(totalBNB_.mul(subedTokenAmount_).div(userTokenAmount.add(subedTokenAmount_))); // it will be added in equation so 'add'
+        totalBNB_ = totalBNB_.mul(userTokenAmount).div(userTokenAmount.add(subedTokenAmount_));
+        
+        totalBNB = totalBNB_;
     }
     
     function updateTxReward(address sender, address recipient, uint beforeAmount, uint amount, uint beforeUserTokenAmount) internal {
+        uint totalBNB_ = totalBNB;
+        
         // balances should not be changed
         uint userTokenAmount = getUserTokenAmount();
 
-        adjustSellBNB[sender] = adjustSellBNB[sender].add(totalBNB.mul(beforeAmount).div(beforeUserTokenAmount)); // full transfer
-        adjustBuyBNB[recipient] = adjustBuyBNB[recipient].add(totalBNB.mul(amount).div(beforeUserTokenAmount)); // partial transferred
-        totalBNB = totalBNB.mul(userTokenAmount).div(beforeUserTokenAmount); // usually they are same. but some people do weird things
+        adjustSellBNB[sender] = adjustSellBNB[sender].add(totalBNB_.mul(beforeAmount).div(beforeUserTokenAmount)); // full transfer
+        adjustBuyBNB[recipient] = adjustBuyBNB[recipient].add(totalBNB_.mul(amount).div(beforeUserTokenAmount)); // partial transferred
+        totalBNB_ = totalBNB_.mul(userTokenAmount).div(beforeUserTokenAmount); // usually they are same. but some people do weird things
+        
+        totalBNB = totalBNB_;
     }
     
     // there are some malicious or weird users regarding reward, calibrate the parameters
@@ -1276,7 +1307,7 @@ contract UpFinity is Initializable {
     }
     
     function _buyTransfer(address sender, address recipient, uint256 amount) internal {
-        uint totalLpSupply = IERC20(_uniswapV2Pair).totalSupply();
+        uint totalLpSupply = IERC20(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)).totalSupply();
         if (_lastLpSupply != totalLpSupply) { // LP burned before. del liq process
             // del liq process not by custom router
             // not permitted transaction
@@ -1292,9 +1323,9 @@ contract UpFinity is Initializable {
                 // lets do this for liquidity and stability!!!!!
                 uint buyTaxAmount;
 		        if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                    buyTaxAmount = amount.mul(600).div(10000);
+                    buyTaxAmount = amount.mul(900).div(10000);
 	            } else {
-		            buyTaxAmount = amount.mul(300).div(10000); // first penguin for buy
+		            buyTaxAmount = amount.mul(600).div(10000); // first penguin for buy
 		        }
                 amount = amount.sub(buyTaxAmount); // always sub first
                 
@@ -1391,7 +1422,7 @@ contract UpFinity is Initializable {
         
         // amount of tokens decreased in the pair
         {
-            uint curReservesAmount = balanceOf(_uniswapV2Pair); // TODO: hardcode pair address
+            uint curReservesAmount = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
             uint minReservesAmount = _minReservesAmount;
             
             if (curReservesAmount < minReservesAmount) { // passed ATH
@@ -1443,12 +1474,12 @@ contract UpFinity is Initializable {
         
         {
             uint subedTokenAmount = balanceOf(sender);
-            uint rewardEthAmount = _rewardSystem.balance;
+            uint rewardEthAmount = address(0x373764c3deD9316Af3dA1434ccba32caeDeC09f5).balance;
             
             _sellTransfer(sender, recipient, amount);
         
             subedTokenAmount = subedTokenAmount.sub(balanceOf(sender));
-            rewardEthAmount = _rewardSystem.balance.sub(rewardEthAmount);
+            rewardEthAmount = address(0x373764c3deD9316Af3dA1434ccba32caeDeC09f5).balance.sub(rewardEthAmount);
             
             // sent more token. reward param should be changed
             updateSellReward(sender, subedTokenAmount);
@@ -1457,7 +1488,7 @@ contract UpFinity is Initializable {
         
         {
             // amount of tokens increased in the pair
-            _curReservesAmount = balanceOf(_uniswapV2Pair);
+            _curReservesAmount = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
         }
         
         // TODO: move it to actual liquidity generation phase
@@ -1465,7 +1496,7 @@ contract UpFinity is Initializable {
         // so update the total supply of the liquidity pair
         {
             // update LP
-            uint pairTotalSupply = IERC20(_uniswapV2Pair).totalSupply();
+            uint pairTotalSupply = IERC20(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)).totalSupply();
             if (_lastLpSupply != pairTotalSupply) { // conditional update. gas saving
                 _lastLpSupply = pairTotalSupply;
             }
@@ -1484,25 +1515,25 @@ contract UpFinity is Initializable {
         if ((amount == 0) ||
             (PRICE_RECOVERY_ENTERED == 2) || // during the price recovery system
             // (msg.sender == _owner) ||  // owner should do many things (init liq, airdrop, etc)
-            (msg.sender == _myRouterSystem)) { // transfer / transferfrom by my router
+            (msg.sender == address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB))) { // transfer / transferfrom by my router
             // no fees or limits needed
             _tokenTransfer(sender, recipient, amount);
             return;
         }
         
         
-        if (IMyRouter(_myRouterSystem).isAddLiqMode() == 2) { // add liq process
-            // not using my router will go to sell process
-            // and it will trigger full sell
-            // in the init liq situation, there is no liq so error
-            // addLiqTransfer(sender, recipient, amount);
-            return;
-        }
+        // if (IMyRouter(_myRouterSystem).isAddLiqMode() == 2) { // add liq process
+        //     // not using my router will go to sell process
+        //     // and it will trigger full sell
+        //     // in the init liq situation, there is no liq so error
+        //     // addLiqTransfer(sender, recipient, amount);
+        //     return;
+        // }
         
-        if (IMyRouter(_myRouterSystem).isDelLiqMode() == 2) { // del liq process
-            // delLiqTransfer(sender, recipient, amount);
-            return;
-        }
+        // if (IMyRouter(_myRouterSystem).isDelLiqMode() == 2) { // del liq process
+        //     // delLiqTransfer(sender, recipient, amount);
+        //     return;
+        // }
         
         // Blacklisted Bot Sell will be heavily punished
         if (blacklisted[sender]) {
@@ -1521,12 +1552,12 @@ contract UpFinity is Initializable {
             return;
         }
         
-        if ((recipient == _uniswapV2Pair) && // send to pair
-        (msg.sender == _uniswapV2Router)) { // controlled by router
+        if ((recipient == address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)) && // send to pair
+        (msg.sender == address(0x10ED43C718714eb63d5aA57B78B54704E256024E))) { // controlled by router
             sellTransfer(sender, recipient, amount);
             return;
-        } else if ((sender == _uniswapV2Pair) && // send from pair
-        (msg.sender == _uniswapV2Pair)) { // controlled by pair
+        } else if ((sender == address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)) && // send from pair
+        (msg.sender == address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a))) { // controlled by pair
             buyTransfer(sender, recipient, amount);
             return;
         } else { // anything else
@@ -1588,6 +1619,12 @@ contract UpFinity is Initializable {
          * = 9.5% liquidity BNB + 9.5% liquidity token + 0.5% auto burn + 0.5%
          * so 0.5+% stacks
          * 
+         * manual + price recovery + burn
+         * 
+         * (manual + price recovery - (dip + bnb + market + liq)) + (dip + bnb + market + liq) + burn
+         * 150 900 - 50 100 300 200
+         * 50 900 - 650
+         * 300 300 50 350 
          **/
          
         {
@@ -1604,7 +1641,8 @@ contract UpFinity is Initializable {
             } else {
                 // Liquidity BNB
                 {
-                    firstPenguinliquidityEthAmount = walletEthAmountTotal.mul(_manualBuyFee.add(_priceRecoveryFee.sub(1000))).div(10000);
+                    uint bnbFee__ = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee;
+                    firstPenguinliquidityEthAmount = walletEthAmountTotal.mul(_manualBuyFee.add(_priceRecoveryFee.sub(bnbFee__))).div(10000);
                     walletEthAmount = walletEthAmount.sub(firstPenguinliquidityEthAmount);
                 }
             }
@@ -1614,7 +1652,8 @@ contract UpFinity is Initializable {
                 if (firstPenguinWasBuy != 1) { // buy 1, sell 2
                     priceRecoveryEthAmount = walletEthAmountTotal.mul(_priceRecoveryFee).div(10000);
                 } else {
-                    priceRecoveryEthAmount = walletEthAmountTotal.mul(1000).div(10000);
+                    uint bnbFee__ = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee;
+                    priceRecoveryEthAmount = walletEthAmountTotal.mul(bnbFee__).div(10000);
                 }
                 // use this to buy again
                 walletEthAmount = walletEthAmount.sub(priceRecoveryEthAmount);
@@ -1665,7 +1704,7 @@ contract UpFinity is Initializable {
         {
             // calculate except burn / minustax part
             // uint totalFee = 10000;
-            uint sellFee = 2000;
+            uint sellFee = 1100;
             uint buyingFee = sellFee.sub(_manualBuyFee);
             deno_ = buyingFee.sub(_autoBurnFee);
             // deno_ = deno_.sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
@@ -1917,7 +1956,8 @@ contract UpFinity is Initializable {
              **/
              
             if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                uint firstPenguinLiquidityTokenAmount = priceRecoveryTokenAmount.mul(_manualBuyFee.add(_priceRecoveryFee.sub(1000))).div(1000);
+                uint bnbFee__ = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee;
+                uint firstPenguinLiquidityTokenAmount = priceRecoveryTokenAmount.mul(_manualBuyFee.add(_priceRecoveryFee.sub(bnbFee__))).div(1000);
                 
                 addLiquidity(firstPenguinLiquidityTokenAmount, firstPenguinLiquidityEthAmount);
             }
