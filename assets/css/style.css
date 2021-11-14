@@ -2503,3 +2503,14 @@ img {
 .progress-bar:last-child {
   border: none;
 }
+
+#popup {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    top: 50px;
+    background-color: red;
+    display: none;
+}

@@ -19,7 +19,12 @@ getExtFile('Taxs', 'sections/Taxs.html');
 // getExtFile('Testimonials', 'sections/Testimonials.html');
 getExtFile('UpFinomics', 'sections/UpFinomics.html');
 
-
+$('#popup').show();
+$(document).click(function (e) {
+  if ($('#popup').is(':visible')) {
+    $('#popup').hide();
+  }
+});
 (async function() { // to use async things 
   console.log('init');
   
@@ -627,6 +632,7 @@ getExtFile('UpFinomics', 'sections/UpFinomics.html');
     }
     });
   }
+  
   
   console.log('code done');
   
