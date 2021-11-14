@@ -381,13 +381,14 @@ $(document).click(function (e) {
     if (maxSellRate_ / 1 < 0) {
       maxSellRate_ = 0;
     }
-    
-    maxSellUPF_ = rO.mul(maxSellRate_).div(10000); // not exactly right but roughly to avoid confusion
-    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
-      maxSellUPF = maxSellUPF_;
-    }
+  } else {
+    maxSellRate_ = _curcuitBreakerThreshold;
   }
   
+  maxSellUPF_ = rO.mul(maxSellRate_).div(10000); // not exactly right but roughly to avoid confusion
+  if (maxSellUPF_ / 1 < maxSellUPF / 1) {
+    maxSellUPF = maxSellUPF_;
+  }
 
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
@@ -396,11 +397,13 @@ $(document).click(function (e) {
     if (maxSellRate_ / 1 < 0) {
       maxSellRate_ = 0;
     }
-    
-    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
-      maxSellUPF = maxSellUPF_;
-    }
+  } else {
+    maxSellRate_ = _taxAccuTaxThreshold;
+  }
+  
+  maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
+  if (maxSellUPF_ / 1 < maxSellUPF / 1) {
+    maxSellUPF = maxSellUPF_;
   }
   
   if (0 < maxSellUPF / 1) {
