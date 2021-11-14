@@ -370,6 +370,7 @@ $(document).click(function (e) {
   blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
 
   cantsell = cantsellReason();
+  
   if (cantsell != "") {
     displayText("circuitBreakerStatus", cantsell);
   }
