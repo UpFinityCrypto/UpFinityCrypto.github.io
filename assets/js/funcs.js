@@ -394,13 +394,16 @@ function mintNFT(name, isBoy) {
       for (idx = 0; idx < nftBalance; idx++) {
         tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
         tokenItem = (await nftC.functions._itemById(tokenId))[0];
-        if (tokenItem / 1 == 2) {
-          alert("Already have diamond!");
-          return;
-        }
-        if (tokenItem / 1 == 3) {
-          alert("Already have diamond!");
-          return;
+        if (isBoy) {
+          if (tokenItem / 1 == 2) {
+            alert("Already have diamond boy!");
+            return;
+          }
+        } else {
+          if (tokenItem / 1 == 3) {
+            alert("Already have diamond girl!");
+            return;
+          }
         }
       }
 
@@ -426,13 +429,16 @@ function mintNFT(name, isBoy) {
       for (idx = 0; idx < nftBalance; idx++) {
         tokenId = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0];
         tokenItem = (await nftC.functions._itemById(tokenId))[0];
-        if (tokenItem / 1 == 0) {
-          alert("Already have emerald!");
-          return;
-        }
-        if (tokenItem / 1 == 1) {
-          alert("Already have emerald!");
-          return;
+        if (isBoy) {
+          if (tokenItem / 1 == 0) {
+            alert("Already have emerald boy!");
+            return;
+          }
+        } else {
+          if (tokenItem / 1 == 1) {
+            alert("Already have emerald girl!");
+            return;
+          }
         }
       }
 
