@@ -480,23 +480,30 @@ $(document).click(function (e) {
   displayText("devNotice", "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>");
   
   
+  id2Names = {
+    0: 'emeraldBoy',
+    1: 'emeraldGirl',
+    2: 'diamondBoy',
+    3: 'diamondGirl',
+  }
+  var name2Ids = {};
+  for(var id in id2Names)
+  {
+      var numsArr = id2Names[id];
+      numsArr.forEach(function(num){
+          name2Ids[num]=id;
+      });
+  }
   
-  
-  var elms_ = document.querySelectorAll("[id='diamondBoy']");
-  if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/0.json"))['image']);
-  }
-  var elms_ = document.querySelectorAll("[id='diamondGirl']");
-  if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/1.json"))['image']);
-  }
-  var elms_ = document.querySelectorAll("[id='emeraldBoy']");
-  if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/2.json"))['image']);
-  }
-  var elms_ = document.querySelectorAll("[id='emeraldGirl']");
-  if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3.json"))['image']);
+  grades = ['diamond', 'emerald'];
+  genders = ['Boy', 'Girl'];
+  for (grade of grades) {
+    for (gender of genders) {
+      var elms_ = document.querySelectorAll("[id='" + grade + gender "']");
+      if (elms_.length) {
+        elms_[0].setAttribute('src', JSON.parse(loadFile("assets/" + name2Ids[grade + gender] + ".json"))['image']);
+      }
+    }
   }
   
   
@@ -547,24 +554,7 @@ $(document).click(function (e) {
       myNFTs.innerHTML += output;
     }
   }
-  
-  
-  <!-- grades = ['diamond', 'emerald']; -->
-  <!-- isBoys = [true, false]; -->
-  <!-- for (grade of grades) { -->
-    <!-- console.log(grade); -->
-    <!-- for (isBoy of isBoys) { -->
-      <!-- output = ` -->
-      <!-- <div class="col-12 col-lg-6 text-justify content"> -->
-        <!-- <img id="${grade}${isBoy}" src="" style="width: 30px;">${grade}${isBoy} -->
-        <!-- <p>Minted: <span id="diamondBoyCount"></span></p> -->
-        <!-- <p><a href="#null" class="button scrollto" onclick="mintNFT(${grade}, Boolean(${isBoy}));">Mint</a></p> -->
-        <!-- <p id="mintDiamondBoyResult"></p> -->
-      <!-- </div> -->
-      <!-- `; -->
-      <!-- target.innerHTML += output; -->
-    <!-- } -->
-  <!-- } -->
+
   
   chart = document.querySelector('#SellTaxChart');
   if (chart) {
