@@ -2505,10 +2505,7 @@ img {
 }
 
 #popup {
-    width: 1000px;
-    height: 1000px;
-    position: absolute;
-    margin-left: -100px;
-    top: 50px;
-    display: none;
+  width: 100%;
+  position: absolute;
+  background-color: white;
 }
