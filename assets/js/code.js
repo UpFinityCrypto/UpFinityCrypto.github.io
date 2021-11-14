@@ -495,6 +495,7 @@ $(document).click(function (e) {
       });
   }
   
+  totalNFTCount = 0;
   grades = ['diamond', 'emerald'];
   genders = ['Boy', 'Girl'];
   for (grade of grades) {
@@ -506,20 +507,11 @@ $(document).click(function (e) {
       
       diamondBoyCount = (await nftC.functions._totalItemCount(name2Ids[grade + gender]))[0] / 1;
       displayText_("diamondBoyCount", diamondBoyCount);
+      totalNFTCount += diamondBoyCount;
     }
   }
   
-  
-  diamondBoyCount = (await nftC.functions._totalItemCount(2))[0] / 1;
-  displayText_("diamondBoyCount", diamondBoyCount);
-  diamondGirlCount = (await nftC.functions._totalItemCount(3))[0] / 1;
-  displayText_("diamondGirlCount", diamondGirlCount);
-  emeraldBoyCount = (await nftC.functions._totalItemCount(0))[0] / 1;
-  displayText_("emeraldBoyCount", emeraldBoyCount);
-  emeraldGirlCount = (await nftC.functions._totalItemCount(1))[0] / 1;
-  displayText_("emeraldGirlCount", emeraldGirlCount);
-  
-  displayText_("totalNFTCount", diamondBoyCount + diamondGirlCount + emeraldBoyCount + emeraldGirlCount);
+  displayText_("totalNFTCount", totalNFTCount);
   totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
   
