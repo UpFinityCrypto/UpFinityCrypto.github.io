@@ -2514,3 +2514,7 @@ img {
   top: 50px;
   background-color: white;
 }
+
+.center {
+  margin: auto;
+}
