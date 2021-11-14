@@ -484,19 +484,19 @@ $(document).click(function (e) {
   
   var elms_ = document.querySelectorAll("[id='diamondBoy']");
   if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/0"))['image']);
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/0.json"))['image']);
   }
   var elms_ = document.querySelectorAll("[id='diamondGirl']");
   if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/1"))['image']);
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/1.json"))['image']);
   }
   var elms_ = document.querySelectorAll("[id='emeraldBoy']");
   if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/2"))['image']);
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/2.json"))['image']);
   }
   var elms_ = document.querySelectorAll("[id='emeraldGirl']");
   if (elms_.length) {
-    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3"))['image']);
+    elms_[0].setAttribute('src', JSON.parse(loadFile("assets/3.json"))['image']);
   }
   
   
