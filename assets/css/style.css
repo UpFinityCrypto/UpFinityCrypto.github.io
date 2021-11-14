@@ -1129,7 +1129,7 @@ section {
   border-radius: 50px;
   display: inline-block;
   font-size: 20px;
-  margin: auto;
+  margin: 10px auto;
 }
 
 @media (max-width: 992px) {
