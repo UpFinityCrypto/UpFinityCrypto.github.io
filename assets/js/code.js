@@ -404,8 +404,8 @@ $(document).click(function (e) {
   }
   
   if (0 < maxSellUPF / 1) {
-    maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0];
-    // maxSellBNB = maxSellUPF / rO * rI; // workaround 
+    // maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0];
+    maxSellBNB = maxSellUPF / rO * rI; // workaround 
     maxSellBNB = maxSellBNB / 1.5; // roughly estimated
   } else {
     maxSellBNB = 0;
