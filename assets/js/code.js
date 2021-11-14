@@ -501,8 +501,11 @@ $(document).click(function (e) {
     for (gender of genders) {
       var elms_ = document.querySelectorAll("[id='" + grade + gender "']");
       if (elms_.length) {
-        elms_[0].setAttribute('src', JSON.parse(loadFile("assets/" + name2Ids[grade + gender] + ".json"))['image']);
+        elms_[0].setAttribute('src', JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))['image']);
       }
+      
+      diamondBoyCount = (await nftC.functions._totalItemCount(name2Ids[grade + gender]))[0] / 1;
+      displayText_("diamondBoyCount", diamondBoyCount);
     }
   }
   
