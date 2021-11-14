@@ -549,6 +549,7 @@ $(document).click(function (e) {
       `;
       myNFTs.innerHTML += output;
     }
+    displayText_("totalMyNFTCount", myNFTcounts);
   }
 
   
