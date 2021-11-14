@@ -486,6 +486,7 @@ $(document).click(function (e) {
     2: 'diamondBoy',
     3: 'diamondGirl',
   }
+  
   var name2Ids = {};
   for(var id in id2Names)
   {
