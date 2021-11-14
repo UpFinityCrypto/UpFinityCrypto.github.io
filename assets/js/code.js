@@ -500,9 +500,10 @@ $(document).click(function (e) {
   genders = ['Boy', 'Girl'];
   for (grade of grades) {
     for (gender of genders) {
-      var elms_ = document.querySelectorAll("[id='" + grade + gender "']");
+      var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
       if (elms_.length) {
-        elms_[0].setAttribute('src', JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))['image']);
+        jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
+        elms_[0].setAttribute('src', jsonFile['image']);
       }
       
       diamondBoyCount = (await nftC.functions._totalItemCount(name2Ids[grade + gender]))[0] / 1;
