@@ -60,7 +60,7 @@ $(document).click(function (e) {
     rewardAdr = '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5';
     freeAirdropAdr = '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4';
     airdropAdr = '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004';
-    nftAdr = '0x7AECf6381b637a5bA68A19df35Ba963774a777Bd';
+    nftAdr = '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD';
   } else {
     alert('Change to BSC network and refresh!');
     return;
