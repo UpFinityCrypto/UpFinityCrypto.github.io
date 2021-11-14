@@ -264,7 +264,87 @@
   </section><!-- End Hero -->
 
   <main id="main">
-    
+    <section id="nft" class="about">
+      <div id="NFT" class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="section-title">
+          <h2>NFT</h2>
+          <span class="wrap-address">
+            <a href="https://bscscan.com/address/0x7AECf6381b637a5bA68A19df35Ba963774a777Bd" target="_tab">0x7AECf6381b637a5bA68A19df35Ba963774a777Bd
+            </a>
+            <a id="copyUpfinityNFTAdr" class="button scrollto" onclick="copyAdr('copyUpfinityNFTAdr', '0x7AECf6381b637a5bA68A19df35Ba963774a777Bd');">
+              Copy
+            </a>
+          </span>
+          <p></p>
+          <div class="text-center" style="margin-top:25px;">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+              <div id="connectResult"><span><span></div>
+          </div>
+          <p>Total Minted: <span id="totalNFTCount"></span></p>
+        </div>
+        
+        
+        <div class="row">
+          <div class="col-12 col-lg-6 text-justify content">
+            <div class="section-title">
+              <h2>diamond</h2>
+              <p>Need to hold at least: <img src="assets/img/logo.png" style="width: 30px;"> 2B UPF</p>
+              <p>Price: <img src="assets/img/trade/bin.ico"> 0.25 BNB</p>
+              <div class="row">
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img id="diamondBoy" src="" style="width: 30px;">
+                  <p>Minted: <span id="diamondBoyCount"></span></p>
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', true);">Mint</a></p>
+                  <p id="mintDiamondBoyResult"></p>
+                </div>
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img id="diamondGirl" src="" style="width: 30px;">
+                  <p>Minted: <span id="diamondGirlCount"></span></p>
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', false);">Mint</a></p>
+                  <p id="mintDiamondGirlResult"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12 col-lg-6 text-justify content">
+            <div class="section-title">
+              <h2>emerald</h2>
+              <p>Need to hold at least: <img src="assets/img/logo.png" style="width: 30px;"> 20B UPF</p>
+              <p>Price: <img src="assets/img/trade/bin.ico"> 0.5 BNB</p>
+              <div class="row">
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img id="emeraldBoy" src="" style="width: 30px;">
+                  <p>Minted: <span id="emeraldBoyCount"></span></p>
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', true);">Mint</a></p>
+                  <p id="mintEmeraldBoyResult"></p>
+                </div>
+                <div class="col-12 col-lg-6 text-justify content">
+                  <img id="emeraldGirl" src="" style="width: 30px;">
+                  <p>Minted: <span id="emeraldGirlCount"></span></p>
+                  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', false);">Mint</a></p>
+                  <p id="mintEmeraldGirlResult"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="myNFT" class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="section-title">
+          <h2>my NFT</h2>
+          <div class="text-center" style="margin-top:25px;">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+              <div id="connectResult"><span><span></div>
+          </div>
+        </div>
+
+        <div id="myNFTs" class="row">
+        </div>
+      </div>
+     
+
+    </section>
 
      <!-- <section id="" class=" section-bg"> -->
       <!-- <div class="container aos-init aos-animate" data-aos="fade-up"> -->
