@@ -376,8 +376,8 @@ $(document).click(function (e) {
   
   
   maxSellUPF = rO;  
-  maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
-  if (Date.now() < _taxAccuTaxCheckGlobal + _accuTaxTimeWindow) { // in time window
+  if (Date.now() < _timeAccuTaxCheckGlobal + _accuTaxTimeWindow) { // in time window
+    maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
     if (maxSellRate_ / 1 < 0) {
       maxSellRate_ = 0;
     }
@@ -391,8 +391,8 @@ $(document).click(function (e) {
 
   _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
   _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
-  maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
   if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+    maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
     if (maxSellRate_ / 1 < 0) {
       maxSellRate_ = 0;
     }
