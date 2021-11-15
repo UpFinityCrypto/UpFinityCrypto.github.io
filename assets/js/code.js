@@ -545,7 +545,7 @@ $(document).click(function (e) {
       myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
       output = `
         <div class="col-12 col-lg-3 text-justify content">
-          <img src="${myNFTimgSrc}" style="width: 300px;">
+          <img src="${myNFTimgSrc}" style="width: 300px; height: 400px;">
           <p>ID: ${myNFTidx}</p>
           <p>${myNFTimgName}</p>
           
@@ -654,10 +654,12 @@ $(document).click(function (e) {
       
       var elms = document.querySelectorAll("[id='" + id + "']");
       if (elms.length) {
-        elms[0].textContent = days + 'd '; 
-        elms[0].textContent += hours + 'h ';
-        elms[0].textContent += minutes + 'm '; 
-        elms[0].textContent += seconds + 's';
+        for (var idx = 0; idx < elms.length; idx++) {
+          elms[idx].textContent = days + 'd '; 
+          elms[idx].textContent += hours + 'h ';
+          elms[idx].textContent += minutes + 'm '; 
+          elms[idx].textContent += seconds + 's';
+        }
       }
       
     } 
