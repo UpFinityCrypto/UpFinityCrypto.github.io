@@ -502,7 +502,9 @@ $(document).click(function (e) {
       var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
       if (elms_.length) {
         jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
-        elms_[0].setAttribute('src', jsonFile['image']);
+        for (var idx = 0; idx < elms_.length; idx++) {
+          elms_[idx].setAttribute('src', jsonFile['image']);
+        }
       }
       
       diamondBoyCount = (await nftC.functions._totalItemCount(name2Ids[grade + gender]))[0] / 1;
