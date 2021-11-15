@@ -543,7 +543,7 @@ $(document).click(function (e) {
       myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
       output = `
         <div class="col-12 col-lg-3 text-justify content">
-          <img src="${myNFTimgSrc}" style="width: 30px;">
+          <img src="${myNFTimgSrc}" style="width: 300px;">
           <p>ID: ${myNFTidx}</p>
           <p>${myNFTimgName}</p>
           
@@ -627,6 +627,49 @@ $(document).click(function (e) {
   }
   
   
+  const countDownTimer = function (id, date) { 
+    var _vDate = new Date(date); // 전달 받은 일자 
+    var _second = 1000; 
+    var _minute = _second * 60; 
+    var _hour = _minute * 60; 
+    var _day = _hour * 24; 
+    var timer; 
+    
+    function showRemaining() { 
+      var now = new Date(); 
+      var distDt = _vDate - now; 
+      if (distDt < 0) { 
+        clearInterval(timer); 
+        document.getElementById(id).textContent = 'Will be Open Now!';
+        return;
+      } 
+      
+      var days = Math.floor(distDt / _day); 
+      var hours = Math.floor((distDt % _day) / _hour); 
+      var minutes = Math.floor((distDt % _hour) / _minute); 
+      var seconds = Math.floor((distDt % _minute) / _second); 
+      //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+      
+      var elms = document.querySelectorAll("[id='" + id + "']");
+      if (elms.length) {
+        elms[0].textContent = days + 'd '; 
+        elms[0].textContent += hours + 'h ';
+        elms[0].textContent += minutes + 'm '; 
+        elms[0].textContent += seconds + 's';
+      }
+      
+    } 
+    timer = setInterval(showRemaining, 1000); 
+  } 
+  
+  var dateObj = new Date(); 
+  
+  dateObj.setDate(dateObj.getDate() + 1); 
+  countDownTimer('NFTcountDown', '11/16/2021 03:00 AM); // 내일까지 
+
+                                              
+                                              
+                                              
   console.log('code done');
   
   }());
