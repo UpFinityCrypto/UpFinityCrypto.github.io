@@ -2510,9 +2510,9 @@ img {
 
 #popup {
   width: 100%;
-  position: absolute;
-  top: 50px;
-  background-color: white;
+  /* position: absolute; */
+  /* top: 50px; */
+  background-color: black;
 }
 
 .center {
