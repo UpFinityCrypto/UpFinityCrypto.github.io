@@ -544,7 +544,9 @@ $(document).click(function (e) {
       output = `
         <div class="col-12 col-lg-3 text-justify content">
           <img src="${myNFTimgSrc}" style="width: 30px;">
+          <p>ID: ${myNFTidx}</p>
           <p>${myNFTimgName}</p>
+          
         </div>
       `;
       myNFTs.innerHTML += output;
