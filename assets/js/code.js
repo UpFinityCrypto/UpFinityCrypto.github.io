@@ -665,7 +665,7 @@ $(document).click(function (e) {
   var dateObj = new Date(); 
   
   dateObj.setDate(dateObj.getDate() + 1); 
-  countDownTimer('NFTcountDown', '11/16/2021 03:00 AM); // 내일까지 
+  countDownTimer('NFTcountDown', '11/16/2021 03:00 AM'); // 내일까지 
 
                                               
                                               
