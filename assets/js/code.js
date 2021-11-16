@@ -31,7 +31,13 @@ $(document).click(function (e) {
   console.log('init done');
   
   
-  
+//   } catch (e) {
+// if (e['message'] == 'Internal JSON-RPC error.') {
+//     if (e['data']['message'] == 'header not found') {
+// console.log('run again');
+//     }
+// }
+// }
  
   /////////////////////////////////////////////////////////////
   // inits
