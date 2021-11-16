@@ -178,9 +178,9 @@ function loadFile(filePath) {
   }
   
 
-  function copy(elementId) {
-
-    var input = document.getElementById(elementId);
+  function copy(value) {
+    const input = document.createElement('textarea');
+    elem.value = value;
     var isiOSDevice = navigator.userAgent.match(/ipad|iphone/i);
 
     if (isiOSDevice) {
@@ -209,14 +209,14 @@ function loadFile(filePath) {
     document.execCommand('copy');
   }
   
-  function copyValue(id, value) {
-    copy(id);
+  function copyValue(value) {
+    copy(value);
     // navigator.clipboard.writeText(value);
     
   }
   
-  function copyAdr(id) {
-    copyValue(id);
+  function copyAdr(id, value) {
+    copyValue(value);
     displayText(id, "Copied");
     <!-- doToast('Copied!' + adr); -->
     <!-- var element = document.getElementById("copyAdrIcon"); -->
