@@ -144,7 +144,7 @@ $(document).click(function (e) {
   priceRecoveryFee = sellFee - _manualBuyFee;
   displayText("priceRecoveryFee", priceRecoveryFee / 100);
   
-  multiplier = 1 + (priceRecoveryFee - _autoBurnFee) / sellFee;
+  multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
   
   displayText("_accuMulFactor", _accuMulFactor);
   displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
