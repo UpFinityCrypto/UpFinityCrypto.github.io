@@ -145,7 +145,12 @@ $(document).click(function (e) {
   
   
   buyFee = 900;
+  displayText("buyFee", buyFee / 100);
   sellFee = 1200;
+  displayText("sellFee", sellFee / 100);
+  totalFee = buyFee + sellFee;
+  displayText("totalFee", totalFee / 100);
+  
   priceRecoveryFee = sellFee - _manualBuyFee;
   displayText("priceRecoveryFee", priceRecoveryFee / 100);
   
@@ -577,7 +582,7 @@ $(document).click(function (e) {
     type: 'doughnut',
     data: {
       labels: [
-      'Manual Buy: 5.2%',
+      'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
       'Rewards: 3.9%',
       'Liquidity: 11.7%',
       'Project: 3.9%',
@@ -585,7 +590,7 @@ $(document).click(function (e) {
       ],
       datasets: [{
       label: 'Sell Tax',
-      data: [5.2, 3.9, 11.7, 3.9, 1.3],
+      data: [_manualBuyFee / 100, 3.9, 11.7, 3.9, 1.3],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
