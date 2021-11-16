@@ -98,6 +98,8 @@ $(document).click(function (e) {
   airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
   
+  syncDelay(50);
+  
   x = getElement("referralAdrDisplay");
   if (x != null) {
     refAdr = GetURLParameter("ref");
