@@ -408,7 +408,7 @@ function mintNFT(name, isBoy) {
       }
 
       nftOverride = {
-        value: ethers.utils.parseEther('0.000000000025'), // it require string number
+        value: ethers.utils.parseEther('0.25'), // it require string number
       }
 
       nftSigner.mintDiamond(isBoy, nftOverride).then((arg) => {
@@ -443,7 +443,7 @@ function mintNFT(name, isBoy) {
       }
 
       nftOverride = {
-        value: ethers.utils.parseEther('0.00000000005'), // it require string number
+        value: ethers.utils.parseEther('0.5'), // it require string number
       }
 
       nftSigner.mintEmerald(isBoy, nftOverride).then((arg) => {
