@@ -592,26 +592,25 @@ $(document).click(function (e) {
       myNFTitemIdx = (await nftC.functions._itemById(myNFTidx))[0] / 1;
       myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['image'];
       myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
-      myNFTId = name2Ids[myNFTimgSrc];
-      if (myNFTId == 0) {
+      if (myNFTitemIdx == 0) {
         myNFTimgSrc = "boy.gif";
         myNFTborder = "emerald";
       }
-      if (myNFTId == 1) {
+      if (myNFTitemIdx == 1) {
         myNFTimgSrc = "girl.gif";
         myNFTborder = "emerald";
       }
-      if (myNFTId == 2) {
+      if (myNFTitemIdx == 2) {
         myNFTimgSrc = "boy.png";
         myNFTborder = "diamond";
       }
-      if (myNFTId == 3) {
+      if (myNFTitemIdx == 3) {
         myNFTimgSrc = "girl.png";
         myNFTborder = "diamond";
       }
       output = `
         <div class="col-12 col-lg-3 text-justify content" style="position: relative;">
-          <img src="${myNFTimgSrc}" style="position: absolute; top:0; left: 0; padding: 20px;">
+          <img src="assets/img/nft/origins/${myNFTimgSrc}" style="position: absolute; top:0; left: 0; padding: 20px;">
           <img src="assets/img/nft/origins/${myNFTborder}.png" style="position: absolute; top:0; left: 0;">
           <p>ID: ${myNFTidx}</p>
           <p>${myNFTimgName}</p>
