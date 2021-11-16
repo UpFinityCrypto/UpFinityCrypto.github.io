@@ -545,9 +545,14 @@ $(document).click(function (e) {
     for (gender of genders) {
       var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
       if (elms_.length) {
-        jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
+        // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
         for (var idx = 0; idx < elms_.length; idx++) {
-          elms_[idx].setAttribute('src', jsonFile['image']);
+          // elms_[idx].setAttribute('src', jsonFile['image']);
+          if (grades == 'diamond') {
+            elms_[idx].setAttribute('src', genders + '.png');
+          } else if (grades == 'emerald') {
+            elms_[idx].setAttribute('src', genders + '.gif');
+          }
         }
       }
       
