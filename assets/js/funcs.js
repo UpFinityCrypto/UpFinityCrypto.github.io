@@ -180,8 +180,11 @@ function loadFile(filePath) {
 
   
   function copyValue(value) {
-    navigator.clipboard.writeText(value);
+    copy(value);
+    // navigator.clipboard.writeText(value);
+    
   }
+  
   function copyAdr(id, adr) {
     copyValue(adr);
     displayText(id, "Copied");
