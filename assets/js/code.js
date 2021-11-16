@@ -53,6 +53,7 @@ $(document).click(function (e) {
   provider = new ethers.providers.Web3Provider(window.ethereum);
   signer = provider.getSigner();    
   
+  syncDelay(100);
   network = await provider.getNetwork();
   chainId = network.chainId;
   if (chainId == 56) {
@@ -326,6 +327,7 @@ $(document).click(function (e) {
   
   
   // personal wallet infos
+  syncDelay(100);
   
   currentAccount = await afconnect();
   
