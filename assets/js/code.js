@@ -549,9 +549,9 @@ $(document).click(function (e) {
         for (var idx = 0; idx < elms_.length; idx++) {
           // elms_[idx].setAttribute('src', jsonFile['image']);
           if (grades == 'diamond') {
-            elms_[idx].setAttribute('src', genders + '.png');
+            elms_[idx].setAttribute('src', gender + '.png');
           } else if (grades == 'emerald') {
-            elms_[idx].setAttribute('src', genders + '.gif');
+            elms_[idx].setAttribute('src', gender + '.gif');
           }
         }
       }
@@ -695,7 +695,7 @@ $(document).click(function (e) {
       var distDt = _vDate - now; 
       if (distDt < 0) { 
         clearInterval(timer); 
-        document.getElementById(id).textContent = 'Will be Open Now!';
+        displayText_(id, 'Will be Open Now!');
         return;
       } 
       
