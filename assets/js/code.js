@@ -676,9 +676,7 @@ $(document).click(function (e) {
   
   
   const countDownTimer = function (id, date) {
-    var date = new Date(date); // 전달 받은 일자 
-    var _vDate =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-     date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+    var _vDate = new Date(date); // exact date UTC
     var _second = 1000; 
     var _minute = _second * 60; 
     var _hour = _minute * 60; 
@@ -719,10 +717,7 @@ $(document).click(function (e) {
   var dateObj = new Date(); 
   
   dateObj.setDate(dateObj.getDate() + 1); 
-  countDownTimer('NFTcountDown', '11/16/2021 11:59 PM'); // 내일까지 
-
-                                              
-                                              
+  countDownTimer('NFTcountDown', '11/16/2021 2:59 PM'); // 내일까지 
                                               
   console.log('code done');
   
