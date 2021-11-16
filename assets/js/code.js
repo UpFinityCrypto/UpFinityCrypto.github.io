@@ -31,7 +31,25 @@ $(document).click(function (e) {
   console.log('init done');
   
   
+//   } catch (e) {
+// if (e['message'] == 'Internal JSON-RPC error.') {
+//     if (e['data']['message'] == 'header not found') {
+// console.log('run again');
+//     }
+// }
+// }
   
+//   int count = 0;
+// int maxTries = 3;
+// while(true) {
+//     try {
+//         // Some Code
+//         // break out of loop, or return, on success
+//     } catch (SomeException e) {
+//         // handle exception
+//         if (++count == maxTries) throw e;
+//     }
+// }
  
   /////////////////////////////////////////////////////////////
   // inits
@@ -46,13 +64,29 @@ $(document).click(function (e) {
     console.log('no dapp');
     return;
   }
-    
+  
+  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
+  displayText("connectResult", connectWalletText);
+  displayText("balanceStatus", connectWalletText);
+  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
+  displayText("oneBuyLimitStatus", connectWalletText);
+  displayText("oneSellLimitStatus", connectWalletText);
+  
+  displayText("claimable", connectWalletText);
+  displayText("claimed", connectWalletText);
+
+  displayText_("BNBbalance", connectWalletText);
+  displayText_("UPFbalance", connectWalletText);
+  
+  
+  
   ethereum.on('chainChanged', handleChainChanged);
   ethereum.on('accountsChanged', handleAccountsChanged);
     
   provider = new ethers.providers.Web3Provider(window.ethereum);
   signer = provider.getSigner();    
   
+  syncDelay(100);
   network = await provider.getNetwork();
   chainId = network.chainId;
   if (chainId == 56) {
@@ -64,8 +98,6 @@ $(document).click(function (e) {
   } else {
     alert('Change to BSC network and refresh!');
     return;
-    console.log('testnet');
-    rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
   }
     
   routerC = new ethers.Contract(routerAdr, routerAbi, provider);
@@ -83,6 +115,8 @@ $(document).click(function (e) {
   freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
   airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
+  
+  syncDelay(50);
   
   x = getElement("referralAdrDisplay");
   if (x != null) {
@@ -108,12 +142,16 @@ $(document).click(function (e) {
   
   _accuMulFactor = (await upfinityC.functions._accuMulFactor())[0] / 1;
   
+  syncDelay(100);
+  
   _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
   _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
   _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
   _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
   _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
   _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  
+  syncDelay(100);
   
   _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
   _airdropSystem = (await upfinityC.functions._airdropSystem())[0] / 1;
@@ -126,6 +164,9 @@ $(document).click(function (e) {
   _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0]; // big number
   _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0] / 1;
   _improvedRewardFee = (await upfinityC.functions._improvedRewardFee())[0] / 1;
+  
+  syncDelay(100);
+  
   _liquidityFee = (await upfinityC.functions._liquidityFee())[0] / 1;
   _manualBuyFee = (await upfinityC.functions._manualBuyFee())[0] / 1;
   _maxBalanceNume = (await upfinityC.functions._maxBalanceNume())[0] / 1;
@@ -138,15 +179,28 @@ $(document).click(function (e) {
   _whaleSellFee = (await upfinityC.functions._whaleSellFee())[0] / 1;
   _whaleTransferFee = (await upfinityC.functions._whaleTransferFee())[0] / 1;
   
+  syncDelay(100);
+  
   _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
   
-  multiplier = 1 + 600 / 2000;
+  buyFee = 900;
+  displayText("buyFee", buyFee / 100);
+  sellFee = 1200;
+  displayText("sellFee", sellFee / 100);
+  totalFee = buyFee + sellFee;
+  displayText("totalFee", totalFee / 100);
+  
+  priceRecoveryFee = sellFee - _manualBuyFee;
+  displayText("priceRecoveryFee", priceRecoveryFee / 100);
+  
+  multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
+  
   displayText("_accuMulFactor", _accuMulFactor);
   displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
   displayText("_airdropSystem", _airdropSystem);
-  displayText("_antiDumpDuration", _antiDumpDuration / 60);
-  displayText("_autoBurnFee", _autoBurnFee * multiplier / 100);
-  displayText("_buySellTimeDuration", _buySellTimeDuration / 60);
+  displayText("_antiDumpDuration", _antiDumpDuration);
+  displayText("_autoBurnFee", _autoBurnFee / 100); // not multiplied
+  displayText("_buySellTimeDuration", _buySellTimeDuration);
   displayText("_curcuitBreakerDuration", _curcuitBreakerDuration / 60 / 60);
   displayText("_curcuitBreakerThreshold", _curcuitBreakerThreshold / 100);
   displayText("_dipRewardFee", _dipRewardFee * multiplier / 100);
@@ -154,35 +208,24 @@ $(document).click(function (e) {
   displayText("_freeAirdropSystem", _freeAirdropSystem);
   displayText("_improvedRewardFee", _improvedRewardFee * multiplier / 100);
   displayText("_liquidityFee", _liquidityFee * multiplier / 100 * 2); // double
-  displayText("_manualBuyFee", _manualBuyFee * multiplier / 100);
+  displayText("_manualBuyFee", _manualBuyFee / 100); // not multiplied
   displayText("_maxBalanceNume", _maxBalanceNume / 100);
-  displayText("_maxSellNume", _maxSellNume / 100);
+  displayText("_maxSellNume", _maxSellNume / 100 / 2); // half
   displayText("_maxTxNume", _maxTxNume / 100);
   displayText("_minusTaxBonus", _minusTaxBonus / 100);
   <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
-  displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100);
+  displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100 * 2); // double
   displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
   displayText("_whaleRate", _whaleRate / 10000);
   displayText("_whaleSellFee", _whaleSellFee / 10000);
   displayText("_whaleTransferFee", _whaleTransferFee / 10000);
   
   _projectFundFee = (await upfinityC.functions._projectFundFee())[0] / 1;
-  redistributionFee = (2000 - _manualBuyFee) - _autoBurnFee - (10000 - (2000 - _manualBuyFee)) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   
-  displayText("redistributionFee", redistributionFee * multiplier / 100);
-  
-  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
-  displayText("connectResult", connectWalletText);
-  displayText("balanceStatus", connectWalletText);
-  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
-  displayText("oneBuyLimitStatus", connectWalletText);
-  displayText("oneSellLimitStatus", connectWalletText);
-  
-  displayText("claimable", connectWalletText);
-  displayText("claimed", connectWalletText);
 
-  displayText_("BNBbalance", connectWalletText);
-  displayText_("UPFbalance", connectWalletText);
+  redistributionFee
+    = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
+  displayText("redistributionFee", redistributionFee * multiplier / 100);
   
   reserveData = await pairC.functions.getReserves();
   
@@ -196,13 +239,13 @@ $(document).click(function (e) {
   
   totalLpSupply = (await pairC.functions.totalSupply())[0];
   
-  maxBuyUPF = rO.mul(1000).div(10000); // 10% of current liquidity
+  maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
   maxBuyBNB = (await routerC.functions.getAmountIn(maxBuyUPF, rI, rO))[0];
   
 
   sellCooltime = 0;
   if (_curcuitBreakerFlag == 2) { // breaker on?
-    sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60;
+    sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 0.5 * 60 * 60; // reliable rough estimation
     if (Date.now() < sellCooltime_) {
       if (sellCooltime / 1 < sellCooltime_ / 1) {
         sellCooltime = sellCooltime_;
@@ -219,7 +262,7 @@ $(document).click(function (e) {
     displayText("sellCooltime", d);
   }
   
-  
+  syncDelay(100);
   
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
@@ -249,8 +292,8 @@ $(document).click(function (e) {
   burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
-  bnbAmount = rI / 1e18;
-  tokenAmount = rO / 10 ** decimals;
+  bnbAmount = rI / bnbDiv;
+  tokenAmount = rO / bnbDiv;
   
   
   // without wallet connection
@@ -269,7 +312,7 @@ $(document).click(function (e) {
   
   price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
   realSupply = totalSupply.sub(burnAmount);
-  mcap = price * realSupply / 10 ** decimals;
+  mcap = price * realSupply / bnbDiv;
   
   var elms_ = document.querySelectorAll("[id='priceCounter']");
   if (elms_.length) {
@@ -277,11 +320,11 @@ $(document).click(function (e) {
   }
   var elms_ = document.querySelectorAll("[id='burnCounter']");
   if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', burnAmount / 1e18);
+  elms_[0].setAttribute('data-purecounter-end', burnAmount / bnbDiv);
   }
   var elms_ = document.querySelectorAll("[id='circulateCounter']");
   if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', realSupply / 1e18);
+  elms_[0].setAttribute('data-purecounter-end', realSupply / bnbDiv);
   }
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
   if (elms_.length) {
@@ -314,6 +357,7 @@ $(document).click(function (e) {
   
   
   // personal wallet infos
+  syncDelay(100);
   
   currentAccount = await afconnect();
   
@@ -563,22 +607,23 @@ $(document).click(function (e) {
     type: 'doughnut',
     data: {
       labels: [
-      'Manual Buy: 5.2%',
-      'Rewards: 3.9%',
-      'Liquidity: 11.7%',
-      'Project: 3.9%',
-      'Burn + Redist + etc: 1.3%',
+      'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
+      'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
+      'Liquidity: ' + String(_liquidityFee / 100) + '%',
+      'Project: ' + String(_projectFundFee / 100) + '%',
+      'Ecosystem: ' + String(_projectFundFee / 100) + '%',
+      'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) / 100) + '%',
       ],
       datasets: [{
       label: 'Sell Tax',
-      data: [5.2, 3.9, 11.7, 3.9, 1.3],
+      data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee / 100, _projectFundFee / 100, _projectFundFee / 100, (_autoBurnFee + redistributionFee) / 100],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
         'rgb(255, 205, 86)',
         'rgb(40, 167, 69)',
         'rgb(162, 74, 96)',
-        <!-- 'rgb(234, 72, 23)', -->				  
+        'rgb(234, 72, 23)',				  
       ],
       hoverOffset: 4
       }],
