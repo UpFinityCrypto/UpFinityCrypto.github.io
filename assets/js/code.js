@@ -64,8 +64,6 @@ $(document).click(function (e) {
   } else {
     alert('Change to BSC network and refresh!');
     return;
-    console.log('testnet');
-    rewardAdr = '0x0C646ba1295e6d725174D6Ae6C9748788D99e492';
   }
     
   routerC = new ethers.Contract(routerAdr, routerAbi, provider);
@@ -140,7 +138,14 @@ $(document).click(function (e) {
   
   _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
   
-  multiplier = 1 + 600 / 2000;
+  
+  buyFee = 900;
+  sellFee = 1200;
+  priceRecoveryFee = sellFee - _manualBuyFee;
+  displayText("priceRecoveryFee", priceRecoveryFee * multiplier / 100);
+  
+  multiplier = 1 + (priceRecoveryFee - _autoBurnFee) / sellFee;
+  
   displayText("_accuMulFactor", _accuMulFactor);
   displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
   displayText("_airdropSystem", _airdropSystem);
@@ -167,9 +172,12 @@ $(document).click(function (e) {
   displayText("_whaleTransferFee", _whaleTransferFee / 10000);
   
   _projectFundFee = (await upfinityC.functions._projectFundFee())[0] / 1;
-  redistributionFee = (2000 - _manualBuyFee) - _autoBurnFee - (10000 - (2000 - _manualBuyFee)) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   
+
+  redistributionFee = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   displayText("redistributionFee", redistributionFee * multiplier / 100);
+  
+  
   
   connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
   displayText("connectResult", connectWalletText);
