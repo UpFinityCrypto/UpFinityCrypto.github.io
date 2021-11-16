@@ -584,15 +584,6 @@ $(document).click(function (e) {
   swapComma("swapInput", false);
   swapComma("swapOuput", true);
   
-  
-  <div class="col-12 col-lg-6 text-justify content" style="position: relative;">
-                  <img id="diamondBoy" src="" style="position: absolute; top:0; left: 0; padding: 20px;">
-                  <img src="assets/img/nft/origins/diamond.png" style="position: absolute; top:0; left: 0;">
-                  <p>Minted: <span id="diamondBoyCount"></span></p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="/*mintNFT('diamond', true);*/"></a></p>
-                  <p id="mintDiamondBoyResult"></p>
-                </div>
-                
   myNFTs = getElement("myNFTs");
   if (myNFTs) {
     myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
