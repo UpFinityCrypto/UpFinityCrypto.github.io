@@ -46,7 +46,22 @@ $(document).click(function (e) {
     console.log('no dapp');
     return;
   }
-    
+  
+  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
+  displayText("connectResult", connectWalletText);
+  displayText("balanceStatus", connectWalletText);
+  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
+  displayText("oneBuyLimitStatus", connectWalletText);
+  displayText("oneSellLimitStatus", connectWalletText);
+  
+  displayText("claimable", connectWalletText);
+  displayText("claimed", connectWalletText);
+
+  displayText_("BNBbalance", connectWalletText);
+  displayText_("UPFbalance", connectWalletText);
+  
+  
+  
   ethereum.on('chainChanged', handleChainChanged);
   ethereum.on('accountsChanged', handleAccountsChanged);
     
@@ -129,6 +144,9 @@ $(document).click(function (e) {
   _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0]; // big number
   _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0] / 1;
   _improvedRewardFee = (await upfinityC.functions._improvedRewardFee())[0] / 1;
+  
+  syncDelay(50);
+  
   _liquidityFee = (await upfinityC.functions._liquidityFee())[0] / 1;
   _manualBuyFee = (await upfinityC.functions._manualBuyFee())[0] / 1;
   _maxBalanceNume = (await upfinityC.functions._maxBalanceNume())[0] / 1;
@@ -143,6 +161,7 @@ $(document).click(function (e) {
   
   _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
   
+  syncDelay(50);
   
   buyFee = 900;
   displayText("buyFee", buyFee / 100);
@@ -186,21 +205,6 @@ $(document).click(function (e) {
 
   redistributionFee = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   displayText("redistributionFee", redistributionFee * multiplier / 100);
-  
-  
-  
-  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
-  displayText("connectResult", connectWalletText);
-  displayText("balanceStatus", connectWalletText);
-  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
-  displayText("oneBuyLimitStatus", connectWalletText);
-  displayText("oneSellLimitStatus", connectWalletText);
-  
-  displayText("claimable", connectWalletText);
-  displayText("claimed", connectWalletText);
-
-  displayText_("BNBbalance", connectWalletText);
-  displayText_("UPFbalance", connectWalletText);
   
   reserveData = await pairC.functions.getReserves();
   
@@ -583,14 +587,14 @@ $(document).click(function (e) {
     data: {
       labels: [
       'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
-      'Rewards: 3.9%',
-      'Liquidity: 11.7%',
-      'Project: 3.9%',
+      'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
+      'Liquidity: ' + String(_liquidityFee / 100) + '%',
+      'Project: ' + String(_liquidityFee / 100) + '%',
       'Burn + Redist + etc: 1.3%',
       ],
       datasets: [{
       label: 'Sell Tax',
-      data: [_manualBuyFee / 100, 3.9, 11.7, 3.9, 1.3],
+      data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee / 100, 3.9, 1.3],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
