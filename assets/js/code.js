@@ -713,7 +713,7 @@ $(document).click(function (e) {
       var distDt = _vDate - now; 
       if (distDt < 0) { 
         clearInterval(timer); 
-        displayText_(id, 'Will be Open Now!');
+        displayText_(id, 'Mint!');
         return;
       } 
       
@@ -726,6 +726,8 @@ $(document).click(function (e) {
       var elms = document.querySelectorAll("[id='" + id + "']");
       if (elms.length) {
         for (var idx = 0; idx < elms.length; idx++) {
+          elms[idx].textContent = "Mint!";
+          continue;
           elms[idx].textContent = days + 'd '; 
           elms[idx].textContent += hours + 'h ';
           elms[idx].textContent += minutes + 'm '; 
