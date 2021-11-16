@@ -674,8 +674,11 @@ $(document).click(function (e) {
   }
   
   
-  const countDownTimer = function (id, date) { 
-    var _vDate = new Date(date); // 전달 받은 일자 
+  
+  const countDownTimer = function (id, date) {
+    var date = new Date(date); // 전달 받은 일자 
+    var _vDate =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+     date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     var _second = 1000; 
     var _minute = _second * 60; 
     var _hour = _minute * 60; 
@@ -683,7 +686,9 @@ $(document).click(function (e) {
     var timer; 
     
     function showRemaining() { 
-      var now = new Date(); 
+      var date = new Date(); 
+      var now =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+       date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
       var distDt = _vDate - now; 
       if (distDt < 0) { 
         clearInterval(timer); 
