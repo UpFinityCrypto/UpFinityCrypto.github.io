@@ -106,12 +106,16 @@ $(document).click(function (e) {
   
   _accuMulFactor = (await upfinityC.functions._accuMulFactor())[0] / 1;
   
+  syncDelay(50);
+  
   _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
   _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
   _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
   _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
   _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
   _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  
+  syncDelay(50);
   
   _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
   _airdropSystem = (await upfinityC.functions._airdropSystem())[0] / 1;
