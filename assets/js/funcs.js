@@ -215,8 +215,8 @@ function loadFile(filePath) {
     
   }
   
-  function copyAdr(id, adr) {
-    copyValue(id, adr);
+  function copyAdr(id) {
+    copyValue(id);
     displayText(id, "Copied");
     <!-- doToast('Copied!' + adr); -->
     <!-- var element = document.getElementById("copyAdrIcon"); -->
