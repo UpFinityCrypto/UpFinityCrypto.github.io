@@ -142,7 +142,7 @@ $(document).click(function (e) {
   buyFee = 900;
   sellFee = 1200;
   priceRecoveryFee = sellFee - _manualBuyFee;
-  displayText("priceRecoveryFee", priceRecoveryFee * multiplier / 100);
+  displayText("priceRecoveryFee", priceRecoveryFee / 100);
   
   multiplier = 1 + (priceRecoveryFee - _autoBurnFee) / sellFee;
   
@@ -204,13 +204,13 @@ $(document).click(function (e) {
   
   totalLpSupply = (await pairC.functions.totalSupply())[0];
   
-  maxBuyUPF = rO.mul(1000).div(10000); // 10% of current liquidity
+  maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
   maxBuyBNB = (await routerC.functions.getAmountIn(maxBuyUPF, rI, rO))[0];
   
 
   sellCooltime = 0;
   if (_curcuitBreakerFlag == 2) { // breaker on?
-    sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60;
+    sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 0.5 * 60 * 60; // reliable rough estimation
     if (Date.now() < sellCooltime_) {
       if (sellCooltime / 1 < sellCooltime_ / 1) {
         sellCooltime = sellCooltime_;
@@ -257,8 +257,8 @@ $(document).click(function (e) {
   burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
-  bnbAmount = rI / 1e18;
-  tokenAmount = rO / 10 ** decimals;
+  bnbAmount = rI / bnbDiv;
+  tokenAmount = rO / bnbDiv;
   
   
   // without wallet connection
@@ -277,7 +277,7 @@ $(document).click(function (e) {
   
   price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
   realSupply = totalSupply.sub(burnAmount);
-  mcap = price * realSupply / 10 ** decimals;
+  mcap = price * realSupply / bnbDiv;
   
   var elms_ = document.querySelectorAll("[id='priceCounter']");
   if (elms_.length) {
@@ -285,11 +285,11 @@ $(document).click(function (e) {
   }
   var elms_ = document.querySelectorAll("[id='burnCounter']");
   if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', burnAmount / 1e18);
+  elms_[0].setAttribute('data-purecounter-end', burnAmount / bnbDiv);
   }
   var elms_ = document.querySelectorAll("[id='circulateCounter']");
   if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', realSupply / 1e18);
+  elms_[0].setAttribute('data-purecounter-end', realSupply / bnbDiv);
   }
   var elms_ = document.querySelectorAll("[id='marketcapCounter']");
   if (elms_.length) {
