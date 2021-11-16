@@ -209,14 +209,14 @@ function loadFile(filePath) {
     document.execCommand('copy');
   }
   
-  function copyValue(value) {
-    copy(value);
+  function copyValue(id, value) {
+    copy(id);
     // navigator.clipboard.writeText(value);
     
   }
   
   function copyAdr(id, adr) {
-    copyValue(adr);
+    copyValue(id, adr);
     displayText(id, "Copied");
     <!-- doToast('Copied!' + adr); -->
     <!-- var element = document.getElementById("copyAdrIcon"); -->
