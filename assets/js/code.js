@@ -161,9 +161,9 @@ $(document).click(function (e) {
   _whaleSellFee = (await upfinityC.functions._whaleSellFee())[0] / 1;
   _whaleTransferFee = (await upfinityC.functions._whaleTransferFee())[0] / 1;
   
-  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
-  
   syncDelay(50);
+  
+  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
   
   buyFee = 900;
   displayText("buyFee", buyFee / 100);
