@@ -180,7 +180,7 @@ function loadFile(filePath) {
 
   function copy(value) {
     const input = document.createElement('textarea');
-    elem.value = value;
+    input.value = value;
     var isiOSDevice = navigator.userAgent.match(/ipad|iphone/i);
 
     if (isiOSDevice) {
@@ -207,6 +207,7 @@ function loadFile(filePath) {
     }
 
     document.execCommand('copy');
+    document.body.removeChild(input);
   }
   
   function copyValue(value) {
