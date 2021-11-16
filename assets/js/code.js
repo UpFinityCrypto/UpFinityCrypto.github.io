@@ -548,10 +548,10 @@ $(document).click(function (e) {
         // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
         for (var idx = 0; idx < elms_.length; idx++) {
           // elms_[idx].setAttribute('src', jsonFile['image']);
-          if (grades == 'diamond') {
-            elms_[idx].setAttribute('src', gender + '.png');
-          } else if (grades == 'emerald') {
-            elms_[idx].setAttribute('src', gender + '.gif');
+          if (grade == 'diamond') {
+            elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
+          } else if (grade == 'emerald') {
+            elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
           }
         }
       }
