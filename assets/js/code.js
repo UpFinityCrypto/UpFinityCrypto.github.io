@@ -611,7 +611,7 @@ $(document).click(function (e) {
       output = `
         <div class="col-12 col-lg-3 text-justify content">
           <div style="width: 100%; position: relative;">
-            <img src="assets/img/nft/origins/${myNFTimgSrc}" style="position: absolute; top:0; left: 0; padding: 20px; height: auto;">
+            <img src="assets/img/nft/origins/${myNFTimgSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
             <img src="assets/img/nft/origins/${myNFTborder}.png" style="position: absolute; top:0; left: 0;">
           </div>
           <p>ID: ${myNFTidx}</p>
