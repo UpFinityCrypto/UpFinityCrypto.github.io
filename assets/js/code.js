@@ -203,7 +203,8 @@ $(document).click(function (e) {
   _projectFundFee = (await upfinityC.functions._projectFundFee())[0] / 1;
   
 
-  redistributionFee = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
+  redistributionFee
+    = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   displayText("redistributionFee", redistributionFee * multiplier / 100);
   
   reserveData = await pairC.functions.getReserves();
@@ -589,19 +590,20 @@ $(document).click(function (e) {
       'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
       'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
       'Liquidity: ' + String(_liquidityFee / 100) + '%',
-      'Project: ' + String(_liquidityFee / 100) + '%',
-      'Burn + Redist + etc: 1.3%',
+      'Project: ' + String(_projectFundFee / 100) + '%',
+      'Ecosystem: ' + String(_projectFundFee / 100) + '%',
+      'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) / 100) + '%',
       ],
       datasets: [{
       label: 'Sell Tax',
-      data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee / 100, 3.9, 1.3],
+      data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee / 100, _projectFundFee / 100, _projectFundFee / 100, (_autoBurnFee + redistributionFee) / 100],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
         'rgb(255, 205, 86)',
         'rgb(40, 167, 69)',
         'rgb(162, 74, 96)',
-        <!-- 'rgb(234, 72, 23)', -->				  
+        'rgb(234, 72, 23)',				  
       ],
       hoverOffset: 4
       }],
