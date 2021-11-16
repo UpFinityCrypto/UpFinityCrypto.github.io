@@ -623,34 +623,6 @@ $(document).click(function (e) {
     }
     displayText_("totalMyNFTCount", myNFTcounts);
   }
-
-<div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>emerald</h2>
-              <p>Need to hold at least: <img src="assets/img/logo.png" style="width: 30px;"> 20B UPF</p>
-              <p>Price: <img src="assets/img/trade/bin.ico"> 0.5 BNB</p>
-              <div class="row">
-                <div class="col-12 col-lg-6 text-justify content">
-                  <div style="width: 100%; position: relative;">
-                    <img id="emeraldBoy" src="" style="position: absolute; top:0; left: 0; padding: 20px; height: auto;">
-                    <img src="assets/img/nft/origins/emerald.png" style="position: absolute; top:0; left: 0;">
-                  </div>
-                  <p>Minted: <span id="emeraldBoyCount"></span></p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="/*mintNFT('emerald', true);*/"></a></p>
-                  <p id="mintEmeraldBoyResult"></p>
-                </div>
-                <div class="col-12 col-lg-6 text-justify content">
-                  <div style="width: 100%; position: relative;">
-                    <img id="emeraldGirl" src="" style="position: absolute; top:0; left: 0; padding: 20px; height: auto;">
-                    <img src="assets/img/nft/origins/emerald.png" style="position: absolute; top:0; left: 0;">
-                  </div>
-                  <p>Minted: <span id="emeraldGirlCount"></span></p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="/*mintNFT('emerald', false);*/"></a></p>
-                  <p id="mintEmeraldGirlResult"></p>
-                </div>
-              </div>
-            </div>
-          </div>
   
   chart = document.querySelector('#SellTaxChart');
   if (chart) {
