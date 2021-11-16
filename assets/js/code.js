@@ -147,7 +147,7 @@ $(document).click(function (e) {
   buyFee = 900;
   sellFee = 1200;
   priceRecoveryFee = sellFee - _manualBuyFee;
-  displayText("priceRecoveryFee", (priceRecoveryFee / 100);
+  displayText("priceRecoveryFee", priceRecoveryFee / 100);
   
   multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
   
