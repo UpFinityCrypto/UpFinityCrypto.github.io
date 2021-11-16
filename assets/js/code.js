@@ -147,16 +147,16 @@ $(document).click(function (e) {
   buyFee = 900;
   sellFee = 1200;
   priceRecoveryFee = sellFee - _manualBuyFee;
-  displayText("priceRecoveryFee", priceRecoveryFee / 100);
+  displayText("priceRecoveryFee", (priceRecoveryFee / 100);
   
   multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
   
   displayText("_accuMulFactor", _accuMulFactor);
   displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
   displayText("_airdropSystem", _airdropSystem);
-  displayText("_antiDumpDuration", _antiDumpDuration / 60);
-  displayText("_autoBurnFee", _autoBurnFee * multiplier / 100);
-  displayText("_buySellTimeDuration", _buySellTimeDuration / 60);
+  displayText("_antiDumpDuration", _antiDumpDuration);
+  displayText("_autoBurnFee", _autoBurnFee / 100); // not multiplied
+  displayText("_buySellTimeDuration", _buySellTimeDuration);
   displayText("_curcuitBreakerDuration", _curcuitBreakerDuration / 60 / 60);
   displayText("_curcuitBreakerThreshold", _curcuitBreakerThreshold / 100);
   displayText("_dipRewardFee", _dipRewardFee * multiplier / 100);
@@ -164,13 +164,13 @@ $(document).click(function (e) {
   displayText("_freeAirdropSystem", _freeAirdropSystem);
   displayText("_improvedRewardFee", _improvedRewardFee * multiplier / 100);
   displayText("_liquidityFee", _liquidityFee * multiplier / 100 * 2); // double
-  displayText("_manualBuyFee", _manualBuyFee * multiplier / 100);
+  displayText("_manualBuyFee", _manualBuyFee / 100); // not multiplied
   displayText("_maxBalanceNume", _maxBalanceNume / 100);
-  displayText("_maxSellNume", _maxSellNume / 100);
+  displayText("_maxSellNume", _maxSellNume / 100 / 2); // half
   displayText("_maxTxNume", _maxTxNume / 100);
   displayText("_minusTaxBonus", _minusTaxBonus / 100);
   <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
-  displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100);
+  displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100 * 2); // double
   displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
   displayText("_whaleRate", _whaleRate / 10000);
   displayText("_whaleSellFee", _whaleSellFee / 10000);
@@ -232,7 +232,7 @@ $(document).click(function (e) {
     displayText("sellCooltime", d);
   }
   
-  
+  syncDelay(100);
   
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
