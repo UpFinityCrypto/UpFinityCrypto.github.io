@@ -584,6 +584,15 @@ $(document).click(function (e) {
   swapComma("swapInput", false);
   swapComma("swapOuput", true);
   
+  
+  <div class="col-12 col-lg-6 text-justify content" style="position: relative;">
+                  <img id="diamondBoy" src="" style="position: absolute; top:0; left: 0; padding: 20px;">
+                  <img src="assets/img/nft/origins/diamond.png" style="position: absolute; top:0; left: 0;">
+                  <p>Minted: <span id="diamondBoyCount"></span></p>
+                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="/*mintNFT('diamond', true);*/"></a></p>
+                  <p id="mintDiamondBoyResult"></p>
+                </div>
+                
   myNFTs = getElement("myNFTs");
   if (myNFTs) {
     myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
@@ -592,9 +601,27 @@ $(document).click(function (e) {
       myNFTitemIdx = (await nftC.functions._itemById(myNFTidx))[0] / 1;
       myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['image'];
       myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
+      myNFTId = name2Ids[myNFTimgSrc];
+      if (myNFTId == 0) {
+        myNFTimgSrc = "boy.gif";
+        myNFTborder = "emerald";
+      }
+      if (myNFTId == 1) {
+        myNFTimgSrc = "girl.gif";
+        myNFTborder = "emerald";
+      }
+      if (myNFTId == 2) {
+        myNFTimgSrc = "boy.png";
+        myNFTborder = "diamond";
+      }
+      if (myNFTId == 3) {
+        myNFTimgSrc = "girl.png";
+        myNFTborder = "diamond";
+      }
       output = `
-        <div class="col-12 col-lg-3 text-justify content">
-          <img src="${myNFTimgSrc}" style="width: 300px; height: 400px;">
+        <div class="col-12 col-lg-3 text-justify content" style="position: relative;">
+          <img src="${myNFTimgSrc}" style="position: absolute; top:0; left: 0; padding: 20px;">
+          <img src="assets/img/nft/origins/${myNFTborder}.png" style="position: absolute; top:0; left: 0;">
           <p>ID: ${myNFTidx}</p>
           <p>${myNFTimgName}</p>
           
