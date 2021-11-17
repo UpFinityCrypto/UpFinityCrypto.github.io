@@ -410,6 +410,16 @@ $(document).click(function (e) {
 
 
   if (getDiv("Taxs").length) {
+    taxPenalty = 0;
+    if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+      taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
+      if (15 < taxPenalty / 1) {
+        taxPenalty = 15; // check
+      }
+    }
+    displayText("yourTaxPenalty", taxPenalty);
+
+	  
     base = 20;
     margin = 3;
     whaleTax = 0;
