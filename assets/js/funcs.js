@@ -780,12 +780,13 @@ function cantsellReason() {
 function getExtFile(target, file){
   var div = $('#' + target);
   if (!div.length) {
-	  return;
+	  return false;
   }
   $.get(file, function(response) {
     div.append($(response));
 
   });
+  return true;
 }
 
 async function CALL(cf, attr, params=null) {
