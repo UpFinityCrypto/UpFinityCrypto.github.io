@@ -41,19 +41,6 @@ $(document).click(function (e) {
     return;
   }
   
-  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
-  displayText("connectResult", connectWalletText);
-  displayText("balanceStatus", connectWalletText);
-  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
-  displayText("oneBuyLimitStatus", connectWalletText);
-  displayText("oneSellLimitStatus", connectWalletText);
-  
-  displayText("claimable", connectWalletText);
-  displayText("claimed", connectWalletText);
-
-  displayText_("BNBbalance", connectWalletText);
-  displayText_("UPFbalance", connectWalletText);
-  
   displayText("devNotice", "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>");
   
   ethereum.on('chainChanged', handleChainChanged);
@@ -130,6 +117,19 @@ $(document).click(function (e) {
   needValue |= getExtFile('Taxs', 'sections/Taxs.html');
   needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
+  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
+  displayText("connectResult", connectWalletText);
+  displayText("balanceStatus", connectWalletText);
+  <!-- displayText("balanceIcon", connectWalletText); --> // big icon
+  displayText("oneBuyLimitStatus", connectWalletText);
+  displayText("oneSellLimitStatus", connectWalletText);
+  
+  displayText("claimable", connectWalletText);
+  displayText("claimed", connectWalletText);
+
+  displayText_("BNBbalance", connectWalletText);
+  displayText_("UPFbalance", connectWalletText);
+	
   if (needValue) {
     if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length)) {
       await loadValues();
