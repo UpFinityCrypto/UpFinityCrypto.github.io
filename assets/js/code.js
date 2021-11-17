@@ -100,21 +100,18 @@ $(document).click(function (e) {
     return;
   }
     
-  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
+  routerF = (new ethers.Contract(routerAdr, routerAbi, provider)).functions;
+  factoryAdr = CALL(routerF, 'factory')[0];
+  factoryF = (new ethers.Contract(factoryAdr, factoryAbi, provider)).functions;
   
-  factoryData = await routerC.functions.factory();
-  factoryAdr = factoryData[0];
-  factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+  pairAdr = CALL(factoryF, 'getPair', [wbnbAdr, upfinityAdr])[0];
+  pairF = (new ethers.Contract(pairAdr, pairAbi, provider)).functions;
   
-  pairData = await factoryC.functions.getPair(wbnbAdr, upfinityAdr);
-  pairAdr = pairData[0];
-  pairC = new ethers.Contract(pairAdr, pairAbi, provider);
-  
-  upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
-  rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
-  freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
-  airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
-  nftC = new ethers.Contract(nftAdr, nftAbi , provider);
+  upfinityF = (new ethers.Contract(upfinityAdr, upfinityAbi, provider)).functions;
+  rewardF = (new ethers.Contract(rewardAdr, rewardAbi, provider)).functions;
+  freeAirdropF = (new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider)).functions;
+  airdropF = (new ethers.Contract(airdropAdr, airdropAbi, provider)).functions;
+  nftF = (new ethers.Contract(nftAdr, nftAbi , provider)).functions;
   
   syncDelay(50);
   
@@ -138,18 +135,17 @@ $(document).click(function (e) {
   
   // constants
   
-  totalSupply = (await upfinityC.functions.totalSupply())[0];
-  
-  _accuMulFactor = (await upfinityC.functions._accuMulFactor())[0] / 1;
+  totalSupply = CALL(upfinityF, 'totalSupply')[0];
+  _accuMulFactor = CALL(upfinityF, '_accuMulFactor')[0] / 1;
   
   syncDelay(100);
   
-  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
-  _curcuitBreakerTime = (await upfinityC.functions._curcuitBreakerTime())[0] / 1;
-  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
-  _taxAccuTaxCheckGlobal = (await upfinityC.functions._taxAccuTaxCheckGlobal())[0] / 1;
-  _curcuitBreakerFlag = (await upfinityC.functions._curcuitBreakerFlag())[0] / 1;
+  _accuTaxTimeWindow = CALL(upfinityF, '_accuTaxTimeWindow')[0] / 1;
+  _curcuitBreakerTime = CALL(upfinityF, '_curcuitBreakerTime')[0] / 1;
+  _curcuitBreakerDuration = CALL(upfinityF, '_curcuitBreakerDuration')[0] / 1;
+  _curcuitBreakerThreshold = CALL(upfinityF, '_curcuitBreakerThreshold')[0] / 1;
+  _taxAccuTaxCheckGlobal = CALL(upfinityF, '_taxAccuTaxCheckGlobal')[0] / 1;
+  _curcuitBreakerFlag = CALL(upfinityF, '_curcuitBreakerFlag')[0] / 1;
   
   syncDelay(100);
   
