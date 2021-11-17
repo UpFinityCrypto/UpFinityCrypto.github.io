@@ -5,6 +5,13 @@ const routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
 const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
 const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
 
+buyFee = 900;
+displayText("buyFee", buyFee / 100);
+sellFee = 1200;
+displayText("sellFee", sellFee / 100);
+totalFee = buyFee + sellFee;
+displayText("totalFee", totalFee / 100);
+
 inputHandlerBuy = function (e) {
   (async function () {
     valueIn = e.target.value;
