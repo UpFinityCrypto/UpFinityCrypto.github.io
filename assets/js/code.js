@@ -136,10 +136,11 @@ $(document).click(function (e) {
   // constants
   
   totalSupply = CALL(upfinityF, 'totalSupply')[0];
-  _accuMulFactor = CALL(upfinityF, '_accuMulFactor')[0] / 1;
+  _dividendPartyThreshold = CALL(upfinityF, '_dividendPartyThreshold')[0];
   
   syncDelay(100);
   
+  _accuMulFactor = CALL(upfinityF, '_accuMulFactor')[0] / 1;
   _accuTaxTimeWindow = CALL(upfinityF, '_accuTaxTimeWindow')[0] / 1;
   _curcuitBreakerTime = CALL(upfinityF, '_curcuitBreakerTime')[0] / 1;
   _curcuitBreakerDuration = CALL(upfinityF, '_curcuitBreakerDuration')[0] / 1;
@@ -149,36 +150,34 @@ $(document).click(function (e) {
   
   syncDelay(100);
   
-  _accuTaxTimeWindow = (await upfinityC.functions._accuTaxTimeWindow())[0] / 1;
-  _airdropSystem = (await upfinityC.functions._airdropSystem())[0] / 1;
-  _antiDumpDuration = (await upfinityC.functions._antiDumpDuration())[0] / 1;
-  _autoBurnFee = (await upfinityC.functions._autoBurnFee())[0] / 1;
-  _buySellTimeDuration = (await upfinityC.functions._buySellTimeDuration())[0] / 1;
-  _curcuitBreakerDuration = (await upfinityC.functions._curcuitBreakerDuration())[0] / 1;
-  _curcuitBreakerThreshold = (await upfinityC.functions._curcuitBreakerThreshold())[0] / 1;
-  _dipRewardFee = (await upfinityC.functions._dipRewardFee())[0] / 1;
-  _dividendPartyThreshold = (await upfinityC.functions._dividendPartyThreshold())[0]; // big number
-  _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0] / 1;
-  _improvedRewardFee = (await upfinityC.functions._improvedRewardFee())[0] / 1;
+  
+  _airdropSystem = CALL(upfinityF, '_airdropSystem')[0] / 1;
+  _antiDumpDuration = CALL(upfinityF, '_antiDumpDuration')[0] / 1;
+  _freeAirdropSystem = CALL(upfinityF, '_freeAirdropSystem')[0] / 1;
+  
+  _autoBurnFee = CALL(upfinityF, '_autoBurnFee')[0] / 1;
+  _buySellTimeDuration = CALL(upfinityF, '_buySellTimeDuration')[0] / 1;
+  _dipRewardFee = CALL(upfinityF, '_dipRewardFee')[0] / 1;
+  _improvedRewardFee = CALL(upfinityF, '_improvedRewardFee')[0] / 1;
   
   syncDelay(100);
   
-  _liquidityFee = (await upfinityC.functions._liquidityFee())[0] / 1;
-  _manualBuyFee = (await upfinityC.functions._manualBuyFee())[0] / 1;
-  _maxBalanceNume = (await upfinityC.functions._maxBalanceNume())[0] / 1;
-  _maxSellNume = (await upfinityC.functions._maxSellNume())[0] / 1;
-  _maxTxNume = (await upfinityC.functions._maxTxNume())[0] / 1;
-  _minusTaxBonus = (await upfinityC.functions._minusTaxBonus())[0] / 1;
-  _taxAccuTaxThreshold = (await upfinityC.functions._taxAccuTaxThreshold())[0] / 1;
-  _timeAccuTaxCheckGlobal = (await upfinityC.functions._timeAccuTaxCheckGlobal())[0] / 1;
-  _whaleRate = (await upfinityC.functions._whaleRate())[0] / 1;
-  _whaleSellFee = (await upfinityC.functions._whaleSellFee())[0] / 1;
-  _whaleTransferFee = (await upfinityC.functions._whaleTransferFee())[0] / 1;
+  _liquidityFee = CALL(upfinityF, '_liquidityFee')[0] / 1;
+  _manualBuyFee = CALL(upfinityF, '_manualBuyFee')[0] / 1;
+  _maxBalanceNume = CALL(upfinityF, '_maxBalanceNume')[0] / 1;
+  _maxSellNume = CALL(upfinityF, '_maxSellNume')[0] / 1;
+  _maxTxNume = CALL(upfinityF, '_maxTxNume')[0] / 1;
+  _minusTaxBonus = CALL(upfinityF, '_minusTaxBonus')[0] / 1;
+  
+  _taxAccuTaxThreshold = CALL(upfinityF, '_taxAccuTaxThreshold')[0] / 1;
+  _timeAccuTaxCheckGlobal = CALL(upfinityF, '_timeAccuTaxCheckGlobal')[0] / 1;
+  _whaleRate = CALL(upfinityF, '_whaleRate')[0] / 1;
+  _whaleSellFee = CALL(upfinityF, '_whaleSellFee')[0] / 1;
+  _whaleTransferFee = CALL(upfinityF, '_whaleTransferFee')[0] / 1;
+  _antiDumpTimer = CALL(upfinityF, '_antiDumpTimer')[0] / 1;
   
   syncDelay(100);
-  
-  _antiDumpTimer = (await upfinityC.functions._antiDumpTimer())[0] / 1;
-  
+
   buyFee = 900;
   displayText("buyFee", buyFee / 100);
   sellFee = 1200;
