@@ -54,7 +54,7 @@ $(document).click(function (e) {
   displayText_("BNBbalance", connectWalletText);
   displayText_("UPFbalance", connectWalletText);
   
-  
+  displayText("devNotice", "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>");
   
   ethereum.on('chainChanged', handleChainChanged);
   ethereum.on('accountsChanged', handleAccountsChanged);
@@ -148,463 +148,477 @@ $(document).click(function (e) {
     rO = reserveData[0];
   }
   
-  totalLpSupply = (await pairF.totalSupply())[0];
   
-  maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
-  maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
   
 
-  sellCooltime = 0;
-  if (_curcuitBreakerFlag == 2) { // breaker on?
-    sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 0.5 * 60 * 60; // reliable rough estimation
-    if (Date.now() < sellCooltime_) {
-      if (sellCooltime / 1 < sellCooltime_ / 1) {
-        sellCooltime = sellCooltime_;
-        d = new Date(sellCooltime * 1000);
-        displayText("sellCooltime", d);
+  
+  
+  if (getDiv("Airdrop").length) {
+    // airdrop
+    freeAirdropBalance = (await upfinityF.balanceOf(freeAirdropAdr))[0];
+    dollarsPerBNB = (await airdropF._dollarsPerBNB())[0] / 1;
+    oneDollarBNB = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
+    oneDollarUPF = (await routerF.getAmountOut(ethers.utils.parseEther(oneDollarBNB.toString()), rI, rO))[0];
+    _freeAirdropSystem = (await upfinityF._freeAirdropSystem())[0]
+    displayText("freeAirdropBalance", "Free Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(freeAirdropBalance.div(oneDollarUPF) / 1)) + " $]");
+
+    airdropBalance = (await upfinityF.balanceOf(airdropAdr))[0];
+    _airdropSystem = (await upfinityF._airdropSystem())[0]
+    displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1)) + "$]");
+  }
+  
+  
+  if (getDiv("Rewards").length) {
+    balanceInfo = await provider.getBalance(rewardAdr);
+    balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
+    displayText("totalUnclaimed", balance.toString() + ' BNB');
+  }
+  
+  if (getDiv("Status").length) {
+    maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
+    maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
+
+
+    sellCooltime = 0;
+    if (_curcuitBreakerFlag == 2) { // breaker on?
+      sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 0.5 * 60 * 60; // reliable rough estimation
+      if (Date.now() < sellCooltime_) {
+        if (sellCooltime / 1 < sellCooltime_ / 1) {
+          sellCooltime = sellCooltime_;
+          d = new Date(sellCooltime * 1000);
+          displayText("sellCooltime", d);
+        }
       }
     }
-  }
-  
-  sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
-  if (Date.now() < sellCooltime_) {
-    sellCooltime = sellCooltime_;
-    d = new Date(sellCooltime * 1000);
-    displayText("sellCooltime", d);
-  }
-  
-  
-  communityToken = "0x000000000000000000000000000000000000dEaD";
-  
-  // airdrop
-  freeAirdropBalance = (await upfinityF.balanceOf(freeAirdropAdr))[0];
-  dollarsPerBNB = (await airdropF._dollarsPerBNB())[0] / 1;
-  oneDollarBNB = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
-  oneDollarUPF = (await routerF.getAmountOut(ethers.utils.parseEther(oneDollarBNB.toString()), rI, rO))[0];
-  _freeAirdropSystem = (await upfinityF._freeAirdropSystem())[0]
-  displayText("freeAirdropBalance", "Free Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(freeAirdropBalance.div(oneDollarUPF) / 1)) + " $]");
-  
-  airdropBalance = (await upfinityF.balanceOf(airdropAdr))[0];
-  _airdropSystem = (await upfinityF._airdropSystem())[0]
-  displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1)) + "$]");
-  
-  
-  balanceInfo = await provider.getBalance(rewardAdr);
-  balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-  displayText("totalUnclaimed", balance.toString() + ' BNB');
-  
-  burnAdr = "0x000000000000000000000000000000000000dEaD";
-  burnAmount = (await upfinityF.balanceOf(burnAdr))[0];
-  burnPercentage = burnAmount.mul(100).div(totalSupply);
-  burnPercentage = burnPercentage.sub(50); // 50% burn at the start
-  displayText("_manualburned", round(burnPercentage / 1, 1));
-  burnLpAmount = (await pairF.balanceOf(burnAdr))[0];
-  burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
-  displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
-  
-  bnbAmount = rI / bnbDiv;
-  tokenAmount = rO / bnbDiv;
-  
 
-  busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-  pricePairAdr = (await factoryF.getPair(wbnbAdr, busdAdr))[0];
-  pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
-  priceReserveData = await pricePairC.functions.getReserves();
-  
-  if (wbnbAdr < busdAdr) { // BNB / busd
-    pricerI = priceReserveData[0]; 
-    pricerO = priceReserveData[1];
-  } else {
-    pricerI = priceReserveData[1];
-    pricerO = priceReserveData[0];
+    sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
+    if (Date.now() < sellCooltime_) {
+      sellCooltime = sellCooltime_;
+      d = new Date(sellCooltime * 1000);
+      displayText("sellCooltime", d);
+    }
+
+    upfinityBalance = (await upfinityF.balanceOf(upfinityAdr))[0];
+    partyImpact = 0;
+    if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
+      displayText("dividendPartyStatus", "READY");
+      partyImpact = _dividendPartyThreshold.div(rO) * 100; // roughly
+      displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
+      displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
+    } else {
+      displayText("dividendPartyStatus", "OFF");
+    }
+    
+    
+    // stats
+    burnAmount = (await upfinityF.balanceOf(burnAdr))[0];
+    burnPercentage = burnAmount.mul(100).div(totalSupply);
+    burnPercentage = burnPercentage.sub(50); // 50% burn at the start
+    displayText("_manualburned", round(burnPercentage / 1, 1));
+    burnLpAmount = (await pairF.balanceOf(burnAdr))[0];
+    burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
+    displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
+
+    bnbAmount = rI / bnbDiv;
+    tokenAmount = rO / bnbDiv;
+
+
+    busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+    pricePairAdr = (await factoryF.getPair(wbnbAdr, busdAdr))[0];
+    pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
+    priceReserveData = await pricePairC.functions.getReserves();
+
+    if (wbnbAdr < busdAdr) { // BNB / busd
+      pricerI = priceReserveData[0]; 
+      pricerO = priceReserveData[1];
+    } else {
+      pricerI = priceReserveData[1];
+      pricerO = priceReserveData[0];
+    }
+    
+    price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
+    realSupply = totalSupply.sub(burnAmount);
+    mcap = price * realSupply / bnbDiv;
+
+    var elms_ = document.querySelectorAll("[id='priceCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
+    }
+    var elms_ = document.querySelectorAll("[id='burnCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', burnAmount / bnbDiv);
+    }
+    var elms_ = document.querySelectorAll("[id='circulateCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', realSupply / bnbDiv);
+    }
+    var elms_ = document.querySelectorAll("[id='marketcapCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
+    }
+    var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', burnPercentage);
+    }
+    var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
+    }
+    var elms_ = document.querySelectorAll("[id='startMultiCounter']");
+    if (elms_.length) {
+    elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
+    }
   }
-  
-  price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
-  realSupply = totalSupply.sub(burnAmount);
-  mcap = price * realSupply / bnbDiv;
-  
-  var elms_ = document.querySelectorAll("[id='priceCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
-  }
-  var elms_ = document.querySelectorAll("[id='burnCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', burnAmount / bnbDiv);
-  }
-  var elms_ = document.querySelectorAll("[id='circulateCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', realSupply / bnbDiv);
-  }
-  var elms_ = document.querySelectorAll("[id='marketcapCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
-  }
-  var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', burnPercentage);
-  }
-  var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
-  }
-  var elms_ = document.querySelectorAll("[id='startMultiCounter']");
-  if (elms_.length) {
-  elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
-  }
-  
-  upfinityBalance = (await upfinityF.balanceOf(upfinityAdr))[0];
-  partyImpact = 0;
-  if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
-    displayText("dividendPartyStatus", "READY");
-    partyImpact = _dividendPartyThreshold.div(rO) * 100; // roughly
-    displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
-    displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
-  } else {
-    displayText("dividendPartyStatus", "OFF");
-  }
-  
   
   t = TT('global done', t);
   
   
-  // personal wallet infos  
+  // personal wallet infos
   currentAccount = await afconnect();
   
-  balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
-  displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
+  if (getDiv("Status").length) {
+    balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
+    displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
+
+    balancePercentage = round(balanceUPF / totalSupply * 100, 2);
+    displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
+    if (balancePercentage >= 1) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
+    } else if (balancePercentage >= 0.3) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
+    } else if (balancePercentage >= 0.1) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
+    } else if (balancePercentage >= 0.03) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
+    } else if (balancePercentage >= 0.01) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
+    } else if (balancePercentage >= 0.003) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
+    } else if (balancePercentage >= 0.001) {
+      displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
+    } 
   
-  balancePercentage = round(balanceUPF / totalSupply * 100, 2);
-  displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
-  if (balancePercentage >= 1) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
-  } else if (balancePercentage >= 0.3) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F988)); // 🦈
-  } else if (balancePercentage >= 0.1) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F42C)); // 🐬
-  } else if (balancePercentage >= 0.03) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F41F)); // 🐟
-  } else if (balancePercentage >= 0.01) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F419)); // 🐙
-  } else if (balancePercentage >= 0.003) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F980)); // 🦀
-  } else if (balancePercentage >= 0.001) {
-    displayText("balanceIcon", String.fromCodePoint(0x1F990)); // 🦐
-  } 
   
   
-  
-  balanceLimit = totalSupply.mul(_maxBalanceNume).div(10000); // 1.1% of total supply
-  buyLimit = balanceLimit.sub(balanceUPF);
-  if (buyLimit / 1 < 0) {
-    displayText("oneBuyLimitStatus", 'already max!');
-    buyLimit = 0;
-  } else {
-    maxBuyBNB_ = (await routerF.getAmountIn(buyLimit, rI, rO))[0];
-    if (maxBuyBNB_ / 1 < maxBuyBNB / 1) {
-      maxBuyBNB = maxBuyBNB_;
+    balanceLimit = totalSupply.mul(_maxBalanceNume).div(10000); // 1.1% of total supply
+    buyLimit = balanceLimit.sub(balanceUPF);
+    if (buyLimit / 1 < 0) {
+      displayText("oneBuyLimitStatus", 'already max!');
+      buyLimit = 0;
+    } else {
+      maxBuyBNB_ = (await routerF.getAmountIn(buyLimit, rI, rO))[0];
+      if (maxBuyBNB_ / 1 < maxBuyBNB / 1) {
+        maxBuyBNB = maxBuyBNB_;
+      }
+
+      displayText("oneBuyLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB');  
     }
-    
-    displayText("oneBuyLimitStatus", round(maxBuyBNB / bnbDiv, 2) + ' BNB');  
-  }
   
   
   
   
-  // it may display last big value
-  
-  _buySellTimer = (await upfinityF._buySellTimer(currentAccount))[0] / 1;
-  sellCooltime_ = _buySellTimer + _buySellTimeDuration;
-  if (sellCooltime / 1 < sellCooltime_ / 1) {
-    sellCooltime = sellCooltime_;
-    d = new Date(sellCooltime * 1000);
-    displayText("sellCooltime", d);
-  }
-  
-  blacklisted = (await upfinityF.blacklisted(currentAccount))[0];
+    // it may display last big value
 
-  cantsell = cantsellReason();
-  
-  if (cantsell != "") {
-    displayText("circuitBreakerStatus", cantsell);
-  }
-  
-  
-  maxSellUPF = rO;  
-  if (Date.now() < _timeAccuTaxCheckGlobal + _accuTaxTimeWindow) { // in time window
-    maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
-    if (maxSellRate_ / 1 < 0) {
-      maxSellRate_ = 0;
+    _buySellTimer = (await upfinityF._buySellTimer(currentAccount))[0] / 1;
+    sellCooltime_ = _buySellTimer + _buySellTimeDuration;
+    if (sellCooltime / 1 < sellCooltime_ / 1) {
+      sellCooltime = sellCooltime_;
+      d = new Date(sellCooltime * 1000);
+      displayText("sellCooltime", d);
     }
-  } else {
-    maxSellRate_ = _curcuitBreakerThreshold;
-  }
-  
-  maxSellUPF_ = rO.mul(maxSellRate_).div(10000); // not exactly right but roughly to avoid confusion
-  if (maxSellUPF_ / 1 < maxSellUPF / 1) {
-    maxSellUPF = maxSellUPF_;
-  }
 
-  _timeAccuTaxCheck = (await upfinityF._timeAccuTaxCheck(currentAccount))[0] / 1;
-  _taxAccuTaxCheck = (await upfinityF._taxAccuTaxCheck(currentAccount))[0] / 1;
-  if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
-    maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
-    if (maxSellRate_ / 1 < 0) {
-      maxSellRate_ = 0;
+    blacklisted = (await upfinityF.blacklisted(currentAccount))[0];
+
+    cantsell = cantsellReason();
+
+    if (cantsell != "") {
+      displayText("circuitBreakerStatus", cantsell);
     }
-  } else {
-    maxSellRate_ = _taxAccuTaxThreshold;
-  }
-  
-  maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
-  if (maxSellUPF_ / 1 < maxSellUPF / 1) {
-    maxSellUPF = maxSellUPF_;
-  }
-  
-  if (0 < maxSellUPF / 1) {
-    // maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0];
-    maxSellBNB = maxSellUPF / rO * rI; // workaround 
-    maxSellBNB = maxSellBNB / 1.5; // roughly estimated
-  } else {
-    maxSellBNB = 0;
-  }
 
-  displayText("oneSellLimitStatus", round(maxSellBNB / bnbDiv, 2) + ' BNB');
 
-  taxPenalty = 0;
-  if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
-    taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
-    if (15 < taxPenalty / 1) {
-      taxPenalty = 15; // check
+    maxSellUPF = rO;  
+    if (Date.now() < _timeAccuTaxCheckGlobal + _accuTaxTimeWindow) { // in time window
+      maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
+      if (maxSellRate_ / 1 < 0) {
+        maxSellRate_ = 0;
+      }
+    } else {
+      maxSellRate_ = _curcuitBreakerThreshold;
     }
+
+    maxSellUPF_ = rO.mul(maxSellRate_).div(10000); // not exactly right but roughly to avoid confusion
+    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
+      maxSellUPF = maxSellUPF_;
+    }
+
+    _timeAccuTaxCheck = (await upfinityF._timeAccuTaxCheck(currentAccount))[0] / 1;
+    _taxAccuTaxCheck = (await upfinityF._taxAccuTaxCheck(currentAccount))[0] / 1;
+    if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+      maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
+      if (maxSellRate_ / 1 < 0) {
+        maxSellRate_ = 0;
+      }
+    } else {
+      maxSellRate_ = _taxAccuTaxThreshold;
+    }
+
+    maxSellUPF_ = rO.mul(maxSellRate_).div(10000);
+    if (maxSellUPF_ / 1 < maxSellUPF / 1) {
+      maxSellUPF = maxSellUPF_;
+    }
+
+    if (0 < maxSellUPF / 1) {
+      // maxSellBNB = (await routerC.functions.getAmountIn(maxSellUPF, rI, rO))[0];
+      maxSellBNB = maxSellUPF / rO * rI; // workaround 
+      maxSellBNB = maxSellBNB / 1.5; // roughly estimated
+    } else {
+      maxSellBNB = 0;
+    }
+
+    displayText("oneSellLimitStatus", round(maxSellBNB / bnbDiv, 2) + ' BNB');
+
+    taxPenalty = 0;
+    if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+      taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
+      if (15 < taxPenalty / 1) {
+        taxPenalty = 15; // check
+      }
+    }
+    displayText("yourTaxPenalty", taxPenalty);
+
+
+    // price impact 1 / ( 1 + x / r0) = (1 - I)
+    // smart contract, change x,r0 equation to 1 / (1 + x / r0) for exact result 
+    // x / r0 = a => price diff = 1 / (1 + a)^2
+    // for simplicity + safety, a = 0.08, 0.05
+
+    // for user: price impact based limit
+    // for graph: price change based limit
+    // so need price impact - price change relation
+    // price impact accumulation => user limit
+    // price change accumulation => global limit
+    // x / r0 = a => price change = 1 / (1 + a)^2
   }
-  displayText("yourTaxPenalty", taxPenalty);
-
-
-  // price impact 1 / ( 1 + x / r0) = (1 - I)
-  // smart contract, change x,r0 equation to 1 / (1 + x / r0) for exact result 
-  // x / r0 = a => price diff = 1 / (1 + a)^2
-  // for simplicity + safety, a = 0.08, 0.05
-
-  // for user: price impact based limit
-  // for graph: price change based limit
-  // so need price impact - price change relation
-  // price impact accumulation => user limit
-  // price change accumulation => global limit
-  // x / r0 = a => price change = 1 / (1 + a)^2
   
   t = TT('personal done', t);
 
 
 
 
+  if (getDiv("Taxs").length) {
+    base = 20;
+    margin = 3;
+    whaleTax = 0;
+    impact = getImpact(tokenAmount, 10**7);
+    if (10**7 / tokenAmount * 100 > 1) {
+      whaleTax = 4;
+    } else {
+      whaleTax = 0;
+    }
+    displayText("10mSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
+    impact = getImpact(tokenAmount, 10**8);
+    if (10**8 / tokenAmount * 100 > 1) {
+      whaleTax = 4;
+    } else {
+      whaleTax = 0;
+    }
+    displayText("100mSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
+    impact = getImpact(tokenAmount, 10**9);
+    if (10**9 / tokenAmount * 100 > 1) {
+      whaleTax = 4;
+    } else {
+      whaleTax = 0;
+    }
+    displayText("1bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
+    impact = getImpact(tokenAmount, 10**10);
+    if (10**10 / tokenAmount * 100 > 1) {
+      whaleTax = 4;
+    } else {
+      whaleTax = 0;
+    }
+    displayText("10bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
+  }
+ 
+  
+  if (getDiv("nft").length) {
+    id2Names = {
+      0: 'emeraldBoy',
+      1: 'emeraldGirl',
+      2: 'diamondBoy',
+      3: 'diamondGirl',
+    }
 
-  base = 20;
-  margin = 3;
-  whaleTax = 0;
-  impact = getImpact(tokenAmount, 10**7);
-  if (10**7 / tokenAmount * 100 > 1) {
-    whaleTax = 4;
-  } else {
-    whaleTax = 0;
+    var name2Ids = {};
+    for(var id in id2Names)
+    {
+        var num = id2Names[id];
+        name2Ids[num] = id;
+    }
+
+    totalNFTCount = 0;
+    grades = ['diamond', 'emerald'];
+    genders = ['Boy', 'Girl'];
+    for (grade of grades) {
+      for (gender of genders) {
+        var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
+        if (elms_.length) {
+          // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
+          for (var idx = 0; idx < elms_.length; idx++) {
+            // elms_[idx].setAttribute('src', jsonFile['image']);
+            if (grade == 'diamond') {
+              elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
+            } else if (grade == 'emerald') {
+              elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
+            }
+          }
+        }
+
+        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 10;
+        displayText_(grade + gender + "Count", diamondBoyCount);
+        totalNFTCount += diamondBoyCount;
+      }
+    }
+
+    displayText_("totalNFTCount", totalNFTCount);
+    totalSupplyNFT = (await nftF.totalSupply())[0] / 1;
+    console.log(totalSupplyNFT);
+    
+    myNFTs = getElement("myNFTs");
+    if (myNFTs) {
+      myNFTcounts = (await nftF.balanceOf(currentAccount))[0] / 1;
+      for (idx = 0; idx < myNFTcounts; idx++) {
+        myNFTidx = (await nftF.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
+        myNFTitemIdx = (await nftF._itemById(myNFTidx))[0] / 1;
+        myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['image'];
+        myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
+        if (myNFTitemIdx == 0) {
+          myNFTimgSrc = "boy.gif";
+          myNFTborder = "emerald";
+        }
+        if (myNFTitemIdx == 1) {
+          myNFTimgSrc = "girl.gif";
+          myNFTborder = "emerald";
+        }
+        if (myNFTitemIdx == 2) {
+          myNFTimgSrc = "boy.png";
+          myNFTborder = "diamond";
+        }
+        if (myNFTitemIdx == 3) {
+          myNFTimgSrc = "girl.png";
+          myNFTborder = "diamond";
+        }
+        output = `
+          <div class="col-12 col-lg-3 text-justify content">
+            <div style="width: 100%; position: relative;">
+              <img src="assets/img/nft/origins/${myNFTimgSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
+              <img src="assets/img/nft/origins/${myNFTborder}.png" style="position: absolute; top:0; left: 0;">
+            </div>
+            <p>ID: ${myNFTidx}</p>
+            <p>${myNFTimgName}</p>
+
+          </div>
+        `;
+        myNFTs.innerHTML += output;
+      }
+      displayText_("totalMyNFTCount", myNFTcounts);
+    }
   }
-  displayText("10mSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
-  impact = getImpact(tokenAmount, 10**8);
-  if (10**8 / tokenAmount * 100 > 1) {
-    whaleTax = 4;
-  } else {
-    whaleTax = 0;
-  }
-  displayText("100mSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
-  impact = getImpact(tokenAmount, 10**9);
-  if (10**9 / tokenAmount * 100 > 1) {
-    whaleTax = 4;
-  } else {
-    whaleTax = 0;
-  }
-  displayText("1bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
-  impact = getImpact(tokenAmount, 10**10);
-  if (10**10 / tokenAmount * 100 > 1) {
-    whaleTax = 4;
-  } else {
-    whaleTax = 0;
-  }
-  displayText("10bSlippage", round(base + impact * _accuMulFactor + taxPenalty + partyImpact + whaleTax + margin, 1));
   
-  displayText("devNotice", "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>");
+  if (getDiv("swap").length) {
+    source = getElement('swapInput');
+    if (source) {
+      source.addEventListener('input', inputHandlerBuy);
+      source.addEventListener('propertychange', inputHandlerBuy); // for IE8
+      // Firefox/Edge18-/IE9+ don’t fire on <select><option>
+      // source.addEventListener('change', inputHandler); 
+    }
   
-  
-  id2Names = {
-    0: 'emeraldBoy',
-    1: 'emeraldGirl',
-    2: 'diamondBoy',
-    3: 'diamondGirl',
+    balanceBNB = await provider.getBalance(currentAccount);
+    displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
+
+    balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
+    displayText_("UPFbalance", numberWithCommas(parseInt(balanceUPF / bnbDiv)));
+    balance = balanceUPF;
+
+    swapComma("swapInput", false);
+    swapComma("swapOuput", true);
   }
   
-  var name2Ids = {};
-  for(var id in id2Names)
-  {
-      var num = id2Names[id];
-      name2Ids[num] = id;
-  }
   
-  totalNFTCount = 0;
-  grades = ['diamond', 'emerald'];
-  genders = ['Boy', 'Girl'];
-  for (grade of grades) {
-    for (gender of genders) {
-      var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
-      if (elms_.length) {
-        // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
-        for (var idx = 0; idx < elms_.length; idx++) {
-          // elms_[idx].setAttribute('src', jsonFile['image']);
-          if (grade == 'diamond') {
-            elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
-          } else if (grade == 'emerald') {
-            elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
+  if (getDiv("UpFinomics").length) {
+  
+    chart = document.querySelector('#SellTaxChart');
+    if (chart) {
+      new Chart(document.querySelector('#SellTaxChart'), {
+      type: 'doughnut',
+      data: {
+        labels: [
+        'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
+        'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
+        'Liquidity: ' + String(_liquidityFee / 100) + '%',
+        'Project: ' + String(_projectFundFee / 100) + '%',
+        'Ecosystem: ' + String(_projectFundFee / 100) + '%',
+        'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) / 100) + '%',
+        ],
+        datasets: [{
+        label: 'Sell Tax',
+        data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee / 100, _projectFundFee / 100, _projectFundFee / 100, (_autoBurnFee + redistributionFee) / 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(40, 167, 69)',
+          'rgb(162, 74, 96)',
+          'rgb(234, 72, 23)',				  
+        ],
+        hoverOffset: 4
+        }],
+      },
+      options: {
+        plugins: {
+          legend: {
+            <!-- position: 'chartArea' -->
+            position: 'right'
           }
         }
       }
-      
-      diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 10;
-      displayText_(grade + gender + "Count", diamondBoyCount);
-      totalNFTCount += diamondBoyCount;
+      });
     }
-  }
-  
-  displayText_("totalNFTCount", totalNFTCount);
-  totalSupplyNFT = (await nftF.totalSupply())[0] / 1;
-  console.log(totalSupplyNFT);
-  
-  source = getElement('swapInput');
-  if (source) {
-    source.addEventListener('input', inputHandlerBuy);
-    source.addEventListener('propertychange', inputHandlerBuy); // for IE8
-    // Firefox/Edge18-/IE9+ don’t fire on <select><option>
-    // source.addEventListener('change', inputHandler); 
-  }
-  
-  balanceBNB = await provider.getBalance(currentAccount);
-  displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
-  balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
-  displayText_("UPFbalance", numberWithCommas(parseInt(balanceUPF / bnbDiv)));
-  balance = balanceUPF;
-  
-  swapComma("swapInput", false);
-  swapComma("swapOuput", true);
-  
-  myNFTs = getElement("myNFTs");
-  if (myNFTs) {
-    myNFTcounts = (await nftF.balanceOf(currentAccount))[0] / 1;
-    for (idx = 0; idx < myNFTcounts; idx++) {
-      myNFTidx = (await nftF.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
-      myNFTitemIdx = (await nftF._itemById(myNFTidx))[0] / 1;
-      myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['image'];
-      myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
-      if (myNFTitemIdx == 0) {
-        myNFTimgSrc = "boy.gif";
-        myNFTborder = "emerald";
-      }
-      if (myNFTitemIdx == 1) {
-        myNFTimgSrc = "girl.gif";
-        myNFTborder = "emerald";
-      }
-      if (myNFTitemIdx == 2) {
-        myNFTimgSrc = "boy.png";
-        myNFTborder = "diamond";
-      }
-      if (myNFTitemIdx == 3) {
-        myNFTimgSrc = "girl.png";
-        myNFTborder = "diamond";
-      }
-      output = `
-        <div class="col-12 col-lg-3 text-justify content">
-          <div style="width: 100%; position: relative;">
-            <img src="assets/img/nft/origins/${myNFTimgSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
-            <img src="assets/img/nft/origins/${myNFTborder}.png" style="position: absolute; top:0; left: 0;">
-          </div>
-          <p>ID: ${myNFTidx}</p>
-          <p>${myNFTimgName}</p>
-          
-        </div>
-      `;
-      myNFTs.innerHTML += output;
-    }
-    displayText_("totalMyNFTCount", myNFTcounts);
-  }
-  
-  chart = document.querySelector('#SellTaxChart');
-  if (chart) {
-    new Chart(document.querySelector('#SellTaxChart'), {
-    type: 'doughnut',
-    data: {
-      labels: [
-      'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
-      'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
-      'Liquidity: ' + String(_liquidityFee / 100) + '%',
-      'Project: ' + String(_projectFundFee / 100) + '%',
-      'Ecosystem: ' + String(_projectFundFee / 100) + '%',
-      'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) / 100) + '%',
-      ],
-      datasets: [{
-      label: 'Sell Tax',
-      data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee / 100, _projectFundFee / 100, _projectFundFee / 100, (_autoBurnFee + redistributionFee) / 100],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-        'rgb(40, 167, 69)',
-        'rgb(162, 74, 96)',
-        'rgb(234, 72, 23)',				  
-      ],
-      hoverOffset: 4
-      }],
-    },
-    options: {
-      plugins: {
-        legend: {
-          <!-- position: 'chartArea' -->
-          position: 'right'
+    chart = document.querySelector('#TokenDistributionChart');
+    if (chart) {
+      new Chart(document.querySelector('#TokenDistributionChart'), {
+      type: 'doughnut',
+      data: {
+        labels: [
+        'Burn: 50%',
+        'Liquidity: 40%',
+        'Minus Tax: 2%',
+        'Project: 8%',
+        ],
+        datasets: [{
+        label: 'Token Distribution',
+        data: [50, 40, 2, 8],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(40, 167, 69)',
+        ],
+        hoverOffset: 4
+        }],
+      },
+      options: {
+        plugins: {
+          legend: {
+            <!-- position: 'chartArea' -->
+            position: 'right'
+          }
         }
       }
+      });
     }
-    });
   }
-  
-  chart = document.querySelector('#TokenDistributionChart');
-  if (chart) {
-    new Chart(document.querySelector('#TokenDistributionChart'), {
-    type: 'doughnut',
-    data: {
-      labels: [
-      'Burn: 50%',
-      'Liquidity: 40%',
-      'Minus Tax: 2%',
-      'Project: 8%',
-      ],
-      datasets: [{
-      label: 'Token Distribution',
-      data: [50, 40, 2, 8],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-        'rgb(40, 167, 69)',
-      ],
-      hoverOffset: 4
-      }],
-    },
-    options: {
-      plugins: {
-        legend: {
-          <!-- position: 'chartArea' -->
-          position: 'right'
-        }
-      }
-    }
-    });
-  }
-  
   
   
   const countDownTimer = function (id, date) {
