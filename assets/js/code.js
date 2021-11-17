@@ -100,18 +100,26 @@ $(document).click(function (e) {
     return;
   }
     
-  routerF = (new ethers.Contract(routerAdr, routerAbi, provider)).functions;
+  routerC = new ethers.Contract(routerAdr, routerAbi, provider);
+  routerF = routerC.functions;
   factoryAdr = (await CALL(routerF, 'factory'))[0];
-  factoryF = (new ethers.Contract(factoryAdr, factoryAbi, provider)).functions;
+  factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
+  factoryF = factoryC.functions;
   
   pairAdr = (await CALL(factoryF, 'getPair', [wbnbAdr, upfinityAdr]))[0];
-  pairF = (new ethers.Contract(pairAdr, pairAbi, provider)).functions;
+  pairC = new ethers.Contract(pairAdr, pairAbi, provider);
+  pairF = pairC.functions;
   
-  upfinityF = (new ethers.Contract(upfinityAdr, upfinityAbi, provider)).functions;
-  rewardF = (new ethers.Contract(rewardAdr, rewardAbi, provider)).functions;
-  freeAirdropF = (new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider)).functions;
-  airdropF = (new ethers.Contract(airdropAdr, airdropAbi, provider)).functions;
-  nftF = (new ethers.Contract(nftAdr, nftAbi , provider)).functions;
+  upfinityC = new ethers.Contract(upfinityAdr, upfinityAbi, provider);
+  upfinityF = upfinityC.functions;
+  rewardC = new ethers.Contract(rewardAdr, rewardAbi, provider);
+  rewardF = rewardC.functions;
+  freeAirdropC = new ethers.Contract(freeAirdropAdr, freeAirdropAbi, provider);
+  freeAirdropF = freeAirdropC.functions;
+  airdropC = new ethers.Contract(airdropAdr, airdropAbi, provider);
+  airdropF = airdropC.functions;
+  nftC = new ethers.Contract(nftAdr, nftAbi , provider);
+  nftF = nftC.functions;
   
   syncDelay(50);
   
