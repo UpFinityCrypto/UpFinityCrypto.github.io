@@ -215,14 +215,14 @@ $(document).click(function (e) {
   displayText("_whaleSellFee", _whaleSellFee / 10000);
   displayText("_whaleTransferFee", _whaleTransferFee / 10000);
   
-  _projectFundFee = (await upfinityC.functions._projectFundFee())[0] / 1;
+  _projectFundFee = (await CALL(upfinityF, '_projectFundFee'))[0] / 1;
   
 
   redistributionFee
     = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   displayText("redistributionFee", redistributionFee * multiplier / 100);
   
-  reserveData = await pairC.functions.getReserves();
+  reserveData = await pairF.getReserves();
   
   if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
     rI = reserveData[0]; 
@@ -232,10 +232,10 @@ $(document).click(function (e) {
     rO = reserveData[0];
   }
   
-  totalLpSupply = (await pairC.functions.totalSupply())[0];
+  totalLpSupply = (await pairF.totalSupply())[0];
   
   maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
-  maxBuyBNB = (await routerC.functions.getAmountIn(maxBuyUPF, rI, rO))[0];
+  maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
   
 
   sellCooltime = 0;
@@ -262,15 +262,15 @@ $(document).click(function (e) {
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
   // airdrop
-  freeAirdropBalance = (await upfinityC.functions.balanceOf(freeAirdropAdr))[0];
-  dollarsPerBNB = (await airdropC.functions._dollarsPerBNB())[0] / 1;
+  freeAirdropBalance = (await upfinityF.balanceOf(freeAirdropAdr))[0];
+  dollarsPerBNB = (await airdropF._dollarsPerBNB())[0] / 1;
   oneDollarBNB = 1 / dollarsPerBNB; // 1 BNB = 400$ for simplicity + optimize gas fee
-  oneDollarUPF = (await routerC.functions.getAmountOut(ethers.utils.parseEther(oneDollarBNB.toString()), rI, rO))[0];
-  _freeAirdropSystem = (await upfinityC.functions._freeAirdropSystem())[0]
+  oneDollarUPF = (await routerF.getAmountOut(ethers.utils.parseEther(oneDollarBNB.toString()), rI, rO))[0];
+  _freeAirdropSystem = (await upfinityF._freeAirdropSystem())[0]
   displayText("freeAirdropBalance", "Free Airdrop (" + _freeAirdropSystem + ") balance: [" + numberWithCommas(Math.floor(freeAirdropBalance.div(oneDollarUPF) / 1)) + " $]");
   
-  airdropBalance = (await upfinityC.functions.balanceOf(airdropAdr))[0];
-  _airdropSystem = (await upfinityC.functions._airdropSystem())[0]
+  airdropBalance = (await upfinityF.balanceOf(airdropAdr))[0];
+  _airdropSystem = (await upfinityF._airdropSystem())[0]
   displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1)) + "$]");
   
   
@@ -279,11 +279,11 @@ $(document).click(function (e) {
   displayText("totalUnclaimed", balance.toString() + ' BNB');
   
   burnAdr = "0x000000000000000000000000000000000000dEaD";
-  burnAmount = (await upfinityC.functions.balanceOf(burnAdr))[0];
+  burnAmount = (await upfinityF.balanceOf(burnAdr))[0];
   burnPercentage = burnAmount.mul(100).div(totalSupply);
   burnPercentage = burnPercentage.sub(50); // 50% burn at the start
   displayText("_manualburned", round(burnPercentage / 1, 1));
-  burnLpAmount = (await pairC.functions.balanceOf(burnAdr))[0];
+  burnLpAmount = (await pairF.balanceOf(burnAdr))[0];
   burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
   displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
   
@@ -293,7 +293,7 @@ $(document).click(function (e) {
   
   // without wallet connection
   busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-  pricePairAdr = (await factoryC.functions.getPair(wbnbAdr, busdAdr))[0];
+  pricePairAdr = (await factoryF.getPair(wbnbAdr, busdAdr))[0];
   pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
   priceReserveData = await pricePairC.functions.getReserves();
   
@@ -338,7 +338,7 @@ $(document).click(function (e) {
   elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
   }
   
-  upfinityBalance = (await upfinityC.functions.balanceOf(upfinityAdr))[0];
+  upfinityBalance = (await upfinityF.balanceOf(upfinityAdr))[0];
   partyImpact = 0;
   if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
     displayText("dividendPartyStatus", "READY");
@@ -356,7 +356,7 @@ $(document).click(function (e) {
   
   currentAccount = await afconnect();
   
-  balanceUPF = (await upfinityC.functions.balanceOf(currentAccount))[0];
+  balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
   displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
   
   balancePercentage = round(balanceUPF / totalSupply * 100, 2);
@@ -385,7 +385,7 @@ $(document).click(function (e) {
     displayText("oneBuyLimitStatus", 'already max!');
     buyLimit = 0;
   } else {
-    maxBuyBNB_ = (await routerC.functions.getAmountIn(buyLimit, rI, rO))[0];
+    maxBuyBNB_ = (await routerF.getAmountIn(buyLimit, rI, rO))[0];
     if (maxBuyBNB_ / 1 < maxBuyBNB / 1) {
       maxBuyBNB = maxBuyBNB_;
     }
@@ -398,7 +398,7 @@ $(document).click(function (e) {
   
   // it may display last big value
   
-  _buySellTimer = (await upfinityC.functions._buySellTimer(currentAccount))[0] / 1;
+  _buySellTimer = (await upfinityF._buySellTimer(currentAccount))[0] / 1;
   sellCooltime_ = _buySellTimer + _buySellTimeDuration;
   if (sellCooltime / 1 < sellCooltime_ / 1) {
     sellCooltime = sellCooltime_;
@@ -406,7 +406,7 @@ $(document).click(function (e) {
     displayText("sellCooltime", d);
   }
   
-  blacklisted = (await upfinityC.functions.blacklisted(currentAccount))[0];
+  blacklisted = (await upfinityF.blacklisted(currentAccount))[0];
 
   cantsell = cantsellReason();
   
@@ -430,8 +430,8 @@ $(document).click(function (e) {
     maxSellUPF = maxSellUPF_;
   }
 
-  _timeAccuTaxCheck = (await upfinityC.functions._timeAccuTaxCheck(currentAccount))[0] / 1;
-  _taxAccuTaxCheck = (await upfinityC.functions._taxAccuTaxCheck(currentAccount))[0] / 1;
+  _timeAccuTaxCheck = (await upfinityF._timeAccuTaxCheck(currentAccount))[0] / 1;
+  _taxAccuTaxCheck = (await upfinityF._taxAccuTaxCheck(currentAccount))[0] / 1;
   if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
     maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
     if (maxSellRate_ / 1 < 0) {
@@ -551,14 +551,14 @@ $(document).click(function (e) {
         }
       }
       
-      diamondBoyCount = (await nftC.functions._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 10;
+      diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 10;
       displayText_(grade + gender + "Count", diamondBoyCount);
       totalNFTCount += diamondBoyCount;
     }
   }
   
   displayText_("totalNFTCount", totalNFTCount);
-  totalSupplyNFT = (await nftC.functions.totalSupply())[0] / 1;
+  totalSupplyNFT = (await nftF.totalSupply())[0] / 1;
   console.log(totalSupplyNFT);
   
   source = getElement('swapInput');
@@ -572,7 +572,7 @@ $(document).click(function (e) {
   balanceBNB = await provider.getBalance(currentAccount);
   displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
-  balanceUPF = (await upfinityC.functions.balanceOf(currentAccount))[0];
+  balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
   displayText_("UPFbalance", numberWithCommas(parseInt(balanceUPF / bnbDiv)));
   balance = balanceUPF;
   
@@ -581,10 +581,10 @@ $(document).click(function (e) {
   
   myNFTs = getElement("myNFTs");
   if (myNFTs) {
-    myNFTcounts = (await nftC.functions.balanceOf(currentAccount))[0] / 1;
+    myNFTcounts = (await nftF.balanceOf(currentAccount))[0] / 1;
     for (idx = 0; idx < myNFTcounts; idx++) {
-      myNFTidx = (await nftC.functions.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
-      myNFTitemIdx = (await nftC.functions._itemById(myNFTidx))[0] / 1;
+      myNFTidx = (await nftF.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
+      myNFTitemIdx = (await nftF._itemById(myNFTidx))[0] / 1;
       myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['image'];
       myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
       if (myNFTitemIdx == 0) {
