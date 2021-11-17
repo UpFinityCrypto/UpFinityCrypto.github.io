@@ -2,6 +2,11 @@ function T() {
 	return new Date().getTime();
 }
 
+function TT(t, txt) {
+	console.log(txt, T() - t);
+	return T();
+}
+
 function loadFile(filePath) {
     var result = null;
     var xmlhttp = new XMLHttpRequest();
