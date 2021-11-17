@@ -130,24 +130,22 @@ $(document).click(function (e) {
   needValue |= getExtFile('Taxs', 'sections/Taxs.html');
   needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
-  if (!needValue) {
-    return;
+  if (needValue) {
+    await loadValues();
   }
-  
-  await loadValues();
-  
   t = TT('value done', t);
   
-  reserveData = await pairF.getReserves();
+  if (needValue) {
+    reserveData = await pairF.getReserves();
   
-  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-    rI = reserveData[0]; 
-    rO = reserveData[1];
-  } else {
-    rI = reserveData[1];
-    rO = reserveData[0];
+    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+      rI = reserveData[0]; 
+      rO = reserveData[1];
+    } else {
+      rI = reserveData[1];
+      rO = reserveData[0];
+    }
   }
-  
   
   
 
