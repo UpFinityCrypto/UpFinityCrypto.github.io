@@ -7,6 +7,10 @@ function TT(txt, t) {
 	return T();
 }
 
+function getDiv(target) {
+	return $('#' + target);
+	
+}
 function loadFile(filePath) {
     var result = null;
     var xmlhttp = new XMLHttpRequest();
