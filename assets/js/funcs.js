@@ -775,10 +775,14 @@ function getExtFile(target, file){
   });
 }
 
-function CALL(cf, attr) {
+function CALL(cf, attr, params=null) {
   for (idx = 0; idx < 5; idx++) {
 	  try {
-	    v = await cf[attr]();
+		  if (params) {
+	    		v = await cf[attr](...params);
+		  } else {
+			  v = await cf[attr]();
+		  }
 		return v;
 	  } catch (e) {
  		continue;
