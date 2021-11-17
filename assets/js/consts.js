@@ -4,6 +4,7 @@ const wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
 const routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
 const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
 const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
+const burnAdr = "0x000000000000000000000000000000000000dEaD";
 
 buyFee = 900;
 displayText("buyFee", buyFee / 100);
