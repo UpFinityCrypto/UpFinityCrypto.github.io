@@ -1,3 +1,7 @@
+function T() {
+	return new Date().getTime();
+}
+
 function loadFile(filePath) {
     var result = null;
     var xmlhttp = new XMLHttpRequest();
