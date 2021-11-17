@@ -192,8 +192,10 @@ function loadFile(filePath) {
   
 
   function copy(value) {
-    const input = document.createElement('textarea');
-    input.value = value;
+	   const input = document.createElement('textarea');
+	   input.value = text;
+	   
+    
     var isiOSDevice = navigator.userAgent.match(/ipad|iphone/i);
 
     if (isiOSDevice) {
@@ -216,11 +218,15 @@ function loadFile(filePath) {
       input.readOnly = readOnly;
 
     } else {
-      input.select();
+      document.body.appendChild(input);
+   input.select();
+
     }
 
-    document.execCommand('copy');
-    document.body.removeChild(input);
+   document.execCommand('copy');
+	if (!isiOSDevice) {
+   	document.body.removeChild(input);
+	}
   }
   
   function copyValue(value) {
