@@ -2,7 +2,7 @@ function T() {
 	return new Date().getTime();
 }
 
-function TT(t, txt) {
+function TT(txt, t) {
 	console.log(txt, T() - t);
 	return T();
 }
