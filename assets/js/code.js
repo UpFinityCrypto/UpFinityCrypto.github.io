@@ -55,13 +55,13 @@ $(document).click(function (e) {
   // inits
 
   if (location.hostname == "") {
-    console.log('local');
+    alert('running in local!');
     return;
 
   }
   
   if (typeof window.ethereum === 'undefined') {
-    console.log('no dapp');
+    alert('not running in dapp!');
     return;
   }
   
