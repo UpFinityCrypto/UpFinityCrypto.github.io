@@ -278,7 +278,9 @@ $(document).click(function (e) {
   
   // personal wallet infos
   currentAccount = await afconnect();
+  displayText("connectResult", currentAccount + " <span>Loading</span>);
   
+	
   if (getDiv("Status").length) {
     balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
     displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
@@ -674,5 +676,6 @@ $(document).click(function (e) {
   
   
   t = TT('others done', t);
-  
+  displayText("connectResult", currentAccount + " <span>Done!</span>);
+	      
   }());
