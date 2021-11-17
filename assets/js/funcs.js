@@ -193,7 +193,7 @@ function loadFile(filePath) {
 
   function copy(value) {
 	   const input = document.createElement('textarea');
-	   input.value = text;
+	   input.value = value;
 	   
     
     var isiOSDevice = navigator.userAgent.match(/ipad|iphone/i);
