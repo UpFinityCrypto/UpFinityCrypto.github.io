@@ -785,6 +785,7 @@ async function CALL(cf, attr, params=null) {
 		  }
 		return v;
 	  } catch (e) {
+		console.log('e', 'retry', idx, cf, attr, params);
 		  syncDelay(100);
  		continue;
 	  }
