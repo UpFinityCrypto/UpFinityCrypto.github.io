@@ -775,7 +775,7 @@ function getExtFile(target, file){
   });
 }
 
-function CALL(cf, attr, params=null) {
+async function CALL(cf, attr, params=null) {
   for (idx = 0; idx < 5; idx++) {
 	  try {
 		  if (params) {
