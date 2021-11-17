@@ -8,16 +8,16 @@
       <div>When current price drops by <span id="_curcuitBreakerThreshold">15</span>% within <span id="_accuTaxTimeWindow"></span> day, triggers [Circuit breaker]</div>
       
       <h4>Circuit Breaker Algorithm</h4>
-      <div>None can sell for <span id="_curcuitBreakerDuration"></span> hours, resets [Global Anti-dump algorithm]</div>
+      <div>[Impact Tax Algorithm] is doubled for <span id="_curcuitBreakerDuration"></span> hours, resets [Global Anti-dump algorithm]</div>
       
       <h4>Personal Anti-Dump Algorithm</h4>
       <div>Each wallet can only sell/transfer <span id="_taxAccuTaxThreshold"></span>% of price impact within 1 day</div>
       
       <h4>Global Anti-Panic Algorithm</h4>
-      <div>Only 1 sell per <span id="_antiDumpDuration"></span> min can happen, globally.</div>
+      <div>Only 1 sell per <span id="_antiDumpDuration"></span> seconds can happen, globally.</div>
       
       <h4>Personal Anti-Panic Algorithm</h4>
-      <div>Each wallet can sell once every <span id="_buySellTimeDuration"></span> min</div>
+      <div>Each wallet can sell once every <span id="_buySellTimeDuration"></span> seconds</div>
       
       
     </div>
