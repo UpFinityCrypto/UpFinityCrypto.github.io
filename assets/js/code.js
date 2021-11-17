@@ -131,11 +131,14 @@ $(document).click(function (e) {
   needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
   if (needValue) {
-    await loadValues();
-  }
-  t = TT('value done', t);
-  
-  if (needValue) {
+    if ((getDiv('Features').length) | (getDiv('Status').length)) {
+      await loadValues();
+      t = TT('value done', t);
+    }
+    
+    totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
+	  totalLpSupply = (await pairF.totalSupply())[0];
+    
     reserveData = await pairF.getReserves();
   
     if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
@@ -145,6 +148,9 @@ $(document).click(function (e) {
       rI = reserveData[1];
       rO = reserveData[0];
     }
+    
+    bnbAmount = rI / bnbDiv;
+    tokenAmount = rO / bnbDiv;
   }
   
   
@@ -217,8 +223,7 @@ $(document).click(function (e) {
     burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
     displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
 
-    bnbAmount = rI / bnbDiv;
-    tokenAmount = rO / bnbDiv;
+
 
 
     busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
