@@ -779,7 +779,9 @@ function cantsellReason() {
 
 function getExtFile(target, file){
   var div = $('#' + target);
-  // Getting elements from server and saving the in the variable data
+  if (!div.length) {
+	  return;
+  }
   $.get(file, function(response) {
     div.append($(response));
 
