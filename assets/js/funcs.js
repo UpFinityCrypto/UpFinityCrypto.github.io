@@ -824,6 +824,8 @@ async function loadValues() {
 	// constants
   
 	totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
+	totalLpSupply = (await pairF.totalSupply())[0];
+	
 	_dividendPartyThreshold = (await CALL(upfinityF, '_dividendPartyThreshold'))[0];
 
 	_accuMulFactor = (await CALL(upfinityF, '_accuMulFactor'))[0] / 1;
