@@ -418,7 +418,7 @@ function mintNFT(name, isBoy) {
     balance = (await upfinityC.functions.balanceOf(currentAccount))[0];
 
     if (name == 'diamond') {
-      if (balance / 1 < 2 * 10 ** 9 * 10 ** decimals) {
+      if (balance / 1 < 2 * 10**9 * 10**decimals) {
         alert("Should have more than 2B UPF!");
         return;
       }
@@ -446,9 +446,10 @@ function mintNFT(name, isBoy) {
       }
 
       nftSigner.mintDiamond(isBoy, nftOverride).then((arg) => {
-        displayText("mintDiamondResult", arg);
-      }, (error) => {
-        console.log(error['data']['message']);
+	alert(arg);
+      }, (e) => {
+	e = parseError(e);
+	alert(e);
       });
     }
 
@@ -481,9 +482,10 @@ function mintNFT(name, isBoy) {
       }
 
       nftSigner.mintEmerald(isBoy, nftOverride).then((arg) => {
-        displayText("mintEmeraldResult", arg);
-      }, (error) => {
-        displayText("mintEmeraldResult", error['data']['message']);
+        alert(arg);
+      }, (e) => {
+	e = parseError(e);
+	alert(e);
       });
     }
   })();
@@ -793,5 +795,10 @@ async function CALL(cf, attr, params=null) {
 	return null;
 }
 
-
-
+function parseError(e) {
+	if (e['message'] == 'Internal JSON-RPC error.') {
+		return e['data']['message'];
+	}
+	
+	return e['message'];
+}
