@@ -131,7 +131,7 @@ $(document).click(function (e) {
   needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
   if (needValue) {
-    if ((getDiv('Features').length) | (getDiv('Status').length)) {
+    if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length)) {
       await loadValues();
       t = TT('value done', t);
     }
