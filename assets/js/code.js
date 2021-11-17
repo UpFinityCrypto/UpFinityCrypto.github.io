@@ -14,6 +14,16 @@ getExtFile('Patchs', 'sections/Patchs.html');
 getExtFile('Roadmap', 'sections/Roadmap.html');
 // getExtFile('Testimonials', 'sections/Testimonials.html');
 
+needValue = false;
+needValue |= getExtFile('Airdrop', 'sections/Airdrop.html');
+needValue |= getExtFile('FAQs', 'sections/FAQs.html');
+needValue |= getExtFile('Features', 'sections/Features.html');
+needValue |= getExtFile('Rewards', 'sections/Rewards.html');
+needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
+needValue |= getExtFile('Status', 'sections/Status.html');
+needValue |= getExtFile('Taxs', 'sections/Taxs.html');
+needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
+
 t = TT('init done', t);
 
 $('#popup').show();
@@ -105,17 +115,6 @@ $(document).click(function (e) {
   t = TT('head done', t);
   // without wallet connection
   
-  
-  
-  needValue = false;
-  needValue |= getExtFile('Airdrop', 'sections/Airdrop.html');
-  needValue |= getExtFile('FAQs', 'sections/FAQs.html');
-  needValue |= getExtFile('Features', 'sections/Features.html');
-  needValue |= getExtFile('Rewards', 'sections/Rewards.html');
-  needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
-  needValue |= getExtFile('Status', 'sections/Status.html');
-  needValue |= getExtFile('Taxs', 'sections/Taxs.html');
-  needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
   connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
   displayText("connectResult", connectWalletText);
