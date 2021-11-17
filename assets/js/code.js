@@ -101,10 +101,10 @@ $(document).click(function (e) {
   }
     
   routerF = (new ethers.Contract(routerAdr, routerAbi, provider)).functions;
-  factoryAdr = CALL(routerF, 'factory')[0];
+  factoryAdr = (await CALL(routerF, 'factory'))[0];
   factoryF = (new ethers.Contract(factoryAdr, factoryAbi, provider)).functions;
   
-  pairAdr = CALL(factoryF, 'getPair', [wbnbAdr, upfinityAdr])[0];
+  pairAdr = (await CALL(factoryF, 'getPair', [wbnbAdr, upfinityAdr]))[0];
   pairF = (new ethers.Contract(pairAdr, pairAbi, provider)).functions;
   
   upfinityF = (new ethers.Contract(upfinityAdr, upfinityAbi, provider)).functions;
@@ -135,46 +135,46 @@ $(document).click(function (e) {
   
   // constants
   
-  totalSupply = CALL(upfinityF, 'totalSupply')[0];
-  _dividendPartyThreshold = CALL(upfinityF, '_dividendPartyThreshold')[0];
+  totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
+  _dividendPartyThreshold = (await CALL(upfinityF, '_dividendPartyThreshold'))[0];
   
   syncDelay(100);
   
-  _accuMulFactor = CALL(upfinityF, '_accuMulFactor')[0] / 1;
-  _accuTaxTimeWindow = CALL(upfinityF, '_accuTaxTimeWindow')[0] / 1;
-  _curcuitBreakerTime = CALL(upfinityF, '_curcuitBreakerTime')[0] / 1;
-  _curcuitBreakerDuration = CALL(upfinityF, '_curcuitBreakerDuration')[0] / 1;
-  _curcuitBreakerThreshold = CALL(upfinityF, '_curcuitBreakerThreshold')[0] / 1;
-  _taxAccuTaxCheckGlobal = CALL(upfinityF, '_taxAccuTaxCheckGlobal')[0] / 1;
-  _curcuitBreakerFlag = CALL(upfinityF, '_curcuitBreakerFlag')[0] / 1;
+  _accuMulFactor = (await CALL(upfinityF, '_accuMulFactor'))[0] / 1;
+  _accuTaxTimeWindow = (await CALL(upfinityF, '_accuTaxTimeWindow'))[0] / 1;
+  _curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime'))[0] / 1;
+  _curcuitBreakerDuration = (await CALL(upfinityF, '_curcuitBreakerDuration'))[0] / 1;
+  _curcuitBreakerThreshold = (await CALL(upfinityF, '_curcuitBreakerThreshold'))[0] / 1;
+  _taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal'))[0] / 1;
+  _curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag'))[0] / 1;
   
   syncDelay(100);
   
   
-  _airdropSystem = CALL(upfinityF, '_airdropSystem')[0] / 1;
-  _antiDumpDuration = CALL(upfinityF, '_antiDumpDuration')[0] / 1;
-  _freeAirdropSystem = CALL(upfinityF, '_freeAirdropSystem')[0] / 1;
+  _airdropSystem = (await CALL(upfinityF, '_airdropSystem'))[0] / 1;
+  _antiDumpDuration = (await CALL(upfinityF, '_antiDumpDuration'))[0] / 1;
+  _freeAirdropSystem = (await CALL(upfinityF, '_freeAirdropSystem'))[0] / 1;
   
-  _autoBurnFee = CALL(upfinityF, '_autoBurnFee')[0] / 1;
-  _buySellTimeDuration = CALL(upfinityF, '_buySellTimeDuration')[0] / 1;
-  _dipRewardFee = CALL(upfinityF, '_dipRewardFee')[0] / 1;
-  _improvedRewardFee = CALL(upfinityF, '_improvedRewardFee')[0] / 1;
+  _autoBurnFee = (await CALL(upfinityF, '_autoBurnFee'))[0] / 1;
+  _buySellTimeDuration = (await CALL(upfinityF, '_buySellTimeDuration'))[0] / 1;
+  _dipRewardFee = (await CALL(upfinityF, '_dipRewardFee'))[0] / 1;
+  _improvedRewardFee = (await CALL(upfinityF, '_improvedRewardFee'))[0] / 1;
   
   syncDelay(100);
   
-  _liquidityFee = CALL(upfinityF, '_liquidityFee')[0] / 1;
-  _manualBuyFee = CALL(upfinityF, '_manualBuyFee')[0] / 1;
-  _maxBalanceNume = CALL(upfinityF, '_maxBalanceNume')[0] / 1;
-  _maxSellNume = CALL(upfinityF, '_maxSellNume')[0] / 1;
-  _maxTxNume = CALL(upfinityF, '_maxTxNume')[0] / 1;
-  _minusTaxBonus = CALL(upfinityF, '_minusTaxBonus')[0] / 1;
+  _liquidityFee = (await CALL(upfinityF, '_liquidityFee'))[0] / 1;
+  _manualBuyFee = (await CALL(upfinityF, '_manualBuyFee'))[0] / 1;
+  _maxBalanceNume = (await CALL(upfinityF, '_maxBalanceNume'))[0] / 1;
+  _maxSellNume = (await CALL(upfinityF, '_maxSellNume'))[0] / 1;
+  _maxTxNume = (await CALL(upfinityF, '_maxTxNume'))[0] / 1;
+  _minusTaxBonus = (await CALL(upfinityF, '_minusTaxBonus'))[0] / 1;
   
-  _taxAccuTaxThreshold = CALL(upfinityF, '_taxAccuTaxThreshold')[0] / 1;
-  _timeAccuTaxCheckGlobal = CALL(upfinityF, '_timeAccuTaxCheckGlobal')[0] / 1;
-  _whaleRate = CALL(upfinityF, '_whaleRate')[0] / 1;
-  _whaleSellFee = CALL(upfinityF, '_whaleSellFee')[0] / 1;
-  _whaleTransferFee = CALL(upfinityF, '_whaleTransferFee')[0] / 1;
-  _antiDumpTimer = CALL(upfinityF, '_antiDumpTimer')[0] / 1;
+  _taxAccuTaxThreshold = (await CALL(upfinityF, '_taxAccuTaxThreshold'))[0] / 1;
+  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal'))[0] / 1;
+  _whaleRate = (await CALL(upfinityF, '_whaleRate'))[0] / 1;
+  _whaleSellFee = (await CALL(upfinityF, '_whaleSellFee'))[0] / 1;
+  _whaleTransferFee = (await CALL(upfinityF, '_whaleTransferFee'))[0] / 1;
+  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer'))[0] / 1;
   
   syncDelay(100);
 
