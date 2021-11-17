@@ -1,3 +1,5 @@
+console.log('init');
+t = T();
 
 getExtFile('Airdrop', 'sections/Airdrop.html');
 getExtFile('Donations', 'sections/Donations.html');
@@ -19,6 +21,8 @@ getExtFile('Taxs', 'sections/Taxs.html');
 // getExtFile('Testimonials', 'sections/Testimonials.html');
 getExtFile('UpFinomics', 'sections/UpFinomics.html');
 
+t = TT('init done', t);
+
 $('#popup').show();
 $(document).click(function (e) {
   if ($('#popup').is(':visible')) {
@@ -26,30 +30,8 @@ $(document).click(function (e) {
   }
 });
 (async function() { // to use async things 
-  console.log('init');
-  
-  console.log('init done');
   
   
-//   } catch (e) {
-// if (e['message'] == 'Internal JSON-RPC error.') {
-//     if (e['data']['message'] == 'header not found') {
-// console.log('run again');
-//     }
-// }
-// }
-  
-//   int count = 0;
-// int maxTries = 3;
-// while(true) {
-//     try {
-//         // Some Code
-//         // break out of loop, or return, on success
-//     } catch (SomeException e) {
-//         // handle exception
-//         if (++count == maxTries) throw e;
-//     }
-// }
  
   /////////////////////////////////////////////////////////////
   // inits
@@ -121,7 +103,7 @@ $(document).click(function (e) {
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
   nftF = nftC.functions;
   
-  syncDelay(50);
+  
   
   x = getElement("referralAdrDisplay");
   if (x != null) {
@@ -139,6 +121,7 @@ $(document).click(function (e) {
     }
   }
   
+  t = TT('head done', t);
   // without wallet connection
   
   // constants
@@ -230,6 +213,8 @@ $(document).click(function (e) {
     = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
   displayText("redistributionFee", redistributionFee * multiplier / 100);
   
+  t = TT('value done', t);
+  
   reserveData = await pairF.getReserves();
   
   if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
@@ -265,7 +250,6 @@ $(document).click(function (e) {
     displayText("sellCooltime", d);
   }
   
-  syncDelay(100);
   
   communityToken = "0x000000000000000000000000000000000000dEaD";
   
@@ -298,8 +282,7 @@ $(document).click(function (e) {
   bnbAmount = rI / bnbDiv;
   tokenAmount = rO / bnbDiv;
   
-  
-  // without wallet connection
+
   busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
   pricePairAdr = (await factoryF.getPair(wbnbAdr, busdAdr))[0];
   pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
@@ -358,10 +341,10 @@ $(document).click(function (e) {
   }
   
   
+  t = TT('global done', t);
   
-  // personal wallet infos
-  syncDelay(100);
   
+  // personal wallet infos  
   currentAccount = await afconnect();
   
   balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
@@ -486,7 +469,7 @@ $(document).click(function (e) {
   // price change accumulation => global limit
   // x / r0 = a => price change = 1 / (1 + a)^2
   
-  
+  t = TT('personal done', t);
 
 
 
@@ -750,6 +733,6 @@ $(document).click(function (e) {
 
   
   
-  console.log('code done');
+  t = TT('others done', t);
   
   }());
