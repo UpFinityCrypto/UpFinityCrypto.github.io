@@ -1,11 +1,9 @@
 console.log('init');
 t = T();
 
-getExtFile('Airdrop', 'sections/Airdrop.html');
 getExtFile('Donations', 'sections/Donations.html');
 getExtFile('Ecosystem', 'sections/Ecosystem.html');
 getExtFile('FAQs', 'sections/FAQs.html');
-getExtFile('Features', 'sections/Features.html');
 getExtFile('footer', 'sections/Footer.html'); // footer
 // getExtFile('Gallery', 'sections/Gallery.html');
 getExtFile('header', 'sections/Header.html'); // header
@@ -13,13 +11,8 @@ getExtFile('header', 'sections/Header.html'); // header
 getExtFile('Motivation', 'sections/Motivation.html');
 getExtFile('Notice', 'sections/Notice.html');
 getExtFile('Patchs', 'sections/Patchs.html');
-getExtFile('Rewards', 'sections/Rewards.html');
 getExtFile('Roadmap', 'sections/Roadmap.html');
-getExtFile('SAFUs', 'sections/SAFUs.html');
-getExtFile('Status', 'sections/Status.html');
-getExtFile('Taxs', 'sections/Taxs.html');
 // getExtFile('Testimonials', 'sections/Testimonials.html');
-getExtFile('UpFinomics', 'sections/UpFinomics.html');
 
 t = TT('init done', t);
 
@@ -29,6 +22,7 @@ $(document).click(function (e) {
     $('#popup').hide();
   }
 });
+
 (async function() { // to use async things 
   
   
@@ -124,94 +118,23 @@ $(document).click(function (e) {
   t = TT('head done', t);
   // without wallet connection
   
-  // constants
-  
-  totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
-  _dividendPartyThreshold = (await CALL(upfinityF, '_dividendPartyThreshold'))[0];
-  
-  syncDelay(100);
-  
-  _accuMulFactor = (await CALL(upfinityF, '_accuMulFactor'))[0] / 1;
-  _accuTaxTimeWindow = (await CALL(upfinityF, '_accuTaxTimeWindow'))[0] / 1;
-  _curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime'))[0] / 1;
-  _curcuitBreakerDuration = (await CALL(upfinityF, '_curcuitBreakerDuration'))[0] / 1;
-  _curcuitBreakerThreshold = (await CALL(upfinityF, '_curcuitBreakerThreshold'))[0] / 1;
-  _taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal'))[0] / 1;
-  _curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag'))[0] / 1;
-  
-  syncDelay(100);
   
   
-  _airdropSystem = (await CALL(upfinityF, '_airdropSystem'))[0] / 1;
-  _antiDumpDuration = (await CALL(upfinityF, '_antiDumpDuration'))[0] / 1;
-  _freeAirdropSystem = (await CALL(upfinityF, '_freeAirdropSystem'))[0] / 1;
+  needValue = false;
+  needValue |= getExtFile('Airdrop', 'sections/Airdrop.html');
+  needValue |= getExtFile('FAQs', 'sections/FAQs.html');
+  needValue |= getExtFile('Features', 'sections/Features.html');
+  needValue |= getExtFile('Rewards', 'sections/Rewards.html');
+  needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
+  needValue |= getExtFile('Status', 'sections/Status.html');
+  needValue |= getExtFile('Taxs', 'sections/Taxs.html');
+  needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   
-  _autoBurnFee = (await CALL(upfinityF, '_autoBurnFee'))[0] / 1;
-  _buySellTimeDuration = (await CALL(upfinityF, '_buySellTimeDuration'))[0] / 1;
-  _dipRewardFee = (await CALL(upfinityF, '_dipRewardFee'))[0] / 1;
-  _improvedRewardFee = (await CALL(upfinityF, '_improvedRewardFee'))[0] / 1;
+  if (!needValue) {
+    return;
+  }
   
-  syncDelay(100);
-  
-  _liquidityFee = (await CALL(upfinityF, '_liquidityFee'))[0] / 1;
-  _manualBuyFee = (await CALL(upfinityF, '_manualBuyFee'))[0] / 1;
-  _maxBalanceNume = (await CALL(upfinityF, '_maxBalanceNume'))[0] / 1;
-  _maxSellNume = (await CALL(upfinityF, '_maxSellNume'))[0] / 1;
-  _maxTxNume = (await CALL(upfinityF, '_maxTxNume'))[0] / 1;
-  _minusTaxBonus = (await CALL(upfinityF, '_minusTaxBonus'))[0] / 1;
-  
-  _taxAccuTaxThreshold = (await CALL(upfinityF, '_taxAccuTaxThreshold'))[0] / 1;
-  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal'))[0] / 1;
-  _whaleRate = (await CALL(upfinityF, '_whaleRate'))[0] / 1;
-  _whaleSellFee = (await CALL(upfinityF, '_whaleSellFee'))[0] / 1;
-  _whaleTransferFee = (await CALL(upfinityF, '_whaleTransferFee'))[0] / 1;
-  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer'))[0] / 1;
-  
-  syncDelay(100);
-
-  buyFee = 900;
-  displayText("buyFee", buyFee / 100);
-  sellFee = 1200;
-  displayText("sellFee", sellFee / 100);
-  totalFee = buyFee + sellFee;
-  displayText("totalFee", totalFee / 100);
-  
-  priceRecoveryFee = sellFee - _manualBuyFee;
-  displayText("priceRecoveryFee", priceRecoveryFee / 100);
-  
-  multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
-  
-  displayText("_accuMulFactor", _accuMulFactor);
-  displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
-  displayText("_airdropSystem", _airdropSystem);
-  displayText("_antiDumpDuration", _antiDumpDuration);
-  displayText("_autoBurnFee", _autoBurnFee / 100); // not multiplied
-  displayText("_buySellTimeDuration", _buySellTimeDuration);
-  displayText("_curcuitBreakerDuration", _curcuitBreakerDuration / 60 / 60);
-  displayText("_curcuitBreakerThreshold", _curcuitBreakerThreshold / 100);
-  displayText("_dipRewardFee", _dipRewardFee * multiplier / 100);
-  displayText("_dividendPartyThreshold", numberWithCommas(_dividendPartyThreshold / 1e18));
-  displayText("_freeAirdropSystem", _freeAirdropSystem);
-  displayText("_improvedRewardFee", _improvedRewardFee * multiplier / 100);
-  displayText("_liquidityFee", _liquidityFee * multiplier / 100 * 2); // double
-  displayText("_manualBuyFee", _manualBuyFee / 100); // not multiplied
-  displayText("_maxBalanceNume", _maxBalanceNume / 100);
-  displayText("_maxSellNume", _maxSellNume / 100 / 2); // half
-  displayText("_maxTxNume", _maxTxNume / 100);
-  displayText("_minusTaxBonus", _minusTaxBonus / 100);
-  <!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
-  displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100 * 2); // double
-  displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
-  displayText("_whaleRate", _whaleRate / 10000);
-  displayText("_whaleSellFee", _whaleSellFee / 10000);
-  displayText("_whaleTransferFee", _whaleTransferFee / 10000);
-  
-  _projectFundFee = (await CALL(upfinityF, '_projectFundFee'))[0] / 1;
-  
-
-  redistributionFee
-    = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
-  displayText("redistributionFee", redistributionFee * multiplier / 100);
+  await loadValues();
   
   t = TT('value done', t);
   
