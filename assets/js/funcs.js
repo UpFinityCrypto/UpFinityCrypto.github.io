@@ -785,6 +785,7 @@ async function CALL(cf, attr, params=null) {
 		  }
 		return v;
 	  } catch (e) {
+		  syncDelay(100);
  		continue;
 	  }
   }
