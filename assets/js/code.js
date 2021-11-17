@@ -278,7 +278,7 @@ $(document).click(function (e) {
   
   // personal wallet infos
   currentAccount = await afconnect();
-  displayText("connectResult", currentAccount + " <span>Loading</span>);
+  displayText("connectResult", currentAccount + " <span>Loading</span>");
   
 	
   if (getDiv("Status").length) {
