@@ -9,5 +9,11 @@ $.get('sections/head.html', function(response) {
 <head>
 </head>
 <body>
+<div id="tail"></div>
 </body>
+<script>
+$.get('sections/tail.html', function(response) {
+    $('#tail').append($(response));
+});
+<script>
 </html>

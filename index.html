@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="assets/js/jquery.min.js"></script>
+<script>
+$.get('sections/head.html', function(response) {
+    $('head').append($(response));
+});
+</script>
 <head>
 </head>
+<body>
 
 <body class="row center text-center" style="margin: 0px; width: auto; height: auto;">
 
@@ -314,8 +320,11 @@
   <footer id="footer">
   </footer><!-- End Footer -->
   
-  <div id="tail">
-  </div>
+  <div id="tail"></div>
 </body>
-
+<script>
+$.get('sections/tail.html', function(response) {
+    $('#tail').append($(response));
+});
+<script>
 </html>
