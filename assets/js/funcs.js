@@ -808,22 +808,27 @@ async function CALL(cf, attr, params=null) {
     success : function(v_) {
       v = [v_];
     },
-    error: async function() {
-      for (idx = 0; idx < 5; idx++) {
-        try {
-          if (params) {
-              v = await cf[attr](...params);
-          } else {
-            v = await cf[attr]();
-          }
-        } catch (e) {
-        console.log('e', 'retry', 100 * 2**idx, idx, cf, attr, params);
-          syncDelay(100 * 2**idx);
-        continue;
-        }
-      }
-    }
+    error: function() {}
  });
+ 
+ if (v) {
+   return v;
+ }
+ 
+ for (idx = 0; idx < 5; idx++) {
+  try {
+      if (params) {
+        v = await cf[attr](...params);
+      } else {
+        v = await cf[attr]();
+      }
+    break;
+  } catch (e) {
+    console.log('e', 'retry', 100 * 2**idx, idx, cf, attr, params);
+    syncDelay(100 * 2**idx);
+    continue;
+  }
+ }
  return v;
 }
 
