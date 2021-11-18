@@ -306,7 +306,7 @@ $(document).click(function (e) {
   
   
   
-    balanceLimit = totalSupply * _maxBalanceNume / 10000; // 1.1% of total supply
+    balanceLimit = totalSupply.mul(_maxBalanceNume).div(10000); // 1.1% of total supply
     buyLimit = balanceLimit.sub(balanceUPF);
     if (buyLimit / 1 < 0) {
       displayText("oneBuyLimitStatus", 'already max!');
