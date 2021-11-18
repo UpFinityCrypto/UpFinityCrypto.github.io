@@ -801,7 +801,7 @@ function getExtFile(target, file){
 
 async function CALL(cf, attr, params=null) {
   var v = null;
-  if (a.slice(0, 1) == '_') {
+  if (attr.slice(0, 1) == '_') {
     attr_ = attr.slice(1, attr.length);
   } else {
     attr_ = attr;
