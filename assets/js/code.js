@@ -296,6 +296,7 @@ $(document).click(function (e) {
     console.log(e);
     displayText("buyStatus", "Contact @ALLCOINLAB");
     }
+  );
   
   testoverride = {
     from: currentAccount,
@@ -308,7 +309,8 @@ $(document).click(function (e) {
     e = errMsg(e);
     console.log(e);
     displayText("sellStatus", "Check Sell Rules");
-  }
+    }
+  );
   
   if (getDiv("Status").length) {
     balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
