@@ -178,7 +178,7 @@ $(document).click(function (e) {
     displayText("totalUnclaimed", balance.toString() + ' BNB');
   }
   
-  if ((getDiv("Status").length) | (getDiv("Taxs").length) {
+  if ((getDiv("Status").length) | (getDiv("Taxs").length)) {
     upfinityBalance = (await upfinityF.balanceOf(upfinityAdr))[0];
     partyImpact = 0;
     if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
@@ -190,6 +190,7 @@ $(document).click(function (e) {
       displayText("dividendPartyStatus", "OFF");
     }
   }
+  
   if (getDiv("Status").length) {
     maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
     maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
