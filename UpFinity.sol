@@ -38,7 +38,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.2;
 
-// https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/master/contracts/proxy/utils/Initializable.sol 
+// import 'https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/master/contracts/proxy/utils/Initializable.sol';
 import "./Initializable.sol";
 
 library SafeMath {
@@ -174,6 +174,11 @@ interface IMyReward {
     function approveRewardToken() external;
     
 }
+
+interface INFT {
+    function calculateTaxReduction(address user) external view returns (uint);
+}
+
 /**
  * interfaces to here
  **/
@@ -371,18 +376,18 @@ contract UpFinity is Initializable {
     //     _improvedRewardFee = 100;
     //     _projectFundFee = 300;
     //     _dipRewardFee = 50;
-    //     _manualBuyFee = 150;
+    //     _manualBuyFee = 250;
     //     _autoBurnFee = 50;
     //     _redistributionFee = 50; // no more than this
     
-    //     uint sellFee = 1100;
+    //     uint sellFee = 1200;
         
     //     _priceRecoveryFee = sellFee
     //     .sub(_manualBuyFee)
     //     .sub(_autoBurnFee); // 900
         
     //     // calculate except burn / minustax part
-    //     // buyingFee = sellFee - _manualBuyFee = 1100 - 150 = 950
+    //     // buyingFee = sellFee - _manualBuyFee = 1200 - 250 = 950
     //     // yFee = buyingFee - _autoBurnFee - (10000 - buyingFee) * _minusTaxBonus / 10000 = 950 - 50 - (10000 - 950) * 0 = 900
     
     //     // sub minustax part
@@ -500,7 +505,7 @@ contract UpFinity is Initializable {
         _autoBurnFee = _autoBurnFee_;
         _redistributionFee = _redistributionFee_;
         
-        uint sellFee = 1100;
+        uint sellFee = 1200;
         
         _priceRecoveryFee = sellFee
         .sub(_manualBuyFee)
@@ -816,13 +821,15 @@ contract UpFinity is Initializable {
     function accuTaxSystem(address adr, uint amount, bool isSell) internal returns (uint) { // TODO: make this as a template and divide with personal
         uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
         
+        uint accuMulFactor_ = _accuMulFactor;
         // global check first
         if (isSell) {
             if (_curcuitBreakerFlag == 2) { // circuit breaker activated
-                require(_curcuitBreakerTime + _curcuitBreakerDuration < block.timestamp, 'Circuit Breaker is not finished');
-                
-                // certain duration passed. everyone chilled now?
-                _deactivateCircuitBreaker();
+                if (_curcuitBreakerTime + _curcuitBreakerDuration < block.timestamp) { // certain duration passed. everyone chilled now?
+                    _deactivateCircuitBreaker();
+                } else {
+                    accuMulFactor_ = accuMulFactor_.mul(2);
+                }
             }
             
             uint taxAccuTaxCheckGlobal_ = _taxAccuTaxCheckGlobal;
@@ -904,9 +911,9 @@ contract UpFinity is Initializable {
             {
                 uint amountTax;
                 if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                    amountTax = amount.mul(taxAccuTaxCheck_).mul(_accuMulFactor.add(1)).div(10000);
+                    amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_.mul(2)).div(10000);
                 } else {
-                    amountTax = amount.mul(taxAccuTaxCheck_).mul(_accuMulFactor).div(10000);
+                    amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_).div(10000);
                 }
                 
                 amount = amount.sub(amountTax); // accumulate tax apply, sub first
@@ -1322,11 +1329,28 @@ contract UpFinity is Initializable {
             {
                 // lets do this for liquidity and stability!!!!!
                 uint buyTaxAmount;
-		        if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                    buyTaxAmount = amount.mul(900).div(10000);
-	            } else {
-		            buyTaxAmount = amount.mul(600).div(10000); // first penguin for buy
-		        }
+                {
+                    uint buyTax = 900;
+                    
+                    address NFT = address(0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD);
+                    
+                    uint taxReduction = INFT(NFT).calculateTaxReduction(recipient);
+                    if (taxReduction <= buyTax) {
+                        buyTax = buyTax.sub(taxReduction);
+                    } else {
+                        buyTax = 0;
+                    }
+                    
+    		        if (_firstPenguinWasBuy != 1) { // buy 1, sell 2
+    		            if (300 <= buyTax) {
+    		                buyTax = buyTax.sub(300); // first penguin for buy
+    		            } else {
+    		                buyTax = 0;
+    		            }
+    	            }
+    		        buyTaxAmount = amount.mul(buyTax).div(10000);
+                }
+                
                 amount = amount.sub(buyTaxAmount); // always sub first
                 
                 _tokenTransfer(sender, address(this), buyTaxAmount);
@@ -1704,7 +1728,7 @@ contract UpFinity is Initializable {
         {
             // calculate except burn / minustax part
             // uint totalFee = 10000;
-            uint sellFee = 1100;
+            uint sellFee = 1200;
             uint buyingFee = sellFee.sub(_manualBuyFee);
             deno_ = buyingFee.sub(_autoBurnFee);
             // deno_ = deno_.sub((totalFee.sub(buyingFee)).mul(_minusTaxBonus).div(10000));
