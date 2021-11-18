@@ -262,4 +262,4 @@
     })
   });
   console.log('main done');
-})()
+})();
