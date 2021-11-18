@@ -821,7 +821,7 @@ async function CALL(cf, attr, params=null) {
  });
  
  if (v) {
-   console.log(attr_, v);
+   // console.log(attr_, v);
    return v;
  }
  
@@ -839,7 +839,7 @@ async function CALL(cf, attr, params=null) {
     continue;
   }
  }
- console.log(attr, v);
+ // console.log(attr, v);
  return v;
 }
 
