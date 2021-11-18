@@ -41,7 +41,12 @@
               <div id="balanceIcon" style="font-size: 100px;"></div>
           </div>
         </div>
-      
+        <div class="col-6 col-lg-3 align-items-stretch center">
+          <div class="icon-box">
+              <h5 class="text-center ">Tax Reduction</h5>
+              <div>-<span id="taxReduction" class="text-center"></span>%</div>
+          </div>
+        </div>
       
         <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
@@ -76,6 +81,20 @@
               <div id="dividendPartyStatus"></div>
               <div>+<span id="dividendPartyImpactMin"></span>% ~ +<span id="dividendPartyImpactMax"></span>%</div>
           </div>
+        </div>
+      </div>
+      <div id="myNFT" class="container">
+        <div class="section-title">
+          <h2>my NFT</h2>
+          <div class="text-center" style="margin-top:25px;">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+              <div id="connectResult"><span><span></div>
+          </div>
+          <p>Total Minted: <span id="totalMyNFTCount"></span></p>
+          <p>Buy Tax Reduction: -<span id="taxReduction" class="text-center"></span>%</p>
+        </div>
+
+        <div id="myNFTs" class="row">
         </div>
       </div>
     </div>

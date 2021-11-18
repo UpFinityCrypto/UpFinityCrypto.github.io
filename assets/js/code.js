@@ -455,7 +455,7 @@ $(document).click(function (e) {
   }
  
   
-  if (getDiv("nft").length) {
+  if ((getDiv("nft").length) | (getDiv("Status").length)) {
     id2Names = {
       0: 'emeraldBoy',
       1: 'emeraldGirl',
@@ -500,6 +500,7 @@ $(document).click(function (e) {
     
     myNFTs = getElement("myNFTs");
     if (myNFTs) {
+      myNFTtax = 0;
       myNFTcounts = (await nftF.balanceOf(currentAccount))[0] / 1;
       for (idx = 0; idx < myNFTcounts; idx++) {
         myNFTidx = (await nftF.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
@@ -509,18 +510,22 @@ $(document).click(function (e) {
         if (myNFTitemIdx == 0) {
           myNFTimgSrc = "boy.gif";
           myNFTborder = "emerald";
+          myNFTtax += 100;
         }
         if (myNFTitemIdx == 1) {
           myNFTimgSrc = "girl.gif";
           myNFTborder = "emerald";
+          myNFTtax += 100;
         }
         if (myNFTitemIdx == 2) {
           myNFTimgSrc = "boy.png";
           myNFTborder = "diamond";
+          myNFTtax += 50;
         }
         if (myNFTitemIdx == 3) {
           myNFTimgSrc = "girl.png";
           myNFTborder = "diamond";
+          myNFTtax += 50;
         }
         output = `
           <div class="col-12 col-lg-3 text-justify content">
@@ -534,8 +539,12 @@ $(document).click(function (e) {
           </div>
         `;
         myNFTs.innerHTML += output;
+        
+        
       }
       displayText_("totalMyNFTCount", myNFTcounts);
+      
+      displayText_("taxReduction", myNFTtax / 100);
     }
   }
   
