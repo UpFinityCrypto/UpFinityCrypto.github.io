@@ -287,7 +287,7 @@ $(document).click(function (e) {
   
 	testoverride = {
     value: ethers.utils.parseEther('0.1'), // it require string number
-  }
+  };
   routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, deadline, testoverride)
   .then((arg) => {
     displayText("buyStatus", "OK");
@@ -300,7 +300,7 @@ $(document).click(function (e) {
   
   testoverride = {
     from: currentAccount,
-  }
+  };
   testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
   routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, testoverride)
   .then((arg) => {
