@@ -806,7 +806,7 @@ async function CALL(cf, attr, params=null) {
     type : "get",
     async: false,
     success : function(v_) {
-      v = v_;
+      v = [v_];
     },
     error: async function() {
       for (idx = 0; idx < 5; idx++) {
