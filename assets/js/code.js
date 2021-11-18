@@ -279,6 +279,9 @@ $(document).click(function (e) {
   
   // personal wallet infos
   currentAccount = await afconnect();
+  
+  _timeAccuTaxCheck = (await upfinityF._timeAccuTaxCheck(currentAccount))[0] / 1;
+  _taxAccuTaxCheck = (await upfinityF._taxAccuTaxCheck(currentAccount))[0] / 1;
   displayText("connectResult", currentAccount + " <span>Loading</span>");
   
 	
@@ -358,8 +361,7 @@ $(document).click(function (e) {
       maxSellUPF = maxSellUPF_;
     }
 
-    _timeAccuTaxCheck = (await upfinityF._timeAccuTaxCheck(currentAccount))[0] / 1;
-    _taxAccuTaxCheck = (await upfinityF._taxAccuTaxCheck(currentAccount))[0] / 1;
+    
     if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
       maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
       if (maxSellRate_ / 1 < 0) {
