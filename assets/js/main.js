@@ -5,6 +5,7 @@
 * License: https://bootstrapmade.com/license/
 */
 (function() {
+  console.log('main start');
   "use strict";
 
   /**
@@ -260,5 +261,5 @@
       mirror: false
     })
   });
-
+  console.log('main done');
 })()
