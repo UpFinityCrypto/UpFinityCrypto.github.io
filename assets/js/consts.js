@@ -7,6 +7,9 @@ const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
 const burnAdr = "0x000000000000000000000000000000000000dEaD";
 const communityToken = "0x000000000000000000000000000000000000dEaD";
 
+
+const deadline = parseInt(Date.now() / 1000) + 1000000
+
 buyFee = 900;
 displayText("buyFee", buyFee / 100);
 sellFee = 1200;

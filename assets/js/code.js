@@ -130,27 +130,28 @@ $(document).click(function (e) {
   displayText_("BNBbalance", connectWalletText);
   displayText_("UPFbalance", connectWalletText);
 	
+  totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
+  totalLpSupply = (await pairF.totalSupply())[0];
+  
+  reserveData = await pairF.getReserves();
+
+  if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
+    rI = reserveData[0]; 
+    rO = reserveData[1];
+  } else {
+    rI = reserveData[1];
+    rO = reserveData[0];
+  }
+  
+  bnbAmount = rI / bnbDiv;
+  tokenAmount = rO / bnbDiv;
+  
   if (needValue) {
     if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length)) {
       await loadValues();
       t = TT('value done', t);
     }
-    
-    totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
-	  totalLpSupply = (await pairF.totalSupply())[0];
-    
-    reserveData = await pairF.getReserves();
-  
-    if (wbnbAdr < upfinityAdr) { // BNB / UpFinity
-      rI = reserveData[0]; 
-      rO = reserveData[1];
-    } else {
-      rI = reserveData[1];
-      rO = reserveData[0];
-    }
-    
-    bnbAmount = rI / bnbDiv;
-    tokenAmount = rO / bnbDiv;
+
   }
   
   
@@ -329,6 +330,7 @@ $(document).click(function (e) {
     if (sellCooltime / 1 < sellCooltime_ / 1) {
       sellCooltime = sellCooltime_;
       d = new Date(sellCooltime * 1000);
+      d = d.toString().split(' ').slice(1, 5).join(' ');
       displayText("sellCooltime", d);
     }
 
