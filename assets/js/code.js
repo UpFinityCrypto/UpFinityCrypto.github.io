@@ -178,17 +178,18 @@ $(document).click(function (e) {
     displayText("totalUnclaimed", balance.toString() + ' BNB');
   }
   
-  upfinityBalance = (await upfinityF.balanceOf(upfinityAdr))[0];
-  partyImpact = 0;
-  if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
-    displayText("dividendPartyStatus", "READY");
-    partyImpact = _dividendPartyThreshold.div(rO) * 100; // roughly
-    displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
-    displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
-  } else {
-    displayText("dividendPartyStatus", "OFF");
+  if ((getDiv("Status").length) | (getDiv("Taxs").length) {
+    upfinityBalance = (await upfinityF.balanceOf(upfinityAdr))[0];
+    partyImpact = 0;
+    if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
+      displayText("dividendPartyStatus", "READY");
+      partyImpact = _dividendPartyThreshold.div(rO) * 100; // roughly
+      displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
+      displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
+    } else {
+      displayText("dividendPartyStatus", "OFF");
+    }
   }
-  
   if (getDiv("Status").length) {
     maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
     maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
