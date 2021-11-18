@@ -4,7 +4,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(async function() { // to use async things 
   console.log('main start');
   "use strict";
 

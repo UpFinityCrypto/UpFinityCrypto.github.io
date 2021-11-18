@@ -699,4 +699,4 @@ $(document).click(function (e) {
   t = TT('others done', t);
   displayText("connectResult", currentAccount + " <span>Done!</span>");
 	      
-  }());
+}());
