@@ -488,7 +488,7 @@ $(document).click(function (e) {
           }
         }
 
-        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 10;
+        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 5;
         displayText_(grade + gender + "Count", diamondBoyCount);
         totalNFTCount += diamondBoyCount;
       }
