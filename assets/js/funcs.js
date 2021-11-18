@@ -808,7 +808,11 @@ async function CALL(cf, attr, params=null) {
     success : function(v_) {
       v = [v_];
     },
-    error: function() {}
+    error: function(xhr, ajaxOptions, thrownError) {
+        if(xhr.status==404) {
+            console.log(attr, 'no cache, get value');
+        }
+    }
  });
  
  if (v) {
