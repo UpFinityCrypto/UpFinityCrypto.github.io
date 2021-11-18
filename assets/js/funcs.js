@@ -846,14 +846,13 @@ async function loadValues() {
 
 	_accuMulFactor = (await CALL(upfinityF, '_accuMulFactor'))[0] / 1;
 	_accuTaxTimeWindow = (await CALL(upfinityF, '_accuTaxTimeWindow'))[0] / 1;
-	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime'))[0] / 1;
 	_curcuitBreakerDuration = (await CALL(upfinityF, '_curcuitBreakerDuration'))[0] / 1;
 	_curcuitBreakerThreshold = (await CALL(upfinityF, '_curcuitBreakerThreshold'))[0] / 1;
+
+	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime'))[0] / 1;
 	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal'))[0] / 1;
 	_curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag'))[0] / 1;
-
-
-
+  
 	_airdropSystem = (await CALL(upfinityF, '_airdropSystem'))[0] / 1;
 	_antiDumpDuration = (await CALL(upfinityF, '_antiDumpDuration'))[0] / 1;
 	_freeAirdropSystem = (await CALL(upfinityF, '_freeAirdropSystem'))[0] / 1;
