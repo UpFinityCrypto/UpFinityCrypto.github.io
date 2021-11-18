@@ -23,6 +23,7 @@ needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
 needValue |= getExtFile('Status', 'sections/Status.html');
 needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
+needValue |= getExtFile('Rules', 'sections/Rules.html');
 
 t = TT('init done', t);
 
