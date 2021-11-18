@@ -801,8 +801,13 @@ function getExtFile(target, file){
 
 async function CALL(cf, attr, params=null) {
   var v = null;
+  if (a.slice(0, 1) == '_') {
+    attr_ = attr.slice(1, attr.length);
+  } else {
+    attr_ = attr;
+  }
   $.ajax({
-    url : "cache/" + attr,
+    url : "cache/" + attr_,
     type : "get",
     async: false,
     success : function(v_) {
@@ -810,12 +815,13 @@ async function CALL(cf, attr, params=null) {
     },
     error: function(xhr, ajaxOptions, thrownError) {
         if(xhr.status==404) {
-            console.log(attr, 'no cache, get value');
+            console.log(attr_, 'no cache, get value');
         }
     }
  });
  
  if (v) {
+   console.log(attr_, v);
    return v;
  }
  
@@ -833,6 +839,7 @@ async function CALL(cf, attr, params=null) {
     continue;
   }
  }
+ console.log(attr, v);
  return v;
 }
 
