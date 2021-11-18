@@ -800,21 +800,32 @@ function getExtFile(target, file){
 }
 
 async function CALL(cf, attr, params=null) {
-  for (idx = 0; idx < 5; idx++) {
-	  try {
-		  if (params) {
-	    		v = await cf[attr](...params);
-		  } else {
-			  v = await cf[attr]();
-		  }
-		return v;
-	  } catch (e) {
-		console.log('e', 'retry', 100 * 2**idx, idx, cf, attr, params);
-		  syncDelay(100 * 2**idx);
- 		continue;
-	  }
-  }
-	return null;
+  $.ajax({
+    url : "cache/" + attr,
+    type : "get",
+    async: false,
+    success : function(response) {
+      console.log(response);
+      return response;
+    },
+    error: async function() {
+      for (idx = 0; idx < 5; idx++) {
+        try {
+          if (params) {
+              v = await cf[attr](...params);
+          } else {
+            v = await cf[attr]();
+          }
+        return v;
+        } catch (e) {
+        console.log('e', 'retry', 100 * 2**idx, idx, cf, attr, params);
+          syncDelay(100 * 2**idx);
+        continue;
+        }
+      }
+      return null;
+    }
+ });
 }
 
 function parseError(e) {
