@@ -95,8 +95,7 @@ $(document).click(function (e) {
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
   nftF = nftC.functions;
   
-  
-  
+
   x = getElement("referralAdrDisplay");
   if (x != null) {
     refAdr = GetURLParameter("ref");
@@ -284,7 +283,33 @@ $(document).click(function (e) {
   _taxAccuTaxCheck = (await upfinityF._taxAccuTaxCheck(currentAccount))[0] / 1;
   displayText("connectResult", currentAccount + " <span>Loading</span>");
   
-	
+  
+  
+	testoverride = {
+    value: ethers.utils.parseEther('0.1'), // it require string number
+  }
+  routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, deadline, testoverride)
+  .then((arg) => {
+    displayText("buyStatus", "OK");
+  }, (e) => {
+    e = errMsg(e);
+    console.log(e);
+    displayText("buyStatus", "Contact @ALLCOINLAB");
+    }
+  
+  testoverride = {
+    from: currentAccount,
+  }
+  testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
+  routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, testoverride)
+  .then((arg) => {
+    displayText("sellStatus", "OK");
+  }, (e) => {
+    e = errMsg(e);
+    console.log(e);
+    displayText("sellStatus", "Check Sell Rules");
+  }
+  
   if (getDiv("Status").length) {
     balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
     displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
