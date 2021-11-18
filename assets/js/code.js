@@ -371,6 +371,7 @@ $(document).click(function (e) {
     cantsell = cantsellReason();
 
     if (cantsell != "") {
+      displayText("cantSellStatus", "Can't Sell Because:");
       displayText("circuitBreakerStatus", cantsell);
     }
 
