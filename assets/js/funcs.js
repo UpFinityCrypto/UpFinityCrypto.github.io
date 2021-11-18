@@ -800,13 +800,13 @@ function getExtFile(target, file){
 }
 
 async function CALL(cf, attr, params=null) {
+  var v = null;
   $.ajax({
     url : "cache/" + attr,
     type : "get",
     async: false,
-    success : function(response) {
-      console.log(response);
-      return response;
+    success : function(v_) {
+      v = v_;
     },
     error: async function() {
       for (idx = 0; idx < 5; idx++) {
@@ -816,16 +816,15 @@ async function CALL(cf, attr, params=null) {
           } else {
             v = await cf[attr]();
           }
-        return v;
         } catch (e) {
         console.log('e', 'retry', 100 * 2**idx, idx, cf, attr, params);
           syncDelay(100 * 2**idx);
         continue;
         }
       }
-      return null;
     }
  });
+ return v;
 }
 
 function parseError(e) {
