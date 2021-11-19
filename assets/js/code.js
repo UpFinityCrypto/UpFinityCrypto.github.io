@@ -319,7 +319,7 @@ $(document).click(function (e) {
     displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
 
     balancePercentage = round(balanceUPF / totalSupply * 100, 2);
-    displayText("balancePercentageStatus", '(' + balancePercentage.toString() + ' %)');
+    displayText("balancePercentageStatus", balancePercentage);
     if (balancePercentage >= 1) {
       displayText("balanceIcon", String.fromCodePoint(0x1F40B)); // 🐳
     } else if (balancePercentage >= 0.3) {
