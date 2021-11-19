@@ -2526,3 +2526,7 @@ img {
 .center {
   margin: 0 auto;
 }
+
+.small-icon {
+  width: 2em;
+}
