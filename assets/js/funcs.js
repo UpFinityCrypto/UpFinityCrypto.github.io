@@ -802,6 +802,7 @@ function getExtFile(target, file){
 async function CALL(cf, attr, params=null, cache=true) {
   var v = null;
   if (cache) {
+    console.log('sss');
     if (attr.slice(0, 1) == '_') {
       attr_ = attr.slice(1, attr.length);
     } else {
@@ -865,11 +866,11 @@ async function loadValues() {
 	_curcuitBreakerDuration = (await CALL(upfinityF, '_curcuitBreakerDuration'))[0] / 1;
 	_curcuitBreakerThreshold = (await CALL(upfinityF, '_curcuitBreakerThreshold'))[0] / 1;
 
-	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', cache=false))[0] / 1;
-	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', cache=false))[0] / 1;
-	_curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', cache=false))[0] / 1;
-  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', cache=false))[0] / 1;
-  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', cache=false))[0] / 1;
+	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', params=null, cache=false))[0] / 1;
+	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
+	_curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', params=null, cache=false))[0] / 1;
+  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', params=null, cache=false))[0] / 1;
+  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
   
 	_airdropSystem = (await CALL(upfinityF, '_airdropSystem'))[0] / 1;
 	_antiDumpDuration = (await CALL(upfinityF, '_antiDumpDuration'))[0] / 1;

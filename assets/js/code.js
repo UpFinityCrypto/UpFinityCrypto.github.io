@@ -76,7 +76,7 @@ $(document).click(function (e) {
     
   routerC = new ethers.Contract(routerAdr, routerAbi, provider);
   routerF = routerC.functions;
-  factoryAdr = (await CALL(routerF, 'factory', cache=false))[0];
+  factoryAdr = (await CALL(routerF, 'factory', params=null, cache=false))[0];
   factoryC = new ethers.Contract(factoryAdr, factoryAbi, provider);
   factoryF = factoryC.functions;
   
