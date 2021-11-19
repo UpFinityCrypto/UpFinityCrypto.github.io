@@ -567,8 +567,10 @@ $(document).click(function (e) {
         output = `
           <div class="col-12 col-lg-3 text-justify content">
             <div style="width: 100%; position: relative;">
-              <img href="assets/img/nft/origins/${myNFTborder}${myNFTimgSrc}" src="assets/img/nft/origins/${myNFTimgThumbSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
+              <a href="assets/img/nft/origins/${myNFTimgSrc}">
+              <img src="assets/img/nft/origins/${myNFTimgThumbSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
               <img src="assets/img/nft/origins/${myNFTborder}_thumb.png" style="position: absolute; top:0; left: 0;">
+              </a>
             </div>
             <p>ID: ${myNFTidx}</p>
             <p>${myNFTimgName}</p>
