@@ -807,25 +807,27 @@ async function CALL(cf, attr, params=null, cache=true) {
     } else {
       attr_ = attr;
     }
-    $.ajax({
-      url : "cache/" + attr_,
-      type : "get",
-      async: true,
-      success : function(v_) {
-        v = [v_];
-      },
-      error: function(xhr, ajaxOptions, thrownError) {
-          if(xhr.status==404) {
-              console.log(attr_, 'no cache, get value');
-          }
-      }
-   });
+    
+    loadFile("cache/" + attr_);
+    // $.ajax({
+      // url : "cache/" + attr_,
+      // type : "get",
+      // async: true,
+      // success : function(v_) {
+        // v = [v_];
+      // },
+      // error: function(xhr, ajaxOptions, thrownError) {
+          // if(xhr.status==404) {
+              // console.log(attr_, 'no cache, get value');
+          // }
+        // }
+      // });
  
-   if (v) {
-     // console.log(attr_, v);
-     return v;
-   }
- }
+     if (v) {
+       // console.log(attr_, v);
+       return v;
+     }
+  }
  
  for (idx = 0; idx < 5; idx++) {
   try {
