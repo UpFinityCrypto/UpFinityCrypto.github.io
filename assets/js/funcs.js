@@ -101,12 +101,12 @@ function loadFile(filePath) {
     
     rewardF.calBNB(currentAccount).then(function (balanceInfo) {
         claimableBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-        displayText('claimable', claimableBalance.toString() + ' BNB');
+        displayText('claimable', claimableBalance);
       });
     
     rewardF.claimedBNB(currentAccount).then(function (balanceInfo) {
         claimedBalance = BNB(ethers.utils.formatEther(balanceInfo[0]) * bnbDiv);
-        displayText('claimed', claimedBalance.toString() + ' BNB');
+        displayText('claimed', claimedBalance);
       });
 	
 
