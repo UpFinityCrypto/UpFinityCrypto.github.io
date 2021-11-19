@@ -890,28 +890,28 @@ async function loadValues() {
 	
   values = JSON.parse(loadFile('cache/values.json'));
   
-  _dividendPartyThreshold = values['_dividendPartyThreshold'];
-  _accuMulFactor = values['_accuMulFactor'];
-  _accuTaxTimeWindow = values['_accuTaxTimeWindow'];
-  _curcuitBreakerDuration = values['_curcuitBreakerDuration'];
-  _curcuitBreakerThreshold = values['_curcuitBreakerThreshold'];
-  _airdropSystem = values['_airdropSystem'];
-  _antiDumpDuration = values['_antiDumpDuration'];
-  _freeAirdropSystem = values['_freeAirdropSystem'];
-  _autoBurnFee = values['_autoBurnFee'];
-  _buySellTimeDuration = values['_buySellTimeDuration'];
-  _dipRewardFee = values['_dipRewardFee'];
-  _improvedRewardFee = values['_improvedRewardFee'];
-  _liquidityFee = values['_liquidityFee'];
-  _manualBuyFee = values['_manualBuyFee'];
-  _maxBalanceNume = values['_maxBalanceNume'];
-  _maxSellNume = values['_maxSellNume'];
-  _maxTxNume = values['_maxTxNume'];
-  _minusTaxBonus = values['_minusTaxBonus'];
-  _taxAccuTaxThreshold = values['_taxAccuTaxThreshold'];
-  _whaleRate = values['_whaleRate'];
-  _whaleSellFee = values['_whaleSellFee'];
-  _whaleTransferFee = values['_whaleTransferFee'];
+  _dividendPartyThreshold = values['dividendPartyThreshold'];
+  _accuMulFactor = values['accuMulFactor'];
+  _accuTaxTimeWindow = values['accuTaxTimeWindow'];
+  _curcuitBreakerDuration = values['curcuitBreakerDuration'];
+  _curcuitBreakerThreshold = values['curcuitBreakerThreshold'];
+  _airdropSystem = values['airdropSystem'];
+  _antiDumpDuration = values['antiDumpDuration'];
+  _freeAirdropSystem = values['freeAirdropSystem'];
+  _autoBurnFee = values['autoBurnFee'];
+  _buySellTimeDuration = values['buySellTimeDuration'];
+  _dipRewardFee = values['dipRewardFee'];
+  _improvedRewardFee = values['improvedRewardFee'];
+  _liquidityFee = values['liquidityFee'];
+  _manualBuyFee = values['manualBuyFee'];
+  _maxBalanceNume = values['maxBalanceNume'];
+  _maxSellNume = values['maxSellNume'];
+  _maxTxNume = values['maxTxNume'];
+  _minusTaxBonus = values['minusTaxBonus'];
+  _taxAccuTaxThreshold = values['taxAccuTaxThreshold'];
+  _whaleRate = values['whaleRate'];
+  _whaleSellFee = values['whaleSellFee'];
+  _whaleTransferFee = values['whaleTransferFee'];
   
   
 	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', params=null, cache=false))[0] / 1;
