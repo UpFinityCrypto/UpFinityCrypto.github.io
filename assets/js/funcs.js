@@ -799,30 +799,32 @@ function getExtFile(target, file){
   return true;
 }
 
-async function CALL(cf, attr, params=null) {
+async function CALL(cf, attr, params=null, cache=true) {
   var v = null;
-  if (attr.slice(0, 1) == '_') {
-    attr_ = attr.slice(1, attr.length);
-  } else {
-    attr_ = attr;
-  }
-  $.ajax({
-    url : "cache/" + attr_,
-    type : "get",
-    async: false,
-    success : function(v_) {
-      v = [v_];
-    },
-    error: function(xhr, ajaxOptions, thrownError) {
-        if(xhr.status==404) {
-            console.log(attr_, 'no cache, get value');
-        }
+  if (cache) {
+    if (attr.slice(0, 1) == '_') {
+      attr_ = attr.slice(1, attr.length);
+    } else {
+      attr_ = attr;
     }
- });
+    $.ajax({
+      url : "cache/" + attr_,
+      type : "get",
+      async: false,
+      success : function(v_) {
+        v = [v_];
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+          if(xhr.status==404) {
+              console.log(attr_, 'no cache, get value');
+          }
+      }
+   });
  
- if (v) {
-   // console.log(attr_, v);
-   return v;
+   if (v) {
+     // console.log(attr_, v);
+     return v;
+   }
  }
  
  for (idx = 0; idx < 5; idx++) {
@@ -855,8 +857,6 @@ function parseError(e) {
 async function loadValues() {
 	// constants
   
-	totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
-	totalLpSupply = (await pairF.totalSupply())[0];
 	
 	_dividendPartyThreshold = (await CALL(upfinityF, '_dividendPartyThreshold'))[0];
 
@@ -865,9 +865,11 @@ async function loadValues() {
 	_curcuitBreakerDuration = (await CALL(upfinityF, '_curcuitBreakerDuration'))[0] / 1;
 	_curcuitBreakerThreshold = (await CALL(upfinityF, '_curcuitBreakerThreshold'))[0] / 1;
 
-	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime'))[0] / 1;
-	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal'))[0] / 1;
-	_curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag'))[0] / 1;
+	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', cache=false))[0] / 1;
+	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', cache=false))[0] / 1;
+	_curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', cache=false))[0] / 1;
+  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', cache=false))[0] / 1;
+  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', cache=false))[0] / 1;
   
 	_airdropSystem = (await CALL(upfinityF, '_airdropSystem'))[0] / 1;
 	_antiDumpDuration = (await CALL(upfinityF, '_antiDumpDuration'))[0] / 1;
@@ -888,11 +890,10 @@ async function loadValues() {
 	_minusTaxBonus = (await CALL(upfinityF, '_minusTaxBonus'))[0] / 1;
 
 	_taxAccuTaxThreshold = (await CALL(upfinityF, '_taxAccuTaxThreshold'))[0] / 1;
-	_timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal'))[0] / 1;
 	_whaleRate = (await CALL(upfinityF, '_whaleRate'))[0] / 1;
 	_whaleSellFee = (await CALL(upfinityF, '_whaleSellFee'))[0] / 1;
 	_whaleTransferFee = (await CALL(upfinityF, '_whaleTransferFee'))[0] / 1;
-	_antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer'))[0] / 1;
+	
 
 
 	priceRecoveryFee = sellFee - _manualBuyFee;
