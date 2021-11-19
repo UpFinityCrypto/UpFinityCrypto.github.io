@@ -733,5 +733,6 @@ $(document).click(function (e) {
   
   t = TT('others done', t);
   displayText("connectResult", currentAccount + " <span>Done!</span>");
-	      
+	
+  // displayText('<iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>');
 }());
