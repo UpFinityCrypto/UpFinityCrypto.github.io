@@ -22,5 +22,5 @@
     "totalSupply": 10000000000000000000000000000000,
     "whaleRate": 10000,
     "whaleSellFee": 40000,
-    "whaleTransferFee": 20000,
+    "whaleTransferFee": 20000
 }
