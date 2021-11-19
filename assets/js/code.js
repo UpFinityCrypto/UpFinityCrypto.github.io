@@ -129,7 +129,7 @@ $(document).click(function (e) {
   displayText_("BNBbalance", connectWalletText);
   displayText_("UPFbalance", connectWalletText);
 	
-  totalSupply = (await CALL(upfinityF, 'totalSupply'))[0];
+  totalSupply = (await CALL(upfinityF, 'totalSupply', params=null, cache=false))[0];
   totalLpSupply = (await pairF.totalSupply())[0];
   
   reserveData = await pairF.getReserves();
