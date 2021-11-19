@@ -116,7 +116,7 @@ $(document).click(function (e) {
   // without wallet connection
   
   
-  connectWalletText = "<span>Loading, Connect wallet to use claim, etc!</span>";
+  connectWalletText = "<span style='font-size: 0.5em;'>Loading, Connect wallet to use claim, etc!</span>";
   displayText("connectResult", connectWalletText);
   displayText("balanceStatus", connectWalletText);
   <!-- displayText("balanceIcon", connectWalletText); --> // big icon
