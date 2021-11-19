@@ -539,24 +539,27 @@ $(document).click(function (e) {
       for (idx = 0; idx < myNFTcounts; idx++) {
         myNFTidx = (await nftF.tokenOfOwnerByIndex(currentAccount, idx))[0] / 1;
         myNFTitemIdx = (await nftF._itemById(myNFTidx))[0] / 1;
-        myNFTimgSrc = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['image'];
         myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
         if (myNFTitemIdx == 0) {
+          myNFTimgThumbSrc = "boy_thumb.gif";
           myNFTimgSrc = "boy.gif";
           myNFTborder = "emerald";
           myNFTtax += 100;
         }
         if (myNFTitemIdx == 1) {
+          myNFTimgThumbSrc = "girl_thumb.gif";
           myNFTimgSrc = "girl.gif";
           myNFTborder = "emerald";
           myNFTtax += 100;
         }
         if (myNFTitemIdx == 2) {
+          myNFTimgThumbSrc = "boy_thumb.png";
           myNFTimgSrc = "boy.png";
           myNFTborder = "diamond";
           myNFTtax += 50;
         }
         if (myNFTitemIdx == 3) {
+          myNFTimgThumbSrc = "girl_thumb.png";
           myNFTimgSrc = "girl.png";
           myNFTborder = "diamond";
           myNFTtax += 50;
@@ -564,7 +567,7 @@ $(document).click(function (e) {
         output = `
           <div class="col-12 col-lg-3 text-justify content">
             <div style="width: 100%; position: relative;">
-              <img src="assets/img/nft/origins/${myNFTimgSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
+              <img href="assets/img/nft/origins/${myNFTimgSrc}" src="assets/img/nft/origins/${myNFTimgThumbSrc}" style="top:0; left: 0; padding: 20px; height: auto;">
               <img src="assets/img/nft/origins/${myNFTborder}.png" style="position: absolute; top:0; left: 0;">
             </div>
             <p>ID: ${myNFTidx}</p>
