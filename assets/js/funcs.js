@@ -810,7 +810,7 @@ async function CALL(cf, attr, params=null, cache=true) {
     $.ajax({
       url : "cache/" + attr_,
       type : "get",
-      async: false,
+      async: true,
       success : function(v_) {
         v = [v_];
       },
