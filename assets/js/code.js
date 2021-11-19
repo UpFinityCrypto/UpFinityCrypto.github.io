@@ -173,9 +173,9 @@ $(document).click(function (e) {
   
   
   if (getDiv("Rewards").length) {
-    balanceInfo = await provider.getBalance(rewardAdr);
-    balance = BNB(ethers.utils.formatEther(balanceInfo) * bnbDiv);
-    displayText("totalUnclaimed", balance.toString() + ' BNB');
+    rewardBalanceRaw = await provider.getBalance(rewardAdr);
+    rewardBalance = round(rewardBalanceRaw / bnbDiv, 3);
+    displayText("totalUnclaimed", rewardBalance);
   }
   
   if ((getDiv("Status").length) | (getDiv("Taxs").length)) {
