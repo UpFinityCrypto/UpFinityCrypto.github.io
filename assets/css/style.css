@@ -1222,7 +1222,7 @@ section {
 }
 
 .icon-box {
-  padding: 30px 30px;
+  padding: 0px 0px;
   position: relative;
   overflow: hidden;
   background: #000;

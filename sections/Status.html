@@ -2,8 +2,8 @@
 
   <div class="section-title">
     <h2>Status</h2>
-    <div>Buy Status: <span id="buyStatus"></span></div>
-    <div>Sell Status: <span id="sellStatus"></span></div>
+    <div>Buy: <span id="buyStatus"></span></div>
+    <div>Sell: <span id="sellStatus"></span></div>
     <div class="text-center" style="margin-top:25px;">
         <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
         <div id="connectResult"><span><span></div>
@@ -20,64 +20,64 @@
       <div class="row mt-5">
         <span id="devNotice"></span>
       </div>
-      <div class="row mt-5" style="font-size: 50px; font-weight: bold;">
-        <div class="col-12 col-lg-3 align-items-stretch center">
+      <div class="row mt-5" style="font-size: 10vw; font-weight: bold;">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Limit Per 1 Buy</h5>
-              <h6 class="text-center ">(<10% Liq)</h6>
+              <h6 class="text-center ">(<span id="_maxTxNume"></span>% Liq)</h6>
               <div id="oneBuyLimitStatus" class="text-center"></div>
               
           </div>
         </div>
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Balance</h5>
-              <h6 class="text-center ">(<span id="_maxBalanceNume">1.1</span>% Max)</h6>
-              <div id="balanceStatus" class="text-center" style="font-size: 30px;"></div>
+              <h6 class="text-center ">(<span id="_maxBalanceNume"></span>% Max)</h6>
+              <div id="balanceStatus" class="text-center" style="font-size: 4vw;"></div>
               <div id="balancePercentageStatus" class="text-center"></div>
           </div>
         </div>
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Grade</h5>
-              <div id="balanceIcon" style="font-size: 100px;"></div>
+              <div id="balanceIcon" style="font-size: 100px; font-weight: 0;"></div>
           </div>
         </div>
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Tax Reduction</h5>
               <div>-<span id="taxReduction" class="text-center"></span>%</div>
           </div>
         </div>
       
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Limit Per 1 Sell</h5>
-              <h6 class="text-center ">(<1.5% Impact)</h6>
+              <h6 class="text-center ">(<span id="_maxSellNume"></span>% Impact)</h6>
               <div id="oneSellLimitStatus" class="text-center"></div>
               
           </div>
         </div>
-       <div class="col-12 col-lg-3 align-items-stretch center">
+       <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Sell Cooltime</h5>
               <div id="sellCooltime" class="text-center"></div>
               
           </div>
         </div>
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 id="cantSellStatus" class="text-center "></h5>
               <div id="circuitBreakerStatus" class="text-center"></div>
           </div>
         </div>
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Tax Penalty</h5>
               <div>+<span id="yourTaxPenalty"></span>%</div>
           </div>
         </div>
-        <div class="col-12 col-lg-3 align-items-stretch center">
+        <div class="col-6 col-lg-3 align-items-stretch center">
           <div class="icon-box">
               <h5 class="text-center ">Dividend Party</h5>
               <div id="dividendPartyStatus"></div>
@@ -85,6 +85,7 @@
           </div>
         </div>
       </div>
+      
       <div id="myNFT" class="container">
         <div class="section-title">
           <h2>my NFT</h2>
