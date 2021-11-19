@@ -889,6 +889,7 @@ async function loadValues() {
 	// _whaleTransferFee = (await CALL(upfinityF, '_whaleTransferFee'))[0] / 1;
 	
   values = JSON.parse(loadFile('cache/values.json'));
+  _accuMulFactor = values['_dividendPartyThreshold'];
   _accuMulFactor = values['_accuMulFactor'];
   _accuTaxTimeWindow = values['_accuTaxTimeWindow'];
   _curcuitBreakerDuration = values['_curcuitBreakerDuration'];
