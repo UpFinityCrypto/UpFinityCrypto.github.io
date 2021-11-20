@@ -187,7 +187,7 @@ displayText("totalFee", totalFee / 100);
     partyImpact = 0;
     if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
       displayText("dividendPartyStatus", "READY");
-      partyImpact = _dividendPartyThreshold / rO * 100; // roughly
+      partyImpact = _dividendPartyThreshold * 100 / rO; // roughly
       displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
       displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
     } else {
@@ -196,7 +196,7 @@ displayText("totalFee", totalFee / 100);
   }
   
   if (getDiv("Status").length) {
-    maxBuyUPF = rO.mul(_maxTxNume).div(10000); // 10% of current liquidity
+    maxBuyUPF = rO / 10000 * _maxTxNume; // 10% of current liquidity
     maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
 
 
