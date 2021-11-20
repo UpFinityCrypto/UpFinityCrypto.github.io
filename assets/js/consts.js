@@ -11,11 +11,9 @@ communityToken = "0x000000000000000000000000000000000000dEaD";
 const deadline = parseInt(Date.now() / 1000) + 1000000
 
 buyFee = 900;
-displayText("buyFee", buyFee / 100);
 sellFee = 1200;
-displayText("sellFee", sellFee / 100);
 totalFee = buyFee + sellFee;
-displayText("totalFee", totalFee / 100);
+
 
 inputHandlerBuy = function (e) {
   (async function () {

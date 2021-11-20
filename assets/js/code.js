@@ -34,6 +34,10 @@ $(document).click(function (e) {
   }
 });
 
+displayText("buyFee", buyFee / 100);
+displayText("sellFee", sellFee / 100);
+displayText("totalFee", totalFee / 100);
+
 (async function() { // to use async things 
   
   
@@ -183,7 +187,7 @@ $(document).click(function (e) {
     partyImpact = 0;
     if (_dividendPartyThreshold * 0.9 < upfinityBalance / 1) {
       displayText("dividendPartyStatus", "READY");
-      partyImpact = _dividendPartyThreshold.div(rO) * 100; // roughly
+      partyImpact = _dividendPartyThreshold / rO * 100; // roughly
       displayText("dividendPartyImpactMin", (partyImpact * 1).toFixed(1));
       displayText("dividendPartyImpactMax", (partyImpact * 2).toFixed(1));
     } else {

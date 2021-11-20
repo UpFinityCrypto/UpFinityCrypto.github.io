@@ -939,11 +939,11 @@ async function loadValues() {
 	displayText("_liquidityFee", _liquidityFee * multiplier / 100 * 2); // double
 	displayText("_manualBuyFee", _manualBuyFee / 100); // not multiplied
 	displayText("_maxBalanceNume", _maxBalanceNume / 100);
-	displayText("_maxSellNume", _maxSellNume / 100 / 2); // half
+	displayText("_maxSellNume", _maxSellNume / 100);
 	displayText("_maxTxNume", _maxTxNume / 100);
 	displayText("_minusTaxBonus", _minusTaxBonus / 100);
 	<!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
-	displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100 * 2); // double
+	displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100);
 	displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
 	displayText("_whaleRate", _whaleRate / 10000);
 	displayText("_whaleSellFee", _whaleSellFee / 10000);
