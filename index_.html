@@ -1,89 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="shortcut icon" href="./assets/img/logo.png" />
+<script src="assets/js/jquery.min.js"></script>
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>UpFinity - World's Most Innovative Token</title>
-  <meta name="description" content="UpFinity(UPF) is the World's Most Innovative Token with 23+ Fully New Unique Features">
-  <meta name="og:title" content="UpFinity(UPF) is the World's Most Innovative Token with 23+ Fully New Unique Features">
-  <meta name="twitter:title" content="UpFinity(UPF) is the World's Most Innovative Token with 23+ Fully New Unique Features">
-  <meta name="keywords" content="UpFinity,UPF,bitcoin,dogecoin,doge,defi,coinbase,coinmarketcap,coinmarket,bscscan,whitebit,coingecko,cryptocurrency,crypto,pancakeswap,dex,ethereum,eth,btc">
-  <meta name="og:image" content="{% static 'assets/img/logo.png' %}" />
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:image" content="{% static 'assets/img/logo.png' %}" />
-  <meta name="twitter:title" content="UpFinity Coin Vote Site">
-  
-  <meta content="UpFinity,UPF,bitcoin,dogecoin,doge,defi,coinbase,coinmarketcap,coinmarket,bscscan,whitebit,coingecko,cryptocurrency,crypto,pancakeswap,dex,ethereum,eth,btc" name="keywords">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-  <!-- blockchains -->
-  <script src="assets/js/web3.min.js" type="text/javascript" ></script>
-  <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-  <script src="assets/js/ethers.umd.min.js" type="application/javascript"></script>
-  
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="shortcut icon">
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto|Oswald:300,400,700|Teko:400,600" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Vendor CSS Files -->
-  <!-- <link rel="stylesheet" href="assets/css/theme.min.css"> -->
-  <!-- <link rel="stylesheet" href="assets/css/materialize.min.css"> -->
-  
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/font-awesome/css/fontawesome-all.min.css" rel="stylesheet">
-  
-  
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
- 
-            
-  <!-- =======================================================
-  * Template Name: MyResume - v4.5.0
-  * Template URL: https://bootstrapmade.com/free-html-bootstrap-template-my-resume/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
-
-<body>
-
-  <!-- ======= Mobile nav toggle button ======= -->
-  <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+<script>
+$.get('sections/head.html', function(response) {
+    $('head').append($(response));
+});
+</script>
+<body class="row center text-center" style="margin: 0px; width: auto; height: auto;">
   <!-- ======= Header ======= -->
-  <header id="header" class="d-flex flex-column justify-content-center">
+  <i class="bi bi-list mobile-nav-toggle d-xl-none" style="width: fit-content;"></i>
+  
+  <header id="header" class="d-flex flex-column justify-content-center" style="width: auto;">
   </header><!-- End Header -->
-
+  
+  <div id="popup" class="col-12 col-lg-6 text-center center">
+    <div class="col-12 col-lg-3 text-center center">
+      <div class="row center">
+        <div class="col-6 center" style="max-width: 300px; max-height: 400px;">
+          <img src="assets/img/nft/origins/boy_thumb.gif" style="width: 100%; height: 100%;">
+        </div>
+        <div class="col-6 center" style="max-width: 300px; max-height: 400px;">
+          <img src="assets/img/nft/origins/girl_thumb.gif" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+      <div>
+        <p>Origins nft Launched!</p>
+        <a href="nft.html" class="button scrollto">NFT Beta</a>
+        <p>Don't miss out!"</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" style="margin: 0px;">
+    <div class="col-6 col-lg-2">
+      <a href="dashboard.html" class="button scrollto">Dashboard</a>
+    </div>
+    <div class="col-6 col-lg-2">
+      <a href="roadmap.html" class="button scrollto">Roadmap</a>
+    </div>
+    
+    <div class="col-4 col-lg-2">
+      <a href="airdrop.html" class="button scrollto">Airdrop</a>
+    </div>
+    <div class="col-4 col-lg-2">
+      <a href="community.html" class="button scrollto">Community</a>
+    </div>
+    <div class="col-4 col-lg-2">
+      <a href="faqs.html" class="button scrollto">FAQs</a>
+    </div>
+    
+    <div class="col-12 col-lg-2 text-center">
+      <a href="donations.html" class="button scrollto">Donations</a>
+    </div>
+  </div>
+  
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="row">
-      <div class="col-12 col-lg-8">
-        <div class="container" data-aos="zoom-in" data-aos-delay="100">
+  <section id="hero" class="d-flex flex-column justify-content-center" style="height: auto;">
+    <div class="row" style="margin: 0px;">
+      <div class="col-12 col-lg-8" style="align-self: center;">
+        <div id="main" class="container" style="padding: 0px;" data-aos="zoom-in" data-aos-delay="100">
           <h1>UpFinity: Buy, Hold, Earn</h1>
           <p>World's Best <span class="typed" data-typed-items="Upgradable, Innovative"></span> Token</p>
           <p>
             <span class="wrap-address">
-              <a href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
+              <a id="UpfinityAdr" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
               </a>
-              <a id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
-                Copy
-              </a>
-              <a class="button scrollto" onclick="addUPF();">
-                Add UPF in wallet
-              </a>
+              <div class="row">
+                <div class="col-6">
+                  <a href="#" id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
+                    Copy Address
+                  </a>
+                </div>
+                <div class="col-6">
+                  <a href="#" class="button scrollto" onclick="addUPF();">
+                    Add UPF in wallet
+                  </a>
+                </div>
+              </div>
             </span>
           </p>
                 
@@ -100,253 +95,185 @@
               <img src="assets/img/trade/dext.ico" style="width: 30px">
             </a>
             <a href="https://github.com/UpFinityCrypto/UpFinityCrypto.github.io/blob/main/UpFinity.sol" target="_tab" class="twitter"><i class="bx bxl-github"></i></a>
-            <a id="WhitePaperLink" href="UpFinity_WhitePaper.pdf" class="button scrollto">WhitePaper</a>
-            <a id="UpFinomicsLink" href="#upfinomics" class="button scrollto">UpFinomics</a>
+          </div>
+          
+          <div class="row">
+            <a href="dashboard.html" class="button scrollto">Dashboard</a>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <a id="WhitePaperLink" href="UpFinity_WhitePaper.pdf" class="button scrollto" >WhitePaper</a>
+            </div>
+            <div class="col-6">
+              <a id="UpFinomicsLink" href="upfinity.html" class="button scrollto">UpFinomics</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4">
-        <div class="container" data-aos="zoom-in" data-aos-delay="100">
-          <div class="sc-jSFjdj sc-dIvrsQ kJmatq hdzOgI">
-            <div class="sc-jSFjdj sc-gKAaRy sc-vMGZd kJmatq jcNvwq jsAPRX">
-              <div class="sc-jSFjdj sc-gKAaRy cpromH togOu">
-                <div class="sc-jSFjdj sc-gKAaRy kJmatq iIdAKa">
-                  <h2 color="text" class="sc-gtsrHT sc-kLojOw iGtzpP jDXLmf text-center">Exchange (Test)</h2>
-                  <div class="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center" style="margin: 10px;">
-                    <div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Trade tokens in an instant</div>
-                  </div>
+
+    <div class="col-12 col-lg-4">
+      <div id="swap" class="container" data-aos="zoom-in" data-aos-delay="100" style="padding: 0px;">
+        <div class="sc-jSFjdj sc-dIvrsQ kJmatq hdzOgI">
+          <div class="sc-jSFjdj sc-gKAaRy sc-vMGZd kJmatq jcNvwq jsAPRX">
+            <div class="sc-jSFjdj sc-gKAaRy cpromH togOu">
+              <div class="sc-jSFjdj sc-gKAaRy kJmatq iIdAKa">
+                <h2 color="text" class="sc-gtsrHT sc-kLojOw iGtzpP jDXLmf text-center">Exchange</h2>
+                <div class="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center" style="margin: 10px;">
+                  <div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Trade tokens in an instant</div>
+                  <div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Sell part will be done soon</div>
+                  <div>Buy Status: <span id="buyStatus"></span></div>
+                  <div>Sell Status: <span id="sellStatus"></span></div>
                 </div>
               </div>
             </div>
-            <div id="swap-page" class="sc-gpEJdM jdQeRJ">
-              <div class="sc-enrZtP cXbVbC">
+          </div>
+          <div id="swap-page" class="sc-gpEJdM jdQeRJ">
+            <div class="sc-enrZtP cXbVbC">
+              <div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
+        border-radius: 16px;
+        /* background-color: rgb(238, 234, 244); */
+        border-color: #28a745;
+        border: solid 3px;
+        box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
+        ">
+                <div class="sc-eTTTle hCspWz" style="
+        padding: 15px;
+    ">
+                  <div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
+                    <div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
+        display: flex; justify-content: space-between;
+    ">
+                      <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">From</div>
+                      <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
+                        <div id="BNBbalance" style="display: inline;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="sc-fVnRWS idBnak" style="
+        display: flex;
+    ">
+                    <input id="swapInput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white; color: white;">
+                      <button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
+        justify-content: space-between;
+        border: 0px;
+        background-color: #00000000;
+    ">
+                        <div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+    ">
+                          <img id="BNBlogo" src="assets/img/trade/bin.ico" style="width: 30px;">
+                          <div id="BNBtarget" color="text" class="sc-gtsrHT MlLjM" style="
+        display: flex;
+        text-align: left;
+        margin: 10px;
+        color: #aaaaaa;
+    ">BNB</div>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="sc-enrZtP jMLgAG"> -->
+                  <!-- <div class="sc-jSFjdj sc-knSFqH sc-cfARRi kJmatq chNVSQ jttSjR" style="padding: 0px 1rem;"> -->
+                    <!-- <div class="sc-cxxZvF bgTNhm" style="display: table; margin: 0 auto;"> -->
+                      <!-- <a href="#null" onclick="buySellChange();"> -->
+                        <!-- <svg viewBox="0 0 24 24" width="30px" color="text" -->
+                          <!-- xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca"> -->
+                          
+                          <!-- <path d="M11 5V16.17L6.11997 11.29C5.72997 10.9 5.08997 10.9 4.69997 11.29C4.30997 11.68 4.30997 12.31 4.69997 12.7L11.29 19.29C11.68 19.68 12.31 19.68 12.7 19.29L19.29 12.7C19.68 12.31 19.68 11.68 19.29 11.29C18.9 10.9 18.27 10.9 17.88 11.29L13 16.17V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5Z" style="fill: white;"></path> -->
+                        <!-- </svg> -->
+                      <!-- </a> -->
+                    <!-- </div> -->
+                  <!-- </div> -->
+                <!-- </div> -->
                 <div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
-          border-radius: 16px;
-          /* background-color: rgb(238, 234, 244); */
-          border-color: #28a745;
-          border: solid 3px;
-          box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
-          ">
+        border-radius: 16px;
+        /* background-color: rgb(238, 234, 244); */
+        border-color: #28a745;
+        border: solid 3px;
+        box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
+        ">
                   <div class="sc-eTTTle hCspWz" style="
-          padding: 15px;
-      ">
+        padding: 15px;
+    ">
                     <div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
                       <div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
-          display: flex; justify-content: space-between;
-      ">
-                        <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">From</div>
+        display: flex; justify-content: space-between;
+    ">
+                        <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">To (Estimated)</div>
                         <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
-                          <div id="BNBbalance" style="display: inline;"></div>
+                          <div id="UPFbalance" style="display: inline;"></div>
                         </div>
                       </div>
                     </div>
                     <div class="sc-fVnRWS idBnak" style="
-          display: flex;
-      ">
-                      <input id="swapInput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white; color: white;">
+        display: flex;
+    ">
+                      <input id="swapOutput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white;  color: white;" readonly>
                         <button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
-          justify-content: space-between;
-          border: 0px;
-          background-color: #00000000;
-      ">
+        justify-content: space-between;
+        border: 0px;
+        background-color: #00000000;
+    ">
                           <div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
-          justify-content: space-between;
-          display: flex;
-          align-items: center;
-      ">
-                            <img id="BNBlogo" src="assets/img/trade/bin.ico" style="width: 30px;">
-                            <div id="BNBtarget" color="text" class="sc-gtsrHT MlLjM" style="
-          display: flex;
-          text-align: left;
-          margin: 10px;
-          color: #aaaaaa;
-      ">BNB</div>
-                          </div>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="sc-enrZtP jMLgAG">
-                    <div class="sc-jSFjdj sc-knSFqH sc-cfARRi kJmatq chNVSQ jttSjR" style="padding: 0px 1rem;">
-                      <div class="sc-cxxZvF bgTNhm" style="display: table; margin: 0 auto;">
-                        <a href="#null" onclick="buySellChange();">
-                          <svg viewBox="0 0 24 24" width="30px" color="text"
-                            xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca">
-                            
-                            <path d="M11 5V16.17L6.11997 11.29C5.72997 10.9 5.08997 10.9 4.69997 11.29C4.30997 11.68 4.30997 12.31 4.69997 12.7L11.29 19.29C11.68 19.68 12.31 19.68 12.7 19.29L19.29 12.7C19.68 12.31 19.68 11.68 19.29 11.29C18.9 10.9 18.27 10.9 17.88 11.29L13 16.17V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5Z" style="fill: white;"></path>
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
-          border-radius: 16px;
-          /* background-color: rgb(238, 234, 244); */
-          border-color: #28a745;
-          border: solid 3px;
-          box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
-          ">
-                    <div class="sc-eTTTle hCspWz" style="
-          padding: 15px;
-      ">
-                      <div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
-                        <div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
-          display: flex; justify-content: space-between;
-      ">
-                          <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">To (Estimated)</div>
-                          <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
-                            <div id="UPFbalance" style="display: inline;"></div>
-                          </div>
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+    ">
+                            <img id="UPFlogo" src="assets/img/logo.png" style="width: 30px;">
+                              <div id="UPFtarget" color="text" class="sc-gtsrHT MlLjM" style="
+        display: flex;
+        text-align: left;
+        margin: 10px;
+        color: #aaaaaa;
+    ">UPF</div>
+                            </div>
+                          </button>
                         </div>
                       </div>
-                      <div class="sc-fVnRWS idBnak" style="
-          display: flex;
-      ">
-                        <input id="swapOutput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white;  color: white;" readonly>
-                          <button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
-          justify-content: space-between;
-          border: 0px;
-          background-color: #00000000;
-      ">
-                            <div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
-          justify-content: space-between;
-          display: flex;
-          align-items: center;
-      ">
-                              <img id="UPFlogo" src="assets/img/logo.png" style="width: 30px;">
-                                <div id="UPFtarget" color="text" class="sc-gtsrHT MlLjM" style="
-          display: flex;
-          text-align: left;
-          margin: 10px;
-          color: #aaaaaa;
-      ">UPF</div>
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="sc-enrZtP bxRIiB" style="padding: 0px 16px;"></div>
                     </div>
+                    <div class="sc-enrZtP bxRIiB" style="padding: 0px 16px;"></div>
+                  </div>
+                  <div class="sc-jSFjdj jRqThc">
                     <div class="sc-jSFjdj jRqThc">
-                      <div class="sc-jSFjdj jRqThc">
-                        <a id="swapBuy" class="button scrollto" id="swap-button" width="100%" scale="md" style="
-          -webkit-box-align: center;
-          align-items: center;
-          border: 0px;
-          border-radius: 16px;
-          box-shadow: rgb(14 14 44 / 40%) 0px -1px 0px 0px inset;
-          cursor: pointer;
-          display: inline-flex;
-          font-family: inherit;
-          font-size: 16px;
-          font-weight: 600;
-          -webkit-box-pack: center;
-          justify-content: center;
-          letter-spacing: 0.03em;
-          line-height: 1;
-          opacity: 1;
-          outline: 0px;
-          transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;
-          height: 48px;
-          padding: 0px 24px;
-          margin: 10px 0px;
-          color: white;
-          width: 100%;
-          " onClick="fbuyUPF();">Swap</a>
-                      </div>
-                      <div id="swapResult"></div>
+                      <a id="swapBuy" class="button scrollto" id="swap-button" width="100%" scale="md" style="
+        -webkit-box-align: center;
+        align-items: center;
+        border: 0px;
+        border-radius: 16px;
+        box-shadow: rgb(14 14 44 / 40%) 0px -1px 0px 0px inset;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 600;
+        -webkit-box-pack: center;
+        justify-content: center;
+        letter-spacing: 0.03em;
+        line-height: 1;
+        opacity: 1;
+        outline: 0px;
+        transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;
+        height: 48px;
+        padding: 0px 24px;
+        margin: 10px 0px;
+        color: white;
+        width: 100%;
+        " onClick="fbuyUPF();">Swap</a>
                     </div>
+                    <div id="swapResult"></div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
-    <section id="nft" class="about">
-      <div id="NFT" class="container aos-init aos-animate" data-aos="fade-up">
-        <div class="section-title">
-          <h2>NFT</h2>
-          <span class="wrap-address">
-            <a href="https://bscscan.com/address/0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD" target="_tab">0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD
-            </a>
-            <a id="copyUpfinityNFTAdr" class="button scrollto" onclick="copyAdr('copyUpfinityNFTAdr', '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD');">
-              Copy
-            </a>
-          </span>
-          <p></p>
-          <div class="text-center" style="margin-top:25px;">
-              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-              <div id="connectResult"><span><span></div>
-          </div>
-          <p>Total Minted: <span id="totalNFTCount"></span></p>
-        </div>
-        
-        
-        <div class="row">
-          <div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>diamond</h2>
-              <p>Need to hold at least: <img src="assets/img/logo.png" style="width: 30px;"> 2B UPF</p>
-              <p>Price: <img src="assets/img/trade/bin.ico"> 0.25 BNB</p>
-              <div class="row">
-                <div class="col-12 col-lg-6 text-justify content">
-                  <img id="diamondBoy" src="" style="width: 30px;">
-                  <p>Minted: <span id="diamondBoyCount"></span></p>
-                  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', true);">Mint</a></p>
-                  <p id="mintDiamondBoyResult"></p>
-                </div>
-                <div class="col-12 col-lg-6 text-justify content">
-                  <img id="diamondGirl" src="" style="width: 30px;">
-                  <p>Minted: <span id="diamondGirlCount"></span></p>
-                  <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond', false);">Mint</a></p>
-                  <p id="mintDiamondGirlResult"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>emerald</h2>
-              <p>Need to hold at least: <img src="assets/img/logo.png" style="width: 30px;"> 20B UPF</p>
-              <p>Price: <img src="assets/img/trade/bin.ico"> 0.5 BNB</p>
-              <div class="row">
-                <div class="col-12 col-lg-6 text-justify content">
-                  <img id="emeraldBoy" src="" style="width: 30px;">
-                  <p>Minted: <span id="emeraldBoyCount"></span></p>
-                  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', true);">Mint</a></p>
-                  <p id="mintEmeraldBoyResult"></p>
-                </div>
-                <div class="col-12 col-lg-6 text-justify content">
-                  <img id="emeraldGirl" src="" style="width: 30px;">
-                  <p>Minted: <span id="emeraldGirlCount"></span></p>
-                  <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald', false);">Mint</a></p>
-                  <p id="mintEmeraldGirlResult"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="myNFT" class="container aos-init aos-animate" data-aos="fade-up">
-        <div class="section-title">
-          <h2>my NFT</h2>
-          <div class="text-center" style="margin-top:25px;">
-              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-              <div id="connectResult"><span><span></div>
-          </div>
-          <p>Total Minted: <span id="totalMyNFTCount"></span></p>
-        </div>
-
-        <div id="myNFTs" class="row">
-        </div>
-      </div>
-     
-
-    </section>
-
+    
      <!-- <section id="" class=" section-bg"> -->
       <!-- <div class="container aos-init aos-animate" data-aos="fade-up"> -->
         <!-- <div class="section-title"> -->
@@ -378,47 +305,61 @@
         <!-- </div> -->
       <!-- </div> -->
      <!-- </section> -->
-
+    
+    
+    
+    
+    <section id="Ecosystem">
+    </section><!-- End Hero -->
+    
   </main><!-- End #main -->
 
   
   <!-- ======= Footer ======= -->
   <footer id="footer">
   </footer><!-- End Footer -->
+  
+  <div id="tail">
+    <script src="assets/js/jquery-ui.js"></script>
 
-  <script src="assets/js/jquery.min.js"></script>
-  
-  <!-- for home -->
-  
-  <script src="assets/vendor/chart.js/chart.min.js"></script>
-  
-  <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
-  <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
-  
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script async src="assets/vendor/purecounter/purecounter.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script> 
-  
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  
-  <script src="assets/js/funcs.js"></script>
-  <script src="assets/js/consts.js"></script>
-  <script src="assets/js/code.js"></script>
-  
-  
-  
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <div class="copyright">
-    <iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>
+    <!-- blockchains -->
+    <script src="assets/js/web3.min.js" type="text/javascript"></script>
+    <script src="assets/js/detect-provider.min.js" type="text/javascript"></script>
+    <script src="assets/js/ethers.umd.min.js" type="application/javascript"></script>
+
+    <!-- for home -->
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+
+    <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script async src="assets/vendor/purecounter/purecounter.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/typed.js/typed.min.js"></script> 
+
+    <script src="assets/js/funcs.js"></script>
+    <script src="assets/js/consts.js"></script>
+    <script src="assets/js/code.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div class="copyright">
+      <iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>
+    </div>
   </div>
 </body>
-
+<script>
+<!-- $.get('sections/tail.html', function(response) { -->
+    <!-- $('#tail').append($(response)); -->
+<!-- }); -->
+</script>
 </html>
