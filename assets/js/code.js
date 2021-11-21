@@ -34,10 +34,6 @@ $(document).click(function (e) {
   }
 });
 
-displayText("buyFee", buyFee / 100);
-displayText("sellFee", sellFee / 100);
-displayText("totalFee", totalFee / 100);
-
 (async function() { // to use async things 
   
   
@@ -613,6 +609,9 @@ displayText("totalFee", totalFee / 100);
   
   
   if (getDiv("UpFinomics").length) {
+    displayText("buyFee", buyFee / 100);
+    displayText("sellFee", sellFee / 100);
+    displayText("totalFee", totalFee / 100);
   
     chart = document.querySelector('#SellTaxChart');
     if (chart) {
@@ -735,7 +734,7 @@ displayText("totalFee", totalFee / 100);
   countDownTimer('NFTcountDown', '11/16/2021 2:59 PM'); // 내일까지 
   
 
-  
+
   
   t = TT('others done', t);
   displayText("connectResult", currentAccount + " <span>Done!</span>");
