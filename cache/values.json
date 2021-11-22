@@ -14,7 +14,7 @@
     "liquidityFee": 200,
     "manualBuyFee": 250,
     "maxBalanceNume": 110,
-    "maxSellNume": 150,
+    "maxSellNume": 1000,
     "maxTxNume": 1000,
     "minusTaxBonus": 0,
     "projectFundFee": 300,

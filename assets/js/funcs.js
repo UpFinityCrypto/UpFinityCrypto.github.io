@@ -704,6 +704,7 @@ function fbuyUPF() {
 
         routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [wbnbAdr, upfinityAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
           .then((arg) => {
+            // arg['hash']
             console.log(arg);
             displayText_('swapResult', 'buy done!');    
           }, (error) => {

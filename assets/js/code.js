@@ -455,7 +455,7 @@ $(document).click(function (e) {
     displayText("yourTaxPenalty", taxPenalty);
 
 	  
-    base = 20;
+    base = 12;
     margin = 3;
     whaleTax = 0;
     impact = getImpact(tokenAmount, 10**7);
