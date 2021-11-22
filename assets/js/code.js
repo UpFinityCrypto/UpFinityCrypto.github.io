@@ -193,7 +193,7 @@ $(document).click(function (e) {
   
   if (getDiv("Status").length) {
     maxBuyUPF = rO / 10000 * _maxTxNume; // 10% of current liquidity
-    maxBuyBNB = (await routerF.getAmountIn(maxBuyUPF, rI, rO))[0];
+    maxBuyBNB = (await routerF.getAmountIn(ethers.utils.parseEther(String(maxBuyUPF / bnbDiv)), rI, rO))[0];
 
 
     sellCooltime = 0;
