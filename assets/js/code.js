@@ -622,7 +622,7 @@ $(document).click(function (e) {
         'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
         'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
         'Liquidity: ' + String(_liquidityFee / 100) + '%',
-        'Project: ' + String(_projectFundFee / 100) + '%',
+        'Marketing: ' + String(_projectFundFee / 100) + '%',
         'Ecosystem: ' + String(_projectFundFee / 100) + '%',
         'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) / 100) + '%',
         ],
