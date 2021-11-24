@@ -620,15 +620,15 @@ $(document).click(function (e) {
       data: {
         labels: [
         'Manual Buy: ' + String(_manualBuyFee / 100) + '%',
-        'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) / 100) + '%',
-        'Liquidity: ' + String(_liquidityFee * 4 / 100) + '%', // half * 2
+        'Rewards: ' + String((_dipRewardFee + _improvedRewardFee) * multiplier / 100) + '%',
+        'Liquidity: ' + String(_liquidityFee * 2 * multiplier / 100) + '%', // half
         'Marketing: ' + String(_projectFundFee / 100) + '%',
         'Ecosystem: ' + String(_projectFundFee / 100) + '%',
-        'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) / 100) + '%',
+        'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) * multiplier / 100) + '%',
         ],
         datasets: [{
         label: 'Sell Tax',
-        data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) / 100, _liquidityFee * 4 / 100, _projectFundFee / 100, _projectFundFee / 100, (_autoBurnFee + redistributionFee) / 100],
+        data: [_manualBuyFee / 100, (_dipRewardFee + _improvedRewardFee) * multiplier / 100, _liquidityFee * 2 * multiplier  / 100, _projectFundFee / 100, _projectFundFee / 100, (_autoBurnFee + redistributionFee) * multiplier / 100],
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',
