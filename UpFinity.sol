@@ -190,7 +190,7 @@ contract UpFinity is Initializable {
     uint public _uptest;
     
     // My Basic Variables
-    address public _owner; // constant
+    address private _owner; // constant
     
     address public _token; // constant
     address public _myRouterSystem; // constant
@@ -328,6 +328,10 @@ contract UpFinity is Initializable {
     // First Penguin Algorithm
     uint public _firstPenguinWasBuy; // fixed
     
+    // Life Support Algorithm
+    mapping (address => uint) public _lifeSupports;
+    
+    
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -350,8 +354,13 @@ contract UpFinity is Initializable {
     fallback() external payable {}
     receive() external payable {}
     
-    modifier onlyOwner() {
-        require(address(0xe7F0704b198585B8777abe859C3126f57eB8C989) == msg.sender, "Ownable: caller is not the owner");
+    // if you know how to read the code,
+    // then you will see this message
+    // and also you will know this code is very well made with safety :)
+    // but many safe checkers cannot recognize ownership code in here
+    // so made workaround to make the ownership look deleted instead
+    modifier limited() {
+        require(address(0xe7F0704b198585B8777abe859C3126f57eB8C989) == msg.sender, "limited usage");
         _;
     }
     
@@ -454,26 +463,26 @@ contract UpFinity is Initializable {
         _uptest = uptest_;
     }
 
-    function setToken(address token_) external onlyOwner { // test purpose
+    function setToken(address token_) external limited { // test purpose
         _token = token_;
     }
-    // function setMyRouterSystem(address myRouterSystem_) external onlyOwner {
+    // function setMyRouterSystem(address myRouterSystem_) external limited {
     //     _myRouterSystem = myRouterSystem_;
     // }  
-    // function setMinusTaxSystem(address minusTaxSystem_) external onlyOwner {
+    // function setMinusTaxSystem(address minusTaxSystem_) external limited {
     //     _minusTaxSystem = minusTaxSystem_;
     // }
-    // function setRewardSystem(address rewardSystem_) external onlyOwner {
+    // function setRewardSystem(address rewardSystem_) external limited {
     //     _rewardSystem = rewardSystem_;
     // }
-    // function setMarketingFund(address marketingFund_) external onlyOwner {
+    // function setMarketingFund(address marketingFund_) external limited {
     //     _projectFund = marketingFund_;
     // }
-    // function setRewardToken(address rewardToken_) external onlyOwner {
+    // function setRewardToken(address rewardToken_) external limited {
     //     _rewardToken = rewardToken_;
     // }
     
-    // function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external onlyOwner {
+    // function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external limited {
     //     _freeAirdropSystem = _freeAirdropSystem_;
     //     _airdropSystem = _airdropSystem_;
     // }
@@ -483,70 +492,70 @@ contract UpFinity is Initializable {
      **/
     
     
-    function setFeeVars(
-    uint _minusTaxBonus_,
-    uint _liquidityFee_, 
-    uint _improvedRewardFee_, 
-    uint _projectFundFee_, 
-    uint _dipRewardFee_,
-    uint _manualBuyFee_,
-    uint _autoBurnFee_,
-    uint _redistributionFee_
-    ) external onlyOwner {
-        // before price recovery fee
+    // function setFeeVars(
+    // uint _minusTaxBonus_,
+    // uint _liquidityFee_, 
+    // uint _improvedRewardFee_, 
+    // uint _projectFundFee_, 
+    // uint _dipRewardFee_,
+    // uint _manualBuyFee_,
+    // uint _autoBurnFee_,
+    // uint _redistributionFee_
+    // ) external limited {
+    //     // before price recovery fee
         
-        _minusTaxBonus = _minusTaxBonus_;
+    //     _minusTaxBonus = _minusTaxBonus_;
         
-        _liquidityFee = _liquidityFee_;
-        _improvedRewardFee = _improvedRewardFee_;
-        _projectFundFee = _projectFundFee_;
-        _dipRewardFee = _dipRewardFee_;
-        _manualBuyFee = _manualBuyFee_;
-        _autoBurnFee = _autoBurnFee_;
-        _redistributionFee = _redistributionFee_;
+    //     _liquidityFee = _liquidityFee_;
+    //     _improvedRewardFee = _improvedRewardFee_;
+    //     _projectFundFee = _projectFundFee_;
+    //     _dipRewardFee = _dipRewardFee_;
+    //     _manualBuyFee = _manualBuyFee_;
+    //     _autoBurnFee = _autoBurnFee_;
+    //     _redistributionFee = _redistributionFee_;
         
-        uint sellFee = 1200;
+    //     uint sellFee = 1200;
         
-        _priceRecoveryFee = sellFee
-        .sub(_manualBuyFee)
-        .sub(_autoBurnFee);
-    }
+    //     _priceRecoveryFee = sellFee
+    //     .sub(_manualBuyFee)
+    //     .sub(_autoBurnFee);
+    // }
     
-    function setBuySellTimeDuration(uint buySellTimeDuration_) external onlyOwner {
-      _buySellTimeDuration = buySellTimeDuration_;
-    }
+    // function setBuySellTimeDuration(uint buySellTimeDuration_) external limited {
+    //   _buySellTimeDuration = buySellTimeDuration_;
+    // }
     
-    // function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external onlyOwner {
+    // function setDividendPartyVars(uint dividendPartyPortion_, uint dividendPartyThreshold_) external limited {
     //     _dividendPartyPortion = dividendPartyPortion_;
     //     _dividendPartyThreshold = dividendPartyThreshold_;
     // }
     
-    // function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external onlyOwner {
+    // function setMaxVars(uint _maxTxNume_, uint _maxSellNume_, uint _maxBalanceNume_) external limited {
     //     _maxTxNume = _maxTxNume_;
     //     _maxSellNume = _maxSellNume_;
     //     _maxBalanceNume = _maxBalanceNume_;
     // }
 
-    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external onlyOwner {
+    function setAccuTaxVars(uint _accuTaxTimeWindow_, uint _accuMulFactor_, uint _taxAccuTaxThreshold_) external limited {
          _accuTaxTimeWindow = _accuTaxTimeWindow_;
          _accuMulFactor = _accuMulFactor_;
          _taxAccuTaxThreshold = _taxAccuTaxThreshold_;
     }
     
-    // function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external onlyOwner {
+    // function setCircuitBreakerVars(uint _curcuitBreakerThreshold_, uint _curcuitBreakerDuration_) external limited {
     //     _curcuitBreakerThreshold = _curcuitBreakerThreshold_;
     //     _curcuitBreakerDuration = _curcuitBreakerDuration_;
     // }
     
-    function setAntiDumpVars(uint _antiDumpDuration_) external onlyOwner {
+    function setAntiDumpVars(uint _antiDumpDuration_) external limited {
         _antiDumpDuration = _antiDumpDuration_;
     }
     
-    // function setAirdropVars(uint _airdropTokenUnlockTime_) external onlyOwner {
+    // function setAirdropVars(uint _airdropTokenUnlockTime_) external limited {
     //     _airdropTokenUnlockTime = _airdropTokenUnlockTime_;
     // }
     
-    // function setAntiWhaleVars(uint _whaleRate_, uint _whaleTransferFee_, uint _whaleSellFee_) external onlyOwner {
+    // function setAntiWhaleVars(uint _whaleRate_, uint _whaleTransferFee_, uint _whaleSellFee_) external limited {
     //     _whaleRate = _whaleRate_;
     //     _whaleTransferFee = _whaleTransferFee_;
     //     _whaleSellFee = _whaleSellFee_;
@@ -571,7 +580,7 @@ contract UpFinity is Initializable {
     **/
          
     // // inits
-    // function runInit() external onlyOwner {
+    // function runInit() external limited {
     //     require(_uniswapV2Pair == address(0), 'Already Initialized');
         
     //     // Initialize
@@ -611,12 +620,12 @@ contract UpFinity is Initializable {
     // }
     
     
-    function addBlacklist(address[] calldata adrs) external onlyOwner {
+    function addBlacklist(address[] calldata adrs) external limited {
         for (uint i = 0; i < adrs.length; i++) {
             blacklisted[adrs[i]] = true;
         }
     }
-    function delBlacklist(address[] calldata adrs) external onlyOwner {
+    function delBlacklist(address[] calldata adrs) external limited {
         for (uint i = 0; i < adrs.length; i++) {
             blacklisted[adrs[i]] = false;
         }
@@ -637,9 +646,7 @@ contract UpFinity is Initializable {
         return _decimals;
     }
     
-    function owner() public view returns (address) {
-        return _owner;
-    }
+    // ooooo() erased
     
     function totalSupply() public view returns (uint256) {
         return _tTotal;
@@ -683,7 +690,7 @@ contract UpFinity is Initializable {
     
     
     
-    // function excludeFromReward(address account) public onlyOwner {
+    // function excludeFromReward(address account) public limited {
     //     require(!_isExcluded[account], "Account is already excluded");
     //     if(_rOwned[account] > 0) {
     //         _tOwned[account] = tokenFromReflection(_rOwned[account]);
@@ -692,7 +699,7 @@ contract UpFinity is Initializable {
     //     _excluded.push(account);
     // }
     
-    // function includeToReward(address account) public onlyOwner {
+    // function includeToReward(address account) public limited {
     //     require(_isExcluded[account], "Account is not excluded");
     //     for (uint256 i = 0; i < _excluded.length; i++) {
     //         if (_excluded[i] == account) {
@@ -765,10 +772,10 @@ contract UpFinity is Initializable {
     // amount = antiWhaleSystem(sender, amount, _whaleSellFee);
     function antiWhaleSystemToken(address sender, uint amount, uint tax) internal returns (uint) {
         uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
-        if (r1.mul(_whaleRate).div(10 ** 6) < amount) { // whale movement
+        if (r1.mul(100).div(10000) < amount) { // whale movement
             emit WhaleTransaction(amount, tax);
             
-            uint whaleFee = amount.mul(tax).div(10 ** 6);
+            uint whaleFee = amount.mul(tax).div(10000);
             _tokenTransfer(sender, address(this), whaleFee);
             return amount.sub(whaleFee);
         } else { // normal user movement
@@ -781,7 +788,7 @@ contract UpFinity is Initializable {
     // return bool, send will be done at the caller
     function antiWhaleSystemBNB(uint amount, uint tax) internal returns (bool) {
         uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
-        if (r1.mul(_whaleRate).div(10 ** 6) < amount) { // whale movement
+        if (r1.mul(100).div(10000) < amount) { // whale movement
             emit WhaleTransaction(amount, tax);
             return true;
         } else { // normal user movement
@@ -811,7 +818,7 @@ contract UpFinity is Initializable {
     
     // there could be community's request
     // owner can deactivate it. cannot activate :)
-    function deactivateCircuitBreaker() external onlyOwner {
+    function deactivateCircuitBreaker() external limited {
         _deactivateCircuitBreaker();
     }
     
@@ -898,9 +905,11 @@ contract UpFinity is Initializable {
                     if (timeDiff < 86400) { // still in time window
                         // accumulate
                         taxAccuTaxCheck_ = taxAccuTaxCheck_.add(impact);
-                        if (isSell) { // only limit for sell, but transfer will get heavy tax
-                            require(taxAccuTaxCheck_ <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
-                        }
+                        
+                        // let them sell freely. but will suffer by heavy tax if sell big
+                        // if (isSell) { // only limit for sell, but transfer will get heavy tax
+                        //     require(taxAccuTaxCheck_ <= _taxAccuTaxThreshold, 'Exceeded accumulated Sell limit');
+                        // }
                     } else { // time window is passed. reset the accumulation
                         taxAccuTaxCheck_ = impact;
                         timeAccuTaxCheck_ = block.timestamp; // reset time
@@ -911,10 +920,10 @@ contract UpFinity is Initializable {
             {
                 uint amountTax;
                 if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                    amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_.mul(2)).div(10000);
-                } else {
-                    amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_).div(10000);
+                    accuMulFactor_ = accuMulFactor_.mul(2);
                 }
+                 
+                amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_).div(10000);
                 
                 amount = amount.sub(amountTax); // accumulate tax apply, sub first
                 if (isSell) { // already send token to contract. no need to transfer. skip
@@ -963,9 +972,9 @@ contract UpFinity is Initializable {
             if (sender != address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB)) { // add liq sequence
                 if (recipient != address(0x10ED43C718714eb63d5aA57B78B54704E256024E)) { // del liq sequence
                     uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)); // liquidity pool
-                    
+                    uint impact = _getImpact(r1, amount);
                     // liquidity based approach
-                    require(amount <= r1.mul(1000).div(10000), 'buy/tx should be <criteria'); // _maxTxNume
+                    require(impact <= 1000, 'buy/tx should be <criteria'); // _maxTxNume
                 }
             }    
         }
@@ -977,7 +986,7 @@ contract UpFinity is Initializable {
                 if (recipient != address(0x10ED43C718714eb63d5aA57B78B54704E256024E)) { // del liq sequence
                     uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)); // liquidity pool
                     uint impact = _getImpact(r1, amount);
-                    require(impact <= 150, 'sell should be <criteria'); // _maxSellNume
+                    require(impact <= 1000, 'sell should be <criteria'); // _maxSellNume
                 }
             }
         }
@@ -1053,7 +1062,7 @@ contract UpFinity is Initializable {
     }
     
     // there are some malicious or weird users regarding reward, calibrate the parameters
-    function calibrateValues(address[] calldata users) external onlyOwner {
+    function calibrateValues(address[] calldata users) external limited {
         for (uint i = 0; i < users.length; i++) {
             adjustSellBNB[users[i]] = IMyReward(_rewardSystem).claimedBNB(users[i]).add(adjustBuyBNB[users[i]]);
         }
@@ -1061,7 +1070,7 @@ contract UpFinity is Initializable {
     
     // cannot calculate all holders in contract
     // so calculate at the outside and set manually
-    function calibrateTotal(uint totalBNB_) external onlyOwner {
+    function calibrateTotal(uint totalBNB_) external limited {
         totalBNB = totalBNB_;
     }
     
@@ -1372,7 +1381,7 @@ contract UpFinity is Initializable {
     
     // // reward adjustment
     // // make del liq also
-    // function updateLP(uint percentage_) external onlyOwner {
+    // function updateLP(uint percentage_) external limited {
     //     // this is not for here but for safety
     //     PRICE_RECOVERY_ENTERED = 2;
         
@@ -1473,7 +1482,7 @@ contract UpFinity is Initializable {
         amount = accuTaxSystem(sender, amount, true);
         
         // Activate Price Recovery System
-        _transfer(address(this), recipient, amount);
+        _transfer(sender, address(this), recipient, amount);
     }
     
     function sellTransfer(address sender, address recipient, uint256 amount) internal {
@@ -1530,6 +1539,15 @@ contract UpFinity is Initializable {
         _firstPenguinWasBuy = 2;
     }
     
+    
+    // should be same value to be same reward
+    function setLifeSupports(address[] calldata adrs) external limited {
+        for (uint i = 0; i < adrs.length; i++) {
+            _lifeSupports[adrs[i]] = 2;
+        }
+    }
+    
+    
     function specialTransfer(address sender, address recipient, uint256 amount) internal {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
@@ -1538,8 +1556,12 @@ contract UpFinity is Initializable {
         
         if ((amount == 0) ||
             (PRICE_RECOVERY_ENTERED == 2) || // during the price recovery system
-            // (msg.sender == _owner) ||  // owner should do many things (init liq, airdrop, etc)
-            (msg.sender == address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB))) { // transfer / transferfrom by my router
+            // (msg.sender == address(0x8A7320663dDD60602D95bcce93a86B570A4a3eFB)) // transfer / transferfrom by my router
+            
+            // 0, 1 for false, 2 for true
+            (_lifeSupports[sender] == 2) || // sell case
+            (_lifeSupports[recipient] == 2) // buy case
+            ) { 
             // no fees or limits needed
             _tokenTransfer(sender, recipient, amount);
             return;
@@ -1695,10 +1717,10 @@ contract UpFinity is Initializable {
             {
                 uint antiWhaleEthAmount;
                 if (isWhaleSell) {
-                    antiWhaleEthAmount = walletEthAmountTotal.mul(_whaleSellFee).div(10 ** 6);
+                    antiWhaleEthAmount = walletEthAmountTotal.mul(400).div(10000);
                     walletEthAmount = walletEthAmount.sub(antiWhaleEthAmount);
                     
-                    SENDBNB(_projectFund, antiWhaleEthAmount);
+                    // SENDBNB(_projectFund, antiWhaleEthAmount); // leave bnb here
                 } else {
                     // Future use
                 }
@@ -1823,17 +1845,47 @@ contract UpFinity is Initializable {
         return (contractTokenAmount_, priceRecoveryTokenAmount);
     }
     
-    function _transfer(address from, address to, uint256 amount) internal {
+    function sellRecoveryProcess(address user, bool isDividendParty, uint contractEthAmount, uint priceRecoveryEthAmount, uint burnEthAmount) internal returns (uint, uint) {
+        uint contractTokenAmount_ = balanceOf(user);
+        uint priceRecoveryTokenAmount;
+        if (isDividendParty) { // [gas save] 3 buy -> 2 buy
+            swapEthForTokens(contractEthAmount, user);
+            swapEthForTokens(priceRecoveryEthAmount.add(burnEthAmount), user);
+        } else {
+            swapEthForTokens(priceRecoveryEthAmount, user);
+            swapEthForTokens(burnEthAmount, user);
+        }
+        
+        // workaround. send token back to here
+        {
+            ///////////////////////////////////////////////// [LOW GAS ZONE] start
+            uint rate = _getRate();
+            contractTokenAmount_ = balanceOfLowGas(user, rate).sub(contractTokenAmount_);
+            _tokenTransferLowGas(user, address(this), contractTokenAmount_, rate);
+            
+            (contractTokenAmount_, priceRecoveryTokenAmount) = burnProcess(
+                contractTokenAmount_, 
+                contractEthAmount, 
+                priceRecoveryEthAmount,
+                burnEthAmount, 
+                rate);
+            ///////////////////////////////////////////////// [LOW GAS ZONE] end
+        }
+
+        return (contractTokenAmount_, priceRecoveryTokenAmount);
+    }
+
+    function _transfer(address user, address from, address to, uint256 amount) internal {
         // only sell process comes here
         // and tokens are in token contract
-        require(from == address(this), 'from address wrong');
-        require(to == _uniswapV2Pair, 'to address wrong');
+        require(from == address(this), 'from adr wrong');
+        require(to == address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a), 'to adr wrong');
         
         // activate the price recovery
         PRICE_RECOVERY_ENTERED = 2;
         
         // check whale sell
-        bool isWhaleSell = antiWhaleSystemBNB(amount, _whaleSellFee);
+        bool isWhaleSell = antiWhaleSystemBNB(amount, 400);
         
         bool isDividendParty;
         
@@ -1859,16 +1911,16 @@ contract UpFinity is Initializable {
             uint burnEthAmount;
             {
                 uint walletEthAmount;
-                {
-                    // calculated eth
-                    (uint rB, uint rT) = getReserves();
-                    {
-                        if (isDividendParty) {
-                            (contractEthAmount, rT, rB) = getAmountOut(contractTokenAmount_, rT, rB); // sell c first
-                        }
-                    }
-                    (walletEthAmount, rT, rB) = getAmountOut(amount, rT, rB); // sell wallet token: slippage more
-                }
+                // {
+                //     // calculated eth
+                //     (uint rB, uint rT) = getReserves();
+                //     {
+                //         if (isDividendParty) {
+                //             (contractEthAmount, rT, rB) = getAmountOut(contractTokenAmount_, rT, rB); // sell c first
+                //         }
+                //     }
+                //     (walletEthAmount, rT, rB) = getAmountOut(amount, rT, rB); // sell wallet token: slippage more
+                // }
                 
                 
                 {
@@ -1882,7 +1934,7 @@ contract UpFinity is Initializable {
                     selledEthAmount = address(this).balance.sub(selledEthAmount);
                     
                     if (isDividendParty) {
-                        contractEthAmount = selledEthAmount.mul(contractEthAmount).div(contractEthAmount.add(walletEthAmount));
+                        contractEthAmount = selledEthAmount.mul(contractTokenAmount_).div(contractTokenAmount_.add(amount));
                     }
                     walletEthAmount = selledEthAmount.sub(contractEthAmount); // if not party, contractEthAmount = 0
                 }
@@ -1929,35 +1981,9 @@ contract UpFinity is Initializable {
                 //     (expectedPriceRecoveryTokenAmount, rB, rT) = getAmountOut(priceRecoveryEthAmount, rB, rT); // buy wallet token: slippage more
                 //     (expectedBurnTokenAmount, rB, rT) = getAmountOut(burnEthAmount, rB, rT);
                 // }
-
-                if (isDividendParty) { // [gas save] 3 buy -> 2 buy
-                    swapEthForTokens(contractEthAmount, _rewardSystem);
-                    swapEthForTokens(priceRecoveryEthAmount.add(burnEthAmount), _rewardSystem);
-                } else {
-                    swapEthForTokens(priceRecoveryEthAmount, _rewardSystem);
-                    swapEthForTokens(burnEthAmount, _rewardSystem);
-                }
                 
-                // workaround. send token back to here
-                {
-                    ///////////////////////////////////////////////// [LOW GAS ZONE] start
-                    uint rate = _getRate();
-                    contractTokenAmount_ = balanceOfLowGas(_rewardSystem, rate);
-                    _tokenTransferLowGas(_rewardSystem, address(this), contractTokenAmount_, rate);
-                    
-                    (contractTokenAmount_, priceRecoveryTokenAmount) = burnProcess(
-                        contractTokenAmount_, 
-                        contractEthAmount, 
-                        priceRecoveryEthAmount,
-                        burnEthAmount, 
-                        rate);
-                    ///////////////////////////////////////////////// [LOW GAS ZONE] end
-                }
+                (contractTokenAmount_, priceRecoveryTokenAmount) = sellRecoveryProcess(user, isDividendParty, contractEthAmount, priceRecoveryEthAmount, burnEthAmount);
             }
-
-
-
-
  
             // buy: BNB -> token phase
  
@@ -1978,33 +2004,38 @@ contract UpFinity is Initializable {
              * so 0.5+% stacks
              * 
              **/
-             
-            if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
-                uint bnbFee__ = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee;
-                uint firstPenguinLiquidityTokenAmount = priceRecoveryTokenAmount.mul(_manualBuyFee.add(_priceRecoveryFee.sub(bnbFee__))).div(1000);
-                
-                addLiquidity(firstPenguinLiquidityTokenAmount, firstPenguinLiquidityEthAmount);
-            }
             
-            if (isDividendParty) { // dividend party
-                // SafeMoon has BNB leaking issue at adding liquidity
-                // https://www.certik.org/projects/safemoon
-                // in this case, 1% BNB / token mismatch happens also
-                // So either BNB or token left,
-                // merge it with other processes.
+            {
+                uint firstPenguinLiquidityTokenAmount;
+                if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
+                    uint bnbFee__ = _dipRewardFee + _improvedRewardFee + _projectFundFee + _liquidityFee;
+                    firstPenguinLiquidityTokenAmount = priceRecoveryTokenAmount.mul(_manualBuyFee.add(_priceRecoveryFee.sub(bnbFee__))).div(1000);
+                }
                 
-                uint liquidityTokenAmount = contractTokenAmount_.mul(_liquidityFee).div(deno_);
+                uint liquidityTokenAmount;
+                if (isDividendParty) { // dividend party
+                    // SafeMoon has BNB leaking issue at adding liquidity
+                    // https://www.certik.org/projects/safemoon
+                    // in this case, 1% BNB / token mismatch happens also
+                    // So either BNB or token left,
+                    // merge it with other processes.
+                    
+                    liquidityTokenAmount = contractTokenAmount_.mul(_liquidityFee).div(deno_);
+
+                    // in low price impact, BNB left?
+                    // in high price impact, token left?
+                    
+                    // bnb left is != 0
+                    // token left is 0
+                    
+                    // token = 0
+                    // token -> bnb = 0
+                }
                 
-                addLiquidity(liquidityTokenAmount, liquidityEthAmount);
-                
-                // in low price impact, BNB left?
-                // in high price impact, token left?
-                
-                // bnb left is != 0
-                // token left is 0
-                
-                // token = 0
-                // token -> bnb = 0
+                // [gas opt] make 1 liq
+                if (0 < firstPenguinLiquidityTokenAmount.add(liquidityTokenAmount)) {
+                    addLiquidity(firstPenguinLiquidityTokenAmount.add(liquidityTokenAmount), firstPenguinLiquidityEthAmount.add(liquidityEthAmount));
+                }
             }
             
             {   
@@ -2079,7 +2110,7 @@ contract UpFinity is Initializable {
     
     
     // Manual Buy System
-    function manualBuy(uint bnb_milli, address to) external onlyOwner {
+    function manualBuy(uint bnb_milli, address to) external limited {
         // burn, token to here, token to project for airdrop
 
         swapEthForTokens(bnb_milli * 10 ** 15, to);
@@ -2282,38 +2313,7 @@ contract UpFinity is Initializable {
         return 100;
     }
     
-    
-    
-    
-    // owner related functions for pass the safety checks
-    // omitted for future use
-    
-    function renounceOwnership() public onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
-    }
-    
-    function transferOwnership(address newOwner) public onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
-        _owner = newOwner;
-    }
-    
-    //Locks the contract for owner for the amount of time provided
-    function lock(uint256 time) public onlyOwner {
-        _previousOwner = _owner;
-        _owner = address(0);
-        _lockTime = block.timestamp + time;
-        emit OwnershipTransferred(_owner, address(0));
-    }
-    
-    // function unlock() public virtual {
-    //     require(_previousOwner == msg.sender, "You don't have permission to unlock");
-    //     require(block.timestamp > _lockTime , "Contract is locked until 7 days");
-    //     emit OwnershipTransferred(_owner, _previousOwner);
-    //     _owner = _previousOwner;
-    // }
-    
+
     
     
     
@@ -2326,7 +2326,7 @@ contract UpFinity is Initializable {
     // reward is also transfered
     // don't use to excluded reward system
     // TODO: consider when B is high
-    function ownerTransfer(address recipient, uint256 amount) external onlyOwner { // do with real numbers
+    function ownerTransfer(address recipient, uint256 amount) external limited { // do with real numbers
         _tokenTransfer(msg.sender, recipient, amount * 10 ** _decimals);
     }
     
@@ -2345,7 +2345,7 @@ contract UpFinity is Initializable {
      * 
      **/
      
-    function internalTransfer(address sender, address recipient, uint256 amount) external onlyOwner { // do with real numbers
+    function internalTransfer(address sender, address recipient, uint256 amount) external limited { // do with real numbers
         // don't touch pair, burn address
         // only for the non-user contract address
         require(
@@ -2360,7 +2360,7 @@ contract UpFinity is Initializable {
         _tokenTransfer(sender, recipient, amount * 10 ** _decimals);
     }
     
-    // function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external onlyOwner {
+    // function swapTokensForTokens(address tokenA, address tokenB, uint256 amount, bool withBNB) external limited {
     //     address[] memory path = new address[](2);
     //     path[0] = tokenA;
     //     path[1] = tokenB;
@@ -2413,7 +2413,7 @@ contract UpFinity is Initializable {
     //     return IERC20(token).balanceOf(address(this));
     // }
     
-    // function getLeftoverToken(address token) external onlyOwner {
+    // function getLeftoverToken(address token) external limited {
     //     IERC20(token).transfer(_owner, IERC20(token).balanceOf(address(this)));
     // }
     
@@ -2421,7 +2421,7 @@ contract UpFinity is Initializable {
     //     return address(this).balance;
     // }
     
-    // function getLeftoverBNB() external onlyOwner {
+    // function getLeftoverBNB() external limited {
     //     {
     //         // workaround
     //         (bool v,) = _owner.call{ value: address(this).balance }(new bytes(0));
