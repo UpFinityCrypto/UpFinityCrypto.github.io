@@ -141,7 +141,9 @@ function loadFile(filePath) {
 		.request({ method: 'eth_requestAccounts' }); // eth_requestAccounts
     
     currentAccount = await ahandleAccountsChanged(accounts);
-    
+    currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
+    displayText('connect', currentAccountShort);
+	  
     return currentAccount;		
 	}
   
