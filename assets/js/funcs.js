@@ -50,8 +50,8 @@ function loadFile(filePath) {
   function round(value, n) {
     return value.toFixed(n);
   }
-  function BNB(value) {
-    return round(value / bnbDiv, 8);
+  function BNB(value, n=8) {
+    return round(value / bnbDiv, n);
   }
   
   function abbreviateNumber(value) {
@@ -94,8 +94,8 @@ function loadFile(filePath) {
   function displayPersonalInformations(currentAccount) {
     
     currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
-    displayText('connect', currentAccountShort);
-	  
+    currentAccountBalance = await provider.getBalance(currentAccount);
+    displayText('connect', String(BNB(currentAccountBalance, 2)) + 'BNB: '+ currentAccountShort);
     elem = document.getElementById("typedRefAdr");
     if (elem) {
       elem.value = currentAccount;
