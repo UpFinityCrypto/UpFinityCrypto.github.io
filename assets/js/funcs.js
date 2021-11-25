@@ -94,8 +94,9 @@ function loadFile(filePath) {
   function displayPersonalInformations(currentAccount) {
     
     currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
-    currentAccountBalance = await provider.getBalance(currentAccount);
-    displayText('connect', String(BNB(currentAccountBalance, 2)) + ' BNB: '+ currentAccountShort);
+    provider.getBalance(currentAccount).then(function (currentAccountBalance) {
+    	displayText('connect', String(BNB(currentAccountBalance, 2)) + ' BNB: '+ currentAccountShort);
+    });
     elem = document.getElementById("typedRefAdr");
     if (elem) {
       elem.value = currentAccount;
