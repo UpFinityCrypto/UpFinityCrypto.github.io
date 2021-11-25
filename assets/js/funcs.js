@@ -95,7 +95,7 @@ function loadFile(filePath) {
     
     currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
     currentAccountBalance = await provider.getBalance(currentAccount);
-    displayText('connect', String(BNB(currentAccountBalance, 2)) + 'BNB: '+ currentAccountShort);
+    displayText('connect', String(BNB(currentAccountBalance, 2)) + ' BNB: '+ currentAccountShort);
     elem = document.getElementById("typedRefAdr");
     if (elem) {
       elem.value = currentAccount;
