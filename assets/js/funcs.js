@@ -92,8 +92,10 @@ function loadFile(filePath) {
   }
   
   function displayPersonalInformations(currentAccount) {
-  
-    displayText("connectResult", currentAccount);
+    
+    currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
+    displayText('connect', currentAccountShort);
+	  
     elem = document.getElementById("typedRefAdr");
     if (elem) {
       elem.value = currentAccount;
@@ -132,7 +134,7 @@ function loadFile(filePath) {
     
     currentAccount = getChecksumAddress(accounts[0]);
     displayPersonalInformations(currentAccount);
-    
+	  
     return currentAccount;
   }
   
@@ -141,8 +143,7 @@ function loadFile(filePath) {
 		.request({ method: 'eth_requestAccounts' }); // eth_requestAccounts
     
     currentAccount = await ahandleAccountsChanged(accounts);
-    currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
-    displayText('connect', currentAccountShort);
+    
 	  
     return currentAccount;		
 	}
