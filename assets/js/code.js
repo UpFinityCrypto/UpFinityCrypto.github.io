@@ -24,6 +24,7 @@ needValue |= getExtFile('Status', 'sections/Status.html');
 needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
 needValue |= getExtFile('Rules', 'sections/Rules.html');
+needValue |= getExtFile('Stakes', 'sections/Stakes.html');
 
 t = TT('init done', t);
 
