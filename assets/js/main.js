@@ -4,7 +4,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(async function() { // to use async things 
+function init() { // to use async things 
   console.log('main start');
   "use strict";
 
@@ -273,4 +273,4 @@
     })
   });
   console.log('main done');
-})();
+}
