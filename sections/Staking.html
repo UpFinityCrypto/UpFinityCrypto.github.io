@@ -1,9 +1,9 @@
 <div class="container">
 
   <div class="section-title">
-    <h2>Staking</h2>
+    <h2>Staking (test)</h2>
     <p>Stake <img src="assets/img/logo.png" class="small-icon">UPF, Earn <img src="assets/img/logo.png" class="small-icon">UPF</p>
-    <p>Reward will be automatically added to the staking pool</p>
+    <p>Rewards are auto-staked/compounded</p>
     <p>Total UPF Staked</p>
     <div id="totalUnclaimed" class="text-center" style="font-size: 0.5em;"></div><img src="assets/img/logo.png" class="small-icon">UPF
     <div class="text-center" style="margin-top:25px;">
@@ -64,15 +64,22 @@
       <div class="row mt-5" style="font-size: 3em; font-weight: bold;">
         <div class="col-6 col-md-4 align-items-stretch">
           <div class="icon-box">
-              <h6 class="text-center ">Staked</h6>
+              <h6 class="text-center ">Staked Amount</h6>
               <div id="claimable" class="text-center" style="font-size: 0.5em;"></div>UPF
           </div>
         </div>
         <div class="col-6 col-md-4 align-items-stretch">
           <div class="icon-box">
+              <h6 class="text-center ">Staked Time</h6>
+              <div id="claimtime" class="text-center" style="font-size: 0.5em;"></div>TIME
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5" style="font-size: 3em; font-weight: bold;">
+        <div class="col-6 col-md-4 align-items-stretch">
+          <div class="icon-box">
               <h6 class="text-center ">Rewards</h6>
               <div id="claimable" class="text-center" style="font-size: 0.5em;"></div>UPF
-              <a href="#null" id="claim" class="button scrollto" onclick="">Unstake</a>
           </div>
         </div>
         <div class="col-6 col-md-4 align-items-stretch">
@@ -81,6 +88,7 @@
                 <div id="claimed" class="text-center" style="font-size: 0.5em;"></div>UPF
             </div>
         </div>
+        <a href="#null" id="claim" class="button scrollto" onclick="">Unstake</a>
       </div>
     </div>
   </div>
