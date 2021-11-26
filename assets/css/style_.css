@@ -206,7 +206,7 @@
 
 @media (min-width: 1200px) {
   #main, #footer {
-    margin-left: 300px;
+    margin-left: 0px;
   }
 }
 @media (max-width: 1199px) {
