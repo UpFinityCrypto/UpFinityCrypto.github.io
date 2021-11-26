@@ -523,4 +523,14 @@
     margin: 10px auto;
 }
 
-
+@media (max-width: 992px)
+.button {
+    color: #fff;
+    border: 0;
+    padding: 5px 10px;
+    background: #28a745;
+    transition: 0.4s;
+    border-radius: 50px;
+    display: inline-block;
+    font-size: 15px;
+}
