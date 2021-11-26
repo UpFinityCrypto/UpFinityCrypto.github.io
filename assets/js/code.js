@@ -645,7 +645,10 @@ $(document).click(function (e) {
         plugins: {
           legend: {
             <!-- position: 'chartArea' -->
-            position: 'right'
+            position: 'right',
+            labels: {
+	      boxWidth: 20,
+	    }
           }
         }
       }
@@ -679,7 +682,10 @@ $(document).click(function (e) {
         plugins: {
           legend: {
             <!-- position: 'chartArea' -->
-            position: 'right'
+            position: 'right',
+            labels: {
+	      boxWidth: 20,
+	    }
           }
         }
       }
