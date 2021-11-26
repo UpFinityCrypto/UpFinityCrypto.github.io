@@ -446,6 +446,7 @@
   bottom: 0;
 /*   background: rgba(1, 22, 61, 0.9); */
   transition: 0s;
+  opacity: 0.8;
 }
 .navbar-mobile .mobile-nav-toggle {
   position: absolute;
