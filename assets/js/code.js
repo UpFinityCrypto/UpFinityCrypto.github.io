@@ -625,7 +625,7 @@ $(document).click(function (e) {
         'Liquidity: ' + String(_liquidityFee * 2 * multiplier / 100) + '%', // half
         'Marketing: ' + String(_projectFundFee / 100) + '%',
         'Ecosystem: ' + String(_projectFundFee / 100) + '%',
-        'Burn + Redist + etc: ' + String((_autoBurnFee + redistributionFee) * multiplier / 100) + '%',
+        'Burn/Redist/etc: ' + String((_autoBurnFee + redistributionFee) * multiplier / 100) + '%',
         ],
         datasets: [{
         label: 'Sell Tax',
