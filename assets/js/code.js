@@ -647,7 +647,7 @@ $(document).click(function (e) {
             <!-- position: 'chartArea' -->
             position: 'right',
             labels: {
-	      boxWidth: 20,
+	      boxWidth: 5,
 	    }
           }
         }
@@ -684,7 +684,7 @@ $(document).click(function (e) {
             <!-- position: 'chartArea' -->
             position: 'right',
             labels: {
-	      boxWidth: 20,
+	      boxWidth: 5,
 	    }
           }
         }
