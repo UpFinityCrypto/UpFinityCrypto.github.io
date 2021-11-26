@@ -337,7 +337,7 @@
   font-weight: 700;
   color: #000;
   white-space: nowrap;
-  transition: 0.3s;
+  transition: 0s;
 }
 .navbar a i, .navbar a:focus i {
   font-size: 12px;
@@ -422,7 +422,7 @@
   cursor: pointer;
   display: none;
   line-height: 0;
-  transition: 0.5s;
+  transition: 0s;
 }
 .mobile-nav-toggle.bi-x {
   color: #fff;
@@ -444,13 +444,11 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(1, 22, 61, 0.9);
-  transition: 0.3s;
+/*   background: rgba(1, 22, 61, 0.9); */
+  transition: 0s;
 }
 .navbar-mobile .mobile-nav-toggle {
   position: absolute;
-  top: 15px;
-  right: 15px;
 }
 .navbar-mobile ul {
   display: block;
