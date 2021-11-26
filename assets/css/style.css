@@ -148,17 +148,17 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
-#header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 9997;
-  transition: all 0.5s;
-  padding: 15px;
-  overflow-y: auto;
-  width: fit-content;
-}
+/* #header { */
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
+  /* bottom: 0; */
+  /* z-index: 9997; */
+  /* transition: all 0.5s; */
+  /* padding: 15px; */
+  /* overflow-y: auto; */
+  /* width: fit-content; */
+/* } */
 
 .wrap-address {
   font-size:20px;
