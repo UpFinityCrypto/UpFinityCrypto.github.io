@@ -9,10 +9,68 @@ $.get('sections/head.html', function(response) {
 });
 </script>
 <body class="row center text-center" style="margin: 0px; width: auto; height: auto;">
+  <link href="assets/css/style_.css" rel="stylesheet">
   <!-- ======= Header ======= -->
 
-  <header id="header" class="d-flex flex-column justify-content-center" style="width: auto;">
-  </header><!-- End Header -->
+  <header class="header fixed-top d-flex align-items-center header-scrolled" style="width: auto;">
+  <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets/img/logo.png" class="small-icon" alt="" style="
+        /* padding: -2px; */
+        margin: 10px;
+    ">
+    <h6> UpFinity</h6>
+    </a>
+<nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="upfinity.html">UpFinity</a></li>
+          <li class="dropdown"><a class="nav-link scrollto" href="#Ecosystem">Ecosystem<i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="nft.html">NFT</a></li>
+              <li><a href="https://upfvote.com">Coin Vote</a></li>
+              <li class="dropdown"><a href="#"><div>Coming Soon</div> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">MarketPlace</a></li>
+                  <li><a href="#">Mystery Box</a></li>
+                  <li><a href="#">Farming</a></li>
+                  <li><a href="#">Staking</a></li>
+                  <li><a href="#">P2E Game</a></li>
+                  <li><a href="#">Swap</a></li>
+                  <li><a href="#">UPF Store</a></li>
+                  <li><a href="#">Merchandise</a></li>
+                  <li><a href="#">More to Add!</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="dashboard.html">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="roadmap.html">Roadmap</a></li>
+          <li><a class="nav-link scrollto" href="Airdrop.html">Airdrop</a></li>
+          <li><a class="nav-link scrollto" href="donations.html">Donations</a></li>
+          <li class="dropdown"><a href="#"><div>More</div> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="community.html">Community</a></li>
+              <li><a href="faqs.html">FAQs</a></li>
+              <li><a href="#">More to Add!</a></li>
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+
+    <nav class="header-nav ms-auto" style="margin-right: 40px;">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown">
+          <div class="text-center" style="">
+              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
+          </div>
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header>
   
   <div id="popup" class="col-12 col-lg-6 text-center center">
     <div class="col-12 col-lg-3 text-center center">
