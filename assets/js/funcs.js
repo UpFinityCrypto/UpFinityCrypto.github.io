@@ -961,3 +961,21 @@ async function loadValues() {
 	  = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
 	displayText("redistributionFee", redistributionFee * multiplier / 100);
 }
+
+function staked() {
+	displayText("claim", 'already staked');
+}
+function stake(days) {
+	duration = 60 * 60 * 24 * days;
+	// stake(amount, duration);
+	staked();
+}
+
+function unstake() {
+	// unstake();
+}
+
+
+
+
+
