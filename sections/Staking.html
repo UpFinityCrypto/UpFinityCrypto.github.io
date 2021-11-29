@@ -12,28 +12,25 @@
     <div class="col-12 col-lg-6 text-justify content">
       <h3>How to Stake</h3>
       <ul>
-        <li><i class="bi bi-chevron-right"></i>Connect your wallet</li>
+        <li><i class="bi bi-chevron-right"></i>Connect wallet</li>
         <li><i class="bi bi-chevron-right"></i>Write down 'Amount to Stake'</li>
-        <li><i class="bi bi-chevron-right"></i>Click 'Stake'</li>
-        <li><i class="bi bi-chevron-right"></i>Confirm transaction in wallet dapp</li>
-        <li><i class="bi bi-chevron-right"></i>UPF will be staked</li>
+        <li><i class="bi bi-chevron-right"></i>Click among 'Stake Duration'</li>
+        <li><i class="bi bi-chevron-right"></i>Click 'Confirm' in wallet dapp</li>
       </ul>
       
       <h3>How to Unstake</h3>
       <ul>
-        <li><i class="bi bi-chevron-right"></i>Connect your wallet</li>
+        <li><i class="bi bi-chevron-right"></i>Connect wallet</li>
         <li><i class="bi bi-chevron-right"></i>Click 'Unstake'</li>
-        <li><i class="bi bi-chevron-right"></i>Confirm transaction in wallet dapp</li>
+        <li><i class="bi bi-chevron-right"></i>Click 'Confirm' in wallet dapp</li>
         <li><i class="bi bi-chevron-right"></i>UPF will be unstaked <span>with rewards</span></li>
       </ul>
       
-      <h3>Reward Amounts per 1 Billion UPF for 1 day / 7 day / 28 day stake</h3>
+      <h3>Reward per 1 Billion UPF</h3>
       <ul>
-        <li><i class="bi bi-chevron-right"></i>1 minute: 1K / 1.5K / 3K UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 hour: 10K / 15K / 30K UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 day: 100K / 150K / 300K UPF</li>
-        <li><i class="bi bi-chevron-right"></i>7 day: X / 1500K / 3000K UPF</li>
-        <li><i class="bi bi-chevron-right"></i>28 day: X / X / 30M UPF</li>
+        <li><i class="bi bi-chevron-right"></i>1 day: 10M UPF</li>
+        <li><i class="bi bi-chevron-right"></i>7 day: 150M UPF</li>
+        <li><i class="bi bi-chevron-right"></i>28 day: 900M UPF</li>
       </ul>
     </div>
     <div class="col-12 col-lg-6 pt-4 pt-lg-0 content">
@@ -47,9 +44,17 @@
               <form action="">
                 <input type="text" id="typedStakeAmount" placeholder="Write down amount to stake (Already Staked, disable)">
               </form>
-              <a href="#null" id="claim" class="button scrollto" onclick="">1 day Stake (Already Staked)</a>
-              <a href="#null" id="claim" class="button scrollto" onclick="">7 day Stake (Already Staked)</a>
-              <a href="#null" id="claim" class="button scrollto" onclick="">28 day Stake (Already Staked)</a>
+              <h6 class="text-center ">Stake Duration</h6>
+              <div class="row">
+                <div class="col-4 align-items-stretch">
+                  <a href="#null" id="claim" class="button scrollto" onclick="">1 day (Already Staked)</a>
+                </div>
+                <div class="col-4 align-items-stretch">
+                  <a href="#null" id="claim" class="button scrollto" onclick="">7 day (Already Staked)</a>
+                </div>
+                <div class="col-4 align-items-stretch">
+                  <a href="#null" id="claim" class="button scrollto" onclick="">28 day (Already Staked)</a>
+                </div>
           </div>
         </div>
       </div>
@@ -69,19 +74,19 @@
         </div>
       </div>
       <div class="row mt-5" style="font-size: 3em; font-weight: bold;">
-        <div class="col-6 col-md-4 align-items-stretch">
+        <div class="col-6 align-items-stretch">
           <div class="icon-box">
               <h6 class="text-center ">Rewards</h6>
               <div id="claimable" class="text-center" style="font-size: 0.5em;"></div>UPF
           </div>
         </div>
-        <div class="col-6 col-md-4 align-items-stretch">
+        <div class="col-6 align-items-stretch">
             <div class="icon-box">
                 <h6 class="text-center ">Your claimed rewards</h6>
                 <div id="claimed" class="text-center" style="font-size: 0.5em;"></div>UPF
             </div>
         </div>
-        <a href="#null" id="claim" class="button scrollto" onclick="">Unstake</a>
+        <a href="#null" id="claim" class="button scrollto" onclick="">Withdraw</a>
       </div>
     </div>
   </div>
