@@ -27,19 +27,13 @@
         <li><i class="bi bi-chevron-right"></i>UPF will be unstaked <span>with rewards</span></li>
       </ul>
       
-      <h3>How to change staked amount</h3>
+      <h3>Reward Amounts per 1 Billion UPF for 1 day / 7 day / 28 day stake</h3>
       <ul>
-        <li><i class="bi bi-chevron-right"></i>You should unstake and stake again</li>
-      </ul>
-      
-      <h3>Reward Amounts per 1 Billion UPF</h3>
-      <ul>
-        <li><i class="bi bi-chevron-right"></i>1 minute: 1K UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 hour: 10K UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 day: 1M UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 week: 10M UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 month: 100M UPF</li>
-        <li><i class="bi bi-chevron-right"></i>1 year: 500M UPF</li>
+        <li><i class="bi bi-chevron-right"></i>1 minute: 1K / 1.5K / 3K UPF</li>
+        <li><i class="bi bi-chevron-right"></i>1 hour: 10K / 15K / 30K UPF</li>
+        <li><i class="bi bi-chevron-right"></i>1 day: 100K / 150K / 300K UPF</li>
+        <li><i class="bi bi-chevron-right"></i>7 day: X / 1500K / 3000K UPF</li>
+        <li><i class="bi bi-chevron-right"></i>28 day: X / X / 30M UPF</li>
       </ul>
     </div>
     <div class="col-12 col-lg-6 pt-4 pt-lg-0 content">
@@ -53,20 +47,23 @@
               <form action="">
                 <input type="text" id="typedStakeAmount" placeholder="Write down amount to stake (Already Staked, disable)">
               </form>
-              <a href="#null" id="claim" class="button scrollto" onclick="">Stake (Already Staked)</a>
+              <a href="#null" id="claim" class="button scrollto" onclick="">1 day Stake (Already Staked)</a>
+              <a href="#null" id="claim" class="button scrollto" onclick="">7 day Stake (Already Staked)</a>
+              <a href="#null" id="claim" class="button scrollto" onclick="">28 day Stake (Already Staked)</a>
           </div>
         </div>
       </div>
       <div class="row mt-5" style="font-size: 3em; font-weight: bold;">
-        <div class="col-6 col-md-4 align-items-stretch">
+        <div class="col-6 align-items-stretch">
           <div class="icon-box">
               <h6 class="text-center ">Staked Amount</h6>
               <div id="claimable" class="text-center" style="font-size: 0.5em;"></div>UPF
           </div>
         </div>
-        <div class="col-6 col-md-4 align-items-stretch">
+        <div class="col-6 align-items-stretch">
           <div class="icon-box">
               <h6 class="text-center ">Staked Time</h6>
+            <p> 15 days left </p>
               <div id="claimtime" class="text-center" style="font-size: 0.5em;"></div>TIME
           </div>
         </div>
