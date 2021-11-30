@@ -7,8 +7,8 @@ bodyClassList.add('container');
 bodyClassList.add('center');
 bodyClassList.add('text-center');
 bodyClassList.add('d-flex');
-body.style.width = auto;
-body.style.height = auto;
+body.style.width = 'auto';
+body.style.height = 'auto';
 
 header = select('header#header');
 headerClassList = header.classList;
@@ -17,7 +17,7 @@ bodyClassList.add('fixed-top');
 bodyClassList.add('d-flex');
 bodyClassList.add('align-items-center');
 bodyClassList.add('header-scrolled');
-header.style.width = auto;
+header.style.width = 'auto';
 
 
 getExtFile('header', 'sections/Header.html'); // header
