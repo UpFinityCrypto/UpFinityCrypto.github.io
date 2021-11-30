@@ -43,7 +43,6 @@ needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
 needValue |= getExtFile('Status', 'sections/Status.html');
 needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
-needValue |= getExtFile('Rules', 'sections/Rules.html');
 needValue |= getExtFile('Staking', 'sections/Staking.html');
 
 t = TT('init done', t);
@@ -167,7 +166,8 @@ $(document).click(function (e) {
   tokenAmount = rO / bnbDiv;
   
   if (needValue) {
-    if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length)) {
+    if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length) | (getDiv('Rules').length)) {
+			getExtFile('Rules', 'sections/Rules.html');
       await loadValues();
       t = TT('value done', t);
     }
