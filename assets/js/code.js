@@ -1,6 +1,18 @@
 console.log('init');
 t = T();
 
+body = select('body');
+bodyClassList = body.classList;
+bodyClassList.add('container');
+bodyClassList.add('center');
+bodyClassList.add('text-center');
+bodyClassList.add('d-flex');
+
+body.style.width = auto;
+body.style.height = auto;
+
+
+
 getExtFile('header', 'sections/Header.html'); // header
 
 getExtFile('Donations', 'sections/Donations.html');
