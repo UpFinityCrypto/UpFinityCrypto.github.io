@@ -55,7 +55,22 @@ inputHandlerSell = function (e) {
     
   })();
 }
+inputHandlerStake = function (e) {
+  (async function () {
+    valueIn = e.target.value;
+    valueIn = valueIn.replace(/,/g, '');
+    valueIn = valueIn.replace(/./g, '');
+    result = getElement('typedStakeAmount');
+    if (valueIn == 0) {
+      result.value = 0;
+      return;
+    }
 
+    valueIn = parseInt(valueIn);
+    valueIn = numberWithCommas(valueIn);
+    result.value = valueIn;
+  })();
+}
 
 const select = (el, all = false) => {
   el = el.trim()
