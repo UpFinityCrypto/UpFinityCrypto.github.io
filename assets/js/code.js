@@ -6,7 +6,6 @@ bodyClassList = body.classList;
 bodyClassList.add('container');
 bodyClassList.add('center');
 bodyClassList.add('text-center');
-bodyClassList.add('d-flex');
 body.style.width = 'auto';
 body.style.height = 'auto';
 
