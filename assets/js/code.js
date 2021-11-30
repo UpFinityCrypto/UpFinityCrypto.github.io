@@ -12,11 +12,11 @@ body.style.height = 'auto';
 
 header = select('header#header');
 headerClassList = header.classList;
-bodyClassList.add('header');
-bodyClassList.add('fixed-top');
-bodyClassList.add('d-flex');
-bodyClassList.add('align-items-center');
-bodyClassList.add('header-scrolled');
+headerClassList.add('header');
+headerClassList.add('fixed-top');
+headerClassList.add('d-flex');
+headerClassList.add('align-items-center');
+headerClassList.add('header-scrolled');
 header.style.width = 'auto';
 
 
