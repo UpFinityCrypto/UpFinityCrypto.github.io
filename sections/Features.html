@@ -1,10 +1,10 @@
 <div class="container">
-        <div class="section-title">
-            <h2>Special Features</h2>
-            <p><span class="text-bold text-color-secondary text-bold">SO MANY</span> Unique Features, all in <span class="text-color-secondary">SINGLE</span> token
-            <p>Use Dapp to view values correctly!</p>
-            <p>(Details in WhitePaper)</p>
-        </div>
+  <div class="section-title">
+    <h2>Special Features</h2>
+    <p><span class="text-bold text-color-secondary text-bold">SO MANY</span> Unique Features, all in <span class="text-color-secondary">SINGLE</span> token
+    <p>Use Dapp to view values correctly!</p>
+    <p>(Details in WhitePaper)</p>
+  </div>
 <div class="row">
   <div class="col-lg-6">
     <div class="card">
@@ -117,18 +117,27 @@
       <div class="accordion-item">
         <div class="accordion-header" id="headingFive">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          4x Advanced Tax Algorithms
+          6x Advanced Tax Algorithms
         </button>
         </div>
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
         <div class="accordion-body">
           <p><strong>Managing the overall UpFinomics Effectively</strong></p>
           
-          <h4>Proportional Tax Algorithm</h4>
+          <h4>Impact Tax Algorithm</h4>
           <div>Whales <span>CANNOT</span> do workaround to avoid tax</div>
           <div>Extra tax will be set proportionally to <span>price impact</span></div>
           <div>If a sell/transfer with 1% price impact => <span id="_accuMulFactor"></span>% more tax</div>
           <div>Current multiplication: <span id="_accuMulFactor"></span></div>
+          
+          <h4>Circuit Breaker Algorithm</h4>
+          <div>Stabilizing the market <span>MORE</span></div>
+          <div>When current price drops by <span id="_curcuitBreakerThreshold">15</span>% within <span id="_accuTaxTimeWindow"></span> day,</div>
+          <div>[Impact Tax Algorithm] is doubled for <span id="_curcuitBreakerDuration"></span> hours</div>
+          
+          <h4>First Penguin Algorithm</h4>
+          <div>Breaking the uptrend should pay tax <span>MORE</span></div>
+          <div>If sell after the buy, [Impact Tax Algorithm] is doubled</div>
           
           <h4>Penalty Tax Algorithm</h4>
           <div>Whales <span>CANNOT</span> dump it all quickly</div>
