@@ -615,6 +615,8 @@ $(document).click(function (e) {
       source.addEventListener('propertychange', inputHandlerBuy); // for IE8
       // Firefox/Edge18-/IE9+ don’t fire on <select><option>
       // source.addEventListener('change', inputHandler); 
+    } else {
+      console.log('swapInput not ready');
     }
   
     balanceBNB = await provider.getBalance(currentAccount);
@@ -635,6 +637,8 @@ $(document).click(function (e) {
       source.addEventListener('propertychange', inputHandlerStake); // for IE8
       // Firefox/Edge18-/IE9+ don’t fire on <select><option>
       // source.addEventListener('change', inputHandlerStake); 
+    } else {
+      console.log('typedStakeAmount not ready');
     }
 	}
   
