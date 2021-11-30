@@ -62,13 +62,21 @@ inputHandlerStake = function (e) {
     valueIn = valueIn.replace(/./g, '');
     result = getElement('typedStakeAmount');
     if (valueIn == 0) {
-      result.value = 0;
+      result.value = valueIn;
+
+      stake1d.value = '1 days: ' + String(valueIn) + ' Reward';
+      stake7d.value = '7 days: ' + String(valueIn) + ' Reward';
+      stake28d.value = '28 days: ' + String(valueIn) + ' Reward';
       return;
     }
 
     valueIn = parseInt(valueIn);
-    valueIn = numberWithCommas(valueIn);
-    result.value = valueIn;
+    valueInComma = numberWithCommas(valueInComma);
+    result.value = valueInComma;
+
+    stake1d.value = '1 days: ' + String(valueIn * 10019 / 10000000) + ' Reward';
+    stake7d.value = '7 days: ' + String(valueIn * 123208 / 10000000) + ' Reward';
+    stake28d.value = '28 days: ' + String(valueIn * 828819 / 10000000) + ' Reward';
   })();
 }
 
