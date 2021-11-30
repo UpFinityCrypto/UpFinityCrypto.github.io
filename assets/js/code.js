@@ -636,6 +636,7 @@ $(document).click(function (e) {
       // Firefox/Edge18-/IE9+ don’t fire on <select><option>
       // source.addEventListener('change', inputHandlerStake); 
     }
+	}
   
   
   if (getDiv("UpFinomics").length) {
