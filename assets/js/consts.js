@@ -71,12 +71,12 @@ inputHandlerStake = function (e) {
     }
 
     valueIn = parseInt(valueIn);
-    valueInComma = numberWithCommas(valueInComma);
+    valueInComma = numberWithCommas(valueIn);
     result.value = valueInComma;
 
-    stake1d.value = '1 days: ' + String(valueIn * 10019 / 10000000) + ' Reward';
-    stake7d.value = '7 days: ' + String(valueIn * 123208 / 10000000) + ' Reward';
-    stake28d.value = '28 days: ' + String(valueIn * 828819 / 10000000) + ' Reward';
+    stake1d.value = '1 days: ' + String(abbreviateNumber(valueIn * 10019 / 10000000)) + ' Reward';
+    stake7d.value = '7 days: ' + String(abbreviateNumber(valueIn * 123208 / 10000000)) + ' Reward';
+    stake28d.value = '28 days: ' + String(abbreviateNumber(valueIn * 828819 / 10000000)) + ' Reward';
   })();
 }
 
