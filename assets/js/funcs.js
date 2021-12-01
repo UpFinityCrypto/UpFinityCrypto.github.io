@@ -962,6 +962,32 @@ async function loadValues() {
 	displayText("redistributionFee", redistributionFee * multiplier / 100);
 }
 
+
+
+function TX(targetS, attr, params=[]) {
+  
+}
+
+function approve(adr) {
+
+  upfinityC.estimateGas['approve'](adr)
+    .then((arg) => {
+      upfinityS = upfinityC.connect(signer);
+
+      upfinityS.approve(adr)
+        .then((arg) => {
+          console.log(arg['hash']);
+          displayText_('approveStake', 'Approved:' + arg['hash']);
+        }, (error) => {
+          error = errMsg(error);
+          displayText_('approveStake', 'FAIL:' + error);
+        });
+    }, (error) => {
+      error = errMsg(error);
+      displayText_('approveStake', 'AFAIL:' + error);
+    });
+}
+
 function staked() {
 	displayText("claim", 'already staked');
 }
