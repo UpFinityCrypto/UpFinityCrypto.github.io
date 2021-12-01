@@ -990,11 +990,30 @@ function stake(days) {
   amount = parseInt(amount.replace(/,/g, ''));
   duration = 60 * 60 * 24 * days;
 
-  alert()
+  alertMsg = '';
+  alertMsg = alertMsg + 'Staking [' + numberWithCommas(amount) + '] UPF ';
+  alertMsg = alertMsg + 'for [' + days + '] days.';
+  alertMsg = alertMsg + '\n';
+  alertMsg = alertMsg + 'And it will be LOCKED for that duration.';
+  alertMsg = alertMsg + '\n';
+  alertMsg = alertMsg + 'You can UNLOCK it with extra reward after that duration.';
+  alertMsg = alertMsg + '\n';
+  alertMsg = alertMsg + 'Click confirm in the wallet dapp to do the stake.';
+
+  alert(alertMsg);
   stakeS = stakeC.connect(signer);
-  stakeS.stake(amount * 10**18, 60 * 60 * 24 * 1);
-	// stake(amount, duration);
-	staked();
+
+  amount = ethers.utils.parseEther(String(amount));
+  stakeS.stake(amount, duration)
+    .then((arg) => {
+      console.log(arg['hash']);
+      //displayText_('approveStake', 'Approved:' + arg['hash']);
+    }, (error) => {
+      error = errMsg(error);
+      console.log(error);
+      //displayText_('approveStake', 'FAIL:' + error);
+    });
+
 }
 
 function unstake() {
