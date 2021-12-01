@@ -43,7 +43,7 @@ needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
 needValue |= getExtFile('Status', 'sections/Status.html');
 needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
-// needValue |= getExtFile('Staking', 'sections/Staking.html');
+needValue |= getExtFile('Staking', 'sections/Staking.html');
 
 t = TT('init done', t);
 

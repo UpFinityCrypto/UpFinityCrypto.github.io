@@ -4,377 +4,114 @@
 <head>
 </head>
 <script>
-$.get('sections/head.html', function(response) {
+  $.get('sections/head.html', function (response) {
     $('head').append($(response));
-});
+  });
 </script>
-<body class="row center text-center" style="margin: 0px; width: auto; height: auto;">
-  <link href="assets/css/style_.css" rel="stylesheet">
+<body class="container center text-center" style="width: auto; height: auto;">
   <!-- ======= Header ======= -->
-
-  <header class="header fixed-top d-flex align-items-center header-scrolled" style="width: auto;">
-  <a href="index.html" class="logo d-flex align-items-center">
-            <img src="assets/img/logo.png" class="small-icon" alt="" style="
-        /* padding: -2px; */
-        margin: 10px;
-    ">
-    <h6> UpFinity</h6>
-    </a>
-<nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="upfinity.html">UpFinity</a></li>
-          <li class="dropdown"><a class="nav-link scrollto" href="#Ecosystem">Ecosystem<i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="nft.html">NFT</a></li>
-              <li><a href="https://upfvote.com">Coin Vote</a></li>
-              <li class="dropdown"><a href="#"><div>Coming Soon</div> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">MarketPlace</a></li>
-                  <li><a href="#">Mystery Box</a></li>
-                  <li><a href="#">Farming</a></li>
-                  <li><a href="#">Staking</a></li>
-                  <li><a href="#">P2E Game</a></li>
-                  <li><a href="#">Swap</a></li>
-                  <li><a href="#">UPF Store</a></li>
-                  <li><a href="#">Merchandise</a></li>
-                  <li><a href="#">More to Add!</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="dashboard.html">Dashboard</a></li>
-          <li><a class="nav-link scrollto" href="roadmap.html">Roadmap</a></li>
-          <li><a class="nav-link scrollto" href="Airdrop.html">Airdrop</a></li>
-          <li><a class="nav-link scrollto" href="donations.html">Donations</a></li>
-          <li class="dropdown"><a href="#"><div>More</div> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="community.html">Community</a></li>
-              <li><a href="faqs.html">FAQs</a></li>
-              <li><a href="#">More to Add!</a></li>
-            </ul>
-          </li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-
-    <nav class="header-nav ms-auto" style="margin-right: 40px;">
-      <ul class="d-flex align-items-center">
-
-        <li class="nav-item dropdown">
-          <div class="text-center" style="">
-              <a href="#null" id="connect" class="button scrollto" onclick="fconnect();">Connect Wallet</a>
-          </div>
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
+  <header id="header" class="header fixed-top d-flex align-items-center header-scrolled" style="width: auto;">
   </header>
-  
-  <div id="popup" class="col-12 col-lg-6 text-center center">
-    <div class="col-12 col-lg-3 text-center center">
-      <div class="row center">
-        <div class="col-6 center" style="max-width: 300px; max-height: 400px;">
-          <img src="assets/img/nft/origins/boy_thumb.gif" style="width: 100%; height: 100%;">
-        </div>
-        <div class="col-6 center" style="max-width: 300px; max-height: 400px;">
-          <img src="assets/img/nft/origins/girl_thumb.gif" style="width: 100%; height: 100%;">
-        </div>
-      </div>
-      <div>
-        <p>Origins nft Launched!</p>
-        <a href="nft.html" class="button scrollto">NFT Beta</a>
-        <p>Don't miss out!"</p>
-      </div>
-    </div>
-  </div>
-    
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center" style="height: auto;">
-    <div class="row" style="margin: 0px;">
-      <div class="col-12 col-lg-8" style="align-self: center;">
-        <div id="main" class="container" style="padding: 0px;" data-aos="zoom-in" data-aos-delay="100">
-          <h1>UpFinity: Buy, Hold, Earn</h1>
-          <p>World's Best <span class="typed" data-typed-items="Upgradable, Innovative"></span> Token</p>
-          <p>
-            <span class="wrap-address">
-              <a id="UpfinityAdr" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
-              </a>
-              <div class="row">
-                <div class="col-6">
-                  <a href="#" id="copyUpfinityAdr" class="button scrollto" onclick="copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae');">
-                    Copy Address
-                  </a>
-                </div>
-                <div class="col-6">
-                  <a href="#" class="button scrollto" onclick="addUPF();">
-                    Add UPF in wallet
-                  </a>
-                </div>
-              </div>
-            </span>
-          </p>
-                recommended slippage: buy 10+ / sell 15+
-          <div class="social-links">
-            <a href="https://t.me/UpFinityTG" target="_tab" class="telegram"><i class="bi bi-telegram"></i></a>
-            <a href="https://twitter.com/UpFinityTW" target="_tab" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a id="PanCakeSwapLink" href="https://pancakeswap.finance/swap?outputCurrency=0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" class="scrollto">
-              <img src="assets/img/trade/pcs.ico" style="width: 30px">
-            </a>
-            <a id="PoocoinTradeLink" href="https://poocoin.app/swap?outputCurrency=0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" class="scrollto">
-              <img src="assets/img/trade/poo.png" style="width: 30px">
-            </a>
-            <a id="DextoolsTradeLink" href="https://www.dextools.io/app/bsc/pair-explorer/0xd3ab58a10eab5f6e2523b53a78c6a8d378488c9a" class="scrollto">
-              <img src="assets/img/trade/dext.ico" style="width: 30px">
-            </a>
-            <a href="https://github.com/UpFinityCrypto/UpFinityCrypto.github.io/blob/main/UpFinity.sol" target="_tab" class="twitter"><i class="bx bxl-github"></i></a>
-          </div>
-          
-          <div class="row">
-            <a href="dashboard.html" class="button scrollto">Dashboard</a>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <a id="WhitePaperLink" href="UpFinity_WhitePaper.pdf" class="button scrollto" >WhitePaper</a>
-            </div>
-            <div class="col-6">
-              <a id="UpFinomicsLink" href="upfinity.html" class="button scrollto">UpFinomics</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    <div class="col-12 col-lg-4">
-      <div id="swap" class="container" data-aos="zoom-in" data-aos-delay="100" style="padding: 0px;">
-        <div class="sc-jSFjdj sc-dIvrsQ kJmatq hdzOgI">
-          <div class="sc-jSFjdj sc-gKAaRy sc-vMGZd kJmatq jcNvwq jsAPRX">
-            <div class="sc-jSFjdj sc-gKAaRy cpromH togOu">
-              <div class="sc-jSFjdj sc-gKAaRy kJmatq iIdAKa">
-                <h2 color="text" class="sc-gtsrHT sc-kLojOw iGtzpP jDXLmf text-center">Exchange</h2>
-                <div class="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center" style="margin: 10px;">
-                  <div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Trade tokens in an instant</div>
-                  <div color="textSubtle" font-size="14px" class="sc-gtsrHT llSJBl">Sell part will be done soon</div>
-                  <div>Buy Status: <span id="buyStatus"></span></div>
-                  <div>Sell Status: <span id="sellStatus"></span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="swap-page" class="sc-gpEJdM jdQeRJ">
-            <div class="sc-enrZtP cXbVbC">
-              <div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
-        border-radius: 16px;
-        /* background-color: rgb(238, 234, 244); */
-        border-color: #28a745;
-        border: solid 3px;
-        box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
-        ">
-                <div class="sc-eTTTle hCspWz" style="
-        padding: 15px;
-    ">
-                  <div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
-                    <div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
-        display: flex; justify-content: space-between;
-    ">
-                      <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">From</div>
-                      <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
-                        <div id="BNBbalance" style="display: inline;"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="sc-fVnRWS idBnak" style="
-        display: flex;
-    ">
-                    <input id="swapInput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white; color: white;">
-                      <button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
-        justify-content: space-between;
-        border: 0px;
-        background-color: #00000000;
-    ">
-                        <div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
-        justify-content: space-between;
-        display: flex;
-        align-items: center;
-    ">
-                          <img id="BNBlogo" src="assets/img/trade/bin.ico" style="width: 30px;">
-                          <div id="BNBtarget" color="text" class="sc-gtsrHT MlLjM" style="
-        display: flex;
-        text-align: left;
-        margin: 10px;
-        color: #aaaaaa;
-    ">BNB</div>
-                        </div>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- <div class="sc-enrZtP jMLgAG"> -->
-                  <!-- <div class="sc-jSFjdj sc-knSFqH sc-cfARRi kJmatq chNVSQ jttSjR" style="padding: 0px 1rem;"> -->
-                    <!-- <div class="sc-cxxZvF bgTNhm" style="display: table; margin: 0 auto;"> -->
-                      <!-- <a href="#null" onclick="buySellChange();"> -->
-                        <!-- <svg viewBox="0 0 24 24" width="30px" color="text" -->
-                          <!-- xmlns="http://www.w3.org/2000/svg" class="sc-bdnxRM kDWlca"> -->
-                          
-                          <!-- <path d="M11 5V16.17L6.11997 11.29C5.72997 10.9 5.08997 10.9 4.69997 11.29C4.30997 11.68 4.30997 12.31 4.69997 12.7L11.29 19.29C11.68 19.68 12.31 19.68 12.7 19.29L19.29 12.7C19.68 12.31 19.68 11.68 19.29 11.29C18.9 10.9 18.27 10.9 17.88 11.29L13 16.17V5C13 4.45 12.55 4 12 4C11.45 4 11 4.45 11 5Z" style="fill: white;"></path> -->
-                        <!-- </svg> -->
-                      <!-- </a> -->
-                    <!-- </div> -->
-                  <!-- </div> -->
-                <!-- </div> -->
-                <div id="swap-currency-input" class="sc-hLiTib isUOgq" style="
-        border-radius: 16px;
-        /* background-color: rgb(238, 234, 244); */
-        border-color: #28a745;
-        border: solid 3px;
-        box-shadow: rgb(74 74 104 / 10%) 0px 2px 2px -1px inset;
-        ">
-                  <div class="sc-eTTTle hCspWz" style="
-        padding: 15px;
-    ">
-                    <div class="sc-fSvVUw fLBCdk" style="justify-content: space-between;">
-                      <div class="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style="
-        display: flex; justify-content: space-between;
-    ">
-                        <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt">To (Estimated)</div>
-                        <div font-size="14px" color="text" class="sc-gtsrHT jFEWVt" style="display: inline; cursor: pointer;">Balance: 
-                          <div id="UPFbalance" style="display: inline;"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="sc-fVnRWS idBnak" style="
-        display: flex;
-    ">
-                      <input id="swapOutput" class="sc-iMCRTP iOdHiq token-amount-input" inputmode="decimal" title="Token Amount" autocomplete="off" autocorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minlength="1" maxlength="79" spellcheck="false" value="" style="caret-color: white;  color: white;" readonly>
-                        <button class="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style="
-        justify-content: space-between;
-        border: 0px;
-        background-color: #00000000;
-    ">
-                          <div class="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO" style="
-        justify-content: space-between;
-        display: flex;
-        align-items: center;
-    ">
-                            <img id="UPFlogo" src="assets/img/logo.png" style="width: 30px;">
-                              <div id="UPFtarget" color="text" class="sc-gtsrHT MlLjM" style="
-        display: flex;
-        text-align: left;
-        margin: 10px;
-        color: #aaaaaa;
-    ">UPF</div>
-                            </div>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="sc-enrZtP bxRIiB" style="padding: 0px 16px;"></div>
-                  </div>
-                  <div class="sc-jSFjdj jRqThc">
-                    <div class="sc-jSFjdj jRqThc">
-                      <a id="swapBuy" class="button scrollto" id="swap-button" width="100%" scale="md" style="
-        -webkit-box-align: center;
-        align-items: center;
-        border: 0px;
-        border-radius: 16px;
-        box-shadow: rgb(14 14 44 / 40%) 0px -1px 0px 0px inset;
-        cursor: pointer;
-        display: inline-flex;
-        font-family: inherit;
-        font-size: 16px;
-        font-weight: 600;
-        -webkit-box-pack: center;
-        justify-content: center;
-        letter-spacing: 0.03em;
-        line-height: 1;
-        opacity: 1;
-        outline: 0px;
-        transition: background-color 0.2s ease 0s, opacity 0.2s ease 0s;
-        height: 48px;
-        padding: 0px 24px;
-        margin: 10px 0px;
-        color: white;
-        width: 100%;
-        " onClick="fbuyUPF();">Swap</a>
-                    </div>
-                    <div id="swapResult"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
-  </section><!-- End Hero -->
 
   <main id="main">
-    
-     <!-- <section id="" class=" section-bg"> -->
-      <!-- <div class="container aos-init aos-animate" data-aos="fade-up"> -->
-        <!-- <div class="section-title"> -->
-          <!-- <h2>NFT</h2> -->
-          <!-- <p></p> -->
-        <!-- </div> -->
-        
-        
-        <!-- <div class="row"> -->
-          <!-- <div class="col-12 col-lg-6 text-justify content"> -->
-          <!-- <div class="section-title"> -->
-            <!-- <h2>diamond</h2> -->
-            <!-- <p>aaa</p> -->
-          
-            <!-- <p><a href="#null" class="button scrollto" onclick="mintNFT('diamond');">Buy</a></p> -->
-            <!-- <p id="mintDiamondResult"></p> -->
-          <!-- </div> -->
-          <!-- </div> -->
-          
-          <!-- <div class="col-12 col-lg-6 text-justify content"> -->
-          <!-- <div class="section-title"> -->
-            <!-- <h2>emerald</h2> -->
-            <!-- <p>aaa</p> -->
-          
-            <!-- <p><a href="#null" class="button scrollto" onclick="mintNFT('emerald');">Buy</a></p> -->
-            <!-- <p id="mintEmeraldResult"></p> -->
-          <!-- </div> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-     <!-- </section> -->
-    
-    
-    
-    
-    <section id="Ecosystem">
-    </section><!-- End Hero -->
-    
-    <div class="row" style="margin: 0px;">
-      <div class="col-6 col-lg-2">
-        <a href="dashboard.html" class="button scrollto">Dashboard</a>
-      </div>
-      <div class="col-6 col-lg-2">
-        <a href="roadmap.html" class="button scrollto">Roadmap</a>
-      </div>
-      
-      <div class="col-4 col-lg-2">
-        <a href="airdrop.html" class="button scrollto">Airdrop</a>
-      </div>
-      <div class="col-4 col-lg-2">
-        <a href="community.html" class="button scrollto">Community</a>
-      </div>
-      <div class="col-4 col-lg-2">
-        <a href="faqs.html" class="button scrollto">FAQs</a>
-      </div>
-      
-      <div class="col-12 col-lg-2 text-center">
-        <a href="donations.html" class="button scrollto">Donations</a>
-      </div>
-    </div>
-  </main><!-- End #main -->
 
-  
+    <section id="Status" class="about">
+    </section><!-- End About Section -->
+
+    <section class="Stats">
+      <div class="section-title">
+        <h2>Stats</h2>
+        <p>Check realtime basic stats!<p>
+      </div>
+      <div class="container" style="font-size: 50px; font-weight: bold;">
+
+        <div class="row gy-4">
+
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Price</h5>
+                <span id="priceCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-decimals="10" data-purecounter-currency="true" data-purecounter-currencysymbol="$" class="purecounter" style="font-size: 30px;"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Burned</h5>
+                <span id="burnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Circulating</h5>
+                <span id="circulateCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" data-purecounter-currency="true" class="purecounter"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Market Cap</h5>
+                <span>$</span><span id="marketcapCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Burned by Event</h5>
+                <span id="manualBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">LP Burned by Event</h5>
+                <span id="manualLPBurnCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span><span>%</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Initial Market Cap</h5>
+                <span>$</span><span id="initialMcapCounter" data-purecounter-start="0" data-purecounter-end="333" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-3">
+            <div class="count-box">
+              <div>
+                <h5 class="text-center ">Multiplied from start</h5>
+                <span>x</span><span id="startMultiCounter" data-purecounter-start="0" data-purecounter-end="0" data-purecounter-duration="5" data-purecounter-separator="true" class="purecounter"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- End About Section -->
+
+
+    <section id="Rewards" class="about">
+    </section><!-- End About Section -->
+
+    <section id="Staking" class="about">
+    </section><!-- End About Section -->
+
+  </main><!-- End #main -->
   <!-- ======= Footer ======= -->
   <footer id="footer">
   </footer><!-- End Footer -->
-  
+
   <div id="tail">
     <script src="assets/js/jquery-ui.js"></script>
 
@@ -388,7 +125,6 @@ $.get('sections/head.html', function(response) {
 
     <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
     <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
-
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -398,24 +134,24 @@ $.get('sections/head.html', function(response) {
     <script async src="assets/vendor/purecounter/purecounter.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/typed.js/typed.min.js"></script> 
+    <script src="assets/vendor/typed.js/typed.min.js"></script>
 
     <script src="assets/js/funcs.js"></script>
     <script src="assets/js/consts.js"></script>
-    <script src="assets/js/code.js"></script>
-
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/code.js"></script>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <div class="copyright">
-      <iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>
+      <iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;"></iframe>
     </div>
   </div>
 </body>
 <script>
-<!-- $.get('sections/tail.html', function(response) { -->
-    <!-- $('#tail').append($(response)); -->
-<!-- }); -->
+<!--  $.get('sections/tail.html', function (response) {
+    -->
+    < !--$('#tail').append($(response)); -->
+< !-- }); -->
 </script>
 </html>
