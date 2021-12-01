@@ -639,6 +639,10 @@ $(document).click(function (e) {
         // source.addEventListener('change', inputHandlerStake); 
 
         typedStakeAmount.value = '1,000,000,000';
+        displayText('stake1d', '1 days (APY 40 %) (Reward: 1M)');
+        displayText('stake7d', '1 days (APY 80 %) (Reward: 12M)');
+        displayText('stake28d', '1 days (APY 160 %) (Reward: 83M)');
+        
       } else {
         console.log('typedStakeAmount not ready');
       }
