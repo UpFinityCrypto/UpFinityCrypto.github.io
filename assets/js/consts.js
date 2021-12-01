@@ -59,7 +59,7 @@ inputHandlerStake = function (e) {
   (async function () {
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
-    valueIn = valueIn.replace(/./g, '');
+    valueIn = valueIn.replace(/\./g, '');
     result = getElement('typedStakeAmount');
     if (valueIn == 0) {
       result.value = valueIn;
