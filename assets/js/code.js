@@ -33,6 +33,7 @@ getExtFile('Notice', 'sections/Notice.html');
 getExtFile('Patchs', 'sections/Patchs.html');
 getExtFile('Roadmap', 'sections/Roadmap.html');
 // getExtFile('Testimonials', 'sections/Testimonials.html');
+getExtFile('Team', 'sections/Team.html');
 
 needValue = false;
 needValue |= getExtFile('Airdrop', 'sections/Airdrop.html');
