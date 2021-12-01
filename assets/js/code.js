@@ -667,7 +667,7 @@ $(document).click(function (e) {
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
       for (stakeDuration of stakeDurations) {
-        stakeDuration_ = select(stakeDuration);
+        stakeDuration_ = select('a#' + stakeDuration);
         stakeDuration_.classList.add('button-soon');
         stakeDuration_.onclick = function () { return false; }
         displayText(stakeDuration, 'Staked');
