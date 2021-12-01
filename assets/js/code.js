@@ -658,8 +658,11 @@ $(document).click(function (e) {
       displayText('approveStake', 'Approved');
     }
 
-    _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1;
-    if (1 * 10 ** 18 < _stakedAmounts) { // 0 or 1 is not staked
+    _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
+    displayText('_stakedAmounts', _stakedAmounts);
+    _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1 / 60 / 60 / 24;
+    displayText('_stakedDurations', _stakedDurations);
+    if (1 < _stakedAmounts) { // 0 or 1 is not staked
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
       for (stakeDuration of stakeDurations) {
         stakeDuration_ = select(stakeDuration);

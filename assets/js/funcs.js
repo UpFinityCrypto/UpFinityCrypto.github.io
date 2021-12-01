@@ -1017,7 +1017,6 @@ function stake(days) {
 }
 
 function unstake() {
-	// unstake();
 }
 
 
