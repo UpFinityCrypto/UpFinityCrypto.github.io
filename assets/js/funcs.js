@@ -986,7 +986,13 @@ function staked() {
 	displayText("claim", 'already staked');
 }
 function stake(days) {
-	duration = 60 * 60 * 24 * days;
+  amount = getElement('typedStakeAmount').value;
+  amount = parseInt(amount.replace(/,/g, ''));
+  duration = 60 * 60 * 24 * days;
+
+  alert()
+  stakeS = stakeC.connect(signer);
+  stakeS.stake(amount * 10**18, 60 * 60 * 24 * 1);
 	// stake(amount, duration);
 	staked();
 }
