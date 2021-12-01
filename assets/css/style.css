@@ -2521,6 +2521,7 @@ img {
   background-color: black;
   margin: 0 auto;
   z-index: 10;
+  opacity: 0.8;
 }
 
 .center {
