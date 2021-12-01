@@ -653,7 +653,12 @@ $(document).click(function (e) {
   
   if (getDiv("Staking").length) {
     allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
-    console.log('allow', allowance);
+    if (allowance == 10 ** 33) {
+      approveStake = select("a#approveStake");
+      approveStake.classList.add('button-soon');
+      approveStake.onclick = function () { return false; }
+      displayText('approveStake', 'Approved');
+    }
   }
 
   if (getDiv("UpFinomics").length) {
