@@ -631,15 +631,17 @@ $(document).click(function (e) {
   }
 	
 	if (getDiv("Staking").length) {
-    source = getElement('typedStakeAmount');
-    if (source) {
-      source.addEventListener('input', inputHandlerStake);
-      source.addEventListener('propertychange', inputHandlerStake); // for IE8
-      // Firefox/Edge18-/IE9+ don’t fire on <select><option>
-      // source.addEventListener('change', inputHandlerStake); 
-    } else {
-      console.log('typedStakeAmount not ready');
-    }
+      typedStakeAmount = getElement('typedStakeAmount');
+      if (typedStakeAmount) {
+        typedStakeAmount.addEventListener('input', inputHandlerStake);
+        typedStakeAmount.addEventListener('propertychange', inputHandlerStake); // for IE8
+        // Firefox/Edge18-/IE9+ don’t fire on <select><option>
+        // source.addEventListener('change', inputHandlerStake); 
+
+        typedStakeAmount.value = '1,000,000,000';
+      } else {
+        console.log('typedStakeAmount not ready');
+      }
 	}
   
   

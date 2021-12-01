@@ -57,12 +57,16 @@ inputHandlerSell = function (e) {
 }
 inputHandlerStake = function (e) {
   (async function () {
+    typedStakeAmount = getElement('typedStakeAmount');
+    stake1d = getElement('stake1d');
+    stake7d = getElement('stake7d');
+    stake28d = getElement('stake28d');
+
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     valueIn = valueIn.replace(/\./g, '');
-    result = getElement('typedStakeAmount');
     if (valueIn == 0) {
-      result.value = valueIn;
+      typedStakeAmount.value = valueIn;
 
       stake1d.value = '1 days: ' + String(valueIn) + ' Reward';
       stake7d.value = '7 days: ' + String(valueIn) + ' Reward';
@@ -72,7 +76,7 @@ inputHandlerStake = function (e) {
 
     valueIn = parseInt(valueIn);
     valueInComma = numberWithCommas(valueIn);
-    result.value = valueInComma;
+    typedStakeAmount.value = valueInComma;
 
     stake1d.value = '1 days: ' + String(abbreviateNumber(valueIn * 10019 / 10000000)) + ' Reward';
     stake7d.value = '7 days: ' + String(abbreviateNumber(valueIn * 123208 / 10000000)) + ' Reward';
