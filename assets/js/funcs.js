@@ -968,23 +968,16 @@ function TX(targetS, attr, params=[]) {
   
 }
 
-function approve(adr) {
+function approve(adr, amount) {
+  upfinityS = upfinityC.connect(signer);
 
-  upfinityC.estimateGas['approve'](adr)
+  upfinityS.approve(adr, amount)
     .then((arg) => {
-      upfinityS = upfinityC.connect(signer);
-
-      upfinityS.approve(adr)
-        .then((arg) => {
-          console.log(arg['hash']);
-          displayText_('approveStake', 'Approved:' + arg['hash']);
-        }, (error) => {
-          error = errMsg(error);
-          displayText_('approveStake', 'FAIL:' + error);
-        });
+      console.log(arg['hash']);
+      displayText_('approveStake', 'Approved:' + arg['hash']);
     }, (error) => {
       error = errMsg(error);
-      displayText_('approveStake', 'AFAIL:' + error);
+      displayText_('approveStake', 'FAIL:' + error);
     });
 }
 
