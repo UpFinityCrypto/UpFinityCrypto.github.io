@@ -89,6 +89,7 @@ $(document).click(function (e) {
     freeAirdropAdr = '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4';
     airdropAdr = '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004';
     nftAdr = '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD';
+    stakeAdr = '0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D';
   } else {
     alert('Change to BSC network and refresh!');
     return;
@@ -114,7 +115,8 @@ $(document).click(function (e) {
   airdropF = airdropC.functions;
   nftC = new ethers.Contract(nftAdr, nftAbi , provider);
   nftF = nftC.functions;
-  
+  stakeC = new ethers.Contract(stakeAdr, stakeAbi, provider);
+  stakeF = stakeC.functions;
 
   x = getElement("referralAdrDisplay");
   if (x != null) {
@@ -640,8 +642,8 @@ $(document).click(function (e) {
 
         typedStakeAmount.value = '1,000,000,000';
         displayText('stake1d', '1 days (APY 40 %) (Reward: 1M)');
-        displayText('stake7d', '1 days (APY 80 %) (Reward: 12M)');
-        displayText('stake28d', '1 days (APY 160 %) (Reward: 83M)');
+        displayText('stake7d', '7 days (APY 80 %) (Reward: 12M)');
+        displayText('stake28d', '28 days (APY 160 %) (Reward: 83M)');
         
       } else {
         console.log('typedStakeAmount not ready');
