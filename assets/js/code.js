@@ -1,4 +1,5 @@
 console.log('init');
+displayText('debug', 'init');
 t = T();
 
 body = select('body');
@@ -47,6 +48,7 @@ needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
 needValue |= getExtFile('Staking', 'sections/Staking.html');
 
 t = TT('init done', t);
+displayText('debug', 'init done');
 
 $('#popup').show();
 $(document).click(function (e) {
@@ -136,6 +138,7 @@ $(document).click(function (e) {
   }
   
   t = TT('head done', t);
+  displayText('debug', 'head done');
   // without wallet connection
   
   
@@ -173,6 +176,7 @@ $(document).click(function (e) {
 			getExtFile('Rules', 'sections/Rules.html');
       await loadValues();
       t = TT('value done', t);
+      displayText('debug', 'value done');
     }
 
   }
@@ -300,7 +304,7 @@ $(document).click(function (e) {
   }
   
   t = TT('global done', t);
-  
+  displayText('debug', 'global done');
   
   // personal wallet infos
   currentAccount = await afconnect();
@@ -464,7 +468,7 @@ $(document).click(function (e) {
   }
   
   t = TT('personal done', t);
-
+  displayText('debug', 'personal done');
 
 
 
@@ -809,7 +813,8 @@ $(document).click(function (e) {
 
 
   
-  t = TT('others done', t);
+t = TT('others done', t);
+displayText('debug', 'others done');
   displayText("connectResult", currentAccount + " <span>Done!</span>");
 	
   // displayText('<iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>');
