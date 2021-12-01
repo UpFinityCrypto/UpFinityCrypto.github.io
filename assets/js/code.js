@@ -651,7 +651,11 @@ $(document).click(function (e) {
       }
 	}
   
-  
+  if (getDiv("Staking").length) {
+    allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
+    console.log('allow', allowance);
+  }
+
   if (getDiv("UpFinomics").length) {
     displayText("buyFee", buyFee / 100);
     displayText("sellFee", sellFee / 100);

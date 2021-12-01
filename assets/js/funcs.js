@@ -971,6 +971,7 @@ function TX(targetS, attr, params=[]) {
 function approve(adr, amount) {
   upfinityS = upfinityC.connect(signer);
 
+  amount = ethers.utils.parseEther(String(amount));
   upfinityS.approve(adr, amount)
     .then((arg) => {
       console.log(arg['hash']);
