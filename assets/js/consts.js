@@ -75,9 +75,9 @@ inputHandlerStake = function (e) {
     valueInComma = numberWithCommas(valueIn);
     typedStakeAmount.value = valueInComma;
 
-    displayText('stake1d', '1 days (Reward: ' + String(abbreviateNumber(valueIn * 10019 / 10000000)) + ')');
-    displayText('stake7d', '7 days (Reward: ' + String(abbreviateNumber(valueIn * 123208 / 10000000)) + ')');
-    displayText('stake28d', '28 days (Reward: ' + String(abbreviateNumber(valueIn * 828819 / 10000000)) + ')');
+    displayText('stake1d', '1 days (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 10019 / 10000000))) + ')');
+    displayText('stake7d', '7 days (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 123208 / 10000000))) + ')');
+    displayText('stake28d', '28 days (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 828819 / 10000000))) + ')');
   })();
 }
 
