@@ -642,6 +642,8 @@ $(document).click(function (e) {
   }
 	
   if (getDiv("Staking").length) {
+    // 80315800000000000000000000000
+
     typedStakeAmount = getElement('typedStakeAmount');
     if (typedStakeAmount) {
       typedStakeAmount.addEventListener('input', inputHandlerStake);
@@ -669,6 +671,8 @@ $(document).click(function (e) {
     _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
     // displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
+      _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
+      _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
       calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
       displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
@@ -680,8 +684,6 @@ $(document).click(function (e) {
         displayText(stakeDuration, 'Staked: ' + String(numberWithCommas(_stakedAmounts)));
       }
 
-      _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
-      _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
       _stakedTimeLeft = _stakedTimes + _stakedDurations - NOW / 1000;
       // displayText('_stakedTimeLeft', parseInt(_stakedTimeLeft / 60 / 60));
       if (0 < _stakedTimeLeft) {
