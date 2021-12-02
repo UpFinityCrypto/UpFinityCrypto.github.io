@@ -809,6 +809,10 @@ function getExtFile(target, file){
   return true;
 }
 
+async function GET_VALUE(cf, attr, params = null) {
+  return (await CALL(cf, attr, params, false))[0] / 1;
+}
+
 async function CALL(cf, attr, params=null, cache=true) {
   var v = null;
   if (cache) {

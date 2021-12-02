@@ -643,6 +643,11 @@ $(document).click(function (e) {
 	
   if (getDiv("Staking").length) {
     // 80315800000000000000000000000
+    stakeBalance = await GET_VALUE(upfinityF, 'balanceOf', [stakeAdr]);
+    _totalFundsReserved = await GET_VALUE(stakeF, '_totalFundsReserved');
+    _totalFundsUsed = await GET_VALUE(stakeF, '_totalFundsUsed');
+
+    displayText('totalStaked',);
 
     typedStakeAmount = getElement('typedStakeAmount');
     if (typedStakeAmount) {
