@@ -657,7 +657,7 @@ $(document).click(function (e) {
     }
 
     allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
-    if (allowance == 10 ** 18) { // used approve
+    if (10 ** 18 < allowance) { // used approve
       approveStake = select("a#approveStake");
       approveStake.classList.add('button-soon');
       approveStake.onclick = function () { return false; }
@@ -668,7 +668,7 @@ $(document).click(function (e) {
     displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
       _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
-      displayText('_stakedDurations', _stakedDurations / 60 / 60 / 24);
+      displayText('_stakedDurations', _stakedDurations / 60 / 60);
       calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
       displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
