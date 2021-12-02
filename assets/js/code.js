@@ -47,6 +47,8 @@ needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
 needValue |= getExtFile('Staking', 'sections/Staking.html');
 
+NOW = Date.now();
+
 t = TT('init done', t);
 displayText('debug', 'init done');
 
@@ -227,7 +229,7 @@ $(document).click(function (e) {
     sellCooltime = 0;
     if (_curcuitBreakerFlag == 2) { // breaker on?
       sellCooltime_ = _curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 0.5 * 60 * 60; // reliable rough estimation
-      if (Date.now() < sellCooltime_) {
+      if (NOW < sellCooltime_) {
         if (sellCooltime / 1 < sellCooltime_ / 1) {
           sellCooltime = sellCooltime_;
           d = new Date(sellCooltime * 1000);
@@ -237,7 +239,7 @@ $(document).click(function (e) {
     }
 
     sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
-    if (Date.now() < sellCooltime_) {
+    if (NOW < sellCooltime_) {
       sellCooltime = sellCooltime_;
       d = new Date(sellCooltime * 1000);
       displayText("sellCooltime", d);
@@ -332,7 +334,7 @@ $(document).click(function (e) {
     from: currentAccount,
   };
   testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
-  routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(Date.now() / 1000) + 100000, testoverride)
+  routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
   .then((arg) => {
     displayText("sellStatus", "OK");
   }, (e) => {
@@ -405,7 +407,7 @@ $(document).click(function (e) {
 
 
     maxSellUPF = rO;  
-    if (Date.now() < _timeAccuTaxCheckGlobal + _accuTaxTimeWindow) { // in time window
+    if (NOW < _timeAccuTaxCheckGlobal + _accuTaxTimeWindow) { // in time window
       maxSellRate_ = _curcuitBreakerThreshold - _taxAccuTaxCheckGlobal;
       if (maxSellRate_ / 1 < 0) {
         maxSellRate_ = 0;
@@ -420,7 +422,7 @@ $(document).click(function (e) {
     }
 
     
-    if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+    if (NOW < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
       maxSellRate_ = _taxAccuTaxThreshold - _taxAccuTaxCheck; // reverted if exceed limit, so always little value left
       if (maxSellRate_ / 1 < 0) {
         maxSellRate_ = 0;
@@ -445,7 +447,7 @@ $(document).click(function (e) {
     displayText("oneSellLimitStatus", round(maxSellBNB / bnbDiv, 2) + ' BNB');
 
     taxPenalty = 0;
-    if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+    if (NOW < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
       taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
       if (15 < taxPenalty / 1) {
         taxPenalty = 15; // check
@@ -476,7 +478,7 @@ $(document).click(function (e) {
 
   if (getDiv("Taxs").length) {
     taxPenalty = 0;
-    if (Date.now() < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
+    if (NOW < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
       taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
       if (15 < taxPenalty / 1) {
         taxPenalty = 15; // check
@@ -667,8 +669,10 @@ $(document).click(function (e) {
     _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
     displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
+      _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
       _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
-      displayText('_stakedDurations', _stakedDurations / 60 / 60);
+      _stakedTimeLeft = _stakedTimes + _stakedDurations - NOW / 1000;
+      displayText('_stakedTimeLeft', _stakedTimeLeft / 60 / 60);
       calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
       displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
