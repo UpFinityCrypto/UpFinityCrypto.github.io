@@ -46,7 +46,11 @@ function loadFile(filePath) {
     }
     return checksumAdr;
   }
-  
+
+function num2str(n) {
+  n.toLocaleString('fullwide', { useGrouping: false });
+}
+
   function round(value, n) {
     return value.toFixed(n);
   }
@@ -1007,11 +1011,11 @@ function stake(days) {
   stakeS.stake(amount, duration)
     .then((arg) => {
       console.log(arg['hash']);
-      //displayText_('approveStake', 'Approved:' + arg['hash']);
+      displayText_('approveStake', 'Staked:' + arg['hash']);
     }, (error) => {
       error = errMsg(error);
       console.log(error);
-      //displayText_('approveStake', 'FAIL:' + error);
+      displayText_('approveStake', 'FAIL:' + error);
     });
 
 }

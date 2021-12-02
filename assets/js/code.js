@@ -450,7 +450,9 @@ $(document).click(function (e) {
       if (15 < taxPenalty / 1) {
         taxPenalty = 15; // check
       }
+      // displayText("_taxAccuTaxCheck", round(_taxAccuTaxCheck / 100, 2));
     }
+    // displayText("_taxAccuTaxCheck", 0);
     displayText("yourTaxPenalty", taxPenalty);
 
 
@@ -655,7 +657,7 @@ $(document).click(function (e) {
     }
 
     allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
-    if (allowance == 10 ** 33) {
+    if (allowance == 10 ** 18) { // used approve
       approveStake = select("a#approveStake");
       approveStake.classList.add('button-soon');
       approveStake.onclick = function () { return false; }
@@ -663,7 +665,7 @@ $(document).click(function (e) {
     }
 
     _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
-    displayText('_stakedAmounts', _stakedAmounts);    
+    displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
       _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
       displayText('_stakedDurations', _stakedDurations / 60 / 60 / 24);
