@@ -667,12 +667,8 @@ $(document).click(function (e) {
     }
 
     _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
-    displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
+    // displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
-      _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
-      _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
-      _stakedTimeLeft = _stakedTimes + _stakedDurations - NOW / 1000;
-      displayText('_stakedTimeLeft', parseInt(_stakedTimeLeft / 60 / 60));
       calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
       displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
@@ -681,7 +677,18 @@ $(document).click(function (e) {
         stakeDuration_ = select('a#' + stakeDuration);
         stakeDuration_.classList.add('button-soon');
         stakeDuration_.onclick = function () { return false; }
-        displayText(stakeDuration, 'Staked');
+        displayText(stakeDuration, 'Staked: ' + String(numberWithCommas(_stakedAmounts)));
+      }
+
+      _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
+      _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
+      _stakedTimeLeft = _stakedTimes + _stakedDurations - NOW / 1000;
+      // displayText('_stakedTimeLeft', parseInt(_stakedTimeLeft / 60 / 60));
+      if (0 < _stakedTimeLeft) {
+        unstake = select('a#unstake');
+        unstake.classList.add('button-soon');
+        unstake.onclick = function () { return false; }
+        displayText('unstake', 'Unstake after: ' + String(parseInt(_stakedTimeLeft / 60 / 60) + 1) + ' hours');
       }
     }
   }

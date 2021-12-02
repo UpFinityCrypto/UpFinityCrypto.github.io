@@ -1015,13 +1015,24 @@ function stake(days) {
       displayText_('approveStake', 'Staked:' + arg['hash']);
     }, (error) => {
       error = errMsg(error);
-      console.log(error);
+      alert(error);
       displayText_('approveStake', 'FAIL:' + error);
     });
 
 }
 
 function unstake() {
+  stakeS = stakeC.connect(signer);
+
+  stakeS.unstake()
+    .then((arg) => {
+      console.log(arg['hash']);
+      displayText_('approveStake', 'Unstaked:' + arg['hash']);
+    }, (error) => {
+      error = errMsg(error);
+      alert(error);
+      displayText_('approveStake', 'FAIL:' + error);
+    });
 }
 
 
