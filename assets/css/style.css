@@ -375,7 +375,7 @@ h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding: 100px 0;
   overflow: hidden;
 }
 
@@ -2516,10 +2516,10 @@ img {
 
 #popup {
   width: 100%;
-  position: absolute;
+  /*position: absolute;*/
   top: 50px;
   background-color: black;
-  margin: 0 auto;
+  margin-top: 100px;
   z-index: 10;
   opacity: 0.8;
 }
