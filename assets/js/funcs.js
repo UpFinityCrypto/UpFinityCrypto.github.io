@@ -983,10 +983,12 @@ function approve(adr, amount) {
   amount = ethers.utils.parseEther(String(amount));
   upfinityS.approve(adr, amount)
     .then((arg) => {
-      console.log(arg['hash']);
-      displayText_('approveStake', 'Approved:' + arg['hash']);
+      displayText_('stakeLog', 'tx hash: ' + arg['hash']);
+      displayText_('approveStake', 'Approving.. refresh page!');
     }, (error) => {
       error = errMsg(error);
+      alert(error);
+      displayText_('stakeLog', error);
       displayText_('approveStake', 'FAIL:' + error);
     });
 }
@@ -1021,12 +1023,17 @@ async function stake(days) {
   amount = ethers.utils.parseEther(String(amount));
   stakeS.stake(amount, duration)
     .then((arg) => {
-      console.log(arg['hash']);
-      displayText_('approveStake', 'Staked:' + arg['hash']);
+      displayText_('stakeLog', 'tx hash: ' + arg['hash']);
+      displayText_('stake1d', 'staking.. refresh page!');
+      displayText_('stake7d', 'staking.. refresh page!');
+      displayText_('stake28d', 'staking.. refresh page!');
     }, (error) => {
       error = errMsg(error);
       alert(error);
-      displayText_('approveStake', 'FAIL:' + error);
+      displayText_('stakeLog', error);
+      displayText_('stake1d', 'FAIL');
+      displayText_('stake7d', 'FAIL');
+      displayText_('stake28d', 'FAIL');
     });
 
 }
@@ -1036,12 +1043,13 @@ function unstake() {
 
   stakeS.unstake()
     .then((arg) => {
-      console.log(arg['hash']);
-      displayText_('approveStake', 'Unstaked:' + arg['hash']);
+      displayText_('stakeLog', 'tx hash: ' + arg['hash']);
+      displayText_('unstake', 'unstaking.. refresh page!');
     }, (error) => {
       error = errMsg(error);
       alert(error);
-      displayText_('approveStake', 'FAIL:' + error);
+      displayText_('stakeLog', error);
+      displayText_('unstake', 'FAIL:' + error);
     });
 }
 
