@@ -73,7 +73,7 @@ $(document).click(function (e) {
   }
   
   if (typeof window.ethereum === 'undefined') {
-    alert('not running in dapp!');
+    alert('Use Dapp to view blockchain values!');
     return;
   }
   
