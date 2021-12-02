@@ -994,7 +994,13 @@ function approve(adr, amount) {
 function staked() {
 	displayText("claim", 'already staked');
 }
-function stake(days) {
+async function stake(days) {
+  allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
+  if (10 ** 18 >= allowance) { // not used approve
+    alert('Approve First!');
+    return;
+  }
+
   amount = getElement('typedStakeAmount').value;
   amount = parseInt(amount.replace(/,/g, ''));
   duration = 60 * 60 * 24 * days;
