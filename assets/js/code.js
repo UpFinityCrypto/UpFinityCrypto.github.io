@@ -672,7 +672,7 @@ $(document).click(function (e) {
       _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
       _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
       _stakedTimeLeft = _stakedTimes + _stakedDurations - NOW / 1000;
-      displayText('_stakedTimeLeft', _stakedTimeLeft / 60 / 60);
+      displayText('_stakedTimeLeft', parseInt(_stakedTimeLeft / 60 / 60));
       calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
       displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
