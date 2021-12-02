@@ -73,7 +73,10 @@ $(document).click(function (e) {
   }
   
   if (typeof window.ethereum === 'undefined') {
-    alert('Use Dapp to view blockchain values!');
+    if (getDiv("Team").length) {
+    } else {
+      alert('Website tools are available with Dapp');
+    }
     return;
   }
   
@@ -644,9 +647,9 @@ $(document).click(function (e) {
   if (getDiv("Staking").length) {
     
     stakeBalance = await GET_VALUE(upfinityF, 'balanceOf', [stakeAdr]);
-    //_totalFundsReserved = await GET_VALUE(stakeF, '_totalFundsReserved'); // 80315800000000000000000000000
+    //_totalFundsReserved = await GET_VALUE(stakeF, '_totalFundsReserved'); // 88315800000000000000000000000
     _totalFundsUsed = await GET_VALUE(stakeF, '_totalFundsUsed');
-    totalStaked = stakeBalance - (80315800000000000000000000000 - _totalFundsUsed);
+    totalStaked = stakeBalance - (88315800000000000000000000000 - _totalFundsUsed);
     displayText('totalStaked', numberWithCommas(parseInt(totalStaked / bnbDiv)));
 
     typedStakeAmount = getElement('typedStakeAmount');
