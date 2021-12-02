@@ -48,7 +48,8 @@ function loadFile(filePath) {
   }
 
 function num2str(n) {
-  n.toLocaleString('fullwide', { useGrouping: false });
+  nStr = n.toLocaleString('fullwide', { useGrouping: false });
+  return nStr;
 }
 
   function round(value, n) {
