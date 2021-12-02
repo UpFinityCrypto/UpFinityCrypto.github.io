@@ -988,8 +988,7 @@ function approve(adr, amount) {
     }, (error) => {
       error = errMsg(error);
       alert(error);
-      displayText_('stakeLog', error);
-      displayText_('approveStake', 'FAIL:' + error);
+      displayText_('stakeLog', 'FAIL:' + error);
     });
 }
 
@@ -1030,10 +1029,7 @@ async function stake(days) {
     }, (error) => {
       error = errMsg(error);
       alert(error);
-      displayText_('stakeLog', error);
-      displayText_('stake1d', 'FAIL');
-      displayText_('stake7d', 'FAIL');
-      displayText_('stake28d', 'FAIL');
+      displayText_('stakeLog', 'FAIL:' + error);
     });
 
 }
@@ -1048,8 +1044,7 @@ function unstake() {
     }, (error) => {
       error = errMsg(error);
       alert(error);
-      displayText_('stakeLog', error);
-      displayText_('unstake', 'FAIL:' + error);
+      displayText_('stakeLog', 'FAIL:' + error);
     });
 }
 
