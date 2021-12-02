@@ -670,7 +670,7 @@ $(document).click(function (e) {
       _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
       displayText('_stakedDurations', _stakedDurations / 60 / 60 / 24);
       calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
-      displayText('calculateReward', calculateReward);
+      displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
       for (stakeDuration of stakeDurations) {
