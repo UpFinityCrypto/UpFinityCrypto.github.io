@@ -642,12 +642,12 @@ $(document).click(function (e) {
   }
 	
   if (getDiv("Staking").length) {
-    // 80315800000000000000000000000
+    
     stakeBalance = await GET_VALUE(upfinityF, 'balanceOf', [stakeAdr]);
-    _totalFundsReserved = await GET_VALUE(stakeF, '_totalFundsReserved');
+    //_totalFundsReserved = await GET_VALUE(stakeF, '_totalFundsReserved'); // 80315800000000000000000000000
     _totalFundsUsed = await GET_VALUE(stakeF, '_totalFundsUsed');
-
-    displayText('totalStaked',);
+    totalStaked = stakeBalance - (80315800000000000000000000000 - _totalFundsUsed);
+    displayText('totalStaked', numberWithCommas(parseInt(totalStaked / bnbDiv)));
 
     typedStakeAmount = getElement('typedStakeAmount');
     if (typedStakeAmount) {
