@@ -21,7 +21,7 @@ header.style.width = 'auto';
 
 
 getExtFile('header', 'sections/Header.html'); // header
-getExtFile('Swap', 'sections/Swap.html'); // header
+getExtFile('Swap', 'sections/Swap.html');
 
 getExtFile('Donations', 'sections/Donations.html');
 getExtFile('Ecosystem', 'sections/Ecosystem.html');
