@@ -6,6 +6,8 @@
     <p>Rewards are <span>auto-staked/compounded</span></p>
     <p>Total UPF Staked</p>
     <span id="totalStaked" class="text-center" style="font-size: 3em;"></span><img src="assets/img/logo.png" class="small-icon">UPF
+    <p>Total UPF Rewarded</p>
+    <span id="_totalFundsUsed" class="text-center" style="font-size: 3em;"></span><img src="assets/img/logo.png" class="small-icon">UPF
   </div>
 
   <div class="row">
@@ -72,10 +74,10 @@
         <div class="col-6 align-items-stretch">
             <div class="icon-box">
                 <h6 class="text-center ">Your claimed rewards</h6>
-                <div id="claimed" class="text-center" style="font-size: 0.5em;"></div>UPF
+                <div id="_claimedAmounts" class="text-center" style="font-size: 0.5em;"></div>UPF
             </div>
         </div>
-        <a href="#null" id="unstake" class="button scrollto" onclick="">Unstake</a>
+        <a href="#null" id="unstake" class="button scrollto" onclick="unstake();">Unstake</a>
       </div>
     </div>
   </div>
