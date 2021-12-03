@@ -675,7 +675,7 @@ $(document).click(function (e) {
       approveStake.onclick = function () { return false; };
       displayText('approveStake', 'Approved');
     } else {
-      approveStake.classList.del('button-soon');
+      approveStake.classList.remove('button-soon');
       approveStake.onclick = function () { approve(stakeAdr, 10 ** 15); };
       displayText('approveStake', 'Approve');
     }
@@ -708,7 +708,7 @@ $(document).click(function (e) {
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
       for (stakeDuration of stakeDurations) {
         stakeDuration_ = select('a#' + stakeDuration);
-        stakeDuration_.classList.del('button-soon');
+        stakeDuration_.classList.remove('button-soon');
       }
       displayText('stake1d', '1 days (APY 40 %) (Reward: 1M)');
       displayText('stake7d', '7 days (APY 80 %) (Reward: 12M)');
