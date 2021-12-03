@@ -653,7 +653,7 @@ $(document).click(function (e) {
     _totalFundsUsed = await GET_VALUE(stakeF, '_totalFundsUsed');
     totalStaked = stakeBalance - (88315800000000000000000000000 - _totalFundsUsed);
     displayText('totalStaked', numberWithCommas(parseInt(totalStaked / bnbDiv)));
-    displayText('totalValueLocked', abbreviateNumber(parseInt(price * totalStaked / bnbDiv)));
+    displayText('totalValueLocked', '$ ' + abbreviateNumber(parseInt(price * stakeBalance / bnbDiv)));
     _totalFundsUsed = (await CALL(stakeF, '_totalFundsUsed', [], false))[0] / 1;
     displayText('_totalFundsUsed', numberWithCommas(parseInt(_totalFundsUsed / bnbDiv)));
 
