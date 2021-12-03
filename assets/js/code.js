@@ -698,11 +698,15 @@ $(document).click(function (e) {
 
       _stakedTimeLeft = _stakedTimes + _stakedDurations - NOW / 1000;
       // displayText('_stakedTimeLeft', parseInt(_stakedTimeLeft / 60 / 60));
+      unstake = select('a#unstake');
       if (0 < _stakedTimeLeft) {
-        unstake = select('a#unstake');
         unstake.classList.add('button-soon');
         unstake.onclick = function () { return false; }
         displayText('unstake', 'Unstake after: ' + String(parseInt(_stakedTimeLeft / 60 / 60) + 1) + ' hours');
+      } else {
+        unstake.classList.remove('button-soon');
+        unstake.onclick = function () { unstake(); }
+        displayText('unstake', 'Unstake');
       }
     } else {
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
