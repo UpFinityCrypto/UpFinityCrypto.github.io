@@ -983,7 +983,7 @@ function approve(adr, amount) {
   amount = ethers.utils.parseEther(String(amount));
   upfinityS.approve(adr, amount)
     .then((arg) => {
-      displayText_('stakeLog', 'tx hash: ' + arg['hash']);
+      displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('approveStake', 'Approving.. refresh page!');
     }, (error) => {
       error = errMsg(error);
@@ -1022,7 +1022,7 @@ async function stake(days) {
   amount = ethers.utils.parseEther(String(amount));
   stakeS.stake(amount, duration)
     .then((arg) => {
-      displayText_('stakeLog', 'tx hash: ' + arg['hash']);
+      displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('stake1d', 'staking.. refresh page!');
       displayText_('stake7d', 'staking.. refresh page!');
       displayText_('stake28d', 'staking.. refresh page!');
@@ -1039,7 +1039,7 @@ function unstake() {
 
   stakeS.unstake()
     .then((arg) => {
-      displayText_('stakeLog', 'tx hash: ' + arg['hash']);
+      displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('unstake', 'unstaking.. refresh page!');
     }, (error) => {
       error = errMsg(error);
