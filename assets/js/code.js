@@ -686,7 +686,7 @@ $(document).click(function (e) {
     _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
     // displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
 
-    if (1e-18 < _stakedAmounts)
+    if (1e-18 < _stakedAmounts) {
       params = [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations];
       calculateReward = (await CALL(stakeF, 'calculateReward', params, false))[0] / 1;
     } else {
