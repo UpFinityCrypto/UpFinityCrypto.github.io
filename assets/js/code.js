@@ -663,21 +663,21 @@ $(document).click(function (e) {
       // Firefox/Edge18-/IE9+ don’t fire on <select><option>
       // source.addEventListener('change', inputHandlerStake); 
 
-      typedStakeAmount.value = '1,000,000,000';
-      displayText('stake1d', '1 days (APY 40 %) (Reward: 1M)');
-      displayText('stake7d', '7 days (APY 80 %) (Reward: 12M)');
-      displayText('stake28d', '28 days (APY 160 %) (Reward: 83M)');
-        
+      typedStakeAmount.value = '1,000,000,000';        
     } else {
       console.log('typedStakeAmount not ready');
     }
 
     allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
+    approveStake = select("a#approveStake");
     if (10 ** 18 < allowance) { // used approve
-      approveStake = select("a#approveStake");
       approveStake.classList.add('button-soon');
-      approveStake.onclick = function () { return false; }
+      approveStake.onclick = function () { return false; };
       displayText('approveStake', 'Approved');
+    } else {
+      approveStake.classList.del('button-soon');
+      approveStake.onclick = function () { approve(stakeAdr, 10 ** 15); };
+      displayText('approveStake', 'Approve');
     }
 
     _stakedAmounts = (await CALL(stakeF, '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
@@ -704,6 +704,15 @@ $(document).click(function (e) {
         unstake.onclick = function () { return false; }
         displayText('unstake', 'Unstake after: ' + String(parseInt(_stakedTimeLeft / 60 / 60) + 1) + ' hours');
       }
+    } else {
+      stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
+      for (stakeDuration of stakeDurations) {
+        stakeDuration_ = select('a#' + stakeDuration);
+        stakeDuration_.classList.del('button-soon');
+      }
+      displayText('stake1d', '1 days (APY 40 %) (Reward: 1M)');
+      displayText('stake7d', '7 days (APY 80 %) (Reward: 12M)');
+      displayText('stake28d', '28 days (APY 160 %) (Reward: 83M)');
     }
 
     _claimedAmounts = (await CALL(stakeF, '_claimedAmounts', [currentAccount], false))[0] / 1;
