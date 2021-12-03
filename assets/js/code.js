@@ -689,7 +689,7 @@ $(document).click(function (e) {
     if (0 < _stakedDurations) {
       params = [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations];
     } else {
-      params = [ethers.utils.parseEther(String(_stakedAmounts)), 1]; // dummy
+      params = [ethers.utils.parseEther(String(_stakedAmounts)), 60 * 60 * 24 * 1]; // dummy
     }
     calculateReward = (await CALL(stakeF, 'calculateReward', params, false))[0] / 1;
     displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
