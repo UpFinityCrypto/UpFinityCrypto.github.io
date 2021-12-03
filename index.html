@@ -12,11 +12,16 @@ $.get('sections/head.html', function(response) {
 
   <header id="header">
   </header>
-  
+
   <div id="devNotice" class="header fixed-top d-flew align-items-center header-scrolled" style="width:auto; top: 60px;">
     DEV NOTICE!
   </div>
-  <div id="popup" class="col-12 col-lg-6 text-center center">
+
+  <div id="devNotice" class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <div id="popup" class="alert alert-dark alert-dismissible fade show" role="alert">
     <div class="col-12 col-lg-6 text-center center">
       <div class="row center">
         <div class="col-6 center" style="max-width: 300px; max-height: 400px;">
@@ -32,8 +37,9 @@ $.get('sections/head.html', function(response) {
         <p>Don't miss out!"</p>
       </div>
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-    
+
   <!-- ======= Hero Section ======= -->
   <section class="d-flex flex-column justify-content-center" style="height: auto;">
     <div class="row" style="margin: 0px;">
@@ -90,9 +96,9 @@ $.get('sections/head.html', function(response) {
         </div>
       </div>
 
-    <section id="Swap">
-    </section><!-- End Hero -->
-</section><!-- End Hero -->
+      <section id="Swap">
+      </section><!-- End Hero -->
+  </section><!-- End Hero -->
 
   <main id="main">
 
@@ -161,14 +167,12 @@ $.get('sections/head.html', function(response) {
       </div>
     </div>
   </main><!-- End #main -->
-
-  
   <!-- ======= Footer ======= -->
   <footer id="footer">
   </footer><!-- End Footer -->
-  
+
   <div id="debug"></div>
-  
+
   <div id="tail">
     <script src="assets/js/jquery-ui.js"></script>
 
@@ -182,7 +186,6 @@ $.get('sections/head.html', function(response) {
 
     <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
     <!-- <script type="text/javascript" src="assets/js/materialize.min.js"></script> -->
-
     <!-- Vendor JS Files -->
     <script src="assets/vendor/aos/aos.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -192,20 +195,20 @@ $.get('sections/head.html', function(response) {
     <script async src="assets/vendor/purecounter/purecounter.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-    <script src="assets/vendor/typed.js/typed.min.js"></script> 
+    <script src="assets/vendor/typed.js/typed.min.js"></script>
 
     <script src="assets/js/funcs.js"></script>
     <script src="assets/js/consts.js"></script>
-    
+
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/code.js"></script>
 
-    
+
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <div class="copyright">
-      <iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>
+      <iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;"></iframe>
     </div>
   </div>
 </body>
