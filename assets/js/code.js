@@ -684,10 +684,11 @@ $(document).click(function (e) {
     _stakedTimes = (await CALL(stakeF, '_stakedTimes', [currentAccount], false))[0] / 1;
     _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
     // displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
-    if (1 < _stakedAmounts) { // 0 or 1 is not staked
-      calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
-      displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
 
+    calculateReward = (await CALL(stakeF, 'calculateReward', [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations], false))[0] / 1;
+    displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
+    
+    if (1 < _stakedAmounts) { // 0 or 1 is not staked
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
       for (stakeDuration of stakeDurations) {
         stakeDuration_ = select('a#' + stakeDuration);
