@@ -686,12 +686,12 @@ $(document).click(function (e) {
     _stakedDurations = (await CALL(stakeF, '_stakedDurations', [currentAccount], false))[0] / 1;
     // displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
 
-    if (0 < _stakedDurations) {
+    if (1e-18 < _stakedAmounts)
       params = [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations];
+      calculateReward = (await CALL(stakeF, 'calculateReward', params, false))[0] / 1;
     } else {
-      params = [ethers.utils.parseEther(String(_stakedAmounts)), 60 * 60 * 24 * 1]; // dummy
+      calculateReward = 0;
     }
-    calculateReward = (await CALL(stakeF, 'calculateReward', params, false))[0] / 1;
     displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
     
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
