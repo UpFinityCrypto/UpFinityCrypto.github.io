@@ -78,6 +78,7 @@ $(document).click(function (e) {
     } else {
       alert('Website tools are available with Dapp');
     }
+    syncDelay(1000);
     init();
     return;
   }
