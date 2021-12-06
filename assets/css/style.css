@@ -1954,10 +1954,11 @@ form {
 input, textarea {
     font-size: 13px;
     padding: 10px;
-    border: 3px solid #2626260;
+    padding: 10px;
+    border: 3px solid #262626;
     width: 80%;
     margin-bottom: 0px;
-    background-color: #2626260;
+    background-color: #262626;
     outline: none;
 }
 
