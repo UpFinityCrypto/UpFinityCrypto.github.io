@@ -3023,7 +3023,7 @@ img {
   opacity: 1;
   visibility: visible;
   background: #262626;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  box-shadow: 0px 0px 5px 5px #28a74577;
 }
 .navbar-mobile .dropdown ul li {
   min-width: 200px;
