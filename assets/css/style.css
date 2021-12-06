@@ -1065,7 +1065,7 @@ i {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #000;
+  background: #262626;
   color: #aaaaaa;
   font-size: 14px;
   text-align: center;
@@ -1225,7 +1225,7 @@ i {
   padding: 0px 0px;
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: #262626;
   box-shadow: 0 0 29px 0 rgba(18, 66, 101, 0.08);
   /* transition: all 0.3s ease-in-out; */
   border-radius: 8px;
@@ -1508,7 +1508,7 @@ html {
     height: 40px;
     border-radius: 50%;
     border: 4px solid #aaaaaa;
-    background-color: #000;
+    background-color: #262626;
 }
 
 .cd-timeline-img i {
@@ -1624,7 +1624,7 @@ html {
 .cd-timeline-content {
     position: relative;
     margin-left: 60px;
-    background-color: #000;
+    background-color: #262626;
     border: 4px solid #aaaaaa;
     border-radius: 0.50em;
 }
@@ -1954,10 +1954,10 @@ form {
 input, textarea {
     font-size: 13px;
     padding: 10px;
-    border: 3px solid #0000;
+    border: 3px solid #2626260;
     width: 80%;
     margin-bottom: 0px;
-    background-color: #0000;
+    background-color: #2626260;
     outline: none;
 }
 
@@ -2406,7 +2406,7 @@ footer {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #000;
+    background-color: #262626;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
@@ -2425,7 +2425,7 @@ footer {
     font-size: 1rem;
     color: #ffffff;
     text-align: left;
-    background-color: #000;
+    background-color: #262626;
     border: 0;
     border-radius: 0;
     overflow-anchor: none;
@@ -2997,7 +2997,7 @@ img {
   left: 15px;
   padding: 10px 0;
   border-radius: 10px;
-  background-color: #000;
+  background-color: #262626;
   overflow-y: auto;
   transition: 0.3s;
 }
@@ -3020,7 +3020,7 @@ img {
   z-index: 99;
   opacity: 1;
   visibility: visible;
-  background: #000;
+  background: #262626;
   box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
 }
 .navbar-mobile .dropdown ul li {
