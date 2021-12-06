@@ -2906,7 +2906,7 @@ img {
   opacity: 1;
   visibility: hidden;
   background: #333;
-  box-shadow: 0px 0px 30px rgb(234 72 23 / 36%);
+  /*box-shadow: 0px 0px 30px rgb(234 72 23 / 36%);*/
   transition: 0.3s;
   border-radius: 4px;
 }
