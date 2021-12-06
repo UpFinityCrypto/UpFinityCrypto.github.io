@@ -693,7 +693,7 @@ $(document).click(function (e) {
     } else {
       calculateReward = 0;
     }
-    displayText('calculateReward', numberWithCommas(calculateReward / bnbDiv));
+    displayText('calculateReward', numberWithCommas(parseInt(calculateReward / bnbDiv)));
     
     if (1 < _stakedAmounts) { // 0 or 1 is not staked
       stakeDurations = ['stake1d', 'stake7d', 'stake28d'];
