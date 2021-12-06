@@ -25,7 +25,6 @@ getExtFile('Swap', 'sections/Swap.html');
 
 getExtFile('Donations', 'sections/Donations.html');
 getExtFile('Ecosystem', 'sections/Ecosystem.html');
-getExtFile('FAQs', 'sections/FAQs.html');
 getExtFile('footer', 'sections/Footer.html'); // footer
 // getExtFile('Gallery', 'sections/Gallery.html');
 
