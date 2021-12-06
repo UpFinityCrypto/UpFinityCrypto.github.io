@@ -995,7 +995,7 @@ function approve(adr, amount) {
 function staked() {
 	displayText("claim", 'already staked');
 }
-async function stake(days) {
+async function fstake(days) {
   allowance = (await CALL(upfinityF, 'allowance', [currentAccount, stakeAdr], false))[0] / 1;
   if (10 ** 18 >= allowance) { // not used approve
     alert('Approve First!');
@@ -1034,7 +1034,7 @@ async function stake(days) {
 
 }
 
-function unstake() {
+function funstake() {
   stakeS = stakeC.connect(signer);
 
   stakeS.unstake()

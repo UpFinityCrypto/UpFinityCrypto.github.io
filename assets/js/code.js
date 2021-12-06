@@ -713,7 +713,7 @@ $(document).click(function (e) {
         displayText('unstake', 'Unstake after: ' + String(parseInt(_stakedTimeLeft / 60 / 60) + 1) + ' hours');
       } else {
         unstake.classList.remove('button-soon');
-        unstake.onclick = function () { unstake(); }
+        unstake.onclick = function () { funstake(); }
         displayText('unstake', 'Unstake');
       }
     } else {
