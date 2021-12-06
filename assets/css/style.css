@@ -1123,17 +1123,18 @@ i {
 }
 
 .button {
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    border: 0;
-    padding: 5px 20px;
-    background: #28a745;
-    transition: 0.4s;
-    border-radius: 50px;
-    display: inline-block;
-    font-size: 20px;
-    margin: 10px auto;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  border: 0;
+  padding: 5px 20px;
+  background: #28a745;
+  transition: 0.4s;
+  border-radius: 50px;
+  display: inline-block;
+  font-size: 20px;
+  margin: 10px auto;
+  box-shadow: 0px 0px 0px 0px #28a745;
 }
 
 @media (max-width: 992px) {
