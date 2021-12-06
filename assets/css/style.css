@@ -815,13 +815,13 @@ i {
   box-shadow: 0px 0 35px 0 rgba(0, 0, 0, 0.08);
 }
 .services .iconbox-blue i {
-  color: #47aeff;
+  color: #ea4817;
 }
 .services .iconbox-blue:hover .icon i {
   color: #fafafa;
 }
 .services .iconbox-blue:hover .icon path {
-  fill: #47aeff;
+  fill: #ea4817;
 }
 .services .iconbox-orange i {
   color: #ffa76e;
