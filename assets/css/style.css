@@ -1156,7 +1156,7 @@ i {
 }
 
 .button:hover {
-  background: #a7288a;
+  background: #ea4817;
   color: #fff;
 }
 
@@ -1170,7 +1170,7 @@ i {
 }
 
 .button-primary:hover {
-  color: #a7288a;
+  color: #ea4817;
 }
 
 .card-box {
@@ -2905,8 +2905,8 @@ img {
   z-index: 99;
   opacity: 1;
   visibility: hidden;
-  background: #000;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  background: #333;
+  box-shadow: 0px 0px 30px rgb(234 72 23 / 36%)
   transition: 0.3s;
   border-radius: 4px;
 }
