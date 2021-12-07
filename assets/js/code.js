@@ -871,6 +871,6 @@ $(document).click(function (e) {
 
 }());
 
-$(window).load(function(e) {
+window.addEventListener("load", function(ee){
     init();
 });
