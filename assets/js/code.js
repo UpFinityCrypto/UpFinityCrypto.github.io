@@ -279,34 +279,43 @@ $(document).click(function (e) {
     realSupply = totalSupply.sub(burnAmount);
     mcap = price * realSupply / bnbDiv;
 
-    var elms_ = document.querySelectorAll("[id='priceCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
-    }
-    var elms_ = document.querySelectorAll("[id='burnCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', burnAmount / bnbDiv);
-    }
-    var elms_ = document.querySelectorAll("[id='circulateCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', realSupply / bnbDiv);
-    }
-    var elms_ = document.querySelectorAll("[id='marketcapCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
-    }
-    var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', burnPercentage);
-    }
-    var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
-    }
-    var elms_ = document.querySelectorAll("[id='startMultiCounter']");
-    if (elms_.length) {
-    elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
-    }
+
+    displayText('priceCounter', (price / 1).toFixed(10));
+    displayText('burnCounter', abbreviateNumber(parseInt(burnAmount / bnbDiv)));
+    displayText('circulateCounter', abbreviateNumber(parseInt(realSupply / bnbDiv)));
+    displayText('marketcapCounter', mcap.toFixed(0));
+    displayText('manualBurnCounter', burnPercentage);
+    displayText('manualLPBurnCounter', burnLpPercentage);
+    displayText('startMultiCounter', mcap.toFixed(0) / 333);
+
+    //var elms_ = document.querySelectorAll("[id='priceCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', (price / 1).toFixed(10));
+    //}
+    //var elms_ = document.querySelectorAll("[id='burnCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', burnAmount / bnbDiv);
+    //}
+    //var elms_ = document.querySelectorAll("[id='circulateCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', realSupply / bnbDiv);
+    //}
+    //var elms_ = document.querySelectorAll("[id='marketcapCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0));
+    //}
+    //var elms_ = document.querySelectorAll("[id='manualBurnCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', burnPercentage);
+    //}
+    //var elms_ = document.querySelectorAll("[id='manualLPBurnCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', burnLpPercentage);
+    //}
+    //var elms_ = document.querySelectorAll("[id='startMultiCounter']");
+    //if (elms_.length) {
+    //elms_[0].setAttribute('data-purecounter-end', mcap.toFixed(0) / 333);
+    //}
   }
   
   t = TT('global done', t);
