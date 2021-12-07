@@ -69,14 +69,13 @@ $(document).click(function (e) {
   if (location.hostname == "") {
     alert('running in local!');
     return;
-
   }
   
   if (typeof window.ethereum === 'undefined') {
-    if (getDiv("Team").length) {
-    } else {
-      alert('Website tools are available with Dapp');
-    }
+    //if (getDiv("Team").length) {
+    //} else {
+    //  alert('Website tools are available with Dapp');
+    //}
 
     return;
   }
@@ -586,26 +585,26 @@ $(document).click(function (e) {
         myNFTitemIdx = (await nftF._itemById(myNFTidx))[0] / 1;
         myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
         if (myNFTitemIdx == 0) {
-          myNFTimgThumbSrc = "boy_thumb.gif";
-          myNFTimgSrc = "boy.gif";
+          myNFTimgThumbSrc = "LegendaryOB.png";
+          myNFTimgSrc = "OBanimationL.mp4";
           myNFTborder = "emerald";
           myNFTtax += 100;
         }
         if (myNFTitemIdx == 1) {
-          myNFTimgThumbSrc = "girl_thumb.gif";
-          myNFTimgSrc = "girl.gif";
+          myNFTimgThumbSrc = "LegendaryOG.png";
+          myNFTimgSrc = "OGanimationL.mp4";
           myNFTborder = "emerald";
           myNFTtax += 100;
         }
         if (myNFTitemIdx == 2) {
-          myNFTimgThumbSrc = "boy_thumb.png";
-          myNFTimgSrc = "boy.png";
+          myNFTimgThumbSrc = "EpicOB.png";
+          myNFTimgSrc = "EpicOB.png";
           myNFTborder = "diamond";
           myNFTtax += 50;
         }
         if (myNFTitemIdx == 3) {
-          myNFTimgThumbSrc = "girl_thumb.png";
-          myNFTimgSrc = "girl.png";
+          myNFTimgThumbSrc = "EpicOG.png";
+          myNFTimgSrc = "EpicOG.png";
           myNFTborder = "diamond";
           myNFTtax += 50;
         }
