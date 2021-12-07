@@ -77,8 +77,7 @@ $(document).click(function (e) {
     } else {
       alert('Website tools are available with Dapp');
     }
-    syncDelay(1000);
-    init();
+
     return;
   }
   
@@ -861,15 +860,17 @@ $(document).click(function (e) {
   dateObj.setDate(dateObj.getDate() + 1); 
   countDownTimer('NFTcountDown', '11/16/2021 2:59 PM'); // 내일까지 
   
-
-
+  t = TT('others done', t);
+  displayText('debug', 'others done');
   
-t = TT('others done', t);
-displayText('debug', 'others done');
   displayText("connectResult", currentAccount + " <span>Done!</span>");
 	
   // displayText('<iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>');
   
 	// if staked, run staked();
-  init();
+
 }());
+
+$(window).load(function(e) {
+    init();
+});
