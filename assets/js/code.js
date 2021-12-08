@@ -416,6 +416,7 @@ $(document).click(function (e) {
     if (cantsell != "") {
       displayText("cantSellStatus", "Sell Event");
       displayText("circuitBreakerStatus", cantsell);
+      displayText("cbStatus", "Circuit Breaker ON");
     }
 
 
