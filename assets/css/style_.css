@@ -72,7 +72,7 @@
   text-align: center;
   color: #fff;
   border: 0;
-  padding: 1px 1px;
+  padding: 5px 10px;
   background: #222222;
   transition: 0.5s;
   border-radius: 50px;
@@ -84,13 +84,6 @@
 
 @media (max-width: 992px) {
   .button {
-    color: #fff;
-    border: 0;
-    padding: 5px 10px;
-    background: #28a745;
-    transition: 0.4s;
-    border-radius: 50px;
-    display: inline-block;
     font-size: 15px;
   }
 }

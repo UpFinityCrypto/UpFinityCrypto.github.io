@@ -272,5 +272,15 @@ function init() { // to use async things
       mirror: false
     })
   });
+  
+    /**
+   * Initiate tooltips
+   */
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+  
+  
   console.log('main done');
 }

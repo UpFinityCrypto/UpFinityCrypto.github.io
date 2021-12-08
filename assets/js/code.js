@@ -43,6 +43,7 @@ needValue |= getExtFile('Features', 'sections/Features.html');
 needValue |= getExtFile('Rewards', 'sections/Rewards.html');
 needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
 needValue |= getExtFile('Status', 'sections/Status.html');
+needValue |= getExtFile('Stats', 'sections/Stats.html');
 needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
 needValue |= getExtFile('Staking', 'sections/Staking.html');
@@ -147,7 +148,7 @@ $(document).click(function (e) {
   // without wallet connection
   
   
-  connectWalletText = "<span style='font-size: 10px;'>Loading, Connect wallet to use claim, etc!</span>";
+  connectWalletText = "<span style='font-size: 10px;'>Connect Wallet, Loading</span>";
   displayText("connectResult", connectWalletText);
   displayText("balanceStatus", connectWalletText);
   <!-- displayText("balanceIcon", connectWalletText); --> // big icon
@@ -282,10 +283,10 @@ $(document).click(function (e) {
     displayText('priceCounter', (price / 1).toFixed(10));
     displayText('burnCounter', abbreviateNumber(parseInt(burnAmount / bnbDiv)));
     displayText('circulateCounter', abbreviateNumber(parseInt(realSupply / bnbDiv)));
-    displayText('marketcapCounter', mcap.toFixed(0));
+    displayText('marketcapCounter', numberWithCommas(mcap.toFixed(0)));
     displayText('manualBurnCounter', burnPercentage);
     displayText('manualLPBurnCounter', burnLpPercentage);
-    displayText('startMultiCounter', mcap.toFixed(0) / 333);
+    displayText('startMultiCounter', (mcap / 333).toFixed(0));
 
     //var elms_ = document.querySelectorAll("[id='priceCounter']");
     //if (elms_.length) {
