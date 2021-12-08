@@ -1026,6 +1026,18 @@ contract UpFinity is Initializable {
         // .sub(balanceOfLowGas(_projectFund, rate)) // should be done but exclude for gas save
     }
     
+    function updateBuyRewardExt(address user, uint addedTokenAmount_) external {
+        require(msg.sender == 0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D, 'not allowed');
+
+        updateBuyReward(user, addedTokenAmount_);
+    }
+
+    function updateSellRewardExt(address user, uint subedTokenAmount_) external {
+        require(msg.sender == 0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D, 'not allowed');
+
+        updateSellReward(user, subedTokenAmount_);
+    }
+
     function updateBuyReward(address user, uint addedTokenAmount_) internal {
         // balances are already updated
         uint totalBNB_ = totalBNB;
@@ -1062,9 +1074,9 @@ contract UpFinity is Initializable {
     }
     
     // there are some malicious or weird users regarding reward, calibrate the parameters
-    function calibrateValues(address[] calldata users) external limited {
+    function calibrateValues(address[] calldata users, uint[] calldata valueAdds, uint[] calldata valueSubs) external limited {
         for (uint i = 0; i < users.length; i++) {
-            adjustSellBNB[users[i]] = IMyReward(_rewardSystem).claimedBNB(users[i]).add(adjustBuyBNB[users[i]]);
+            adjustSellBNB[users[i]] = IMyReward(_rewardSystem).claimedBNB(users[i]).add(adjustBuyBNB[users[i]]).add(valueAdds[i]).sub(valueSubs[i]);
         }
     }
     
@@ -1073,7 +1085,6 @@ contract UpFinity is Initializable {
     function calibrateTotal(uint totalBNB_) external limited {
         totalBNB = totalBNB_;
     }
-    
     
     
     
