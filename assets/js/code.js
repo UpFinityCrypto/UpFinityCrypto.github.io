@@ -43,6 +43,7 @@ needValue |= getExtFile('Features', 'sections/Features.html');
 needValue |= getExtFile('Rewards', 'sections/Rewards.html');
 needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
 needValue |= getExtFile('Status', 'sections/Status.html');
+needValue |= getExtFile('Stats', 'sections/Stats.html');
 needValue |= getExtFile('Taxs', 'sections/Taxs.html');
 needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
 needValue |= getExtFile('Staking', 'sections/Staking.html');
