@@ -142,7 +142,20 @@ $(document).click(function (e) {
       }
     }
   }
-  
+
+  cantsell = cantsellReason();
+
+  if (cantsell != "") {
+    displayText("cantSellStatus", "Sell Event");
+    displayText("circuitBreakerStatus", cantsell);
+    displayText("cbStatus", "Circuit Breaker ON");
+    select("curStatus").classList.add('bi-exclamation-circle');
+    select("curStatus").classList.add('text-warning');
+  } else {
+    select("curStatus").classList.add('bi-check-circle');
+    select("curStatus").classList.add('text-success');
+  }
+
   t = TT('head done', t);
   displayText('debug', 'head done');
   // without wallet connection
