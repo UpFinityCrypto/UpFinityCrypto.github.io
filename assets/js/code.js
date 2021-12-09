@@ -201,6 +201,7 @@ $(document).click(function (e) {
     select("i#curStatus").classList.add('bi-exclamation-circle');
     select("i#curStatus").classList.add('text-warning');
   } else {
+	  displayText("cbStatus", "Circuit Breaker OFF");
     select("i#curStatus").classList.add('bi-check-circle');
     select("i#curStatus").classList.add('text-success');
   }
