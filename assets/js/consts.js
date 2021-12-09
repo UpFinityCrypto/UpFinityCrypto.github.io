@@ -98,33 +98,31 @@ const countDownTimer = function (id, date) {
   var _day = _hour * 24; 
   var timer; 
 
-  function showRemaining() { 
-    var date = new Date(); 
-    var now =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-     date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-    var distDt = _vDate - now; 
-    if (distDt < 0) { 
-      clearInterval(timer); 
-      displayText_(id, 'Mint!');
-      return;
-    } 
+  function showRemaining(id) {
 
-    var days = Math.floor(distDt / _day); 
-    var hours = Math.floor((distDt % _day) / _hour); 
-    var minutes = Math.floor((distDt % _hour) / _minute); 
-    var seconds = Math.floor((distDt % _minute) / _second); 
-    //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+    // Get today's date and time
+    var now = new Date().getTime();
 
-    var elms = document.querySelectorAll("[id='" + id + "']");
-    if (elms.length) {
-      for (var idx = 0; idx < elms.length; idx++) {
-        elms[idx].textContent += hours + 'h ';
-        elms[idx].textContent += minutes + 'm '; 
-        elms[idx].textContent += seconds + 's';
-      }
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="demo"
+    document.getElementById(id).innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById(id).innerHTML = "EXPIRED";
     }
-
-  } 
+  }
+  
   timer = setInterval(showRemaining, 1000); 
 } 
 
