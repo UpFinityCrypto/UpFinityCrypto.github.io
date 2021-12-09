@@ -90,8 +90,9 @@
 
 .button-soon {
   background: #00000000;
-  border: 5px solid;
-  border-color: #28a745;
+/*   border: 5px solid;
+  border-color: #28a745; */
+  box-shadow: 0px 0px 4px 1px #b7a73077;
 }
 
 .button:hover {
