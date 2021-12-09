@@ -859,3 +859,28 @@ $(document).click(function (e) {
 window.addEventListener("load", function(ee){
     init();
 });
+
+
+// function getElem(a, b) {
+//   return '<img src="https://theupfinity.com/assets/img/logo.png" style="' + getStyle(a, b) + '">';
+// }
+// function getStyle(a, b) {	
+//   p = a - 10 / 2;
+//   q = b - 10 / 2;
+//   return "position: absolute; top: " + String(p) + "%; left: " + String(q) + "%; width: 10%";
+// }
+
+// function getFour(a, b, w) {
+//   console.log(v, w);
+//   return [[a - w, b - w], [a - w, b + w], [a + w, b - w], [a + w, b + w]];
+// }
+// v = 50
+// str = "";
+// str += getElem(v, v);
+// for (pos of getFour(v, v, v/2)) {
+//   str += getElem(pos[0], pos[1]);
+//   for (pos_ of getFour(pos[0], pos[1], v/5)) {
+// 	str += getElem(pos_[0], pos_[1]);
+//   }
+// }
+// document.getElementById('test').innerHTML = str;
