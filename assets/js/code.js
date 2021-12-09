@@ -200,6 +200,7 @@ $(document).click(function (e) {
     displayText("cbStatus", "Circuit Breaker ON");
     select("i#curStatus").classList.add('bi-exclamation-circle');
     select("i#curStatus").classList.add('text-warning');
+	  countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000));
   } else {
 	  displayText("cbStatus", "Circuit Breaker OFF");
     select("i#curStatus").classList.add('bi-check-circle');
@@ -837,51 +838,12 @@ $(document).click(function (e) {
   }
   
   
-  const countDownTimer = function (id, date) {
-    var _vDate = new Date(date); // exact date UTC
-    var _second = 1000; 
-    var _minute = _second * 60; 
-    var _hour = _minute * 60; 
-    var _day = _hour * 24; 
-    var timer; 
-    
-    function showRemaining() { 
-      var date = new Date(); 
-      var now =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-       date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-      var distDt = _vDate - now; 
-      if (distDt < 0) { 
-        clearInterval(timer); 
-        displayText_(id, 'Mint!');
-        return;
-      } 
-      
-      var days = Math.floor(distDt / _day); 
-      var hours = Math.floor((distDt % _day) / _hour); 
-      var minutes = Math.floor((distDt % _hour) / _minute); 
-      var seconds = Math.floor((distDt % _minute) / _second); 
-      //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-      
-      var elms = document.querySelectorAll("[id='" + id + "']");
-      if (elms.length) {
-        for (var idx = 0; idx < elms.length; idx++) {
-          elms[idx].textContent = "Mint!";
-          continue;
-          elms[idx].textContent = days + 'd '; 
-          elms[idx].textContent += hours + 'h ';
-          elms[idx].textContent += minutes + 'm '; 
-          elms[idx].textContent += seconds + 's';
-        }
-      }
-      
-    } 
-    timer = setInterval(showRemaining, 1000); 
-  } 
+  
   
   var dateObj = new Date(); 
   
   dateObj.setDate(dateObj.getDate() + 1); 
-  countDownTimer('NFTcountDown', '11/16/2021 2:59 PM'); // 내일까지 
+  
   
   t = TT('others done', t);
   displayText('debug', 'others done');
