@@ -780,20 +780,22 @@ function fsellUPF() {
 function cantsellReason() {
   if ((_curcuitBreakerFlag == 2) & (Date.now() < (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000)) {
     return "Circuit breaker ON: " + String(_curcuitBreakerDuration / 60 / 60) + "hours";
-  } else {
-    if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
-      return "last sell less than " + String(_antiDumpDuration / 60) + "minutes";
-    } else {
-      if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
-        return "your last sell less than " + String(_buySellTimeDuration) + "seconds";
-      } else {
-        if (blacklisted) {
-          return "Contact @ALLCOINLAB";
-        } else {
-          return "";
-        }
-      }
-    }
+  }
+  else {
+    return "";
+//     if (Date.now() < _antiDumpTimer / 1 + _antiDumpDuration / 1) {
+//       return "last sell less than " + String(_antiDumpDuration / 60) + "minutes";
+//     } else {
+//       if (Date.now() < _buySellTimer / 1 + _buySellTimeDuration / 1) {
+//         return "your last sell less than " + String(_buySellTimeDuration) + "seconds";
+//       } else {
+//         if (blacklisted) {
+//           return "Contact @ALLCOINLAB";
+//         } else {
+//           return "";
+//         }
+//       }
+//     }
   }
 }
 
@@ -869,39 +871,7 @@ function parseError(e) {
 	return e['message'];
 }
 
-
-async function loadValues() {
-	// constants
-  
-	
-	// _dividendPartyThreshold = (await CALL(upfinityF, '_dividendPartyThreshold'))[0];
-
-	// _accuMulFactor = (await CALL(upfinityF, '_accuMulFactor'))[0] / 1;
-	// _accuTaxTimeWindow = (await CALL(upfinityF, '_accuTaxTimeWindow'))[0] / 1;
-	// _curcuitBreakerDuration = (await CALL(upfinityF, '_curcuitBreakerDuration'))[0] / 1;
-	// _curcuitBreakerThreshold = (await CALL(upfinityF, '_curcuitBreakerThreshold'))[0] / 1;
-  
-	// _airdropSystem = (await CALL(upfinityF, '_airdropSystem'))[0] / 1;
-	// _antiDumpDuration = (await CALL(upfinityF, '_antiDumpDuration'))[0] / 1;
-	// _freeAirdropSystem = (await CALL(upfinityF, '_freeAirdropSystem'))[0] / 1;
-
-	// _autoBurnFee = (await CALL(upfinityF, '_autoBurnFee'))[0] / 1;
-	// _buySellTimeDuration = (await CALL(upfinityF, '_buySellTimeDuration'))[0] / 1;
-	// _dipRewardFee = (await CALL(upfinityF, '_dipRewardFee'))[0] / 1;
-	// _improvedRewardFee = (await CALL(upfinityF, '_improvedRewardFee'))[0] / 1;
-
-	// _liquidityFee = (await CALL(upfinityF, '_liquidityFee'))[0] / 1;
-	// _manualBuyFee = (await CALL(upfinityF, '_manualBuyFee'))[0] / 1;
-	// _maxBalanceNume = (await CALL(upfinityF, '_maxBalanceNume'))[0] / 1;
-	// _maxSellNume = (await CALL(upfinityF, '_maxSellNume'))[0] / 1;
-	// _maxTxNume = (await CALL(upfinityF, '_maxTxNume'))[0] / 1;
-	// _minusTaxBonus = (await CALL(upfinityF, '_minusTaxBonus'))[0] / 1;
-
-	// _taxAccuTaxThreshold = (await CALL(upfinityF, '_taxAccuTaxThreshold'))[0] / 1;
-	// _whaleRate = (await CALL(upfinityF, '_whaleRate'))[0] / 1;
-	// _whaleSellFee = (await CALL(upfinityF, '_whaleSellFee'))[0] / 1;
-	// _whaleTransferFee = (await CALL(upfinityF, '_whaleTransferFee'))[0] / 1;
-	
+async function loadCaches() {
   values = JSON.parse(loadFile('cache/values.json'));
   
   _dividendPartyThreshold = values['dividendPartyThreshold'];
@@ -926,13 +896,20 @@ async function loadValues() {
   _whaleRate = values['whaleRate'];
   _whaleSellFee = values['whaleSellFee'];
   _whaleTransferFee = values['whaleTransferFee'];
-  
-  
-	_curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', params=null, cache=false))[0] / 1;
-	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
-	_curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', params=null, cache=false))[0] / 1;
+}
+
+async function loadCB() {
+  _curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', params=null, cache=false))[0] / 1;
+  _curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', params=null, cache=false))[0] / 1;
+}
+
+async function loadValues() {	
   _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', params=null, cache=false))[0] / 1;
+	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;  
   _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
+}
+
+async function setValues() {
 	priceRecoveryFee = sellFee - _manualBuyFee;
 	displayText("priceRecoveryFee", priceRecoveryFee / 100);
 

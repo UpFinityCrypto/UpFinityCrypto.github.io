@@ -143,19 +143,6 @@ $(document).click(function (e) {
     }
   }
 
-  cantsell = cantsellReason();
-
-  if (cantsell != "") {
-    displayText("cantSellStatus", "Sell Event");
-    displayText("circuitBreakerStatus", cantsell);
-    displayText("cbStatus", "Circuit Breaker ON");
-    select("curStatus").classList.add('bi-exclamation-circle');
-    select("curStatus").classList.add('text-warning');
-  } else {
-    select("curStatus").classList.add('bi-check-circle');
-    select("curStatus").classList.add('text-success');
-  }
-
   t = TT('head done', t);
   displayText('debug', 'head done');
   // without wallet connection
@@ -190,10 +177,14 @@ $(document).click(function (e) {
   bnbAmount = rI / bnbDiv;
   tokenAmount = rO / bnbDiv;
   
+  await loadCaches();
+  await loadCB();
+  
   if (needValue) {
     if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length) | (getDiv('Rules').length)) {
 			getExtFile('Rules', 'sections/Rules.html');
       await loadValues();
+      await setValues();
       t = TT('value done', t);
       displayText('debug', 'value done');
     }
@@ -201,6 +192,21 @@ $(document).click(function (e) {
   }
   
   
+  cantsell = cantsellReason();
+
+  if (cantsell != "") {
+    displayText("cantSellStatus", "Sell Event");
+    displayText("circuitBreakerStatus", cantsell);
+    displayText("cbStatus", "Circuit Breaker ON");
+    select("i#curStatus").classList.add('bi-exclamation-circle');
+    select("i#curStatus").classList.add('text-warning');
+	  countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000);
+  } else {
+	  displayText("cbStatus", "Circuit Breaker OFF");
+    select("i#curStatus").classList.add('bi-check-circle');
+    select("i#curStatus").classList.add('text-success');
+  }
+	
 
   
   
@@ -348,6 +354,7 @@ $(document).click(function (e) {
   };
   routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, deadline, testoverride)
   .then((arg) => {
+    console.log('BUY OK');
     displayText("buyStatus", "OK");
   }, (e) => {
     e = errMsg(e);
@@ -362,6 +369,7 @@ $(document).click(function (e) {
   testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
   routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
   .then((arg) => {
+    console.log('SELL OK');
     displayText("sellStatus", "OK");
   }, (e) => {
     e = errMsg(e);
@@ -423,19 +431,6 @@ $(document).click(function (e) {
     }
 
     blacklisted = (await upfinityF.blacklisted(currentAccount))[0];
-
-    cantsell = cantsellReason();
-
-    if (cantsell != "") {
-      displayText("cantSellStatus", "Sell Event");
-      displayText("circuitBreakerStatus", cantsell);
-      displayText("cbStatus", "Circuit Breaker ON");
-      select("i#curStatus").classList.add('bi-exclamation-circle');
-      select("i#curStatus").classList.add('text-warning');
-    } else {
-      select("i#curStatus").classList.add('bi-check-circle');
-      select("i#curStatus").classList.add('text-success');
-    }
 
 
     maxSellUPF = rO;  
@@ -573,20 +568,21 @@ $(document).click(function (e) {
     genders = ['Boy', 'Girl'];
     for (grade of grades) {
       for (gender of genders) {
-        var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
+//         var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
+        var elms_ = document.querySelectorAll("[id='" + grade + 'Border' + "']");
         if (elms_.length) {
           // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
           for (var idx = 0; idx < elms_.length; idx++) {
-            // elms_[idx].setAttribute('src', jsonFile['image']);
-            if (grade == 'diamond') {
-              elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
-            } else if (grade == 'emerald') {
-              elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
-            }
+//             elms_[idx].setAttribute('src', 'assets/img/new/upf ' + grade.toLowerCase() + '.png');
+//             if (grade == 'diamond') {
+//               elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
+//             } else if (grade == 'emerald') {
+//               elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
+//             }
           }
         }
 
-        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 5;
+        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1;
         displayText_(grade + gender + "Count", diamondBoyCount);
         totalNFTCount += diamondBoyCount;
       }
@@ -842,51 +838,12 @@ $(document).click(function (e) {
   }
   
   
-  const countDownTimer = function (id, date) {
-    var _vDate = new Date(date); // exact date UTC
-    var _second = 1000; 
-    var _minute = _second * 60; 
-    var _hour = _minute * 60; 
-    var _day = _hour * 24; 
-    var timer; 
-    
-    function showRemaining() { 
-      var date = new Date(); 
-      var now =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-       date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-      var distDt = _vDate - now; 
-      if (distDt < 0) { 
-        clearInterval(timer); 
-        displayText_(id, 'Mint!');
-        return;
-      } 
-      
-      var days = Math.floor(distDt / _day); 
-      var hours = Math.floor((distDt % _day) / _hour); 
-      var minutes = Math.floor((distDt % _hour) / _minute); 
-      var seconds = Math.floor((distDt % _minute) / _second); 
-      //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
-      
-      var elms = document.querySelectorAll("[id='" + id + "']");
-      if (elms.length) {
-        for (var idx = 0; idx < elms.length; idx++) {
-          elms[idx].textContent = "Mint!";
-          continue;
-          elms[idx].textContent = days + 'd '; 
-          elms[idx].textContent += hours + 'h ';
-          elms[idx].textContent += minutes + 'm '; 
-          elms[idx].textContent += seconds + 's';
-        }
-      }
-      
-    } 
-    timer = setInterval(showRemaining, 1000); 
-  } 
+  
   
   var dateObj = new Date(); 
   
   dateObj.setDate(dateObj.getDate() + 1); 
-  countDownTimer('NFTcountDown', '11/16/2021 2:59 PM'); // 내일까지 
+  
   
   t = TT('others done', t);
   displayText('debug', 'others done');
@@ -902,3 +859,33 @@ $(document).click(function (e) {
 window.addEventListener("load", function(ee){
     init();
 });
+
+
+// function getElem(a, b) {
+//   return '<img src="https://theupfinity.com/assets/img/logo.png" style="' + getStyle(a, b) + '">';
+// }
+// function getStyle(a, b) {	
+//   p = a - 10 / 2;
+//   q = b - 10 / 2;
+//   return "position: absolute; top: " + String(p) + "%; left: " + String(q) + "%; width: 10%";
+// }
+
+// function getFour(a, b, w) {
+//   console.log(v, w);
+//   return [[a - w, b - w], [a - w, b + w], [a + w, b - w], [a + w, b + w]];
+// }
+// v = 50
+// str = "";
+// str += getElem(v, v);
+// for (pos of getFour(v, v, v/2)) {
+//   str += getElem(pos[0], pos[1]);
+//   for (pos_ of getFour(pos[0], pos[1], v/5)) {
+// 	str += getElem(pos_[0], pos_[1]);
+//   }
+// }
+// document.getElementById('test').innerHTML = str;
+
+
+// arbor.js
+// JavaScript InfoVis Toolkit
+// d3.js

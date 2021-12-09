@@ -90,7 +90,42 @@ const select = (el, all = false) => {
   }
 }
 
+const countDownTimer = function (id, date) {
+  var _vDate = new Date(date); // exact date UTC
+  var _second = 1000; 
+  var _minute = _second * 60; 
+  var _hour = _minute * 60; 
+  var _day = _hour * 24; 
+  var timer; 
+
+  function showRemaining(id) {
+
+    // Get today's date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Output the result in an element with id="demo"
+    document.getElementById(id).innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+
+    // If the count down is over, write some text 
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById(id).innerHTML = "EXPIRED";
+    }
+  }
   
+  timer = setInterval(showRemaining, 1000); 
+} 
+
 const tokenAbi = [
 {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
 {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
