@@ -198,11 +198,11 @@ $(document).click(function (e) {
     displayText("cantSellStatus", "Sell Event");
     displayText("circuitBreakerStatus", cantsell);
     displayText("cbStatus", "Circuit Breaker ON");
-    select("curStatus").classList.add('bi-exclamation-circle');
-    select("curStatus").classList.add('text-warning');
+    select("i#curStatus").classList.add('bi-exclamation-circle');
+    select("i#curStatus").classList.add('text-warning');
   } else {
-    select("curStatus").classList.add('bi-check-circle');
-    select("curStatus").classList.add('text-success');
+    select("i#curStatus").classList.add('bi-check-circle');
+    select("i#curStatus").classList.add('text-success');
   }
 	
 
@@ -427,19 +427,6 @@ $(document).click(function (e) {
     }
 
     blacklisted = (await upfinityF.blacklisted(currentAccount))[0];
-
-    cantsell = cantsellReason();
-
-    if (cantsell != "") {
-      displayText("cantSellStatus", "Sell Event");
-      displayText("circuitBreakerStatus", cantsell);
-      displayText("cbStatus", "Circuit Breaker ON");
-      select("i#curStatus").classList.add('bi-exclamation-circle');
-      select("i#curStatus").classList.add('text-warning');
-    } else {
-      select("i#curStatus").classList.add('bi-check-circle');
-      select("i#curStatus").classList.add('text-success');
-    }
 
 
     maxSellUPF = rO;  
