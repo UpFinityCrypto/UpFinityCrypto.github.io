@@ -562,7 +562,7 @@ $(document).click(function (e) {
     }
 
     totalNFTCount = 0;
-    grades = ['epic', 'legendary'];
+    grades = ['diamond', 'emerald'];
     genders = ['Boy', 'Girl'];
     for (grade of grades) {
       for (gender of genders) {
