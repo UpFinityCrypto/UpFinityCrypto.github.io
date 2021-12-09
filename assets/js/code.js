@@ -100,7 +100,7 @@ $(document).click(function (e) {
     nftAdr = '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD';
     stakeAdr = '0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D';
   } else {
-    alert('Change to BSC network and refresh!');
+    // alert('Change to BSC network and refresh!');
     return;
   }
     
