@@ -352,6 +352,7 @@ $(document).click(function (e) {
   };
   routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, deadline, testoverride)
   .then((arg) => {
+    console.log('BUY OK');
     displayText("buyStatus", "OK");
   }, (e) => {
     e = errMsg(e);
@@ -366,6 +367,7 @@ $(document).click(function (e) {
   testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
   routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
   .then((arg) => {
+    console.log('SELL OK');
     displayText("sellStatus", "OK");
   }, (e) => {
     e = errMsg(e);
