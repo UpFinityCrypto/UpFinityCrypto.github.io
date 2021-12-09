@@ -569,12 +569,12 @@ $(document).click(function (e) {
         if (elms_.length) {
           // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
           for (var idx = 0; idx < elms_.length; idx++) {
-            elms_[idx].setAttribute('src', 'assets/img/new/upf ' + gender.toLowerCase() + '.png');
-            if (grade == 'diamond') {
-              elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
-            } else if (grade == 'emerald') {
-              elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
-            }
+//             elms_[idx].setAttribute('src', 'assets/img/new/upf ' + grade.toLowerCase() + '.png');
+//             if (grade == 'diamond') {
+//               elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
+//             } else if (grade == 'emerald') {
+//               elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.gif');
+//             }
           }
         }
 
