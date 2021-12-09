@@ -90,7 +90,44 @@ const select = (el, all = false) => {
   }
 }
 
-  
+const countDownTimer = function (id, date) {
+  var _vDate = new Date(date); // exact date UTC
+  var _second = 1000; 
+  var _minute = _second * 60; 
+  var _hour = _minute * 60; 
+  var _day = _hour * 24; 
+  var timer; 
+
+  function showRemaining() { 
+    var date = new Date(); 
+    var now =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+     date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+    var distDt = _vDate - now; 
+    if (distDt < 0) { 
+      clearInterval(timer); 
+      displayText_(id, 'Mint!');
+      return;
+    } 
+
+    var days = Math.floor(distDt / _day); 
+    var hours = Math.floor((distDt % _day) / _hour); 
+    var minutes = Math.floor((distDt % _hour) / _minute); 
+    var seconds = Math.floor((distDt % _minute) / _second); 
+    //document.getElementById(id).textContent = date.toLocaleString() + "까지 : ";
+
+    var elms = document.querySelectorAll("[id='" + id + "']");
+    if (elms.length) {
+      for (var idx = 0; idx < elms.length; idx++) {
+        elms[idx].textContent += hours + 'h ';
+        elms[idx].textContent += minutes + 'm '; 
+        elms[idx].textContent += seconds + 's';
+      }
+    }
+
+  } 
+  timer = setInterval(showRemaining, 1000); 
+} 
+
 const tokenAbi = [
 {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
 {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
