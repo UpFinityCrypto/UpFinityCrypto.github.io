@@ -560,15 +560,16 @@ $(document).click(function (e) {
     }
 
     totalNFTCount = 0;
-    grades = ['diamond', 'emerald'];
+    grades = ['epic', 'legendary'];
     genders = ['Boy', 'Girl'];
     for (grade of grades) {
       for (gender of genders) {
-        var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
+//         var elms_ = document.querySelectorAll("[id='" + grade + gender + "']");
+        var elms_ = document.querySelectorAll("[id='" + grade + 'Border' + "']");
         if (elms_.length) {
           // jsonFile = JSON.parse(loadFile("assets/" + String(name2Ids[grade + gender]) + ".json"))
           for (var idx = 0; idx < elms_.length; idx++) {
-            // elms_[idx].setAttribute('src', jsonFile['image']);
+            elms_[idx].setAttribute('src', 'assets/img/new/upf ' + gender.toLowerCase() + '.png');
             if (grade == 'diamond') {
               elms_[idx].setAttribute('src', 'assets/img/nft/origins/' + gender.toLowerCase() + '.png');
             } else if (grade == 'emerald') {
@@ -577,7 +578,7 @@ $(document).click(function (e) {
           }
         }
 
-        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1 + 5;
+        diamondBoyCount = (await nftF._totalItemCount(name2Ids[grade + gender]))[0] / 1;
         displayText_(grade + gender + "Count", diamondBoyCount);
         totalNFTCount += diamondBoyCount;
       }
