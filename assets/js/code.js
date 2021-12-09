@@ -200,7 +200,7 @@ $(document).click(function (e) {
     displayText("cbStatus", "Circuit Breaker ON");
     select("i#curStatus").classList.add('bi-exclamation-circle');
     select("i#curStatus").classList.add('text-warning');
-	  countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000));
+	  countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000);
   } else {
 	  displayText("cbStatus", "Circuit Breaker OFF");
     select("i#curStatus").classList.add('bi-check-circle');
