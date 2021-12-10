@@ -1122,3 +1122,9 @@ img {
 .text-center {
   vertical-align: middle;
 }
+
+#onramper-widget {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
