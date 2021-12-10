@@ -804,9 +804,12 @@ function getExtFile(target, file){
   if (!div.length) {
 	  return false;
   }
-  $.get(file, function(response) {
-    div.append($(response));
-
+  $.ajax({
+    url: file, 
+    async: false,
+    success: function(response) {
+      div.append($(response));
+    }
   });
   return true;
 }
