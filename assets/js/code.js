@@ -149,6 +149,8 @@ $(document).click(function (e) {
   displayText('debug', 'head done');
   // without wallet connection
   
+  dappNeeded = "Use <span>DAPP</span> to view values correctly!";
+	displayText("dappNeeded", dappNeeded);
   
   connectWalletText = "<span style='font-size: 10px;'>Connect Wallet, Loading</span>";
   displayText("connectResult", connectWalletText);
