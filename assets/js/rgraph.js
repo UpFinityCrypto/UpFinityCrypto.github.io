@@ -227,17 +227,18 @@ var json = {
             var style = domElement.style;
             style.display = '';
             style.cursor = 'pointer';
-
-            if (node._depth <= 1) {
-                style.fontSize = "0.8em";
-                style.color = "#ccc";
-            
+            style.color = "#fff";
+            if (node._depth == 0) {
+              style.fontSize = "1.5em";
+            }
+            if (node._depth == 1) {
+                style.fontSize = "1em";
             } else if(node._depth == 2){
                 style.fontSize = "0.7em";
-                style.color = "#494949";
-            
+                style.color = "#777";
             } else {
-                style.display = 'none';
+                style.fontSize = "0.5em";
+                style.color = "#555";
             }
 
             var left = parseInt(style.left);
