@@ -145,6 +145,11 @@ function num2str(n) {
   }
   
   async function afconnect() {
+	  if (typeof window.ethereum === 'undefined') {
+      alert("use Dapp to connect wallet!");
+      return null;
+	  }
+    
 		accounts = await ethereum
 		.request({ method: 'eth_requestAccounts' }); // eth_requestAccounts
     
@@ -155,6 +160,11 @@ function num2str(n) {
 	}
   
 	function fconnect() {
+    if (typeof window.ethereum === 'undefined') {
+      alert("use Dapp to connect wallet!");
+      return null;
+	  }
+    
 		ethereum
 		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
 		.then(handleAccountsChanged)
