@@ -77,6 +77,13 @@ var json = {
               relation: "",
           },
           children: [],
+		}, {
+          id: "0_0_3",
+          name: "Airdrop",
+          data: {
+              relation: "",
+          },
+          children: [],
         }],
       }, {
 		id: "0_1",
@@ -175,13 +182,19 @@ var json = {
     
     //init RGraph
     var rgraph = new $jit.RGraph({
+		useCanvas: false,
+		// background: "https://theupfinity.com/assets/img/logo.png",
+		duration: 300,
+		fps: 30,
+		transition: $jit.Trans.Quart.easeInOut,
+		
         //Where to append the visualization
         injectInto: 'infovis',
         //Optional: create a background canvas that plots
         //concentric circles.
         background: {
           CanvasStyles: {
-            strokeStyle: '#555'
+            strokeStyle: '#fff'
           }
         },
         //Add navigation capabilities:
@@ -193,30 +206,32 @@ var json = {
         },
         //Set Node and Edge styles.
         Node: {
-            color: '#ddeeff'
+            color: '#222222',
         },
-        
+		
         Edge: {
           color: '#C17878',
           lineWidth:1.5
         },
 
         onBeforeCompute: function(node){
-            Log.write("centering " + node.name + "...");
+            //Log.write("centering " + node.name + "...");
             //Add the relation list in the right column.
             //This list is taken from the data property of each JSON node.
-            $jit.id('inner-details').innerHTML = node.data.relation;
+            //$jit.id('inner-details').innerHTML = node.data.relation;
         },
         
         //Add the name of the node in the correponding label
         //and a click handler to move the graph.
         //This method is called once, on label creation.
         onCreateLabel: function(domElement, node){
-            domElement.innerHTML = node.name;
+			
+            // domElement.innerHTML = node.name;
+			domElement.innerHTML = "<div style='position: relative; top: -10px;'><img src='https://theupfinity.com/assets/img/new/" + node.name + ".png' style='width: 20px;'></div>" + node.name,
             domElement.onclick = function(){
                 rgraph.onClick(node.id, {
                     onComplete: function() {
-                        Log.write("done");
+                        //Log.write("done");
                     }
                 });
             };
@@ -255,7 +270,7 @@ var json = {
     rgraph.compute('end');
     rgraph.fx.animate({
       modes:['polar'],
-      duration: 500,
+      duration: 500
     });
     //end
     //append information about the root relations in the right column
