@@ -28,7 +28,7 @@ var Log = {
 
 function init(){
     //init data
-    var json = {
+var json = {
       id: "0",
       name: "UpFinity",
       data: {},
@@ -65,6 +65,7 @@ function init(){
             name: "Advanced Tax Algorithms",
             data: {},
 		  }],
+		}, {
 		  id: "0_0_1",
           name: "Staking",
           data: {},
