@@ -187,7 +187,7 @@ var json = {
 		duration: 300,
 		fps: 30,
 		transition: $jit.Trans.Quart.easeInOut,
-		
+		theta: 1,
         //Where to append the visualization
         injectInto: 'infovis',
         //Optional: create a background canvas that plots
@@ -210,8 +210,12 @@ var json = {
         },
 		
         Edge: {
+	      type: 'line',
           color: '#C17878',
-          lineWidth:1.5
+          lineWidth:1.5,
+		  alpha: 0.5,
+		  dim: 1000,
+		  epsilon: 1,
         },
 
         onBeforeCompute: function(node){
@@ -263,15 +267,16 @@ var json = {
     //load JSON data
     rgraph.loadJSON(json);
     //trigger small animation
-    rgraph.graph.eachNode(function(n) {
-      var pos = n.getPos();
-      pos.setc(-200, -200);
-    });
+    // rgraph.graph.eachNode(function(n) {
+      // var pos = n.getPos();
+      // pos.setp(-1200, 0);
+    // });
     rgraph.compute('end');
     rgraph.fx.animate({
       modes:['polar'],
-      duration: 500
+      duration: 500,
     });
+	
     //end
     //append information about the root relations in the right column
     $jit.id('inner-details').innerHTML = rgraph.graph.getNode(rgraph.root).data.relation;
