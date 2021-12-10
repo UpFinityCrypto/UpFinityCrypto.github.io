@@ -901,9 +901,10 @@ async function loadCaches() {
   priceRecoveryFee = sellFee - _manualBuyFee;
   displayText("priceRecoveryFee", priceRecoveryFee / 100);
   
+  multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
+  
   redistributionFee = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
 	displayText("redistributionFee", redistributionFee * multiplier / 100);
-  multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
   
   displayText("_accuMulFactor", _accuMulFactor);
 	displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
