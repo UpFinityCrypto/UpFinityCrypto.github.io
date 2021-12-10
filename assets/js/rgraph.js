@@ -36,52 +36,52 @@ function init(){
             id: "0_0",
             name: "Token",
             data: {
-                relation: ""
+                relation: "",
             },
             children: [{
                 id: "0_0_0",
                 name: "Features",
                 data: {
-                    relation: ""
+                    relation: "",
                 },
-                children: []
+                children: [],
             }]
         }, {
-            id: "0_0",
+            id: "0_1",
             name: "NFT",
             data: {
-                relation: ""
+                relation: "",
             },
             children: [{
-                id: "0_0_0",
+                id: "0_1_0",
                 name: "NFT Origins",
                 data: {
-                    relation: ""
+                    relation: "",
                 },
-                children: []
+                children: [],
             }, {
-                id: "0_0_0",
+                id: "0_1_1",
                 name: "NFT Mystery Box",
                 data: {
-                    relation: ""
+                    relation: "",
                 },
-                children: []
+                children: [],
             }, {
-                id: "0_0_0",
+                id: "0_1_2",
                 name: "NFT Avatar",
                 data: {
-                    relation: ""
+                    relation: "",
                 },
-                children: []
+                children: [],
             }, {
-                id: "0_0_0",
+                id: "0_1_3",
                 name: "NFT MarketPlace",
                 data: {
-                    relation: ""
+                    relation: "",
                 },
-                children: []
+                children: [],
             }],
-        },
+        }],
     };
     //end
     
