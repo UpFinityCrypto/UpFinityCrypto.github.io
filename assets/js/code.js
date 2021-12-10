@@ -863,6 +863,7 @@ $(document).click(function (e) {
 }());
 
 window.addEventListener("load", function(ee){
+  console.log('load');
     init();
 });
 
