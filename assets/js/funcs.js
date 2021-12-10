@@ -892,30 +892,20 @@ async function loadCaches() {
   _maxSellNume = values['maxSellNume'];
   _maxTxNume = values['maxTxNume'];
   _minusTaxBonus = values['minusTaxBonus'];
+  _projectFundFee = values['projectFundFee'];
   _taxAccuTaxThreshold = values['taxAccuTaxThreshold'];
   _whaleRate = values['whaleRate'];
   _whaleSellFee = values['whaleSellFee'];
   _whaleTransferFee = values['whaleTransferFee'];
-}
-
-async function loadCB() {
-  _curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', params=null, cache=false))[0] / 1;
-  _curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', params=null, cache=false))[0] / 1;
-}
-
-async function loadValues() {	
-  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', params=null, cache=false))[0] / 1;
-	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;  
-  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
-}
-
-async function setValues() {
-	priceRecoveryFee = sellFee - _manualBuyFee;
-	displayText("priceRecoveryFee", priceRecoveryFee / 100);
-
-	multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
-
-	displayText("_accuMulFactor", _accuMulFactor);
+  
+  priceRecoveryFee = sellFee - _manualBuyFee;
+  displayText("priceRecoveryFee", priceRecoveryFee / 100);
+  
+  redistributionFee = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
+	displayText("redistributionFee", redistributionFee * multiplier / 100);
+  multiplier = 1 + buyFee / (priceRecoveryFee - _autoBurnFee);
+  
+  displayText("_accuMulFactor", _accuMulFactor);
 	displayText("_accuTaxTimeWindow", _accuTaxTimeWindow / 60 / 60 / 24);
 	displayText("_airdropSystem", _airdropSystem);
 	displayText("_antiDumpDuration", _antiDumpDuration);
@@ -935,17 +925,25 @@ async function setValues() {
 	displayText("_minusTaxBonus", _minusTaxBonus / 100);
 	<!-- displayText("_rewardToken", (await upfinityC.functions._rewardToken())[0] / 100); -->
 	displayText("_taxAccuTaxThreshold", _taxAccuTaxThreshold / 100);
-	displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
-	displayText("_whaleRate", _whaleRate / 10000);
+  displayText("_whaleRate", _whaleRate / 10000);
 	displayText("_whaleSellFee", _whaleSellFee / 10000);
 	displayText("_whaleTransferFee", _whaleTransferFee / 10000);
+}
 
-	_projectFundFee = (await CALL(upfinityF, '_projectFundFee'))[0] / 1;
+async function loadCB() {
+  _curcuitBreakerTime = (await CALL(upfinityF, '_curcuitBreakerTime', params=null, cache=false))[0] / 1;
+  _curcuitBreakerFlag = (await CALL(upfinityF, '_curcuitBreakerFlag', params=null, cache=false))[0] / 1;
+}
 
+async function loadValues() {	
+  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', params=null, cache=false))[0] / 1;
+	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;  
+  _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
+  
+  displayText("_timeAccuTaxCheckGlobal", _timeAccuTaxCheckGlobal / 60 / 60 / 24);
+}
 
-	redistributionFee
-	  = (priceRecoveryFee - _autoBurnFee) - (10000 - priceRecoveryFee) * 0 / 100 - (_liquidityFee + _projectFundFee + _improvedRewardFee + _dipRewardFee) - _liquidityFee;
-	displayText("redistributionFee", redistributionFee * multiplier / 100);
+async function setValues() {
 }
 
 
