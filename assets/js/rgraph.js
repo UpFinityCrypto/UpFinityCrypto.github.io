@@ -230,13 +230,12 @@ var json = {
             style.color = "#fff";
             if (node._depth == 0) {
               style.fontSize = "1.5em";
-            }
-            if (node._depth == 1) {
+            } else if (node._depth == 1) {
                 style.fontSize = "1em";
             } else if(node._depth == 2){
                 style.fontSize = "0.7em";
                 style.color = "#777";
-            } else {
+            } else if(node._depth >= 3){
                 style.fontSize = "0.5em";
                 style.color = "#555";
             }
