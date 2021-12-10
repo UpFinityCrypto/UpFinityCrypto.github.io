@@ -29,59 +29,66 @@ var Log = {
 function init(){
     //init data
     var json = {
-        id: "0",
-        name: "UpFinity",
-        data: {},
+      id: "0",
+      name: "UpFinity",
+      data: {},
+      children: [{
+        id: "0_0",
+        name: "Token",
+        data: {
+            relation: "",
+        },
         children: [{
-            id: "0_0",
-            name: "Token",
-            data: {
-                relation: "",
-            },
-            children: [{
-                id: "0_0_0",
-                name: "Features",
-                data: {
-                    relation: "",
-                },
-                children: [],
-            }]
+          id: "0_0_0",
+          name: "Features",
+          data: {
+              relation: "",
+          },
+          children: [],
+          }]
         }, {
-            id: "0_1",
-            name: "NFT",
+        id: "0_1",
+        name: "Utility",
+        data: {
+            relation: "",
+        },
+        children: [{
+          id: "0_1",
+          name: "NFT",
+          data: {
+              relation: "",
+          },
+          children: [{
+            id: "0_1_0",
+            name: "NFT Origins",
             data: {
                 relation: "",
             },
-            children: [{
-                id: "0_1_0",
-                name: "NFT Origins",
-                data: {
-                    relation: "",
-                },
-                children: [],
-            }, {
-                id: "0_1_1",
-                name: "NFT Mystery Box",
-                data: {
-                    relation: "",
-                },
-                children: [],
-            }, {
-                id: "0_1_2",
-                name: "NFT Avatar",
-                data: {
-                    relation: "",
-                },
-                children: [],
-            }, {
-                id: "0_1_3",
-                name: "NFT MarketPlace",
-                data: {
-                    relation: "",
-                },
-                children: [],
-            }],
+            children: [],
+          }, {
+            id: "0_1_1",
+            name: "NFT Mystery Box",
+            data: {
+                relation: "",
+            },
+            children: [],
+          }, {
+            id: "0_1_2",
+            name: "NFT Avatar",
+            data: {
+                relation: "",
+            },
+            children: [],
+          }, {
+            id: "0_1_3",
+            name: "NFT MarketPlace",
+            data: {
+                relation: "",
+            },
+            children: [],
+          }],
         }],
+      }],
     };
     //end
     
