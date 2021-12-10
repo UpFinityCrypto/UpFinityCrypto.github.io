@@ -937,7 +937,7 @@ async function loadCB() {
 }
 
 async function loadValues() {	
-  _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', params=null, cache=false))[0] / 1;
+//   _antiDumpTimer = (await CALL(upfinityF, '_antiDumpTimer', params=null, cache=false))[0] / 1; // no need because timer is 0
 	_taxAccuTaxCheckGlobal = (await CALL(upfinityF, '_taxAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;  
   _timeAccuTaxCheckGlobal = (await CALL(upfinityF, '_timeAccuTaxCheckGlobal', params=null, cache=false))[0] / 1;
   
