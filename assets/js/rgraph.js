@@ -255,7 +255,7 @@ var json = {
     rgraph.compute('end');
     rgraph.fx.animate({
       modes:['polar'],
-      duration: 2000
+      duration: 500,
     });
     //end
     //append information about the root relations in the right column
