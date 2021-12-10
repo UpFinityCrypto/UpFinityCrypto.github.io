@@ -146,6 +146,27 @@ function init(){
 				relation: "",
 			},
 			children: [],
+			}, {
+			id: "0_2_4",
+			name: "Swap",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_2_5",
+			name: "Store",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_2_6",
+			name: "Merchandise",
+			data: {
+				relation: "",
+			},
+			children: [],
 		}],
       }],
     };
