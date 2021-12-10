@@ -263,12 +263,12 @@ $(document).click(function (e) {
       }
     }
 
-    sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
-    if (NOW < sellCooltime_) {
-      sellCooltime = sellCooltime_;
-      d = new Date(sellCooltime * 1000);
-      displayText("sellCooltime", d);
-    }
+//     sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
+//     if (NOW < sellCooltime_) {
+//       sellCooltime = sellCooltime_;
+//       d = new Date(sellCooltime * 1000);
+//       displayText("sellCooltime", d);
+//     }
     
     
     // stats
