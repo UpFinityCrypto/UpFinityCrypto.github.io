@@ -79,7 +79,9 @@ $(document).click(function (e) {
     //} else {
     //  alert('Website tools are available with Dapp');
     //}
-
+    dappNeeded = "Use <span>DAPP</span> to view values correctly!";
+	  displayText("dappNeeded", dappNeeded);
+    
     return;
   }
   
@@ -148,9 +150,6 @@ $(document).click(function (e) {
   t = TT('head done', t);
   displayText('debug', 'head done');
   // without wallet connection
-  
-  dappNeeded = "Use <span>DAPP</span> to view values correctly!";
-	displayText("dappNeeded", dappNeeded);
   
   connectWalletText = "<span style='font-size: 10px;'>Connect Wallet, Loading</span>";
   displayText("connectResult", connectWalletText);
