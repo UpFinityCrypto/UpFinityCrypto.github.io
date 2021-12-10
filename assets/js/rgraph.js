@@ -45,7 +45,21 @@ function init(){
               relation: "",
           },
           children: [],
-          }]
+        }, {
+          id: "0_0_1",
+          name: "Swap",
+          data: {
+              relation: "",
+          },
+          children: [],
+        }, {
+          id: "0_0_2",
+          name: "Staking",
+          data: {
+              relation: "",
+          },
+          children: [],
+          }],
         }, {
         id: "0_1",
         name: "Utility",
@@ -53,40 +67,45 @@ function init(){
             relation: "",
         },
         children: [{
-          id: "0_1",
+          id: "0_1_0",
           name: "NFT",
           data: {
               relation: "",
           },
           children: [{
-            id: "0_1_0",
+            id: "0_1_0_0",
             name: "NFT Origins",
             data: {
                 relation: "",
             },
             children: [],
           }, {
-            id: "0_1_1",
+            id: "0_1_0_1",
             name: "NFT Mystery Box",
             data: {
                 relation: "",
             },
             children: [],
           }, {
-            id: "0_1_2",
+            id: "0_1_0_2",
             name: "NFT Avatar",
             data: {
                 relation: "",
             },
             children: [],
           }, {
-            id: "0_1_3",
+            id: "0_1_0_3",
             name: "NFT MarketPlace",
             data: {
                 relation: "",
             },
             children: [],
           }],
+            id: "0_1_1",
+            name: "Coin Vote",
+            data: {
+                relation: "",
+            },
         }],
       }],
     };
