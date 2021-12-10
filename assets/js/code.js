@@ -72,6 +72,8 @@ $(document).click(function (e) {
     return;
   }
   
+  await loadCaches();
+  
   if (typeof window.ethereum === 'undefined') {
     //if (getDiv("Team").length) {
     //} else {
@@ -177,7 +179,7 @@ $(document).click(function (e) {
   bnbAmount = rI / bnbDiv;
   tokenAmount = rO / bnbDiv;
   
-  await loadCaches();
+  
   await loadCB();
   
   if (needValue) {
