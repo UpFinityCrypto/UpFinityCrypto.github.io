@@ -37,16 +37,16 @@ getExtFile('Roadmap', 'sections/Roadmap.html');
 getExtFile('Team', 'sections/Team.html');
 
 needValue = false;
-needValue |= getExtFile('Airdrop', 'sections/Airdrop.html');
-needValue |= getExtFile('FAQs', 'sections/FAQs.html');
-needValue |= getExtFile('Features', 'sections/Features.html');
-needValue |= getExtFile('Rewards', 'sections/Rewards.html');
-needValue |= getExtFile('SAFUs', 'sections/SAFUs.html');
-needValue |= getExtFile('Status', 'sections/Status.html');
-needValue |= getExtFile('Stats', 'sections/Stats.html');
-needValue |= getExtFile('Taxs', 'sections/Taxs.html');
-needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
-needValue |= getExtFile('Staking', 'sections/Staking.html');
+needValue |= getExtFile('Airdrop', 'sections/Airdrop.html', false);
+needValue |= getExtFile('FAQs', 'sections/FAQs.html', false);
+needValue |= getExtFile('Features', 'sections/Features.html', false);
+needValue |= getExtFile('Rewards', 'sections/Rewards.html', false);
+needValue |= getExtFile('SAFUs', 'sections/SAFUs.html', false);
+needValue |= getExtFile('Status', 'sections/Status.html', false);
+needValue |= getExtFile('Stats', 'sections/Stats.html', false);
+needValue |= getExtFile('Taxs', 'sections/Taxs.html', false);
+needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html', false);
+needValue |= getExtFile('Staking', 'sections/Staking.html', false);
 
 NOW = Date.now();
 
@@ -185,7 +185,7 @@ $(document).click(function (e) {
   
   if (needValue) {
     if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length) | (getDiv('Rules').length)) {
-			getExtFile('Rules', 'sections/Rules.html');
+			getExtFile('Rules', 'sections/Rules.html, false);
       await loadValues();
       await setValues();
       t = TT('value done', t);
