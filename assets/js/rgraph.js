@@ -44,69 +44,109 @@ function init(){
           data: {
               relation: "",
           },
-          children: [],
-        }, {
-          id: "0_0_1",
+          children: [{
+		    id: "0_0_0_0",
+            name: "Reward Systems",
+            data: {},
+		  }, {
+		    id: "0_0_0_0",
+            name: "Sell Protection Algorithms",
+            data: {},
+		  }, {
+		    id: "0_0_0_0",
+            name: "Stability Algorithms",
+            data: {},
+		  }, {
+		    id: "0_0_0_0",
+            name: "Events",
+            data: {},
+		  }, {
+		    id: "0_0_0_0",
+            name: "Advanced Tax Algorithms",
+            data: {},
+		  }],
+		  id: "0_0_1",
+          name: "Staking",
+          data: {},
+		  children: [],
+		}, {
+          id: "0_0_2",
           name: "Swap",
           data: {
               relation: "",
           },
           children: [],
-        }, {
-          id: "0_0_2",
-          name: "Staking",
-          data: {
-              relation: "",
-          },
-          children: [],
-          }],
-        }, {
-        id: "0_1",
-        name: "Utility",
-        data: {
-            relation: "",
-        },
-        children: [{
-          id: "0_1_0",
-          name: "NFT",
-          data: {
-              relation: "",
-          },
-          children: [{
-            id: "0_1_0_0",
-            name: "NFT Origins",
-            data: {
-                relation: "",
-            },
-            children: [],
-          }, {
-            id: "0_1_0_1",
-            name: "NFT Mystery Box",
-            data: {
-                relation: "",
-            },
-            children: [],
-          }, {
-            id: "0_1_0_2",
-            name: "NFT Avatar",
-            data: {
-                relation: "",
-            },
-            children: [],
-          }, {
-            id: "0_1_0_3",
-            name: "NFT MarketPlace",
-            data: {
-                relation: "",
-            },
-            children: [],
-          }],
-            id: "0_1_1",
-            name: "Coin Vote",
-            data: {
-                relation: "",
-            },
         }],
+      }, {
+		id: "0_1",
+		name: "NFT",
+		data: {
+		  relation: "",
+		},
+		children: [{
+			id: "0_1_0",
+			name: "NFT Origins",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_1_1",
+			name: "NFT Mystery Box",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_1_2",
+			name: "NFT Avatar",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_1_3",
+			name: "NFT MarketPlace",
+			data: {
+				relation: "",
+			},
+			children: [],
+		}],
+	  }, {
+		id: "0_2",
+		name: "Utility",
+		data: {
+		relation: "",
+		},
+		children: [{
+			id: "0_2_0",
+			name: "Coin Vote",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_2_1",
+			name: "Auto Shill",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_2_2",
+			name: "SAFU Checker",
+			data: {
+				relation: "",
+			},
+			children: [],
+			}, {
+			id: "0_2_3",
+			name: "P2E Game",
+			data: {
+				relation: "",
+			},
+			children: [],
+		}],
       }],
     };
     //end
