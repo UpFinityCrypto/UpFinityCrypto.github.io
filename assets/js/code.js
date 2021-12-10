@@ -352,35 +352,38 @@ $(document).click(function (e) {
   displayText("connectResult", currentAccount + " <span>Loading</span>");
   
   
+  if (getDiv("buyStatus").length) {
+    testoverride = {
+      value: ethers.utils.parseEther('0.1'), // it require string number
+    };
+    routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, deadline, testoverride)
+    .then((arg) => {
+      console.log('BUY OK');
+      displayText("buyStatus", "OK");
+    }, (e) => {
+      e = errMsg(e);
+      console.log(e);
+      displayText("buyStatus", "Contact @ALLCOINLAB");
+      }
+    );
+  }
   
-	testoverride = {
-    value: ethers.utils.parseEther('0.1'), // it require string number
-  };
-  routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [wbnbAdr, upfinityAdr], currentAccount, deadline, testoverride)
-  .then((arg) => {
-    console.log('BUY OK');
-    displayText("buyStatus", "OK");
-  }, (e) => {
-    e = errMsg(e);
-    console.log(e);
-    displayText("buyStatus", "Contact @ALLCOINLAB");
-    }
-  );
-  
-  testoverride = {
-    from: currentAccount,
-  };
-  testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
-  routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
-  .then((arg) => {
-    console.log('SELL OK');
-    displayText("sellStatus", "OK");
-  }, (e) => {
-    e = errMsg(e);
-    console.log(e);
-    displayText("sellStatus", "Check Sell Rules");
-    }
-  );
+  if (getDiv("sellStatus").length) {
+    testoverride = {
+      from: currentAccount,
+    };
+    testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
+    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [upfinityAdr, wbnbAdr], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
+    .then((arg) => {
+      console.log('SELL OK');
+      displayText("sellStatus", "OK");
+    }, (e) => {
+      e = errMsg(e);
+      console.log(e);
+      displayText("sellStatus", "Check Sell Rules");
+      }
+    );
+  }
   
   if (getDiv("Status").length) {
     balanceUPF = (await upfinityF.balanceOf(currentAccount))[0];
