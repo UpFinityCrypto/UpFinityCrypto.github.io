@@ -799,14 +799,14 @@ function cantsellReason() {
   }
 }
 
-function getExtFile(target, file){
+function getExtFile(target, file, async=true){
   var div = $('#' + target);
   if (!div.length) {
 	  return false;
   }
   $.ajax({
     url: file, 
-    async: false,
+    async: async,
     success: function(response) {
       div.append($(response));
     }
