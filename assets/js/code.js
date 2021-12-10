@@ -185,7 +185,7 @@ $(document).click(function (e) {
   
   if (needValue) {
     if ((getDiv('Features').length) | (getDiv('Status').length) | (getDiv('Taxs').length) | (getDiv('Rules').length)) {
-			getExtFile('Rules', 'sections/Rules.html, false);
+			getExtFile('Rules', 'sections/Rules.html', false);
       await loadValues();
       await setValues();
       t = TT('value done', t);
