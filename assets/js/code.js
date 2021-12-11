@@ -636,7 +636,6 @@ $(document).click(function (e) {
             <div style="width: 100%; position: relative;">
               <a href="assets/img/new/${myNFTimgSrc}">
               <img src="assets/img/new/${myNFTimgThumbSrc}" style="top:0; left: 0; padding: 0px; height: auto;">
-              <img src="assets/img/nft/origins/${myNFTborder}_thumb.png" style="position: absolute; top:0; left: 0;">
               </a>
             </div>
             <p>ID: ${myNFTidx}</p>
