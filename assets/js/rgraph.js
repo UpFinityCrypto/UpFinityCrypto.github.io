@@ -253,10 +253,10 @@ var json = {
                 style.fontSize = "1em";
             } else if(node._depth == 2){
                 style.fontSize = "0.7em";
-                style.color = "#777";
+                style.color = "#ccc";
             } else if(node._depth >= 3){
                 style.fontSize = "0.5em";
-                style.color = "#555";
+                style.color = "#aaa";
             }
 
             var left = parseInt(style.left);
