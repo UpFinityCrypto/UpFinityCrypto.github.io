@@ -106,7 +106,8 @@ function num2str(n) {
     
     currentAccountShort = currentAccount.slice(0, 6) + '..' + currentAccount.slice(-4);
     provider.getBalance(currentAccount).then(function (currentAccountBalance) {
-    	displayText('connect', String(BNB(currentAccountBalance, 2)) + ' BNB: '+ currentAccountShort);
+//     	displayText('connect', String(BNB(currentAccountBalance, 2)) + ' BNB: '+ currentAccountShort);
+	    displayText('connect', currentAccountShort);
     });
     elem = document.getElementById("typedRefAdr");
     if (elem) {
