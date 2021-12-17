@@ -78,7 +78,7 @@
   border-radius: 50px;
   display: inline-block;
   font-size: 20px;
-  margin: 10px;
+  margin: 10px auto;
   box-shadow: 0px 0px 4px 1px #28a74577;
 }
 
@@ -989,7 +989,7 @@ footer {
     color: #fff;
   }
 
-.list {
+.list>* {
   width: auto;
   margin: 10px;
 }
