@@ -38,35 +38,6 @@ runs['status'] = async function runStatus() {
   //     }
 
 
-  // stats
-  burnAmount = (await funcs['upf'].balanceOf(adrs['burn']))[0];
-  burnPercentage = burnAmount.mul(100).div(totalSupply);
-  burnPercentage = burnPercentage.sub(50); // 50% burn at the start
-  displayText("_manualburned", round(burnPercentage / 1, 1));
-  burnLpAmount = (await funcs['pair'].balanceOf(adrs['burn']))[0];
-  burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
-  displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
-
-
-
-
-  busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
-  pricePairAdr = (await funcs['factory'].getPair(adrs['wbnb'], busdAdr))[0];
-  pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
-  priceReserveData = await pricePairC.functions.getReserves();
-
-  if (adrs['wbnb'] < busdAdr) { // BNB / busd
-    pricerI = priceReserveData[0];
-    pricerO = priceReserveData[1];
-  } else {
-    pricerI = priceReserveData[1];
-    pricerO = priceReserveData[0];
-  }
-
-  price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
-  realSupply = totalSupply.sub(burnAmount);
-  mcap = price * realSupply / bnbDiv;
-
 
   displayText('priceCounter', (price / 1).toFixed(10));
   displayText('burnCounter', abbreviateNumber(parseInt(burnAmount / bnbDiv)));
@@ -599,7 +570,7 @@ async function runCode() {
   displayText_("UPFbalance", connectWalletText);
 
 
-
+  totalSupply = _totalSupply;
   totalLpSupply = (await funcs['pair'].totalSupply())[0];
 
   reserveData = await funcs['pair'].getReserves();
@@ -614,7 +585,34 @@ async function runCode() {
 
   bnbAmount = rI / bnbDiv;
   tokenAmount = rO / bnbDiv;
+  
+  // stats
+  burnAmount = (await funcs['upf'].balanceOf(adrs['burn']))[0];
+  burnPercentage = burnAmount.mul(100).div(totalSupply);
+  burnPercentage = burnPercentage.sub(50); // 50% burn at the start
+  displayText("_manualburned", round(burnPercentage / 1, 1));
+  burnLpAmount = (await funcs['pair'].balanceOf(adrs['burn']))[0];
+  burnLpPercentage = burnLpAmount.mul(100).div(totalLpSupply);
+  displayText("_manuallpburned", round(burnLpPercentage / 1, 1));
 
+  busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
+  pricePairAdr = (await funcs['factory'].getPair(adrs['wbnb'], busdAdr))[0];
+  pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
+  priceReserveData = await pricePairC.functions.getReserves();
+
+  if (adrs['wbnb'] < busdAdr) { // BNB / busd
+    pricerI = priceReserveData[0];
+    pricerO = priceReserveData[1];
+  } else {
+    pricerI = priceReserveData[1];
+    pricerO = priceReserveData[0];
+  }
+
+  price = rI / rO * pricerO / pricerI; // TODO: WBNB-BUSD, same decimal
+  realSupply = totalSupply.sub(burnAmount);
+  mcap = price * realSupply / bnbDiv;
+  
+  
   await loadCB();
 
   cantsell = cantsellReason();
