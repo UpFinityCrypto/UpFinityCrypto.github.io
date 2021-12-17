@@ -84,9 +84,7 @@
 
 @media (max-width: 992px) {
   .button {
-    width: 100%;
     font-size: 12px;
-    margin: 10px auto;
   }
 }
 
