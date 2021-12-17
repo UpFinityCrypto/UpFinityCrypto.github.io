@@ -126,7 +126,7 @@ function num2str(n) {
 
   }
 
-async function ahandleAccountsChanged(accounts) {
+function handleAccountsChanged(accounts) {
   if (accounts.length == 0) {
     displayText("connectResult", 'Please Connect Metamask');
     return false;
@@ -146,7 +146,7 @@ async function afconnect() {
 
   result = ethereum
     .request({ method: 'eth_requestAccounts' })
-    .then(ahandleAccountsChanged)
+    .then(handleAccountsChanged)
     .catch((err) => {
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
