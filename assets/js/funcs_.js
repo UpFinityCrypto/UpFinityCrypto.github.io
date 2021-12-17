@@ -1,6 +1,6 @@
 const runs = {};
 const runPersonals = {};
-runs['airdrop'] = async function runAirdrop() {
+runs['Airdrop'] = async function runAirdrop() {
   // airdrop
   freeAirdropBalance = (await funcs['upf'].balanceOf(adrs['freeair']))[0];
   dollarsPerBNB = (await funcs['airdrop']._dollarsPerBNB())[0] / 1;
@@ -14,7 +14,7 @@ runs['airdrop'] = async function runAirdrop() {
   displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1)) + "$]");
 }
 
-runs['status'] = async function runStatus() {
+runs['Status'] = async function runStatus() {
   maxBuyUPF = rO / 10000 * _maxTxNume; // 10% of current liquidity
   maxBuyBNB = (await funcs['router'].getAmountIn(ethers.utils.parseEther(String(maxBuyUPF / bnbDiv)), rI, rO))[0];
 
@@ -635,7 +635,7 @@ async function runCode() {
 
 
   if (getDiv("Airdrop").length) {
-    await runAirdrop();
+    await runs['Airdrop']();
   }
 
 
@@ -659,7 +659,7 @@ async function runCode() {
   }
 
   if (getDiv("Status").length) {
-    await runStatus();
+    await runs['Status']();
   }
 
   if (getDiv("buyStatus").length) {
