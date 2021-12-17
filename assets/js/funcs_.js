@@ -485,7 +485,24 @@ async function runPersonal() {
   _taxAccuTaxCheck = (await funcs['upf']._taxAccuTaxCheck(currentAccount))[0] / 1;
   displayText("connectResult", currentAccount + " <span>Loading</span>");
 
-
+  
+  if (getDiv("sellStatus").length) {
+    testoverride = {
+      from: currentAccount,
+    };
+    testUPFamount = (await conts['router'].functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
+    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [adrs['upf'], adrs['wbnb']], adrs['router'], Math.floor(NOW / 1000) + 100000, testoverride)
+      .then((arg) => {
+        console.log('SELL OK');
+        displayText("sellStatus", "OK");
+      }, (e) => {
+        e = errMsg(e);
+        console.log(e);
+        displayText("sellStatus", "Check Sell Rules");
+      }
+     );
+  }
+  
   if (getDiv("Status").length) {
     await runStatusPersonal();
   }
@@ -660,23 +677,6 @@ async function runCode() {
         displayText("buyStatus", "Contact @ALLCOINLAB");
       }
     );
-  }
-
-  if (getDiv("sellStatus").length) {
-    testoverride = {
-      from: currentAccount,
-    };
-    testUPFamount = (await conts['router'].functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
-    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [adrs['upf'], adrs['wbnb']], adrs['router'], Math.floor(NOW / 1000) + 100000, testoverride)
-      .then((arg) => {
-        console.log('SELL OK');
-        displayText("sellStatus", "OK");
-      }, (e) => {
-        e = errMsg(e);
-        console.log(e);
-        displayText("sellStatus", "Check Sell Rules");
-      }
-     );
   }
 
   if (getDiv("nft").length) {
