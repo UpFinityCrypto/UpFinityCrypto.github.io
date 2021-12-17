@@ -1,18 +1,29 @@
 const decimals = 18;
 const bnbDiv = 10 ** decimals;
-const wbnbAdr = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c';
-const routerAdr = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
-const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
-const upfinityAdr = '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae';
-const burnAdr = "0x000000000000000000000000000000000000dEaD";
-communityToken = "0x000000000000000000000000000000000000dEaD";
 
+const adrs = {
+  'zero': '0x0000000000000000000000000000000000000000',
+  'burn': '0x000000000000000000000000000000000000dEaD',
+  'wbnb': '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  'router': '0x10ED43C718714eb63d5aA57B78B54704E256024E',
+  'factory': '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
+
+  'upf': '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae',
+  'pair': '0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a',
+  'reward': '0x373764c3deD9316Af3dA1434ccba32caeDeC09f5',
+  'freeair': '0x17f90D36E2B11999CBEbf5E36e09E7079Ea9e2a4',
+  'airdrop': '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004',
+  'nft': '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD',
+  'stake': '0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D',
+}
+const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
+let communityToken = "0x000000000000000000000000000000000000dEaD";
 
 const deadline = parseInt(Date.now() / 1000) + 1000000
 
-buyFee = 900;
-sellFee = 1200;
-totalFee = buyFee + sellFee;
+const buyFee = 900;
+const sellFee = 1200;
+const totalFee = buyFee + sellFee;
 
 
 inputHandlerBuy = function (e) {
@@ -126,23 +137,24 @@ const countDownTimer = function (id, date) {
   timer = setInterval(showRemaining, 1000); 
 } 
 
+const abis = {};
 const tokenAbi = [
 {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
 {"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
 ];
-const routerAbi = [
+
+
+abis['router'] = [
 {"inputs":[],"name":"factory","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
 {"inputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountIn","outputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"}],"stateMutability":"pure","type":"function"},
 {"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"reserveIn","type":"uint256"},{"internalType":"uint256","name":"reserveOut","type":"uint256"}],"name":"getAmountOut","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"pure","type":"function"},
 {"inputs":[{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactETHForTokensSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"payable","type":"function"},
 {"inputs":[{"internalType":"uint256","name":"amountIn","type":"uint256"},{"internalType":"uint256","name":"amountOutMin","type":"uint256"},{"internalType":"address[]","name":"path","type":"address[]"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"deadline","type":"uint256"}],"name":"swapExactTokensForETHSupportingFeeOnTransferTokens","outputs":[],"stateMutability":"nonpayable","type":"function"},
 ];
-const factoryAbi = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}];
-const pairAbi = [{"constant":true,"inputs":[],"name":"getReserves","outputs":[{"internalType":"uint112","name":"_reserve0","type":"uint112"},{"internalType":"uint112","name":"_reserve1","type":"uint112"},{"internalType":"uint32","name":"_blockTimestampLast","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},
-{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
-{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
-];
-const upfinityAbi = [
+
+abis['factory'] = [{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"address","name":"","type":"address"}],"name":"getPair","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}];
+
+abis['upf'] = [
 {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
 { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" },
 {'inputs':[{'internalType':'address','name':'owner_','type':'address'},{'internalType':'address','name':'spender','type':'address'}],'name':'allowance','outputs':[{'internalType':'uint256','name':'','type':'uint256'}],'stateMutability':'view','type':'function'},
@@ -167,27 +179,32 @@ const upfinityAbi = [
 {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"blacklisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
 ];
 
-const rewardAbi = [
+abis['pair'] = [{ "constant": true, "inputs": [], "name": "getReserves", "outputs": [{ "internalType": "uint112", "name": "_reserve0", "type": "uint112" }, { "internalType": "uint112", "name": "_reserve1", "type": "uint112" }, { "internalType": "uint32", "name": "_blockTimestampLast", "type": "uint32" }], "payable": false, "stateMutability": "view", "type": "function" },
+{ "constant": true, "inputs": [], "name": "totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" },
+{ "constant": true, "inputs": [{ "name": "", "type": "address" }], "name": "balanceOf", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" },
+];
+
+abis['reward'] = [
 {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"calBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 {"inputs":[],"name":"claimBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},
 {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"claimedBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 ];
 
-const freeAirdropAbi = [
+abis['freeair'] = [
 {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 {"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "_communityBonus","outputs": [{"internalType":"uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
 {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doFreeAirdrop","outputs":[],"stateMutability":"nonpayable","type":"function"},
 ];
 
-const airdropAbi = [
+abis['airdrop'] = [
 {"inputs":[],"name":"_dollarsPerBNB","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 {"inputs": [{"internalType": "address","name": "","type": "address"}],"name": "_communityBonus","outputs": [{"internalType":"uint256","name": "","type": "uint256"}],"stateMutability": "view","type": "function"},
 {"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"_doneFreeAirdrop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 {"inputs":[{"internalType":"address","name":"refAdr","type":"address"},{"internalType":"uint256","name":"dollarCount_","type":"uint256"},{"internalType": "address","name": "communityToken","type": "address"}],"name":"doAirdrop","outputs":[],"stateMutability":"payable","type":"function"},
 ];
 
-const nftAbi = [
+abis['nft'] = [
 {"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},
 {"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
 {"inputs": [{"internalType": "bool", "name": "isBoy", "type": "bool"}], "name": "mintDiamond", "outputs": [], "stateMutability": "payable", "type": "function"},
@@ -201,6 +218,6 @@ const nftAbi = [
 {"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},
 ];
 
-const stakeAbi = [
+abis['stake'] = [
   { 'stateMutability': 'payable', 'type': 'fallback' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_claimedAmounts', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_marketingFund', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_minusTaxSystem', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_myRouter', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_owner', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_rewardSystem', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_stakedAmounts', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_stakedDurations', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_stakedTimes', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_token', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_totalFundsReserved', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_totalFundsUsed', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_totalStakedAmounts', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_uptest', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'amount', 'type': 'uint256' }, { 'internalType': 'uint256', 'name': 'duration', 'type': 'uint256' }], 'name': 'calculateReward', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'pure', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': 'owner_', 'type': 'address' }], 'name': 'initialize', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': 'token_', 'type': 'address' }], 'name': 'setToken', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'uptest_', 'type': 'uint256' }], 'name': 'setUptest', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'totalFundsReserved_', 'type': 'uint256' }], 'name': 'setVars', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'amount', 'type': 'uint256' }, { 'internalType': 'uint256', 'name': 'duration', 'type': 'uint256' }], 'name': 'stake', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [], 'name': 'unstake', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'stateMutability': 'payable', 'type': 'receive' }
 ];
