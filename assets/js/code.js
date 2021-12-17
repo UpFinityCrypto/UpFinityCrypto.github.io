@@ -71,11 +71,10 @@ $(document).click(function (e) {
 
 loadSections()
   .then(loadSubsections)
-  .then(runCode)
-  .then(init)
   .then(loadCaches)
-  .then(displayCaches);
-
+  .then(displayCaches)
+  .then(runCode)
+  .then(init);
 // function getElem(a, b) {
 //   return '<img src="https://theupfinity.com/assets/img/logo.png" style="' + getStyle(a, b) + '">';
 // }
