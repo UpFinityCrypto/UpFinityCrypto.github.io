@@ -612,7 +612,7 @@ async function runCode() {
   realSupply = totalSupply.sub(burnAmount);
   mcap = price * realSupply / bnbDiv;
   
-  displayText("curPrice", price * parseInt(price * 1e9));
+  displayText("curPrice", parseInt(price * 1e9));
   
   await loadCB();
 
