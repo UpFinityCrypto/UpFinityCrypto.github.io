@@ -464,7 +464,9 @@ async function runPersonal() {
       from: currentAccount,
     };
     testUPFamount = (await conts['router'].functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
-    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [adrs['upf'], adrs['wbnb']], adrs['router'], Math.floor(NOW / 1000) + 100000, testoverride)
+
+    // router: ETH_TRANSFER_FAILED
+    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
       .then((arg) => {
         console.log('SELL OK');
         displayText("sellStatus", "OK");
