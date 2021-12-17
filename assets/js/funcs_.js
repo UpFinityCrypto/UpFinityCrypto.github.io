@@ -295,7 +295,8 @@ runPersonals['Nft'] = async function runNftPersonal() {
   displayText_("taxReduction", myNFTtax / 100);
 }
 
-runs['Taxs'] = async function runTaxs{}
+runs['Taxs'] = async function runTaxs() { }
+
 runPersonals['Taxs'] = async function runTaxsPersonal() {
   taxPenalty = 0;
   if (NOW < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
