@@ -988,3 +988,8 @@ footer {
     font-style: normal;
     color: #fff;
   }
+
+.list {
+  width: auto;
+  margin: 10px;
+}
