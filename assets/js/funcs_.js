@@ -488,6 +488,22 @@ async function runPersonal() {
     await runStatusPersonal();
   }
 
+  if (getDiv("Taxs").length) {
+    await runTaxs();
+  }
+
+  if (getDiv("myNFTs").length) {
+    await runMyNFT();
+  }
+
+  if (getDiv("swap").length) {
+    await runSwapPersonal();
+  }
+
+  if (getDiv("Staking").length) {
+    await runStakingPersonal();
+  }
+  
   t = TT('personal done', t);
   displayText('debug', 'personal done');
   
@@ -673,6 +689,14 @@ async function runCode() {
     await runStaking();
   }
   
+  if (getDiv("UpFinomics").length) {
+    displayText("buyFee", buyFee / 100);
+    displayText("sellFee", sellFee / 100);
+    displayText("totalFee", totalFee / 100);
+
+    displayChart();
+  }
+  
   t = TT('global done', t);
   displayText('debug', 'global done');
 
@@ -684,31 +708,6 @@ async function runCode() {
     } else {
     }
   });
-
-  if (getDiv("Taxs").length) {
-    await runTaxs();
-  }
-
-  if (getDiv("myNFTs").length) {
-    await runMyNFT();
-  }
-
-  if (getDiv("swap").length) {
-    await runSwapPersonal();
-  }
-
-
-  if (getDiv("Staking").length) {
-    await runStakingPersonal();
-  }
-
-  if (getDiv("UpFinomics").length) {
-    displayText("buyFee", buyFee / 100);
-    displayText("sellFee", sellFee / 100);
-    displayText("totalFee", totalFee / 100);
-
-    displayChart();
-  }
 
   var dateObj = new Date();
 
