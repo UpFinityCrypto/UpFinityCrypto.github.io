@@ -125,65 +125,41 @@ function num2str(n) {
 	
 
   }
-  
-  async function ahandleAccountsChanged(accounts) {
-    if (accounts.length == 0) {
-      displayText("connectResult", 'Please Connect Metamask');
-      return;
-    }
-    
-    currentAccount = getChecksumAddress(accounts[0]);
-    displayPersonalInformations(currentAccount);
-    
-    return currentAccount;
+
+async function ahandleAccountsChanged(accounts) {
+  if (accounts.length == 0) {
+    displayText("connectResult", 'Please Connect Metamask');
+    return false;
   }
+
+  currentAccount = getChecksumAddress(accounts[0]);
+  displayPersonalInformations(currentAccount);
+
+  return true;
+}
   
-  function handleAccountsChanged(accounts) {
-    if (accounts.length == 0) {
-      displayText("connectResult", 'Please Connect Metamask');
-      return;
-    }
-    
-    currentAccount = getChecksumAddress(accounts[0]);
-    displayPersonalInformations(currentAccount);
-	  
-    return currentAccount;
+async function afconnect() {
+  if (!ethereum) {
+    alert("use Dapp to connect wallet!");
+    return false;
   }
-  
-  async function afconnect() {
-	  if (typeof window.ethereum === 'undefined') {
-      alert("use Dapp to connect wallet!");
-      return null;
-	  }
-    
-		accounts = await ethereum
-		.request({ method: 'eth_requestAccounts' }); // eth_requestAccounts
-    
-    currentAccount = await ahandleAccountsChanged(accounts);
-    
-	  
-    return currentAccount;		
-	}
-  
-	function fconnect() {
-    if (typeof window.ethereum === 'undefined') {
-      alert("use Dapp to connect wallet!");
-      return null;
-	  }
-    
-		ethereum
-		.request({ method: 'eth_requestAccounts' }) // eth_requestAccounts
-		.then(handleAccountsChanged)
-		.catch((err) => {
+
+  result = ethereum
+    .request({ method: 'eth_requestAccounts' })
+    .then(ahandleAccountsChanged)
+    .catch((err) => {
 			if (err.code == 4001) {
 				// EIP-1193 userRejectedRequest error
 				// If this happens, the user rejected the connection request.
-        displayText("connectResult", '<span>You Rejected! Connect wallet to use claim, etc!</span>');
+        displayText("connectResult", '<span>You Rejected!</span>');
 			} else {
-				console.error(err);
+				displayText("connectResult", err);
 			}
+      return false;
 		});
-	}
+  
+  return result;
+}
 
 	function fclaim() {
 		if (typeof conts['reward'] === 'undefined') {
