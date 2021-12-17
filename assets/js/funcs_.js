@@ -614,7 +614,7 @@ async function runCode() {
     testoverride = {
       value: ethers.utils.parseEther('0.1'), // it require string number
     };
-    routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [adrs['wbnb'], adrs['upf']], currentAccount, deadline, testoverride)
+    conts['router'].estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(0, [adrs['wbnb'], adrs['upf']], currentAccount, deadline, testoverride)
       .then((arg) => {
         console.log('BUY OK');
         displayText("buyStatus", "OK");
@@ -630,8 +630,8 @@ async function runCode() {
     testoverride = {
       from: currentAccount,
     };
-    testUPFamount = (await routerC.functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
-    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
+    testUPFamount = (await conts['router'].functions.getAmountIn(ethers.utils.parseEther('0.1'), rO, rI))[0];
+    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(testUPFamount, 0, [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(NOW / 1000) + 100000, testoverride)
       .then((arg) => {
         console.log('SELL OK');
         displayText("sellStatus", "OK");
