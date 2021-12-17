@@ -78,7 +78,7 @@ runs['Status'] = async function runStatus() {
 }
 
 
-runs['status'] = async function runStatusPersonal() {
+runPersonals['Status'] = async function runStatusPersonal() {
   balanceUPF = (await funcs['upf'].balanceOf(currentAccount))[0];
   displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
 
@@ -198,7 +198,7 @@ runs['status'] = async function runStatusPersonal() {
   // x / r0 = a => price change = 1 / (1 + a)^2
 }
 
-async function runNFT() {
+runs['Nft'] = async function runNft() {
   id2Names = {
     0: 'emeraldBoy',
     1: 'emeraldGirl',
@@ -243,7 +243,7 @@ async function runNFT() {
 }
 
 
-async function runMyNFT() {
+runPersonals['Nft'] = async function runNftPersonal() {
   myNFTtax = 0;
   myNFTcounts = (await funcs['nft'].balanceOf(currentAccount))[0] / 1;
   for (idx = 0; idx < myNFTcounts; idx++) {
@@ -295,7 +295,8 @@ async function runMyNFT() {
   displayText_("taxReduction", myNFTtax / 100);
 }
 
-async function runTaxs() {
+runs['Taxs'] = async function runTaxs{}
+runPersonals['Taxs'] = async function runTaxsPersonal() {
   taxPenalty = 0;
   if (NOW < _timeAccuTaxCheck + _accuTaxTimeWindow) { // in time window
     taxPenalty = _taxAccuTaxCheck * _accuMulFactor / 100;
@@ -339,7 +340,7 @@ async function runTaxs() {
 
 
 
-async function runSwap() {
+runs['Swap'] = async function runSwap() {
   source = getElement('swapInput');
   if (source) {
     source.addEventListener('input', inputHandlerBuy);
@@ -354,7 +355,7 @@ async function runSwap() {
   swapComma("swapOuput", true);
 }
 
-async function runSwapPersonal() {
+runPersonals['Swap'] = async function runSwapPersonal() {
   balanceBNB = await provider.getBalance(currentAccount);
   displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
@@ -363,7 +364,7 @@ async function runSwapPersonal() {
   balance = balanceUPF;
 }
 
-async function runStaking() {
+runs['Staking'] = async function runStaking() {
 
   stakeBalance = await GET_VALUE(funcs['upf'], 'balanceOf', [adrs['stake']]);
   //_totalFundsReserved = await GET_VALUE(funcs['stake'], '_totalFundsReserved'); // 88315800000000000000000000000
@@ -387,7 +388,7 @@ async function runStaking() {
   }
 }
 
-async function runStakingPersonal() {
+runPersonals['Staking'] = async function runStakingPersonal() {
   allowance = (await CALL(funcs['upf'], 'allowance', [currentAccount, adrs['stake']], false))[0] / 1;
   approveStake = select("a#approveStake");
   if (10 ** 18 < allowance) { // used approve
@@ -473,27 +474,13 @@ async function runPersonal() {
       }
      );
   }
-  
-  if (getDiv("Status").length) {
-    await runStatusPersonal();
+
+  for (var section in runPersonals) {
+    if (getDiv(section).length) {
+      await runPersonals[section]();
+    }
   }
 
-  if (getDiv("Taxs").length) {
-    await runTaxs();
-  }
-
-  if (getDiv("myNFTs").length) {
-    await runMyNFT();
-  }
-
-  if (getDiv("swap").length) {
-    await runSwapPersonal();
-  }
-
-  if (getDiv("Staking").length) {
-    await runStakingPersonal();
-  }
-  
   t = TT('personal done', t);
   displayText('debug', 'personal done');
   
@@ -632,13 +619,6 @@ async function runCode() {
   }
 
 
-
-
-  if (getDiv("Airdrop").length) {
-    await runs['Airdrop']();
-  }
-
-
   if (getDiv("Rewards").length) {
     rewardBalanceRaw = await provider.getBalance(adrs['reward']);
     rewardBalance = round(rewardBalanceRaw / bnbDiv, 3);
@@ -658,10 +638,6 @@ async function runCode() {
     }
   }
 
-  if (getDiv("Status").length) {
-    await runs['Status']();
-  }
-
   if (getDiv("buyStatus").length) {
     testoverride = {
       value: ethers.utils.parseEther('0.1'), // it require string number
@@ -677,18 +653,6 @@ async function runCode() {
       }
     );
   }
-
-  if (getDiv("nft").length) {
-    await runNFT();
-  }
-  
-  if (getDiv("swap").length) {
-    await runSwap();
-  }
-  
-  if (getDiv("Staking").length) {
-    await runStaking();
-  }
   
   if (getDiv("UpFinomics").length) {
     displayText("buyFee", buyFee / 100);
@@ -697,7 +661,13 @@ async function runCode() {
 
     displayChart();
   }
-  
+
+  for (var section in runs) {
+    if (getDiv(section).length) {
+      await runs[section]();
+    }
+  }
+
   t = TT('global done', t);
   displayText('debug', 'global done');
 
