@@ -19,6 +19,12 @@ body {
   height: auto;
 }
 
+@media (min-width: 992px) {
+  body {
+    font-size: 13px;
+  }
+}
+
 a {
   color: #28a745;
   text-decoration: none;
