@@ -570,7 +570,7 @@ async function runCode() {
   displayText_("UPFbalance", connectWalletText);
 
 
-  totalSupply = _totalSupply;
+  totalSupply = (await funcs['upf'].totalSupply())[0];
   totalLpSupply = (await funcs['pair'].totalSupply())[0];
 
   reserveData = await funcs['pair'].getReserves();
