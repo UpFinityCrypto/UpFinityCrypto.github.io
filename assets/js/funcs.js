@@ -707,7 +707,8 @@ function fbuyUPF() {
           .then((arg) => {
             // arg['hash']
             console.log(arg);
-            displayText_('swapResult', 'buy done!');    
+            linkElement = "<a href='https://bscscan.com/tx/" + arg['hash'] + "'>" + "view in Bscscan" + "</a>";
+            displayText_('swapResult', "buy done! " + linkElement);
           }, (error) => {
             error = errMsg(error);
             displayText_('swapResult', error);
