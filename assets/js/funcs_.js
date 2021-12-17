@@ -603,6 +603,7 @@ async function runCode() {
   displayText("curPrice", parseInt(price * 1e9));
   
   await loadCB();
+  await loadValues();
 
   cantsell = cantsellReason();
 
