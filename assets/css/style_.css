@@ -989,7 +989,7 @@ footer {
     color: #fff;
   }
 
-listed>* {
+.listed>* {
   width: auto;
   margin: 10px;
 }
