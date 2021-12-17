@@ -68,7 +68,7 @@
 }
 
 .button {
-  width: 100%;
+  width: auto;
   text-align: center;
   color: #fff;
   border: 0;
@@ -84,6 +84,7 @@
 
 @media (max-width: 992px) {
   .button {
+    width: 100%;
     font-size: 12px;
     margin: 10px auto;
   }
