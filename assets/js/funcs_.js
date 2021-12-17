@@ -1,4 +1,6 @@
-async function runAirdrop() {
+const runs = {};
+const runPersonals = {};
+runs['airdrop'] = async function runAirdrop() {
   // airdrop
   freeAirdropBalance = (await funcs['upf'].balanceOf(adrs['freeair']))[0];
   dollarsPerBNB = (await funcs['airdrop']._dollarsPerBNB())[0] / 1;
@@ -12,7 +14,7 @@ async function runAirdrop() {
   displayText("airdropBalance", "Airdrop (" + _airdropSystem + ") balance: [" + numberWithCommas(Math.floor(airdropBalance.div(oneDollarUPF) / 1)) + "$]");
 }
 
-async function runStatus() {
+runs['status'] = async function runStatus() {
   maxBuyUPF = rO / 10000 * _maxTxNume; // 10% of current liquidity
   maxBuyBNB = (await funcs['router'].getAmountIn(ethers.utils.parseEther(String(maxBuyUPF / bnbDiv)), rI, rO))[0];
 
@@ -24,9 +26,9 @@ async function runStatus() {
         sellCooltime = sellCooltime_;
         d = new Date(sellCooltime * 1000);
         displayText("sellCooltime", d);
+        }
       }
     }
-  }
 
   //     sellCooltime_ = _antiDumpTimer / 1 + _antiDumpDuration / 1;
   //     if (NOW < sellCooltime_) {
@@ -105,7 +107,7 @@ async function runStatus() {
 }
 
 
-async function runStatusPersonal() {
+runs['status'] = async function runStatusPersonal() {
   balanceUPF = (await funcs['upf'].balanceOf(currentAccount))[0];
   displayText("balanceStatus", numberWithCommas(Math.floor(balanceUPF / 1e18)));
 
