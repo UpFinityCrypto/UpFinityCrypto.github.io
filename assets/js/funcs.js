@@ -657,7 +657,7 @@ async function getBNBandUPF() {
     rO = reserveData[0];
   }
   
-  UPFamount = (await routerC.functions.getAmountOut(buyBNB, rI, rO))[0];
+  UPFamount = (await conts['router'].functions.getAmountOut(buyBNB, rI, rO))[0];
 
   return [buyBNB, UPFamount];
 }
@@ -677,7 +677,7 @@ async function getUPFandBNB() {
     rO = reserveData[0];
   }
 
-  BNBamount = (await routerC.functions.getAmountOut(buyUPF, rO, rI))[0];
+  BNBamount = (await conts['router'].functions.getAmountOut(buyUPF, rO, rI))[0];
 
   return [buyUPF, BNBamount];
 }
@@ -697,11 +697,11 @@ function fbuyUPF() {
       value: buyBNB, // it require string number
     }
 
-    routerC.estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [adrs['wbnb'], adrs['upf']], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
+    conts['router'].estimateGas.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [adrs['wbnb'], adrs['upf']], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
       .then((arg) => {
         displayText_('swapResult', "can buy. estimated gas:" + (arg / 1).toString());
 
-        routerSigner = routerC.connect(signer);
+        routerSigner = conts['router'].connect(signer);
 
         routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [adrs['wbnb'], adrs['upf']], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
           .then((arg) => {
@@ -739,11 +739,11 @@ function fsellUPF() {
       return;
     }
     //////////////////// why transfer from fail and signer works?
-    routerC.estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [adrs['upf'], adrs['wbnb']], currentAccount, 9999999999)
+    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [adrs['upf'], adrs['wbnb']], currentAccount, 9999999999)
       .then((arg) => {
         displayText_('swapResult', "can sell. estimated gas:" + (arg / 1).toString());
 
-        routerSigner = routerC.connect(signer);
+        routerSigner = conts['router'].connect(signer);
         routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [adrs['upf'], adrs['wbnb']], currentAccount, 9999999999)
           .then((arg) => {
             console.log(arg);
