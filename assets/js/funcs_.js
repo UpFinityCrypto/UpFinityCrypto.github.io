@@ -597,7 +597,7 @@ async function runCode() {
 
   busdAdr = "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56";
   pricePairAdr = (await funcs['factory'].getPair(adrs['wbnb'], busdAdr))[0];
-  pricePairC = new ethers.Contract(pricePairAdr, pairAbi, provider);
+  pricePairC = new ethers.Contract(pricePairAdr, abis['pair'], provider);
   priceReserveData = await pricePairC.functions.getReserves();
 
   if (adrs['wbnb'] < busdAdr) { // BNB / busd
@@ -612,6 +612,7 @@ async function runCode() {
   realSupply = totalSupply.sub(burnAmount);
   mcap = price * realSupply / bnbDiv;
   
+  displayText("curPrice", price * parseInt(price * 1e9));
   
   await loadCB();
 
