@@ -377,15 +377,17 @@ async function runSwap() {
     console.log('swapInput not ready');
   }
 
+  swapComma("swapInput", false);
+  swapComma("swapOuput", true);
+}
+
+async function runSwapPersonal() {
   balanceBNB = await provider.getBalance(currentAccount);
   displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
   balanceUPF = (await funcs['upf'].balanceOf(currentAccount))[0];
   displayText_("UPFbalance", numberWithCommas(parseInt(balanceUPF / bnbDiv)));
   balance = balanceUPF;
-
-  swapComma("swapInput", false);
-  swapComma("swapOuput", true);
 }
 
 async function runStaking() {
@@ -410,7 +412,9 @@ async function runStaking() {
   } else {
     console.log('typedStakeAmount not ready');
   }
+}
 
+async function runStakingPersonal() {
   allowance = (await CALL(funcs['upf'], 'allowance', [currentAccount, adrs['stake']], false))[0] / 1;
   approveStake = select("a#approveStake");
   if (10 ** 18 < allowance) { // used approve
@@ -474,7 +478,21 @@ async function runStaking() {
 
 
 
+async function runPersonal() {
+  _timeAccuTaxCheck = (await funcs['upf']._timeAccuTaxCheck(currentAccount))[0] / 1;
+  _taxAccuTaxCheck = (await funcs['upf']._taxAccuTaxCheck(currentAccount))[0] / 1;
+  displayText("connectResult", currentAccount + " <span>Loading</span>");
 
+
+  if (getDiv("Status").length) {
+    await runStatusPersonal();
+  }
+
+  t = TT('personal done', t);
+  displayText('debug', 'personal done');
+  
+  
+}
 
 /////////////////////////////////////////////////////////////
 // to use async functions, we need to make it inits
@@ -643,45 +661,45 @@ async function runCode() {
      );
   }
 
+  if (getDiv("nft").length) {
+    await runNFT();
+  }
+  
+  if (getDiv("swap").length) {
+    await runSwap();
+  }
+  
+  if (getDiv("Staking").length) {
+    await runStaking();
+  }
+  
   t = TT('global done', t);
   displayText('debug', 'global done');
 
   // personal wallet infos
-  currentAccount = await afconnect();
-
-  _timeAccuTaxCheck = (await funcs['upf']._timeAccuTaxCheck(currentAccount))[0] / 1;
-  _taxAccuTaxCheck = (await funcs['upf']._taxAccuTaxCheck(currentAccount))[0] / 1;
-  displayText("connectResult", currentAccount + " <span>Loading</span>");
-
-
-  if (getDiv("Status").length) {
-    await runStatusPersonal();
-  }
-
-  t = TT('personal done', t);
-  displayText('debug', 'personal done');
-
+  afconnect()
+  .then((res) => {
+    if (res) {
+      runPersonal();
+    } else {
+    }
+  });
 
   if (getDiv("Taxs").length) {
     await runTaxs();
   }
 
-
-  if ((getDiv("nft").length) | (getDiv("Status").length)) {
-    await runNFT();
-
-    myNFTs = getElement("myNFTs");
-    if (myNFTs) {
-      await runMyNFT();
-    }
+  if (getDiv("myNFTs").length) {
+    await runMyNFT();
   }
 
   if (getDiv("swap").length) {
-    await runSwap();
+    await runSwapPersonal();
   }
 
+
   if (getDiv("Staking").length) {
-    await runStaking();
+    await runStakingPersonal();
   }
 
   if (getDiv("UpFinomics").length) {
