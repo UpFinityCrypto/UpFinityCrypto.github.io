@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="assets/js/jquery.min.js"></script>
+<!-- Template Main CSS File -->
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/style_.css" rel="stylesheet">
+<link href="assets/css/style__.css" rel="stylesheet">
+
 <head>
 </head>
 <script>
-$.get('sections/head.html', function(response) {
+  $.get('sections/head.html', function (response) {
     $('head').append($(response));
-});
+  });
 </script>
 <body class="container row center text-center" style="width: auto; height: auto;">
   <!-- ======= Header ======= -->
@@ -29,101 +34,101 @@ $.get('sections/head.html', function(response) {
             <a id="copyUpfinityNFTAdr" class="button scrollto" onclick="copyAdr('copyUpfinityNFTAdr', '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD');">
               Copy NFT address to visualize it in your wallet
             </a>
-          </span>
-          <p></p>
-          <!--<p>Total Minted: <span id="totalNFTCount"></span></p>-->
-        </div>
+            </span>
+            <p></p>
+            <!--<p>Total Minted: <span id="totalNFTCount"></span></p>-->
+          </div>
 
 
-        <div class="row">
-          <div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>Epic</h2>
-              <p>Need to hold at least: 2B <img src="assets/img/logo.png" class="small-icon"> UPF</p>  
-              <p>Price: 0.25 <img src="assets/img/trade/bin.ico" class="small-icon"> BNB</p>
-              <p>You will get <span>0.5%</span> Tax Reduction</p>
-              <div class="row">
-                <div class="col-12 col-lg-6 text-justify content">
-                  <div style="width: 100%; position: relative;">
-                    <div style="margin: 20px; box-shadow: 0px 0px 10px 1px #a7288a77;">
-                      <a href="assets/img/nft/origins/EpicYang.png">
-                        <img id="diamondBoy" src="assets/img/new/EpicYang.png" style="top:0; left: 0; padding: 0px; height: auto;">
-                        <img id="epicBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
-                      </a>
+          <div class="row">
+            <div class="col-12 col-lg-6 text-justify content">
+              <div class="section-title">
+                <h2>Epic</h2>
+                <p>Need to hold at least: 2B <img src="assets/img/logo.png" class="small-icon"> UPF</p>
+                <p>Price: 0.25 <img src="assets/img/trade/bin.ico" class="small-icon"> BNB</p>
+                <p>You will get <span>0.5%</span> Tax Reduction</p>
+                <div class="row">
+                  <div class="col-12 col-lg-6 text-justify content">
+                    <div style="width: 100%; position: relative;">
+                      <div style="margin: 20px; box-shadow: 0px 0px 10px 1px #a7288a77;">
+                        <a href="assets/img/nft/origins/EpicYang.png" target="_tab">
+                          <img id="diamondBoy" src="assets/img/new/EpicYang.png" style="top:0; left: 0; padding: 0px; height: auto;">
+                          <img id="epicBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
+                        </a>
+                      </div>
                     </div>
+                    <!--<p>Minted: <span id="diamondBoyCount"></span></p>-->
+                    <p>Can only hold 1 per wallet</p>
+                    <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('diamond', true);">Mint!</a></p>
+                    <p id="mintDiamondBoyResult"></p>
                   </div>
-                  <!--<p>Minted: <span id="diamondBoyCount"></span></p>-->
-                  <p>Can only hold 1 per wallet</p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('diamond', true);">Mint!</a></p>
-                  <p id="mintDiamondBoyResult"></p>
+                  <div class="col-12 col-lg-6 text-justify content">
+                    <div style="width: 100%; position: relative;">
+                      <div style="margin: 20px; box-shadow: 0px 0px 10px 1px #a7288a77;">
+                        <a href="assets/img/nft/origins/EpicYin.png" target="_tab">
+                          <img id="diamondGirl" src="assets/img/new/EpicYin.png" style="top:0; left: 0; padding: 0px; height: auto;">
+                          <img id="epicBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
+                        </a>
+                      </div>
+                    </div>
+                    <!--<p>Minted: <span id="diamondGirlCount"></span></p>-->
+                    <p>Can only hold 1 per wallet</p>
+                    <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('diamond', false);">Mint!</a></p>
+                    <p id="mintDiamondGirlResult"></p>
+                  </div>
                 </div>
-                <div class="col-12 col-lg-6 text-justify content">
-                  <div style="width: 100%; position: relative;">
-                    <div style="margin: 20px; box-shadow: 0px 0px 10px 1px #a7288a77;">
-                      <a href="assets/img/nft/origins/EpicYin.png">
-                        <img id="diamondGirl" src="assets/img/new/EpicYin.png" style="top:0; left: 0; padding: 0px; height: auto;">
-                        <img id="epicBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
-                      </a>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 text-justify content">
+              <div class="section-title">
+                <h2>Legendary</h2>
+                <p>Need to hold at least: 20B <img src="assets/img/logo.png" class="small-icon"> UPF</p>
+                <p>Price: 0.5 <img src="assets/img/trade/bin.ico" class="small-icon"> BNB</p>
+                <p>You will get <span>1%</span> Tax Reduction</p>
+                <div class="row">
+                  <div class="col-12 col-lg-6 text-justify content">
+                    <div style="width: 100%; position: relative;">
+                      <div style="margin: 20px; box-shadow: 0px 0px 20px 1px #f9580c77;">
+                        <a href="assets/img/nft/origins/LegendaryYang.mp4" target="_tab">
+                          <img id="emeraldBoy" src="assets/img/new/LegendaryYang.gif" style="top:0; left: 0; padding: 0px; height: auto;">
+                          <img id="legendaryBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
+                        </a>
+                      </div>
                     </div>
+                    <!--<p>Minted: <span id="emeraldBoyCount"></span></p>-->
+                    <p>Can only hold 1 per wallet</p>
+                    <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('emerald', true);">Mint!</a></p>
+                    <p id="mintEmeraldBoyResult"></p>
                   </div>
-                  <!--<p>Minted: <span id="diamondGirlCount"></span></p>-->
-                  <p>Can only hold 1 per wallet</p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('diamond', false);">Mint!</a></p>
-                  <p id="mintDiamondGirlResult"></p>
+                  <div class="col-12 col-lg-6 text-justify content">
+                    <div style="width: 100%; position: relative;">
+                      <div style="margin: 20px; box-shadow: 0px 0px 20px 1px #f9580c77;">
+                        <a href="assets/img/nft/origins/LegendaryYin.mp4" target="_tab">
+                          <img id="emeraldGirl" src="assets/img/new/LegendaryYin.gif" style="top:0; left: 0; padding: 0px; height: auto;">
+                          <img id="legendaryBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
+                        </a>
+                      </div>
+                    </div>
+                    <!--<p>Minted: <span id="emeraldGirlCount"></span></p>-->
+                    <p>Can only hold 1 per wallet</p>
+                    <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('emerald', false);">Mint!</a></p>
+                    <p id="mintEmeraldGirlResult"></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div id="myNFT" class="aos-init aos-animate" data-aos="fade-up" style="padding: 0px;">
+          <div class="section-title">
+            <h2>my NFT</h2>
+            <p>Total Minted: <span id="totalMyNFTCount"></span></p>
+          </div>
 
-          <div class="col-12 col-lg-6 text-justify content">
-            <div class="section-title">
-              <h2>Legendary</h2>
-              <p>Need to hold at least: 20B <img src="assets/img/logo.png" class="small-icon"> UPF</p>  
-              <p>Price: 0.5 <img src="assets/img/trade/bin.ico" class="small-icon"> BNB</p>
-              <p>You will get <span>1%</span> Tax Reduction</p>
-              <div class="row">
-                <div class="col-12 col-lg-6 text-justify content">
-                  <div style="width: 100%; position: relative;">
-                    <div style="margin: 20px; box-shadow: 0px 0px 20px 1px #f9580c77;">
-                      <a href="assets/img/nft/origins/LegendaryYang.mp4">
-                        <img id="emeraldBoy" src="assets/img/new/LegendaryYang.gif" style="top:0; left: 0; padding: 0px; height: auto;">
-                        <img id="legendaryBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
-                      </a>
-                    </div>
-                  </div>
-                  <!--<p>Minted: <span id="emeraldBoyCount"></span></p>-->
-                  <p>Can only hold 1 per wallet</p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('emerald', true);">Mint!</a></p>
-                  <p id="mintEmeraldBoyResult"></p>
-                </div>
-                <div class="col-12 col-lg-6 text-justify content">
-                  <div style="width: 100%; position: relative;">
-                    <div style="margin: 20px; box-shadow: 0px 0px 20px 1px #f9580c77;">
-                      <a href="assets/img/nft/origins/LegendaryYin.mp4">
-                        <img id="emeraldGirl" src="assets/img/new/LegendaryYin.gif" style="top:0; left: 0; padding: 0px; height: auto;">
-                        <img id="legendaryBorder" src="" style="position: absolute; top:0; left: 0;height:100%;">
-                      </a>
-                    </div>
-                  </div>
-                  <!--<p>Minted: <span id="emeraldGirlCount"></span></p>-->
-                  <p>Can only hold 1 per wallet</p>
-                  <p><a href="#null" id="NFTcountDown" class="button scrollto" onclick="mintNFT('emerald', false);">Mint!</a></p>
-                  <p id="mintEmeraldGirlResult"></p>
-                </div>
-              </div>
-            </div>
+          <div id="myNFTs" class="row">
           </div>
         </div>
-      </div>
-      <div id="myNFT" class="aos-init aos-animate" data-aos="fade-up" style="padding: 0px;">
-        <div class="section-title">
-          <h2>my NFT</h2>
-          <p>Total Minted: <span id="totalMyNFTCount"></span></p>
-        </div>
-
-        <div id="myNFTs" class="row">
-        </div>
-      </div>
 
 
     </section>
@@ -171,8 +176,9 @@ $.get('sections/head.html', function(response) {
   </div>
 </body>
 <script>
-<!-- $.get('sections/tail.html', function(response) { -->
-    <!-- $('#tail').append($(response)); -->
-<!-- }); -->
+<!--  $.get('sections/tail.html', function (response) {
+    -->
+    < !--$('#tail').append($(response)); -->
+< !-- }); -->
 </script>
 </html>

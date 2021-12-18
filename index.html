@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="assets/js/jquery.min.js"></script>
+<!-- Template Main CSS File -->
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/style_.css" rel="stylesheet">
+<link href="assets/css/style__.css" rel="stylesheet">
+
 <head>
 </head>
 <script>
-$.get('sections/head.html', function(response) {
+  $.get('sections/head.html', function (response) {
     $('head').append($(response));
-});
+  });
 </script>
 <body>
 
   <header id="header">
   </header>
-  
+
   <div id="notice">
-      <!--<div class="alert alert-primary alert-dismissible fade show" role="alert" style="width:auto; top: 60px;">
-    <div id="devNotice"></div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>-->
+    <!--<div class="alert alert-primary alert-dismissible fade show" role="alert" style="width:auto; top: 60px;">
+      <div id="devNotice"></div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>-->
   </div>
-  
+
 
   <!--<div id="popup" style="width:auto; top: 60px;">
     <div class="col-12 col-lg-6 text-center center">
@@ -38,7 +43,6 @@ $.get('sections/head.html', function(response) {
       </div>
     </div>
   </div>-->
-
   <!-- ======= Hero Section ======= -->
   <section class="d-flex flex-column justify-content-center" style="height: auto;">
     <div class="row" style="margin: 0px;">
@@ -64,26 +68,26 @@ $.get('sections/head.html', function(response) {
                 </a>
               </div>
             </div>
-          </p> 
+          </p>
           <p>Tax: buy 9% / sell 12%</p>
           <p>recommended slippage: buy 10+ / sell 14+</p>
           <div class="social-links" style="font-size:30px;">
             <a href="https://t.me/UpFinityTG" target="_tab" class="telegram"><i class="bi bi-telegram"></i></a>
             <a href="https://twitter.com/UpFinityTW" target="_tab" class="twitter"><i class="bx bxl-twitter"></i></a>
             <a href="https://github.com/UpFinityCrypto/UpFinityCrypto.github.io/blob/main/UpFinity.sol" target="_tab" class="twitter"><i class="bx bxl-github"></i></a>
-          </div> 
+          </div>
 
           <div class="row">
             <div class="col-12">
-              <a href="dashboard.html" class="button scrollto">Dashboard</a>
+              <a href="dashboard.html" class="button scrollto" target="_tab">Dashboard</a>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
-              <a id="WhitePaperLink" href="https://upfinity.gitbook.io" class="button scrollto">WhitePaper</a>
+              <a id="WhitePaperLink" href="https://upfinity.gitbook.io" class="button scrollto" target="_tab">WhitePaper</a>
             </div>
             <div class="col-6">
-              <a id="UpFinomicsLink" href="upfinity.html" class="button scrollto">UpFinomics</a>
+              <a id="UpFinomicsLink" href="upfinity.html" class="button scrollto" target="_tab">UpFinomics</a>
             </div>
           </div>
         </div>
@@ -93,9 +97,9 @@ $.get('sections/head.html', function(response) {
         <section id="Swap">
         </section><!-- End Hero -->
       </div>
-      
 
-</section><!-- End Hero -->
+
+  </section><!-- End Hero -->
 
   <main id="main">
 
@@ -120,13 +124,13 @@ $.get('sections/head.html', function(response) {
 
       <div class="row">
         <div class="col-12 col-lg-2 center">
-          <a href="https://dessertswap.finance/audits/Upfinity-Audit-BSC-13335222.pdf">
+          <a href="https://dessertswap.finance/audits/Upfinity-Audit-BSC-13335222.pdf" target="_tab">
             Audited with 0 Issue by:
             <img src="https://dessertswap.finance/images/logo2.png" style="width: 100%;">
           </a>
         </div>
         <div class="col-12 col-lg-2 center">
-          <a href="https://bitriseaudits.com/project/129">
+          <a href="https://bitriseaudits.com/project/129" target="_tab">
             <img src="https://bitriseaudits.com/images/logo.png" style="width: 100%;">
           </a>
         </div>
@@ -143,27 +147,27 @@ $.get('sections/head.html', function(response) {
       <div class="row">
 
         <div class="col-12 col-lg-2">
-          <a href="https://www.coinbase.com/price/upfinity">
+          <a href="https://www.coinbase.com/price/upfinity" target="_tab">
             <img src="https://images.ctfassets.net/q5ulk4bp65r7/3TBS4oVkD1ghowTqVQJlqj/2dfd4ea3b623a7c0d8deb2ff445dee9e/Consumer_Wordmark.svg" style="width: 100%;">
           </a>
         </div>
         <div class="col-12 col-lg-2">
-          <a href="https://coinmarketcap.com/currencies/upfinity/">
+          <a href="https://coinmarketcap.com/currencies/upfinity/" target="_tab">
             <img src="https://s2.coinmarketcap.com/static/cloud/img/coinmarketcap_1.svg?_=15bcb56" style="width: 100%;">
           </a>
         </div>
         <div class="col-12 col-lg-2">
-          <a href="https://www.coingecko.com/en/coins/upfinity">
+          <a href="https://www.coingecko.com/en/coins/upfinity" target="_tab">
             <img src="https://static.coingecko.com/s/coingecko-logo-d13d6bcceddbb003f146b33c2f7e8193d72b93bb343d38e392897c3df3e78bdd.png" style="width: 100%;">
           </a>
         </div>
         <div class="col-12 col-lg-2">
-          <a href="https://www.dextools.io/app/bsc/pair-explorer/0xd3ab58a10eab5f6e2523b53a78c6a8d378488c9a">
+          <a href="https://www.dextools.io/app/bsc/pair-explorer/0xd3ab58a10eab5f6e2523b53a78c6a8d378488c9a" target="_tab">
             <img src="https://www.dextools.io/app/assets/img/logo/dextools_logo_header_large_dark_35.png" style="width: 100%;">
           </a>
         </div>
         <div class="col-12 col-lg-2">
-          <a href="https://charts.bogged.finance/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae">
+          <a href="https://charts.bogged.finance/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">
             <img src="https://global-uploads.webflow.com/60f997cdf2dbe758a7f94a3b/61141e5427c1a057eb719535_Bogged%20Finance%20Logo%20White.svg" style="width: 100%;">
           </a>
         </div>
@@ -196,8 +200,6 @@ $.get('sections/head.html', function(response) {
       </div>
     </div>
   </main><!-- End #main -->
-
-
   <!-- ======= Footer ======= -->
   <footer id="footer">
   </footer><!-- End Footer -->
@@ -231,7 +233,7 @@ $.get('sections/head.html', function(response) {
     <script src="assets/js/consts.js"></script>
     <script src="assets/js/funcs.js"></script>
     <script src="assets/js/funcs_.js"></script>
-    
+
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
@@ -246,8 +248,9 @@ $.get('sections/head.html', function(response) {
   </div>
 </body>
 <script>
-<!-- $.get('sections/tail.html', function(response) { -->
-    <!-- $('#tail').append($(response)); -->
-<!-- }); -->
+<!--  $.get('sections/tail.html', function (response) {
+    -->
+    < !--$('#tail').append($(response)); -->
+< !-- }); -->
 </script>
 </html>
