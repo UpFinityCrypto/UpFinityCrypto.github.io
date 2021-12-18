@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="assets/js/jquery.min.js"></script>
+<head>
+</head>
+<script>
+  $.get('sections/head.html', function (response) {
+    $('head').append($(response));
+  });
+</script>
 <!-- Template Main CSS File -->
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/style_.css" rel="stylesheet">
 <link href="assets/css/style__.css" rel="stylesheet">
-
-<head>
-</head>
 <script>
   $.get('sections/head.html', function (response) {
     $('head').append($(response));
