@@ -501,19 +501,17 @@ async function runCode() {
 
   if (location.hostname == "") {
     alert('running in local!');
+    console.log('running in local!');
     return false;
   }
 
   await loadCaches();
 
   if (!window.ethereum) {
-    //if (getDiv("Team").length) {
-    //} else {
-    //  alert('Website tools are available with Dapp');
-    //}
     dappNeeded = "Use <span>DAPP</span> to view values correctly!";
     displayText("dappNeeded", dappNeeded);
-
+    console.log('dapp needed');
+    
     return false;
   }
 
@@ -529,7 +527,8 @@ async function runCode() {
   network = await provider.getNetwork();
   chainId = network.chainId;
   if (chainId != 56) {
-    // alert('Change to BSC network and refresh!');
+    console.log('Not BSC');
+    
     return false;
   }
 
