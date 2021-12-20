@@ -61,7 +61,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  font-family: "Reem Kufi", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
 
 
@@ -75,7 +75,7 @@
 }
 
   .missionStatement h1 {
-    font-family: "Reem Kufi", sans-serif;
+    font-family: "Oswald", sans-serif;
     width: 90%;
     height: 100%;
     text-align: center;
@@ -83,7 +83,7 @@
   }
 
   .missionStatement p {
-    font-family: "Reem Kufi", sans-serif;
+    font-family: "Poppins", sans-serif;
     width: 80%;
     text-align: center;
     font-size: 24px;
