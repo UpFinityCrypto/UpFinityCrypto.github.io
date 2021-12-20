@@ -101,6 +101,30 @@ const select = (el, all = false) => {
   }
 }
 
+
+const on = (type, el, listener, all = false) => {
+  let selectEl = select(el, all)
+  if (selectEl) {
+    if (all) {
+      selectEl.forEach(e => e.addEventListener(type, listener))
+    } else {
+      selectEl.addEventListener(type, listener)
+    }
+  }
+}
+
+const onscroll = (el, listener) => {
+  el.addEventListener('scroll', listener)
+}
+
+const scrollto = (el) => {
+  let elementPos = select(el).offsetTop
+  window.scrollTo({
+    top: elementPos,
+    behavior: 'smooth'
+  })
+}
+
 const countDownTimer = function (id, date) {
   var _vDate = new Date(date); // exact date UTC
   var _second = 1000; 
