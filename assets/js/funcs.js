@@ -1,9 +1,12 @@
 function T() {
 	return new Date().getTime();
 }
+function WRAP(v) {
+	return '[' + v + ']';
+}
 
 function TT(txt, t) {
-  console.log(txt, T() - t);
+  console.log(txt, WRAP(T() - t));
   displayText('debug', txt);
 
   return T();
