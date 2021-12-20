@@ -20,19 +20,6 @@ function init() { // to use async things
     }
   }
 
-  /**
-   * Easy event listener function
-   */
-  on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
-    }
-  }
 
   /**
    * Easy on scroll event listener 
