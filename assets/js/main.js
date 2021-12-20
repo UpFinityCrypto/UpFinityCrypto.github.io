@@ -87,16 +87,6 @@ function init() { // to use async things
     window.addEventListener('load', toggleBacktotop)
     onscroll(document, toggleBacktotop)
   }
-
-  /**
-   * Mobile nav toggle
-   */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('body').classList.toggle('mobile-nav-active')
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
   
   /**
   * Mobile nav dropdowns activate
