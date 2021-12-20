@@ -86,6 +86,20 @@
     </nav><!-- End Icons Navigation -->
     <script>
       /**
+      * Easy event listener function
+      */
+      const on = (type, el, listener, all = false) => {
+        let selectEl = select(el, all)
+        if (selectEl) {
+          if (all) {
+            selectEl.forEach(e => e.addEventListener(type, listener))
+          } else {
+            selectEl.addEventListener(type, listener)
+          }
+        }
+      }
+
+      /**
       * Mobile nav toggle
       */
       on('click', '.mobile-nav-toggle', function (e) {
