@@ -508,12 +508,13 @@ async function runCode() {
   await loadCaches();
 
   if (!window.ethereum) {
-    dappNeeded = "Use <span>DAPP</span> to view values correctly!";
-    displayText("dappNeeded", dappNeeded);
     console.log('dapp needed');
     
     return false;
   }
+
+  dappNeeded = "";
+  displayText("dappNeeded", dappNeeded);
 
   devNoticeString = "<p>If numbers not showing correctly, it means dev is upgrading :)</p><p>IF having trouble for anything, DM @ALLCOINLAB</p><p>All value can be changed or different due to network status!</p>";
   displayText("devNotice", devNoticeString);

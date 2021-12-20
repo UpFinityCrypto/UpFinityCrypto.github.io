@@ -39,6 +39,10 @@ async function loadSections() {
   getExtFile('Roadmap', 'sections/Roadmap.html');
   // getExtFile('Testimonials', 'sections/Testimonials.html');
   getExtFile('Team', 'sections/Team.html');
+
+  getExtFile('Audits', 'sections/Audits.html');
+  getExtFile('Mysterybox', 'sections/Mysterybox.html');
+  getExtFile('P2egames', 'sections/P2egames.html');
 }
 
 async function loadSubsections() {
