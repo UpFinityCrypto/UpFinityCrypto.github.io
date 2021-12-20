@@ -79,7 +79,8 @@ window.addEventListener('load', async () => {
     .then(loadCaches)
     .then(displayCaches)
     .then(runCode)
-    .then(init);
+    .then(init)
+    .then(init_);
 });
 
 // function getElem(a, b) {

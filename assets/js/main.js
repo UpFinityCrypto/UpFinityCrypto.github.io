@@ -23,7 +23,7 @@ function init() { // to use async things
   /**
    * Easy event listener function
    */
-  const on = (type, el, listener, all = false) => {
+  on = (type, el, listener, all = false) => {
     let selectEl = select(el, all)
     if (selectEl) {
       if (all) {
@@ -284,4 +284,13 @@ function init() { // to use async things
   
   
   console.log('main done');
+}
+
+function init_() {
+  on('click', '.mobile-nav-toggle', function (e) {
+    select('body').classList.toggle('mobile-nav-active')
+    select('#navbar').classList.toggle('navbar-mobile')
+  this.classList.toggle('bi-list')
+  this.classList.toggle('bi-x')
+  })
 }
