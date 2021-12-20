@@ -125,7 +125,7 @@
       <div class="accordion-item">
         <div class="accordion-header" id="headingFive">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          6x Advanced Tax Algorithms
+          4x Advanced Tax Algorithms
         </button>
         </div>
         <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
@@ -153,15 +153,6 @@
           <div>If a sell/transfer with 1% price impact => <span id="_accuMulFactor"></span>% more tax</div>
           <div>if same wallet sells again for 1% price impact within <span id="_accuTaxTimeWindow"></span> day => <span id="_accuMulFactor"></span>% + <span id="_accuMulFactor"></span>% more tax</div>
           <div>This tax resets <span id="_accuTaxTimeWindow"></span> day after each first sell</div>
-          
-          <h4>Advanced Sell Tax Algorithm</h4>
-          <div>Tax is based on <span>price impact</span>, not total supply</div>
-          <div>Flat <span id="_whaleSellFee"></span>% more tax if sell more than <span id="_whaleRate"></span>% of current liquidity</div>
-          
-          <h4>Advanced Transfer Tax Algorithm</h4>
-          <div>Tax is based on <span>price impact</span>, not total supply</div>
-          <div>Flat <span id="_whaleTransferFee"></span>% more tax if transfer more than <span id="_whaleRate"></span>% of current liquidity</div>
-          
         </div>
         </div>
       </div>
