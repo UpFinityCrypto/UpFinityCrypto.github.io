@@ -58,6 +58,7 @@ async function loadSubsections() {
   needValue |= getExtFile('Taxs', 'sections/Taxs.html');
   needValue |= getExtFile('UpFinomics', 'sections/UpFinomics.html');
   needValue |= getExtFile('Staking', 'sections/Staking.html');
+  needValue |= getExtFile('Navbar', 'sections/Navbar.html');
 }
 
 NOW = Date.now();
