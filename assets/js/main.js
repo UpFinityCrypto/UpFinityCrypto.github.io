@@ -263,7 +263,7 @@ function init() { // to use async things
   console.log('main done');
 }
 
-function init_() {
+function initHeader() {
   on('click', '.mobile-nav-toggle', function (e) {
     select('body').classList.toggle('mobile-nav-active')
     select('#navbar').classList.toggle('navbar-mobile')
