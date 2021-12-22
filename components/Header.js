@@ -1,7 +1,7 @@
 function Header() {
   const menu = {width:"20px", height:"20px"};
-  const white = {color: "#fff"};
-  
+  const white = {color: "#fff"};  
+
   return (
     <header id="Header">
       <i className="bi bi-list mobile-nav-toggle"></i>
@@ -16,7 +16,8 @@ function Header() {
           <li className="dropdown">
             <a className="nav-link scrollto" href="#">Token<i className="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="upfinity.html">Features</a></li>
+              <li><Link to="/upfinitys">Features</Link></li>
+              <li><a href="upfinitys">Features</a></li>
               <li><a href="swap.html">Swap</a></li>
               <li><a href="dashboard.html#Staking">Staking</a></li>
               <li><a href="dashboard.html#Rewards">Rewards</a></li>
@@ -79,6 +80,7 @@ function Header() {
             </div>
           </li>
         </ul>
+
       </div>
 
       <div className="row listed" style={{display: "contents"}}>
