@@ -105,14 +105,13 @@ $(document).click(function (e) {
 
 
 window.addEventListener('load', async () => {
-  loadSections()
+  loadHeader()
+    .then(loadSections)
     .then(loadSubsections)
     .then(loadCaches)
     .then(displayCaches)
     .then(runCode)
-    .then(init)
-    .then(init_)
-    .then(loadHeader);
+    .then(init);
 });
 
 // function getElem(a, b) {
