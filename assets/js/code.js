@@ -21,6 +21,8 @@ header.style.width = 'auto';
 
 
 async function loadHeader() { // header load first
+  var div = $('#header');
+  
   $.ajax({
     url: "sections/Header.html", 
     success: function(response) {
