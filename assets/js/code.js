@@ -2,35 +2,28 @@ console.log('init');
 displayText('debug', 'init');
 t = T();
 
-body = select('body');
-bodyClassList = body.classList;
-bodyClassList.add('container');
-bodyClassList.add('center');
-bodyClassList.add('text-center');
-body.style.width = 'auto';
-body.style.height = 'auto';
-
-header = select('header#header');
-headerClassList = header.classList;
-headerClassList.add('header');
-headerClassList.add('fixed-top');
-headerClassList.add('d-flex');
-headerClassList.add('align-items-center');
-headerClassList.add('header-scrolled');
-header.style.width = 'auto';
-
-
 async function loadHeader() { // header load first
-  var div = $('#header');
+  header = select('header#Header');
+  headerClassList = header.classList;
+  headerClassList.add('header');
+  headerClassList.add('fixed-top');
+  headerClassList.add('d-flex');
+  headerClassList.add('align-items-center');
+  headerClassList.add('header-scrolled');
+  header.style.width = 'auto';
   
-  $.ajax({
-    url: "sections/Header.html", 
-    success: async function(response) {
-      div.append($(response));
+  await initHeader();
+  
+  // var div = $('#header');
+  
+  // $.ajax({
+    // url: "sections/Header.html", 
+    // success: async function(response) {
+      // div.append($(response));
       
-      await initHeader();
-    }
-  });
+      // await initHeader();
+    // }
+  // });
   
   return true; 
 }
@@ -90,6 +83,16 @@ $(document).click(function (e) {
 
 
 window.addEventListener('load', async () => {
+  console.log('done');
+
+  body = select('body');
+  bodyClassList = body.classList;
+  bodyClassList.add('container');
+  bodyClassList.add('center');
+  bodyClassList.add('text-center');
+  body.style.width = 'auto';
+  body.style.height = 'auto';
+  
   loadHeader()
     .then(loadSections)
     .then(loadSubsections)
