@@ -25,7 +25,7 @@ async function loadHeader() { // header load first
   
   $.ajax({
     url: "sections/Header.html", 
-    success: function(response) {
+    success: async function(response) {
       div.append($(response));
       
       await initHeader();
