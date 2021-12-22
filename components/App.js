@@ -3,24 +3,10 @@ function App() {
   
     <Router>
       <Header />
-      <Notice />
-      <Banner />
-      <Hero />
-      
-      <Stats />
-      
-      <Ecosystem />
-      
-      <Audits />
-      
-      <Listings />
-      
-      <Team />
-      
       
       <Routes>
-        <Route exact path="/test" element={<Header />} />
-        <Route exact path="/upfinitys" element={<Stats />} />
+        <Route exact path="/" element={<MainPage />} />
+        <Route exact path="/swap" element={<SwapPage />} />
       </Routes>
       
       <Footer />
