@@ -20,10 +20,38 @@ headerClassList.add('header-scrolled');
 header.style.width = 'auto';
 
 
+async function loadHeader() { // header load first
+  $.ajax({
+    url: "sections/Header.html", 
+    success: function(response) {
+      div.append($(response));
+      
+      on('click', '.mobile-nav-toggle', function (e) {
+        select('body').classList.toggle('mobile-nav-active')
+        select('#navbar').classList.toggle('navbar-mobile')
+      this.classList.toggle('bi-list')
+      this.classList.toggle('bi-x')
+      })
+
+      /**
+      * Mobile nav dropdowns activate
+      */
+      on('click', '.navbar .dropdown > a', function (e) {
+        if (select('#navbar').classList.contains('navbar-mobile')) {
+          e.preventDefault()
+          this.nextElementSibling.classList.toggle('dropdown-active')
+        }
+      }, true)
+    }
+  });
+  
+  return true; 
+}
+
 async function loadSections() {
   t = TT('sections loading', t);
 
-  getExtFile('header', 'sections/Header.html'); // header
+  
   getExtFile('Swap', 'sections/Swap.html');
   getExtFile('Fiat', 'sections/Fiat.html');
 
@@ -75,7 +103,8 @@ $(document).click(function (e) {
 
 
 window.addEventListener('load', async () => {
-  loadSections()
+  loadHeader()
+    .then(loadSections)
     .then(loadSubsections)
     .then(loadCaches)
     .then(displayCaches)
