@@ -3,7 +3,7 @@ function Header() {
   const white = {color: "#fff"};
   
   return (
-    <section id="Header">
+    <header id="Header">
       <i className="bi bi-list mobile-nav-toggle"></i>
       <a href="https://www.theupfinity.com/" className="logo d-flex align-items-center">
         <img src="assets/img/logo.png" className="small-icon" alt="" style={{margin:"10px"}}/>
@@ -94,6 +94,6 @@ function Header() {
       </nav>
       <script type="text/javascript">
       </script>
-    </section>
+    </header>
   );
 }
