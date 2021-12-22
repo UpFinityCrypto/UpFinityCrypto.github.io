@@ -6,6 +6,7 @@ function App() {
       
       <Routes>
         <Route exact path="/" element={<MainPage />} />
+        <Route exact path="/test" element={<MainPage />} />
         <Route exact path="/swap" element={<SwapPage />} />
       </Routes>
       
