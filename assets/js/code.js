@@ -12,18 +12,18 @@ async function loadHeader() { // header load first
   headerClassList.add('header-scrolled');
   header.style.width = 'auto';
   
-  await initHeader();
+//   await initHeader();
   
-  // var div = $('#header');
+  var div = $('#header');
   
-  // $.ajax({
-    // url: "sections/Header.html", 
-    // success: async function(response) {
-      // div.append($(response));
+  $.ajax({
+    url: "sections/Header.html", 
+    success: async function(response) {
+      div.append($(response));
       
-      // await initHeader();
-    // }
-  // });
+      await initHeader();
+    }
+  });
   
   return true; 
 }
