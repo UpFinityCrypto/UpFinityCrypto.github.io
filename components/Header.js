@@ -12,13 +12,12 @@ function Header() {
         
       <nav id="navbar" className="navbar">
         <ul>
-          <li><a className="nav-link scrollto" href="dashboard.html">Dashboard</a></li>
+          <li><Link to href="/dashboard">Dashboard</Link></li>
           <li className="dropdown">
             <a className="nav-link scrollto" href="#">Token<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/upfinitys">Features</Link></li>
-              <li><a href="upfinitys">Features</a></li>
-              <li><a href="swap.html">Swap</a></li>
+              <li><Link to="/swap">Swap</Link></li>
               <li><a href="dashboard.html#Staking">Staking</a></li>
               <li><a href="dashboard.html#Rewards">Rewards</a></li>
             </ul>
