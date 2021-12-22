@@ -25,6 +25,14 @@
   <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
   <script src="https://unpkg.com/react-router@5.2.1/umd/react-router.min.js"></script>
   <script src="https://unpkg.com/react-router-dom@5.2.1/umd/react-router-dom.min.js"></script>
+  <script type="text/babel">
+  'use strict';
+  
+  const Router = window.ReactRouterDOM.BrowserRouter;
+  const Routes =  window.ReactRouterDOM.Switch;
+  const Route =  window.ReactRouterDOM.Route;
+  const Link =  window.ReactRouterDOM.Link;
+  </script>
   
   <script type="text/babel" src="components/Head/Head.js"></script>
   <script type="text/babel" src="components/Header.js"></script>
@@ -32,29 +40,23 @@
   <script type="text/babel" src="components/Banner.js"></script>
   <script type="text/babel" src="components/Hero.js"></script>
   <script type="text/babel" src="components/Swap.js"></script>
-  <script type="text/babel">
-  'use strict';
+  <script type="text/babel" src="components/Stats.js"></script>
+  <script type="text/babel" src="components/Ecosystem.js"></script>
+  <script type="text/babel" src="components/Listings.js"></script>
+  <script type="text/babel" src="components/Audits.js"></script>
+  <script type="text/babel" src="components/Team.js"></script>
+  <script type="text/babel" src="components/Footer.js"></script>
   
-  const Router = window.ReactRouterDOM.BrowserRouter;
-  const Route =  window.ReactRouterDOM.Route;
-  const Link =  window.ReactRouterDOM.Link;
+  <script type="text/babel" src="components/App.js"></script>
+  
+  <script type="text/babel" src="components/index.js"></script>
+  
+  
+  
+  <script type="text/babel">
+  
 
-  ReactDOM.render(
-      <React.StrictMode>
-        <Header />
-        <Notice />
-        <Banner />
-        <Hero />
-        
-        <Router>
-          <Route exact path="/test" element={<Header />} />
-          <Route exact path="/upfinitys" element={<Notice />} />
-        </Router>
-        
-      </React.StrictMode>  
-      ,
-      document.getElementById("root")
-    );
+
   
   
   </script>
