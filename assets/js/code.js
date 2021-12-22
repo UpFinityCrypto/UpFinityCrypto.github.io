@@ -14,7 +14,7 @@ async function loadHeader() { // header load first
   
 //   await initHeader();
   
-  var div = $('#header');
+  var div = $('#Header');
   
   $.ajax({
     url: "sections/Header.html", 
