@@ -79,7 +79,6 @@ function Header() {
             </div>
           </li>
         </ul>
-
       </div>
 
       <div className="row listed" style={{display: "contents"}}>
