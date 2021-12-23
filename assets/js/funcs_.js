@@ -158,7 +158,7 @@ runPersonals['Status'] = async function runStatusPersonal() {
     // displayText("_taxAccuTaxCheck", round(_taxAccuTaxCheck / 100, 2));
   }
   // displayText("_taxAccuTaxCheck", 0);
-  displayText("yourTaxPenalty", taxPenalty);
+  displayText("yourTaxPenalty", "+" + String(taxPenalty.toFixed(0)) + "%");
 
 
   // price impact 1 / ( 1 + x / r0) = (1 - I)
