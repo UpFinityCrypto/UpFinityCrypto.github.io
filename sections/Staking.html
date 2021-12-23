@@ -1,0 +1,92 @@
+<div class="container">
+
+  <div class="section-title">
+    <h2>Staking</h2>
+    <p>Stake <img src="assets/img/logo.png" class="small-icon">UPF, Earn <img src="assets/img/logo.png" class="small-icon">UPF</p>
+    <p>Rewards are <span>auto-staked/compounded</span></p>
+
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <p>Total Value Locked (TVL)</p>
+        <span id="totalValueLocked" class="text-center" style="font-size: 2.5em;"></span>
+      </div>
+      <div class="col-12 col-md-4">
+        <p>Total UPF Staked</p>
+        <span id="totalStaked" class="text-center" style="font-size: 2.5em;"></span><img src="assets/img/logo.png" class="small-icon">UPF
+      </div>
+      <div class="col-12 col-md-4">
+        <p>Total UPF Rewarded</p>
+        <span id="_totalFundsUsed" class="text-center" style="font-size: 2.5em;"></span><img src="assets/img/logo.png" class="small-icon">UPF
+      </div>  
+    </div>
+    <p>Staking Contract Address</p>
+    <a href="https://bscscan.com/address/0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D" target="_tab">
+      0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D
+    </a>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-6 text-justify content">
+      <h3>Stake</h3>
+      <div><i class="bi bi-chevron-right"></i>Connect wallet</div>
+
+      <div><i class="bi bi-chevron-right"></i>Click 'approve' and confirm in wallet dapp</div>
+      <a href="#null" id="approveStake" class="button button-soon scrollto" onclick="">Loading..</a>
+
+      <div><i class="bi bi-chevron-right"></i>Write down amount to Stake <span>(max 29B)</span></div>
+      <div style="border: solid 3px; border-radius: 16px; background: white;">
+        <input id="typedStakeAmount" inputmode="decimal" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="Write down amount to stake" value="" style="caret-color: black; color: black; text-align: center; background-color: white;">
+        <div>
+          <img id="UPFlogo" class="small-icon" src="assets/img/logo.png" style="width: 30px;">
+          UPF
+        </div>
+      </div>
+
+      <div><i class="bi bi-chevron-right"></i>Select one Stake Duration and confirm in wallet dapp</div>
+      <a href="#null" id="stake1d" class="button button-soon scrollto" onclick="fstake(1);">Loading..</a>
+      <a href="#null" id="stake7d" class="button button-soon scrollto" onclick="fstake(7);">Loading..</a>
+      <a href="#null" id="stake28d" class="button button-soon scrollto" onclick="fstake(28);">Loading..</a>
+      <span id="stakeLog"></span>
+
+    </div>
+    <div class="col-12 col-lg-6 pt-4 pt-lg-0 content">
+      <h3>Unstake</h3>
+      <div class="row mt-5" style="font-size: 3em; font-weight: bold;">
+        <div class="col-6 align-items-stretch">
+          <div class="icon-box">
+            <h6 class="text-center ">Your Rewards</h6>
+            <div id="calculateReward" class="text-center" style="font-size: 0.5em;"></div>UPF
+          </div>
+        </div>
+        <div class="col-6 align-items-stretch">
+          <div class="icon-box">
+            <h6 class="text-center ">Your claimed rewards</h6>
+            <div id="_claimedAmounts" class="text-center" style="font-size: 0.5em;"></div>UPF
+          </div>
+        </div>
+      </div>
+
+      <div><i class="bi bi-chevron-right"></i>Connect wallet</div>
+
+      <div><i class="bi bi-chevron-right"></i>Click 'Unstake' and confirm in wallet dapp</div>
+      <a href="#null" id="unstake" class="button button-soon scrollto" onclick="funstake();">Stake First</a>
+
+      <div><i class="bi bi-chevron-right"></i>UPF will be unstaked <span>with rewards</span></div>
+
+      <!--<div class="row mt-5" style="font-size: 3em; font-weight: bold;">
+    <div class="col-6 align-items-stretch">
+      <div class="icon-box">
+          <h6 class="text-center ">Staked Amount</h6>
+          <div id="_stakedAmounts" class="text-center" style="font-size: 0.5em;"></div>UPF
+      </div>
+    </div>
+    <div class="col-6 align-items-stretch">
+      <div class="icon-box">
+          <h6 class="text-center ">Staked Time</h6>
+          <div id="_stakedTimeLeft" class="text-center" style="font-size: 0.5em;"></div>Hours
+      </div>
+    </div>
+  </div>-->
+    </div>
+  </div>
+</div>
