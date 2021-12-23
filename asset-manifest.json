@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.60a3653b.css",
-    "main.js": "/static/js/main.280d1807.js",
+    "main.js": "/static/js/main.8aadb058.js",
     "static/media/Fundo_Cinza_green.png": "/static/media/Fundo_Cinza_green.b9986afee24e6049d41b.png",
     "static/media/Fundo_Cinza.png": "/static/media/Fundo_Cinza.3ab5b1126290dc66de9e.png",
     "index.html": "/index.html",
     "main.60a3653b.css.map": "/static/css/main.60a3653b.css.map",
-    "main.280d1807.js.map": "/static/js/main.280d1807.js.map"
+    "main.8aadb058.js.map": "/static/js/main.8aadb058.js.map"
   },
   "entrypoints": [
     "static/css/main.60a3653b.css",
-    "static/js/main.280d1807.js"
+    "static/js/main.8aadb058.js"
   ]
 }
