@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 import classes from './banner.module.css';
 
 function Banner() {
@@ -24,14 +24,14 @@ function Banner() {
                 </p>
                 <div className="row">
                   <div className="col-6">
-                    <a href="swap.html" className="button scrollto">
+                    <Link to="/swap" className="button scrollto">
                       <p className="center">Buy Now!</p>
-                    </a>
+                    </Link>
                   </div>
                   <div className="col-6">
-                    <a href="upfinity.html" className="button scrollto">
+                    <Link to="/upfinity" className="button scrollto">
                       <p className="center">Learn More</p>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

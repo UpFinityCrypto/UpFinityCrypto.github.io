@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Swap from './Swap';
+import { Link } from "react-router-dom";
 
 function Hero() {
   const menu = {width:"20px", height:"20px"};
@@ -23,12 +24,12 @@ function Hero() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <a href="#" id="copyUpfinityAdr" className="button scrollto" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>
+                  <a href="" id="copyUpfinityAdr" className="button scrollto" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>
                     Copy Address
                   </a>
                 </div>
                 <div className="col-6">
-                  <a href="#" className="button scrollto" onClick={window.addUPF}>
+                  <a href="" className="button scrollto" onClick={window.addUPF}>
                     Add UPF in wallet
                   </a>
                 </div>
@@ -44,7 +45,7 @@ function Hero() {
 
             <div className="row">
               <div className="col-12">
-                <a href="dashboard.html" className="button scrollto" target="_tab">Dashboard</a>
+                <Link to="/dashboard" className="button scrollto">Dashboard</Link>
               </div>
             </div>
             <div className="row">
@@ -52,7 +53,7 @@ function Hero() {
                 <a id="WhitePaperLink" href="https://upfinity.gitbook.io" className="button scrollto" target="_tab">WhitePaper</a>
               </div>
               <div className="col-6">
-                <a id="UpFinomicsLink" href="upfinity.html" className="button scrollto" target="_tab">UpFinomics</a>
+                <Link id="UpFinomicsLink" to="/upfinity" className="button scrollto">UpFinomics</Link>
               </div>
             </div>
           </div>

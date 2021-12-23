@@ -25,14 +25,14 @@ function P2egame() {
         </div>
         <div className="col-6 col-lg-6 center">
           <video width="100%" controls autoPlay>
-            <source src="assets/imgs/p2egame/demo.mp4" type="video/mp4" className="" alt=""/>
+            <source src="assets/img/p2egame/demo.mp4" type="video/mp4" className="" alt=""/>
           </video>
         </div>
       </div>
 
       <div className="row">
         <div className="col-6 col-lg-6 center">
-          <img className="full-width" src="assets/imgs/p2egame/concept.png"/>
+          <img className="full-width" src="assets/img/p2egame/concept.png"/>
         </div>
         <div className="col-6 col-lg-6 center">
           <h4>3 Stats</h4>
@@ -52,7 +52,7 @@ function P2egame() {
           <p>Legendary</p>
         </div>
         <div className="col-6 col-lg-6 center">
-          <img className="full-width" src="assets/imgs/p2egame/rockets.png"/>
+          <img className="full-width" src="assets/img/p2egame/rockets.png"/>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Mynft from './Mynft';
+import { Link } from "react-router-dom";
 
 function Status() {
   const menu = {width:"20px", height:"20px"};
@@ -28,7 +29,7 @@ function Status() {
         <div className="row">
           <div className="col-12 col-lg-12 text-justify content">
             <p>Questions about sell? Check FAQs!</p>
-            <a href="faqs.html" className="button scrollto">FAQs</a>
+            <Link to="/FAQs" className="button scrollto">FAQs</Link>
           </div>
           <div className="col-12 col-lg-12 text-justify content">
             <div className="row mt-5" style={bigNumber}>

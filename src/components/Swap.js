@@ -116,7 +116,7 @@ function Swap() {
               </div>
               <div id="swapResult"></div>
               <div>
-                <a href="#" className="scrollto" onClick={window.addUPF}>
+                <a href="" className="scrollto" onClick={window.addUPF}>
                   Click here to add UPF in wallet
                 </a>
               </div>

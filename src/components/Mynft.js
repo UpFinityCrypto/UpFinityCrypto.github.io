@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function Mynft() {
   const menu = {width:"20px", height:"20px"};

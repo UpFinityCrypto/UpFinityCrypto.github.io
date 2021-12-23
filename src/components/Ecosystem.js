@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Ecosystem() {
   const menu = {width:"20px", height:"20px"};
@@ -27,7 +28,7 @@ function Ecosystem() {
               <h6>20+ Features. 10+ Utilities. All in One</h6>
               <p>Enjoy all the things and get <span>profit!</span></p>
 
-              <p><a id="tokenLink" href="upfinity.html" className="button scrollto">UpFinity</a></p>
+              <p><Link id="tokenLink" to="/upfinity" className="button scrollto">UpFinity</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -36,14 +37,14 @@ function Ecosystem() {
               <h2>NFT</h2>
               <h6>Limited Sale. Holders Only. Special Perks</h6>
               <p>Buy NFT to get <span>Tax Reduction!</span></p>
-              <p><a id="NFTLink" href="nft.html" className="button scrollto">NFT</a></p>
+              <p><Link id="NFTLink" to="/nft" className="button scrollto">NFT</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/Swap.png"/>
-              <h2>Exchange</h2>
-              <p><a href="swap.html" className="button scrollto">Exchange</a></p>
+              <h2>Swap</h2>
+              <p><Link to="/swap" className="button scrollto">Swap</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -52,7 +53,7 @@ function Ecosystem() {
               <h2>Staking</h2>
               <h6>Buy UPF. Stake UPF. Earn UPF</h6>
               <p>Stake your UPF to get much more UPF rewards!</p>
-              <p><a href="dashboard.html#Staking" className="button scrollto">Staking</a></p>
+              <p><Link to="/Staking" className="button scrollto">Staking</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -61,7 +62,7 @@ function Ecosystem() {
               <h2>Rewards</h2>
               <h6>Buy UPF. Hold UPF. Earn BNB</h6>
               <p>Buy/Hold UPF to get much more BNB Rewards!</p>
-              <p><a href="https://www.theupfinity.com/dashboard.html#Rewards" className="button scrollto">Rewards</a></p>
+              <p><Link to="/Rewards" className="button scrollto">Rewards</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -70,7 +71,7 @@ function Ecosystem() {
               <h2>NFT Avatar</h2>
               <h6>8 Parts. 4 Grades. 3 Perks</h6>
               <p>Decorate your avatar with useful items!</p>
-              <p><a id="P2ELink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="P2ELink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -79,7 +80,7 @@ function Ecosystem() {
               <h2>Mystery Box</h2>
               <h6>Random items. Try your luck. More to Come.</h6>
               <p>Open the box to get legendary items!</p>
-              <p><a id="MysteryLink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -105,7 +106,7 @@ function Ecosystem() {
               <h2>Marketplace</h2>
               <p>UpFinity marketplace will be the place to trade all your NFTs. It will reward UPF holders with a percentage
                 of the tx fee!</p>
-              <p><a id="MarketplaceLink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="MarketplaceLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
@@ -114,7 +115,7 @@ function Ecosystem() {
               <h2>P2E Game</h2>
               <p>Enjoy gaming? Want to turn your skills into money? Coming soon, a fun easy to play, yet challenging game on
                 our platform, where you can earn UPF based on your score and play time. So get ready to PLAY TO WIN!</p>
-              <p><a id="P2ELink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="P2ELink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
 
@@ -122,28 +123,28 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/NFT_Farming.png"/>
               <h2>NFT Farming</h2>
-              <p><a id="MysteryLink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/Safu_Checker.png"/>
               <h2>SAFU Checker</h2>
-              <p><a id="MysteryLink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/merchandise.png"/>
               <h2>UPF Store</h2>
-              <p><a id="MysteryLink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/merchandise.png"/>
               <h2>Merchandise</h2>
-              <p><a id="MysteryLink" href="" className="button button-soon scrollto">Coming Soon</a></p>
+              <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
         </div>

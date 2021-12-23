@@ -17,7 +17,7 @@ export function Header() {
         <ul>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li className="dropdown">
-            <a className="nav-link scrollto" href="#">Token<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >Token<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/upfinity">Features</Link></li>
               <li><Link to="/swap">Swap</Link></li>
@@ -26,7 +26,7 @@ export function Header() {
             </ul>
           </li>
           <li className="dropdown">
-            <a className="nav-link scrollto" href="#">NFT<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >NFT<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/nft">NFT Origin</Link></li>
               <li><Link to="/mysterybox">NFT Mystery Box</Link></li>
@@ -36,7 +36,7 @@ export function Header() {
             </ul>
           </li>
           <li className="dropdown">
-            <a className="nav-link scrollto" href="#">Utility<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >Utility<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill</a></li>
               <li><a href="https://upfvote.com/">Coin Vote<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
@@ -47,7 +47,7 @@ export function Header() {
             </ul>
           </li>
           <li className="dropdown">
-            <a className="nav-link scrollto" href="#">About<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >About<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/roadmap">Roadmap</Link></li>
               <li><Link to="/team">Team</Link></li>
@@ -57,7 +57,7 @@ export function Header() {
           </li>
           <li><Link className="nav-link scrollto" to="/community">Community</Link></li>
           <li className="dropdown">
-            <a href="#">More<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto">More<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/donations">Donations</Link></li>
               <li><Link to="/airdrops">Airdrops</Link></li>
@@ -67,7 +67,7 @@ export function Header() {
       </nav>
 
       <div className="nav-item dropdown" style={{margin:"0 5px"}}>
-        <a className="nav-link nav-icon" href="#" data-bs-toggle="dropdown" aria-expanded="false" style={{padding: "0px"}}>
+        <a className="nav-link nav-icon" data-bs-toggle="dropdown" aria-expanded="false" style={{padding: "0px"}}>
           <i id="curStatus" className="bi" style={{fontSize:"25px"}}></i>
         </a>
 
@@ -92,7 +92,7 @@ export function Header() {
 
       <nav id="connectButton" className="header-nav ms-auto" style={ {marginRight:"50px"} }>
         <div className="text-center">
-          <a href="#null" id="connect" className="button scrollto" onClick={window.afconnect}>Connect Wallet</a>
+          <a href="" id="connect" className="button scrollto" onClick={window.afconnect}>Connect Wallet</a>
         </div>
       </nav>
       <script type="text/javascript">

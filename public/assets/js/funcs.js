@@ -406,7 +406,7 @@ async function afconnect() {
 
     try {
       // wasAdded is a boolean. Like any RPC method, an error may be thrown.
-      const wasAdded = await ethereum.request({
+      ethereum.request({
         method: 'wallet_watchAsset',
         params: {
           type: 'ERC20', // Initially only supports ERC20, but eventually more!
@@ -417,13 +417,8 @@ async function afconnect() {
             image: tokenImage, // A string url of the token logo
           },
         },
+      }).then({
       });
-
-      if (wasAdded) {
-        alert('UpFinity added!');
-      } else {
-        alert('Filed to add!');
-      }
     } catch (error) {
       alert(error);
     }
