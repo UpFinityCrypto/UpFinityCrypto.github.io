@@ -262,6 +262,9 @@ runs['Nft'] = async function runNft() {
 
 
 runPersonals['Mynft'] = async function runMynft() {
+  myNFTs = $('#myNFTs');
+  myNFTs.innerHTML = '';
+
   myNFTtax = 0;
   myNFTcounts = (await funcs['nft'].balanceOf(currentAccount))[0] / 1;
   for (idx = 0; idx < myNFTcounts; idx++) {
