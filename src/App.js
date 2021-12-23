@@ -26,6 +26,8 @@ import Donations from './components/Donations';
 import Airdrops from './components/Airdrops';
 import Fiat from './components/Fiat';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   const location = useLocation();
   useEffect(async () => {
@@ -41,7 +43,8 @@ function App() {
    
     <Header />
     <HeaderMargin />
-    
+
+    <ScrollToTop />
     <Routes>
       <Route exact path="/" element={<MainPage />} />
       <Route exact path="/dashboard" element={<DashboardPage />} />

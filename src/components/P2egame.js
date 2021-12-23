@@ -18,12 +18,12 @@ function P2egame() {
       </div>
 
       <div className="row">
-        <div className="col-6 col-lg-6 center">
+        <div className="col-12 col-lg-6 center">
           <h4>2 Game Modes</h4>
           <p>classNameic</p>
           <p>Guild vs Guild</p>
         </div>
-        <div className="col-6 col-lg-6 center">
+        <div className="col-12 col-lg-6 center">
           <video width="100%" controls autoPlay>
             <source src="assets/img/p2egame/demo.mp4" type="video/mp4" className="" alt=""/>
           </video>
@@ -31,10 +31,10 @@ function P2egame() {
       </div>
 
       <div className="row">
-        <div className="col-6 col-lg-6 center">
+        <div className="col-12 col-lg-6 center">
           <img className="full-width" src="assets/img/p2egame/concept.png"/>
         </div>
-        <div className="col-6 col-lg-6 center">
+        <div className="col-12 col-lg-6 center">
           <h4>3 Stats</h4>
           <p>Chasis: Bigger Growth</p>
           <p>Engine: Higer Speed</p>
@@ -43,7 +43,7 @@ function P2egame() {
       </div>
 
       <div className="row">
-        <div className="col-6 col-lg-6 center">
+        <div className="col-12 col-lg-6 center">
           <h4>Get Higher Tier of Rocket!</h4>
           <p>Normal</p>
           <p>Uncommon</p>
@@ -51,7 +51,7 @@ function P2egame() {
           <p>Epic</p>
           <p>Legendary</p>
         </div>
-        <div className="col-6 col-lg-6 center">
+        <div className="col-12 col-lg-6 center">
           <img className="full-width" src="assets/img/p2egame/rockets.png"/>
         </div>
       </div>
