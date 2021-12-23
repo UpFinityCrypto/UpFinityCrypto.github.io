@@ -1,0 +1,474 @@
+.intro {
+    display: flex;
+    background-color: #262626;
+    align-items: center;
+    justify-content:center;
+    width: 100%;
+    height: auto;
+    font-family: 'Oswald', sans-serif;
+}
+
+.introDescription { 
+    display: flex; 
+    width: 65%;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: white;
+    margin: 5rem auto;
+    margin-left: 5rem;
+    line-height: 2.5rem;
+    padding: 0;
+}
+
+.introDescription h1 {
+  font-size: 50px;
+  text-overflow: none;  
+  margin-bottom: 2.5rem;
+}
+
+.upfinityName {
+    color:#28A745;
+}
+
+.introDescription p {
+    font-size: 17px;
+}
+
+.buttonCopy {
+    color: white;
+    font-family: "Oswald", sans-serif;
+    padding: 3px;
+    font-size: 1rem;
+    margin-left: 1rem;
+    background: transparent;
+    box-shadow:#28A745 0px 1px 4px;
+    outline: none;
+    border: none;
+    text-align: center;
+}
+
+
+.walletButtons {
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin: 1.5rem 0;
+} 
+
+
+.walletBtn {
+    width: 200px;
+    height: 45px;
+    background-color: #F9580C;    
+    border-radius: 6px;
+    color: white;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    outline: none;
+    border: none;
+}
+
+.walletBtn:nth-child(2) {
+    margin-left: 2.5rem;
+}
+
+.walletBtn::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	transition: all 0.3s;
+	background-color: rgba(255,255,255,0.1);
+}
+
+.walletBtn:hover::after {
+	opacity: 0;	
+	transform: scale(0.1, 1);
+
+}
+
+.introRobotImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: auto;
+    padding: 0;
+    margin-right: 3rem;
+}
+
+.introRobotImage img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    max-width: 500px;
+}
+
+
+/*ICONS*/
+
+.icons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.icons .icon,
+.icons img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 1rem 0.5rem;
+    object-fit: contain;
+}
+
+
+/* ---------------------------MEDIA QUERIES --------------------------*/
+ 
+@media only screen and (max-width: 1024px) {
+    .intro {
+        height: 100%;
+    }
+    
+    .introDescription { 
+        width: 60%;
+        margin: 4.5rem 3rem;
+    }
+
+    .introDescription h1{
+        font-size: 38px;
+        margin-bottom: 1.5rem;
+    }
+
+    .introDescription p {
+        font-size: 15px;
+    }
+
+    .icons {
+        font-size: 15px;
+    }
+
+    .icons .icon,
+    .icons img {
+        width: 37px;
+        height: 37px;
+    } 
+
+
+    .walletBtn {
+        width: 120px;
+        height: 40px;
+        font-size: 15px;      
+    }
+
+    .buttonCopy {
+        width: auto;
+        height: 25px;
+        font-size: 12px;
+    }
+
+    .introRobotImage {
+        width: 40%;
+        height: auto;
+        justify-content:center;
+        align-items: center;
+        margin:0;
+        padding: 0;
+    } 
+    
+    .introRobotImage img {
+        width: 100%;
+    }
+
+} 
+
+
+/*  (889px and below) */
+ @media only screen and (max-width: 889px) {
+    .intro {
+        height: 100%;
+    }
+    
+    .introDescription { 
+        width: 55%;
+        margin: 4rem 2.2rem;
+        line-height: 1.7rem;
+        padding: 0;
+    }
+
+    .introDescription h1{
+        font-size: 28px;
+        margin-bottom: 1rem;
+    }
+
+    .introDescription p {
+        font-size: 14px;
+    }
+
+    .icons {
+        font-size: 12px;
+    }
+
+
+    .icons .icon,
+    .icons img {
+        width: 33px;
+        height: 33px;
+    } 
+
+
+    .walletBtn {
+        width: 100px;
+        height: 35px;
+        font-size: 12px;      
+    }
+
+    .buttonCopy {
+        width: auto;
+        height: 20px;
+        font-size: 10px;
+    }
+
+    .introRobotImage {
+        width: 45%;
+        height: auto;
+        margin:0;
+        padding:0;
+    } 
+    
+    .introRobotImage img {
+        justify-content:center;
+        align-items: center;
+        width: 100%;
+    }
+
+} 
+
+
+
+/* 700px and below*/
+@media only screen and (max-width: 700px) {
+    .intro {
+        height: 100%;
+    }
+    
+    .introDescription { 
+        width: 55%;
+        align-items: flex-start;
+        line-height: 1.5rem;
+        margin: 2.5rem 2rem;
+    }
+
+    .introDescription h1{
+        font-size: 27px;
+        text-overflow: none;
+        margin-bottom: 1rem;
+    }
+
+    .introDescription p {
+        font-size: 12px;
+    }
+
+    .icons {
+        width: 90%;
+        font-size: 10px;
+    }
+
+    .icons .icon,
+    .icons img {
+        width: 33px;
+        height: 33px;
+        margin: 0.5rem 0.5rem;
+    } 
+
+
+    .walletBtn {
+        width: 90px;
+        height: 30px;
+        font-size: 10px;      
+    }
+
+    .buttonCopy {
+        width: auto;
+        height: 18px;
+        font-size: 8px;
+    }
+
+    .introRobotImage {
+        width: 45%;
+        justify-content:center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        height: auto;
+    } 
+    
+    .introRobotImage img {
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+/*  (595px and below) */
+@media only screen and (max-width: 630px) {
+    .intro {
+        height: 100%;
+    }
+    
+    .introDescription { 
+        width: 60%;
+        align-items: center;
+        line-height: 1rem;
+        margin: 2rem 1rem;
+    }
+
+    .introDescription h1{
+        font-size: 20px;
+        text-overflow: none;
+        margin-bottom: 0.8rem;
+    }
+
+    .introDescription p {
+        font-size: 10px;
+    }
+
+    .buttonCopy {
+        width: auto;
+        height: 12px;
+        font-size: 5px;
+        margin-left: 0.5rem;
+        box-shadow:#28A745 0px 1px 3px;
+    }
+
+    .walletButtons {
+        justify-content:center;
+        margin: 1rem 0;
+    } 
+
+    .walletBtn {
+        width: 70px;
+        height: 30px;
+        font-size: 9px;      
+    }
+
+    .icons .icon,
+    .icons img {
+        width: 28px;
+        height: 28px;
+        margin: 1rem 0.5rem;
+    }
+
+
+    .icons {
+        justify-content:center;
+        align-items: center;
+        width: 80%;
+        font-size: 10px;
+    }
+
+    .introRobotImage {
+        justify-content:center;
+        align-items:center;
+        width: 45%;
+        height: auto;
+        margin:0;
+        padding:0;
+    }
+    
+    .introRobotImage img {
+        width: 100%;
+        height: auto;
+    }
+
+    
+}
+
+/*screens between 320 - 480px*/
+@media screen and (min-width : 320px) and (max-width : 480px) {
+    .intro {
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .introDescription { 
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 3rem auto;
+        padding: 0;
+    }
+    
+    .introDescription h1{
+        font-size: 16px;
+        margin-bottom: 0.5rem;
+    }
+
+    .introDescription p {
+        font-size: 10px;
+    }
+
+    .introDescription p:nth-child(3) {
+        font-size: 8px;
+    }
+
+    .walletButtons {
+        justify-content:center;
+        margin: 1rem 0;
+    } 
+
+    .walletBtn {
+        width: 70px;
+        height: 20px;
+        font-size: 5px;      
+    }
+
+    .icons {
+        justify-content:center;
+        align-items: center;
+        width: 100%;
+        font-size: 8px;
+    }
+
+    .icons .icon,
+    .icons img {
+        width: 15px;
+        height: 15px;
+        margin: 1rem 0.3rem;
+    }
+
+    .buttonCopy {
+        width: auto;
+        height: 12px;
+        font-size: 4px;
+        margin-left: 0.3rem;
+    }
+
+    .introRobotImage {
+        justify-content:center;
+        align-items: center;
+        height: auto;
+        margin: 0;
+        padding:0;
+    }
+    
+    .introRobotImage img {
+        width: 200px;
+        height: auto;
+    }   
+  }
+

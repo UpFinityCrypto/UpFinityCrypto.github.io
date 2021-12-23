@@ -1,0 +1,111 @@
+.introNew {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#212121;
+    position: relative;
+    color: white;
+    font-family:"Reem Kufi", sans-serif;
+}
+
+.banner {
+    width: 100%;
+    height: 70%;
+}
+
+.banner img  {
+    width: 100%;
+    height: 100%;
+}
+
+.about {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.introAbout {
+    /* margin: 2rem auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 65%;
+    height: auto;
+    text-align: center;
+    line-height:2rem;
+    margin: 1rem auto 3rem auto; 
+}
+
+.introAbout span, .introAbout h1, .introAbout p {
+    font-family:"Reem Kufi", sans-serif;
+}
+
+.introAbout h1 {
+  font-size: 48px;
+  text-overflow: none;  
+  margin-bottom: 2rem;
+}
+
+.introAbout p {
+   font-size: 16px;
+   margin: 0 0.5rem;
+}
+
+
+.iconCopy{
+    width: 45px;
+    height: 25px;
+}
+
+
+.graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 35%;
+    height: 100%;
+    padding-top: 10rem;
+    line-height: 2rem;
+    margin: 1rem auto 5rem auto ;
+}
+
+.graph p {
+    font-family:"Reem Kufi", sans-serif;
+    font-size: 16px
+}
+
+.icons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons span {
+    font-family:"Reem Kufi", sans-serif;
+    font-size: 16px;
+
+}
+
+.icons .icon,
+.icons img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 0.5rem 0.5rem;
+    object-fit: contain;
+}
+
+
+.svg {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+}

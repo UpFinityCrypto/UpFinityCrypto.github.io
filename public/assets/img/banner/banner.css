@@ -1,0 +1,894 @@
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&display=swap');
+
+.banner {
+  width: 100%;
+  height: 790px;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerOuter {
+  width: 100%;
+  height: 790px;
+  background-image: url(../banner/bannerImages/Fundo_Cinza_green.png);
+  background-repeat: no-repeat;
+  background-position: contain;
+  background-size: 100% 100%;
+  position: relative;
+}
+
+.bannerInner {
+  position: absolute;
+  width: 100%;
+  height: 770px;
+  background-image: url(../banner/bannerImages/Fundo_Cinza.png);
+  background-repeat: no-repeat;
+  background-position: contain;
+  background-size: 100% 100%;
+}
+
+.bannerContent {
+  width: 100%;
+  height: 790px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Reem Kufi", sans-serif;
+  line-height: 2rem;
+}
+
+.bannerImage {
+  width: 100%;
+  height: auto;
+}
+
+  .bannerImage img {
+    width: 90%;
+    height: 90%;
+    padding: 0;
+    margin: 0;
+  }
+
+
+.mission {
+  width: 100%;
+  height: auto;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: "Oswald", sans-serif;
+}
+
+
+.missionStatement {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+  .missionStatement h1 {
+    font-family: "Oswald", sans-serif;
+    width: 90%;
+    height: 100%;
+    text-align: center;
+    font-size: 32px;
+  }
+
+  .missionStatement p {
+    font-family: "Poppins", sans-serif;
+    width: 80%;
+    text-align: center;
+    font-size: 24px;
+  }
+
+.nftMoon {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+  .nftMoon img {
+    position: absolute;
+    width: 30%;
+    top: 34%;
+    left: 68%;
+  }
+
+
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .banner {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 690px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 2rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 26px;
+  }
+
+  .missionStatement p {
+    font-size: 22px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 34%;
+      top: 34%;
+      left: 63%;
+    }
+}
+
+
+@media screen and (min-width: 901px) and (max-width: 991px) {
+  .banner {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 690px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 2rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 26px;
+  }
+
+  .missionStatement p {
+    font-size: 22px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 48%;
+      top: 34%;
+      left: 54%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+
+
+
+@media screen and (min-width: 901px) and (max-width: 991px) {
+  .banner {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 690px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 2rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 26px;
+  }
+
+  .missionStatement p {
+    font-size: 22px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 48%;
+      top: 34%;
+      left: 54%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 900px) {
+  .banner {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 690px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 2rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 26px;
+  }
+
+  .missionStatement p {
+    font-size: 22px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 48%;
+      top: 34%;
+      left: 54%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 900px) {
+  .banner {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 710px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 690px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 710px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 2rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 26px;
+  }
+
+  .missionStatement p {
+    font-size: 22px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 48%;
+      top: 34%;
+      left: 54%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (min-width: 721px) and (max-width: 800px) {
+  .banner {
+    width: 100%;
+    height: 690px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 690px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 670px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 690px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 2rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 26px;
+  }
+
+  .missionStatement p {
+    font-size: 22px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 48%;
+      top: 34%;
+      left: 54%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (min-width: 681px) and (max-width: 720px) {
+  .banner {
+    width: 100%;
+    height: 670px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 670px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 650px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 670px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 1.7rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 24px;
+  }
+
+  .missionStatement p {
+    font-size: 19px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 52%;
+      top: 34%;
+      left: 47%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+@media screen and (min-width: 623px) and (max-width: 680px) {
+  .banner {
+    width: 100%;
+    height: 670px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 670px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 650px;
+  }
+
+
+  .bannerContent {
+    width: 100%;
+    height: 670px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 1.7rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 24px;
+  }
+
+  .missionStatement p {
+    font-size: 19px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 55%;
+      top: 34%;
+      left: 46%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (min-width: 591px) and (max-width: 622px) {
+  .banner {
+    width: 100%;
+    height: 670px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 670px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 650px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 670px;
+    line-height: 1.7rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 24px;
+  }
+
+  .missionStatement p {
+    font-size: 19px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 56%;
+      top: 36%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+@media screen and (min-width: 511px) and (max-width: 590px) {
+  .banner {
+    width: 100%;
+    height: 630px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 630px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 610px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 630px;
+    line-height: 1.5rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 24px;
+  }
+
+  .missionStatement p {
+    font-size: 19px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 58%;
+      top: 36%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (min-width: 427px) and (max-width: 476px) {
+  .banner {
+    width: 100%;
+    height: 550px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 550px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 530px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 550px;
+    line-height: 1.5rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 20px;
+  }
+
+  .missionStatement p {
+    font-size: 16px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 210px;
+      top: 43%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+
+    .nftMoon img {
+      position: absolute;
+      width: 55%;
+      top: 43%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+
+@media screen and (min-width: 477px) and (max-width: 510px) {
+  .banner {
+    width: 100%;
+    height: 580px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 580px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 560px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 580px;
+    line-height: 1.5rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 22px;
+  }
+
+  .missionStatement p {
+    font-size: 18px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+
+    .nftMoon img {
+      position: absolute;
+      width: 55%;
+      top: 40%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (min-width: 427px) and (max-width: 476px) {
+  .banner {
+    width: 100%;
+    height: 550px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 550px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 530px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 550px;
+    line-height: 1.5rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 20px;
+  }
+
+  .missionStatement p {
+    font-size: 16px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 210px;
+      top: 43%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+
+    .nftMoon img {
+      position: absolute;
+      width: 55%;
+      top: 43%;
+      left: 44%;
+      /* border: 1px solid red; */
+    }
+}
+
+
+
+@media screen and (min-width: 361px) and (max-width: 426px) {
+  .banner {
+    width: 100%;
+    height: 500px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 500px;
+  }
+
+  .bannerInner {
+    width: 100%;
+    height: 480px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 500px;
+    line-height: 1.5rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 20px;
+  }
+
+  .missionStatement p {
+    font-size: 16px;
+  }
+
+  .nftMoon {
+    width: 50%;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 160px;
+      top: 43%;
+      left: 59%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 360px) {
+  .banner {
+    width: 100%;
+    height: 450px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 450px;
+  }
+
+  .bannerInner {
+    position: absolute;
+    width: 100%;
+    height: 430px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 1rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 18px;
+  }
+
+  .missionStatement p {
+    font-size: 14px;
+  }
+
+  .nftMoon {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 205px;
+      top: 37%;
+      left: 32%;
+      /* border: 1px solid red; */
+    }
+}
+
+@media screen and (max-width: 320px) {
+  .banner {
+    width: 100%;
+    height: 400px;
+  }
+
+  .bannerOuter {
+    width: 100%;
+    height: 400px;
+  }
+
+  .bannerInner {
+    position: absolute;
+    width: 100%;
+    height: 380px;
+  }
+
+  .bannerContent {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: "Reem Kufi", sans-serif;
+    line-height: 1rem;
+  }
+
+  .missionStatement h1 {
+    font-size: 16px;
+  }
+
+  .missionStatement p {
+    font-size: 12px;
+  }
+
+  .nftMoon {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+    .nftMoon img {
+      position: absolute;
+      width: 150px;
+      top: 40%;
+      left: 45%;
+    }
+}

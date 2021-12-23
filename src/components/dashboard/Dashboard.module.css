@@ -1,0 +1,164 @@
+.dashboard {
+    width: 100%;
+    height: 100%;
+    padding-top: 80px;
+    background-color:#262626;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboardWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height:  1.7rem;
+}
+
+.dashboardWrapper h1 {
+    margin: 2rem auto;
+    color: #28A745;
+}
+
+.faqBtn {
+    width: 200px;
+    height: 45px;
+    background-color: #F9580C;    
+    border-radius: 6px;
+    color: white;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    outline: none;
+    border: none;
+    margin: 2rem auto;
+}
+
+.faqBtn:nth-child(2) {
+    margin-left: 2.5rem;
+}
+
+.faqBtn::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	transition: all 0.3s;
+	background-color: rgba(255,255,255,0.1);
+}
+
+.faqBtn:hover::after {
+	opacity: 0;	
+	transform: scale(0.1, 1);
+}
+
+
+.status, .nft, .stats, .rewards, .staking  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin: 4rem auto 2rem auto;
+}
+
+.top, .bottom {
+    width: 100%;
+    height: 100%;
+     display:grid;
+     grid-template-columns: 1fr 1fr 1fr 1fr;
+     grid-gap: 2rem;
+     justify-content: center;
+     align-content: center;
+}
+
+.top {
+    margin: 2rem auto;
+}
+
+
+.box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items:center;
+    padding: 1rem;
+    text-align: center;
+    line-height:1.5rem;
+}
+
+.rewards .top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.rewards ul li{
+    list-style: none;
+    font-size: 0.8rem;
+}
+
+
+.claimBtn {
+        width: 100px;
+        height: 45px;
+        background-color: #F9580C;    
+        border-radius: 6px;
+        color: white;
+        font-family: "Oswald", sans-serif;
+        font-size: 15px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s;
+        outline: none;
+        border: none;
+        margin: 2rem auto;
+    }
+
+    .claimBtn::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        transition: all 0.3s;
+        background-color: rgba(255,255,255,0.1);
+    }
+    
+    .claimBtn:hover::after {
+        opacity: 0;	
+        transform: scale(0.1, 1);
+    }
+    
+
+    .staking .top {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .staking ul li {
+        list-style: none;
+        font-size: 0.8rem;
+    }
+
+    .staking .innerBox {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        align-content: center;
+        grid-gap: 1rem;
+        margin-bottom: 1rem;
+    }

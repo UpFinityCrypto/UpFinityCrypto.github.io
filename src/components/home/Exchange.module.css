@@ -1,0 +1,172 @@
+.exchanges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #262626;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    color: white;
+    font-family: "Oswald" ,sans-serif;
+}
+
+.exchange {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    margin: 3rem auto;
+    line-height: 2rem;
+}
+
+.exchange h1{
+    margin-bottom: 0.7rem;
+}
+
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    max-height: 400px;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem auto;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #28A745;
+    box-shadow: #28A745  0px 3px 8px;
+    width: 60%;
+    height: 100%;
+    margin: 1rem auto;
+    border-radius: 6px;
+}
+
+.inputContainer input {
+    width: 100%;
+    height: auto;
+    padding: 1.5rem;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+.logo {
+    margin: 1rem 1rem;
+    width: 35px;
+    height: 35px;
+}
+
+
+
+/* ----------Button  */
+.walletButtons {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 40%;
+    height: auto;
+    margin: 1.5rem 0;
+} 
+
+
+.buyBtn {
+    width: 200px;
+    height: 45px;
+    background-color: #F9580C;    
+    border-radius: 6px;
+    color: white;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    outline: none;
+    border: none;
+}
+
+.buyBtn:nth-child(2) {
+    margin-left: 2.5rem;
+}
+
+.buyBtn::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	transition: all 0.3s;
+	background-color: rgba(255,255,255,0.1);
+}
+
+.buyBtn:hover::after {
+	opacity: 0;	
+	transform: scale(0.1, 1);
+
+}
+
+.fiat {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    line-height: 2rem;
+}
+
+.widget {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 1rem; 
+    color:#262626;   
+}
+
+
+
+/* ------------------- Media queries */
+
+/*  (889px and below) */
+@media only screen and (max-width: 889px) {
+   
+}
+
+/*  (595px and below) */
+@media only screen and (max-width: 630px) {
+    
+}
+
+
+
+
+/*screens between 320 - 480px*/
+@media screen and (min-width : 320px) and (max-width : 480px) {
+    .exchanges {
+        flex-direction: column;
+        
+    }
+
+
+    .widget {
+        width: 80%;
+    }
+
+  }
+

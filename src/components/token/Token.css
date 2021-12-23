@@ -1,0 +1,185 @@
+.token {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color:#262626;
+}
+
+.tokenWrapper{
+    width: 100%;
+    height:800px;   
+    padding-top: 80px;
+    display: flex;
+    background-color:#262626;
+    color: white;
+    margin: 1rem auto 7rem auto; 
+}
+
+.circle-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    /*2.8em = 2em*1.4 (2em = half the width of a link with img, 1.4 = sqrt(2))*/
+    /* border-radius: 50%; */
+    margin: 0 auto;
+   
+}
+
+.circle-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 45%; 
+    left: 45%; 
+    width: 12em; 
+    height: 12em;
+    /* margin: -2em; */
+}
+
+
+.circle-container img { 
+    display: block; 
+    width: 100px;
+    height: 100px;
+}
+
+
+.circle-container .center { 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 30em;
+    height: 30em;
+    border-radius: 50%;
+    position: relative;
+    background-color: #212121;;
+}
+
+
+.center .innerCenter {
+    width: 80%;
+    height: 80%;
+    background-image: url(../../assets/images/ecosystemBg.png);
+    background-size: 100% 100%;
+    background-position: contain;
+    background-repeat: no-repeat;
+    filter: blur(12px);
+    border-radius: 50%;
+    position: absolute;
+    top: 10%;
+    left: 8%;
+}
+
+.center .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 10%; 
+  }
+
+
+  .content h1,
+  .content p {
+    font-family:"Reem Kufi", sans-serif;
+  }
+
+
+  .content h1 {
+    font-size: 48px;
+    text-overflow: none;  
+    margin: 2rem auto; 
+  }
+
+  .content p {
+      font-size: 16px;
+  }
+
+  .buyBtn  { 
+    width: 150px;
+    height: 50px;
+    background-color: #F9580C;    
+    border-radius: 6px;
+    color: white;
+    font-family: "Reem Kufi", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+
+.buyBtn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: all 0.3s;
+    background-color: rgba(255,255,255,0.1);
+}
+
+.buyBtn:hover::after {
+    opacity: 0;	
+    transform: scale(0.1, 1);
+}
+
+.circle-container .deg0,
+.circle-container .deg45,
+.circle-container .deg135,
+.circle-container .deg180,
+.circle-container .deg225,
+.circle-container .deg315 { 
+    border-radius:50%;
+    background-color: #212121;
+}
+
+
+.deg0 p,
+.deg45 p,
+.deg135 p,
+.deg180 p,
+.deg225 p,
+.deg315 p {
+    font-family: "Reem Kufi", sans-serif;
+    font-size: 16px;
+}
+
+
+/*positioning*/
+.center {
+    transform: translate(-9em, -9em)
+}
+
+.deg0 { 
+    transform: translate(24em); 
+} 
+
+.deg45 {
+     transform: rotate(45deg) translate(24em) rotate(-45deg); 
+}
+
+.deg135 { transform: rotate(135deg) translate(24em) rotate(-135deg); }
+
+.deg180 { transform: translate(-24em); }
+
+.deg225 { transform: rotate(225deg) translate(24em) rotate(-225deg);}
+
+.deg315 { transform: rotate(315deg) translate(24em) rotate(-315deg); }
