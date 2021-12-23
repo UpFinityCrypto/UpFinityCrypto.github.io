@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 function Swap() {
   const menu = {width:"20px", height:"20px"};
@@ -137,7 +138,7 @@ function Swap() {
                 <a id="PoocoinChartLink" href="https://poocoin.app/tokens/0x6cc5f09e46797189d18ea8cfb3b1aaa4661280ae" className="scrollto">
                   <img src="assets/img/trade/poo.png" style={width30px}/>
                 </a>
-                <div><a href="">Buy BNB/BUSD with Fiat! (soon)</a></div>
+                <div><Link to="/fiat">Buy BNB/BUSD with Fiat!</Link></div>
               </div>
             </div>
           </div>

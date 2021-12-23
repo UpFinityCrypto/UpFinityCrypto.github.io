@@ -24,7 +24,7 @@ import FAQs from './components/FAQs';
 import Community from './components/Community';
 import Donations from './components/Donations';
 import Airdrops from './components/Airdrops';
-
+import Fiat from './components/Fiat';
 
 function App() {
   const location = useLocation();
@@ -64,7 +64,7 @@ function App() {
       
       <Route exact path="/donations" element={<Donations />} />
       <Route exact path="/airdrops" element={<Airdrops />} />
-      
+      <Route exact path="/fiat" element={<Fiat />} />
       
     </Routes>
     
