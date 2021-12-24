@@ -407,7 +407,6 @@ section {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  color: #ebedf0;
 }
 .section-title h2::before {
   content: "";

@@ -93,6 +93,31 @@ window.addEventListener('load', async () => {
     .then(() => {
        t = TT('DONE', t);
     });
+
+  $(".yoke").click(function () {
+    if ($("body").hasClass("night")) {
+      $("body").removeClass("night");
+      $(".box").removeClass("boxedin");
+      $(".switch").removeClass("switchedin");
+      $(".te").removeClass("teedin");
+      $("body").addClass("day");
+      $(".yoke").addClass("unyoked");
+      $(".box").addClass("boxedout");
+      $(".switch").addClass("switchedout");
+      $(".te").addClass("teedout");
+    } else {
+      $(".yoke").removeClass("unyoked");
+      $(".switch").removeClass("switchedout");
+      $(".te").removeClass("teedout");
+      $("body").removeClass("day");
+      $(".box").removeClass("boxedout");
+      $(".yoke").addClass("yoked");
+      $("body").addClass("night");
+      $(".box").addClass("boxedin");
+      $(".switch").addClass("switchedin");
+      $(".te").addClass("teedin");
+    }
+  });
 });
 
 // function getElem(a, b) {
