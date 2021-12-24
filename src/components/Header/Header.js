@@ -9,7 +9,7 @@ export function Header() {
     <header id="Header">
       <i className="bi bi-list mobile-nav-toggle"></i>
       <Link to="/" className="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" className="small-icon" alt="" style={{margin:"10px"}}/>
+        <img src="assets/img/logo_xmas.png" className="small-icon" alt="" style={{margin:"10px"}}/>
         <h6 className="desktop"> UpFinity</h6>
       </Link>
         
@@ -38,7 +38,7 @@ export function Header() {
           <li className="dropdown">
             <a className="nav-link scrollto" >Utility<i className="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill</a></li>
+              <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill (Free 25$!)</a></li>
               <li><a href="https://upfvote.com/">Coin Vote<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
               <li><a href="">SAFU Checker<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
               <li><a href="">Lottery<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
