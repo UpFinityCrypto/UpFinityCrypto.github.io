@@ -1,0 +1,235 @@
+/*Created by Joanna Orlowska*/
+
+.night {
+  animation-name: tonight;
+  animation-duration: 0.5s;
+  background-color: #040018;
+}
+
+@keyframes tonight {
+  from {
+    background-color: white;
+    /*yellow*/
+  }
+
+  to {
+    background-color: #040018;
+  }
+}
+
+.day {
+  animation-name: today;
+  animation-duration: 0.5s;
+  background-color: white;
+}
+
+@keyframes today {
+  from {
+    background-color: #040018;
+  }
+
+  to {
+    background-color: white;
+  }
+}
+
+.box {
+  height: 60px;
+  width: 160px;
+  margin-left: 600px;
+  margin-top: 100px;
+  border-radius: 40px;
+  border: 2px solid #E7E7EC;
+  /* gray*/
+  background-color: #0D0D3C;
+  /*nice navy*/
+}
+
+.boxedin {
+  animation-name: boxedin;
+  animation-duration: 0.5s;
+  background-color: #f44327;
+  /*nice red*/
+}
+
+@keyframes boxedin {
+  from {
+    background-color: #0D0D3C;
+    /*nice navy*/
+  }
+
+  to {
+    background-color: #f44327;
+    /*nice red*/
+  }
+}
+
+.boxedout {
+  animation-name: boxedout;
+  animation-duration: 0.5s;
+  background-color: #0D0D3C;
+  /*nice navy*/
+}
+
+@keyframes boxedout {
+  from {
+    background-color: #f44327;
+    /*nice red*/
+  }
+
+  to {
+    background-color: #0D0D3C;
+    /*nice navy*/
+  }
+}
+
+.switch {
+  height: 50px;
+  width: 150px;
+  margin-top: 3px;
+  margin-left: 3px;
+  border-radius: 30px;
+  border: 2px solid #E7E7EC;
+  /* gray*/
+  background-color: #6f6f8e;
+  /*bluy gray*/
+}
+
+.switchedin {
+  animation-name: switchedin;
+  animation-duration: 0.5s;
+  background-color: #FBFFC9;
+  /*yellow*/
+}
+
+@keyframes switchedin {
+  from {
+    background-color: #6f6f8e;
+    /*bluy gray*/
+  }
+
+  to {
+    background-color: #FBFFC9;
+    /*yellow*/
+  }
+}
+
+.switchedout {
+  animation-name: switchedout;
+  animation-duration: 0.5s;
+  background-color: #6f6f8e;
+  /*bluy gray*/
+}
+
+@keyframes switchedout {
+  from {
+    background-color: #FBFFC9;
+    /*yellow*/
+  }
+
+  to {
+    background-color: #6f6f8e;
+    /*bluy gray*/
+  }
+}
+
+.yoke {
+  height: 40px;
+  width: 45px;
+  border-radius: 20px;
+  margin-top: 3px;
+  margin-left: 5px;
+  background-color: #FBFFC9;
+  /*yellow*/
+}
+
+.yoked {
+  animation-name: yokeAnim;
+  animation-duration: 0.5s;
+  margin-left: 97px;
+  background-color: #f44327;
+  /*nice red*/
+}
+
+@keyframes yokeAnim {
+  from {
+    background-color: #FBFFC9;
+    /*yellow*/
+    margin-left: 5px;
+  }
+
+  to {
+    background-color: #f44327;
+    /*nice red*/
+    margin-left: 97px;
+  }
+}
+
+.unyoked {
+  animation-name: unyokeAnim;
+  animation-duration: 0.5s;
+  margin-left: 5px;
+  background-color: #FBFFC9;
+  /*yellow*/
+}
+
+@keyframes unyokeAnim {
+  from {
+    background-color: #f44327;
+    /*nice red*/
+    margin-left: 97px;
+  }
+
+  to {
+    background-color: #FBFFC9;
+    /*yellow*/
+    margin-left: 5px;
+  }
+}
+
+.te {
+  height: 500px;
+  width: 500px;
+  margin-left: 430px;
+  margin-top: 50px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.teedin {
+  animation-name: teed;
+  animation-duration: 0.5s;
+  color: #c5b2cc;
+  /*light purpuly*/
+}
+
+@keyframes teedin {
+  from {
+    color: #190022;
+    /*dark purply*/
+  }
+
+  to {
+    color: #c5b2cc;
+    /*light purpuly*/
+  }
+}
+
+.teedout {
+  animation-name: teed;
+  animation-duration: 0.5s;
+  color: #190022;
+  /*dark purply*/
+}
+
+@keyframes teedout {
+  from {
+    color: #c5b2cc;
+    /*light purpuly*/
+  }
+
+  to {
+    color: #190022;
+    /*dark purply*/
+  }
+}

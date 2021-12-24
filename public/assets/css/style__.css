@@ -1185,3 +1185,13 @@ red {
 green {
   color: #28a745;
 }
+
+.day {
+  color: #494949;
+  background-color: #dadada;
+}
+
+.night {
+  color: #aaaaaa;
+  background-color: #262626;
+}

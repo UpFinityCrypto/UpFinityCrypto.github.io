@@ -21,6 +21,7 @@ export function Header() {
             <ul>
               <li><Link to="/upfinity">Features</Link></li>
               <li><Link to="/swap">Swap</Link></li>
+              <li><Link to="/fiat">Fiat</Link></li>
               <li><Link to="/staking">Staking</Link></li>
               <li><Link to="/rewards">Rewards</Link></li>
             </ul>
@@ -38,7 +39,7 @@ export function Header() {
           <li className="dropdown">
             <a className="nav-link scrollto" >Utility<i className="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill (Free 25$!)</a></li>
+              <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill <span>(Free 25$!)</span></a></li>
               <li><a href="https://upfvote.com/">Coin Vote<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
               <li><a href="">SAFU Checker<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
               <li><a href="">Lottery<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
@@ -63,6 +64,13 @@ export function Header() {
               <li><Link to="/airdrops">Airdrops</Link></li>
             </ul>
           </li>
+          {/*<li>*/}
+          {/*  <div className="box">*/}
+          {/*    <div className="switch">*/}
+          {/*      <div className="yoke"></div>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</li>*/}
         </ul>
       </nav>
 

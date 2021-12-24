@@ -44,7 +44,18 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/Swap.png"/>
               <h2>Swap</h2>
+              <h6>Buy Easily. Trade Faster. Just click</h6>
+              <p><span>really easy swap tool</span> to help you!</p>
               <p><Link to="/swap" className="button scrollto">Swap</Link></p>
+            </div>
+          </div>
+          <div className="col-12 col-lg-4 text-justify content">
+            <div className="section-title">
+              <img className="ecosystemImage" src="assets/img/ecosystemLogos/Swap.png" />
+              <h2>Fiat</h2>
+              <h6>Prepare Fiat. Just click. Get BNB</h6>
+              <p><span>another easy swap tool</span> to help you!</p>
+              <p><Link to="/fiat" className="button scrollto">Fiat</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">

@@ -10,7 +10,11 @@ function Fiat() {
   
   return (
     <section id="Fiat">
-      <h2>Fiat</h2>
+      <div className="section-title">
+        <h2>Fiat (Beta)</h2>
+        <p>Official widget from <a href="https://onramper.com" style={{ background: "white" }}><img src="assets/img/fiat/onramper.png" class="small-icon" style={{ width: "5em" }} /></a></p>
+        <p>Powered by <a href="https://www.moonpay.com" style={{ background: "white" }}><img src="assets/img/fiat/moonpay.svg" class="small-icon" style={{ width: "5em" }}/></a></p>
+      </div>
       <iframe
         id="onramper-widget"
         title="Onramper widget"

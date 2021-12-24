@@ -50,7 +50,7 @@ function App() {
       <Route exact path="/dashboard" element={<DashboardPage />} />
       <Route exact path="/upfinity" element={<FeaturePage />} />
       <Route exact path="/swap" element={<Swap />} />
-
+      <Route exact path="/fiat" element={<Fiat />} />
 
       <Route exact path="/nft" element={<NftPage />} />
       <Route exact path="/mysterybox" element={<Mysterybox />} />
@@ -67,7 +67,6 @@ function App() {
       
       <Route exact path="/donations" element={<Donations />} />
       <Route exact path="/airdrops" element={<Airdrops />} />
-      <Route exact path="/fiat" element={<Fiat />} />
       
     </Routes>
     
