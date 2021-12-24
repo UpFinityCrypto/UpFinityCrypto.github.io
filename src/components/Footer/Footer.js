@@ -16,24 +16,24 @@ function Footer() {
       <div className="container">
         <div className="row" style={noMargin}>
           <div className="col-6 col-lg-2">
-            <a href="dashboard.html" className="button scrollto">Dashboard</a>
+            <Link to="/dashboard" className="button scrollto">Dashboard</Link>
           </div>
           <div className="col-6 col-lg-2">
-            <a href="roadmap.html" className="button scrollto">Roadmap</a>
+            <Link to="/roadmap" className="button scrollto">Roadmap</Link>
           </div>
 
           <div className="col-4 col-lg-2">
-            <a href="airdrop.html" className="button scrollto">Airdrop</a>
+            <Link to="/airdrop" className="button scrollto">Airdrop</Link>
           </div>
           <div className="col-4 col-lg-2">
-            <a href="community.html" className="button scrollto">Community</a>
+            <Link to="/community" className="button scrollto">Community</Link>
           </div>
           <div className="col-4 col-lg-2">
-            <a href="faqs.html" className="button scrollto">FAQs</a>
+            <Link to="/faqs" className="button scrollto">FAQs</Link>
           </div>
 
           <div className="col-12 col-lg-2 text-center">
-            <a href="donations.html" className="button scrollto">Donations</a>
+            <Link to="/donations" className="button scrollto">Donations</Link>
           </div>
         </div>
 
@@ -48,7 +48,7 @@ function Footer() {
           <a href="https://www.reddit.com/r/upfinity" target="_tab" className="reddit"><i className="bx bxl-reddit"></i></a>
         </div>
         <div className="copyright">
-          <a href="https://www.theupfinity.com/donations.html">Click Here to fund our Project</a>
+          <Link to="/donations">Click Here to fund our Project</Link>
         </div>
         <div className="copyright">
           <p>Official email: <strong>theupfinity@gmail.com</strong></p>
