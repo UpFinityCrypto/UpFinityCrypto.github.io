@@ -10,7 +10,11 @@ function Hero() {
   const center = {margin: "0 auto"};
   const noMargin = {margin: "0px"};
   return (
-    <section className="d-flex flex-column justify-content-center" style={{height: "auto"}}>
+    <section className="d-flex flex-column justify-content-center" style={{ height: "auto" }}>
+      {/*<video autoPlay muted id="bgVideo">*/}
+      {/*  <source src="assets/img/intro.mp4" type="video/mp4"/>*/}
+      {/*  Your browser does not support HTML5 video.*/}
+      {/*</video>*/}
       <div className="row" style={noMargin}>
         <div className="col-12 col-lg-8" style={{alignSelf: "center"}}>
           <div id="main" className="container" style={{padding: "0px"}}>

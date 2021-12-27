@@ -47,7 +47,7 @@ function Staking() {
 
           <div><i className="bi bi-chevron-right"></i>Write down amount to Stake <span>(max 29B)</span></div>
           <div style={{border: "solid 3px", borderRadius: "16px", background: "white"}}>
-            <input id="typedStakeAmount" inputMode="decimal" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="Write down amount to stake" value="" style={{caretColor: "black", color: "black", textAlign: "center", backgroundColor: "white"}} readOnly/>
+            <input id="typedStakeAmount" defaultValue="" inputMode="decimal" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="Write down amount to stake" style={{caretColor: "black", color: "black", textAlign: "center", backgroundColor: "white"}} />
             <div>
               <img id="UPFlogo" className="small-icon" src="assets/img/logo.png" style={{width30px}}/>
               UPF

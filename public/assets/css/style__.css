@@ -1255,3 +1255,12 @@ green {
 p {
   margin: 0;
 }
+
+day-body {
+  background-color: #cacaca;
+  color: #282828;
+}
+
+day-h1 {
+  color: #000;
+}
