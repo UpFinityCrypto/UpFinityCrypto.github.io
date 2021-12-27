@@ -1243,3 +1243,15 @@ green {
 .table > :not(caption) > * > * {
   padding: 0px;
 }
+
+.basic-font {
+  font-family: "Poppins", sans-serif;
+}
+
+.thin-font {
+  font-weight: 100;
+}
+
+p {
+  margin: 0;
+}
