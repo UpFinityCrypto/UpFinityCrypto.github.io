@@ -24,7 +24,7 @@ function Footer() {
           </div>
 
           <div className="col-4 col-lg-2">
-            <Link to="/airdrop" className="button scrollto">Airdrop</Link>
+            <Link to="/airdrops" className="button scrollto">Airdrops</Link>
           </div>
           <div className="col-4 col-lg-2">
             <Link to="/community" className="button scrollto">Community</Link>

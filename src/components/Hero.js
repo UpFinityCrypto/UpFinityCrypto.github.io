@@ -17,11 +17,30 @@ function Hero() {
             <h1>UpFinity:</h1>
             <p>Building web3's leading <span className="typed" data-typed-items="Token, Ecosystem, Metaverse"></span></p>
             <div>
-              <div className="wrap-address">
-                <a id="UpfinityAdr" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">
-                  0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
-                </a>
-              </div>
+              <nav id="navbar" className="navbar" style={{ display: "inline-flex" }}>
+                <ul>
+                  <li className="dropdown">
+                    <a href="" className="nav-link scrollto" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">
+                      <div className="underline" style={{ fontSize: "20px" }}>
+                        0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
+                      </div>
+                      {/*<a id="UpfinityAdr" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">*/}
+                    </a>
+                    {/*<ul>*/}
+                    {/*  <li>*/}
+                    {/*    <div className="row">*/}
+                    {/*      <div style={{ display: "inline-block", overflow: "hidden" }}>Click</div>*/}
+                    {/*      <div style={{ display: "inline-block", overflow: "hidden" }}>to copy address</div>*/}
+                    {/*      <a href="" id="copyUpfinityAdr" className="" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>*/}
+                    {/*        here*/}
+                    {/*      </a>*/}
+                          
+                    {/*    </div>*/}
+                    {/*  </li>*/}
+                    {/*</ul>*/}
+                  </li>
+                </ul>
+              </nav>
               <div className="row">
                 <div className="col-6">
                   <a href="" id="copyUpfinityAdr" className="button scrollto" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>
@@ -35,7 +54,39 @@ function Hero() {
                 </div>
               </div>
             </div>
-            <p>Tax: buy 9% / sell 12%</p>
+            <div className="table">
+              <p className="cell">Tax: buy 9%</p>
+              <nav id="navbar" className="navbar cell" style={{ display: "inline-flex" }}>
+                <ul>
+                  <li className="dropdown">
+                    <a href="" className="nav-link scrollto" >
+                      <i className="bi bi-info-circle text-primary" style={{ fontSize: "20px" }}></i>
+                    </a>
+                    <ul>
+                      <li>
+                        <div>
+                          <p>-3% Tax Reduction if</p>
+                          <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
+                            <div className="underline">
+                              buy right after the sell
+                            </div>
+                            </a>
+                        </div>
+                      </li>
+                      <li>
+                        -3% Tax Reduction by
+                        <Link to="/nft">
+                          <div className="underline">
+                            holding NFT
+                          </div>
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+              <p className="cell">/ sell 12%</p>
+            </div>
             <p>recommended slippage: buy 10+ / sell 14+</p>
             <div className="social-links" style={{fontSize:"30px"}}>
               <a href="https://t.me/UpFinityTG" target="_tab" className="telegram"><i className="bi bi-telegram"></i></a>

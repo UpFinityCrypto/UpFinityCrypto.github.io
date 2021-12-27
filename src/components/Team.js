@@ -40,7 +40,7 @@ function Team() {
         </div>
         <div className="col-12 col-md-3 text-justify content">
           <h3>Angel</h3>
-          <h6>Lead Marketing / Operations</h6>
+          <h6>Co-Founder / Lead Operations</h6>
           <p>USA 🇺🇸</p>
           <a href="https://www.instagram.com/iangel.png">
             <img src="assets/img/team/Angel.png" style={{widthHalf}}/>

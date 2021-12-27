@@ -12,13 +12,21 @@ function Fiat() {
     <section id="Fiat">
       <div className="section-title">
         <h2>Fiat (Beta)</h2>
-        <p>Official widget from <a href="https://onramper.com" style={{ background: "white" }}><img src="assets/img/fiat/onramper.png" class="small-icon" style={{ width: "5em" }} /></a></p>
-        <p>Powered by <a href="https://www.moonpay.com" style={{ background: "white" }}><img src="assets/img/fiat/moonpay.svg" class="small-icon" style={{ width: "5em" }}/></a></p>
+        <p>Official widget from
+          <a href="https://onramper.com" style={{ background: "white" }}>
+            <img src="assets/img/fiat/onramper.png" className="small-icon" style={{ width: "5em" }} />
+          </a>
+        </p>
+        <p>Powered by
+          <a href="https://www.moonpay.com" style={{ background: "white" }}>
+            <img src="assets/img/fiat/moonpay.svg" className="small-icon" style={{ width: "5em" }} />
+          </a>
+        </p>
       </div>
       <iframe
         id="onramper-widget"
         title="Onramper widget"
-        frameborder="no"
+        frameBorder="no"
         allow="accelerometer; autoplay; camera; gyroscope; payment;"
         src="https://widget.onramper.com/?color=28a745&defaultCrypto=BNB_BEP20&defaultAmount=1000&onlyCryptos=BNB_BEP20&apiKey=pk_prod_okK66ZwhpIVCg53cyS1ZzdPKxNz6wZWrhMclvjn0nXg0"
         style={{ height: "600px" }}>
