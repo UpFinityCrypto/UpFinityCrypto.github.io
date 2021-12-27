@@ -509,16 +509,6 @@ img {
   opacity: 0.8;
 }
 
-.center {
-  margin: 0 auto;
-}
-
-.small-icon {
-  width: 2em;
-  margin: 5px;
-}
-
-
 
 .header {
   transition: all 0.5s;
@@ -906,7 +896,7 @@ img {
     position: relative;
   }
 
-  .navbar a, .navbar a:focus {
+  .navbar a {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -917,8 +907,11 @@ img {
     color: #fff;
     white-space: nowrap;
     transition: 0s;
+    text-decoration: none;
   }
-
+  .navbar a:hover {
+    text-decoration: underline;
+  }
     .navbar a i, .navbar a:focus i {
       font-size: 12px;
       line-height: 0;
@@ -953,9 +946,9 @@ img {
     opacity: 1;
     visibility: hidden;
     background: #333;
-    /*box-shadow: 0px 0px 30px rgb(234 72 23 / 36%);*/
     transition: 0.3s;
     border-radius: 4px;
+    box-shadow: 0px 0px 5px 5px #28a74577;
   }
 
     .navbar .dropdown ul li {
@@ -1061,6 +1054,7 @@ img {
     background-color: #262626;
     overflow-y: auto;
     transition: 0.3s;
+    box-shadow: 0px 0px 5px 5px #28a74577;
   }
 
   .navbar-mobile a, .navbar-mobile a:focus {
@@ -1194,4 +1188,58 @@ green {
 .night {
   color: #aaaaaa;
   background-color: #262626;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.small-icon {
+  width: 2em;
+  margin: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.hover:hover + .hide {
+  display: block;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.tooltip {
+  background-color: #262626;
+  color: #aaaaaa;
+  opacity: 1;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.table {
+  display: table;
+  width: auto;
+  table-layout: fixed;
+  color: #aaaaaa;
+}
+
+.cell {
+  display: table-cell;
+}
+
+.table > :not(caption) > * > * {
+  padding: 0px;
 }

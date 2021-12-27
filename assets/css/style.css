@@ -27,12 +27,12 @@ body {
 
 a {
   color: #28a745;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a:hover {
-  color: #28a745;
-  text-decoration: none;
+  color: #0d6efd;
+  text-decoration: underline;
 }
 
 h1, h2, h3, h4, h5, h6 {
