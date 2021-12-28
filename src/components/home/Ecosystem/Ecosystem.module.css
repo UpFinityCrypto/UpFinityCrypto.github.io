@@ -1,0 +1,133 @@
+.ecosystem {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #262626;
+    color: white;
+    margin: 0 auto;
+    box-shadow: inset -12px -8px 40px #464646;
+}
+
+.innerEcosystem {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 5rem auto 8rem auto;
+    /* border: 1px solid red; */
+}
+
+.ecosystemTop {
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    /* border: 1px solid red; */
+}
+
+.ecosystemBtn {
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.ecosystemBtn:hover {
+    opacity: 0.7;
+    transform: scale(1.3);
+    transition: all 0.3s;
+}
+
+.innerEcosystem img {
+    width: 100px;
+    height: 100px;
+    padding: 1rem;
+
+}
+
+
+.itemsContainer {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    /* border: 1px solid red;  */
+}
+
+.itemsContainerLast {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    /* border: 1px solid red;  */
+}
+
+
+
+.items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 480px;
+    min-height: 350px;
+    justify-content: flex-start;
+    align-items: center;
+    text-align:justify;
+    margin: 0 auto;
+    padding: 1rem;
+    /* border: 1px solid red; */
+}
+
+.itemsContainerLast .items {
+    height: 100px;
+    margin: 0; 
+}
+
+
+.items p:nth-child(2) {
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+
+/* --------grid container --------------------------------*/
+.gridContainer {
+    border: 1px solid red; 
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content:center;
+    align-content: center;
+}
+
+.gridContainer h3 {
+    text-align:center;
+}
+
+.box {
+    border: 1px solid red; 
+    width: 100%;
+    height: 250px;
+    justify-content:center;
+    align-content: center;
+}
+
+
+

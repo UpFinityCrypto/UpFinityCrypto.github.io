@@ -1,0 +1,57 @@
+.team {
+    display: flex;
+    background-color: #262626;
+    color: white;
+    flex-direction: column;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    font-family: "Oswald", sans-serif;
+    box-shadow: inset -12px -8px 40px #464646;
+    
+}
+
+
+.teamContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+}
+
+
+.teamProfiles {
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    margin: 1rem;
+    margin-top: 2rem;  
+}
+
+.profile h6 {
+    font-size: 14px;
+}
+.profile p {
+    font-size: 12px;
+    text-align:center;
+}
+
+.profile img {
+    width: 120px; 
+    height: 120px;
+}
