@@ -71,22 +71,22 @@ function Stats() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-3">
-            <div className="count-box">
-              <div>
-                <h5 className="text-center ">Initial Market Cap</h5>
-                <span>$</span><span id="initialMcapCounter">333</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-12 col-md-3">
-            <div className="count-box">
-              <div>
-                <h5 className="text-center ">Multiplied from start</h5>
-                <span id="startMultiCounter"></span>
-              </div>
-            </div>
-          </div>
+          {/*<div className="col-12 col-md-3">*/}
+          {/*  <div className="count-box">*/}
+          {/*    <div>*/}
+          {/*      <h5 className="text-center ">Initial Market Cap</h5>*/}
+          {/*      <span>$</span><span id="initialMcapCounter">333</span>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
+          {/*<div className="col-12 col-md-3">*/}
+          {/*  <div className="count-box">*/}
+          {/*    <div>*/}
+          {/*      <h5 className="text-center ">Multiplied from start</h5>*/}
+          {/*      <span id="startMultiCounter"></span>*/}
+          {/*    </div>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
 
       </div>

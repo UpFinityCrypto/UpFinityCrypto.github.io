@@ -98,14 +98,8 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/Coin_Vote.png"/>
               <h2>Coin Vote</h2>
-              <h6>Check what is <span>REALLY</span> famous</h6>
-
-              <p>We bringing a revolution to current coin voting websites.</p>
-              <p>Very excited to talk about our one of a kind community driven Coin Leaderboard where only authenticated
-                wallets will be able to vote.</p>
-              <p>Making it a lot harder for bots or macros to participate. The best part is that whenever a coin wins, our
-                reward tokens go to that coin and at the same time spread to UPF holders giving the winning token and UPF
-                holders a massive boost!</p>
+              <h6>Vote for Coin. No bots. Real Metric</h6>
+              <p>Vote for the next "buy the dip" reward token!</p>
               <p><a id="coinVoteLink" href="https://upfvote.com" className="button scrollto">Upgrading!</a></p>
             </div>
           </div>
@@ -115,17 +109,17 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/Marketplace.png"/>
               <h2>Marketplace</h2>
-              <p>UpFinity marketplace will be the place to trade all your NFTs. It will reward UPF holders with a percentage
-                of the tx fee!</p>
+              <h6>Buy NFT. Sell NFT. Trade NFT</h6>
+              <p>The place for all your NFTs. Hold UPF and earn a percentage of every tx fee!</p>
               <p><Link id="MarketplaceLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/P2E_Game.png"/>
-              <h2>P2E Game</h2>
-              <p>Enjoy gaming? Want to turn your skills into money? Coming soon, a fun easy to play, yet challenging game on
-                our platform, where you can earn UPF based on your score and play time. So get ready to PLAY TO WIN!</p>
+              <h2>Upfinity wars</h2>
+              <h6>Play Games. Enjoy the Ride. Earn UPF</h6>
+              <p>Join the competition to be the #1 rocketcycle rider!</p>
               <p><Link id="P2ELink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
@@ -134,6 +128,8 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/NFT_Farming.png"/>
               <h2>NFT Farming</h2>
+              <h6>Put your NFTs to work!</h6>
+              <p>Earn passive income by staking your NFTs</p>
               <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
@@ -141,6 +137,8 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/Safu_Checker.png"/>
               <h2>SAFU Checker</h2>
+              <h6>don't get rugpulled again!</h6>
+              <p>A top of the line honeypot and rugpull scanner FREE for UPF holders</p>
               <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
@@ -148,13 +146,17 @@ function Ecosystem() {
             <div className="section-title">
               <img className="ecosystemImage" src="assets/img/ecosystemLogos/merchandise.png"/>
               <h2>UPF Store</h2>
+              <h6>Shop your favorite brands</h6>
+              <p>A blockchain store with all cryptocurrencies accepted, with discount for UPF holders</p>
               <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>
           <div className="col-12 col-lg-4 text-justify content">
             <div className="section-title">
-              <img className="ecosystemImage" src="assets/img/ecosystemLogos/merchandise.png"/>
-              <h2>Merchandise</h2>
+              <img className="ecosystemImage" src="assets/img/ecosystemLogos/card.png"/>
+              <h2>UPF Card</h2>
+              <h6>Load.Pay.Earn</h6>
+              <p>Pay with crypto anywhere and everywhere, bigger cashbacks and rewards for UPF holders</p>
               <p><Link id="MysteryLink" to="" className="button button-soon scrollto">Coming Soon</Link></p>
             </div>
           </div>

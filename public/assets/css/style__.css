@@ -1264,3 +1264,23 @@ day-body {
 day-h1 {
   color: #000;
 }
+
+#Banner h1 {
+  font-size: 50px;
+}
+
+@media (max-width: 992px) {
+  #Banner h1 {
+    font-size: 40px;
+  }
+}
+
+#Banner p {
+  font-size: 30px;
+}
+
+@media (max-width: 992px) {
+  #Banner p {
+    font-size: 20px;
+  }
+}

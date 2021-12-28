@@ -20,6 +20,7 @@ function Hero() {
           <div id="main" className="container" style={{padding: "0px"}}>
             <h1>UpFinity:</h1>
             <p>Building web3's leading <span className="typed" data-typed-items="Token, Ecosystem, Metaverse"></span></p>
+            <p><span>30+</span> Unique Features and Useful Utilities in a <span>SINGLE</span> token</p>
             <div>
               <nav id="navbar" className="navbar" style={{ display: "inline-flex" }}>
                 <ul>
