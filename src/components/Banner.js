@@ -9,18 +9,18 @@ function Banner() {
   const center = {margin: "0 auto"};
   
   return (
-    <div id="Banner" className={classes.banner}>
+    <div id="Banner">
       <div className={classes.bannerOuter}>
         <div className = {classes.bannerInner}>
           <div className = {classes.bannerContent}>
             <div className={classes.bannerImage}>
               <img src="assets/img/banner/bannerImages/Upf_Banner.png" />
             </div>
-            <div className={classes.mission}>
-              <div className={classes.missionStatement}>
+            <div className="row">
+              <div className="col-12 col-lg-8">
                 <h1>BUY.HOLD.EARN.</h1>
                 <p style={baseFontColor}>
-                  <span>30+</span> Unique Features and Useful Utilities in a <span>SINGLE</span> Token
+                  Every Feature and Utility works in your favor
                 </p>
                 <div className="row">
                   <div className="col-6">
@@ -35,10 +35,11 @@ function Banner() {
                   </div>
                 </div>
               </div>
-              <div className={classes.nftMoon}>
-                <img className={classes.moonGirl} src="assets/img/banner/bannerImages/moonGirlbig.png" alt="mongirl"/>
+              <div className="col-12 col-lg-4">
+                <div className={classes.nftMoon}>
+                  <img className={classes.moonGirl} src="assets/img/banner/bannerImages/moonGirlbig.png" alt="mongirl"/>
+                </div>
               </div>
-
             </div>
           </div>
         </div>

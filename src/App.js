@@ -25,6 +25,7 @@ import Community from './components/Community';
 import Donations from './components/Donations';
 import Airdrops from './components/Airdrops';
 import Fiat from './components/Fiat';
+import Metaverse from './components/Metaverse';
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -66,7 +67,9 @@ function App() {
       <Route exact path="/community" element={<Community />} />
       
       <Route exact path="/donations" element={<Donations />} />
-      <Route exact path="/airdrops" element={<Airdrops />} />
+        <Route exact path="/airdrops" element={<Airdrops />} />
+        <Route exact path="/metaverse" element={<Metaverse />} />
+
       
     </Routes>
     

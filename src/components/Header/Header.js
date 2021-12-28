@@ -31,9 +31,17 @@ export function Header() {
             <ul>
               <li><Link to="/nft">NFT Origin</Link></li>
               <li><Link to="/mysterybox">NFT Mystery Box</Link></li>
-              <li><Link to="/p2egame">P2E Game</Link></li>
               <li><a href="">NFT MarketPlace<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
 
+            </ul>
+          </li>
+          <li className="dropdown">
+            <a href="" className="nav-link scrollto" >Play<i className="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><Link to="/p2egame">P2E Game</Link></li>
+              <li><a href="">Lottery<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a href="">Trade Competition<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a href="">UPF & DOWN <div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
             </ul>
           </li>
           <li className="dropdown">
@@ -42,9 +50,6 @@ export function Header() {
               <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill <span>(Free 25$!)</span></a></li>
               <li><a href="https://upfvote.com/">Coin Vote<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
               <li><a href="">SAFU Checker<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
-              <li><a href="">Lottery<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
-              <li><a href="">Trade Competition<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
-              <li><a href="">UPF & DOWN <div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
             </ul>
           </li>
           <li className="dropdown">
@@ -53,6 +58,7 @@ export function Header() {
               <li><Link to="/roadmap">Roadmap</Link></li>
               <li><Link to="/team">Team</Link></li>
               <li><a href="https://upfinity.gitbook.io">Whitepaper</a></li>
+              <li><Link to="/metaverse">Metaverse</Link></li>
               <li><Link to="/faqs">FAQs</Link></li>
             </ul>
           </li>
