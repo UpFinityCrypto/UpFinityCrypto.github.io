@@ -5,17 +5,19 @@ document.cookie = 'same-site-cookie=foo; SameSite=Lax';
 document.cookie = 'cross-site-cookie=bar; SameSite=None; Secure';
 
 async function loadHeader() { // header load first
+
   header = select('header#Header');
-  headerClassList = header.classList;
-  headerClassList.add('header');
-  headerClassList.add('fixed-top');
-  headerClassList.add('d-flex');
-  headerClassList.add('align-items-center');
-  headerClassList.add('header-scrolled');
-  header.style.width = 'auto';
-  
-  await initHeader();
-  
+  if (header) {
+    headerClassList = header.classList;
+    headerClassList.add('header');
+    headerClassList.add('fixed-top');
+    headerClassList.add('d-flex');
+    headerClassList.add('align-items-center');
+    headerClassList.add('header-scrolled');
+    header.style.width = 'auto';
+
+    await initHeader();
+  }
   //var div = $('#Header');
   
   //$.ajax({
@@ -94,30 +96,30 @@ window.addEventListener('load', async () => {
        t = TT('DONE', t);
     });
 
-  $(".yoke").click(function () {
-    if ($("body").hasClass("night")) {
-      $("body").removeClass("night");
-      $(".box").removeClass("boxedin");
-      $(".switch").removeClass("switchedin");
-      $(".te").removeClass("teedin");
-      $("body").addClass("day");
-      $(".yoke").addClass("unyoked");
-      $(".box").addClass("boxedout");
-      $(".switch").addClass("switchedout");
-      $(".te").addClass("teedout");
-    } else {
-      $(".yoke").removeClass("unyoked");
-      $(".switch").removeClass("switchedout");
-      $(".te").removeClass("teedout");
-      $("body").removeClass("day");
-      $(".box").removeClass("boxedout");
-      $(".yoke").addClass("yoked");
-      $("body").addClass("night");
-      $(".box").addClass("boxedin");
-      $(".switch").addClass("switchedin");
-      $(".te").addClass("teedin");
-    }
-  });
+  //$(".yoke").click(function () {
+  //  if ($("body").hasClass("night")) {
+  //    $("body").removeClass("night");
+  //    $(".box").removeClass("boxedin");
+  //    $(".switch").removeClass("switchedin");
+  //    $(".te").removeClass("teedin");
+  //    $("body").addClass("day");
+  //    $(".yoke").addClass("unyoked");
+  //    $(".box").addClass("boxedout");
+  //    $(".switch").addClass("switchedout");
+  //    $(".te").addClass("teedout");
+  //  } else {
+  //    $(".yoke").removeClass("unyoked");
+  //    $(".switch").removeClass("switchedout");
+  //    $(".te").removeClass("teedout");
+  //    $("body").removeClass("day");
+  //    $(".box").removeClass("boxedout");
+  //    $(".yoke").addClass("yoked");
+  //    $("body").addClass("night");
+  //    $(".box").addClass("boxedin");
+  //    $(".switch").addClass("switchedin");
+  //    $(".te").addClass("teedin");
+  //  }
+  //});
 
 
   

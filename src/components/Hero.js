@@ -8,7 +8,25 @@ function Hero() {
   const white = {color: "#fff"};
   const baseFontColor = {color: "#aaaaaa"};
   const center = {margin: "0 auto"};
-  const noMargin = {margin: "0px"};
+  const noMargin = { margin: "0px" };
+
+  const taxTitle = (
+    <div>
+      <p>-3% Tax Reduction if</p>
+      <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
+        <div class="underline">
+          buy right after the sell
+        </div>
+      </a>
+      <p>-3% Tax Reduction by</p>
+      <Link to="/nft">
+        <div class="underline">
+          holding NFT
+        </div>
+      </Link>
+    </div>
+  );
+
   return (
     <section className="d-flex flex-column justify-content-center" style={{ height: "auto" }}>
       {/*<video autoPlay muted id="bgVideo">*/}
@@ -60,36 +78,24 @@ function Hero() {
               </div>
             </div>
             <div className="table">
-              <p className="cell">Tax: buy 9%</p>
-              <nav id="navbar" className="navbar cell" style={{ display: "inline-flex" }}>
-                <ul>
-                  <li className="dropdown">
-                    <a href="" className="nav-link scrollto" >
-                      <i className="bi bi-info-circle text-primary" style={{ fontSize: "20px" }}></i>
-                    </a>
-                    <ul>
-                      <li>
-                        <div>
-                          <p>-3% Tax Reduction if</p>
-                          <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
-                            <div className="underline">
-                              buy right after the sell
-                            </div>
-                            </a>
-                        </div>
-                      </li>
-                      <li>
-                        -3% Tax Reduction by
-                        <Link to="/nft">
-                          <div className="underline">
-                            holding NFT
-                          </div>
-                        </Link>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
+              <p className="cell">Tax: buy 9%
+                <i className="bi bi-info-circle text-primary" title='
+                <div>
+                  <p>-3% Tax Reduction if</p>
+                  <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
+                    <div className="underline">
+                      buy right after the sell
+                    </div>
+                  </a>
+                  <p>-3% Tax Reduction by</p>
+                  <Link to="/nft">
+                    <div className="underline">
+                      holding NFT
+                    </div>
+                  </Link>
+                </div>
+              ' style={{ fontSize: "20px" }}></i>
+              </p>
               <p className="cell">/ sell 12%</p>
             </div>
             <p>recommended slippage: buy 10+ / sell 14+</p>

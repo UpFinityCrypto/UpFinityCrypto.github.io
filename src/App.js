@@ -7,10 +7,15 @@ import { useLocation } from 'react-router-dom';
 import { Header, HeaderMargin } from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
+import App_ from './App_';
+
 import MainPage from './Pages/MainPage';
 import DashboardPage from './Pages/DashboardPage';
 import FeaturePage from './Pages/FeaturePage';
+
 import NftPage from './Pages/NftPage';
+import SplashPage from './Pages/SplashPage';
+
 
 import Rewards from './components/Rewards';
 import Staking from './components/Staking';
@@ -26,6 +31,8 @@ import Donations from './components/Donations';
 import Airdrops from './components/Airdrops';
 import Fiat from './components/Fiat';
 import Metaverse from './components/Metaverse';
+import Ecosystem from './components/Ecosystem';
+
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -33,7 +40,20 @@ function App() {
   const location = useLocation();
   useEffect(async () => {
     const path = location.pathname;
-    
+
+    const header = document.querySelector('#Header');
+    const headerMargin = document.querySelector('#HeaderMargin');
+    const footer = document.querySelector('#Footer');
+    if (path == '/') {
+      header.style.cssText += 'display:none!important';
+      headerMargin.style.cssText += 'display:none!important';
+      footer.style.cssText += 'display:none!important';
+    } else {
+      header.style.cssText += 'display:flex!important';
+      headerMargin.style.cssText += 'display:block!important';
+      footer.style.cssText += 'display:block!important';
+    }
+
     await window.runMain();
     await window.reinit(path.slice(1));
     // if (path == '/upfinity') }
@@ -41,42 +61,46 @@ function App() {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-   
-    <Header />
-    <HeaderMargin />
 
-    <ScrollToTop />
-    <Routes>
-      <Route exact path="/" element={<MainPage />} />
-      <Route exact path="/dashboard" element={<DashboardPage />} />
-      <Route exact path="/upfinity" element={<FeaturePage />} />
-      <Route exact path="/swap" element={<Swap />} />
-      <Route exact path="/fiat" element={<Fiat />} />
+      <Header />
+      <HeaderMargin />
 
-      <Route exact path="/nft" element={<NftPage />} />
-      <Route exact path="/mysterybox" element={<Mysterybox />} />
-      <Route exact path="/p2egame" element={<P2egame />} />
-      
-      <Route exact path="/rewards" element={<Rewards />} />
-      <Route exact path="/staking" element={<Staking />} />
-      
-      <Route exact path="/roadmap" element={<Roadmap />} />
-      <Route exact path="/team" element={<Team />} />
-      <Route exact path="/FAQs" element={<FAQs />} />
-      
-      <Route exact path="/community" element={<Community />} />
-      
-      <Route exact path="/donations" element={<Donations />} />
+      <ScrollToTop />
+      <Routes>
+        <Route exact path="/" element={<SplashPage />} />
+        <Route exact path="/main" element={<MainPage />} />
+        <Route exact path="/ecosystem" element={<Ecosystem />} />
+
+        <Route exact path="/dashboard" element={<DashboardPage />} />
+        <Route exact path="/upfinity" element={<FeaturePage />} />
+        <Route exact path="/swap" element={<Swap />} />
+        <Route exact path="/fiat" element={<Fiat />} />
+
+        <Route exact path="/nft" element={<NftPage />} />
+        <Route exact path="/mysterybox" element={<Mysterybox />} />
+        <Route exact path="/p2egame" element={<P2egame />} />
+
+        <Route exact path="/rewards" element={<Rewards />} />
+        <Route exact path="/staking" element={<Staking />} />
+
+        <Route exact path="/roadmap" element={<Roadmap />} />
+        <Route exact path="/team" element={<Team />} />
+        <Route exact path="/FAQs" element={<FAQs />} />
+
+        <Route exact path="/community" element={<Community />} />
+        
+
+        <Route exact path="/donations" element={<Donations />} />
         <Route exact path="/airdrops" element={<Airdrops />} />
         <Route exact path="/metaverse" element={<Metaverse />} />
 
-      
-    </Routes>
-    
-    <Footer />
-    
-    <div id="debug"></div>
-    
+
+      </Routes>
+
+      <Footer />
+
+      <div id="debug"></div>
+
     </Suspense>
  
   );

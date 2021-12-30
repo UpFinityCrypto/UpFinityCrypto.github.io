@@ -29,7 +29,7 @@ function Stats() {
             </div>
           </div>
 
-          <div className="col-12 col-md-3">
+          <div className="col-6 col-md-3">
             <div className="count-box">
               <div>
                 <h5 className="text-center ">Burned</h5>
@@ -38,7 +38,7 @@ function Stats() {
             </div>
           </div>
 
-          <div className="col-12 col-md-3">
+          <div className="col-6 col-md-3">
             <div className="count-box">
               <div>
                 <h5 className="text-center ">Circulating</h5>
@@ -55,7 +55,7 @@ function Stats() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-3">
+          <div className="col-6 col-md-3">
             <div className="count-box">
               <div>
                 <h5 className="text-center ">Burned by Event</h5>
@@ -63,7 +63,7 @@ function Stats() {
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-3">
+          <div className="col-6 col-md-3">
             <div className="count-box">
               <div>
                 <h5 className="text-center ">LP Burned by Event</h5>

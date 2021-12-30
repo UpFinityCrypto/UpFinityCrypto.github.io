@@ -561,13 +561,20 @@ async function runGlobal(path) {
     displayText("cantSellStatus", "Sell Event");
     displayText("circuitBreakerStatus", cantsell);
     displayText("cbStatus", "Circuit Breaker ON");
-    select("i#curStatus").classList.add('bi-exclamation-circle');
-    select("i#curStatus").classList.add('text-warning');
+
+    curStatus = select("i#curStatus");
+    if (curStatus) {
+      curStatus.classList.add('bi-exclamation-circle');
+      curStatus.classList.add('text-warning');
+    }
     countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000);
   } else {
     displayText("cbStatus", "Circuit Breaker OFF");
-    select("i#curStatus").classList.add('bi-check-circle');
-    select("i#curStatus").classList.add('text-success');
+    curStatus = select("i#curStatus");
+    if (curStatus) {
+      curStatus.classList.add('bi-check-circle');
+      curStatus.classList.add('text-success');
+    }
   }
   
   for (var section in runs) {
