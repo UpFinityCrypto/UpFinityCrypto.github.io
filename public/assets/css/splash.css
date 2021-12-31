@@ -22,7 +22,7 @@
 #Splash .video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   position: fixed;
   left: 0;
   right: 0;
@@ -94,8 +94,15 @@
     text-decoration: none;
     color: white;
   }
-  
-  
+
+#Splash .button {
+  border: 1px solid;
+  border-radius: 30px;
+  border-color: #28a74577;
+  padding: 10px;
+  width: auto;
+}
+
     @media only screen and (min-width: 600px) and (max-width:768px) {
 
     #Splash .content {
@@ -176,6 +183,7 @@
 
     #Splash h2 {
       font-size: 1.5rem;
+      margin: 5px;
     }
 
     #Splash p {
@@ -193,4 +201,6 @@
       height: auto;
       flex-direction: column;
     }
+
+    
     }

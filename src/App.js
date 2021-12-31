@@ -7,8 +7,6 @@ import { useLocation } from 'react-router-dom';
 import { Header, HeaderMargin } from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
-import App_ from './App_';
-
 import MainPage from './Pages/MainPage';
 import DashboardPage from './Pages/DashboardPage';
 import FeaturePage from './Pages/FeaturePage';
@@ -44,14 +42,24 @@ function App() {
     const header = document.querySelector('#Header');
     const headerMargin = document.querySelector('#HeaderMargin');
     const footer = document.querySelector('#Footer');
+    const debug = document.querySelector('#debug');
     if (path == '/') {
       header.style.cssText += 'display:none!important';
       headerMargin.style.cssText += 'display:none!important';
       footer.style.cssText += 'display:none!important';
+      debug.style.cssText += 'display:none!important';
     } else {
       header.style.cssText += 'display:flex!important';
       headerMargin.style.cssText += 'display:block!important';
       footer.style.cssText += 'display:block!important';
+      debug.style.cssText += 'display:block!important';
+
+      //const clickVideo = document.getElementById('clickVideo');
+      //clickVideo.play();
+      //clickVideo.addEventListener('ended', function () {
+      //  // hide video
+      //  clickVideo.style.display = "none";
+      //});
     }
 
     await window.runMain();

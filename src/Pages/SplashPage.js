@@ -14,8 +14,8 @@ function SwapPage() {
         <p>Experience a stay in a world wide ecosystem where every feature and utility works in your favor.</p>
         <p>JOIN US, TREAT YOURSELF</p>
         <div className="redirect">
-          <h2><Link to="/main">LET ME IN </Link></h2>
-          <h2><Link to="/ecosystem">I'D LIKE TO LEARN MORE</Link></h2>
+          <h2 className="button"><Link to="/main">LET ME IN </Link></h2>
+          <h2 className="button"><Link to="/ecosystem">I'D LIKE TO LEARN MORE</Link></h2>
         </div>
       </div>
     </section>

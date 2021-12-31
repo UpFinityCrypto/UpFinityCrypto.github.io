@@ -12,6 +12,10 @@ import Team from '../components/Team';
 function MainPage() {
   return (
     <div>
+      {/*<video id="clickVideo" muted="muted">*/}
+      {/*  <source src="assets/vids/Click.mp4" type="video/mp4" />*/}
+      {/*</video>*/}
+
       <Notice />
       <Banner />
       <Hero />
