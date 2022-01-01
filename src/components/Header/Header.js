@@ -8,7 +8,7 @@ export function Header() {
   return (
     <header id="Header">
       <i className="bi bi-list mobile-nav-toggle"></i>
-      <Link to="/" className="logo d-flex align-items-center no-underline">
+      <Link to="/main" className="logo d-flex align-items-center no-underline">
         <img src="assets/img/logo_xmas.png" className="small-icon" alt="" style={{margin:"10px"}}/>
         <h6 className="desktop">UpFinity</h6>
       </Link>
