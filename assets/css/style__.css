@@ -1295,3 +1295,6 @@ day-h1 {
   }
 }
 
+.ui-widget-content a {
+  color: #28a745;
+}
