@@ -671,7 +671,38 @@ function removeChips(){
 		}
 		removeChips();
 	}
-  }
+	}
+
+	//       tx = runRoullete(bets);
+//       send_tx = provider.sendTransaction(tx);
+//       await provider.waitForTransaction(send_tx);
+
+
+//       const resultTopic = "";
+//       const txHash = "0x5392dbb5f4b2379e800b8fbb460c0b14312a74bc7fc9a9c3123783d0ded7ff0f";
+//       const txReceipt = await provider.waitForTransaction(txHash);
+//       const logs = txReceipt['logs'];
+
+//       for (var idx = 0; idx < logs.length; idx++) {
+//         const topics = logs[idx].topics;
+//         if (topics[0] !== resultTopic) {
+//           continue;
+//         }
+
+//         result = topics[1];
+//         prize = bets[result];
+//       }
+
+    //provider.waitForTransaction('0x32993fee5728439c49388729f42c9fdd2295641a34656b70e89d716205649c66').then((args) => {
+    //  logs = args['logs'];
+    //  for (log of logs) {
+    //    if (log['topics'] == "0x7de6c3e23ce7540806fe64c828ce5a82ea1d9aebfe80d911eeb74cafd7fcb656") {
+    //      console.log(parseInt(log['data'].slice(2, 66), 16));
+    //      console.log(parseInt(log['data'].slice(66, 130), 16));
+    //      console.log(parseInt(log['data'].slice(130, 196), 16));
+    //    }
+    //  }
+    //});
   </script>
   </body>
 </html>
