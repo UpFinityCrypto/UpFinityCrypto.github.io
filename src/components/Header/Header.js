@@ -17,7 +17,7 @@ export function Header() {
         <ul>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto" >Token<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >Token<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/upfinity">Features</Link></li>
               <li><Link to="/swap">Swap</Link></li>
@@ -27,33 +27,33 @@ export function Header() {
             </ul>
           </li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto" >NFT<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >NFT<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/nft">NFT Origin</Link></li>
               <li><Link to="/mysterybox">NFT Mystery Box</Link></li>
-              <li><a href="">NFT MarketPlace<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a >NFT MarketPlace<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
 
             </ul>
           </li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto" >Play<i className="bi bi-chevron-down"></i></a>
+            <a className="nav-link scrollto" >Play<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/p2egame">P2E Game</Link></li>
-              <li><a href="">Lottery<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
-              <li><a href="">Trade Competition<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
-              <li><a href="">UPF & DOWN <div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a>Lottery<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a>Trade Competition<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a>UPF & DOWN <div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
             </ul>
           </li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto" >Utility<i className="bi bi-chevron-down"></i></a>
+            <a  className="nav-link scrollto" >Utility<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="https://upfinity.gitbook.io/upfinity/ecosystem/utility/autoshill/how-to-use-autoshill">Auto Shill <span>(Free 25$!)</span></a></li>
               <li><a href="https://upfvote.com/">Coin Vote<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
-              <li><a href="">SAFU Checker<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
+              <li><a>SAFU Checker<div className="spinner-border text-warning" role="status" style={menu}></div></a></li>
             </ul>
           </li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto" >About<i className="bi bi-chevron-down"></i></a>
+            <a  className="nav-link scrollto" >About<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/roadmap">Roadmap</Link></li>
               <li><Link to="/team">Team</Link></li>
@@ -64,14 +64,14 @@ export function Header() {
           </li>
           <li><Link className="nav-link scrollto" to="/community">Community</Link></li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto">More<i className="bi bi-chevron-down"></i></a>
+            <a  className="nav-link scrollto">More<i className="bi bi-chevron-down"></i></a>
             <ul>
               <li><Link to="/donations">Donations</Link></li>
               <li><Link to="/airdrops">Airdrops</Link></li>
             </ul>
           </li>
           <li className="dropdown">
-            <a href="" className="nav-link scrollto" >
+            <a  className="nav-link scrollto" >
               <i id="curStatus" className="bi" style={{ fontSize: "25px" }}></i>
             </a>
             <ul>
@@ -100,7 +100,7 @@ export function Header() {
 
       <nav id="connectButton" className="header-nav ms-auto" style={ {marginRight:"50px"} }>
         <div className="text-center">
-          <a href="" id="connect" className="button scrollto" onClick={window.afconnect}>Connect Wallet</a>
+          <a  id="connect" className="button scrollto" onClick={window.afconnect}>Connect Wallet</a>
         </div>
       </nav>
     </header>

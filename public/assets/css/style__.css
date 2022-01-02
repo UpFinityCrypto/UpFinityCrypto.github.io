@@ -1203,6 +1203,10 @@ green {
   display: none;
 }
 
+.flex {
+  display: flex!important;
+}
+
 .hover:hover + .hide {
   display: block;
 }
@@ -1279,8 +1283,18 @@ day-h1 {
   font-size: 30px;
 }
 
+.font-size {
+  font-size: 18px!important;
+}
 @media (max-width: 992px) {
   #Banner p {
     font-size: 20px;
   }
+  .font-size {
+    font-size: 12px !important;
+  }
+}
+
+.ui-widget-content a {
+  color: #28a745;
 }

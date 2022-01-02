@@ -41,10 +41,10 @@ function Hero() {
             <p><span>30+</span> Unique Features and Useful Utilities in a <span>SINGLE</span> token</p>
             <div>
               <nav id="navbar" className="navbar" style={{ display: "inline-flex" }}>
-                <ul>
+                <ul className="flex">
                   <li className="dropdown">
-                    <a href="" className="nav-link scrollto" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">
-                      <div className="underline" style={{ fontSize: "20px" }}>
+                    <a  className="nav-link scrollto" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">
+                      <div className="underline font-size">
                         0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae
                       </div>
                       {/*<a id="UpfinityAdr" href="https://bscscan.com/address/0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" target="_tab">*/}
@@ -54,7 +54,7 @@ function Hero() {
                     {/*    <div className="row">*/}
                     {/*      <div style={{ display: "inline-block", overflow: "hidden" }}>Click</div>*/}
                     {/*      <div style={{ display: "inline-block", overflow: "hidden" }}>to copy address</div>*/}
-                    {/*      <a href="" id="copyUpfinityAdr" className="" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>*/}
+                    {/*      <a  id="copyUpfinityAdr" className="" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>*/}
                     {/*        here*/}
                     {/*      </a>*/}
                           
@@ -66,12 +66,12 @@ function Hero() {
               </nav>
               <div className="row">
                 <div className="col-6">
-                  <a href="" id="copyUpfinityAdr" className="button scrollto" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>
+                  <a id="copyUpfinityAdr" className="button scrollto" onClick={() => window.copyAdr('copyUpfinityAdr', '0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae')}>
                     Copy Address
                   </a>
                 </div>
                 <div className="col-6">
-                  <a href="" className="button scrollto" onClick={window.addUPF}>
+                  <a className="button scrollto" onClick={window.addUPF}>
                     Add UPF in wallet
                   </a>
                 </div>
@@ -83,16 +83,16 @@ function Hero() {
                 <div>
                   <p>-3% Tax Reduction if</p>
                   <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
-                    <div className="underline">
+                    <div class="underline">
                       buy right after the sell
                     </div>
                   </a>
                   <p>-3% Tax Reduction by</p>
-                  <Link to="/nft">
-                    <div className="underline">
+                  <a href="/#/nft">
+                    <div class="underline">
                       holding NFT
                     </div>
-                  </Link>
+                  </a>
                 </div>
               ' style={{ fontSize: "20px" }}></i>
               </p>

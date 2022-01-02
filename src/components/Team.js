@@ -131,7 +131,7 @@ function Team() {
         <div className="col-12 col-md-3 text-justify content">
           <h3>Milton</h3>
           <h6>Freelancers</h6>
-          <a href="">
+          <a>
             <img src="assets/img/team/milton_cropped.png" style={{widthHalf}}/>
           </a>
           <p>Developer behind our next NFT game!</p>
