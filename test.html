@@ -1,0 +1,276 @@
+<!-- originally from https://codepen.io/daniandl/pen/mMQmGV -->
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      body {
+      margin: 0;
+      background: tomato;
+    }
+
+    #spin {
+      color: white;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 100;
+    }
+    .roulette {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+
+      .wheel img {
+        transition: transform 10s cubic-bezier(0.3, 1, 0.7, 1),
+          10s filter cubic-bezier(0.1, 1, 0.8, 1),
+          10s -webkit-filter cubic-bezier(0.1, 1, 0.8, 1);
+        will-change: transform;
+        border-radius: 50%;
+        box-shadow: 0 0 100px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 600px;
+        /* border:4px dashed rgba(255,255,255, .5); */
+      }
+
+      .arrow {
+        width: 0;
+        height: 0;
+        border: 80px solid transparent;
+        border-top: 110px solid tomato;
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, -100px);
+        z-index: 20;
+        border-radius: 0.35em;
+      }
+      .arrow:after {
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div class="roulette">
+      <div class="wheel spin">
+        <div id="spin" onclick="spin();">Spin</div>
+        <div id="again" onclick="again();">Again</div>
+        <div class="arrow">
+        </div>
+        <img src="https://i.imgur.com/N01W3Ks.png">
+      </div>
+    </div>
+    <script>
+    perfecthalf = ((1 / 37) * 360) / 2;
+
+  let currentLength = perfecthalf;
+
+  $(".wheel img").css("transition", "0s");
+  $(".wheel img").css("transform", "rotate(" + perfecthalf + "deg)");
+
+
+  numbers = [0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23, 8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32];
+
+  function spin() {
+    $(".wheel img").css("transition", "transform 10s cubic-bezier(0.3, 1, 0.7, 1), 10s filter cubic-bezier(0.1, 1, 0.8, 1), 10s -webkit-filter cubic-bezier(0.1, 1, 0.8, 1)");
+
+    $(".wheel img").css("filter", "blur(8px)");
+
+    result = numbers.indexOf(33);
+    spininterval = result * (360 / 37) + getRandomInt(3, 4) * 360;
+    currentLength += spininterval;
+
+    numofsecs = spininterval;
+
+    console.log(currentLength);
+    $(".wheel img").css("transform", "rotate(" + currentLength + "deg)");
+
+    setTimeout(function () {
+      $(".wheel img").css("filter", "blur(0px)");
+    }, numofsecs);
+  }
+
+  function again() {
+    $(".wheel img").css("filter", "blur(0px)");
+    $(".wheel img").css("transition", "0s");
+    $(".wheel img").css("transform", "rotate(" + perfecthalf + "deg)");
+  }
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  $(document).ready(function() {
+    // $(".spin").click();
+  })
+      
+//       tx = runRoullete(bets);
+//       send_tx = provider.sendTransaction(tx);
+//       await provider.waitForTransaction(send_tx);
+
+
+//       const resultTopic = "";
+//       const txHash = "0x5392dbb5f4b2379e800b8fbb460c0b14312a74bc7fc9a9c3123783d0ded7ff0f";
+//       const txReceipt = await provider.waitForTransaction(txHash);
+//       const logs = txReceipt['logs'];
+
+//       for (var idx = 0; idx < logs.length; idx++) {
+//         const topics = logs[idx].topics;
+//         if (topics[0] !== resultTopic) {
+//           continue;
+//         }
+
+//         result = topics[1];
+//         prize = bets[result];
+//       }
+
+// // SPDX-License-Identifier: MIT
+// pragma solidity >=0.8.2;
+
+// import "./Initializable.sol";
+
+// library SafeMath {
+//     function add(uint256 a, uint256 b) internal pure returns (uint256) {
+//         uint256 c = a + b;
+//         require(c >= a, "SafeMath: addition overflow");
+
+//         return c;
+//     }
+
+//     function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+//         return sub(a, b, "SafeMath: subtraction overflow");
+//     }
+
+//     function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+//         require(b <= a, errorMessage);
+//         uint256 c = a - b;
+
+//         return c;
+//     }
+
+//     function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+//         if (a == 0) {
+//             return 0;
+//         }
+
+//         uint256 c = a * b;
+//         require(c / a == b, "SafeMath: multiplication overflow");
+
+//         return c;
+//     }
+
+//     function div(uint256 a, uint256 b) internal pure returns (uint256) {
+//         return div(a, b, "SafeMath: division by zero");
+//     }
+
+//     function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+//         require(b > 0, errorMessage);
+//         uint256 c = a / b;
+
+//         return c;
+//     }
+
+//     function mod(uint256 a, uint256 b) internal pure returns (uint256) {
+//         return mod(a, b, "SafeMath: modulo by zero");
+//     }
+
+//     function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+//         require(b != 0, errorMessage);
+//         return a % b;
+//     }
+// }
+
+// interface IERC20 {
+//     function totalSupply() external view returns (uint256);
+//     function balanceOf(address account) external view returns (uint256);
+//     function transfer(address recipient, uint256 amount) external returns (bool);
+//     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+//     function approve(address spender, uint value) external returns (bool);
+// }
+
+// /**
+//  * interfaces from here
+//  **/
+
+// interface IRandom {
+//     function getRandom(address adr, uint n, uint seed) external view returns (uint256);
+// }
+// /**
+//  * interfaces to here
+//  **/
+ 
+// contract UpFinityRoulette is Initializable {
+//     using SafeMath for uint256;
+    
+//     // Upgradable Contract Test
+//     uint public _uptest;
+
+//     // My Basic Variables
+//     address public _owner;
+//     address public _token;
+
+//     /**
+//      * vars and events from here
+//      **/
+//     uint256[] public vs;
+
+//     event gotRandomNumber(uint rv);
+//     /**
+//      * vars and events to here
+//      **/
+     
+//     fallback() external payable {}
+//     receive() external payable {}
+    
+//     modifier onlyOwner {
+//         require(_owner == msg.sender, 'Only Owner can do this!!!!!');
+//         _;
+//     }
+    
+//     constructor() {
+//         _owner = msg.sender;
+//         vs = new uint[](100);
+//     }
+
+//     function initialize(address owner_) public initializer {
+//         _owner = owner_;
+        
+//         /**
+//          * inits from here
+//          **/
+         
+//         //_token = token_;        
+//         vs = new uint[](100);
+        
+//         /**
+//          * inits to here
+//          **/
+//     }
+    
+//     function setUptest(uint uptest_) external {
+//         _uptest = uptest_;
+//     }
+
+//     function setToken(address token_) external onlyOwner {
+//         _token = token_;
+//     }
+
+//     /**
+//      * functions from here
+//      **/
+
+//     function runRoulette(uint[] calldata bets) external {
+
+//         uint rv = getRandom(msg.sender, block.timestamp, block.difficulty);
+
+//         emit gotRandomNumber(rv); // check randomness with this
+//         rv = rv % 37; // roulette
+
+//         uint prize = bets[rv] * 1e6; // 1M UPF per basic bet
+//         {
+//             address UPF = address()
+//             IREC20(UPF).transfer(msg.sender, prize);
+//         }
+//     }
+    </script>
+  </body>
+</html>
