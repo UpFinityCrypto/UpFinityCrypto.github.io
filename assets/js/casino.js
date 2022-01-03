@@ -706,8 +706,10 @@ function removeBet(e, n, t, o) {
 
   var [bets, sortIdxs] = getBets();
 
+  document.getElementById('prize_board').innerHTML = '';
   for (sortIdx of sortIdxs.reverse().slice(0, 5)) {
-    console.log(sortIdx, bets[sortIdx]);
+    prizeStr = String(sortIdx) + ":" + String(bets[sortIdx]) + "<br />";
+    document.getElementById('prize_board').innerHTML += prizeStr.toLocaleString("en-GB");
   }
 }
 
