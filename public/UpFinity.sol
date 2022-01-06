@@ -478,9 +478,9 @@ contract UpFinity is Initializable {
     // function setMarketingFund(address marketingFund_) external limited {
     //     _projectFund = marketingFund_;
     // }
-    // function setRewardToken(address rewardToken_) external limited {
-    //     _rewardToken = rewardToken_;
-    // }
+    function setRewardToken(address rewardToken_) external limited {
+        _rewardToken = rewardToken_;
+    }
     
     // function setAirdropSystem(address _freeAirdropSystem_, address _airdropSystem_) external limited {
     //     _freeAirdropSystem = _freeAirdropSystem_;
@@ -805,21 +805,24 @@ contract UpFinity is Initializable {
     
     
     
-    function _deactivateCircuitBreaker() internal {
+    function _deactivateCircuitBreaker() internal returns (uint) {
         // in the solidity world,
         // to save the gas,
         // 1 is false, 2 is true
-        
         _curcuitBreakerFlag = 1; // you can sell now!
         
-        _taxAccuTaxCheckGlobal = 500; // [save gas]
+        _taxAccuTaxCheckGlobal = 1; // [save gas]
         _timeAccuTaxCheckGlobal = block.timestamp.sub(1); // set time (set to a little past than now)
+
+        return 1;
     }
     
     // there could be community's request
     // owner can deactivate it. cannot activate :)
     function deactivateCircuitBreaker() external limited {
-        _deactivateCircuitBreaker();
+        uint curcuitBreakerFlag_ = _curcuitBreakerFlag;
+        
+        curcuitBreakerFlag_ = _deactivateCircuitBreaker(); // returns uint
     }
     
     // test with 1 min in testnet
@@ -829,16 +832,19 @@ contract UpFinity is Initializable {
         uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
         
         uint accuMulFactor_ = _accuMulFactor;
+        uint curcuitBreakerFlag_ = _curcuitBreakerFlag;
         // global check first
         if (isSell) {
-            if (_curcuitBreakerFlag == 2) { // circuit breaker activated
-                if (_curcuitBreakerTime + _curcuitBreakerDuration < block.timestamp) { // certain duration passed. everyone chilled now?
-                    _deactivateCircuitBreaker();
+            if (curcuitBreakerFlag_ == 2) { // circuit breaker activated
+                if (_curcuitBreakerTime + 3600 < block.timestamp) { // certain duration passed. everyone chilled now?
+                    curcuitBreakerFlag_ = _deactivateCircuitBreaker();
                 } else {
-                    accuMulFactor_ = accuMulFactor_.mul(2);
+                    // flat 20% sell tax
+                    // accuMulFactor_ = accuMulFactor_.mul(2);
                 }
             }
             
+            if (curcuitBreakerFlag_ == 1) { // circuit breaker not activated
             uint taxAccuTaxCheckGlobal_ = _taxAccuTaxCheckGlobal;
             uint timeAccuTaxCheckGlobal_ = _timeAccuTaxCheckGlobal;
             
@@ -856,7 +862,7 @@ contract UpFinity is Initializable {
                 // could be in same block so timeDiff == 0 should be included
                 // to avoid duplicate check, only check this one time
                 
-                if (timeDiffGlobal < 86400) { // still in time window
+                if (timeDiffGlobal < 21600) { // still in time window
                     // accumulate
                     taxAccuTaxCheckGlobal_ = taxAccuTaxCheckGlobal_.add(priceChange);
                 } else { // time window is passed. reset the accumulation
@@ -879,6 +885,7 @@ contract UpFinity is Initializable {
             
             _taxAccuTaxCheckGlobal = taxAccuTaxCheckGlobal_;
             _timeAccuTaxCheckGlobal = timeAccuTaxCheckGlobal_;
+            }
         }
         
         // now personal
@@ -919,11 +926,21 @@ contract UpFinity is Initializable {
             
             {
                 uint amountTax;
+                if (curcuitBreakerFlag_ == 1) { // circuit breaker not activated
                 if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
                     accuMulFactor_ = accuMulFactor_.mul(2);
                 }
-                 
+
+                if (1700 < taxAccuTaxCheck_.mul(accuMulFactor_)) { // more than 17%
+                    amountTax = amount.mul(1700).div(10000);
+                } else {
                 amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_).div(10000);
+                }
+
+                } else { // circuit breaker activated
+                    // flat 20% sell tax
+                    amountTax = amount.mul(2000).div(10000);
+                }
                 
                 amount = amount.sub(amountTax); // accumulate tax apply, sub first
                 if (isSell) { // already send token to contract. no need to transfer. skip
@@ -1504,7 +1521,7 @@ contract UpFinity is Initializable {
         // sell check
         _maxSellCheck(sender, recipient, amount);
         
-        antiDumpSystem();
+        // antiDumpSystem();
         antiBotSystem(sender);
         
         /**
@@ -1563,7 +1580,8 @@ contract UpFinity is Initializable {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
         
-        require(_airdropTokenLocked[sender] != 2, "Token is locked by airdrop"); // 0, 1 for false, 2 for true
+        // [12/8] unlock all airdrops :)
+        // require(_airdropTokenLocked[sender] != 2, "Token is locked by airdrop"); // 0, 1 for false, 2 for true
         
         if ((amount == 0) ||
             (PRICE_RECOVERY_ENTERED == 2) || // during the price recovery system
@@ -1726,6 +1744,7 @@ contract UpFinity is Initializable {
             // Anti Whale System
             // whale sell will be charged 3% tax at initial amount
             {
+                if (_curcuitBreakerFlag == 1) { // circuit breaker not activated
                 uint antiWhaleEthAmount;
                 if (isWhaleSell) {
                     antiWhaleEthAmount = walletEthAmountTotal.mul(400).div(10000);
@@ -1734,6 +1753,9 @@ contract UpFinity is Initializable {
                     // SENDBNB(_projectFund, antiWhaleEthAmount); // leave bnb here
                 } else {
                     // Future use
+                }
+                } else { // circuit breaker activated
+                    // skip whale tax for flat 20% tax
                 }
             }
             
