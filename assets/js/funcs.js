@@ -1081,6 +1081,7 @@ async function fstake(days) {
     .catch((error) => {
       alert(error);
       error = errMsg(error);
+      alert(error);
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
@@ -1095,11 +1096,49 @@ function funstake() {
     })
     .catch((error) => {
       alert(error);
-      error = errMsg(error);      
+      error = errMsg(error);
+      alert(error);
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
 
+
+function fgetLottery(n) {
+  lotteryS = conts['lottery'].connect(signer);
+
+  lotteryS.getLottery(n)
+    .then((arg) => {
+      txHash = arg['hash'];
+      console.log(txHash);
+      hashLink = 'https://bscscan.com/tx/' + txHash;
+
+      displayText_('getTicket', loadingStr + 'Getting Ticket.. Tx Hash:' + '<a href="' + hashLink + '" target="_tab">' + txHash + '</a>');
+      provider.waitForTransaction(txHash)
+        .then((result) => {
+          var logs = result['logs'];
+
+          var numbers = [];
+          var prizes = [];
+          for (log of logs) {
+            topics = log['topics'];
+            data = parseInt(log['data'], 16);
+            if (topics[0] == '0xb0bf89da25840617d94dcbb1b0074a6b5c6643f323cb5fb9128772fd6f12e21c') {
+              numbers.push(data);
+            }
+            if (topics[0] == '0xe81555de57d98e22ad22039a3ecf54f4028ec961f9ffaa362697667bfebb3eba') {
+              prizes.push(data);
+            }
+          }
+          displayText_('getTicket', doneStr + 'numbers: ' + numbers + 'prizes: ' + prizes);
+        });
+    })
+    .catch((error) => {
+      alert(error);
+      error = errMsg(error);
+      alert(error);
+      displayText_('stakeLog', 'FAIL:' + error);
+    });
+}
 
 function getRef() {
   x = getElement("referralAdrDisplay");
