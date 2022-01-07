@@ -31,8 +31,10 @@ inputHandlerBuy = function (e) {
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     result = getElement('buyOutput');
+    result_ = getElement('buyOutputMore');
     if (valueIn == 0) {
       result.value = 0;
+      result_.value = 0;
       return;
     }
 
@@ -45,12 +47,11 @@ inputHandlerBuy = function (e) {
     valueOut_ = numberWithCommas(valueOut_);
     result.value = valueOut_;
 
-    result = getElement('buyOutputMore');
     valueOut = valueOut.mul(300).div(10000 - buyFee);
     valueOut_ = ethers.utils.formatEther(valueOut);
     valueOut_ = parseInt(valueOut_);
     valueOut_ = numberWithCommas(valueOut_);
-    result.value = valueOut_;
+    result_.value = valueOut_;
 
   })();
 }
