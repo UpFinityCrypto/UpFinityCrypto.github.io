@@ -92,6 +92,7 @@
 /*   border: 5px solid;
   border-color: #28a745; */
   box-shadow: 0px 0px 4px 1px #ea481777;
+  cursor: not-allowed;
 }
 .button-upgrade {
   /*   border: 5px solid;
