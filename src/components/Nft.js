@@ -38,7 +38,7 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle2}>
                       <a href="assets/img/nft/origins/EpicYang.png" target="_tab">
-                        <img id="diamondBoy" src="assets/img/new/EpicYang.png" style={imgStyle}/>
+                        <img id="diamondBoy" src="assets/img/nft/origins/EpicYang.png" style={imgStyle}/>
                         <img id="epicBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
@@ -51,7 +51,7 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle2}>
                       <a href="assets/img/nft/origins/EpicYin.png" target="_tab">
-                        <img id="diamondGirl" src="assets/img/new/EpicYin.png" style={imgStyle}/>
+                        <img id="diamondGirl" src="assets/img/nft/origins/EpicYin.png" style={imgStyle}/>
                         <img id="epicBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
@@ -75,7 +75,7 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle3}>
                       <a href="assets/img/nft/origins/LegendaryYang.mp4" target="_tab">
-                        <img id="emeraldBoy" src="assets/img/new/LegendaryYang.gif" style={imgStyle}/>
+                        <img id="emeraldBoy" src="assets/img/nft/origins/LegendaryYang.gif" style={imgStyle}/>
                         <img id="legendaryBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
@@ -88,7 +88,7 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle3}>
                       <a href="assets/img/nft/origins/LegendaryYin.mp4" target="_tab">
-                        <img id="emeraldGirl" src="assets/img/new/LegendaryYin.gif" style={imgStyle}/>
+                        <img id="emeraldGirl" src="assets/img/nft/origins/LegendaryYin.gif" style={imgStyle}/>
                         <img id="legendaryBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
