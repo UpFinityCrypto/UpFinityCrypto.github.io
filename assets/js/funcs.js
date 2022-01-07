@@ -152,32 +152,36 @@ async function afconnect() {
     .request({ method: 'eth_requestAccounts' })
     .then(handleAccountsChanged)
     .catch((err) => {
-			if (err.code == 4001) {
-				// EIP-1193 userRejectedRequest error
-				// If this happens, the user rejected the connection request.
+      console.log(err);
+      const code = err.code;
+      if (code == -32002) { // already processing
+        displayText("connectResult", '<span>Connect First and Refresh!</span>');
+      } else if (code == 4001) {
+		// EIP-1193 userRejectedRequest error
+		// If this happens, the user rejected the connection request.
         displayText("connectResult", '<span>You Rejected!</span>');
-			} else {
-				displayText("connectResult", err);
-			}
+	  } else {
+	    displayText("connectResult", err);
+	  }
       return false;
-		});
+	});
   
   return result;
 }
 
-	function fclaim() {
-		if (typeof conts['reward'] === 'undefined') {
-      document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
-      return;
-    }
+function fclaim() {
+  if (typeof conts['reward'] === 'undefined') {
+    document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
+    return;
+  }
     
-    const rewardSigner = conts['reward'].connect(signer);
+  const rewardSigner = conts['reward'].connect(signer);
     
-    rewardSigner.claimBNB().then(function (result) {
-      document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
-      document.getElementById('claimHash').innerHTML = result['hash'];
-    });
-	}
+  rewardSigner.claimBNB().then(function (result) {
+    document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
+    document.getElementById('claimHash').innerHTML = result['hash'];
+  });
+}
   
   
   
@@ -634,6 +638,7 @@ function buySellChange() {
 }
 
 function errMsg(error) {
+  console.log(error);
   if (error['message'] != 'Internal JSON-RPC error.') {
     return error['message'];
   }
@@ -642,7 +647,7 @@ function errMsg(error) {
 }
 
 async function getBNBandUPF() {
-  buyBNB = document.getElementById("swapInput").value;
+  buyBNB = document.getElementById("buyInput").value;
   buyBNB = buyBNB.replace(/,/g,'');
   buyBNB = ethers.utils.parseEther(String(buyBNB));
 
@@ -662,7 +667,7 @@ async function getBNBandUPF() {
 }
 
 async function getUPFandBNB() {
-  buyUPF = document.getElementById("swapInput").value;
+  buyUPF = document.getElementById("sellInput").value;
   buyUPF = buyUPF.replace(/,/g, '');
   buyUPF = ethers.utils.parseEther(String(buyUPF));
 
@@ -701,18 +706,20 @@ function fbuyUPF() {
         displayText_('swapResult', "can buy. estimated gas:" + (arg / 1).toString());
 
         routerSigner = conts['router'].connect(signer);
-
+        console.log(UPFamount.div(2), [adrs['wbnb'], adrs['upf']], currentAccount, Math.floor(Date.now() / 1000) + 100000, override);
         routerSigner.swapExactETHForTokensSupportingFeeOnTransferTokens(UPFamount.div(2), [adrs['wbnb'], adrs['upf']], currentAccount, Math.floor(Date.now() / 1000) + 100000, override)
           .then((arg) => {
             // arg['hash']
             console.log(arg);
             linkElement = "<a href='https://bscscan.com/tx/" + arg['hash'] + "'>" + "view in Bscscan" + "</a>";
             displayText_('swapResult', "buy done! " + linkElement);
-          }, (error) => {
+          })
+          .catch((error) => {
             error = errMsg(error);
             displayText_('swapResult', error);
           });
-      }, (error) => {
+      })
+      .catch((error) => {
         error = errMsg(error);
         if (error == 'execution reverted: Pancake: TRANSFER_FAILED') {
           if (maxBuyBNB / 1 < buyBNB / 1) {
@@ -738,33 +745,49 @@ function fsellUPF() {
       alert('requested UPF size is higher than balance!');
       return;
     }
-    //////////////////// why transfer from fail and signer works?
-    conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [adrs['upf'], adrs['wbnb']], currentAccount, 9999999999)
-      .then((arg) => {
-        displayText_('swapResult', "can sell. estimated gas:" + (arg / 1).toString());
 
-        routerSigner = conts['router'].connect(signer);
-        routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [adrs['upf'], adrs['wbnb']], currentAccount, 9999999999)
-          .then((arg) => {
-            console.log(arg);
-            displayText_('swapResult', 'sell done');      
-          }, (error) => {
-            error = errMsg(error);
-            displayText_('swapResult', error);
-          });
-      }, (error) => {
+    //////////////////// why transfer from fail and signer works?
+    routerSigner = conts['router'].connect(signer);
+    routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, 0, [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+      .then((arg) => {
+        // arg['hash']
+        console.log(arg);
+        linkElement = "<a href='https://bscscan.com/tx/" + arg['hash'] + "'>" + "view in Bscscan" + "</a>";
+        displayText_('sellResult', "sell done! " + linkElement);
+      })
+      .catch((error) => {
         error = errMsg(error);
-        if (error == 'execution reverted: TransferHelper: TRANSFER_FROM_FAILED') {
-          if (maxSellUPF / 1 < sellUPF / 1) {
-            displayText_('swapResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(maxSellUPF / bnbDiv)));
-          } else {
-            displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!');
-          }
-        } else {
-          displayText_('swapResult', 'contact @ALLCOINLAB with screenshot!' + error);
-        }
+        displayText_('sellResult', error);
       });
 
+    //conts['router'].estimateGas.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, BNBamount.div(2), [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+    //  .then((arg) => {
+    //    displayText_('sellResult', "can sell. estimated gas:" + (arg / 1).toString());
+
+    //    routerSigner = conts['router'].connect(signer);
+    //    routerSigner.swapExactTokensForETHSupportingFeeOnTransferTokens(sellUPF, 0, [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(Date.now() / 1000) + 100000)
+    //      .then((arg) => {
+    //        // arg['hash']
+    //        console.log(arg);
+    //        linkElement = "<a href='https://bscscan.com/tx/" + arg['hash'] + "'>" + "view in Bscscan" + "</a>";
+    //        displayText_('sellResult', "sell done! " + linkElement);
+    //      }, (error) => {
+    //        error = errMsg(error);
+    //        displayText_('sellResult', error);
+    //      });
+    //  }, (error) => {
+    //    error = errMsg(error);
+    //    console.log(sellUPF, 0, [adrs['upf'], adrs['wbnb']], currentAccount, Math.floor(Date.now() / 1000) + 100000);
+    //    if (error == 'execution reverted: TransferHelper: TRANSFER_FROM_FAILED') {
+    //      if (maxSellUPF / 1 < sellUPF / 1) {
+    //        displayText_('sellResult', 'sell limit exceeded! ' + numberWithCommas(parseInt(maxSellUPF / bnbDiv)));
+    //      } else {
+    //        displayText_('sellResult', 'contact @ALLCOINLAB with screenshot!');
+    //      }
+    //    } else {
+    //      displayText_('sellResult', 'contact @ALLCOINLAB with screenshot!' + error);
+    //    }
+    //  });
   })();
 }
 
@@ -1012,9 +1035,10 @@ function approve(adr, amount) {
     .then((arg) => {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('approveStake', 'Approving.. refresh page!');
-    }, (error) => {
-      error = errMsg(error);
+    })
+    .catch((error) => {
       alert(error);
+      error = errMsg(error);
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
@@ -1053,12 +1077,12 @@ async function fstake(days) {
       displayText_('stake1d', 'staking.. refresh page!');
       displayText_('stake7d', 'staking.. refresh page!');
       displayText_('stake28d', 'staking.. refresh page!');
-    }, (error) => {
-      error = errMsg(error);
+    })
+    .catch((error) => {
       alert(error);
+      error = errMsg(error);
       displayText_('stakeLog', 'FAIL:' + error);
     });
-
 }
 
 function funstake() {
@@ -1068,9 +1092,10 @@ function funstake() {
     .then((arg) => {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('unstake', 'unstaking.. refresh page!');
-    }, (error) => {
-      error = errMsg(error);
+    })
+    .catch((error) => {
       alert(error);
+      error = errMsg(error);      
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }

@@ -365,18 +365,22 @@ runPersonals['Taxs'] = async function runTaxsPersonal() {
 
 
 runs['Swap'] = async function runSwap() {
-  source = getElement('swapInput');
-  if (source) {
-    source.addEventListener('input', inputHandlerBuy);
-    source.addEventListener('propertychange', inputHandlerBuy); // for IE8
+  buyInput = getElement('buyInput');
+  if (buyInput) {
+    buyInput.addEventListener('input', inputHandlerBuy);
+    buyInput.addEventListener('propertychange', inputHandlerBuy); // for IE8
     // Firefox/Edge18-/IE9+ don’t fire on <select><option>
     // source.addEventListener('change', inputHandler); 
+
+    sellInput = getElement('sellInput');
+    sellInput.addEventListener('input', inputHandlerSell);
+    sellInput.addEventListener('propertychange', inputHandlerSell); // for IE8
   } else {
-    console.log('swapInput not ready');
+    console.log('buyInput not ready');
   }
 
-  swapComma("swapInput", false);
-  swapComma("swapOuput", true);
+  swapComma("buyInput", false);
+  swapComma("sellInput", true);
 }
 
 runPersonals['Swap'] = async function runSwapPersonal() {
@@ -634,6 +638,7 @@ isEth = false;
 isBSC = false;
 async function init() {
   t = TT('init loading', t);
+  initDone = true;
   
   await loadCaches();
   await runDisplayDappNeeded(false);
@@ -740,36 +745,36 @@ async function init() {
 
 
 
-async function runCode() {
-  res = await runInit();
-  if (!res) {
-    return false;
-  }
+//async function runCode() {
+//  res = await runInit();
+//  if (!res) {
+//    return false;
+//  }
   
-  for (var section in runs) {
-    if (getDiv(section).length) {
-      await runs[section]();
-    }
-  }
+//  for (var section in runs) {
+//    if (getDiv(section).length) {
+//      await runs[section]();
+//    }
+//  }
 
-  t = TT('global done', t);
-  displayText('debug', 'global done');
+//  t = TT('global done', t);
+//  displayText('debug', 'global done');
 
   
 
-  var dateObj = new Date();
+//  var dateObj = new Date();
 
-  dateObj.setDate(dateObj.getDate() + 1);
+//  dateObj.setDate(dateObj.getDate() + 1);
 
 
-  t = TT('others done', t);
-  displayText('debug', 'others done');
+//  t = TT('others done', t);
+//  displayText('debug', 'others done');
 
-  // displayText('<iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>');
+//  // displayText('<iframe data-aa="1829702" src="//ad.a-ads.com/1829702?size=120x60" style="width:120px; height:60px; border:0px; padding:0; overflow:hidden; background-color: transparent;" ></iframe>');
 
-  // if staked, run staked();
+//  // if staked, run staked();
 
-}
+//}
 
 
 
@@ -823,8 +828,8 @@ async function reinit(path) {
 
 initDone = false;
 async function runInit() {
+  t = TT('runInit loading', t);
   await init();
-  initDone = true;
 }
 
 
