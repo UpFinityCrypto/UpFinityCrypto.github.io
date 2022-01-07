@@ -390,6 +390,18 @@ runPersonals['Swap'] = async function runSwapPersonal() {
   balanceUPF = (await funcs['upf'].balanceOf(currentAccount))[0];
   displayText_("UPFbalance", numberWithCommas(parseInt(balanceUPF / bnbDiv)));
   balance = balanceUPF;
+
+  allowance = (await CALL(funcs['upf'], 'allowance', [currentAccount, adrs['router']], false))[0] / 1;
+  approveStake = select("a#approveRouter");
+  if (10 ** 18 < allowance) { // used approve
+    approveStake.classList.add('button-soon');
+    approveStake.onclick = function () { return false; };
+    displayText('approveRouter', 'Approved');
+  } else {
+    approveStake.classList.remove('button-soon');
+    approveStake.onclick = function () { approve(adrs['router'], 10 ** 15); };
+    displayText('approveRouter', 'Approve Pancakeswap to sell');
+  }
 }
 
 runs['Staking'] = async function runStaking() {

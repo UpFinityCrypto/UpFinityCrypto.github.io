@@ -11,8 +11,14 @@ function Swap() {
 
   return (
     <section id="Swap">
-      <Buy />
-      <Sell />
+      <div className="row">
+        <div className="col-12 col-lg-6">
+          <Buy />
+        </div>
+        <div className="col-12 col-lg-6">
+          <Sell />
+        </div>
+      </div>
     </section>
   );
 }
@@ -34,7 +40,7 @@ function Buy() {
               <div className="sc-jSFjdj sc-gKAaRy kJmatq iIdAKa">
                 <h2 color="text" className="sc-gtsrHT sc-kLojOw iGtzpP jDXLmf text-center">Buy</h2>
                 <div className="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center" style={{margin: "10px"}}>
-                  <div color="textSubtle" fontSize="14px" className="sc-gtsrHT llSJBl"><span>Swap</span> UPF easily / instantly</div>
+                  <div color="textSubtle" fontSize="14px" className="sc-gtsrHT llSJBl"><span>Buy</span> UPF easily / instantly</div>
                   <div>Buy Status: <span id="BuyStatus"></span></div>
                 </div>
               </div>
@@ -186,6 +192,7 @@ function Sell() {
                 <div className="sc-jSFjdj sc-gKAaRy kJmatq togOu text-center" style={{ margin: "10px" }}>
                   <div color="textSubtle" fontSize="14px" className="sc-gtsrHT llSJBl"><span>Sell</span> UPF easily / instantly</div>
                   <div>Sell Status: <span id="SellStatus"></span></div>
+                  <a id="approveRouter" className="button scrollto"></a>
                 </div>
               </div>
             </div>
