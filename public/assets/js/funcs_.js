@@ -490,9 +490,9 @@ runPersonals['Staking'] = async function runStakingPersonal() {
       stakeDuration_ = select('a#' + stakeDuration);
       stakeDuration_.classList.remove('button-soon');
     }
-    displayText('stake1d', '1 days (APY 40 %) (Reward: 1M)');
-    displayText('stake7d', '7 days (APY 80 %) (Reward: 12M)');
-    displayText('stake28d', '28 days (APY 160 %) (Reward: 83M)');
+    displayText('stake1d', '7 days (APY 20%) (Reward: 3M)');
+    displayText('stake7d', '28 days (APY 40%) (Reward: 28M)');
+    displayText('stake28d', '84 days (APY 80%) (Reward: 174M)');
   }
 
   _claimedAmounts = (await CALL(funcs['stake'], '_claimedAmounts', [currentAccount], false))[0] / 1;

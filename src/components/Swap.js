@@ -60,7 +60,7 @@ export function Buy() {
                     </div>
                   </div>
                   <div className="sc-fVnRWS idBnak" style={{display: "flex"}}>
-                    <input id="buyInput" className="sc-iMCRTP iOdHiq token-amount-input no-margin text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{caretColor: "white", color: "white"}}/>
+                    <input id="buyInput" title="Type BNB Amount do buy UPF" className="token-amount-input no-margin text-left" inputMode="decimal" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{caretColor: "white", color: "white"}}/>
                     <button className="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button no-margin" scale="sm" style={{justifyContent: "space-between", border: "0px", backgroundColor: "#00000000"}}>
                       <div className="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO no-margin" style={{justifyContent: "space-between", display: "flex", alignItems: "center"}}>
                         <img id="BNBlogo" src="assets/img/trade/bin.ico" style={{width: "30px"}}/>
@@ -84,7 +84,7 @@ export function Buy() {
                   <div className="sc-fVnRWS idBnak" style={{
             display: "flex",
                   }}>
-                    <input id="buyOutput" className="sc-iMCRTP iOdHiq token-amount-input text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} readOnly />
+                    <input id="buyOutput" className="sc-iMCRTP iOdHiq token-amount-input text-left" inputMode="decimal" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} readOnly />
                     <button className="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style={{
             justifyContent: "space-between",
             border: "0px",
@@ -219,7 +219,7 @@ export function Sell() {
                     </div>
                   </div>
                   <div className="sc-fVnRWS idBnak" style={{ display: "flex" }}>
-                    <input id="sellInput" className="sc-iMCRTP iOdHiq token-amount-input no-margin text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} />
+                    <input id="sellInput" className="token-amount-input no-margin text-left" inputMode="decimal" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} />
                     <button className="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button no-margin" scale="sm" style={{ justifyContent: "space-between", border: "0px", backgroundColor: "#00000000" }}>
                       <div className="sc-jSFjdj sc-gKAaRy kJmatq eqGhLO no-margin" style={{ justifyContent: "space-between", display: "flex", alignItems: "center" }}>
                         
@@ -244,7 +244,7 @@ export function Sell() {
                   <div className="sc-fVnRWS idBnak" style={{
                     display: "flex",
                   }}>
-                    <input id="sellOutput" className="sc-iMCRTP iOdHiq token-amount-input text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} readOnly />
+                    <input id="sellOutput" className="sc-iMCRTP iOdHiq token-amount-input text-left" inputMode="decimal" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} readOnly />
                     <button className="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style={{
                       justifyContent: "space-between",
                       border: "0px",

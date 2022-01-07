@@ -40,26 +40,26 @@ function Staking() {
       <div className="row">
         <div className="col-12 col-lg-6 text-justify content">
           <h3>Stake</h3>
-          <span>Stake Phase 1 Finished by giving 80,000,000,000 UPF!</span>
-          <div>Please wait for next phase of the stake</div>
-          {/*<div><i className="bi bi-chevron-right"></i>Connect wallet</div>*/}
+          <span>Stake Season 1 Finished by giving 80,000,000,000 UPF!</span>
+          <div>Stake Season 2 Started!</div>
+          <div><i className="bi bi-chevron-right"></i>Connect wallet</div>
 
-          {/*<div><i className="bi bi-chevron-right"></i>Click 'approve' and confirm in wallet dapp</div>*/}
-          {/*<a id="approveStake" className="button button-soon scrollto"></a>*/}
+          <div><i className="bi bi-chevron-right"></i>Click 'approve' and confirm in wallet dapp</div>
+          <a id="approveStake" className="button button-soon scrollto"></a>
 
-          {/*<div><i className="bi bi-chevron-right"></i>Write down amount to Stake <span>(max 29B)</span></div>*/}
-          {/*<div style={{border: "solid 3px", borderRadius: "16px", background: "white"}}>*/}
-          {/*  <input id="typedStakeAmount" defaultValue="" inputMode="decimal" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="Write down amount to stake" style={{caretColor: "black", color: "black", textAlign: "center", backgroundColor: "white"}} />*/}
-          {/*  <div>*/}
-          {/*    <img id="UPFlogo" className="small-icon" src="assets/img/logo.png" style={{width30px}}/>*/}
-          {/*    UPF*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+          <div><i className="bi bi-chevron-right"></i>Write down amount to Stake <span>(max 30B)</span></div>
+          <div style={{border: "solid 3px", borderRadius: "16px", background: "white"}}>
+            <input id="typedStakeAmount" defaultValue="" inputMode="decimal" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="Write down amount to stake" style={{caretColor: "black", color: "black", textAlign: "center", backgroundColor: "white"}} />
+            <div>
+              <img id="UPFlogo" className="small-icon" src="assets/img/logo.png" style={{width30px}}/>
+              UPF
+            </div>
+          </div>
 
-          {/*<div><i className="bi bi-chevron-right"></i>Select one Stake Duration and confirm in wallet dapp</div>*/}
-          {/*<a id="stake1d" className="button button-soon scrollto" onClick={() => window.fstake(1)}></a>*/}
-          {/*<a id="stake7d" className="button button-soon scrollto" onClick={() => window.fstake(7)}></a>*/}
-          {/*<a id="stake28d" className="button button-soon scrollto" onClick={() => window.fstake(28)}></a>*/}
+          <div><i className="bi bi-chevron-right"></i>Select one Stake Duration and confirm in wallet dapp</div>
+          <a id="stake1d" className="button button-soon scrollto" onClick={() => window.fstake(7)}></a>
+          <a id="stake7d" className="button button-soon scrollto" onClick={() => window.fstake(28)}></a>
+          <a id="stake28d" className="button button-soon scrollto" onClick={() => window.fstake(84)}></a>
           <span id="stakeLog"></span>
 
         </div>

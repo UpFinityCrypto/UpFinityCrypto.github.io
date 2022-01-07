@@ -30,7 +30,7 @@ import Airdrops from './components/Airdrops';
 import Fiat from './components/Fiat';
 import Metaverse from './components/Metaverse';
 import Ecosystem from './components/Ecosystem';
-
+import Lottery from './components/Lottery';
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -101,7 +101,7 @@ function App() {
         <Route exact path="/donations" element={<Donations />} />
         <Route exact path="/airdrops" element={<Airdrops />} />
         <Route exact path="/metaverse" element={<Metaverse />} />
-
+        <Route exact path="/Lottery" element={<Lottery />} />
 
       </Routes>
 

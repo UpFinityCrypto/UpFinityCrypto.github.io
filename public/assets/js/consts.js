@@ -15,7 +15,11 @@ const adrs = {
   'airdrop': '0x53a1239a6C3c0cD6458C7Ee9c07815544a537004',
   'nft': '0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD',
   'stake': '0xCeC0Ee6071571d77cFcD52244D7A1D875f71d32D',
+
+  'random': '0x14a346835eDC99e8E82F2905BAef87Aa0fAc36f2',
+  'lottery': '0xB48c64D9b8C9862522cb4971ddc0A01612d9F847',
 }
+
 const refLinkPrefix = 'https://upfinitycrypto.github.io?ref=';
 let communityToken = "0x000000000000000000000000000000000000dEaD";
 
@@ -25,14 +29,19 @@ const buyFee = 900;
 const sellFee = 1200;
 const totalFee = buyFee + sellFee;
 
+const doneStr = '<i class="bi bi-check-circle text-success"></i>';
+const loadingStr = '<div class="spinner-border text-warning" role="status"></div>';
+
 
 inputHandlerBuy = function (e) {
   (async function () {
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
     result = getElement('buyOutput');
+    result_ = getElement('buyOutputMore');
     if (valueIn == 0) {
       result.value = 0;
+      result_.value = 0;
       return;
     }
 
@@ -45,12 +54,11 @@ inputHandlerBuy = function (e) {
     valueOut_ = numberWithCommas(valueOut_);
     result.value = valueOut_;
 
-    result = getElement('buyOutputMore');
     valueOut = valueOut.mul(300).div(10000 - buyFee);
     valueOut_ = ethers.utils.formatEther(valueOut);
     valueOut_ = parseInt(valueOut_);
     valueOut_ = numberWithCommas(valueOut_);
-    result.value = valueOut_;
+    result_.value = valueOut_;
 
   })();
 }
@@ -85,9 +93,9 @@ inputHandlerStake = function (e) {
     if (valueIn == 0) {
       typedStakeAmount.value = valueIn;
 
-      displayText('stake1d', '1 days (APY 40%) (Reward: ' + String(valueIn) + ')');
-      displayText('stake7d', '7 days (APY 80%) (Reward: ' + String(valueIn) + ')');
-      displayText('stake28d', '28 days (APY 160%) (Reward: ' + String(valueIn) + ')');
+      displayText('stake1d', '7 days (APY 20%) (Reward: ' + String(valueIn) + ')');
+      displayText('stake7d', '28 days (APY 40%) (Reward: ' + String(valueIn) + ')');
+      displayText('stake28d', '84 days (APY 80%) (Reward: ' + String(valueIn) + ')');
       return;
     }
 
@@ -95,9 +103,9 @@ inputHandlerStake = function (e) {
     valueInComma = numberWithCommas(valueIn);
     typedStakeAmount.value = valueInComma;
 
-    displayText('stake1d', '1 days (APY 40%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 10019 / 10000000))) + ')');
-    displayText('stake7d', '7 days (APY 80%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 123208 / 10000000))) + ')');
-    displayText('stake28d', '28 days (APY 160%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 828819 / 10000000))) + ')');
+    displayText('stake1d', '7 days (APY 20%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 38055 / 10000000))) + ')');
+    displayText('stake7d', '28 days (APY 40%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 284362 / 10000000))) + ')');
+    displayText('stake28d', '84 days (APY 80%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 1740548 / 10000000))) + ')');
   })();
 }
 
@@ -253,4 +261,10 @@ abis['nft'] = [
 
 abis['stake'] = [
   { 'stateMutability': 'payable', 'type': 'fallback' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_claimedAmounts', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_marketingFund', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_minusTaxSystem', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_myRouter', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_owner', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_rewardSystem', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_stakedAmounts', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_stakedDurations', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'name': '_stakedTimes', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_token', 'outputs': [{ 'internalType': 'address', 'name': '', 'type': 'address' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_totalFundsReserved', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_totalFundsUsed', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_totalStakedAmounts', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [], 'name': '_uptest', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'view', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'amount', 'type': 'uint256' }, { 'internalType': 'uint256', 'name': 'duration', 'type': 'uint256' }], 'name': 'calculateReward', 'outputs': [{ 'internalType': 'uint256', 'name': '', 'type': 'uint256' }], 'stateMutability': 'pure', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': 'owner_', 'type': 'address' }], 'name': 'initialize', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'address', 'name': 'token_', 'type': 'address' }], 'name': 'setToken', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'uptest_', 'type': 'uint256' }], 'name': 'setUptest', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'totalFundsReserved_', 'type': 'uint256' }], 'name': 'setVars', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [{ 'internalType': 'uint256', 'name': 'amount', 'type': 'uint256' }, { 'internalType': 'uint256', 'name': 'duration', 'type': 'uint256' }], 'name': 'stake', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'inputs': [], 'name': 'unstake', 'outputs': [], 'stateMutability': 'nonpayable', 'type': 'function' }, { 'stateMutability': 'payable', 'type': 'receive' }
+];
+
+abis['random'] = [];
+
+abis['lottery'] = [
+  { "inputs": [{ "internalType": "uint256", "name": "n", "type": "uint256" }], "name": "getLottery", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "nonpayable", "type": "function" }
 ];
