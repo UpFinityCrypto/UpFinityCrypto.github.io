@@ -100,7 +100,7 @@ function Ecosystem() {
               <h2>Coin Vote</h2>
               <h6>Vote for Coin. No bots. Real Metric</h6>
               <p>Vote for the next "buy the dip" reward token!</p>
-              <p><a id="coinVoteLink" href="https://upfvote.com" className="button scrollto">Upgrading!</a></p>
+              <p><a id="coinVoteLink" href="https://upfvote.com" className="button scrollto button-upgrade">Upgrading!</a></p>
             </div>
           </div>
 
