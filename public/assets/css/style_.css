@@ -78,7 +78,7 @@
   display: inline-block;
   font-size: 20px;
   margin: 10px auto;
-  box-shadow: 0px 0px 4px 1px #28a74577;
+  box-shadow: 0px 0px 5px 5px #28a74577;
   text-decoration: none;
 }
 
@@ -91,12 +91,13 @@
 .button-soon {
 /*   border: 5px solid;
   border-color: #28a745; */
-  box-shadow: 0px 0px 4px 1px #ea481777;
+  box-shadow: 0px 0px 5px 5px #ea481777;
+  cursor: not-allowed;
 }
 .button-upgrade {
   /*   border: 5px solid;
   border-color: #28a745; */
-  box-shadow: 0px 0px 4px 1px #ffff0077;
+  box-shadow: 0px 0px 5px 5px #ffff0077;
 }
 
 .button:hover {
@@ -1001,4 +1002,11 @@ footer {
 
 .social {
   padding: 0px;
+}
+
+.swap-input {
+  border-radius: 16px;
+  border: 0;
+  box-shadow: 0px 0px 5px 5px #aaaaaa78;
+  margin: 10px;
 }

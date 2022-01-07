@@ -48,7 +48,7 @@ export function Buy() {
           </div>
           <div id="swap-page" className="sc-gpEJdM jdQeRJ">
             <div id="swap-input" className="sc-enrZtP cXbVbC">
-              <div id="swap-currency-input" className="sc-hLiTib isUOgq" style={{borderRadius: "16px", borderColor: "#28a745", border: "solid 3px", boxShadow: "rgb(74 74 104 / 10%) 0px 2px 2px -1px inset"}}>
+              <div id="swap-currency-input" className="swap-input">
                 <div className="sc-eTTTle hCspWz" style={{padding: "15px"}}>
                   <div className="sc-fSvVUw fLBCdk" style={{justifyContent: "space-between"}}>
                     <div className="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style={{display: "flex", justifyContent: "space-between"}}>
@@ -70,7 +70,7 @@ export function Buy() {
                   </div>
                 </div>
               </div>
-              <div id="swap-currency-input" className="sc-hLiTib isUOgq" style={{borderRadius: "16px", borderColor: "#28a745", border: "solid 3px", boxShadow: "rgb(74 74 104 / 10%) 0px 2px 2px -1px inset"}}>
+              <div id="swap-currency-input" className="swap-input">
                 <div className="sc-eTTTle hCspWz" style={{padding: "15px"}}>
                   <div className="sc-fSvVUw fLBCdk" style={{justifyContent: "space-between"}}>
                     <div className="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style={{display: "flex", justifyContent: "space-between"}}>
@@ -110,7 +110,7 @@ export function Buy() {
                   }}>
                     +
                     <input id="buyOutputMore" className="token-amount-input text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue=""
-                      style={{ caretColor: "white", color: "white", width: "30%", padding: "0px"}} readOnly />
+                      style={{ caretColor: "white", color: "white", width: "40%", padding: "0px"}} readOnly />
                     <div className="no-margin">by <Link to="/nft">Buying NFT</Link></div>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ export function Sell() {
           </div>
           <div id="swap-page" className="sc-gpEJdM jdQeRJ">
             <div id="swap-input" className="sc-enrZtP cXbVbC">
-              <div id="swap-currency-input" className="sc-hLiTib isUOgq" style={{ borderRadius: "16px", borderColor: "#28a745", border: "solid 3px", boxShadow: "rgb(74 74 104 / 10%) 0px 2px 2px -1px inset" }}>
+              <div id="swap-currency-input" className="swap-input">
                 <div className="sc-eTTTle hCspWz" style={{ padding: "15px" }}>
                   <div className="sc-fSvVUw fLBCdk" style={{ justifyContent: "space-between" }}>
                     <div className="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style={{ display: "flex", justifyContent: "space-between" }}>
@@ -230,7 +230,7 @@ export function Sell() {
                   </div>
                 </div>
               </div>
-              <div id="swap-currency-input" className="sc-hLiTib isUOgq" style={{ borderRadius: "16px", borderColor: "#28a745", border: "solid 3px", boxShadow: "rgb(74 74 104 / 10%) 0px 2px 2px -1px inset" }}>
+              <div id="swap-currency-input" className="swap-input">
                 <div className="sc-eTTTle hCspWz" style={{ padding: "15px" }}>
                   <div className="sc-fSvVUw fLBCdk" style={{ justifyContent: "space-between" }}>
                     <div className="sc-jSFjdj sc-knSFqH sc-kSCemg kJmatq gIlUEd OGHxE" style={{ display: "flex", justifyContent: "space-between" }}>
