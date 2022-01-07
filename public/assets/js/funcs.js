@@ -152,15 +152,19 @@ async function afconnect() {
     .request({ method: 'eth_requestAccounts' })
     .then(handleAccountsChanged)
     .catch((err) => {
-			if (err.code == 4001) {
-				// EIP-1193 userRejectedRequest error
-				// If this happens, the user rejected the connection request.
+      console.log(err);
+      const code = err.code;
+      if (code == -32002) { // already processing
+        displayText("connectResult", '<span>Connect First and Refresh!</span>');
+      } else if (code == 4001) {
+		// EIP-1193 userRejectedRequest error
+		// If this happens, the user rejected the connection request.
         displayText("connectResult", '<span>You Rejected!</span>');
-			} else {
-				displayText("connectResult", err);
-			}
+	  } else {
+	    displayText("connectResult", err);
+	  }
       return false;
-		});
+	});
   
   return result;
 }
@@ -634,6 +638,7 @@ function buySellChange() {
 }
 
 function errMsg(error) {
+  console.log(error);
   if (error['message'] != 'Internal JSON-RPC error.') {
     return error['message'];
   }
@@ -1028,8 +1033,8 @@ function approve(adr, amount) {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('approveStake', 'Approving.. refresh page!');
     }, (error) => {
-      error = errMsg(error);
       alert(error);
+      error = errMsg(error);
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
@@ -1069,11 +1074,15 @@ async function fstake(days) {
       displayText_('stake7d', 'staking.. refresh page!');
       displayText_('stake28d', 'staking.. refresh page!');
     }, (error) => {
-      error = errMsg(error);
       alert(error);
+      error = errMsg(error);
+      displayText_('stakeLog', 'FAIL:' + error);
+    })
+    .catch ((error) => {
+      alert(error);
+      error = errMsg(error);
       displayText_('stakeLog', 'FAIL:' + error);
     });
-
 }
 
 function funstake() {
@@ -1084,8 +1093,13 @@ function funstake() {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('unstake', 'unstaking.. refresh page!');
     }, (error) => {
-      error = errMsg(error);
       alert(error);
+      error = errMsg(error);
+      displayText_('stakeLog', 'FAIL:' + error);
+    })
+    .catch((error) => {
+      alert(error);
+      error = errMsg(error);      
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
