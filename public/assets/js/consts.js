@@ -38,6 +38,7 @@ inputHandlerBuy = function (e) {
 
     valueIn = ethers.utils.parseEther(valueIn);
     valueOut = rO.mul(valueIn).div(rI.add(valueIn));
+    valueOut = valueOut.mul(10000 - buyFee).div(10000);
     valueOut = ethers.utils.formatEther(valueOut);
     valueOut = parseInt(valueOut);
     valueOut = numberWithCommas(valueOut);
@@ -58,6 +59,7 @@ inputHandlerSell = function (e) {
 
     valueIn = ethers.utils.parseEther(valueIn);
     valueOut = rI.mul(valueIn).div(rO.add(valueIn));
+    valueOut = valueOut.mul(10000 - sellFee).div(10000);
     valueOut = ethers.utils.formatEther(valueOut);
     // valueOut = parseInt(valueOut); // BNB don't need
     // valueOut = numberWithCommas(valueOut); // BNB don't need
