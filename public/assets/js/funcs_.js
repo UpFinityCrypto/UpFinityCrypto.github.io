@@ -365,18 +365,22 @@ runPersonals['Taxs'] = async function runTaxsPersonal() {
 
 
 runs['Swap'] = async function runSwap() {
-  source = getElement('swapInput');
-  if (source) {
-    source.addEventListener('input', inputHandlerBuy);
-    source.addEventListener('propertychange', inputHandlerBuy); // for IE8
+  buyInput = getElement('buyInput');
+  if (buyInput) {
+    buyInput.addEventListener('input', inputHandlerBuy);
+    buyInput.addEventListener('propertychange', inputHandlerBuy); // for IE8
     // Firefox/Edge18-/IE9+ don’t fire on <select><option>
     // source.addEventListener('change', inputHandler); 
+
+    sellInput = getElement('sellInput');
+    sellInput.addEventListener('input', inputHandlerSell);
+    sellInput.addEventListener('propertychange', inputHandlerSell); // for IE8
   } else {
-    console.log('swapInput not ready');
+    console.log('buyInput not ready');
   }
 
-  swapComma("swapInput", false);
-  swapComma("swapOuput", true);
+  swapComma("buyInput", false);
+  swapComma("sellInput", true);
 }
 
 runPersonals['Swap'] = async function runSwapPersonal() {

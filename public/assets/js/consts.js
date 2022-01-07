@@ -30,7 +30,7 @@ inputHandlerBuy = function (e) {
   (async function () {
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
-    result = getElement('swapOutput');
+    result = getElement('buyOutput');
     if (valueIn == 0) {
       result.value = 0;
       return;
@@ -50,7 +50,7 @@ inputHandlerSell = function (e) {
   (async function () {
     valueIn = e.target.value;
     valueIn = valueIn.replace(/,/g, '');
-    result = getElement('swapOutput');
+    result = getElement('sellOutput');
     if (valueIn == 0) {
       result.value = 0;
       return;
