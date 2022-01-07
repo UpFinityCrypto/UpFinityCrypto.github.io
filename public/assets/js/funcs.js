@@ -169,19 +169,19 @@ async function afconnect() {
   return result;
 }
 
-	function fclaim() {
-		if (typeof conts['reward'] === 'undefined') {
-      document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
-      return;
-    }
+function fclaim() {
+  if (typeof conts['reward'] === 'undefined') {
+    document.getElementById('claimResult').innerHTML = 'Connect Metamask to Claim!';
+    return;
+  }
     
-    const rewardSigner = conts['reward'].connect(signer);
+  const rewardSigner = conts['reward'].connect(signer);
     
-    rewardSigner.claimBNB().then(function (result) {
-      document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
-      document.getElementById('claimHash').innerHTML = result['hash'];
-    });
-	}
+  rewardSigner.claimBNB().then(function (result) {
+    document.getElementById('claimResult').innerHTML = claimableBalance.toString() + ' BNB claimed!';
+    document.getElementById('claimHash').innerHTML = result['hash'];
+  });
+}
   
   
   
@@ -713,11 +713,13 @@ function fbuyUPF() {
             console.log(arg);
             linkElement = "<a href='https://bscscan.com/tx/" + arg['hash'] + "'>" + "view in Bscscan" + "</a>";
             displayText_('swapResult', "buy done! " + linkElement);
-          }, (error) => {
+          })
+          .catch((error) => {
             error = errMsg(error);
             displayText_('swapResult', error);
           });
-      }, (error) => {
+      })
+      .catch((error) => {
         error = errMsg(error);
         if (error == 'execution reverted: Pancake: TRANSFER_FAILED') {
           if (maxBuyBNB / 1 < buyBNB / 1) {
@@ -752,7 +754,8 @@ function fsellUPF() {
         console.log(arg);
         linkElement = "<a href='https://bscscan.com/tx/" + arg['hash'] + "'>" + "view in Bscscan" + "</a>";
         displayText_('sellResult', "sell done! " + linkElement);
-      }, (error) => {
+      })
+      .catch((error) => {
         error = errMsg(error);
         displayText_('sellResult', error);
       });
@@ -1032,7 +1035,8 @@ function approve(adr, amount) {
     .then((arg) => {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('approveStake', 'Approving.. refresh page!');
-    }, (error) => {
+    })
+    .catch((error) => {
       alert(error);
       error = errMsg(error);
       displayText_('stakeLog', 'FAIL:' + error);
@@ -1073,12 +1077,8 @@ async function fstake(days) {
       displayText_('stake1d', 'staking.. refresh page!');
       displayText_('stake7d', 'staking.. refresh page!');
       displayText_('stake28d', 'staking.. refresh page!');
-    }, (error) => {
-      alert(error);
-      error = errMsg(error);
-      displayText_('stakeLog', 'FAIL:' + error);
     })
-    .catch ((error) => {
+    .catch((error) => {
       alert(error);
       error = errMsg(error);
       displayText_('stakeLog', 'FAIL:' + error);
@@ -1092,10 +1092,6 @@ function funstake() {
     .then((arg) => {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('unstake', 'unstaking.. refresh page!');
-    }, (error) => {
-      alert(error);
-      error = errMsg(error);
-      displayText_('stakeLog', 'FAIL:' + error);
     })
     .catch((error) => {
       alert(error);
