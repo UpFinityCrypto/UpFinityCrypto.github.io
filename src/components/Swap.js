@@ -84,7 +84,7 @@ function Buy() {
                   <div className="sc-fVnRWS idBnak" style={{
             display: "flex",
                   }}>
-                    <input id="buyOutput" className="sc-iMCRTP iOdHiq token-amount-input text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{caretColor: "white", color: "white"}} readOnly/>
+                    <input id="buyOutput" className="sc-iMCRTP iOdHiq token-amount-input text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue="" style={{ caretColor: "white", color: "white" }} readOnly />
                     <button className="sc-hKFxyN jYLfuR sc-iJKVRt eyGnew open-currency-select-button" scale="sm" style={{
             justifyContent: "space-between",
             border: "0px",
@@ -104,6 +104,14 @@ function Buy() {
                         }}>UPF</div>
                       </div>
                     </button>
+                  </div>
+                  <div className="sc-fVnRWS idBnak" style={{
+                    display: "flex",
+                  }}>
+                    +
+                    <input id="buyOutputMore" className="token-amount-input text-left" inputMode="decimal" title="Token Amount" autoComplete="off" autoCorrect="off" type="text" pattern="^[0-9]*[.,]?[0-9]*$" placeholder="0.0" minLength="1" maxLength="79" spellCheck="false" defaultValue=""
+                      style={{ caretColor: "white", color: "white", width: "30%", padding: "0px"}} readOnly />
+                    <div className="no-margin">by <Link to="/nft">Buying NFT</Link></div>
                   </div>
                 </div>
               </div>

@@ -39,12 +39,19 @@ inputHandlerBuy = function (e) {
     valueIn = ethers.utils.parseEther(valueIn);
     valueOut = rO.mul(valueIn).div(rI.add(valueIn));
     valueOut = valueOut.mul(10000 - buyFee).div(10000);
-    valueOut = ethers.utils.formatEther(valueOut);
-    valueOut = parseInt(valueOut);
-    valueOut = numberWithCommas(valueOut);
-    result.value = valueOut;
 
-    
+    valueOut_ = ethers.utils.formatEther(valueOut);
+    valueOut_ = parseInt(valueOut_);
+    valueOut_ = numberWithCommas(valueOut_);
+    result.value = valueOut_;
+
+    result = getElement('buyOutputMore');
+    valueOut = valueOut.mul(300).div(10000 - buyFee);
+    valueOut_ = ethers.utils.formatEther(valueOut);
+    valueOut_ = parseInt(valueOut_);
+    valueOut_ = numberWithCommas(valueOut_);
+    result.value = valueOut_;
+
   })();
 }
 inputHandlerSell = function (e) {
