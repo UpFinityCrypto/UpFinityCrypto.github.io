@@ -93,9 +93,9 @@ inputHandlerStake = function (e) {
     if (valueIn == 0) {
       typedStakeAmount.value = valueIn;
 
-      displayText('stake1d', '1 days (APY 40%) (Reward: ' + String(valueIn) + ')');
-      displayText('stake7d', '7 days (APY 80%) (Reward: ' + String(valueIn) + ')');
-      displayText('stake28d', '28 days (APY 160%) (Reward: ' + String(valueIn) + ')');
+      displayText('stake1d', '7 days (APY 20%) (Reward: ' + String(valueIn) + ')');
+      displayText('stake7d', '28 days (APY 40%) (Reward: ' + String(valueIn) + ')');
+      displayText('stake28d', '84 days (APY 80%) (Reward: ' + String(valueIn) + ')');
       return;
     }
 
@@ -103,9 +103,9 @@ inputHandlerStake = function (e) {
     valueInComma = numberWithCommas(valueIn);
     typedStakeAmount.value = valueInComma;
 
-    displayText('stake1d', '1 days (APY 40%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 10019 / 10000000))) + ')');
-    displayText('stake7d', '7 days (APY 80%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 123208 / 10000000))) + ')');
-    displayText('stake28d', '28 days (APY 160%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 828819 / 10000000))) + ')');
+    displayText('stake1d', '7 days (APY 20%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 38055 / 10000000))) + ')');
+    displayText('stake7d', '28 days (APY 40%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 284362 / 10000000))) + ')');
+    displayText('stake28d', '84 days (APY 80%) (Reward: ' + String(abbreviateNumber(parseInt(valueIn * 1740548 / 10000000))) + ')');
   })();
 }
 
