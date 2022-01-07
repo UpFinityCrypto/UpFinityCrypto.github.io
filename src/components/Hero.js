@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Swap from './Swap';
+import { Swap, Buy, Sell } from './Swap';
 import { Link } from "react-router-dom";
 
 function Hero() {
@@ -122,7 +122,7 @@ function Hero() {
         </div>
     
         <div className="col-12 col-lg-4" style={{alignSelf: "center"}}>
-          <Swap />
+          <Buy />
         </div>
       </div>
     </section>

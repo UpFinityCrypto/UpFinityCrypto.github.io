@@ -364,26 +364,33 @@ runPersonals['Taxs'] = async function runTaxsPersonal() {
 
 
 
-runs['Swap'] = async function runSwap() {
+runs['Buy'] = async function runSwap() {
   buyInput = getElement('buyInput');
   if (buyInput) {
     buyInput.addEventListener('input', inputHandlerBuy);
     buyInput.addEventListener('propertychange', inputHandlerBuy); // for IE8
     // Firefox/Edge18-/IE9+ don’t fire on <select><option>
     // source.addEventListener('change', inputHandler); 
-
-    sellInput = getElement('sellInput');
-    sellInput.addEventListener('input', inputHandlerSell);
-    sellInput.addEventListener('propertychange', inputHandlerSell); // for IE8
   } else {
     console.log('buyInput not ready');
+  }
+
+  sellInput = getElement('sellInput');
+  if (sellInput) {
+    
+    sellInput.addEventListener('input', inputHandlerSell);
+    sellInput.addEventListener('propertychange', inputHandlerSell); // for IE8
+    // Firefox/Edge18-/IE9+ don’t fire on <select><option>
+    // source.addEventListener('change', inputHandler); 
+  } else {
+    console.log('sellInput not ready');
   }
 
   swapComma("buyInput", false);
   swapComma("sellInput", true);
 }
 
-runPersonals['Swap'] = async function runSwapPersonal() {
+runPersonals['Buy'] = async function runSwapPersonal() {
   balanceBNB = await provider.getBalance(currentAccount);
   displayText_("BNBbalance", round(balanceBNB / bnbDiv, 3));
 
@@ -393,14 +400,16 @@ runPersonals['Swap'] = async function runSwapPersonal() {
 
   allowance = (await CALL(funcs['upf'], 'allowance', [currentAccount, adrs['router']], false))[0] / 1;
   approveStake = select("a#approveRouter");
-  if (10 ** 18 < allowance) { // used approve
-    approveStake.classList.add('button-soon');
-    approveStake.onclick = function () { return false; };
-    displayText('approveRouter', 'Approved');
-  } else {
-    approveStake.classList.remove('button-soon');
-    approveStake.onclick = function () { approve(adrs['router'], 10 ** 15); };
-    displayText('approveRouter', 'Approve Pancakeswap to sell');
+  if (approveStake) {
+    if (10 ** 18 < allowance) { // used approve
+      approveStake.classList.add('button-soon');
+      approveStake.onclick = function () { return false; };
+      displayText('approveRouter', 'Approved');
+    } else {
+      approveStake.classList.remove('button-soon');
+      approveStake.onclick = function () { approve(adrs['router'], 10 ** 15); };
+      displayText('approveRouter', 'Approve Pancakeswap to sell');
+    }
   }
 }
 

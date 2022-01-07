@@ -23,7 +23,7 @@ function Swap() {
   );
 }
 
-function Buy() {
+export function Buy() {
   const menu = { width: "20px", height: "20px" };
   const white = { color: "#fff" };
   const baseFontColor = { color: "#aaaaaa" };
@@ -181,7 +181,7 @@ function Buy() {
 
 
 
-function Sell() {
+export function Sell() {
   const menu = { width: "20px", height: "20px" };
   const white = { color: "#fff" };
   const baseFontColor = { color: "#aaaaaa" };
