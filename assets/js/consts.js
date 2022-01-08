@@ -165,15 +165,19 @@ const countDownTimer = function (id, date) {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    console.log(id);
     // Output the result in an element with id="demo"
-    document.getElementById(id).innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
-
+    var elem = document.getElementById(id);
+    if (elem) {
+      elem.innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+    }
     // If the count down is over, write some text 
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById(id).innerHTML = "EXPIRED";
+      var elem = document.getElementById(id);
+      if (elem) {
+        elem.innerHTML = "EXPIRED";
+      }
     }
   }
   
