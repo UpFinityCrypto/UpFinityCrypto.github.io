@@ -12,7 +12,7 @@ function Banner() {
     <div id="Banner">
       <div className="row">
         <div className="col-12 col-lg-8">
-          <img src="assets/img/banner/bannerImages/Upf_Banner.png" />
+          <img src="assets/img/banner/bannerImages/Upf_Banner_900.png" />
           <h1>BUY.HOLD.EARN.</h1>
           <p>
             Every Feature and Utility works in your favor
@@ -32,7 +32,7 @@ function Banner() {
         </div>
         <div className="col-12 col-lg-4">
           <div>
-            <img src="assets/img/banner/bannerImages/moonGirlbig.png" alt="mongirl" />
+            <img src="assets/img/banner/bannerImages/moonGirlbig_400.png" alt="mongirl" />
           </div>
         </div>
       </div>

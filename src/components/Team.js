@@ -43,7 +43,7 @@ function Team() {
           <h6>Co-Founder / Lead Operations</h6>
           <p>USA 🇺🇸</p>
           <a href="https://www.instagram.com/iangel.png">
-            <img src="assets/img/team/Angel.png" style={{widthHalf}}/>
+            <img src="assets/img/team/Angel_300.png" style={{widthHalf}}/>
           </a>
           <div className="row">
             <div className="col-3 center">
@@ -65,7 +65,7 @@ function Team() {
           <h6>Lead Artist</h6>
           <p>Brazil 🇧🇷</p>
           <a href="https://isazolik.artstation.com">
-            <img src="assets/img/team/isa_cropped.png" style={{widthHalf}}/>
+            <img src="assets/img/team/isa_cropped_300.png" style={{widthHalf}}/>
           </a>
           <div className="row">
             <div className="col-3 center">
@@ -86,7 +86,7 @@ function Team() {
           <h6>Community Manager</h6>
           <p>USA 🇺🇸</p>
           <a href="https://www.instagram.com/zagann">
-            <img src="assets/img/team/zagfinity.png" style={{widthHalf}}/>
+            <img src="assets/img/team/zagfinity_300.png" style={{widthHalf}}/>
           </a>
           <div className="row">
             <div className="col-3 center">
@@ -106,7 +106,7 @@ function Team() {
           <h3>Kami</h3>
           <h6>Artist</h6>
           <a href="https://kamiolive.artstation.com">
-            <img src="assets/img/team/Kami_cropped.png" style={{widthHalf}}/>
+            <img src="assets/img/team/Kami_cropped_300.png" style={{widthHalf}}/>
           </a>
           <div className="row">
             <div className="col-3 center">
