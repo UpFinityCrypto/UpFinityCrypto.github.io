@@ -77,6 +77,7 @@ export function Header() {
             <ul>
               <li>
                 <p id="cbStatus" className="white"></p>
+                <p id="cbDuration" className="white"></p>
                 <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
                   <i className="bi bi-info-circle text-primary" style={{ fontSize: "25px" }}></i>
                 </a>

@@ -592,7 +592,7 @@ async function runGlobal(path) {
       curStatus.classList.add('bi-exclamation-circle');
       curStatus.classList.add('text-warning');
     }
-    countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + _curcuitBreakerDuration / 1 + 1.5 * 60 * 60) * 1000);
+    countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + 7200 / 1 + 1.5 * 60 * 60) * 1000);
   } else {
     displayText("cbStatus", "Circuit Breaker OFF");
     curStatus = select("i#curStatus");
