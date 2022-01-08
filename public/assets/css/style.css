@@ -1094,3 +1094,7 @@ i {
     display: none;
   }
 }
+
+i {
+  cursor: pointer;
+}

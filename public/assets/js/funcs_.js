@@ -583,6 +583,7 @@ async function runGlobal(path) {
   displayText("curPrice", parseInt(price * 1e9));
   
   if (cantsell != "") {
+    
     displayText("cantSellStatus", "Sell Event");
     displayText("circuitBreakerStatus", cantsell);
     displayText("cbStatus", "Circuit Breaker ON");
@@ -591,6 +592,13 @@ async function runGlobal(path) {
     if (curStatus) {
       curStatus.classList.add('bi-exclamation-circle');
       curStatus.classList.add('text-warning');
+      curStatus.title = `
+      <p id="cbStatus" class="white">Circuit Breaker ON</p>
+      <p id="cbDuration" class="white"></p>
+      <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
+        <i class="bi bi-info-circle text-primary" style="font-size: 25px;"></i>
+      </a>
+      `;
     }
     countDownTimer('cbDuration', (_curcuitBreakerTime / 1 + 7200 / 1 + 1.5 * 60 * 60) * 1000);
   } else {
@@ -599,6 +607,13 @@ async function runGlobal(path) {
     if (curStatus) {
       curStatus.classList.add('bi-check-circle');
       curStatus.classList.add('text-success');
+      curStatus.title = `
+      <p id="cbStatus" class="white">Circuit Breaker OFF</p>
+      <p id="cbDuration" class="white"></p>
+      <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
+        <i class="bi bi-info-circle text-primary" style="font-size: 25px;"></i>
+      </a>
+      `;
     }
   }
   

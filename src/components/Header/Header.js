@@ -70,20 +70,13 @@ export function Header() {
               <li><Link to="/airdrops">Airdrops</Link></li>
             </ul>
           </li>
-          <li className="dropdown">
-            <a  className="nav-link scrollto" >
-              <i id="curStatus" className="bi" style={{ fontSize: "25px" }}></i>
+          <i id="curStatus" className="bi" title='
+            <p id="cbStatus" class="white"></p>
+            <p id="cbDuration" class="white"></p>
+            <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
+              <i class="bi bi-info-circle text-primary" style="font-size: 25px;"></i>
             </a>
-            <ul>
-              <li>
-                <p id="cbStatus" className="white"></p>
-                <p id="cbDuration" className="white"></p>
-                <a href="https://upfinity.gitbook.io/upfinity/special-features/advanced-tax-algorithms#stabilizing-the-market-more">
-                  <i className="bi bi-info-circle text-primary" style={{ fontSize: "25px" }}></i>
-                </a>
-              </li>
-            </ul>
-          </li>
+          ' style={{ fontSize: "25px" }} ></i>
           {/*<li>*/}
           {/*  <div className="box">*/}
           {/*    <div className="switch">*/}
