@@ -33,13 +33,12 @@ function Roadmap() {
           <div><i className="bi bi-check-circle text-success"></i>Milestones: 5K TG Members</div>
           <div><i className="bi bi-check-circle text-success"></i>Milestones: 1K Holders</div>
           <div><i className="bi bi-check-circle text-success"></i>New Services: Swap (Buy)</div>
-          <div><i className="bi bi-check-circle text-success"></i>New Services: Staking</div>
+          <div><i className="bi bi-check-circle text-success"></i>New Services: Staking Season 1</div>
           <div><i className="bi bi-check-circle text-success"></i>Listings: CoinMarketCap</div>
           <div><i className="bi bi-check-circle text-success"></i>Milestones: 1M Market Cap</div>
           <div><i className="bi bi-check-circle text-success"></i>Listings: CoinGecko</div>
           <div><i className="bi bi-check-circle text-success"></i>Audit: DessertFinance</div>
-          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: NFT Avatar</div>
-          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Mystery Box</div>
+
         </div>
       </div>
       <div className="cd-timeline-block">
@@ -48,8 +47,14 @@ function Roadmap() {
         </div>
         <div className="cssanimations cd-timeline-content bounce-in">
           <h2>2022 Q1</h2>
-          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Swap (Sell)</div>
-          <div>New Services: Play-to-Earn Game #1</div>
+          <div><i className="bi bi-check-circle text-success"></i>New Services: Swap (Sell)</div>
+          <div><i className="bi bi-check-circle text-success"></i>New Services: Staking Season 2</div>
+          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Lottery</div>
+          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Casino (Roulette)</div>
+          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Casino (Sic Bo)</div>
+          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: NFT Avatar</div>
+          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Mystery Box</div>
+          <div><div className="spinner-border text-warning" role="status" style={divStyle}></div>New Services: Play-to-Earn Game #1</div>
           <div>New Services: NFT MarketPlace</div>
           <div>New Services: Lock Launchpad</div>
           <div>New Services: Infinite Pump</div>
