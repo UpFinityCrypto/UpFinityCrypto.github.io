@@ -156,7 +156,7 @@ const countDownTimer = function (id, date) {
     var now = new Date().getTime();
 
     // Find the distance between now and the count down date
-    var distance = countDownDate - now;
+    var distance = date - now;
 
     // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
