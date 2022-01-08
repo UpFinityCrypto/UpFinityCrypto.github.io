@@ -149,8 +149,9 @@ const countDownTimer = function (id, date) {
   var _hour = _minute * 60; 
   var _day = _hour * 24; 
   var timer; 
+  console.log(id);
 
-  function showRemaining(id) {
+  function showRemaining() {
 
     // Get today's date and time
     var now = new Date().getTime();
@@ -164,6 +165,7 @@ const countDownTimer = function (id, date) {
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+    console.log(id);
     // Output the result in an element with id="demo"
     document.getElementById(id).innerHTML = days + "d " + hours + "h "
     + minutes + "m " + seconds + "s ";
@@ -175,7 +177,7 @@ const countDownTimer = function (id, date) {
     }
   }
   
-  timer = setInterval(showRemaining, 1000); 
+  timer = setInterval(showRemaining, 1000);
 } 
 
 const abis = {};
