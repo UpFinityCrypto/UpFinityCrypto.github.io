@@ -453,11 +453,17 @@ runPersonals['Staking'] = async function runStakingPersonal() {
   _stakedAmounts = (await CALL(funcs['stake'], '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
   _stakedTimes = (await CALL(funcs['stake'], '_stakedTimes', [currentAccount], false))[0] / 1;
   _stakedDurations = (await CALL(funcs['stake'], '_stakedDurations', [currentAccount], false))[0] / 1;
+  _stakedSeasons = (await CALL(funcs['stake'], '_stakedSeasons', [currentAccount], false))[0] / 1;
   // displayText('_stakedAmounts', numberWithCommas(_stakedAmounts));
 
   if (1e-18 < _stakedAmounts) {
     params = [ethers.utils.parseEther(String(_stakedAmounts)), _stakedDurations];
-    calculateReward = (await CALL(funcs['stake'], 'calculateReward', params, false))[0] / 1;
+    if (_stakedSeasons == 0) {
+      calculateReward = (await CALL(funcs['stake'], 'calculateReward', params, false))[0] / 1;
+    } else {
+      calculateReward = (await CALL(funcs['stake'], 'calculateRewardNext', params, false))[0] / 1;
+    }
+    
   } else {
     calculateReward = 0;
   }

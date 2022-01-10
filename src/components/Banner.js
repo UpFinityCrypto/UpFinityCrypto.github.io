@@ -12,7 +12,10 @@ function Banner() {
     <div id="Banner">
       <div className="row">
         <div className="col-12 col-lg-8">
-          <img src="assets/img/banner/bannerImages/Upf_Banner_900.png" />
+          <picture>
+            <source media="(max-width:992px)" srcSet="assets/img/banner/bannerImages/Upf_Banner_300.png"/>
+            <img src="assets/img/banner/bannerImages/Upf_Banner_900.png" />
+          </picture>    
           <h1>BUY.HOLD.EARN.</h1>
           <p>
             Every Feature and Utility works in your favor
@@ -30,9 +33,12 @@ function Banner() {
             </div>
           </div>
         </div>
-        <div className="col-12 col-lg-4">
+        <div className="col-12 col-lg-4 desktop">
           <div>
-            <img src="assets/img/banner/bannerImages/moonGirlbig_400.png" alt="mongirl" />
+            <picture>
+              <source media="(max-width:992px)" srcSet="assets/img/banner/bannerImages/moonGirlbig_300.png" />
+              <img src="assets/img/banner/bannerImages/moonGirlbig_400.png" />
+            </picture>
           </div>
         </div>
       </div>
