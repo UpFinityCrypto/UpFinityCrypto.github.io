@@ -1105,10 +1105,13 @@ function funstake() {
 }
 
 
-function fgetLottery(n) {
+function fgetLottery(n) { // 5: 61304 https://bscscan.com/tx/0x601fe8dd42007b4b36ea94dcffca5f218b9df399733895cc3049907dcefabd19
   lotteryS = conts['lottery'].connect(signer);
+  var overrides = {
+    'gasLimit': n * 20000,
+  };
 
-  lotteryS.getLottery(n)
+  lotteryS.getLottery(n, overrides)
     .then((arg) => {
       txHash = arg['hash'];
       console.log(txHash);
@@ -1117,8 +1120,14 @@ function fgetLottery(n) {
       displayText_('getTicket', loadingStr + 'Getting Ticket.. Tx Hash:' + '<a href="' + hashLink + '" target="_tab">' + txHash + '</a>');
       provider.waitForTransaction(txHash)
         .then((result) => {
-          var logs = result['logs'];
+          var status = result['status'];
+          if (status == 0) { // failed
+            displayText_('getTicket', 'failed');
+            return true;
+          }
 
+          var logs = result['logs'];
+          
           var numbers = [];
           var prizes = [];
           for (log of logs) {
@@ -1132,6 +1141,7 @@ function fgetLottery(n) {
             }
           }
           displayText_('getTicket', doneStr + 'numbers: ' + numbers + 'prizes: ' + prizes);
+          return false;
         });
     })
     .catch((error) => {
