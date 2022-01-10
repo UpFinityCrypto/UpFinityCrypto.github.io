@@ -950,7 +950,9 @@ async function CALL(cf, attr, params=null, cache=true) {
       }
     break;
   } catch (e) {
-    console.log('e', 'retry', 100 * 2**idx, idx, cf, attr, params);
+    console.log('e', 'retry', 100 * 2 ** idx, idx, cf, attr, params);
+    e = parseError(e);
+    console.log(e);
     syncDelay(100 * 2**idx);
     continue;
   }
@@ -960,11 +962,11 @@ async function CALL(cf, attr, params=null, cache=true) {
 }
 
 function parseError(e) {
-	if (e['message'] == 'Internal JSON-RPC error.') {
-		return e['data']['message'];
-	}
+  if (e['message'] == 'Internal JSON-RPC error.') {
+	  return e['data']['message'];
+  }
 	
-	return e['message'];
+  return e['message'];
 }
 
 async function loadCaches() {
