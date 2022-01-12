@@ -30,6 +30,9 @@ function Team() {
               <a href="https://t.me/ALLCOINLAB" target="_tab" className="telegram"><i className="bi bi-telegram"></i></a>
             </div>
             <div className="col-3 center">
+              <a href="https://github.com/ALLCOINLAB" target="_tab" className="github"><i className="bi bi-github"></i></a>
+            </div>
+            <div className="col-3 center">
               <a href="https://www.dessertswap.finance/dessertdoxxed.html" target="_tab">KYC DOXX</a>
             </div>
           </div>
