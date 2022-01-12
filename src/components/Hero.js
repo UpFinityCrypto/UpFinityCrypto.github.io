@@ -102,7 +102,7 @@ function Hero() {
             <div className="social-links" style={{fontSize:"30px"}}>
               <a href="https://t.me/UpFinityTG" target="_tab" className="telegram"><i className="bi bi-telegram"></i></a>
               <a href="https://twitter.com/UpFinityTW" target="_tab" className="twitter"><i className="bx bxl-twitter"></i></a>
-              <a href="https://github.com/UpFinityCrypto/UpFinityCrypto.github.io/blob/main/UpFinity.sol" target="_tab" className="twitter"><i className="bx bxl-github"></i></a>
+              <a href="https://github.com/UpFinityCrypto/UpFinityCrypto.github.io/blob/master/UpFinity.sol" target="_tab" className="twitter"><i className="bx bxl-github"></i></a>
             </div>
 
             <div className="row">

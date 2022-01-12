@@ -446,8 +446,8 @@ runPersonals['Staking'] = async function runStakingPersonal() {
     displayText('approveStake', 'Approved');
   } else {
     approveStake.classList.remove('button-soon');
-    approveStake.onclick = function () { approve(adrs['stake'], 10 ** 15); };
-    displayText('approveStake', 'Approve');
+    approveStake.onclick = function () { approve('approveStake', adrs['stake'], 10 ** 15); };
+    displayText('approveStake', 'Approve to Stake');
   }
 
   _stakedAmounts = (await CALL(funcs['stake'], '_stakedAmounts', [currentAccount], false))[0] / 1 / 10 ** 18;
@@ -503,6 +503,25 @@ runPersonals['Staking'] = async function runStakingPersonal() {
 
   _claimedAmounts = (await CALL(funcs['stake'], '_claimedAmounts', [currentAccount], false))[0] / 1;
   displayText('_claimedAmounts', numberWithCommas(parseInt(_claimedAmounts / bnbDiv)));
+}
+
+runs['Lottery'] = async function RunLottery() {
+}
+
+runPersonals['Lottery'] = async function RunLotteryPersonal() {
+  allowance = (await CALL(funcs['upf'], 'allowance', [currentAccount, adrs['lottery']], false))[0] / 1;
+  approveStake = select("a#approveLottery");
+  if (approveStake) {
+    if (10 ** 18 < allowance) { // used approve
+      approveStake.classList.add('button-soon');
+      approveStake.onclick = function () { return false; };
+      displayText('approveLottery', 'Approved');
+    } else {
+      approveStake.classList.remove('button-soon');
+      approveStake.onclick = function () { approve('approveLottery', adrs['lottery'], 10 ** 15); };
+      displayText('approveLottery', 'Approve Lottery to buy ticket');
+    }
+  }
 }
 
 runs['Rewards'] = async function RunRewards() {

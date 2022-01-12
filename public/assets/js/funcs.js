@@ -1029,19 +1029,37 @@ function TX(targetS, attr, params=[]) {
   
 }
 
-function approve(adr, amount) {
+function approve(id, adr, amount) {
+  alert('Approve process will be done. Check approving address!');
+
+  var target = select('#' + id);
   upfinityS = conts['upf'].connect(signer);
 
   amount = ethers.utils.parseEther(String(amount));
   upfinityS.approve(adr, amount)
     .then((arg) => {
-      displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
-      displayText_('approveStake', 'Approving.. refresh page!');
+      txHash = arg['hash'];
+      console.log(txHash);
+      hashLink = '<a href="https://bscscan.com/tx/' + txHash + ' target="_tab">' + txHash + '</a>';
+
+      displayText_(id, loadingStr + 'Approving.. tx hash: ' + hashLink);
+
+      provider.waitForTransaction(txHash)
+        .then((result) => {
+          var status = result['status'];
+          if (status == 0) { // failed
+            displayText_(id, 'Approve Failed!');
+            return true;
+          }
+
+          displayText_(id, 'Approved! Refresh Page :)');
+          return false;
+        });
     })
     .catch((error) => {
       alert(error);
       error = errMsg(error);
-      displayText_('stakeLog', 'FAIL:' + error);
+      displayText_(id, 'FAIL:' + error);
     });
 }
 
@@ -1100,18 +1118,42 @@ function funstake() {
       alert(error);
       error = errMsg(error);
       alert(error);
+
+      nonce = await provider.getTransactionCount(currentAccount);
+      var overrides = {
+        'nonce': nonce;
+      }
+      stakeS.unstake(overrrides)
+        .then((arg) => {
+          displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
+          displayText_('unstake', 'unstaking.. refresh page!');
+        })
+        .catch((error) => {
+          alert(error);
+          error = errMsg(error);
+          alert(error);
+          displayText_('stakeLog', 'FAIL:' + error);
+        });
+
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
 
 
-function fgetLottery(n) { // 5: 61304 https://bscscan.com/tx/0x601fe8dd42007b4b36ea94dcffca5f218b9df399733895cc3049907dcefabd19
+function fgetLottery(n, lowGas) { // 5: 61304 https://bscscan.com/tx/0x601fe8dd42007b4b36ea94dcffca5f218b9df399733895cc3049907dcefabd19
   lotteryS = conts['lottery'].connect(signer);
-  var overrides = {
-    'gasLimit': n * 20000,
-  };
 
-  lotteryS.getLottery(n, overrides)
+  if (lowGas) {
+    var overrides = {
+      'gasLimit': n * 20000,
+    };
+  }
+  else {
+    var overrides = {
+      'gasLimit': n * 20000 + 200000,
+    };
+  }
+  lotteryS.getLottery(n, lowGas, overrides)
     .then((arg) => {
       txHash = arg['hash'];
       console.log(txHash);
