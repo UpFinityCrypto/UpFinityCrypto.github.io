@@ -38,7 +38,10 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle2}>
                       <a href="assets/img/nft/origins/EpicYang.png" target="_tab">
-                        <img id="diamondBoy" src="assets/img/nft/origins/EpicYang.png" style={imgStyle}/>
+                        <picture>
+                          <source id="diamondBoy" media="(max-width:992px)" srcSet="assets/img/nft/origins/EpicYang_300.png" style={imgStyle}/>
+                          <img id="diamondBoy" src="assets/img/nft/origins/EpicYang_300.png" style={imgStyle} />
+                        </picture>
                         <img id="epicBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
@@ -51,7 +54,10 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle2}>
                       <a href="assets/img/nft/origins/EpicYin.png" target="_tab">
-                        <img id="diamondGirl" src="assets/img/nft/origins/EpicYin.png" style={imgStyle}/>
+                        <picture>
+                          <source id="diamondGirl" media="(max-width:992px)" srcSet="assets/img/nft/origins/EpicYin_300.png" style={imgStyle}/>
+                          <img id="diamondGirl" src="assets/img/nft/origins/EpicYin_300.png" style={imgStyle} />
+                        </picture>
                         <img id="epicBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
@@ -75,7 +81,10 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle3}>
                       <a href="assets/img/nft/origins/LegendaryYang.mp4" target="_tab">
-                        <img id="emeraldBoy" src="assets/img/nft/origins/LegendaryYang.gif" style={imgStyle}/>
+                        <picture>
+                          <source id="emeraldBoy" media="(max-width:992px)" srcSet="assets/img/nft/origins/LegendaryYang_300.gif" style={imgStyle}/>
+                          <img id="emeraldBoy" src="assets/img/nft/origins/LegendaryYang_300.gif" style={imgStyle} />
+                        </picture>
                         <img id="legendaryBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
@@ -88,7 +97,10 @@ export default function Nft() {
                   <div style={divStyle}>
                     <div style={divStyle3}>
                       <a href="assets/img/nft/origins/LegendaryYin.mp4" target="_tab">
-                        <img id="emeraldGirl" src="assets/img/nft/origins/LegendaryYin.gif" style={imgStyle}/>
+                        <picture>
+                          <source id="emeraldGirl" media="(max-width:992px)" srcSet="assets/img/nft/origins/LegendaryYin_300.gif" style={imgStyle}/>
+                          <img id="emeraldGirl" src="assets/img/nft/origins/LegendaryYin_300.gif" style={imgStyle} />
+                        </picture>
                         <img id="legendaryBorder" src="" style={imgStyle2}/>
                       </a>
                     </div>
