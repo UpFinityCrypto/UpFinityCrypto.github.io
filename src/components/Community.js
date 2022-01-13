@@ -29,7 +29,7 @@ export function Testimonials() {
         <p>Comments by people who believes in our <span>PONTENTIAL</span></p>
       </div>
 
-      <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+      <div className="testimonials-slider swiper" data-aos="" data-aos-delay="100">
         <div className="swiper-wrapper">
 
           <div className="swiper-slide">
@@ -127,7 +127,7 @@ export function Gallery() {
           <p><span>Precious</span> contents made by our community members </p>
         </div>
 
-        <div className="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+        <div className="testimonials-slider swiper" data-aos="" data-aos-delay="100">
           <div className="swiper-wrapper">
 
             <div className="swiper-slide">
