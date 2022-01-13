@@ -154,19 +154,19 @@ export function Buy() {
               <div>
                 You could also buy at:
                 <a id="PanCakeSwapLink" href="https://pancakeswap.finance/swap?outputCurrency=0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" className="scrollto">
-                  <img src="assets/img/trade/pcs.ico" style={width30px}/>
+                  <img src="assets/img/trade/pcs_100.ico" style={width30px}/>
                 </a>
                 <a id="PoocoinSwapLink" href="https://poocoin.app/swap/?outputCurrency=0x6CC5F09E46797189D18Ea8cfb3B1AaA4661280Ae" className="scrollto">
-                  <img src="assets/img/trade/poo.png" style={width30px}/>
+                  <img src="assets/img/trade/poo_100.png" style={width30px}/>
                 </a>
               </div>
               <div>
                 Check live chart at:
                 <a id="DextoolsChartLink" href="https://www.dextools.io/app/bsc/pair-explorer/0xd3ab58a10eab5f6e2523b53a78c6a8d378488c9a" className="scrollto">
-                  <img src="assets/img/trade/dext.ico" style={width30px}/>
+                  <img src="assets/img/trade/dext_100.ico" style={width30px}/>
                 </a>
                 <a id="PoocoinChartLink" href="https://poocoin.app/tokens/0x6cc5f09e46797189d18ea8cfb3b1aaa4661280ae" className="scrollto">
-                  <img src="assets/img/trade/poo.png" style={width30px}/>
+                  <img src="assets/img/trade/poo_100.png" style={width30px}/>
                 </a>
                 <div><Link to="/fiat">Buy BNB/BUSD with Fiat!</Link></div>
               </div>
