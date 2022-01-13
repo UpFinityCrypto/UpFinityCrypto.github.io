@@ -272,25 +272,29 @@ runPersonals['Mynft'] = async function runMynft() {
     myNFTitemIdx = (await funcs['nft']._itemById(myNFTidx))[0] / 1;
     myNFTimgName = JSON.parse(loadFile("assets/" + String(myNFTitemIdx) + '.json'))['name'];
     if (myNFTitemIdx == 4) {
-      myNFTimgThumbSrc = "LegendaryOB.png";
+      myNFTimgThumbSrc = "LegendaryOB_300.png";
+      myNFTimgThumbSrcMobile = "LegendaryOB_300.png";
       myNFTimgSrc = "OBanimationL.mp4";
       myNFTborder = "emerald";
       myNFTtax += 100;
     }
     if (myNFTitemIdx == 1) {
-      myNFTimgThumbSrc = "LegendaryOG.png";
+      myNFTimgThumbSrc = "LegendaryOG_300.png";
+      myNFTimgThumbSrcMobile = "LegendaryOG_300.png";
       myNFTimgSrc = "OGanimationL.mp4";
       myNFTborder = "emerald";
       myNFTtax += 100;
     }
     if (myNFTitemIdx == 2) {
-      myNFTimgThumbSrc = "EpicOB.png";
+      myNFTimgThumbSrc = "EpicOB_300.png";
+      myNFTimgThumbSrcMobile = "EpicOB_300.png";
       myNFTimgSrc = "EpicOB.png";
       myNFTborder = "diamond";
       myNFTtax += 50;
     }
     if (myNFTitemIdx == 3) {
-      myNFTimgThumbSrc = "EpicOG.png";
+      myNFTimgThumbSrc = "EpicOG_300.png";
+      myNFTimgThumbSrcMobile = "EpicOG_300.png";
       myNFTimgSrc = "EpicOG.png";
       myNFTborder = "diamond";
       myNFTtax += 50;
@@ -299,7 +303,10 @@ runPersonals['Mynft'] = async function runMynft() {
         <div class="col-12 col-lg-3 text-justify content">
           <div style="width: 100%; position: relative;">
             <a href="assets/img/new/${myNFTimgSrc}">
-            <img src="assets/img/new/${myNFTimgThumbSrc}" style="top:0; left: 0; padding: 0px; height: auto;">
+              <picture>
+                <source media="(max-width:992px)" srcSet="assets/img/new/${myNFTimgThumbSrcMobile}" style="top:0; left: 0; padding: 0px; height: auto;"/>
+                <img src="assets/img/new/${myNFTimgThumbSrc}" style="top:0; left: 0; padding: 0px; height: auto;" />
+              </picture>
             </a>
           </div>
           <p>ID: ${myNFTidx}</p>
