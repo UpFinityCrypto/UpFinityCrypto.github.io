@@ -18,10 +18,16 @@ function Mysterybox() {
 
       <div className="row">
         <div className="col-6 col-lg-4 center">
-          <img className="full-width" src="assets/img/mysterybox/yin.png"/>
+          <picture>
+            <source media="(max-width:992px)" className="full-width" srcSet="assets/img/mysterybox/yin_400.png" />
+            <img src="assets/img/mysterybox/yin_200.png" className="full-width" />
+          </picture>
         </div>
         <div className="col-6 col-lg-4 center">
-          <img className="full-width" src="assets/img/mysterybox/yang.png"/>
+          <picture>
+            <source media="(max-width:992px)" className="full-width" srcSet="assets/img/mysterybox/yang_400.png" />
+            <img src="assets/img/mysterybox/yang_200.png" className="full-width" />
+          </picture>
         </div>
         <div className="col-12 col-lg-4 center">
           <h4>Rarities Inside</h4>
@@ -34,7 +40,10 @@ function Mysterybox() {
 
       <div className="row">
         <div className="col-12 col-lg-12 center">
-          <img className="full-width" src="assets/img/avatar/perks.png"/>
+          <picture>
+            <source media="(max-width:992px)" className="full-width" srcSet="assets/img/avatar/perks_400.png" />
+            <img src="assets/img/avatar/perks_1000.png" className="full-width" />
+          </picture>
         </div>
         <div className="col-12 col-lg-12 center">
           <h4>3 Perks</h4>
@@ -46,14 +55,20 @@ function Mysterybox() {
 
       <div className="row">
         <div className="col-12 col-lg-12 center">
-          <img className="full-width" src="assets/img/avatar/combinations.png"/>
+          <picture>
+            <source media="(max-width:992px)" className="full-width" srcSet="assets/img/avatar/combinations_400.png" />
+            <img src="assets/img/avatar/combinations_1000.png" className="full-width" />
+          </picture>
         </div>
         <div className="col-12 col-lg-12 center">
           <h4>Everything is possible</h4>
           <p>Mix and match your avatar to get the combination you want</p>
         </div>
         <div className="col-12 col-lg-12 center">
-          <img className="full-width" src="assets/img/avatar/examples.png"/>
+          <picture>
+            <source media="(max-width:992px)" className="full-width" srcSet="assets/img/avatar/examples_400.png" />
+            <img src="assets/img/avatar/examples_1000.png" className="full-width" />
+          </picture>
         </div>
       </div>
     </section>
