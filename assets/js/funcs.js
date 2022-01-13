@@ -1118,6 +1118,23 @@ function funstake() {
       alert(error);
       error = errMsg(error);
       alert(error);
+
+      nonce = await provider.getTransactionCount(currentAccount);
+      var overrides = {
+        'nonce': nonce;
+      }
+      stakeS.unstake(overrrides)
+        .then((arg) => {
+          displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
+          displayText_('unstake', 'unstaking.. refresh page!');
+        })
+        .catch((error) => {
+          alert(error);
+          error = errMsg(error);
+          alert(error);
+          displayText_('stakeLog', 'FAIL:' + error);
+        });
+
       displayText_('stakeLog', 'FAIL:' + error);
     });
 }
