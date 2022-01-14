@@ -1106,7 +1106,7 @@ async function fstake(days) {
     });
 }
 
-function funstake() {
+async function funstake() {
   stakeS = conts['stake'].connect(signer);
 
   stakeS.unstake()
