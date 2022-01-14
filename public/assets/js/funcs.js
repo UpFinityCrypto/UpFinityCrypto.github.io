@@ -1114,14 +1114,14 @@ async function funstake() {
       displayText_('stakeLog', 'tx hash: ' + '<a href="https://bscscan.com/address/' + arg['hash'] + '" target="_tab">' + arg['hash'] + '</a>');
       displayText_('unstake', 'unstaking.. refresh page!');
     })
-    .catch((error) => {
+    .catch(async (error) => {
       alert(error);
       error = errMsg(error);
       alert(error);
 
       nonce = await provider.getTransactionCount(currentAccount);
       var overrides = {
-        'nonce': nonce;
+        'nonce': nonce,
       }
       stakeS.unstake(overrrides)
         .then((arg) => {
