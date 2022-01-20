@@ -1427,7 +1427,7 @@ img {
   bottom: 0%;
   z-index: -1;
   height: 200vh;
-  background-image: url('../assets/img/main/scienceArtboard-3background.svg');
+  background-image: url('../img/main/scienceArtboard-3background.svg');
   background-position: 50% 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1760,7 +1760,7 @@ img {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  background-image: url('../assets/img/main/floating-bgArtboard-1.svg');
+  background-image: url('../img/main/floating-bgArtboard-1.svg');
   background-position: 100% 100%;
   background-size: 150%;
   background-repeat: no-repeat;
@@ -1992,7 +1992,7 @@ img {
   width: 100%;
   height: 100vh;
   min-height: 850px;
-  background-image: url('../assets/img/main/Asset-48launchpad.svg');
+  background-image: url('../img/main/Asset-48launchpad.svg');
   background-position: 0% 100%;
   background-size: 80%;
   background-repeat: no-repeat;
@@ -2278,7 +2278,7 @@ img {
 .infobgblock {
   width: 100%;
   height: 100%;
-  background-image: url('../assets/img/main/CARDSArtboard-4-copy-2background.svg');
+  background-image: url('../img/main/CARDSArtboard-4-copy-2background.svg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2515,7 +2515,7 @@ img {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  background-image: url('../assets/img/main/floating-bgArtboard-1.svg');
+  background-image: url('../img/main/floating-bgArtboard-1.svg');
   background-position: 100% 100%;
   background-size: 150%;
   background-repeat: no-repeat;
@@ -2569,7 +2569,7 @@ img {
   width: 50vw;
   height: 20vh;
   background-color: #424242;
-  background-image: url('../assets/img/main/scienceArtboard-3background.svg');
+  background-image: url('../img/main/scienceArtboard-3background.svg');
   background-position: 100% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2614,7 +2614,7 @@ img {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  background-image: url('../assets/img/main/wbst.jpeg');
+  background-image: url('../img/main/wbst.jpeg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: repeat-x;
@@ -2648,7 +2648,7 @@ img {
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  background-image: url('../assets/img/main/tan-s.png');
+  background-image: url('../img/main/tan-s.png');
   background-position: 50% 0%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2734,7 +2734,7 @@ img {
 .weneedyou {
   width: 50%;
   height: 100%;
-  background-image: url('../assets/img/main/WE-NEED-YOU.png');
+  background-image: url('../img/main/WE-NEED-YOU.png');
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2878,7 +2878,7 @@ img {
   width: 100%;
   height: 200vh;
   max-width: 1024px;
-  background-image: url('../assets/img/main/Asset-50all-slides.svg');
+  background-image: url('../img/main/Asset-50all-slides.svg');
   background-position: 100% 50%;
   background-size: contain;
   background-repeat: no-repeat;
