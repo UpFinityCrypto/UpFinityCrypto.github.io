@@ -1427,7 +1427,7 @@ img {
   bottom: 0%;
   z-index: -1;
   height: 200vh;
-  background-image: url('../images/scienceArtboard-3background.svg');
+  background-image: url('../assets/img/main/scienceArtboard-3background.svg');
   background-position: 50% 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1760,7 +1760,7 @@ img {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  background-image: url('../images/floating-bgArtboard-1.svg');
+  background-image: url('../assets/img/main/floating-bgArtboard-1.svg');
   background-position: 100% 100%;
   background-size: 150%;
   background-repeat: no-repeat;
@@ -1992,7 +1992,7 @@ img {
   width: 100%;
   height: 100vh;
   min-height: 850px;
-  background-image: url('../images/Asset-48launchpad.svg');
+  background-image: url('../assets/img/main/Asset-48launchpad.svg');
   background-position: 0% 100%;
   background-size: 80%;
   background-repeat: no-repeat;
@@ -2278,7 +2278,7 @@ img {
 .infobgblock {
   width: 100%;
   height: 100%;
-  background-image: url('../images/CARDSArtboard-4-copy-2background.svg');
+  background-image: url('../assets/img/main/CARDSArtboard-4-copy-2background.svg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2515,7 +2515,7 @@ img {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  background-image: url('../images/floating-bgArtboard-1.svg');
+  background-image: url('../assets/img/main/floating-bgArtboard-1.svg');
   background-position: 100% 100%;
   background-size: 150%;
   background-repeat: no-repeat;
@@ -2569,7 +2569,7 @@ img {
   width: 50vw;
   height: 20vh;
   background-color: #424242;
-  background-image: url('../images/scienceArtboard-3background.svg');
+  background-image: url('../assets/img/main/scienceArtboard-3background.svg');
   background-position: 100% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2614,7 +2614,7 @@ img {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  background-image: url('../images/wbst.jpeg');
+  background-image: url('../assets/img/main/wbst.jpeg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: repeat-x;
@@ -2648,7 +2648,7 @@ img {
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
-  background-image: url('../images/tan-s.png');
+  background-image: url('../assets/img/main/tan-s.png');
   background-position: 50% 0%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2734,7 +2734,7 @@ img {
 .weneedyou {
   width: 50%;
   height: 100%;
-  background-image: url('../images/WE-NEED-YOU.png');
+  background-image: url('../assets/img/main/WE-NEED-YOU.png');
   background-position: 50% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -2878,7 +2878,7 @@ img {
   width: 100%;
   height: 200vh;
   max-width: 1024px;
-  background-image: url('../images/Asset-50all-slides.svg');
+  background-image: url('../assets/img/main/Asset-50all-slides.svg');
   background-position: 100% 50%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3479,168 +3479,168 @@ img {
 
 @font-face {
   font-family: 'Helvetica light';
-  src: url('../fonts/helvetica-light-587ebe5a59211.ttf') format('truetype');
+  src: url('../assets/fonts/helvetica-light-587ebe5a59211.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica regular';
-  src: url('../fonts/Helvetica.ttf') format('truetype');
+  src: url('../assets/fonts/Helvetica.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica bold italic';
-  src: url('../fonts/Helvetica-BoldOblique.ttf') format('truetype');
+  src: url('../assets/fonts/Helvetica-BoldOblique.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica italic';
-  src: url('../fonts/Helvetica-Oblique.ttf') format('truetype');
+  src: url('../assets/fonts/Helvetica-Oblique.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica bold';
-  src: url('../fonts/Helvetica-Bold.ttf') format('truetype');
+  src: url('../assets/fonts/Helvetica-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars black';
-  src: url('../fonts/Uniwars-W00-Black.ttf') format('truetype');
+  src: url('../assets/fonts/Uniwars-W00-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars bold';
-  src: url('../fonts/Uniwars-W00-Bold.ttf') format('truetype');
+  src: url('../assets/fonts/Uniwars-W00-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars heavy';
-  src: url('../fonts/Uniwars-W00-Heavy.ttf') format('truetype');
+  src: url('../assets/fonts/Uniwars-W00-Heavy.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars italic';
-  src: url('../fonts/Uniwars-W00-Italic.ttf') format('truetype');
+  src: url('../assets/fonts/Uniwars-W00-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars light';
-  src: url('../fonts/Uniwars-W00-Light.ttf') format('truetype');
+  src: url('../assets/fonts/Uniwars-W00-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars regular';
-  src: url('../fonts/Uniwars-W00-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/Uniwars-W00-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-Black.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-Bold.ttf') format('truetype'), url('../fonts/TisaSansPro-ExtraBold.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-Bold.ttf') format('truetype'), url('../assets/fonts/TisaSansPro-ExtraBold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-BoldItalic.ttf') format('truetype'), url('../fonts/TisaSansPro-ExtraBoldItalic.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-BoldItalic.ttf') format('truetype'), url('../assets/fonts/TisaSansPro-ExtraBoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-BlackItalic.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-BlackItalic.ttf') format('truetype');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-ExtraLightItalic.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-ExtraLightItalic.ttf') format('truetype');
   font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-Medium.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-Italic.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-Light.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-LightItalic.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-MediumItalic.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../fonts/TisaSansPro-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/TisaSansPro-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica compressed';
-  src: url('../fonts/helvetica-compressed-5871d14b6903a.otf') format('opentype');
+  src: url('../assets/fonts/helvetica-compressed-5871d14b6903a.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica rounded';
-  src: url('../fonts/helvetica-rounded-bold-5871d05ead8de.otf') format('opentype');
+  src: url('../assets/fonts/helvetica-rounded-bold-5871d05ead8de.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
