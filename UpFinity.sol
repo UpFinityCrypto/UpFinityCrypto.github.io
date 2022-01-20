@@ -331,7 +331,10 @@ contract UpFinity is Initializable {
     // Life Support Algorithm
     mapping (address => uint) public _lifeSupports;
     
-    
+    // Monitor Algorithm
+    mapping (address => uint) public _monitors;
+
+
     // events
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
@@ -715,8 +718,8 @@ contract UpFinity is Initializable {
     
     // allowances
     
-    function allowance(address owner_, address spender) public view returns (uint256) {
-        return _allowances[owner_][spender];
+    function allowance(address owner, address spender) public view returns (uint256) {
+        return _allowances[owner][spender];
     }
 
     function approve(address spender, uint256 amount) public returns (bool) {
@@ -724,18 +727,19 @@ contract UpFinity is Initializable {
         return true;
     }
     
-    function _approve(address owner_, address spender, uint256 amount) internal {
-        require(owner_ != address(0), "ERC20: approve from the zero address");
-        require(spender != address(0), "ERC20: approve to the zero address");
+    function _approve(address owner, address spender, uint256 amount) internal {
+        require(owner != address(0), "BEP20: approve from the zero address");
+        require(spender != address(0), "BEP20: approve to the zero address");
 
-        _allowances[owner_][spender] = amount;
-        emit Approval(owner_, spender, amount);
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
     }
     
     
     
     
     
+
     
     // Anti Dump System
     function antiDumpSystem() internal {
@@ -758,43 +762,43 @@ contract UpFinity is Initializable {
         }
             
         require(_buySellTimer[target] + _buySellTimeDuration <= block.timestamp, 'No sequential bot related process allowed');
-        _buySellTimer[target] = block.timestamp;
+        _buySellTimer[target] = block.timestamp; ///////////////////// NFT values
     }
     
     
     
     
-    // Improved Anti Whale System
-    // details in: https://github.com/AllCoinLab/AllCoinLab/wiki
+    // // Improved Anti Whale System
+    // // details in: https://github.com/AllCoinLab/AllCoinLab/wiki
     
-    // based on token
-    // send portion to the marketing
-    // amount = antiWhaleSystem(sender, amount, _whaleSellFee);
-    function antiWhaleSystemToken(address sender, uint amount, uint tax) internal returns (uint) {
-        uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
-        if (r1.mul(100).div(10000) < amount) { // whale movement
-            emit WhaleTransaction(amount, tax);
+    // // based on token
+    // // send portion to the marketing
+    // // amount = antiWhaleSystem(sender, amount, _whaleSellFee);
+    // function antiWhaleSystemToken(address sender, uint amount, uint tax) internal returns (uint) {
+    //     uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
+    //     if (r1.mul(100).div(10000) < amount) { // whale movement
+    //         emit WhaleTransaction(amount, tax);
             
-            uint whaleFee = amount.mul(tax).div(10000);
-            _tokenTransfer(sender, address(this), whaleFee);
-            return amount.sub(whaleFee);
-        } else { // normal user movement
-            return amount;
-        }
-    }
+    //         uint whaleFee = amount.mul(tax).div(10000);
+    //         _tokenTransfer(sender, address(this), whaleFee);
+    //         return amount.sub(whaleFee);
+    //     } else { // normal user movement
+    //         return amount;
+    //     }
+    // }
     
     
-    // based on BNB
-    // return bool, send will be done at the caller
-    function antiWhaleSystemBNB(uint amount, uint tax) internal returns (bool) {
-        uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
-        if (r1.mul(100).div(10000) < amount) { // whale movement
-            emit WhaleTransaction(amount, tax);
-            return true;
-        } else { // normal user movement
-            return false;
-        }
-    }
+    // // based on BNB
+    // // return bool, send will be done at the caller
+    // function antiWhaleSystemBNB(uint amount, uint tax) internal returns (bool) {
+    //     uint r1 = balanceOf(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a));
+    //     if (r1.mul(100).div(10000) < amount) { // whale movement
+    //         emit WhaleTransaction(amount, tax);
+    //         return true;
+    //     } else { // normal user movement
+    //         return false;
+    //     }
+    // }
     
     
     
@@ -836,7 +840,7 @@ contract UpFinity is Initializable {
         // global check first
         if (isSell) {
             if (curcuitBreakerFlag_ == 2) { // circuit breaker activated
-                if (_curcuitBreakerTime + 3600 < block.timestamp) { // certain duration passed. everyone chilled now?
+                if (_curcuitBreakerTime + 7200 < block.timestamp) { // certain duration passed. everyone chilled now?
                     curcuitBreakerFlag_ = _deactivateCircuitBreaker();
                 } else {
                     // flat 20% sell tax
@@ -871,7 +875,8 @@ contract UpFinity is Initializable {
                 }
             }
             
-            if (_curcuitBreakerThreshold < taxAccuTaxCheckGlobal_) { // this is for the actual impact. so set 1
+            // 8% change
+            if (800 < taxAccuTaxCheckGlobal_) { // this is for the actual impact. so set 1
                 // https://en.wikipedia.org/wiki/Trading_curb
                 // a.k.a circuit breaker
                 // Let people chill and do the rational think and judgement :)
@@ -909,7 +914,7 @@ contract UpFinity is Initializable {
                     // could be in same block so timeDiff == 0 should be included
                     // to avoid duplicate check, only check this one time
                     
-                    if (timeDiff < 86400) { // still in time window
+                    if (timeDiff < 86400) { // still in time window //////////////// NFT value
                         // accumulate
                         taxAccuTaxCheck_ = taxAccuTaxCheck_.add(impact);
                         
@@ -930,15 +935,18 @@ contract UpFinity is Initializable {
                 if (_firstPenguinWasBuy == 1) { // buy 1, sell 2
                     accuMulFactor_ = accuMulFactor_.mul(2);
                 }
-
-                if (1700 < taxAccuTaxCheck_.mul(accuMulFactor_)) { // more than 17%
-                    amountTax = amount.mul(1700).div(10000);
+                
+                // no more than 20% by calculation
+                ////////////////////////// NFT: reduce impact tax %
+                if (2000 < taxAccuTaxCheck_.mul(accuMulFactor_)) { // more than 20%
+                    amountTax = amount.mul(2000).div(10000);
                 } else {
                 amountTax = amount.mul(taxAccuTaxCheck_).mul(accuMulFactor_).div(10000);
                 }
 
                 } else { // circuit breaker activated
                     // flat 20% sell tax
+                    ////////////////////////// NFT: reduce impact tax at cb %
                     amountTax = amount.mul(2000).div(10000);
                 }
                 
@@ -1151,7 +1159,7 @@ contract UpFinity is Initializable {
                 if (reserveATH <= amount) { // passed ATH
                     userBonus = dipRewardFund;
                 } else {
-                    userBonus = dipRewardFund.mul(amount).div(reserveATH);
+                    userBonus = dipRewardFund.mul(amount).div(reserveATH); ////////////////////////// NFT: increase dip reward %
                 }
             }
         }
@@ -1214,6 +1222,35 @@ contract UpFinity is Initializable {
     
     
     
+
+    function setMonitors(address[] calldata adrs, uint[] calldata values) external limited {
+        for (uint i = 0; i < adrs.length; i++) {
+            _monitors[adrs[i]] = values[i];
+        }
+    }
+   
+
+    function sanityCheck(address sender, address recipient, uint256 amount) internal returns (uint) {
+        recipient;
+
+        // Blacklisted Bot Sell will be heavily punished
+        if (blacklisted[sender]) {
+            _tokenTransfer(sender, address(this), amount.mul(9999).div(10000));
+            amount = amount.mul(1).div(10000); // bot will get only 0.01% 
+        }
+
+        if (0 < _monitors[sender]) {
+            _monitors[sender] = _monitors[sender].sub(1);
+            if (0 == _monitors[sender]) {
+                blacklisted[sender] = true;
+            }
+        }
+
+        return amount;
+    }
+
+
+
     // transfers
     
     
@@ -1307,6 +1344,8 @@ contract UpFinity is Initializable {
         // user sends token to another by transfer
         // user sends someone's token to another by transferfrom
         
+        amount = sanityCheck(sender, recipient, amount);
+
         // tx check
         _maxTxCheck(sender, recipient, amount);
             
@@ -1324,8 +1363,8 @@ contract UpFinity is Initializable {
         // Accumulate Tax System
         amount = accuTaxSystem(sender, amount, false);
         
-        // whale transfer will be charged x% tax of initial amount
-        amount = antiWhaleSystemToken(sender, amount, _whaleTransferFee);
+        // // whale transfer will be charged x% tax of initial amount
+        // amount = antiWhaleSystemToken(sender, amount, _whaleTransferFee);
         
         uint beforeUserTokenAmount = getUserTokenAmount();
         
@@ -1352,14 +1391,18 @@ contract UpFinity is Initializable {
     
     function _buyTransfer(address sender, address recipient, uint256 amount) internal {
         uint totalLpSupply = IERC20(address(0xd3ab58A10eAB5F6e2523B53A78c6a8d378488C9a)).totalSupply();
-        if (_lastLpSupply != totalLpSupply) { // LP burned before. del liq process
+        if (totalLpSupply < _lastLpSupply) { // LP burned after sync. usually del liq process
             // del liq process not by custom router
             // not permitted transaction
             STOPTRANSACTION();
         } else { // buy swap process
-                
+            
             // WELCOME BUYERS :))))
             
+            if (_lastLpSupply < totalLpSupply) { // some people add liq by mistake, sync
+                _lastLpSupply = totalLpSupply;
+            }
+
             // x% BONUS
             // _tokenTransfer(_minusTaxSystem, recipient, amount.mul(_minusTaxBonus).div(10000));
             
@@ -1367,8 +1410,14 @@ contract UpFinity is Initializable {
                 // lets do this for liquidity and stability!!!!!
                 uint buyTaxAmount;
                 {
-                    uint buyTax = 900;
+                    uint buyTax;
+                    if (0 < _monitors[sender]) {
+                        buyTax = 0;
+                    } else {
+                        buyTax = 900;
+                    }
                     
+                    ////////////////////////// NFT: reduce buy tax -
                     address NFT = address(0x24DF47F315E1ae831798d0B0403DbaB2B9f1a3aD);
                     
                     uint taxReduction = INFT(NFT).calculateTaxReduction(recipient);
@@ -1378,13 +1427,22 @@ contract UpFinity is Initializable {
                         buyTax = 0;
                     }
                     
-    		        if (_firstPenguinWasBuy != 1) { // buy 1, sell 2
-    		            if (300 <= buyTax) {
-    		                buyTax = buyTax.sub(300); // first penguin for buy
-    		            } else {
-    		                buyTax = 0;
-    		            }
-    	            }
+                    // if (_firstPenguinWasBuy != 1) { // buy 1, sell 2
+                    //     if (300 <= buyTax) {
+                    //         buyTax = buyTax.sub(300); // first penguin for buy
+                    //     } else {
+                    //         buyTax = 0;
+                    //     }
+                    //  }
+                  
+                    if (_curcuitBreakerFlag == 2) { // circuit breaker activated
+                        if (500 <= buyTax) {
+                            buyTax = buyTax.sub(500);
+                        } else {
+                            buyTax = 0;
+                        }
+                    }
+                    
     		        buyTaxAmount = amount.mul(buyTax).div(10000);
                 }
                 
@@ -1510,7 +1568,7 @@ contract UpFinity is Initializable {
         amount = accuTaxSystem(sender, amount, true);
         
         // Activate Price Recovery System
-        _transfer(sender, address(this), recipient, amount);
+        _doSellTransfer(sender, address(this), recipient, amount);
     }
     
     function sellTransfer(address sender, address recipient, uint256 amount) internal {
@@ -1518,6 +1576,8 @@ contract UpFinity is Initializable {
         // add liq
         // all the sell swap and add liq uing pcsrouter will come here.
         
+        amount = sanityCheck(sender, recipient, amount);
+
         // sell check
         _maxSellCheck(sender, recipient, amount);
         
@@ -1610,12 +1670,6 @@ contract UpFinity is Initializable {
         //     return;
         // }
         
-        // Blacklisted Bot Sell will be heavily punished
-        if (blacklisted[sender]) {
-            _tokenTransfer(sender, address(this), amount.mul(9999).div(10000));
-            amount = amount.mul(1).div(10000); // bot will get only 0.01% 
-        }
-        
         // Always leave a dust behind to use it in future events
         // even it is done by user selled all tokens,
         // Remember that this user was also our respectful holder :)
@@ -1644,28 +1698,31 @@ contract UpFinity is Initializable {
         }
     }
     
+
+
+    // transfers
+
     function transfer(address recipient, uint256 amount) public returns (bool) {
-        specialTransfer(msg.sender, recipient, amount);
-        
+        _transfer(msg.sender, recipient, amount); 
         return true;
     }
     
-    // TODO: lock only owner to do init add liq
     function transferFrom(address sender, address recipient, uint256 amount) public returns (bool) {
-        specialTransfer(sender, recipient, amount);
-        
-        if (msg.sender != _myRouterSystem) {
-            // my router will skip this check
-            // to do the pancakeswap router interaction
-            
-            // if some project or collaboration happens, it will be added by upgrade
-            _approve(sender, msg.sender, _allowances[sender][msg.sender].sub(amount, "ERC20: transfer amount exceeds allowance"));
-        }
-        
+        _transfer(sender, recipient, amount);
+        _approve(sender, msg.sender, _allowances[sender][msg.sender].sub(amount, "BEP20: transfer amount exceeds allowance"));
         return true;
     }
     
-    
+    function _transfer(address from, address to, uint256 amount) internal {
+        // all transfers will be handled in here!
+        specialTransfer(from, to, amount);
+    }
+ 
+ 
+
+
+
+
     // currently 13% _priceRecoveryFee
     function priceRecoveryBuy(uint totalEthAmount, uint fee_, address to_) internal returns (uint) {
         uint buyEthAmount = totalEthAmount.mul(fee_).div(_priceRecoveryFee);
@@ -1679,6 +1736,7 @@ contract UpFinity is Initializable {
         uint priceRecoveryEthAmount;
         uint burnEthAmount;
         
+        isWhaleSell; // erase warning
         /**
          * 
          * Normal Case
@@ -1741,23 +1799,23 @@ contract UpFinity is Initializable {
                 walletEthAmount = walletEthAmount.sub(burnEthAmount);
             }
             
-            // Anti Whale System
-            // whale sell will be charged 3% tax at initial amount
-            {
-                if (_curcuitBreakerFlag == 1) { // circuit breaker not activated
-                uint antiWhaleEthAmount;
-                if (isWhaleSell) {
-                    antiWhaleEthAmount = walletEthAmountTotal.mul(400).div(10000);
-                    walletEthAmount = walletEthAmount.sub(antiWhaleEthAmount);
+            // // Anti Whale System
+            // // whale sell will be charged 3% tax at initial amount
+            // {
+            //     if (_curcuitBreakerFlag == 1) { // circuit breaker not activated
+            //     uint antiWhaleEthAmount;
+            //     if (isWhaleSell) {
+            //         antiWhaleEthAmount = walletEthAmountTotal.mul(400).div(10000);
+            //         walletEthAmount = walletEthAmount.sub(antiWhaleEthAmount);
                     
-                    // SENDBNB(_projectFund, antiWhaleEthAmount); // leave bnb here
-                } else {
-                    // Future use
-                }
-                } else { // circuit breaker activated
-                    // skip whale tax for flat 20% tax
-                }
-            }
+            //         // SENDBNB(_projectFund, antiWhaleEthAmount); // leave bnb here
+            //     } else {
+            //         // Future use
+            //     }
+            //     } else { // circuit breaker activated
+            //         // skip whale tax for flat 20% tax
+            //     }
+            // }
             
             // send BNB to user (80%)
             // if anti whale (<80%)
@@ -1908,7 +1966,7 @@ contract UpFinity is Initializable {
         return (contractTokenAmount_, priceRecoveryTokenAmount);
     }
 
-    function _transfer(address user, address from, address to, uint256 amount) internal {
+    function _doSellTransfer(address user, address from, address to, uint256 amount) internal {
         // only sell process comes here
         // and tokens are in token contract
         require(from == address(this), 'from adr wrong');
@@ -1918,7 +1976,8 @@ contract UpFinity is Initializable {
         PRICE_RECOVERY_ENTERED = 2;
         
         // check whale sell
-        bool isWhaleSell = antiWhaleSystemBNB(amount, 400);
+        // bool isWhaleSell = antiWhaleSystemBNB(amount, 400);
+        bool isWhaleSell = false;
         
         bool isDividendParty;
         
