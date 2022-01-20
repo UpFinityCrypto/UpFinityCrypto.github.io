@@ -3479,168 +3479,168 @@ img {
 
 @font-face {
   font-family: 'Helvetica light';
-  src: url('../assets/fonts/helvetica-light-587ebe5a59211.ttf') format('truetype');
+  src: url('../fonts/helvetica-light-587ebe5a59211.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica regular';
-  src: url('../assets/fonts/Helvetica.ttf') format('truetype');
+  src: url('../fonts/Helvetica.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica bold italic';
-  src: url('../assets/fonts/Helvetica-BoldOblique.ttf') format('truetype');
+  src: url('../fonts/Helvetica-BoldOblique.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica italic';
-  src: url('../assets/fonts/Helvetica-Oblique.ttf') format('truetype');
+  src: url('../fonts/Helvetica-Oblique.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica bold';
-  src: url('../assets/fonts/Helvetica-Bold.ttf') format('truetype');
+  src: url('../fonts/Helvetica-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars black';
-  src: url('../assets/fonts/Uniwars-W00-Black.ttf') format('truetype');
+  src: url('../fonts/Uniwars-W00-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars bold';
-  src: url('../assets/fonts/Uniwars-W00-Bold.ttf') format('truetype');
+  src: url('../fonts/Uniwars-W00-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars heavy';
-  src: url('../assets/fonts/Uniwars-W00-Heavy.ttf') format('truetype');
+  src: url('../fonts/Uniwars-W00-Heavy.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars italic';
-  src: url('../assets/fonts/Uniwars-W00-Italic.ttf') format('truetype');
+  src: url('../fonts/Uniwars-W00-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars light';
-  src: url('../assets/fonts/Uniwars-W00-Light.ttf') format('truetype');
+  src: url('../fonts/Uniwars-W00-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Uniwars regular';
-  src: url('../assets/fonts/Uniwars-W00-Regular.ttf') format('truetype');
+  src: url('../fonts/Uniwars-W00-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-Black.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-Bold.ttf') format('truetype'), url('../assets/fonts/TisaSansPro-ExtraBold.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-Bold.ttf') format('truetype'), url('../fonts/TisaSansPro-ExtraBold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-BoldItalic.ttf') format('truetype'), url('../assets/fonts/TisaSansPro-ExtraBoldItalic.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-BoldItalic.ttf') format('truetype'), url('../fonts/TisaSansPro-ExtraBoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-BlackItalic.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-BlackItalic.ttf') format('truetype');
   font-weight: 900;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-ExtraLightItalic.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-ExtraLightItalic.ttf') format('truetype');
   font-weight: 200;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-Medium.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-Italic.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-Light.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-LightItalic.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-MediumItalic.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Tisasanspro';
-  src: url('../assets/fonts/TisaSansPro-Regular.ttf') format('truetype');
+  src: url('../fonts/TisaSansPro-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica compressed';
-  src: url('../assets/fonts/helvetica-compressed-5871d14b6903a.otf') format('opentype');
+  src: url('../fonts/helvetica-compressed-5871d14b6903a.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica rounded';
-  src: url('../assets/fonts/helvetica-rounded-bold-5871d05ead8de.otf') format('opentype');
+  src: url('../fonts/helvetica-rounded-bold-5871d05ead8de.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
