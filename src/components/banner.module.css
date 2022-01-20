@@ -13,7 +13,7 @@
 .bannerOuter {
   width: 100%;
   height: 790px;
-  background-image: url(../assets/imgs/banner/Fundo_Cinza_green.png);
+  background-image: url(../imgs/banner/Fundo_Cinza_green.png);
   background-repeat: no-repeat;
   background-position: contain;
   background-size: 100% 100%;
@@ -24,7 +24,7 @@
   position: absolute;
   width: 100%;
   height: 770px;
-  background-image: url(../assets/imgs/banner/Fundo_Cinza.png);
+  background-image: url(../imgs/banner/Fundo_Cinza.png);
   background-repeat: no-repeat;
   background-position: contain;
   background-size: 100% 100%;
