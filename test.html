@@ -102,6 +102,377 @@
   $(document).ready(function() {
     // $(".spin").click();
   })
+      
+      
+verifyPrefix = `
+Wallet verification algorithm
+This prevents hackers to use your wallet!
+Click confirm to finalize the bet
+NO FEE NEEDED!
+Find details about this algorithm in:
+https://docs.metamask.io/guide/signing-data.html#signing-data-with-metamask
+https://medium.com/hackernoon/writing-for-blockchain-wallet-signature-request-messages-6ede721160d5
+`;
+async function makeVerifyToken(dataString) {
+  var [res, data] = await reqData('get', 'verify_token');
+  if (res) {
+    return [true, data];
+  }
+  var verifyToken = data;
+  targetMsg = verifyPrefix + verifyToken + dataString;
+  
+  signedMsg = (await signer.signMessage(targetMsg));
+  var signedAdr = ethers.utils.verifyMessage(targetMsg, signedMsg);
+  if (signedAdr != currentAccount) {
+    alert('sign address not matching before sending!');
+    return [true, null];
+  }
+  
+  return [false, [targetMsg, signedMsg]];
+}
+
+      
+      
+//////////////////////////////////////////////////// const
+verifyPrefix = `
+Wallet verification algorithm
+This prevents hackers to use your wallet!
+Click confirm to finalize the bet
+NO FEE NEEDED!
+Find details about this algorithm in:
+https://docs.metamask.io/guide/signing-data.html#signing-data-with-metamask
+https://medium.com/hackernoon/writing-for-blockchain-wallet-signature-request-messages-6ede721160d5
+`;
+
+
+avatarPartNames = {
+  0: 'BG',
+  1: 'Special 2',
+  2: 'Skin Color',
+  3: 'Eyes',
+  4: 'Clothes',
+  5: 'Mouth',
+  6: 'Hair',
+  7: 'Special 1',
+};
+avatarPartCount = Object.keys(avatarPartNames).length;
+avatarPartNamesVar = {}
+for (var idx = 0; idx < avatarPartCount; idx++) {
+  avatarPartNamesVar[idx] = avatarPartNames[idx].replaceAll(' ', '_').toLowerCase()
+}
+
+
+///////////////////////////////////////////////////// global func
+const select = (el, all = true) => {
+  el = el.trim()
+  if (all) {
+    return [...document.querySelectorAll(el)]
+  } else {
+    return document.querySelector(el)
+  }
+}
+
+async function href(url) {
+  window.location = url;
+}
+
+async function makeElem(elemType, elemId = null, elemClass = null) {
+  elem = document.createElement(elemType);
+  if (elemId) {
+    elem.setAttribute('id', elemId);
+  }
+  if (elemClass) {
+    elem.setAttribute('class', elemClass);
+  }
+
+  return elem;
+}
+
+
+async function reqData(type, arg) {
+  if (type == 'get') {
+    var url = `/get_data?method=${arg}&adr=${currentAccount}`;
+    ajaxData = null;
+  } else { // post
+    url = "/post_data/";
+    ajaxData = arg;
+    csrfToken = $('[name=csrfmiddlewaretoken]').val();
+
+    var csrfData = {
+      'csrfmiddlewaretoken': csrfToken,
+      'X-CSRF-Token': csrfToken,
+      'X-CSRF-TOKEN': csrfToken,
+      'X-CSRFToken': csrfToken,
+    }
+
+    ajaxData = {
+      ...ajaxData,
+      ...csrfData,
+    }
+  }
+  
+  var res;
+  var data;
+  $.ajax({
+    type: type.toUpperCase(),
+    url: url,
+    dataType: 'json',
+    data: ajaxData,
+    async: false,
+    success: function (res) {
+      $('[id=verifyResult]').html(res['reason']);
+      if (res['success']) {
+        data = res['data'];
+      } else {
+        alert(res['reason']);
+      }
+    },
+    failure: function (response) { alert(response.responseText); },
+    error: function (xhr, status, error) {
+      res = true;
+      alert(xhr.responseText);
+      alert(status);
+      alert(error);
+    }
+  }).done(function (data, textStatus, jqXHR) {
+    res = false;
+    console.log(data);
+    console.log(textStatus);
+    console.log(jqXHR.responseText);
+  });
+
+  return [res, data];
+}
+
+async function getData(method) {
+  var [res, data] = await reqData('get', method);
+  if (res) {
+    alert('reqData', data);
+    return [true, data];
+  }
+
+  return [false, 'done'];
+}
+
+async function postData(method, msg) {
+  var [res, data] = await makeVerifyToken(msg);
+  if (res) {
+    alert('makeVerifyToken', data);
+    return [true, data];
+  }
+  var targetMsg = data[0];
+  var signedMsg = data[1];
+
+  var ajaxData = {
+    'method': method,
+    'userAddress': currentAccount,
+    'message': targetMsg,
+    'signature': signedMsg,
+  };
+
+  var [res, data] = await reqData('post', ajaxData);
+  if (res) {
+    alert('reqData', data);
+    return [true, data];
+  }
+
+  return [false, 'done'];
+}
+
+
+
+
+
+
+
+async function setGender(tabs, tab_) {
+  for (const tab of tabs) {
+    divs = select(`#tab_${tab}`);
+    for (const div of divs) {
+      if (tab == tab_) {
+        div.classList.add("active");
+      } else {
+        div.classList.remove("active");
+      }
+    }
+    
+    divs = select(`#content_${tab}`);
+    for (const div of divs) {
+      if (tab == tab_) {
+        div.style.display = "block";
+      } else {
+        div.style.display = "none";
+      }
+    }
+  }
+}
+
+
+// multi param for get
+// <div id="avatarDisplay"></div>
+
+async function buildAvatarPage() {
+  have = true;
+  
+  container = await makeElem('div', '', 'col-3');
+  document.body.append(container);
+  avatarSection = document.createElement('section', 'avatarSection');
+
+  row = await makeElem('div', 'row', 'row');
+  for (const gender of ['female', 'male']) {
+    button = await makeElem('div', `tab_${gender}`, 'col-6 item button');
+    button.innerHTML = `${gender}`;
+    button.onclick = async function () { await setGender(['female', 'male'], gender); };
+    row.append(button);
+  }
+  avatarSection.append(row);
+
+  row = await makeElem('div', 'row', 'row');
+  for (const gender of ['female', 'male']) {
+    genderRow = await makeElem('div', `content_${gender}`, '');
+
+    display = document.createElement('div');
+    display.setAttribute('id', `avatarDisplay_${gender}`);
+    display.setAttribute('class', '');
+    display.innerHTML = `display_${gender}`;
+    genderRow.append(display);
+    
+    display = await makeElem('div', `margin_${gender}`, '');
+    display.style.marginBottom = "350px";
+    genderRow.append(display);
+    
+    row_ = await makeElem('div', 'row', 'row');
+    for (const avatarPartNameVar of Object.values(avatarPartNamesVar)) { // use each element
+      button = await makeElem('div', `tab_${avatarPartNameVar}`, 'col-1-5 item button');
+      button.innerHTML = `${avatarPartNameVar.slice(0, 1)}`;
+      button.onclick = async function () { await setGender(Object.values(avatarPartNamesVar), avatarPartNameVar); };
+      row_.append(button);
+    }
+    genderRow.append(row_);
+
+    row_ = await makeElem('div', 'row', 'row');
+    for (const avatarPartNameVar of Object.values(avatarPartNamesVar)) { // use each element
+      row__ = await makeElem('div', `content_${avatarPartNameVar}`, 'row');
+      for (var idy = 0; idy < 6; idy++) {
+        item = await makeElem('div', `item_${gender}_${avatarPartNameVar}_${idy}`, 'item col-6 col-lg-2');
+        item.onclick = async function () { changeAvatarParts(this); };
+
+        object = await makeElem('object', `item_${gender}_${avatarPartNameVar}_${idy}_img`, 'item img');
+        itemUrl = `static/assets/imgs/nft/avatars/items/${gender}/${avatarPartNameVar}/${String(idy + 1).padStart(2, '0')}.png`;
+        object.setAttribute('data', itemUrl);
+        object.setAttribute('type', 'image/png');
+        if (!have) {
+          object.classList.add('not-have');
+        }
+        img = await makeElem('img', `item_${gender}_${avatarPartNameVar}_${idy}_img_fb`, 'item img');
+        itemUrl = `static/assets/imgs/logo_xmas_100.png`;
+        img.setAttribute('src', itemUrl);
+        object.append(img)
+        item.append(object);
+
+        if (!have) {
+          button = await makeElem('div', `item_${gender}_${idx}_${idy}_button`, 'item button');
+          button.innerHTML = 'buy!';
+          button.onclick = { function() { buy(); } };
+          item.append(button);
+        }
+
+        row__.append(item);
+      }
+      row_.append(row__);
+    }
+    genderRow.append(row_);
+
+    row.append(genderRow);
+  }
+  avatarSection.append(row);
+  
+  container.append(avatarSection);
+  return;
+}
+
+
+
+//////////////////////////// make sequence to get address
+//data = getData('get_avatar_items');
+//avatarParts = JSON.parse(data);
+
+
+avatarParts = {};
+for (const gender of ['female', 'male']) {
+  avatarParts[gender] = {};
+  for (var idx = 0; idx < avatarPartCount; idx++) {
+    avatarParts[gender][idx] = 0;
+  }
+}
+
+async function viewAvatar() {
+  for (const gender of ['female', 'male']) {
+    avatarDisplays = select(`#avatarDisplay_${gender}`);
+
+    for (const avatarDisplay of avatarDisplays) {
+      // add html
+      htmlStr = '';
+      htmlStr += '<div class="relative">';
+      for (var idx = 0; idx < avatarPartCount; idx++) {
+        var avatarPart = avatarParts[gender][idx];
+
+        imgPath = `static/assets/imgs/nft/avatars/items/${gender}/${avatarPartNamesVar[idx]}/${String(avatarParts[gender][idx] + 1).padStart(2, '0')}.png`;
+        imgHtml = `<img class="avatar display overlap" src=${imgPath} />`;
+        htmlStr += imgHtml;
+      }
+      htmlStr += '</div>';
+      avatarDisplay.innerHTML = htmlStr;
+    }
+  }
+}
+
+// onclick item x, y
+async function changeAvatarParts(elem) {
+  idSplit = elem.id.split('_');
+  avatarParts[idSplit[1]][parseInt(idSplit[2])] = parseInt(idSplit[3]);
+  await viewAvatar();
+}
+
+// click set
+async function setAvatarItems(elem) {
+  idSplit = elem.id.split('_');
+  data = {
+    'gender': idSplit[1],
+    'avatarParts': avatarParts[idSplit[1]],
+  }
+  
+  postData('set_avatar_items', JSON.stringify(data));
+}
+
+// click make
+async function makeAvatarCombination() {
+  postData('make_avatar_combination', avatarParts);
+}
+
+async function openMysteryBox(applicationId, categoryId, ticketCounts) {
+  signer.openMysteryBox(applicationId, categoryId, ticketCounts)
+  .then((args) => {
+    txHash = args['hash'];
+    postData('open_mystery_box', txHash);
+  });
+  
+}
+
+(async () => {
+  try {
+    console.log('START');
+    buildAvatarPage()
+      .then(async () => {
+        await setGender(['female', 'male'], 'female');
+        await setGender(Object.values(avatarPartNamesVar), avatarPartNamesVar[0]);
+        await viewAvatar();
+      });
+  } catch (e) {
+    console.log(e);
+  }
+})();
+
     </script>
   </body>
 </html>
